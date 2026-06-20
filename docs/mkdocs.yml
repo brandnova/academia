@@ -1,0 +1,17 @@
+site_name: Academia
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Project Plan: project-plan.md
+  - Features: feature-list.md
+  - User Flows: user-flows.md
+  - Database Schema: database-schema.md
+  - API Contract: api-contract.md
+  - Roles & Permissions: roles-and-permissions.md
+  - Notifications: notification-spec.md
+  - Search: search-spec.md
+  - Frontend Contracts: frontend-data-contracts.md
+  - Moderation: moderation-spec.md
