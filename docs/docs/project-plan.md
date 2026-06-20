@@ -1,653 +1,359 @@
 # PROJECT PLAN
 
-## Working Title: Academia
+# Academia
 
-A nationwide academic knowledge platform where students can ask questions, receive answers, share guidance, solve academic problems, and access school-specific information through dedicated school hubs.
+## Overview
 
-The platform combines concepts from Google Community Help, Stack Overflow, Quora, Reddit Communities, and Facebook Groups while focusing specifically on educational institutions.
+Academia is a school-focused academic knowledge platform designed to help students find answers to questions, solve academic problems, and preserve institutional knowledge in a searchable and organized way.
 
----
+Students constantly encounter situations where important information exists, but is difficult to find. Questions about admissions, registration procedures, clearance requirements, departmental policies, GPA calculations, examinations, SIWES, projects, and countless other academic processes are often answered repeatedly across WhatsApp groups, Telegram channels, student forums, and private conversations.
 
-## PROJECT VISION
+The same questions are asked every semester by different students because previous answers are scattered across platforms that are difficult to search and impossible to preserve.
 
-Students constantly face questions that are not answered by official school websites:
+Academia exists to solve this problem.
 
-- Admission concerns
-- Registration procedures
-- Clearance requirements
-- Course registration
-- GPA calculations
-- Department-specific processes
-- Hostel information
-- SIWES guidance
-- Project guidance
-- Examination concerns
+Its purpose is not to become a social network, a school management system, or an official university platform. Its purpose is to become a searchable academic knowledge base where questions can be asked once, answered well, and discovered by future students when they need them.
 
-These answers often exist somewhere:
+The core idea behind the platform can be summarized as:
 
-- WhatsApp groups
-- Telegram groups
-- Old students
-- SUG executives
-- Departmental representatives
+> Student is confused. Student asks a question. Student receives an answer. Future students discover the answer without needing to ask the same question again.
 
-The platform's purpose is to centralize this knowledge into searchable school hubs.
-
-Instead of repeatedly asking the same questions every semester, students should be able to search existing discussions and find verified answers.
-
-> **Student is confused → Student asks question → Student gets answer → Future students find answer.**
-
-Everything else is support infrastructure.
+Everything else in the system exists to support that process.
 
 ---
 
-## CORE PRINCIPLES
+## Product Vision
 
-### Principle 1: One Hub Per School
+The long-term vision is to create a centralized academic knowledge network covering tertiary institutions across Nigeria and potentially beyond.
 
-A school should only have one official hub.
+Every supported institution should have a dedicated hub where knowledge relevant to that institution can be collected, organized, searched, and maintained.
 
-**Example:**
+Rather than forcing students to depend on temporary conversations or fragmented communities, Academia should become the first place students visit when they need guidance regarding their school.
 
-University of Lagos → One Hub
-
-**Not:**
-
-- UNILAG Hub A
-- UNILAG Hub B
-- UNILAG Freshers Hub
-
-Fragmentation destroys community quality.
+The platform should gradually evolve into a living archive of institutional knowledge built through contributions from students, alumni, moderators, and school representatives.
 
 ---
 
-### Principle 2: Schools Are Platform Managed
+## Core Principles
 
-Schools are system records.
+Academia is guided by several principles that influence every product and technical decision.
+
+### One Hub Per School
+
+Each institution should have a single hub.
+
+The platform should avoid fragmentation and duplicate communities. A student searching for information about a school should never need to choose between multiple competing hubs for the same institution.
+
+Every question, answer, department, moderator assignment, and school-specific discussion should belong to one authoritative hub.
+
+### Schools Are Platform Data
+
+Schools are managed by the platform rather than by users.
 
 Users cannot create schools.
 
-Users can only request activation of hubs for schools that already exist.
+Instead, the platform maintains a curated list of institutions and users may request activation of a hub when one does not already exist.
 
-This prevents:
+This approach prevents duplicates, spelling inconsistencies, fake institutions, and unnecessary moderation challenges.
 
-- Duplicates
-- Misspellings
-- Fake institutions
-- Spam hubs
+The school dataset should eventually become one of the platform's most valuable assets.
 
----
+### Knowledge Over Social Activity
 
-### Principle 3: Hub Ownership Belongs To The Platform
+Academia prioritizes useful information over engagement metrics.
 
-Users do not own school hubs.
+The goal is not to maximize scrolling, feeds, reactions, or endless interaction.
 
-Users can help activate them.
+The goal is to help users find accurate answers as quickly as possible.
 
-Users can become moderators or school representatives.
+Every feature should be evaluated by asking:
 
-Hubs remain platform assets.
+> Does this help students discover, share, organize, or preserve knowledge?
 
-This prevents:
+If the answer is no, the feature should be reconsidered.
 
-- Hostage situations
-- Hub hijacking
-- Ownership disputes
+### Search First
 
----
+The most important feature on the platform is search.
 
-### Principle 4: Knowledge Must Be Searchable
+A student should be able to find existing answers before needing to create a new question.
 
-Every answer should become part of a permanent knowledge base.
+Questions, answers, schools, departments, and tags should all be structured in ways that make information discoverable.
 
-The platform should prioritize:
+A well-organized answer that helps thousands of students over several years is more valuable than hundreds of duplicate discussions.
 
-- Search
-- Discoverability
-- Categorization
-- Archiving
+### Platform Ownership
 
-over social-media-style endless feeds.
+School hubs belong to the platform rather than individual users.
 
----
+Users may help activate hubs.
 
-### Principle 5: Hub Moderation
+Users may become moderators.
 
-Each school hub should eventually have local moderators.
+Users may become school representatives.
 
-These moderators help:
-
-- Answer unanswered questions
-- Report bad content
-- Escalate issues to admins
-- Maintain hub quality
+However, ownership remains with the platform to prevent disputes, abandonment, or community fragmentation.
 
 ---
 
-## USER TYPES
+## Technology Stack
 
-### User
+### Frontend
+- React with TypeScript
+- Component-based architecture
+- State management: React Context or Redux Toolkit (depending on complexity)
 
-Anyone can browse the platform.
+### Backend
+- Django REST Framework
+- PostgreSQL database
+- JWT authentication
+- Django Allauth for social authentication
 
-Authentication is required for the following actions:
-
-- Ask questions
-- Post answers
-- Vote
-- Comment
-- Follow questions
-- Receive notifications
-
----
-
-### Hub Moderator
-
-Moderator responsibilities:
-
-- Receive notifications when new questions appear
-- Help answer unanswered questions
-- Report bad content
-- Escalate issues to admins
-
-**No moderation powers initially.**
-
-- No content deletion
-- No report handling
-- No user management
-
-Moderators focus on helping students.
+### Development
+- API-first development
+- Contract-driven development
+- Frontend and backend developed independently against documented contracts
 
 ---
 
-### School Representative
+## Authentication
 
-Responsibilities:
-
-- Manage school metadata
-- Manage departments
-- Assign moderators
-- Suggest updates to school information
-
-Nothing more.
-
----
-
-### Platform Administrator
-
-Can:
-
-- Manage schools
-- Approve hubs
-- Manage moderators
-- Manage school representatives
-- Manage reports
-- Manage users
-
----
-
-## HUB STRUCTURE
-
-**School Hub**
-
-Example:
-
-University of Lagos
-
-Contains:
-
-- Questions
-- Answers
-- Tags
-- Departments
-- Moderators
-- School Representative
-
----
-
-## DEPARTMENT STRUCTURE
-
-Hubs should support optional departments.
-
-Example:
-
-University of Lagos
-
-- Computer Science
-- Accounting
-- Law
-- Medicine
-- Economics
-
-Questions can belong to:
-
-- School only
-- School + Department
-
-This dramatically improves content organization.
-
----
-
-## QUESTION LIFECYCLE
-
-Questions have three statuses:
-
-### Open
-
-No answers yet.
-
-### Answered
-
-Has at least one answer.
-
-### Solved
-
-Question owner selected a best answer.
-
-This gives users an immediate indication of whether a question still needs attention.
-
-It also allows moderators to filter:
-
-**Show unanswered questions**
-
-which becomes one of the most useful views in the entire platform.
-
-A moderator waking up and seeing:
-
-**12 unanswered questions**
-
-is infinitely more actionable than scrolling through a giant feed trying to figure out where help is needed.
-
----
-
-## QUESTION SYSTEM
-
-Question fields:
-
-- Title
-- Body
-- School
-- Department
-- Tags
-- Author
-- Creation Date
-- Views
-- Status (Open / Answered / Solved)
-
----
-
-## ANSWER SYSTEM
-
-Features:
-
-- Rich text
-- Voting
-- Editing
-- Reporting
-- Best Answer
-
-Only one answer can be marked as best answer.
-
----
-
-## COMMENT SYSTEM
-
-Comments exist under answers.
-
-Purpose:
-
-- Clarification
-- Follow-up questions
-- Additional details
-
-Comments should remain lightweight.
-
----
-
-## TAGGING SYSTEM
-
-Examples:
-
-- admission
-- registration
-- gpa
-- hostel
-- clearance
-- exams
-- project
-- siwes
-
-Tags improve:
-
-- Search
-- Discovery
-- Filtering
-
----
-
-## NOTIFICATION SYSTEM
-
-Events:
-
-- New answer
-- New comment
-- Answer selected
-- Vote received
-- Moderator assignment
-- Hub activation
-
-Future:
-
-- Email notifications
-- Push notifications
-
----
-
-## MODERATION SYSTEM
-
-Content reports:
-
-- Spam
-- Abuse
-- Misinformation
-- Duplicate question
-
-Moderators review reports.
-
----
-
-## SCHOOL ACTIVATION WORKFLOW
-
-User searches for school
-
-↓
-
-School Hub exists
-
-↓
-
-User accesses hub
-
-OR
-
-↓
-
-School Hub does not exist
-
-↓
-
-User submits activation request
-
-↓
-
-Admin approves
-
-↓
-
-School Hub created
-
-↓
-
-User notified
-
----
-
-## SEARCH SYSTEM
-
-Search should support:
-
-- Questions
-- Tags
-- Schools
-- Departments
-
-Future:
-
-- Full-text search
-- Elasticsearch/OpenSearch integration
-
----
-
-## AUTHENTICATION
-
-**Phase 1:**
-
-Google Login Only
-
-Benefits:
-
+### Phase 1: Google Login Only
 - Fast onboarding
 - Reduced spam
-- Less password management
+- Simplified password management
 
-**Future:**
-
-- Email and Password
+### Future Considerations
+- Email/Password
 - Apple Login
 - Microsoft Login
 
 ---
 
-## FRONTEND ARCHITECTURE
+## Hub Structure
 
-**React**
+The platform is organized around School Hubs.
 
-Suggested Structure:
+A School Hub represents a specific institution and serves as the primary container for all questions and answers associated with that institution.
 
+Each hub functions as a structured knowledge shelf rather than a joinable community.
+
+Users do not join hubs. Users access hubs.
+
+Within a hub, questions may optionally be associated with departments to improve organization and searchability.
+
+### Department Organization
+
+Hubs support optional departmental categorization.
+
+Example:
 ```
-src/
-  - api/
-  - components/
-  - pages/
-  - hooks/
-  - layouts/
-  - services/
-  - types/
-  - contexts/
-  - utils/
+University of Lagos
+├── Computer Science
+├── Accounting
+├── Law
+├── Medicine
+└── Economics
 ```
 
-Use TypeScript.
+Questions can belong to:
+- School only
+- School + Department
 
-Generate interfaces directly from API contracts.
-
----
-
-## BACKEND ARCHITECTURE
-
-**Django**
-
-Apps:
-
-- accounts
-- schools
-- hubs
-- questions
-- answers
-- comments
-- notifications
-- moderation
-- search
-
-Use:
-
-- Django REST Framework
-- Simple JWT
-- Django Allauth
-- PostgreSQL
+This allows questions relating to Computer Science to be discoverable independently from questions relating to Medicine or Accounting while still belonging to the same school.
 
 ---
 
-## API-FIRST DEVELOPMENT
+## User Flows
 
-Backend and frontend must communicate through contracts.
+### Ask a Question
+User authenticates → Selects school hub (or searches for it) → Optionally selects department → Adds title, body, tags → Question published with Open status
 
-Never build APIs first and frontend later.
+### Answer a Question
+User authenticates → Views question → Adds answer → Question status becomes Answered
 
-Never build frontend first and backend later.
+### Solve a Question
+Question owner (only) → Selects best answer → Question status becomes Solved
 
-Build contracts first.
+### Activate a Hub
+User searches for school → Hub doesn't exist → Submits activation request → Admin reviews → Hub created → User notified
 
-Everything else follows.
+### Moderator View
+Moderator authenticates → Views unanswered questions dashboard → Answers questions → Reports problematic content to admin if needed
+
+### Report Content
+User views question/answer/comment → Submits report (spam/abuse/misinformation/duplicate) → Moderator reviewed → Escalated to admin if needed
 
 ---
 
-## REQUIRED DOCUMENTATION FILES
+## Question Lifecycle
 
-**docs/**
+Every question moves through a simple lifecycle.
+
+| Status | Description |
+|--------|-------------|
+| Open | No answers yet |
+| Answered | Has at least one answer |
+| Solved | Question owner selected a best answer |
+
+This structure helps users quickly identify unanswered questions while allowing moderators to focus their attention where it is most needed.
+
+The unanswered queue should become one of the most important operational views in the system.
+
+---
+
+## School Hub Activation
+
+A user should be able to search for any institution in the platform database.
+
+If a hub already exists, the user is directed to that hub immediately.
+
+If a hub does not exist, the user may submit an activation request.
+
+After review by a platform administrator, the hub can be created and made available to all users.
+
+This process ensures that hubs are created intentionally while still allowing expansion driven by user demand.
+
+---
+
+## Search Philosophy
+
+Search is the most important feature on the platform.
+
+### Searchable Content
+- Questions
+- Schools
+- Departments
+- Tags
+- Answers (future enhancement)
+
+### Ranking Priorities
+1. Solved questions with best answers
+2. Highly voted answers
+3. Recent content
+4. Relevance to search terms
+
+### Future Enhancements
+- Full-text search
+- Elasticsearch/OpenSearch integration
+
+---
+
+## Moderation Philosophy
+
+Moderation is lightweight and focused on helping students.
+
+### Moderator Responsibilities
+- View unanswered questions
+- Answer questions
+- Report problematic content
+- Escalate to admin
+
+### Moderator Limitations
+- No content deletion
+- No user management
+- No ban capabilities
+- No report handling independently
+
+### Content Reporting
+Users can report:
+- Spam
+- Abuse
+- Misinformation
+- Duplicate questions
+
+Reports are reviewed by administrators. Moderators can escalate content they encounter.
+
+---
+
+## Roles and Responsibilities
+
+### User
+Most users of Academia are simply users.
+
+Users can:
+- Search content
+- Ask questions
+- Answer questions
+- Comment on discussions
+- Vote on useful answers
+- Receive notifications regarding content they care about
+- Report content
+
+All users can browse freely but will require authentication to perform any action.
+
+### Moderator
+Moderators exist primarily to help students receive answers.
+
+Their responsibility is not platform governance.
+
+Instead, moderators:
+- Receive notifications about new and unanswered questions within their assigned hub
+- Help ensure questions do not remain unanswered for long periods
+- Escalate problematic content to administrators when necessary
+
+### School Representative
+Each hub may have one or more school representatives.
+
+School representatives:
+- Maintain information related to their institution
+- Assign moderators to assist with community activity
+- Act as coordinators rather than administrators
+
+### Platform Administrator
+Platform administrators maintain the overall system.
+
+Administrators:
+- Manage schools
+- Approve hub activations
+- Assign representatives
+- Review reports
+- Oversee the health of the platform as a whole
+
+---
+
+## Development Approach
+
+Academia will follow an API-first development process.
+
+Before implementation begins, the project's behavior, data structures, and API responses should be documented and agreed upon.
+
+The backend and frontend should be developed independently against the same documented contracts.
+
+This approach allows both contributors to work simultaneously without waiting for implementation details from the other side.
+
+Documentation is treated as a development artifact rather than an afterthought.
+
+---
+
+## Documentation Structure
+
+The project documentation is intentionally lightweight.
+
+Only four core documents are maintained:
+
+### project-plan.md (This document)
+Defines the vision, philosophy, structure, and guiding decisions of the platform.
 
 ### feature-list.md
-
-Defines every feature and requirement.
-
-### user-flows.md
-
-Contains:
-
-- Registration flow
-- Hub activation flow
-- Ask question flow
-- Answer flow
-- Moderation flow
+Defines the complete list of features and requirements to be implemented.
 
 ### database-schema.md
-
-Contains:
-
-- Models
-- Relationships
-- Constraints
-- Indexes
+Defines models, relationships, constraints, and data structures.
 
 ### api-contract.md
+Defines endpoints, request payloads, response payloads, and API behavior.
 
-Contains:
-
-- Endpoints
-- Requests
-- Responses
-- Error formats
-
-This becomes the single source of truth.
-
-### roles-and-permissions.md
-
-Contains:
-
-- User permissions
-- Moderator permissions
-- School Representative permissions
-- Admin permissions
-
-### notification-spec.md
-
-Contains:
-
-- Notification types
-- Trigger events
-- Payload structure
-
-### search-spec.md
-
-Contains:
-
-- Search rules
-- Filters
-- Ranking logic
-
-### frontend-data-contracts.md
-
-Contains:
-
-TypeScript interfaces matching backend serializers.
-
-### moderation-spec.md
-
-Contains:
-
-- Reporting workflow
-- Content review process
-- Escalation rules
+**Each document should remain focused on its purpose and avoid duplicating information that belongs elsewhere.**
 
 ---
 
-## DOCUMENTATION PRINCIPLE
+## Future Direction
 
-**Each documentation file should contain only the information necessary for its purpose.**
+The initial release focuses on creating a reliable academic question-and-answer platform organized around schools.
 
-- Avoid duplicating information across multiple files.
-- The API contract should not contain database design details.
-- The database schema should not contain endpoint definitions.
-- The feature list should not contain serializer specifications.
+Future versions may expand into additional educational services such as scholarship discovery, internship opportunities, academic resources, AI-assisted search, mobile applications, and other tools that align with the platform's mission.
 
-Each document should serve as the authoritative source for its specific area.
+Regardless of future expansion, the primary goal remains unchanged:
 
----
-
-## DEVELOPMENT WORKFLOW
-
-### Step 1
-
-Complete all documentation.
-
-No coding.
-
-### Step 2
-
-Approve contracts.
-
-No coding.
-
-### Step 3
-
-Frontend builds against mocked API responses.
-
-Backend builds actual APIs.
-
-### Step 4
-
-Frontend switches from mock service to real API.
-
-Minimal integration work required.
-
-### Step 5
-
-Testing and bug fixing.
-
----
-
-## FUTURE CONSIDERATIONS
-
-Potential future features:
-
-- Course-specific communities
-- Marketplace for academic materials
-- School announcements
-- Verified school representatives
-- AI-assisted search
-- Scholarship board
-- Internship opportunities
-- Event listings
-- Student elections
-- Mobile application
-- Nationwide academic knowledge graph
-
----
-
-## FUTURE CONSIDERATION: REPUTATION SYSTEM
-
-If needed later, a reputation system could be introduced where users gain points for:
-
-- Posting answers
-- Receiving upvotes
-- Having answers accepted
-
-Benefits would include:
-
-- Recognition
-- Trust signals
-- Moderator eligibility
-
----
-
-The long-term objective is to become the primary student knowledge platform for tertiary institutions rather than merely a question-and-answer website.
+> To become the most useful destination for students seeking answers to academic questions.
