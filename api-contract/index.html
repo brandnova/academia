@@ -1,0 +1,3259 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../database-schema/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>API Contract - Academia</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-contract" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Academia" class="md-header__button md-logo" aria-label="Academia" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Academia
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Contract
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Academia" class="md-nav__button md-logo" aria-label="Academia" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Academia
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Contract
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#google-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Google Login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Refresh Token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Users
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-current-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Current User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-current-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Current User
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-schools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Schools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-school" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-school-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create School (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-school-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update School (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hubs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hubs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hubs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Hub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-hub-by-school" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Hub by School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-hub-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request Hub Activation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-activation-requests-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Activation Requests (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approve-activation-request-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approve Activation Request (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reject-activation-request-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reject Activation Request (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#departments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Departments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Departments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-departments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Departments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-department-school-representative-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Department (School Representative Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-department-school-representative-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Department (School Representative Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-unanswered-questions-moderator-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Unanswered Questions (Moderator Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Answers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Answers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mark-best-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mark Best Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#answer-votes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Answer Votes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Answer Votes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vote-on-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vote on Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-vote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove Vote
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tags
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-questions-by-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Questions by Tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Notifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mark-notification-as-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mark Notification as Read
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mark-all-notifications-as-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mark All Notifications as Read
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reports
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-reports-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Reports (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolve-report-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolve Report (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reject-report-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reject Report (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moderation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Moderation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Moderation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assign-moderator-school-representative-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assign Moderator (School Representative Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-moderator-school-representative-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove Moderator (School Representative Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-moderators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Moderators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#school-representatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        School Representatives
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="School Representatives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assign-school-representative-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assign School Representative (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-school-representative-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove School Representative (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Formats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#400-bad-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        400 Bad Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#401-unauthorized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        401 Unauthorized
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#403-forbidden" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        403 Forbidden
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#404-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        404 Not Found
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#405-method-not-allowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        405 Method Not Allowed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#429-too-many-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        429 Too Many Requests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#500-internal-server-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        500 Internal Server Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate Limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#google-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Google Login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Refresh Token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Users
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-current-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Current User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-current-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Current User
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-schools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Schools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-school" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-school-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create School (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-school-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update School (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hubs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hubs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hubs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Hub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-hub-by-school" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Hub by School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-hub-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request Hub Activation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-activation-requests-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Activation Requests (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approve-activation-request-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approve Activation Request (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reject-activation-request-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reject Activation Request (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#departments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Departments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Departments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-departments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Departments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-department-school-representative-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Department (School Representative Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-department-school-representative-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Department (School Representative Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-unanswered-questions-moderator-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Unanswered Questions (Moderator Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Answers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Answers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mark-best-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mark Best Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#answer-votes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Answer Votes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Answer Votes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vote-on-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vote on Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-vote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove Vote
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tags
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-questions-by-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Questions by Tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search Questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Notifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mark-notification-as-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mark Notification as Read
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mark-all-notifications-as-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mark All Notifications as Read
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reports
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-reports-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Reports (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolve-report-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolve Report (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reject-report-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reject Report (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moderation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Moderation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Moderation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assign-moderator-school-representative-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assign Moderator (School Representative Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-moderator-school-representative-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove Moderator (School Representative Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-moderators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Moderators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#school-representatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        School Representatives
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="School Representatives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assign-school-representative-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assign School Representative (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-school-representative-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove School Representative (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Formats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#400-bad-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        400 Bad Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#401-unauthorized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        401 Unauthorized
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#403-forbidden" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        403 Forbidden
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#404-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        404 Not Found
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#405-method-not-allowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        405 Method Not Allowed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#429-too-many-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        429 Too Many Requests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#500-internal-server-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        500 Internal Server Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate Limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api-contract">API CONTRACT</h1>
+<h2 id="authentication">Authentication</h2>
+<h3 id="google-login">Google Login</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/auth/google/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;access_token&quot;: &quot;google_oauth_token&quot;
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;access&quot;: &quot;jwt_access_token&quot;,
+  &quot;refresh&quot;: &quot;jwt_refresh_token&quot;,
+  &quot;user&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;email&quot;: &quot;user@example.com&quot;,
+    &quot;full_name&quot;: &quot;John Doe&quot;,
+    &quot;avatar&quot;: &quot;https://lh3.googleusercontent.com/...&quot;
+  }
+}
+</code></pre>
+<p><strong>Response (401 Unauthorized):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Invalid Google token&quot;
+}
+</code></pre>
+<hr />
+<h3 id="refresh-token">Refresh Token</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/auth/refresh/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;refresh&quot;: &quot;jwt_refresh_token&quot;
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;access&quot;: &quot;new_jwt_access_token&quot;
+}
+</code></pre>
+<hr />
+<h3 id="logout">Logout</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/auth/logout/</code></p>
+<p><strong>Request:</strong> None (requires authentication)</p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<hr />
+<h2 id="users">Users</h2>
+<h3 id="get-current-user">Get Current User</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/users/me/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;email&quot;: &quot;user@example.com&quot;,
+  &quot;full_name&quot;: &quot;John Doe&quot;,
+  &quot;avatar&quot;: &quot;https://lh3.googleusercontent.com/...&quot;,
+  &quot;is_admin&quot;: false,
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<hr />
+<h3 id="update-current-user">Update Current User</h3>
+<p><strong>Endpoint:</strong> <code>PATCH /api/users/me/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;full_name&quot;: &quot;Johnathan Doe&quot;
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong> Same as GET <code>/api/users/me/</code></p>
+<hr />
+<h2 id="schools">Schools</h2>
+<h3 id="list-schools">List Schools</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/schools/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>search</code> - Search by name or short_name
+- <code>has_hub</code> - Filter schools with/without hub (true/false)
+- <code>page</code> - Page number (default: 1)
+- <code>page_size</code> - Items per page (default: 20, max: 100)</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 100,
+  &quot;next&quot;: &quot;https://api.academia.com/api/schools/?page=2&quot;,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;name&quot;: &quot;University of Lagos&quot;,
+      &quot;short_name&quot;: &quot;UNILAG&quot;,
+      &quot;location&quot;: &quot;Lagos, Nigeria&quot;,
+      &quot;website&quot;: &quot;https://unilag.edu.ng&quot;,
+      &quot;has_hub&quot;: true,
+      &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="get-school">Get School</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/schools/{school_id}/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;name&quot;: &quot;University of Lagos&quot;,
+  &quot;short_name&quot;: &quot;UNILAG&quot;,
+  &quot;location&quot;: &quot;Lagos, Nigeria&quot;,
+  &quot;website&quot;: &quot;https://unilag.edu.ng&quot;,
+  &quot;has_hub&quot;: true,
+  &quot;departments&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;name&quot;: &quot;Computer Science&quot;,
+      &quot;code&quot;: &quot;CSC&quot;
+    }
+  ],
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<p><strong>Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;School not found&quot;
+}
+</code></pre>
+<hr />
+<h3 id="create-school-admin-only">Create School (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/schools/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;University of Ibadan&quot;,
+  &quot;short_name&quot;: &quot;UI&quot;,
+  &quot;location&quot;: &quot;Ibadan, Nigeria&quot;,
+  &quot;website&quot;: &quot;https://ui.edu.ng&quot;
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong> Same as GET <code>/api/schools/{school_id}/</code></p>
+<hr />
+<h3 id="update-school-admin-only">Update School (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>PATCH /api/schools/{school_id}/</code></p>
+<p><strong>Request:</strong> Same as POST, all fields optional</p>
+<p><strong>Response (200 OK):</strong> Same as GET <code>/api/schools/{school_id}/</code></p>
+<hr />
+<h2 id="hubs">Hubs</h2>
+<h3 id="get-hub">Get Hub</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/hubs/{hub_id}/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;school&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;name&quot;: &quot;University of Lagos&quot;,
+    &quot;short_name&quot;: &quot;UNILAG&quot;,
+    &quot;location&quot;: &quot;Lagos, Nigeria&quot;
+  },
+  &quot;is_active&quot;: true,
+  &quot;activated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;,
+  &quot;departments&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;name&quot;: &quot;Computer Science&quot;,
+      &quot;code&quot;: &quot;CSC&quot;,
+      &quot;question_count&quot;: 42
+    }
+  ],
+  &quot;question_count&quot;: 150,
+  &quot;moderator_count&quot;: 3
+}
+</code></pre>
+<hr />
+<h3 id="get-hub-by-school">Get Hub by School</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/hubs/by-school/{school_id}/</code></p>
+<p><strong>Response (200 OK):</strong> Same as GET <code>/api/hubs/{hub_id}/</code></p>
+<p><strong>Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Hub not found for this school&quot;
+}
+</code></pre>
+<hr />
+<h3 id="request-hub-activation">Request Hub Activation</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/hubs/activation-requests/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;school_id&quot;: &quot;uuid&quot;,
+  &quot;notes&quot;: &quot;Our university needs a hub for students&quot;
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;school&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;name&quot;: &quot;University of Lagos&quot;,
+    &quot;short_name&quot;: &quot;UNILAG&quot;
+  },
+  &quot;user&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;John Doe&quot;
+  },
+  &quot;status&quot;: &quot;PENDING&quot;,
+  &quot;notes&quot;: &quot;Our university needs a hub for students&quot;,
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<hr />
+<h3 id="list-activation-requests-admin-only">List Activation Requests (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/hubs/activation-requests/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>status</code> - PENDING/APPROVED/REJECTED
+- <code>page</code> - Page number</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 5,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;school&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;name&quot;: &quot;University of Lagos&quot;,
+        &quot;short_name&quot;: &quot;UNILAG&quot;
+      },
+      &quot;user&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;full_name&quot;: &quot;John Doe&quot;
+      },
+      &quot;status&quot;: &quot;PENDING&quot;,
+      &quot;notes&quot;: &quot;Our university needs a hub for students&quot;,
+      &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="approve-activation-request-admin-only">Approve Activation Request (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/hubs/activation-requests/{request_id}/approve/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Hub activated successfully&quot;,
+  &quot;hub&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;school&quot;: {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;name&quot;: &quot;University of Lagos&quot;,
+      &quot;short_name&quot;: &quot;UNILAG&quot;
+    },
+    &quot;activated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+  }
+}
+</code></pre>
+<hr />
+<h3 id="reject-activation-request-admin-only">Reject Activation Request (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/hubs/activation-requests/{request_id}/reject/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;reason&quot;: &quot;School not verified&quot;
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Activation request rejected&quot;,
+  &quot;status&quot;: &quot;REJECTED&quot;
+}
+</code></pre>
+<hr />
+<h2 id="departments">Departments</h2>
+<h3 id="list-departments">List Departments</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/schools/{school_id}/departments/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;name&quot;: &quot;Computer Science&quot;,
+      &quot;code&quot;: &quot;CSC&quot;,
+      &quot;question_count&quot;: 42,
+      &quot;is_active&quot;: true
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="create-department-school-representative-only">Create Department (School Representative Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/schools/{school_id}/departments/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Data Science&quot;,
+  &quot;code&quot;: &quot;DSC&quot;
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong> Same as department object above</p>
+<hr />
+<h3 id="update-department-school-representative-only">Update Department (School Representative Only)</h3>
+<p><strong>Endpoint:</strong> <code>PATCH /api/departments/{department_id}/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Computer Science and Engineering&quot;,
+  &quot;is_active&quot;: false
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong> Same as department object</p>
+<hr />
+<h2 id="questions">Questions</h2>
+<h3 id="list-questions">List Questions</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/questions/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>hub</code> - Filter by hub ID
+- <code>department</code> - Filter by department ID
+- <code>status</code> - OPEN/ANSWERED/SOLVED
+- <code>tag</code> - Filter by tag name
+- <code>search</code> - Search in title and body
+- <code>ordering</code> - created_at/-created_at/views/-views
+- <code>page</code> - Page number
+- <code>page_size</code> - Items per page (default: 20, max: 50)</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 150,
+  &quot;next&quot;: &quot;https://api.academia.com/api/questions/?page=2&quot;,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;How do I calculate my CGPA?&quot;,
+      &quot;body&quot;: &quot;I'm confused about the grading system...&quot;,
+      &quot;status&quot;: &quot;SOLVED&quot;,
+      &quot;view_count&quot;: 120,
+      &quot;author&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;full_name&quot;: &quot;John Doe&quot;,
+        &quot;avatar&quot;: &quot;https://...&quot;
+      },
+      &quot;hub&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;school&quot;: {
+          &quot;name&quot;: &quot;University of Lagos&quot;,
+          &quot;short_name&quot;: &quot;UNILAG&quot;
+        }
+      },
+      &quot;department&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;name&quot;: &quot;Computer Science&quot;
+      },
+      &quot;tags&quot;: [&quot;gpa&quot;, &quot;grading&quot;, &quot;calculation&quot;],
+      &quot;answer_count&quot;: 3,
+      &quot;best_answer_id&quot;: &quot;uuid&quot;,
+      &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;,
+      &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="create-question">Create Question</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/questions/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;How do I calculate my CGPA?&quot;,
+  &quot;body&quot;: &quot;I'm confused about the grading system at UNILAG...&quot;,
+  &quot;hub_id&quot;: &quot;uuid&quot;,
+  &quot;department_id&quot;: &quot;uuid&quot;,  // optional
+  &quot;tags&quot;: [&quot;gpa&quot;, &quot;grading&quot;, &quot;calculation&quot;]
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong> Same as GET <code>/api/questions/{question_id}/</code></p>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request - Missing required fields
+{
+  &quot;title&quot;: [&quot;This field is required.&quot;],
+  &quot;body&quot;: [&quot;This field is required.&quot;],
+  &quot;hub_id&quot;: [&quot;This field is required.&quot;]
+}
+
+// 400 Bad Request - Hub doesn't have this department
+{
+  &quot;department_id&quot;: [&quot;Department does not belong to this hub's school.&quot;]
+}
+
+// 404 Not Found - Hub doesn't exist
+{
+  &quot;hub_id&quot;: [&quot;Hub with ID 'uuid' does not exist.&quot;]
+}
+</code></pre>
+<hr />
+<h3 id="get-question">Get Question</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/questions/{question_id}/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;title&quot;: &quot;How do I calculate my CGPA?&quot;,
+  &quot;body&quot;: &quot;I'm confused about the grading system...&quot;,
+  &quot;status&quot;: &quot;SOLVED&quot;,
+  &quot;view_count&quot;: 120,
+  &quot;author&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;John Doe&quot;,
+    &quot;avatar&quot;: &quot;https://...&quot;
+  },
+  &quot;hub&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;school&quot;: {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;name&quot;: &quot;University of Lagos&quot;,
+      &quot;short_name&quot;: &quot;UNILAG&quot;
+    }
+  },
+  &quot;department&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;name&quot;: &quot;Computer Science&quot;
+  },
+  &quot;tags&quot;: [&quot;gpa&quot;, &quot;grading&quot;, &quot;calculation&quot;],
+  &quot;answers&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;body&quot;: &quot;To calculate your CGPA...&quot;,
+      &quot;is_best&quot;: true,
+      &quot;vote_score&quot;: 15,
+      &quot;author&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;full_name&quot;: &quot;Jane Smith&quot;,
+        &quot;avatar&quot;: &quot;https://...&quot;
+      },
+      &quot;comment_count&quot;: 2,
+      &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;,
+      &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ],
+  &quot;answer_count&quot;: 3,
+  &quot;best_answer_id&quot;: &quot;uuid&quot;,
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;,
+  &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<p><strong>Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Question not found&quot;
+}
+</code></pre>
+<hr />
+<h3 id="update-question">Update Question</h3>
+<p><strong>Endpoint:</strong> <code>PATCH /api/questions/{question_id}/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Updated title&quot;,
+  &quot;body&quot;: &quot;Updated body&quot;,
+  &quot;department_id&quot;: &quot;uuid&quot;,
+  &quot;tags&quot;: [&quot;gpa&quot;, &quot;updated&quot;]
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong> Same as GET <code>/api/questions/{question_id}/</code></p>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 403 Forbidden - Not the question author
+{
+  &quot;error&quot;: &quot;You do not have permission to edit this question&quot;
+}
+
+// 400 Bad Request - Invalid status transition (Open → Solved directly)
+{
+  &quot;status&quot;: [&quot;Cannot transition from OPEN to SOLVED without a best answer.&quot;]
+}
+</code></pre>
+<hr />
+<h3 id="delete-question">Delete Question</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/questions/{question_id}/</code></p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to delete this question&quot;
+}
+</code></pre>
+<hr />
+<h3 id="get-unanswered-questions-moderator-only">Get Unanswered Questions (Moderator Only)</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/questions/unanswered/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>hub</code> - Filter by hub ID
+- <code>page</code> - Page number</p>
+<p><strong>Response (200 OK):</strong> Same as list questions, but only OPEN status</p>
+<hr />
+<h2 id="answers">Answers</h2>
+<h3 id="create-answer">Create Answer</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/answers/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;question_id&quot;: &quot;uuid&quot;,
+  &quot;body&quot;: &quot;To calculate your CGPA, you need to...&quot;
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;body&quot;: &quot;To calculate your CGPA, you need to...&quot;,
+  &quot;question&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;title&quot;: &quot;How do I calculate my CGPA?&quot;
+  },
+  &quot;author&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;Jane Smith&quot;,
+    &quot;avatar&quot;: &quot;https://...&quot;
+  },
+  &quot;is_best&quot;: false,
+  &quot;vote_score&quot;: 0,
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;,
+  &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request
+{
+  &quot;question_id&quot;: [&quot;This field is required.&quot;],
+  &quot;body&quot;: [&quot;This field is required.&quot;]
+}
+
+// 403 Forbidden - Question is already SOLVED
+{
+  &quot;question&quot;: [&quot;Cannot add answer to a solved question.&quot;]
+}
+</code></pre>
+<hr />
+<h3 id="update-answer">Update Answer</h3>
+<p><strong>Endpoint:</strong> <code>PATCH /api/answers/{answer_id}/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;body&quot;: &quot;Updated answer content&quot;
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong> Same as GET answer object</p>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to edit this answer&quot;
+}
+</code></pre>
+<hr />
+<h3 id="delete-answer">Delete Answer</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/answers/{answer_id}/</code></p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to delete this answer&quot;
+}
+</code></pre>
+<hr />
+<h3 id="mark-best-answer">Mark Best Answer</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/answers/{answer_id}/mark-best/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Answer marked as best&quot;,
+  &quot;answer&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;is_best&quot;: true
+  },
+  &quot;question&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;status&quot;: &quot;SOLVED&quot;
+  }
+}
+</code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 403 Forbidden - Not the question owner
+{
+  &quot;error&quot;: &quot;Only the question owner can mark a best answer&quot;
+}
+
+// 400 Bad Request - Answer already marked as best
+{
+  &quot;error&quot;: &quot;This answer is already marked as best&quot;
+}
+</code></pre>
+<hr />
+<h2 id="answer-votes">Answer Votes</h2>
+<h3 id="vote-on-answer">Vote on Answer</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/answers/{answer_id}/vote/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;vote_type&quot;: &quot;UP&quot;  // or &quot;DOWN&quot;
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Vote recorded&quot;,
+  &quot;vote_type&quot;: &quot;UP&quot;,
+  &quot;vote_score&quot;: 15
+}
+</code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request - Already voted
+{
+  &quot;error&quot;: &quot;You have already voted on this answer&quot;
+}
+
+// 400 Bad Request - Can't vote on own answer
+{
+  &quot;error&quot;: &quot;You cannot vote on your own answer&quot;
+}
+</code></pre>
+<hr />
+<h3 id="remove-vote">Remove Vote</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/answers/{answer_id}/vote/</code></p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<p><strong>Error Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You have not voted on this answer&quot;
+}
+</code></pre>
+<hr />
+<h2 id="comments">Comments</h2>
+<h3 id="create-comment">Create Comment</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/comments/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;answer_id&quot;: &quot;uuid&quot;,
+  &quot;body&quot;: &quot;Could you elaborate on the grading scale?&quot;
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;body&quot;: &quot;Could you elaborate on the grading scale?&quot;,
+  &quot;author&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;John Doe&quot;,
+    &quot;avatar&quot;: &quot;https://...&quot;
+  },
+  &quot;answer&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;
+  },
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;,
+  &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<hr />
+<h3 id="update-comment">Update Comment</h3>
+<p><strong>Endpoint:</strong> <code>PATCH /api/comments/{comment_id}/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;body&quot;: &quot;Updated comment&quot;
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong> Same as comment object</p>
+<hr />
+<h3 id="delete-comment">Delete Comment</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/comments/{comment_id}/</code></p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<hr />
+<h2 id="tags">Tags</h2>
+<h3 id="list-tags">List Tags</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/tags/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>search</code> - Search by tag name
+- <code>popular</code> - Sort by question count (true/false)</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;name&quot;: &quot;gpa&quot;,
+      &quot;question_count&quot;: 25
+    },
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;name&quot;: &quot;admission&quot;,
+      &quot;question_count&quot;: 18
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="get-questions-by-tag">Get Questions by Tag</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/tags/{tag_name}/questions/</code></p>
+<p><strong>Query Parameters:</strong>
+- Same as list questions</p>
+<p><strong>Response (200 OK):</strong> Same as list questions</p>
+<hr />
+<h2 id="search">Search</h2>
+<h3 id="search-questions">Search Questions</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/search/questions/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>q</code> - Search query
+- <code>hub</code> - Filter by hub ID
+- <code>department</code> - Filter by department ID
+- <code>tag</code> - Filter by tag name
+- <code>page</code> - Page number</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 45,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;How do I calculate my CGPA?&quot;,
+      &quot;body&quot;: &quot;...&quot;,
+      &quot;status&quot;: &quot;SOLVED&quot;,
+      &quot;score&quot;: 0.95,
+      &quot;author&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;full_name&quot;: &quot;John Doe&quot;
+      },
+      &quot;hub&quot;: {
+        &quot;school&quot;: {
+          &quot;name&quot;: &quot;University of Lagos&quot;
+        }
+      },
+      &quot;tags&quot;: [&quot;gpa&quot;, &quot;grading&quot;],
+      &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<p><strong>Note:</strong> Results are ranked by:
+1. Solved questions (status=SOLVED) with best answers
+2. Highly voted answers
+3. Recent content
+4. Relevance to search terms</p>
+<hr />
+<h2 id="notifications">Notifications</h2>
+<h3 id="list-notifications">List Notifications</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/notifications/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>is_read</code> - true/false
+- <code>page</code> - Page number</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 25,
+  &quot;unread_count&quot;: 5,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;type&quot;: &quot;NEW_ANSWER&quot;,
+      &quot;message&quot;: &quot;Jane Smith answered your question: 'How do I calculate my CGPA?'&quot;,
+      &quot;is_read&quot;: false,
+      &quot;related_object_id&quot;: &quot;uuid&quot;,
+      &quot;related_object_type&quot;: &quot;question&quot;,
+      &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="mark-notification-as-read">Mark Notification as Read</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/notifications/{notification_id}/mark-read/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Notification marked as read&quot;,
+  &quot;is_read&quot;: true
+}
+</code></pre>
+<hr />
+<h3 id="mark-all-notifications-as-read">Mark All Notifications as Read</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/notifications/mark-all-read/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;All notifications marked as read&quot;,
+  &quot;count&quot;: 5
+}
+</code></pre>
+<hr />
+<h2 id="reports">Reports</h2>
+<h3 id="create-report">Create Report</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/reports/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;content_type&quot;: &quot;question&quot;,  // &quot;question&quot;, &quot;answer&quot;, &quot;comment&quot;
+  &quot;content_id&quot;: &quot;uuid&quot;,
+  &quot;type&quot;: &quot;SPAM&quot;,  // &quot;SPAM&quot;, &quot;ABUSE&quot;, &quot;MISINFORMATION&quot;, &quot;DUPLICATE&quot;
+  &quot;description&quot;: &quot;This appears to be promotional content&quot;
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;content_type&quot;: &quot;question&quot;,
+  &quot;content_id&quot;: &quot;uuid&quot;,
+  &quot;type&quot;: &quot;SPAM&quot;,
+  &quot;description&quot;: &quot;This appears to be promotional content&quot;,
+  &quot;status&quot;: &quot;PENDING&quot;,
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request - Already reported by this user
+{
+  &quot;error&quot;: &quot;You have already reported this content&quot;
+}
+</code></pre>
+<hr />
+<h3 id="list-reports-admin-only">List Reports (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/reports/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>status</code> - PENDING/RESOLVED/REJECTED
+- <code>page</code> - Page number</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 10,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;content_type&quot;: &quot;question&quot;,
+      &quot;content_id&quot;: &quot;uuid&quot;,
+      &quot;type&quot;: &quot;SPAM&quot;,
+      &quot;description&quot;: &quot;This appears to be promotional content&quot;,
+      &quot;status&quot;: &quot;PENDING&quot;,
+      &quot;reporter&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;full_name&quot;: &quot;John Doe&quot;
+      },
+      &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h3 id="resolve-report-admin-only">Resolve Report (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/reports/{report_id}/resolve/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;action&quot;: &quot;DELETE_CONTENT&quot;  // &quot;DELETE_CONTENT&quot;, &quot;WARN_USER&quot;, &quot;BAN_USER&quot;, &quot;DISMISS&quot;
+}
+</code></pre>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Report resolved&quot;,
+  &quot;status&quot;: &quot;RESOLVED&quot;,
+  &quot;action_taken&quot;: &quot;DELETE_CONTENT&quot;,
+  &quot;resolved_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<hr />
+<h3 id="reject-report-admin-only">Reject Report (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/reports/{report_id}/reject/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Report rejected&quot;,
+  &quot;status&quot;: &quot;REJECTED&quot;,
+  &quot;resolved_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<hr />
+<h2 id="moderation">Moderation</h2>
+<h3 id="assign-moderator-school-representative-only">Assign Moderator (School Representative Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/hubs/{hub_id}/moderators/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;user_id&quot;: &quot;uuid&quot;
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;user&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;Jane Smith&quot;,
+    &quot;avatar&quot;: &quot;https://...&quot;
+  },
+  &quot;hub&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;
+  },
+  &quot;is_active&quot;: true,
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request - Already a moderator
+{
+  &quot;error&quot;: &quot;User is already a moderator for this hub&quot;
+}
+
+// 404 Not Found - User doesn't exist
+{
+  &quot;user_id&quot;: [&quot;User with ID 'uuid' does not exist.&quot;]
+}
+</code></pre>
+<hr />
+<h3 id="remove-moderator-school-representative-only">Remove Moderator (School Representative Only)</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/hubs/{hub_id}/moderators/{user_id}/</code></p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<hr />
+<h3 id="list-moderators">List Moderators</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/hubs/{hub_id}/moderators/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;user&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;full_name&quot;: &quot;Jane Smith&quot;,
+        &quot;avatar&quot;: &quot;https://...&quot;
+      },
+      &quot;assigned_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h2 id="school-representatives">School Representatives</h2>
+<h3 id="assign-school-representative-admin-only">Assign School Representative (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/hubs/{hub_id}/representatives/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;user_id&quot;: &quot;uuid&quot;
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong> Same as moderator assignment</p>
+<hr />
+<h3 id="remove-school-representative-admin-only">Remove School Representative (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/hubs/{hub_id}/representatives/{user_id}/</code></p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<hr />
+<h2 id="error-formats">Error Formats</h2>
+<h3 id="400-bad-request">400 Bad Request</h3>
+<pre><code class="language-json">{
+  &quot;field_name&quot;: [&quot;Error message&quot;]
+}
+</code></pre>
+<h3 id="401-unauthorized">401 Unauthorized</h3>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Authentication credentials were not provided&quot;
+}
+</code></pre>
+<h3 id="403-forbidden">403 Forbidden</h3>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to perform this action&quot;
+}
+</code></pre>
+<h3 id="404-not-found">404 Not Found</h3>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Resource not found&quot;
+}
+</code></pre>
+<h3 id="405-method-not-allowed">405 Method Not Allowed</h3>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Method not allowed for this endpoint&quot;
+}
+</code></pre>
+<h3 id="429-too-many-requests">429 Too Many Requests</h3>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Rate limit exceeded. Please try again later.&quot;
+}
+</code></pre>
+<h3 id="500-internal-server-error">500 Internal Server Error</h3>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;An unexpected error occurred&quot;
+}
+</code></pre>
+<hr />
+<h2 id="rate-limits">Rate Limits</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authentication (login/refresh)</td>
+<td>10 requests per minute</td>
+</tr>
+<tr>
+<td>Question creation</td>
+<td>30 requests per hour</td>
+</tr>
+<tr>
+<td>Answer creation</td>
+<td>50 requests per hour</td>
+</tr>
+<tr>
+<td>Comment creation</td>
+<td>50 requests per hour</td>
+</tr>
+<tr>
+<td>Voting</td>
+<td>100 requests per hour</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>60 requests per minute</td>
+</tr>
+<tr>
+<td>Reports</td>
+<td>10 requests per hour</td>
+</tr>
+<tr>
+<td>General API</td>
+<td>100 requests per minute</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pagination">Pagination</h2>
+<p>All list endpoints support pagination with the following parameters:
+- <code>page</code>: Page number (default: 1)
+- <code>page_size</code>: Items per page (default: 20, max: 100)</p>
+<p>Response includes:
+- <code>count</code>: Total number of items
+- <code>next</code>: URL to next page (or null)
+- <code>previous</code>: URL to previous page (or null)
+- <code>results</code>: Array of items</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

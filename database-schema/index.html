@@ -1,0 +1,1871 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../feature-list/">
+      
+      
+        <link rel="next" href="../api-contract/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Database Schema - Academia</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#database-schema" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Academia" class="md-header__button md-logo" aria-label="Academia" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Academia
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database Schema
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Academia" class="md-nav__button md-logo" aria-label="Academia" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Academia
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Schema
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#school" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#department" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Department
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hubactivationrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HubActivationRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#answervote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AnswerVote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questiontag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuestionTag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moderatorassignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ModeratorAssignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schoolrepresentativeassignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SchoolRepresentativeAssignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relationships-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationships Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraints-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints &amp; Indexes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constraints &amp; Indexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#performance-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Indexes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unique-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unique Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cascade-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cascade Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#school" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#department" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Department
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hubactivationrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HubActivationRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#answervote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AnswerVote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questiontag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuestionTag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moderatorassignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ModeratorAssignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schoolrepresentativeassignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SchoolRepresentativeAssignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relationships-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationships Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraints-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints &amp; Indexes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constraints &amp; Indexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#performance-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Indexes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unique-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unique Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cascade-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cascade Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="database-schema">DATABASE SCHEMA</h1>
+<h2 id="models">Models</h2>
+<h3 id="user">User</h3>
+<p>Represents an authenticated user on the platform.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Unique, Required</td>
+<td>User email address</td>
+</tr>
+<tr>
+<td>full_name</td>
+<td>String</td>
+<td>Required</td>
+<td>User's full name</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td>String</td>
+<td>Nullable</td>
+<td>URL to avatar image (from Google)</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>Boolean</td>
+<td>Default: True</td>
+<td>Account active status</td>
+</tr>
+<tr>
+<td>is_admin</td>
+<td>Boolean</td>
+<td>Default: False</td>
+<td>Platform administrator flag</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Account creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="school">School</h3>
+<p>Represents an educational institution.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Unique, Required</td>
+<td>Full institution name</td>
+</tr>
+<tr>
+<td>short_name</td>
+<td>String</td>
+<td>Unique, Required</td>
+<td>Abbreviated name</td>
+</tr>
+<tr>
+<td>location</td>
+<td>String</td>
+<td>Nullable</td>
+<td>City/State location</td>
+</tr>
+<tr>
+<td>website</td>
+<td>String</td>
+<td>Nullable</td>
+<td>Official website URL</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>Boolean</td>
+<td>Default: True</td>
+<td>School active status</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="department">Department</h3>
+<p>Represents an academic department within a school.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>school</td>
+<td>ForeignKey(School)</td>
+<td>Required, CASCADE</td>
+<td>Parent school</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Required</td>
+<td>Department name</td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>Nullable</td>
+<td>Department code</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>Boolean</td>
+<td>Default: True</td>
+<td>Department active status</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hub">Hub</h3>
+<p>Represents the community space for a school. One-to-one with School.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>school</td>
+<td>OneToOneField(School)</td>
+<td>Required, CASCADE</td>
+<td>Associated school</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>Boolean</td>
+<td>Default: True</td>
+<td>Hub active status</td>
+</tr>
+<tr>
+<td>activated_at</td>
+<td>DateTime</td>
+<td>Nullable</td>
+<td>Activation timestamp</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hubactivationrequest">HubActivationRequest</h3>
+<p>Represents a user request to activate a hub.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>school</td>
+<td>ForeignKey(School)</td>
+<td>Required, CASCADE</td>
+<td>School being requested</td>
+</tr>
+<tr>
+<td>user</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>User who requested</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Enum</td>
+<td>Default: PENDING</td>
+<td>PENDING/APPROVED/REJECTED</td>
+</tr>
+<tr>
+<td>notes</td>
+<td>Text</td>
+<td>Nullable</td>
+<td>Additional notes from user</td>
+</tr>
+<tr>
+<td>reviewed_by</td>
+<td>ForeignKey(User)</td>
+<td>Nullable</td>
+<td>Admin who reviewed</td>
+</tr>
+<tr>
+<td>reviewed_at</td>
+<td>DateTime</td>
+<td>Nullable</td>
+<td>Review timestamp</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="question">Question</h3>
+<p>Represents a question asked by a user.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Required</td>
+<td>Question title</td>
+</tr>
+<tr>
+<td>body</td>
+<td>Text</td>
+<td>Required</td>
+<td>Question content</td>
+</tr>
+<tr>
+<td>author</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>Question creator</td>
+</tr>
+<tr>
+<td>hub</td>
+<td>ForeignKey(Hub)</td>
+<td>Required, CASCADE</td>
+<td>School hub</td>
+</tr>
+<tr>
+<td>department</td>
+<td>ForeignKey(Department)</td>
+<td>Nullable, SET_NULL</td>
+<td>Optional department</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Enum</td>
+<td>Default: OPEN</td>
+<td>OPEN/ANSWERED/SOLVED</td>
+</tr>
+<tr>
+<td>view_count</td>
+<td>Integer</td>
+<td>Default: 0</td>
+<td>Number of views</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="answer">Answer</h3>
+<p>Represents an answer to a question.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>body</td>
+<td>Text</td>
+<td>Required</td>
+<td>Answer content</td>
+</tr>
+<tr>
+<td>author</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>Answer creator</td>
+</tr>
+<tr>
+<td>question</td>
+<td>ForeignKey(Question)</td>
+<td>Required, CASCADE</td>
+<td>Parent question</td>
+</tr>
+<tr>
+<td>is_best</td>
+<td>Boolean</td>
+<td>Default: False</td>
+<td>Best answer flag</td>
+</tr>
+<tr>
+<td>vote_score</td>
+<td>Integer</td>
+<td>Default: 0</td>
+<td>Total vote score</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="answervote">AnswerVote</h3>
+<p>Represents a vote on an answer.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>answer</td>
+<td>ForeignKey(Answer)</td>
+<td>Required, CASCADE</td>
+<td>Voted answer</td>
+</tr>
+<tr>
+<td>user</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>Voter</td>
+</tr>
+<tr>
+<td>vote_type</td>
+<td>Enum</td>
+<td>Required</td>
+<td>UP/DOWN</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Vote timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>Unique constraint: (answer, user) to prevent duplicate votes.</p>
+<h3 id="comment">Comment</h3>
+<p>Represents a comment on an answer.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>body</td>
+<td>Text</td>
+<td>Required</td>
+<td>Comment content</td>
+</tr>
+<tr>
+<td>author</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>Comment creator</td>
+</tr>
+<tr>
+<td>answer</td>
+<td>ForeignKey(Answer)</td>
+<td>Required, CASCADE</td>
+<td>Parent answer</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tag">Tag</h3>
+<p>Represents a tag that can be applied to questions.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Unique, Required</td>
+<td>Tag name</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="questiontag">QuestionTag</h3>
+<p>Many-to-many relationship between questions and tags.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>question</td>
+<td>ForeignKey(Question)</td>
+<td>Required, CASCADE</td>
+<td>Associated question</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>ForeignKey(Tag)</td>
+<td>Required, CASCADE</td>
+<td>Associated tag</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Association timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>Unique constraint: (question, tag) to prevent duplicates.</p>
+<h3 id="notification">Notification</h3>
+<p>Represents a notification for a user.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>user</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>Recipient</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>Required</td>
+<td>NEW_ANSWER/NEW_COMMENT/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>Required</td>
+<td>Notification text</td>
+</tr>
+<tr>
+<td>is_read</td>
+<td>Boolean</td>
+<td>Default: False</td>
+<td>Read status</td>
+</tr>
+<tr>
+<td>related_object_id</td>
+<td>UUID</td>
+<td>Nullable</td>
+<td>ID of related object (question/answer/etc)</td>
+</tr>
+<tr>
+<td>related_object_type</td>
+<td>String</td>
+<td>Nullable</td>
+<td>Model name of related object</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Notification timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="report">Report</h3>
+<p>Represents a user report on content.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>reporter</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>User who reported</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Enum</td>
+<td>Required</td>
+<td>SPAM/ABUSE/MISINFORMATION/DUPLICATE</td>
+</tr>
+<tr>
+<td>content_type</td>
+<td>String</td>
+<td>Required</td>
+<td>Model being reported (question/answer/comment)</td>
+</tr>
+<tr>
+<td>content_id</td>
+<td>UUID</td>
+<td>Required</td>
+<td>ID of reported content</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Text</td>
+<td>Nullable</td>
+<td>Additional context</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Enum</td>
+<td>Default: PENDING</td>
+<td>PENDING/RESOLVED/REJECTED</td>
+</tr>
+<tr>
+<td>resolved_by</td>
+<td>ForeignKey(User)</td>
+<td>Nullable, SET_NULL</td>
+<td>Admin who resolved</td>
+</tr>
+<tr>
+<td>resolved_at</td>
+<td>DateTime</td>
+<td>Nullable</td>
+<td>Resolution timestamp</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<h3 id="moderatorassignment">ModeratorAssignment</h3>
+<p>Represents a user assigned as moderator for a hub.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>user</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>Assigned moderator</td>
+</tr>
+<tr>
+<td>hub</td>
+<td>ForeignKey(Hub)</td>
+<td>Required, CASCADE</td>
+<td>Moderated hub</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>Boolean</td>
+<td>Default: True</td>
+<td>Assignment active status</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Assignment timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>Unique constraint: (user, hub) to prevent duplicate assignments.</p>
+<h3 id="schoolrepresentativeassignment">SchoolRepresentativeAssignment</h3>
+<p>Represents a user assigned as school representative for a hub.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>user</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>Assigned representative</td>
+</tr>
+<tr>
+<td>hub</td>
+<td>ForeignKey(Hub)</td>
+<td>Required, CASCADE</td>
+<td>Represented hub</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>Boolean</td>
+<td>Default: True</td>
+<td>Assignment active status</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Assignment timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>Unique constraint: (user, hub) to prevent duplicate assignments.</p>
+<hr />
+<h2 id="relationships-diagram">Relationships Diagram</h2>
+<pre><code>School (1) ─────── (1) Hub
+   │                    │
+   │                    │
+   │                    │
+   ├── (N) Department   │
+   │                    │
+   │                    ├── (N) Question
+   │                    │       │
+   │                    │       ├── (N) Answer
+   │                    │       │       │
+   │                    │       │       ├── (N) Comment
+   │                    │       │       │
+   │                    │       │       └── (N) AnswerVote
+   │                    │       │
+   │                    │       ├── (N) QuestionTag ── (N) Tag
+   │                    │       │
+   │                    │       └── (1) Author (User)
+   │                    │
+   │                    ├── (N) ModeratorAssignment
+   │                    │
+   │                    ├── (N) SchoolRepresentativeAssignment
+   │                    │
+   │                    └── (N) HubActivationRequest
+   │
+   └── (N) User ─────── (N) Notification
+                        (N) Report
+                        (N) HubActivationRequest
+</code></pre>
+<hr />
+<h2 id="constraints-indexes">Constraints &amp; Indexes</h2>
+<h3 id="performance-indexes">Performance Indexes</h3>
+<ul>
+<li><code>Question</code>: (hub_id, created_at DESC) - For recent questions</li>
+<li><code>Question</code>: (hub_id, status) - For filtering by status</li>
+<li><code>Question</code>: (department_id) - For department filtering</li>
+<li><code>Answer</code>: (question_id, is_best) - For best answer lookup</li>
+<li><code>AnswerVote</code>: (answer_id) - For vote aggregation</li>
+<li><code>Notification</code>: (user_id, is_read, created_at DESC) - For user notifications</li>
+<li><code>Report</code>: (status, created_at DESC) - For reports dashboard</li>
+</ul>
+<h3 id="unique-constraints">Unique Constraints</h3>
+<ul>
+<li><code>School</code>: name, short_name</li>
+<li><code>Department</code>: (school_id, name)</li>
+<li><code>Hub</code>: school_id</li>
+<li><code>AnswerVote</code>: (answer_id, user_id)</li>
+<li><code>QuestionTag</code>: (question_id, tag_id)</li>
+<li><code>ModeratorAssignment</code>: (user_id, hub_id)</li>
+<li><code>SchoolRepresentativeAssignment</code>: (user_id, hub_id)</li>
+</ul>
+<h3 id="cascade-behavior">Cascade Behavior</h3>
+<ul>
+<li>Deleting a <code>School</code> → Delete associated <code>Hub</code>, <code>Department</code>, <code>HubActivationRequest</code></li>
+<li>Deleting a <code>Hub</code> → Delete associated <code>Question</code>, <code>ModeratorAssignment</code>, <code>SchoolRepresentativeAssignment</code></li>
+<li>Deleting a <code>User</code> → Delete associated <code>Question</code>, <code>Answer</code>, <code>Comment</code>, <code>Notification</code>, <code>Report</code></li>
+<li>Deleting a <code>Question</code> → Delete associated <code>Answer</code>, <code>QuestionTag</code></li>
+<li>Deleting an <code>Answer</code> → Delete associated <code>Comment</code>, <code>AnswerVote</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
