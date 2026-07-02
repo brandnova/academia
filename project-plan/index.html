@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../project-overview/">
       
       
-        <link rel="next" href="../feature-list/">
+        <link rel="next" href="../BUILD_LOG/">
       
       
         
@@ -220,6 +220,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -249,6 +276,60 @@
 
       </a>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -397,8 +478,8 @@
 <p>Every question, answer, department, moderator assignment, and school-specific discussion should belong to one authoritative hub.</p>
 <h3 id="schools-are-platform-data">Schools Are Platform Data</h3>
 <p>Schools are managed by the platform rather than by users.</p>
-<p>Users cannot create schools.</p>
-<p>Instead, the platform maintains a curated list of institutions and users may request activation of a hub when one does not already exist.</p>
+<p>Users cannot create schools directly.</p>
+<p>Instead, the platform maintains a curated list of institutions and users may request activation of a hub when one does not already exist, or submit a school for review if it's missing from the directory entirely (see "Developer Tooling &amp; Data Sourcing" below).</p>
 <p>This approach prevents duplicates, spelling inconsistencies, fake institutions, and unnecessary moderation challenges.</p>
 <p>The school dataset should eventually become one of the platform's most valuable assets.</p>
 <h3 id="knowledge-over-social-activity">Knowledge Over Social Activity</h3>
@@ -421,20 +502,22 @@
 <p>Users may become moderators.</p>
 <p>Users may become school representatives.</p>
 <p>However, ownership remains with the platform to prevent disputes, abandonment, or community fragmentation.</p>
+<h3 id="integrity-over-monetization">Integrity Over Monetization</h3>
+<p>Monetization must never compromise the accuracy or completeness of information on the platform. Paid features may increase a school's visibility, add verification badges, or enable official responses to reviews — they may never hide, suppress, or delete legitimate content. If a proposed revenue feature requires concealing true information from students, it does not ship in that form.</p>
 <hr />
 <h2 id="technology-stack">Technology Stack</h2>
 <h3 id="frontend">Frontend</h3>
 <ul>
-<li>React with TypeScript</li>
-<li>Component-based architecture</li>
-<li>State management: React Context or Redux Toolkit (depending on complexity)</li>
+<li>Framework intentionally left open (Django templates + Alpine, React + Tailwind, or Next.js — decided per-section as real pages get built)</li>
+<li>Full custom Tailwind + hand-written CSS for anything a component library can't cleanly express</li>
+<li>No third-party component library</li>
 </ul>
 <h3 id="backend">Backend</h3>
 <ul>
-<li>Django REST Framework</li>
+<li>Django REST Framework, pure API (no server-rendered product pages)</li>
 <li>PostgreSQL database</li>
-<li>JWT authentication</li>
-<li>Django Allauth for social authentication</li>
+<li>JWT authentication (SimpleJWT)</li>
+<li>Google OAuth verified via direct calls to Google's userinfo endpoint (not django-allauth — see "Known Deviations" note in BUILD_LOG.md / CHANGELOG.md for the reasoning)</li>
 </ul>
 <h3 id="development">Development</h3>
 <ul>
@@ -449,6 +532,7 @@
 <li>Fast onboarding</li>
 <li>Reduced spam</li>
 <li>Simplified password management</li>
+<li>Implemented via direct verification against Google's userinfo endpoint (see api-contract.md's "How Google Auth Works" for the full frontend implementation guide)</li>
 </ul>
 <h3 id="future-considerations">Future Considerations</h3>
 <ul>
@@ -607,6 +691,35 @@
 - Review reports
 - Oversee the health of the platform as a whole</p>
 <hr />
+<h2 id="api-versioning-public-api-strategy">API Versioning &amp; Public API Strategy</h2>
+<p>The API is namespaced under <code>/api/v1/</code> from day one, even though no external consumer exists yet. This avoids a breaking migration later.</p>
+<p>Planned rollout:
+- <strong>Phase A (MVP):</strong> Internal only — first-party frontend, JWT user auth.
+- <strong>Phase B:</strong> Read-only public endpoints (schools, hub metadata, published questions/answers, tags) behind an <code>APIClient</code> key with per-client rate limits.
+- <strong>Phase C:</strong> Broader public API, potentially including a self-serve developer portal.</p>
+<hr />
+<h2 id="future-reviews-reputation-system">Future: Reviews &amp; Reputation System</h2>
+<p>Schools may eventually have a review system where students rate and describe their experience across categories (academics, facilities, social life, career support, value for money).</p>
+<p>Design constraints:
+- Reviews are moderated through the same <code>Report</code> pipeline as questions/answers/comments — no separate, more lenient or stricter standard.
+- Verified schools may post one official <code>ReviewResponse</code> per review to add context or rebut inaccuracies — but cannot remove or hide the review itself.
+- No subscription tier may suppress, hide, or deprioritize a legitimate negative review. Paid tiers affect <em>promotion and verification only</em> (see Monetization below).</p>
+<hr />
+<h2 id="future-monetization">Future: Monetization</h2>
+<p>Schools may subscribe to paid plans (<code>Plan</code>/<code>Subscription</code>/<code>Invoice</code>). What paid plans are allowed to unlock:
+- Verified badge on the school profile
+- Promoted placement in search/browse results
+- Official responses to reviews
+- Analytics dashboard for school representatives</p>
+<p>What paid plans are explicitly <strong>not</strong> allowed to affect: visibility of reviews, question/answer content, or moderation outcomes.</p>
+<hr />
+<h2 id="developer-tooling-data-sourcing-planned-not-yet-designed">Developer Tooling &amp; Data Sourcing (Planned — not yet designed)</h2>
+<p>Two backlog items noted here for visibility, to be designed when we get to them:</p>
+<ul>
+<li><strong>Content seed command</strong> — a Django management command to populate the database with placeholder content for testing, updated as new models are added, so any developer can spin up a realistic local dataset quickly.</li>
+<li><strong>Nigerian school directory sourcing</strong> — curating an initial database of Nigerian universities, polytechnics, and colleges (no single authoritative public source currently exists, so this will require manual collection and periodic verification). Tied to this: a user-facing "submit a school that's missing" flow (see <code>SchoolSubmission</code> in database-schema.md's Future Models), with an admin verification workflow before a submission becomes a real <code>School</code> record. This directory is also intended to eventually back the public API's schools endpoint (see "Public/Developer API" in feature-list.md).</li>
+</ul>
+<hr />
 <h2 id="development-approach">Development Approach</h2>
 <p>Academia will follow an API-first development process.</p>
 <p>Before implementation begins, the project's behavior, data structures, and API responses should be documented and agreed upon.</p>
@@ -615,16 +728,31 @@
 <p>Documentation is treated as a development artifact rather than an afterthought.</p>
 <hr />
 <h2 id="documentation-structure">Documentation Structure</h2>
-<p>The project documentation is intentionally lightweight.</p>
-<p>Only four core documents are maintained:</p>
+<p>The project maintains the following documents, each with a distinct purpose and update cadence:</p>
 <h3 id="project-planmd-this-document">project-plan.md (This document)</h3>
-<p>Defines the vision, philosophy, structure, and guiding decisions of the platform.</p>
+<p>Defines the vision, philosophy, structure, and guiding decisions of the platform.
+Updated during periodic doc-sync passes (see below), not every phase.</p>
 <h3 id="feature-listmd">feature-list.md</h3>
-<p>Defines the complete list of features and requirements to be implemented.</p>
+<p>Defines the complete list of features and requirements to be implemented.
+Updated during doc-sync passes.</p>
 <h3 id="database-schemamd">database-schema.md</h3>
-<p>Defines models, relationships, constraints, and data structures.</p>
+<p>Defines models, relationships, constraints, and data structures.
+Updated during doc-sync passes.</p>
 <h3 id="api-contractmd">api-contract.md</h3>
-<p>Defines endpoints, request payloads, response payloads, and API behavior.</p>
+<p>Defines endpoints, request payloads, response payloads, and API behavior.
+Updated during doc-sync passes.</p>
+<h3 id="build_logmd">BUILD_LOG.md</h3>
+<p>Short-term working memory. Updated after <strong>every</strong> completed phase — current
+phase, completed phases, key decisions, conventions established, and known
+deviations from the four core docs above. Its "Known Deviations" section is
+the queue of items waiting to be merged into the core docs at the next sync.</p>
+<h3 id="changelogmd-repo-root-docschangelogmd-published-docs-site">CHANGELOG.md (repo root) / docs/changelog.md (published docs site)</h3>
+<p>The durable history. Gets a small entry after every phase, plus a "Docs Sync"
+entry whenever the four core docs are updated, describing what moved from
+"deviation" to "documented plan." Entries are grouped by development phase
+and date rather than semantic version — this project isn't a versioned
+external release yet. Once the public API ships, its endpoints carry their
+own <code>/v1/</code>, <code>/v2/</code> versioning independent of this log.</p>
 <p><strong>Each document should remain focused on its purpose and avoid duplicating information that belongs elsewhere.</strong></p>
 <hr />
 <h2 id="future-direction">Future Direction</h2>
