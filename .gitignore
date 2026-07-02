@@ -2,6 +2,9 @@
 __pycache__/
 *.pyc
 .venv/
+staticfiles/
+*.sqlite3
+.DS_Store
 
 # Node
 node_modules/
@@ -19,3 +22,6 @@ build/
 
 # MKDocs
 site/
+
+# Custom
+gitignore/

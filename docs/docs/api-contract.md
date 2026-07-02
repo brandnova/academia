@@ -1,5 +1,17 @@
 # API CONTRACT
 
+## Versioning
+
+All endpoints below are namespaced under `/api/v1/`. For example, `GET /api/schools/` becomes `GET /api/v1/schools/`. This applies to every endpoint in this document — the paths shown are relative to that prefix.
+
+Breaking changes will ship under a new version prefix (`/api/v2/`); `/api/v1/` will be maintained for a documented deprecation window once a v2 exists.
+
+## Authentication Modes
+
+Two distinct auth modes will exist:
+- **User auth** — JWT bearer token from `/api/v1/auth/google/`, used by the first-party frontend and any user-driven action.
+- **API client auth** — `X-API-Key: <key>` header, used by registered third-party consumers hitting public read-only endpoints (see "API Clients" below). Not available in MVP; reserved for the Future public-API phase.
+
 ## Authentication
 
 ### Google Login
@@ -1163,6 +1175,44 @@
 **Endpoint:** `DELETE /api/hubs/{hub_id}/representatives/{user_id}/`
 
 **Response (204 No Content):** Empty
+
+---
+
+## API Clients (Future — Public API Phase)
+
+### Register API Client (Admin Only)
+**Endpoint:** `POST /api/v1/admin/api-clients/`
+
+**Request:**
+```json
+{
+  "name": "ThirdPartyApp",
+  "scopes": ["schools:read", "questions:read"],
+  "rate_limit_tier": "STANDARD"
+}
+```
+
+**Response (201 Created):**
+```json
+{
+  "id": "uuid",
+  "name": "ThirdPartyApp",
+  "key_prefix": "ac_live_ab12",
+  "secret": "shown_only_once_here",
+  "scopes": ["schools:read", "questions:read"],
+  "rate_limit_tier": "STANDARD",
+  "created_at": "2026-01-01T00:00:00Z"
+}
+```
+The `secret` is shown once at creation only; only a hash is stored.
+
+### Revoke API Client (Admin Only)
+**Endpoint:** `POST /api/v1/admin/api-clients/{client_id}/revoke/`
+
+**Response (200 OK):**
+```json
+{ "message": "API client revoked", "revoked_at": "2026-01-01T00:00:00Z" }
+```
 
 ---
 

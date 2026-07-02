@@ -114,3 +114,27 @@
 - [ ] AI-assisted search
 - [ ] Nationwide academic knowledge graph
 - [ ] Open schools list API for others to use
+
+## School Reviews (Future)
+- [ ] Submit school review (overall rating + category ratings + text)
+- [ ] Edit/delete own review
+- [ ] View reviews per school
+- [ ] School official response to a review (verified reps only)
+- [ ] Vote review helpful/not helpful
+- [ ] Report review (reuses existing report pipeline)
+
+## School Verification & Claiming (Future)
+- [ ] Claim school profile (representative request + admin approval)
+- [ ] Verified badge on school profile
+
+## Monetization (Future)
+- [ ] Subscription plans for schools
+- [ ] Promoted placement for verified/subscribed schools
+- [ ] Analytics dashboard for school representatives
+- [ ] Payment integration (Stripe/Paystack)
+
+## Public/Developer API (Future)
+- [ ] API client registration (admin issued keys)
+- [ ] API key authentication + per-client rate limiting
+- [ ] Read-only public endpoints (schools, questions, tags)
+- [ ] Developer documentation portal

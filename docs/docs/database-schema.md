@@ -26,6 +26,7 @@ Represents an educational institution.
 | short_name | String | Unique, Required | Abbreviated name |
 | location | String | Nullable | City/State location |
 | website | String | Nullable | Official website URL |
+| verification_status | Enum | Default: UNVERIFIED | UNVERIFIED/PENDING/VERIFIED |
 | is_active | Boolean | Default: True | School active status |
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
@@ -157,8 +158,8 @@ Represents a notification for a user.
 | type | Enum | Required | NEW_ANSWER/NEW_COMMENT/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED |
 | message | String | Required | Notification text |
 | is_read | Boolean | Default: False | Read status |
-| related_object_id | UUID | Nullable | ID of related object (question/answer/etc) |
-| related_object_type | String | Nullable | Model name of related object |
+| content_type | ForeignKey(ContentType) | Nullable | Related object's type |
+| object_id | UUID | Nullable | Related object's ID |
 | created_at | DateTime | Auto now | Notification timestamp |
 
 ### Report
@@ -169,14 +170,16 @@ Represents a user report on content.
 | id | UUID | Primary Key | Unique identifier |
 | reporter | ForeignKey(User) | Required, CASCADE | User who reported |
 | type | Enum | Required | SPAM/ABUSE/MISINFORMATION/DUPLICATE |
-| content_type | String | Required | Model being reported (question/answer/comment) |
-| content_id | UUID | Required | ID of reported content |
+| content_type | ForeignKey(ContentType) | Required | Django content type reference |
+| object_id | UUID | Required | ID of reported object |
 | description | Text | Nullable | Additional context |
 | status | Enum | Default: PENDING | PENDING/RESOLVED/REJECTED |
 | resolved_by | ForeignKey(User) | Nullable, SET_NULL | Admin who resolved |
 | resolved_at | DateTime | Nullable | Resolution timestamp |
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
+
+`content_object` is exposed via Django's `GenericForeignKey('content_type', 'object_id')`. The public API shape is unchanged — it still serializes as `content_type: "question"` and `content_id: uuid` for consumers.
 
 ### ModeratorAssignment
 Represents a user assigned as moderator for a hub.
@@ -205,6 +208,22 @@ Represents a user assigned as school representative for a hub.
 | updated_at | DateTime | Auto now | Last update timestamp |
 
 Unique constraint: (user, hub) to prevent duplicate assignments.
+
+### APIClient
+Represents a registered external consumer of the public API (Phase: Future).
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| name | String | Required | Consumer/application name |
+| owner | ForeignKey(User) | Nullable, SET_NULL | Admin who issued the key |
+| key_prefix | String | Unique, Required | Public identifier shown in dashboards |
+| hashed_secret | String | Required | Hashed API secret (never stored plain) |
+| scopes | String | Required | Comma-separated permission scopes |
+| rate_limit_tier | Enum | Default: STANDARD | STANDARD/ELEVATED/INTERNAL |
+| is_active | Boolean | Default: True | Client active status |
+| revoked_at | DateTime | Nullable | Revocation timestamp |
+| created_at | DateTime | Auto now | Creation timestamp |
 
 ---
 
@@ -268,3 +287,83 @@ School (1) ─────── (1) Hub
 - Deleting a `User` → Delete associated `Question`, `Answer`, `Comment`, `Notification`, `Report`
 - Deleting a `Question` → Delete associated `Answer`, `QuestionTag`
 - Deleting an `Answer` → Delete associated `Comment`, `AnswerVote`
+
+
+---
+
+## Future Models (Not in MVP — reserved for planning)
+
+### SchoolReview
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| school | ForeignKey(School) | Required, CASCADE | Reviewed school |
+| author | ForeignKey(User) | Required, CASCADE | Reviewer |
+| title | String | Required | Review headline |
+| body | Text | Required | Review content |
+| overall_rating | Integer | Required, 1–5 | Overall star rating |
+| status | Enum | Default: PUBLISHED | PUBLISHED/FLAGGED/REMOVED |
+| created_at | DateTime | Auto now | Creation timestamp |
+| updated_at | DateTime | Auto now | Last update timestamp |
+
+### ReviewCategoryScore
+Per-category breakdown (Academics, Facilities, Social Life, Career Support, Value for Money) attached to a review.
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| review | ForeignKey(SchoolReview) | Required, CASCADE | Parent review |
+| category | String | Required | Category name |
+| score | Integer | Required, 1–5 | Category rating |
+
+### ReviewResponse
+The school's single official public reply to a review — this is the mechanism for schools to contextualize criticism instead of suppressing it.
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| review | OneToOneField(SchoolReview) | Required, CASCADE | Review being responded to |
+| author | ForeignKey(User) | Required, CASCADE | Must be an active school representative |
+| body | Text | Required | Response content |
+| created_at | DateTime | Auto now | Creation timestamp |
+
+### ReviewVote
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| review | ForeignKey(SchoolReview) | Required, CASCADE | Voted review |
+| user | ForeignKey(User) | Required, CASCADE | Voter |
+| vote_type | Enum | Required | HELPFUL/NOT_HELPFUL |
+
+Unique constraint: (review, user).
+
+### Plan
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| name | String | Required | Plan name |
+| price | Decimal | Required | Price per billing interval |
+| billing_interval | Enum | Required | MONTHLY/YEARLY |
+| features | JSON | Required | Feature flags unlocked by this plan |
+
+### Subscription
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| school | ForeignKey(School) | Required, CASCADE | Subscribing school |
+| plan | ForeignKey(Plan) | Required | Active plan |
+| status | Enum | Required | ACTIVE/CANCELED/PAST_DUE |
+| external_provider_id | String | Nullable | Stripe/Paystack subscription ID |
+| current_period_end | DateTime | Required | Renewal date |
+
+### Invoice
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| subscription | ForeignKey(Subscription) | Required, CASCADE | Related subscription |
+| amount | Decimal | Required | Amount charged |
+| status | Enum | Required | PAID/FAILED/PENDING |
+| issued_at | DateTime | Auto now | Issue date |
+| paid_at | DateTime | Nullable | Payment date |
+
+**Design constraint carried from `project-plan.md`:** paid plans may only affect *visibility/promotion/verification*. They must never gate deletion, hiding, or suppression of a `SchoolReview`. Reviews are moderated exclusively through the existing `Report` pipeline, on the same rules regardless of the school's subscription status.

@@ -38,6 +38,10 @@ The platform should gradually evolve into a living archive of institutional know
 
 Academia is guided by several principles that influence every product and technical decision.
 
+### Integrity Over Monetization
+
+Monetization must never compromise the accuracy or completeness of information on the platform. Paid features may increase a school's visibility, add verification badges, or enable official responses to reviews — they may never hide, suppress, or delete legitimate content. If a proposed revenue feature requires concealing true information from students, it does not ship in that form.
+
 ### One Hub Per School
 
 Each institution should have a single hub.
@@ -127,6 +131,36 @@ However, ownership remains with the platform to prevent disputes, abandonment, o
 - Email/Password
 - Apple Login
 - Microsoft Login
+
+---
+
+## API Versioning & Public API Strategy
+
+The API is namespaced under `/api/v1/` from day one, even though no external consumer exists yet. This avoids a breaking migration later.
+
+Planned rollout:
+- **Phase A (MVP):** Internal only — first-party frontend, JWT user auth.
+- **Phase B:** Read-only public endpoints (schools, hub metadata, published questions/answers, tags) behind an `APIClient` key with per-client rate limits.
+- **Phase C:** Broader public API, potentially including a self-serve developer portal.
+
+## Future: Reviews & Reputation System
+
+Schools may eventually have a review system where students rate and describe their experience across categories (academics, facilities, social life, career support, value for money).
+
+Design constraints:
+- Reviews are moderated through the same `Report` pipeline as questions/answers/comments — no separate, more lenient or stricter standard.
+- Verified schools may post one official `ReviewResponse` per review to add context or rebut inaccuracies — but cannot remove or hide the review itself.
+- No subscription tier may suppress, hide, or deprioritize a legitimate negative review. Paid tiers affect *promotion and verification only* (see Monetization below).
+
+## Future: Monetization
+
+Schools may subscribe to paid plans (`Plan`/`Subscription`/`Invoice`). What paid plans are allowed to unlock:
+- Verified badge on the school profile
+- Promoted placement in search/browse results
+- Official responses to reviews
+- Analytics dashboard for school representatives
+
+What paid plans are explicitly **not** allowed to affect: visibility of reviews, question/answer content, or moderation outcomes.
 
 ---
 

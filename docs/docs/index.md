@@ -52,6 +52,10 @@ Academia is built around a few simple ideas:
 
 The project documentation is intentionally lightweight and organized around four core documents.
 
+### Project Overview (Read this first)
+
+A quick structured snapshot of the project and what's expected of it.
+
 ### Project Plan
 
 Defines the vision, goals, structure, and guiding decisions behind the platform.
