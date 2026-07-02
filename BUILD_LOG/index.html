@@ -629,7 +629,7 @@
 
 <h1 id="build-log">BUILD LOG</h1>
 <h2 id="current-phase">Current Phase</h2>
-<p>Phase 2 — Schools (complete, confirmed)</p>
+<p>Phase 4 — Hubs + activation requests (complete, pending your confirmation)</p>
 <h2 id="completed-phases">Completed Phases</h2>
 <ul>
 <li>Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
@@ -639,9 +639,15 @@
   refresh rotation + blacklist. Endpoints: /api/v1/auth/google/, /api/v1/auth/refresh/,
   /api/v1/auth/logout/, /api/v1/users/me/ (GET/PATCH).</li>
 <li>Phase 2: School model (apps.schools) with verification_status field. List/search/detail
-  endpoints public; create/update admin-only via IsPlatformAdmin permission. has_hub and
-  departments stubbed pending Phase 4/3. "Delete" implemented as soft-delete via is_active.
-  Global error-response normalizer added (apps.core.exceptions).</li>
+  endpoints public; create/update admin-only via IsPlatformAdmin permission. Global
+  error-response normalizer added (apps.core.exceptions).</li>
+<li>Phase 3: Department model in apps.schools. List (public) + create/update (admin-only)
+  scoped under School. Soft-delete via is_active.</li>
+<li>Phase 4: Hub + HubActivationRequest models (new app.hubs). GET hub by id and by school
+  (public). Activation request create (auth) / list (admin, status filter) / approve
+  (admin, creates Hub) / reject (admin). School.has_hub and the has_hub query filter now
+  wired to real data (Phase 2/3's TODO stubs resolved). Hub detail nests real Department
+  data; question_count/moderator_count still stubbed pending Phase 5/14.</li>
 </ul>
 <h2 id="key-decisions-made">Key Decisions Made</h2>
 <ul>
@@ -650,13 +656,19 @@
 <li>Reviews/Billing apps reserved but not built in MVP</li>
 <li>Django 6.0.6 on Python 3.12, psycopg3 as DB driver</li>
 <li>Settings split into config/settings/{base,development,production}.py, env vars via django-environ</li>
-<li>App code lives under apps/ (apps.core, apps.accounts, apps.schools so far)</li>
+<li>App code lives under apps/ (apps.core, apps.accounts, apps.schools, apps.hubs so far)</li>
 <li>Backend is a pure API — no server-rendered product pages; frontend framework left fully open</li>
 <li>Google auth verified by calling Google's userinfo endpoint with the client-supplied
   access_token, instead of django-allauth's full social-auth flow</li>
 <li>Shared permission (IsPlatformAdmin) and exception handler live in apps.core for reuse
   across all future apps</li>
-<li>School "delete" is soft-delete via is_active=False through the existing PATCH endpoint</li>
+<li>School/Department "delete" is soft-delete via is_active through PATCH</li>
+<li>Sub-resources with no independent lifecycle live in their owning app (Department in
+  apps.schools); Hub gets its own app since it owns further sub-resources
+  (activation requests, moderator/rep assignments, questions) down the line</li>
+<li>Activation requests reject duplicate PENDING requests per school, and block requesting
+  a hub for a school that already has an active one — not documented in api-contract.md,
+  added as a spam/consistency safeguard</li>
 </ul>
 <h2 id="conventions-established">Conventions Established</h2>
 <ul>
@@ -669,16 +681,22 @@
   previous, results} shape</li>
 <li>All error responses normalized to api-contract.md's {"error": "..."} shape via
   apps.core.exceptions.custom_exception_handler; 400s stay field-keyed</li>
-<li>is_admin (not is_staff) is the platform-permission flag checked by API views;
-  is_staff only gates Django admin-site login</li>
+<li>is_admin (not is_staff) is the platform-permission flag checked by API views</li>
+<li>Sub-resources tightly owned by a parent model with no independent lifecycle live in
+  the parent's app; sub-resources with their own future sub-resources get their own app</li>
 </ul>
 <h2 id="known-deviations-from-docs">Known Deviations From Docs</h2>
-<p>(none — all Phase 0–2 deviations merged into the four core docs + CHANGELOG.md on
-2026-07-02. This section resets after every docs sync going forward.)</p>
+<ul>
+<li>Activation request creation blocks duplicate PENDING requests and requests against
+  schools with an already-active hub — not documented in api-contract.md's error
+  responses for that endpoint</li>
+<li>GET /hubs/{hub_id}/ 404 error body ({"error": "Hub not found"}) is assumed, not
+  explicitly documented in api-contract.md (School/Department detail 404s are documented;
+  Hub's isn't, but follows the same established pattern)</li>
+</ul>
 <h2 id="next-immediate-step">Next Immediate Step</h2>
-<p>Phase 3 — Departments (list/create/update scoped to a school; create/update restricted
-to School Representatives once that role exists — for now, admin-only until Phase 14
-introduces SchoolRepresentativeAssignment)</p>
+<p>Phase 5 — Questions (create/edit/delete/detail/list, scoped to a Hub, optional
+Department; wires Hub.question_count and Department.question_count to real data)</p>
 
 
 
