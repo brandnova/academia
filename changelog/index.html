@@ -364,6 +364,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#docs-sync-july-3-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docs Sync — July 3, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-5-questions-july-3-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5 — Questions — July 3, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-hubs-activation-requests-july-2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4 — Hubs &amp; Activation Requests — July 2, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-departments-july-2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3 — Departments — July 2, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#docs-sync-july-2-2026" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -523,6 +567,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#docs-sync-july-3-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docs Sync — July 3, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-5-questions-july-3-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5 — Questions — July 3, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-hubs-activation-requests-july-2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4 — Hubs &amp; Activation Requests — July 2, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-departments-july-2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3 — Departments — July 2, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#docs-sync-july-2-2026" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -589,6 +677,37 @@ documentation. Entries are grouped by development phase and date, not
 semantic version — the project isn't published as a versioned package yet.
 Once a public API is released, that surface will carry its own <code>/v1/</code>,
 <code>/v2/</code> versioning, tracked separately from this page.</p>
+<h2 id="docs-sync-july-3-2026">Docs Sync — July 3, 2026</h2>
+<p>Three small corrections to the API Contract, all reflecting behavior that
+was already live from Phase 4:</p>
+<ul>
+<li>Documented the 404 response for fetching a single hub.</li>
+<li>Documented the error responses for requesting a hub activation — you
+  can't request a hub for a school that already has one, and you can't
+  pile up duplicate pending requests for the same school.</li>
+<li>Fixed a labeling inconsistency on question creation's invalid-hub error
+  (it's a 400, not a 404 — the documented body was already correct, just
+  mislabeled).</li>
+</ul>
+<h2 id="phase-5-questions-july-3-2026">Phase 5 — Questions — July 3, 2026</h2>
+<p>Added the Question model, scoped to a school hub with an optional
+department. Full list/create/detail/update/delete, plus a moderator-facing
+"unanswered questions" queue (admin-only until the Moderator role exists).
+Hub and department question counts are now real numbers instead of
+placeholders. Tags can be submitted when creating or editing a question but
+aren't stored yet — that lands with the tagging system in the next phase.</p>
+<h2 id="phase-4-hubs-activation-requests-july-2-2026">Phase 4 — Hubs &amp; Activation Requests — July 2, 2026</h2>
+<p>Added the Hub model and the activation request workflow: students can
+request a hub for a school that doesn't have one yet, and admins can
+approve or reject those requests. Approving creates the hub and marks the
+school as having one — the <code>has_hub</code> field on schools, previously always
+<code>false</code>, now reflects reality. Duplicate requests for the same school are
+blocked, as is requesting a hub for a school that already has one.</p>
+<h2 id="phase-3-departments-july-2-2026">Phase 3 — Departments — July 2, 2026</h2>
+<p>Added departments as a sub-resource of schools — a school can list its
+departments publicly, and admins can add or update them. Deactivating a
+department (rather than deleting it) keeps historical data intact, the same
+soft-delete pattern used for schools.</p>
 <h2 id="docs-sync-july-2-2026">Docs Sync — July 2, 2026</h2>
 <p>The four core documents (<a href="../project-plan/">Project Plan</a>,
 <a href="../feature-list/">Feature List</a>, <a href="../database-schema/">Database Schema</a>,
