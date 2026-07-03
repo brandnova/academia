@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     "apps.core",
     "apps.accounts",
     "apps.schools",
+    "apps.hubs",
+    "apps.questions",
 ]
 
 AUTH_USER_MODEL = "accounts.User"

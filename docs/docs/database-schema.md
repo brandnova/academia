@@ -12,7 +12,8 @@ Represents an authenticated user on the platform.
 | full_name | String | Required | User's full name |
 | avatar | String | Nullable | URL to avatar image (from Google) |
 | is_active | Boolean | Default: True | Account active status |
-| is_admin | Boolean | Default: False | Platform administrator flag |
+| is_admin | Boolean | Default: False | Platform administrator flag (checked by API views) |
+| is_staff | Boolean | Default: False | Django admin-site login flag (separate from is_admin) |
 | created_at | DateTime | Auto now | Account creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
 
@@ -27,9 +28,11 @@ Represents an educational institution.
 | location | String | Nullable | City/State location |
 | website | String | Nullable | Official website URL |
 | verification_status | Enum | Default: UNVERIFIED | UNVERIFIED/PENDING/VERIFIED |
-| is_active | Boolean | Default: True | School active status |
+| is_active | Boolean | Default: True | School active status (also used as soft-delete) |
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
+
+`has_hub` is not a stored field — it's computed from the related `Hub` record.
 
 ### Department
 Represents an academic department within a school.
@@ -158,9 +161,11 @@ Represents a notification for a user.
 | type | Enum | Required | NEW_ANSWER/NEW_COMMENT/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED |
 | message | String | Required | Notification text |
 | is_read | Boolean | Default: False | Read status |
-| content_type | ForeignKey(ContentType) | Nullable | Related object's type |
+| content_type | ForeignKey(ContentType) | Nullable | Related object's model type (Django ContentType) |
 | object_id | UUID | Nullable | Related object's ID |
 | created_at | DateTime | Auto now | Notification timestamp |
+
+`content_object` is exposed via `GenericForeignKey('content_type', 'object_id')`. The public API still serializes this as `related_object_type` (string) / `related_object_id` (uuid) — see api-contract.md.
 
 ### Report
 Represents a user report on content.
@@ -170,7 +175,7 @@ Represents a user report on content.
 | id | UUID | Primary Key | Unique identifier |
 | reporter | ForeignKey(User) | Required, CASCADE | User who reported |
 | type | Enum | Required | SPAM/ABUSE/MISINFORMATION/DUPLICATE |
-| content_type | ForeignKey(ContentType) | Required | Django content type reference |
+| content_type | ForeignKey(ContentType) | Required | Reported object's model type (Django ContentType) |
 | object_id | UUID | Required | ID of reported object |
 | description | Text | Nullable | Additional context |
 | status | Enum | Default: PENDING | PENDING/RESOLVED/REJECTED |
@@ -179,7 +184,7 @@ Represents a user report on content.
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
 
-`content_object` is exposed via Django's `GenericForeignKey('content_type', 'object_id')`. The public API shape is unchanged — it still serializes as `content_type: "question"` and `content_id: uuid` for consumers.
+`content_object` is exposed via `GenericForeignKey('content_type', 'object_id')`. Using Django's ContentType framework (instead of a plain string field) means any future model — including SchoolReview — can be reported without a schema change. The public API still serializes this as `content_type: "question"` / `content_id: uuid`.
 
 ### ModeratorAssignment
 Represents a user assigned as moderator for a hub.
@@ -209,8 +214,8 @@ Represents a user assigned as school representative for a hub.
 
 Unique constraint: (user, hub) to prevent duplicate assignments.
 
-### APIClient
-Represents a registered external consumer of the public API (Phase: Future).
+### APIClient (Future — Public API Phase)
+Represents a registered external consumer of the public API.
 
 | Field | Type | Constraints | Description |
 |-------|------|-------------|-------------|
@@ -259,6 +264,10 @@ School (1) ─────── (1) Hub
                         (N) HubActivationRequest
 ```
 
+`Report` and `Notification` also relate generically (via Django ContentType) to any
+reportable/notifiable model — currently Question, Answer, Comment; SchoolReview will
+join this set once built, with no schema change required.
+
 ---
 
 ## Constraints & Indexes
@@ -270,7 +279,9 @@ School (1) ─────── (1) Hub
 - `Answer`: (question_id, is_best) - For best answer lookup
 - `AnswerVote`: (answer_id) - For vote aggregation
 - `Notification`: (user_id, is_read, created_at DESC) - For user notifications
+- `Notification`: (content_type_id, object_id) - For generic relation lookups
 - `Report`: (status, created_at DESC) - For reports dashboard
+- `Report`: (content_type_id, object_id) - For generic relation lookups
 
 ### Unique Constraints
 - `School`: name, short_name
@@ -280,6 +291,7 @@ School (1) ─────── (1) Hub
 - `QuestionTag`: (question_id, tag_id)
 - `ModeratorAssignment`: (user_id, hub_id)
 - `SchoolRepresentativeAssignment`: (user_id, hub_id)
+- `APIClient`: key_prefix
 
 ### Cascade Behavior
 - Deleting a `School` → Delete associated `Hub`, `Department`, `HubActivationRequest`
@@ -288,6 +300,8 @@ School (1) ─────── (1) Hub
 - Deleting a `Question` → Delete associated `Answer`, `QuestionTag`
 - Deleting an `Answer` → Delete associated `Comment`, `AnswerVote`
 
+In practice, `School` is not hard-deleted through the API — see api-contract.md's
+soft-delete note. Hard delete remains available at the database/admin level only.
 
 ---
 
@@ -307,7 +321,7 @@ School (1) ─────── (1) Hub
 | updated_at | DateTime | Auto now | Last update timestamp |
 
 ### ReviewCategoryScore
-Per-category breakdown (Academics, Facilities, Social Life, Career Support, Value for Money) attached to a review.
+Per-category breakdown (Academics, Facilities, Social Life, Career Support, Value for Money).
 
 | Field | Type | Constraints | Description |
 |-------|------|-------------|-------------|
@@ -317,7 +331,7 @@ Per-category breakdown (Academics, Facilities, Social Life, Career Support, Valu
 | score | Integer | Required, 1–5 | Category rating |
 
 ### ReviewResponse
-The school's single official public reply to a review — this is the mechanism for schools to contextualize criticism instead of suppressing it.
+The school's single official public reply to a review.
 
 | Field | Type | Constraints | Description |
 |-------|------|-------------|-------------|
@@ -366,4 +380,24 @@ Unique constraint: (review, user).
 | issued_at | DateTime | Auto now | Issue date |
 | paid_at | DateTime | Nullable | Payment date |
 
-**Design constraint carried from `project-plan.md`:** paid plans may only affect *visibility/promotion/verification*. They must never gate deletion, hiding, or suppression of a `SchoolReview`. Reviews are moderated exclusively through the existing `Report` pipeline, on the same rules regardless of the school's subscription status.
+**Design constraint (see project-plan.md → Integrity Over Monetization):** paid plans
+may only affect visibility/promotion/verification. They must never gate deletion,
+hiding, or suppression of a `SchoolReview`. Reviews are moderated exclusively through
+the existing `Report` pipeline, regardless of the school's subscription status.
+
+### SchoolSubmission (Future — School Data Curation)
+Represents a user-submitted school not yet in the platform's directory.
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| submitted_by | ForeignKey(User) | Required, CASCADE | User who submitted it |
+| name | String | Required | Proposed school name |
+| location | String | Nullable | Proposed location |
+| website | String | Nullable | Proposed website |
+| notes | Text | Nullable | Any supporting context from the submitter |
+| status | Enum | Default: PENDING | PENDING/APPROVED/REJECTED |
+| reviewed_by | ForeignKey(User) | Nullable, SET_NULL | Admin who reviewed |
+| reviewed_at | DateTime | Nullable | Review timestamp |
+| resulting_school | ForeignKey(School) | Nullable, SET_NULL | Set once approved and created |
+| created_at | DateTime | Auto now | Creation timestamp |

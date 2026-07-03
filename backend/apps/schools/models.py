@@ -32,5 +32,28 @@ class School(models.Model):
 
     @property
     def has_hub(self):
-        # TODO(Phase 4): return hasattr(self, "hub") and self.hub.is_active
-        return False
+        return hasattr(self, "hub") and self.hub.is_active
+
+
+class Department(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    school = models.ForeignKey(School, related_name="departments", on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    code = models.CharField(max_length=20, null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "departments"
+        ordering = ["name"]
+        constraints = [
+            models.UniqueConstraint(fields=["school", "name"], name="unique_department_name_per_school")
+        ]
+
+    def __str__(self):
+        return f"{self.name} ({self.school.short_name})"
+
+    @property
+    def question_count(self):
+        return self.questions.count()

@@ -1,6 +1,32 @@
 from rest_framework import serializers
 
-from .models import School
+from .models import Department, School
+
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    question_count = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Department
+        fields = ["id", "name", "code", "question_count", "is_active"]
+
+
+class DepartmentWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ["name", "code"]
+
+    def validate_name(self, value):
+        return value.strip()
+
+
+class DepartmentUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ["name", "code", "is_active"]
+
+    def validate_name(self, value):
+        return value.strip()
 
 
 class SchoolListSerializer(serializers.ModelSerializer):
@@ -23,8 +49,8 @@ class SchoolDetailSerializer(serializers.ModelSerializer):
         ]
 
     def get_departments(self, obj):
-        # TODO(Phase 3): replace with real department serialization
-        return []
+        departments = obj.departments.filter(is_active=True)
+        return DepartmentSerializer(departments, many=True).data
 
 
 class SchoolWriteSerializer(serializers.ModelSerializer):

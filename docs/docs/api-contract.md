@@ -2,25 +2,80 @@
 
 ## Versioning
 
-All endpoints below are namespaced under `/api/v1/`. For example, `GET /api/schools/` becomes `GET /api/v1/schools/`. This applies to every endpoint in this document — the paths shown are relative to that prefix.
-
-Breaking changes will ship under a new version prefix (`/api/v2/`); `/api/v1/` will be maintained for a documented deprecation window once a v2 exists.
+All endpoints below are namespaced under `/api/v1/`. For example, `GET /api/schools/`
+in this document means `GET /api/v1/schools/`. Breaking changes will ship under a new
+version prefix (`/api/v2/`); `/api/v1/` will be maintained for a documented
+deprecation window once a v2 exists.
 
 ## Authentication Modes
 
-Two distinct auth modes will exist:
-- **User auth** — JWT bearer token from `/api/v1/auth/google/`, used by the first-party frontend and any user-driven action.
-- **API client auth** — `X-API-Key: <key>` header, used by registered third-party consumers hitting public read-only endpoints (see "API Clients" below). Not available in MVP; reserved for the Future public-API phase.
+- **User auth** — JWT bearer token, obtained via the Google login flow below. Used by
+  the frontend and any user-driven action.
+- **API client auth** (Future) — `X-API-Key` header, used by registered third-party
+  consumers hitting public read-only endpoints. Not available in MVP.
+
+---
 
 ## Authentication
 
+### How Google Auth Works (Frontend Implementation Guide)
+
+This backend does **not** use Django's full server-side social-auth flow. Instead,
+the frontend obtains a Google **access token** directly using Google Identity
+Services, then hands that token to our backend, which verifies it by calling
+Google's own `userinfo` endpoint. This means: no client secret on the backend, no
+redirect-based OAuth dance, and a small, predictable request/response contract.
+
+**One-time setup (Google Cloud Console):**
+1. Create a project (or use an existing one) at console.cloud.google.com.
+2. Configure the OAuth consent screen (External, testing or published as needed).
+3. Create an OAuth 2.0 Client ID of type **Web application**.
+4. Add your frontend's origin(s) under **Authorized JavaScript origins**
+   (e.g. `http://localhost:3000`, and your production domain later).
+5. You only need the **Client ID** on the frontend — no client secret is used
+   anywhere in this flow.
+
+**Frontend flow, step by step:**
+1. Load Google's Identity Services script:
+   `<script src="https://accounts.google.com/gsi/client" async defer></script>`
+2. Initialize a token client with your Client ID and the scopes
+   `email profile`:
+   ```js
+   const client = google.accounts.oauth2.initTokenClient({
+     client_id: "YOUR_CLIENT_ID.apps.googleusercontent.com",
+     scope: "email profile",
+     callback: (tokenResponse) => {
+       // tokenResponse.access_token is what you send to our backend
+     },
+   });
+   ```
+3. On your "Sign in with Google" button click, call `client.requestAccessToken()`.
+   This opens Google's consent popup and returns an `access_token` in the callback.
+4. POST that token to our backend:
+   `POST /api/v1/auth/google/` with body `{ "access_token": "<token_from_step_3>" }`.
+5. Our backend verifies the token against Google, creates the user if this is their
+   first login, and returns our own JWT pair (`access`/`refresh`) plus the user
+   object — see the endpoint spec below.
+6. Store the JWT pair (httpOnly cookie is preferred once you're past local dev;
+   in-memory/localStorage is fine for early development) and attach
+   `Authorization: Bearer <access>` to every subsequent authenticated request.
+7. When a request comes back `401` because the access token expired, call
+   `POST /api/v1/auth/refresh/` with the stored refresh token to get a new access
+   token — see below. Note refresh tokens rotate on use, so store the new one
+   returned each time.
+8. On logout, POST the current refresh token to `/api/v1/auth/logout/` (this
+   blacklists it server-side) and clear locally stored tokens.
+
+This is the entire flow — there's no separate "callback URL" or server-rendered
+redirect page to build; it's a client-side popup plus one API call.
+
 ### Google Login
-**Endpoint:** `POST /api/auth/google/`
+**Endpoint:** `POST /api/v1/auth/google/`
 
 **Request:**
 ```json
 {
-  "access_token": "google_oauth_token"
+  "access_token": "google_oauth_access_token"
 }
 ```
 
@@ -45,10 +100,14 @@ Two distinct auth modes will exist:
 }
 ```
 
+Behavior notes: first login for an email creates the `User` record automatically
+(no separate signup step); subsequent logins reuse the same user and refresh
+`full_name`/`avatar` from Google if they've changed.
+
 ---
 
 ### Refresh Token
-**Endpoint:** `POST /api/auth/refresh/`
+**Endpoint:** `POST /api/v1/auth/refresh/`
 
 **Request:**
 ```json
@@ -64,21 +123,32 @@ Two distinct auth modes will exist:
 }
 ```
 
+Refresh tokens rotate on every use and the previous one is blacklisted — always
+store whichever refresh token was most recently issued.
+
 ---
 
 ### Logout
-**Endpoint:** `POST /api/auth/logout/`
+**Endpoint:** `POST /api/v1/auth/logout/`
 
-**Request:** None (requires authentication)
+**Request:**
+```json
+{
+  "refresh": "jwt_refresh_token"
+}
+```
 
 **Response (204 No Content):** Empty
+
+Blacklists the given refresh token server-side; it can no longer be used to
+obtain new access tokens.
 
 ---
 
 ## Users
 
 ### Get Current User
-**Endpoint:** `GET /api/users/me/`
+**Endpoint:** `GET /api/v1/users/me/`
 
 **Response (200 OK):**
 ```json
@@ -95,7 +165,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Update Current User
-**Endpoint:** `PATCH /api/users/me/`
+**Endpoint:** `PATCH /api/v1/users/me/`
 
 **Request:**
 ```json
@@ -104,14 +174,14 @@ Two distinct auth modes will exist:
 }
 ```
 
-**Response (200 OK):** Same as GET `/api/users/me/`
+**Response (200 OK):** Same as GET `/api/v1/users/me/`
 
 ---
 
 ## Schools
 
 ### List Schools
-**Endpoint:** `GET /api/schools/`
+**Endpoint:** `GET /api/v1/schools/`
 
 **Query Parameters:**
 - `search` - Search by name or short_name
@@ -123,7 +193,7 @@ Two distinct auth modes will exist:
 ```json
 {
   "count": 100,
-  "next": "https://api.academia.com/api/schools/?page=2",
+  "next": "https://api.academia.com/api/v1/schools/?page=2",
   "previous": null,
   "results": [
     {
@@ -142,7 +212,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Get School
-**Endpoint:** `GET /api/schools/{school_id}/`
+**Endpoint:** `GET /api/v1/schools/{school_id}/`
 
 **Response (200 OK):**
 ```json
@@ -153,6 +223,7 @@ Two distinct auth modes will exist:
   "location": "Lagos, Nigeria",
   "website": "https://unilag.edu.ng",
   "has_hub": true,
+  "verification_status": "VERIFIED",
   "departments": [
     {
       "id": "uuid",
@@ -174,7 +245,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Create School (Admin Only)
-**Endpoint:** `POST /api/schools/`
+**Endpoint:** `POST /api/v1/schools/`
 
 **Request:**
 ```json
@@ -186,23 +257,32 @@ Two distinct auth modes will exist:
 }
 ```
 
-**Response (201 Created):** Same as GET `/api/schools/{school_id}/`
+**Response (201 Created):** Same as GET `/api/v1/schools/{school_id}/`
 
 ---
 
 ### Update School (Admin Only)
-**Endpoint:** `PATCH /api/schools/{school_id}/`
+**Endpoint:** `PATCH /api/v1/schools/{school_id}/`
 
 **Request:** Same as POST, all fields optional
 
-**Response (200 OK):** Same as GET `/api/schools/{school_id}/`
+**Response (200 OK):** Same as GET `/api/v1/schools/{school_id}/`
+
+---
+
+### Delete School (Admin Only)
+There is no dedicated `DELETE` endpoint. "Deleting" a school is a soft-delete —
+send `PATCH /api/v1/schools/{school_id}/` with `{"is_active": false}`. This keeps
+foreign-key relationships (hubs, questions, etc.) intact rather than orphaning
+them, and is easily reversible. A deactivated school is excluded from list/detail
+responses for non-admins.
 
 ---
 
 ## Hubs
 
 ### Get Hub
-**Endpoint:** `GET /api/hubs/{hub_id}/`
+**Endpoint:** `GET /api/v1/hubs/{hub_id}/`
 
 **Response (200 OK):**
 ```json
@@ -229,12 +309,19 @@ Two distinct auth modes will exist:
 }
 ```
 
+**Response (404 Not Found):**
+```json
+{
+  "error": "Hub not found"
+}
+```
+
 ---
 
 ### Get Hub by School
-**Endpoint:** `GET /api/hubs/by-school/{school_id}/`
+**Endpoint:** `GET /api/v1/hubs/by-school/{school_id}/`
 
-**Response (200 OK):** Same as GET `/api/hubs/{hub_id}/`
+**Response (200 OK):** Same as GET `/api/v1/hubs/{hub_id}/`
 
 **Response (404 Not Found):**
 ```json
@@ -246,7 +333,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Request Hub Activation
-**Endpoint:** `POST /api/hubs/activation-requests/`
+**Endpoint:** `POST /api/v1/hubs/activation-requests/`
 
 **Request:**
 ```json
@@ -275,10 +362,32 @@ Two distinct auth modes will exist:
 }
 ```
 
+**Error Responses:**
+```json
+// 400 Bad Request - School already has an active hub
+{
+  "school_id": ["This school already has an active hub."]
+}
+
+// 400 Bad Request - A pending request already exists for this school
+{
+  "school_id": ["There is already a pending activation request for this school."]
+}
+
+// 400 Bad Request - School doesn't exist
+{
+  "school_id": ["School not found."]
+}
+```
+
+A new request is blocked if the target school already has an active hub, or if a
+`PENDING` request for that school already exists — this prevents duplicate/spam
+requests from piling up before an admin reviews the first one.
+
 ---
 
 ### List Activation Requests (Admin Only)
-**Endpoint:** `GET /api/hubs/activation-requests/`
+**Endpoint:** `GET /api/v1/hubs/activation-requests/`
 
 **Query Parameters:**
 - `status` - PENDING/APPROVED/REJECTED
@@ -311,7 +420,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Approve Activation Request (Admin Only)
-**Endpoint:** `POST /api/hubs/activation-requests/{request_id}/approve/`
+**Endpoint:** `POST /api/v1/hubs/activation-requests/{request_id}/approve/`
 
 **Response (200 OK):**
 ```json
@@ -332,7 +441,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Reject Activation Request (Admin Only)
-**Endpoint:** `POST /api/hubs/activation-requests/{request_id}/reject/`
+**Endpoint:** `POST /api/v1/hubs/activation-requests/{request_id}/reject/`
 
 **Request:**
 ```json
@@ -354,7 +463,7 @@ Two distinct auth modes will exist:
 ## Departments
 
 ### List Departments
-**Endpoint:** `GET /api/schools/{school_id}/departments/`
+**Endpoint:** `GET /api/v1/schools/{school_id}/departments/`
 
 **Response (200 OK):**
 ```json
@@ -374,7 +483,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Create Department (School Representative Only)
-**Endpoint:** `POST /api/schools/{school_id}/departments/`
+**Endpoint:** `POST /api/v1/schools/{school_id}/departments/`
 
 **Request:**
 ```json
@@ -389,7 +498,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Update Department (School Representative Only)
-**Endpoint:** `PATCH /api/departments/{department_id}/`
+**Endpoint:** `PATCH /api/v1/departments/{department_id}/`
 
 **Request:**
 ```json
@@ -406,7 +515,7 @@ Two distinct auth modes will exist:
 ## Questions
 
 ### List Questions
-**Endpoint:** `GET /api/questions/`
+**Endpoint:** `GET /api/v1/questions/`
 
 **Query Parameters:**
 - `hub` - Filter by hub ID
@@ -422,7 +531,7 @@ Two distinct auth modes will exist:
 ```json
 {
   "count": 150,
-  "next": "https://api.academia.com/api/questions/?page=2",
+  "next": "https://api.academia.com/api/v1/questions/?page=2",
   "previous": null,
   "results": [
     {
@@ -460,7 +569,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Create Question
-**Endpoint:** `POST /api/questions/`
+**Endpoint:** `POST /api/v1/questions/`
 
 **Request:**
 ```json
@@ -468,12 +577,12 @@ Two distinct auth modes will exist:
   "title": "How do I calculate my CGPA?",
   "body": "I'm confused about the grading system at UNILAG...",
   "hub_id": "uuid",
-  "department_id": "uuid",  // optional
+  "department_id": "uuid",
   "tags": ["gpa", "grading", "calculation"]
 }
 ```
 
-**Response (201 Created):** Same as GET `/api/questions/{question_id}/`
+**Response (201 Created):** Same as GET `/api/v1/questions/{question_id}/`
 
 **Error Responses:**
 ```json
@@ -489,7 +598,7 @@ Two distinct auth modes will exist:
   "department_id": ["Department does not belong to this hub's school."]
 }
 
-// 404 Not Found - Hub doesn't exist
+// 400 Bad Request - Hub doesn't exist
 {
   "hub_id": ["Hub with ID 'uuid' does not exist."]
 }
@@ -498,7 +607,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Get Question
-**Endpoint:** `GET /api/questions/{question_id}/`
+**Endpoint:** `GET /api/v1/questions/{question_id}/`
 
 **Response (200 OK):**
 ```json
@@ -559,7 +668,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Update Question
-**Endpoint:** `PATCH /api/questions/{question_id}/`
+**Endpoint:** `PATCH /api/v1/questions/{question_id}/`
 
 **Request:**
 ```json
@@ -571,7 +680,7 @@ Two distinct auth modes will exist:
 }
 ```
 
-**Response (200 OK):** Same as GET `/api/questions/{question_id}/`
+**Response (200 OK):** Same as GET `/api/v1/questions/{question_id}/`
 
 **Error Responses:**
 ```json
@@ -589,7 +698,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Delete Question
-**Endpoint:** `DELETE /api/questions/{question_id}/`
+**Endpoint:** `DELETE /api/v1/questions/{question_id}/`
 
 **Response (204 No Content):** Empty
 
@@ -603,7 +712,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Get Unanswered Questions (Moderator Only)
-**Endpoint:** `GET /api/questions/unanswered/`
+**Endpoint:** `GET /api/v1/questions/unanswered/`
 
 **Query Parameters:**
 - `hub` - Filter by hub ID
@@ -616,7 +725,7 @@ Two distinct auth modes will exist:
 ## Answers
 
 ### Create Answer
-**Endpoint:** `POST /api/answers/`
+**Endpoint:** `POST /api/v1/answers/`
 
 **Request:**
 ```json
@@ -664,7 +773,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Update Answer
-**Endpoint:** `PATCH /api/answers/{answer_id}/`
+**Endpoint:** `PATCH /api/v1/answers/{answer_id}/`
 
 **Request:**
 ```json
@@ -685,7 +794,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Delete Answer
-**Endpoint:** `DELETE /api/answers/{answer_id}/`
+**Endpoint:** `DELETE /api/v1/answers/{answer_id}/`
 
 **Response (204 No Content):** Empty
 
@@ -699,7 +808,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Mark Best Answer
-**Endpoint:** `POST /api/answers/{answer_id}/mark-best/`
+**Endpoint:** `POST /api/v1/answers/{answer_id}/mark-best/`
 
 **Response (200 OK):**
 ```json
@@ -734,12 +843,12 @@ Two distinct auth modes will exist:
 ## Answer Votes
 
 ### Vote on Answer
-**Endpoint:** `POST /api/answers/{answer_id}/vote/`
+**Endpoint:** `POST /api/v1/answers/{answer_id}/vote/`
 
 **Request:**
 ```json
 {
-  "vote_type": "UP"  // or "DOWN"
+  "vote_type": "UP"
 }
 ```
 
@@ -768,7 +877,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Remove Vote
-**Endpoint:** `DELETE /api/answers/{answer_id}/vote/`
+**Endpoint:** `DELETE /api/v1/answers/{answer_id}/vote/`
 
 **Response (204 No Content):** Empty
 
@@ -784,7 +893,7 @@ Two distinct auth modes will exist:
 ## Comments
 
 ### Create Comment
-**Endpoint:** `POST /api/comments/`
+**Endpoint:** `POST /api/v1/comments/`
 
 **Request:**
 ```json
@@ -815,7 +924,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Update Comment
-**Endpoint:** `PATCH /api/comments/{comment_id}/`
+**Endpoint:** `PATCH /api/v1/comments/{comment_id}/`
 
 **Request:**
 ```json
@@ -829,7 +938,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Delete Comment
-**Endpoint:** `DELETE /api/comments/{comment_id}/`
+**Endpoint:** `DELETE /api/v1/comments/{comment_id}/`
 
 **Response (204 No Content):** Empty
 
@@ -838,7 +947,7 @@ Two distinct auth modes will exist:
 ## Tags
 
 ### List Tags
-**Endpoint:** `GET /api/tags/`
+**Endpoint:** `GET /api/v1/tags/`
 
 **Query Parameters:**
 - `search` - Search by tag name
@@ -865,7 +974,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Get Questions by Tag
-**Endpoint:** `GET /api/tags/{tag_name}/questions/`
+**Endpoint:** `GET /api/v1/tags/{tag_name}/questions/`
 
 **Query Parameters:**
 - Same as list questions
@@ -877,7 +986,7 @@ Two distinct auth modes will exist:
 ## Search
 
 ### Search Questions
-**Endpoint:** `GET /api/search/questions/`
+**Endpoint:** `GET /api/v1/search/questions/`
 
 **Query Parameters:**
 - `q` - Search query
@@ -924,7 +1033,7 @@ Two distinct auth modes will exist:
 ## Notifications
 
 ### List Notifications
-**Endpoint:** `GET /api/notifications/`
+**Endpoint:** `GET /api/v1/notifications/`
 
 **Query Parameters:**
 - `is_read` - true/false
@@ -949,10 +1058,14 @@ Two distinct auth modes will exist:
 }
 ```
 
+`related_object_type`/`related_object_id` are serialized from the underlying
+ContentType-based generic relation (see database-schema.md) — the JSON shape
+doesn't change even as new notifiable models are added.
+
 ---
 
 ### Mark Notification as Read
-**Endpoint:** `POST /api/notifications/{notification_id}/mark-read/`
+**Endpoint:** `POST /api/v1/notifications/{notification_id}/mark-read/`
 
 **Response (200 OK):**
 ```json
@@ -965,7 +1078,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Mark All Notifications as Read
-**Endpoint:** `POST /api/notifications/mark-all-read/`
+**Endpoint:** `POST /api/v1/notifications/mark-all-read/`
 
 **Response (200 OK):**
 ```json
@@ -980,14 +1093,14 @@ Two distinct auth modes will exist:
 ## Reports
 
 ### Create Report
-**Endpoint:** `POST /api/reports/`
+**Endpoint:** `POST /api/v1/reports/`
 
 **Request:**
 ```json
 {
-  "content_type": "question",  // "question", "answer", "comment"
+  "content_type": "question",
   "content_id": "uuid",
-  "type": "SPAM",  // "SPAM", "ABUSE", "MISINFORMATION", "DUPLICATE"
+  "type": "SPAM",
   "description": "This appears to be promotional content"
 }
 ```
@@ -1005,6 +1118,10 @@ Two distinct auth modes will exist:
 }
 ```
 
+`content_type`/`content_id` are serialized from the underlying ContentType-based
+generic relation (see database-schema.md) — the JSON shape stays stable even as
+new reportable models (e.g. SchoolReview) are added later.
+
 **Error Responses:**
 ```json
 // 400 Bad Request - Already reported by this user
@@ -1016,7 +1133,7 @@ Two distinct auth modes will exist:
 ---
 
 ### List Reports (Admin Only)
-**Endpoint:** `GET /api/reports/`
+**Endpoint:** `GET /api/v1/reports/`
 
 **Query Parameters:**
 - `status` - PENDING/RESOLVED/REJECTED
@@ -1047,12 +1164,12 @@ Two distinct auth modes will exist:
 ---
 
 ### Resolve Report (Admin Only)
-**Endpoint:** `POST /api/reports/{report_id}/resolve/`
+**Endpoint:** `POST /api/v1/reports/{report_id}/resolve/`
 
 **Request:**
 ```json
 {
-  "action": "DELETE_CONTENT"  // "DELETE_CONTENT", "WARN_USER", "BAN_USER", "DISMISS"
+  "action": "DELETE_CONTENT"
 }
 ```
 
@@ -1069,7 +1186,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Reject Report (Admin Only)
-**Endpoint:** `POST /api/reports/{report_id}/reject/`
+**Endpoint:** `POST /api/v1/reports/{report_id}/reject/`
 
 **Response (200 OK):**
 ```json
@@ -1085,7 +1202,7 @@ Two distinct auth modes will exist:
 ## Moderation
 
 ### Assign Moderator (School Representative Only)
-**Endpoint:** `POST /api/hubs/{hub_id}/moderators/`
+**Endpoint:** `POST /api/v1/hubs/{hub_id}/moderators/`
 
 **Request:**
 ```json
@@ -1127,14 +1244,14 @@ Two distinct auth modes will exist:
 ---
 
 ### Remove Moderator (School Representative Only)
-**Endpoint:** `DELETE /api/hubs/{hub_id}/moderators/{user_id}/`
+**Endpoint:** `DELETE /api/v1/hubs/{hub_id}/moderators/{user_id}/`
 
 **Response (204 No Content):** Empty
 
 ---
 
 ### List Moderators
-**Endpoint:** `GET /api/hubs/{hub_id}/moderators/`
+**Endpoint:** `GET /api/v1/hubs/{hub_id}/moderators/`
 
 **Response (200 OK):**
 ```json
@@ -1158,7 +1275,7 @@ Two distinct auth modes will exist:
 ## School Representatives
 
 ### Assign School Representative (Admin Only)
-**Endpoint:** `POST /api/hubs/{hub_id}/representatives/`
+**Endpoint:** `POST /api/v1/hubs/{hub_id}/representatives/`
 
 **Request:**
 ```json
@@ -1172,7 +1289,7 @@ Two distinct auth modes will exist:
 ---
 
 ### Remove School Representative (Admin Only)
-**Endpoint:** `DELETE /api/hubs/{hub_id}/representatives/{user_id}/`
+**Endpoint:** `DELETE /api/v1/hubs/{hub_id}/representatives/{user_id}/`
 
 **Response (204 No Content):** Empty
 

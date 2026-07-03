@@ -1,0 +1,125 @@
+# Changelog
+
+All notable changes to Academia (docs + backend) are logged here, grouped by
+development phase and date rather than semantic version — this project isn't
+published as a versioned external release yet. Once the public API ships,
+its endpoints will carry their own `/v1/`, `/v2/` versioning independent of
+this log.
+
+This file is also published to the docs site as `docs/changelog.md`.
+
+## [Unreleased]
+
+## Docs Sync — 2026-07-03
+### Changed
+- `api-contract.md`: documented the 404 response for `GET /hubs/{hub_id}/`
+  (previously undocumented, implemented in Phase 4)
+- `api-contract.md`: documented the error responses for `POST
+  /hubs/activation-requests/` — duplicate pending request and
+  already-active-hub cases (previously undocumented, implemented in Phase 4)
+- `api-contract.md`: fixed a self-contradicting error label on `POST
+  /questions/` — the invalid `hub_id` case was marked "404 Not Found" while
+  showing a field-keyed 400 body; corrected to `400 Bad Request` to match
+  both the implementation and the `department_id` case right above it
+
+### Process
+- Confirms the doc-sync cadence: this pass folds in everything logged in
+  BUILD_LOG.md's "Known Deviations" section across Phases 3–5
+
+## Phase 5 — Questions — 2026-07-03
+### Added
+- Question model (apps.questions), scoped to Hub with optional Department
+- List (public, filterable by hub/department/status/search, orderable),
+  create (auth), detail (public, increments view_count), update/delete
+  (author-only), unanswered queue (admin-only for now)
+- `Hub.question_count` and `Department.question_count` wired to real data
+
+### Known limitation (tracked, not a doc deviation)
+- `tags` is accepted on create/update but not yet persisted — Tag/QuestionTag
+  models land in Phase 6; responses show `tags: []` until then
+
+## Phase 4 — Hubs + Activation Requests — 2026-07-02
+### Added
+- Hub + HubActivationRequest models (apps.hubs)
+- `GET /hubs/{hub_id}/` and `GET /hubs/by-school/{school_id}/` (public)
+- Activation request create (auth) / list (admin, status filter) / approve
+  (admin, creates the Hub) / reject (admin)
+- `School.has_hub` and the `has_hub` list filter wired to real data,
+  replacing the Phase 2 stub
+
+### Deviated (resolved in Docs Sync — 2026-07-03)
+- Activation request creation blocks duplicate `PENDING` requests and
+  requests against schools with an already-active hub — not documented in
+  api-contract.md at the time
+- `GET /hubs/{hub_id}/` 404 error body was assumed (matching the pattern
+  every other detail endpoint uses), not explicitly documented at the time
+
+## Phase 3 — Departments — 2026-07-02
+### Added
+- Department model added to `apps.schools` (kept in the parent app rather
+  than a new one — no independent lifecycle)
+- List (public) + create (admin-only) scoped under
+  `/schools/{id}/departments/`; update (admin-only) at
+  `/departments/{id}/`
+- Soft-delete via `is_active`, same pattern as School
+- `SchoolDetailSerializer.get_departments` now returns real data, replacing
+  the Phase 2 stub
+
+## Docs Sync — 2026-07-02
+### Changed
+- `database-schema.md`, `api-contract.md`, `project-plan.md`, `feature-list.md`
+  updated to reflect everything logged across Phases 0–2 (see entries below)
+- Added `verification_status` to School; documented soft-delete via PATCH
+- Converted Report/Notification to Django's ContentType framework internally
+  (`content_type` FK + `object_id`) — public JSON shape unchanged
+- Added `APIClient` model and Future Models section (SchoolReview,
+  ReviewCategoryScore, ReviewResponse, ReviewVote, Plan, Subscription,
+  Invoice, SchoolSubmission) to database-schema.md
+- Added versioning policy and a full step-by-step "How Google Auth Works"
+  frontend implementation guide to api-contract.md
+- Added "Integrity Over Monetization" principle, API/public-API strategy,
+  future Reviews and Monetization sections, and a Developer Tooling &
+  Data Sourcing backlog note to project-plan.md
+- Added Future Features (Reviews, Verification/Claiming, School Data
+  Curation, Monetization, Public API) to feature-list.md
+- Introduced this CHANGELOG.md and its docs-site counterpart
+
+### Process
+- Established the doc-maintenance system: BUILD_LOG.md tracks short-term
+  phase-by-phase state; the four core docs are updated in periodic sync
+  passes; this CHANGELOG carries the durable history
+
+## Phase 2 — Schools — 2026-07-01
+### Added
+- School model (apps.schools), list/search/detail endpoints (public read)
+- Admin-only create/update via `IsPlatformAdmin` permission
+- Global error-response normalizer (`apps.core.exceptions`) — all future
+  phases get api-contract.md's `{"error": "..."}` shape for free
+
+### Deviated (resolved in Docs Sync — 2026-07-02)
+- api-contract.md didn't document a School delete endpoint; feature-list.md
+  mentioned delete — resolved via soft-delete (`is_active=False`) through
+  the existing PATCH endpoint, no new endpoint added
+- database-schema.md's School model gained `verification_status` (not in
+  the original table)
+
+## Phase 1 — Auth — 2026-07-01
+### Added
+- Custom User model (UUID PK, email-based, `apps.accounts`)
+- Google OAuth login, JWT issuance (SimpleJWT, refresh rotation + blacklist)
+- Endpoints: `/api/v1/auth/google/`, `/api/v1/auth/refresh/`,
+  `/api/v1/auth/logout/`, `/api/v1/users/me/` (GET/PATCH)
+
+### Deviated (resolved in Docs Sync — 2026-07-02)
+- project-plan.md named django-allauth for social auth; implemented instead
+  via direct verification against Google's userinfo endpoint — simpler for
+  an API-only backend, no server-side Google client secret required
+- database-schema.md's User model didn't list `is_staff`; added for Django
+  admin-site compatibility, kept separate from the platform-level `is_admin`
+
+## Phase 0 — Scaffolding — 2026-07-01
+### Added
+- Django 6.0.6 project scaffold, split settings
+  (base/development/production)
+- PostgreSQL connection via django-environ
+- Health-check endpoint at `/api/v1/health/`

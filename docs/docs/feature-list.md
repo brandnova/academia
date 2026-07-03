@@ -68,7 +68,7 @@
 - [ ] Resolve reports (admin only)
 
 ## Administration
-- [ ] Manage schools (create/edit/delete)
+- [ ] Manage schools (create/edit/soft-delete via is_active)
 - [ ] Approve hub activation requests
 - [ ] Assign moderators
 - [ ] Assign school representatives
@@ -108,13 +108,6 @@
 - [ ] User management (moderators)
 - [ ] Flag capabilities (moderators)
 
-## Additional Features (Future)
-- [ ] Marketplace for academic materials
-- [ ] Verified school representatives
-- [ ] AI-assisted search
-- [ ] Nationwide academic knowledge graph
-- [ ] Open schools list API for others to use
-
 ## School Reviews (Future)
 - [ ] Submit school review (overall rating + category ratings + text)
 - [ ] Edit/delete own review
@@ -127,6 +120,11 @@
 - [ ] Claim school profile (representative request + admin approval)
 - [ ] Verified badge on school profile
 
+## School Data Curation (Future)
+- [ ] Curated database of Nigerian universities, polytechnics, and colleges
+- [ ] User-submitted "school not listed" request flow
+- [ ] Admin verification workflow for submitted schools
+
 ## Monetization (Future)
 - [ ] Subscription plans for schools
 - [ ] Promoted placement for verified/subscribed schools
@@ -138,3 +136,8 @@
 - [ ] API key authentication + per-client rate limiting
 - [ ] Read-only public endpoints (schools, questions, tags)
 - [ ] Developer documentation portal
+
+## Additional Features (Future)
+- [ ] Marketplace for academic materials
+- [ ] AI-assisted search
+- [ ] Nationwide academic knowledge graph

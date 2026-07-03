@@ -38,10 +38,6 @@ The platform should gradually evolve into a living archive of institutional know
 
 Academia is guided by several principles that influence every product and technical decision.
 
-### Integrity Over Monetization
-
-Monetization must never compromise the accuracy or completeness of information on the platform. Paid features may increase a school's visibility, add verification badges, or enable official responses to reviews — they may never hide, suppress, or delete legitimate content. If a proposed revenue feature requires concealing true information from students, it does not ship in that form.
-
 ### One Hub Per School
 
 Each institution should have a single hub.
@@ -54,9 +50,9 @@ Every question, answer, department, moderator assignment, and school-specific di
 
 Schools are managed by the platform rather than by users.
 
-Users cannot create schools.
+Users cannot create schools directly.
 
-Instead, the platform maintains a curated list of institutions and users may request activation of a hub when one does not already exist.
+Instead, the platform maintains a curated list of institutions and users may request activation of a hub when one does not already exist, or submit a school for review if it's missing from the directory entirely (see "Developer Tooling & Data Sourcing" below).
 
 This approach prevents duplicates, spelling inconsistencies, fake institutions, and unnecessary moderation challenges.
 
@@ -98,20 +94,24 @@ Users may become school representatives.
 
 However, ownership remains with the platform to prevent disputes, abandonment, or community fragmentation.
 
+### Integrity Over Monetization
+
+Monetization must never compromise the accuracy or completeness of information on the platform. Paid features may increase a school's visibility, add verification badges, or enable official responses to reviews — they may never hide, suppress, or delete legitimate content. If a proposed revenue feature requires concealing true information from students, it does not ship in that form.
+
 ---
 
 ## Technology Stack
 
 ### Frontend
-- React with TypeScript
-- Component-based architecture
-- State management: React Context or Redux Toolkit (depending on complexity)
+- Framework intentionally left open (Django templates + Alpine, React + Tailwind, or Next.js — decided per-section as real pages get built)
+- Full custom Tailwind + hand-written CSS for anything a component library can't cleanly express
+- No third-party component library
 
 ### Backend
-- Django REST Framework
+- Django REST Framework, pure API (no server-rendered product pages)
 - PostgreSQL database
-- JWT authentication
-- Django Allauth for social authentication
+- JWT authentication (SimpleJWT)
+- Google OAuth verified via direct calls to Google's userinfo endpoint (not django-allauth — see "Known Deviations" note in BUILD_LOG.md / CHANGELOG.md for the reasoning)
 
 ### Development
 - API-first development
@@ -126,41 +126,12 @@ However, ownership remains with the platform to prevent disputes, abandonment, o
 - Fast onboarding
 - Reduced spam
 - Simplified password management
+- Implemented via direct verification against Google's userinfo endpoint (see api-contract.md's "How Google Auth Works" for the full frontend implementation guide)
 
 ### Future Considerations
 - Email/Password
 - Apple Login
 - Microsoft Login
-
----
-
-## API Versioning & Public API Strategy
-
-The API is namespaced under `/api/v1/` from day one, even though no external consumer exists yet. This avoids a breaking migration later.
-
-Planned rollout:
-- **Phase A (MVP):** Internal only — first-party frontend, JWT user auth.
-- **Phase B:** Read-only public endpoints (schools, hub metadata, published questions/answers, tags) behind an `APIClient` key with per-client rate limits.
-- **Phase C:** Broader public API, potentially including a self-serve developer portal.
-
-## Future: Reviews & Reputation System
-
-Schools may eventually have a review system where students rate and describe their experience across categories (academics, facilities, social life, career support, value for money).
-
-Design constraints:
-- Reviews are moderated through the same `Report` pipeline as questions/answers/comments — no separate, more lenient or stricter standard.
-- Verified schools may post one official `ReviewResponse` per review to add context or rebut inaccuracies — but cannot remove or hide the review itself.
-- No subscription tier may suppress, hide, or deprioritize a legitimate negative review. Paid tiers affect *promotion and verification only* (see Monetization below).
-
-## Future: Monetization
-
-Schools may subscribe to paid plans (`Plan`/`Subscription`/`Invoice`). What paid plans are allowed to unlock:
-- Verified badge on the school profile
-- Promoted placement in search/browse results
-- Official responses to reviews
-- Analytics dashboard for school representatives
-
-What paid plans are explicitly **not** allowed to affect: visibility of reviews, question/answer content, or moderation outcomes.
 
 ---
 
@@ -346,6 +317,49 @@ Administrators:
 
 ---
 
+## API Versioning & Public API Strategy
+
+The API is namespaced under `/api/v1/` from day one, even though no external consumer exists yet. This avoids a breaking migration later.
+
+Planned rollout:
+- **Phase A (MVP):** Internal only — first-party frontend, JWT user auth.
+- **Phase B:** Read-only public endpoints (schools, hub metadata, published questions/answers, tags) behind an `APIClient` key with per-client rate limits.
+- **Phase C:** Broader public API, potentially including a self-serve developer portal.
+
+---
+
+## Future: Reviews & Reputation System
+
+Schools may eventually have a review system where students rate and describe their experience across categories (academics, facilities, social life, career support, value for money).
+
+Design constraints:
+- Reviews are moderated through the same `Report` pipeline as questions/answers/comments — no separate, more lenient or stricter standard.
+- Verified schools may post one official `ReviewResponse` per review to add context or rebut inaccuracies — but cannot remove or hide the review itself.
+- No subscription tier may suppress, hide, or deprioritize a legitimate negative review. Paid tiers affect *promotion and verification only* (see Monetization below).
+
+---
+
+## Future: Monetization
+
+Schools may subscribe to paid plans (`Plan`/`Subscription`/`Invoice`). What paid plans are allowed to unlock:
+- Verified badge on the school profile
+- Promoted placement in search/browse results
+- Official responses to reviews
+- Analytics dashboard for school representatives
+
+What paid plans are explicitly **not** allowed to affect: visibility of reviews, question/answer content, or moderation outcomes.
+
+---
+
+## Developer Tooling & Data Sourcing (Planned — not yet designed)
+
+Two backlog items noted here for visibility, to be designed when we get to them:
+
+- **Content seed command** — a Django management command to populate the database with placeholder content for testing, updated as new models are added, so any developer can spin up a realistic local dataset quickly.
+- **Nigerian school directory sourcing** — curating an initial database of Nigerian universities, polytechnics, and colleges (no single authoritative public source currently exists, so this will require manual collection and periodic verification). Tied to this: a user-facing "submit a school that's missing" flow (see `SchoolSubmission` in database-schema.md's Future Models), with an admin verification workflow before a submission becomes a real `School` record. This directory is also intended to eventually back the public API's schools endpoint (see "Public/Developer API" in feature-list.md).
+
+---
+
 ## Development Approach
 
 Academia will follow an API-first development process.
@@ -362,21 +376,37 @@ Documentation is treated as a development artifact rather than an afterthought.
 
 ## Documentation Structure
 
-The project documentation is intentionally lightweight.
-
-Only four core documents are maintained:
+The project maintains the following documents, each with a distinct purpose and update cadence:
 
 ### project-plan.md (This document)
 Defines the vision, philosophy, structure, and guiding decisions of the platform.
+Updated during periodic doc-sync passes (see below), not every phase.
 
 ### feature-list.md
 Defines the complete list of features and requirements to be implemented.
+Updated during doc-sync passes.
 
 ### database-schema.md
 Defines models, relationships, constraints, and data structures.
+Updated during doc-sync passes.
 
 ### api-contract.md
 Defines endpoints, request payloads, response payloads, and API behavior.
+Updated during doc-sync passes.
+
+### BUILD_LOG.md
+Short-term working memory. Updated after **every** completed phase — current
+phase, completed phases, key decisions, conventions established, and known
+deviations from the four core docs above. Its "Known Deviations" section is
+the queue of items waiting to be merged into the core docs at the next sync.
+
+### CHANGELOG.md (repo root) / docs/changelog.md (published docs site)
+The durable history. Gets a small entry after every phase, plus a "Docs Sync"
+entry whenever the four core docs are updated, describing what moved from
+"deviation" to "documented plan." Entries are grouped by development phase
+and date rather than semantic version — this project isn't a versioned
+external release yet. Once the public API ships, its endpoints carry their
+own `/v1/`, `/v2/` versioning independent of this log.
 
 **Each document should remain focused on its purpose and avoid duplicating information that belongs elsewhere.**
 
