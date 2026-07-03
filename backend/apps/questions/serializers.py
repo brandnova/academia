@@ -57,8 +57,27 @@ class QuestionDetailSerializer(QuestionListSerializer):
         fields = QuestionListSerializer.Meta.fields + ["answers"]
 
     def get_answers(self, obj):
-        # TODO(Phase 7): serialize real answers
-        return []
+        from apps.answers.serializers import AnswerSerializer
+        return AnswerSerializer(obj.answers.all(), many=True).data
+
+
+def _sync_tags(question, tag_names):
+    """Replace a question's tags with the given list of names (normalized to lowercase)."""
+    from apps.tags.models import QuestionTag, Tag
+
+    if tag_names is None:
+        return
+
+    normalized_names = []
+    for raw_name in tag_names:
+        name = raw_name.strip().lower()
+        if name:
+            normalized_names.append(name)
+
+    QuestionTag.objects.filter(question=question).delete()
+    for name in normalized_names:
+        tag, _ = Tag.objects.get_or_create(name=name)
+        QuestionTag.objects.create(question=question, tag=tag)
 
 
 class QuestionCreateSerializer(serializers.ModelSerializer):
@@ -98,16 +117,17 @@ class QuestionCreateSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        # tags accepted but not persisted yet -- Phase 6 wires real Tag/QuestionTag models
-        validated_data.pop("tags", None)
+        tag_names = validated_data.pop("tags", None)
         hub = validated_data.pop("hub_id")
         department = validated_data.pop("department_id", None)
-        return Question.objects.create(
+        question = Question.objects.create(
             hub=hub,
             department=department,
             author=self.context["request"].user,
             **validated_data,
         )
+        _sync_tags(question, tag_names)
+        return question
 
 
 class QuestionUpdateSerializer(serializers.ModelSerializer):
@@ -138,11 +158,12 @@ class QuestionUpdateSerializer(serializers.ModelSerializer):
         return attrs
 
     def update(self, instance, validated_data):
-        validated_data.pop("tags", None)
+        tag_names = validated_data.pop("tags", None)
         department = validated_data.pop("department_id", "unset")
         if department != "unset":
             instance.department = department
         for field, value in validated_data.items():
             setattr(instance, field, value)
         instance.save()
+        _sync_tags(instance, tag_names)
         return instance

@@ -96,14 +96,14 @@ However, ownership remains with the platform to prevent disputes, abandonment, o
 
 ### Integrity Over Monetization
 
-Monetization must never compromise the accuracy or completeness of information on the platform. Paid features may increase a school's visibility, add verification badges, or enable official responses to reviews — they may never hide, suppress, or delete legitimate content. If a proposed revenue feature requires concealing true information from students, it does not ship in that form.
+Monetization must never compromise the accuracy or completeness of information on the platform. Paid features may increase a school's visibility, add verification badges, or enable official responses to reviews, they may never hide, suppress, or delete legitimate content. If a proposed revenue feature requires concealing true information from students, it does not ship in that form.
 
 ---
 
 ## Technology Stack
 
 ### Frontend
-- Framework intentionally left open (Django templates + Alpine, React + Tailwind, or Next.js — decided per-section as real pages get built)
+- Framework intentionally left open (Django templates + Alpine, React + Tailwind, or Next.js, decided per-section as real pages get built)
 - Full custom Tailwind + hand-written CSS for anything a component library can't cleanly express
 - No third-party component library
 
@@ -111,7 +111,7 @@ Monetization must never compromise the accuracy or completeness of information o
 - Django REST Framework, pure API (no server-rendered product pages)
 - PostgreSQL database
 - JWT authentication (SimpleJWT)
-- Google OAuth verified via direct calls to Google's userinfo endpoint (not django-allauth — see "Known Deviations" note in BUILD_LOG.md / CHANGELOG.md for the reasoning)
+- Google OAuth verified via direct calls to Google's userinfo endpoint (not django-allauth, see "Known Deviations" note in BUILD_LOG.md / CHANGELOG.md for the reasoning)
 
 ### Development
 - API-first development
@@ -322,7 +322,7 @@ Administrators:
 The API is namespaced under `/api/v1/` from day one, even though no external consumer exists yet. This avoids a breaking migration later.
 
 Planned rollout:
-- **Phase A (MVP):** Internal only — first-party frontend, JWT user auth.
+- **Phase A (MVP):** Internal only, first-party frontend, JWT user auth.
 - **Phase B:** Read-only public endpoints (schools, hub metadata, published questions/answers, tags) behind an `APIClient` key with per-client rate limits.
 - **Phase C:** Broader public API, potentially including a self-serve developer portal.
 
@@ -333,8 +333,8 @@ Planned rollout:
 Schools may eventually have a review system where students rate and describe their experience across categories (academics, facilities, social life, career support, value for money).
 
 Design constraints:
-- Reviews are moderated through the same `Report` pipeline as questions/answers/comments — no separate, more lenient or stricter standard.
-- Verified schools may post one official `ReviewResponse` per review to add context or rebut inaccuracies — but cannot remove or hide the review itself.
+- Reviews are moderated through the same `Report` pipeline as questions/answers/comments, no separate, more lenient or stricter standard.
+- Verified schools may post one official `ReviewResponse` per review to add context or rebut inaccuracies, but cannot remove or hide the review itself.
 - No subscription tier may suppress, hide, or deprioritize a legitimate negative review. Paid tiers affect *promotion and verification only* (see Monetization below).
 
 ---
@@ -351,12 +351,12 @@ What paid plans are explicitly **not** allowed to affect: visibility of reviews,
 
 ---
 
-## Developer Tooling & Data Sourcing (Planned — not yet designed)
+## Developer Tooling & Data Sourcing (Planned, not yet designed)
 
 Two backlog items noted here for visibility, to be designed when we get to them:
 
-- **Content seed command** — a Django management command to populate the database with placeholder content for testing, updated as new models are added, so any developer can spin up a realistic local dataset quickly.
-- **Nigerian school directory sourcing** — curating an initial database of Nigerian universities, polytechnics, and colleges (no single authoritative public source currently exists, so this will require manual collection and periodic verification). Tied to this: a user-facing "submit a school that's missing" flow (see `SchoolSubmission` in database-schema.md's Future Models), with an admin verification workflow before a submission becomes a real `School` record. This directory is also intended to eventually back the public API's schools endpoint (see "Public/Developer API" in feature-list.md).
+- **Content seed command**: a Django management command to populate the database with placeholder content for testing, updated as new models are added, so any developer can spin up a realistic local dataset quickly.
+- **Nigerian school directory sourcing**: curating an initial database of Nigerian universities, polytechnics, and colleges (no single authoritative public source currently exists, so this will require manual collection and periodic verification). Tied to this: a user-facing "submit a school that's missing" flow (see `SchoolSubmission` in database-schema.md's Future Models), with an admin verification workflow before a submission becomes a real `School` record. This directory is also intended to eventually back the public API's schools endpoint (see "Public/Developer API" in feature-list.md).
 
 ---
 
@@ -395,7 +395,7 @@ Defines endpoints, request payloads, response payloads, and API behavior.
 Updated during doc-sync passes.
 
 ### BUILD_LOG.md
-Short-term working memory. Updated after **every** completed phase — current
+Short-term working memory. Updated after **every** completed phase, current
 phase, completed phases, key decisions, conventions established, and known
 deviations from the four core docs above. Its "Known Deviations" section is
 the queue of items waiting to be merged into the core docs at the next sync.
@@ -404,7 +404,7 @@ the queue of items waiting to be merged into the core docs at the next sync.
 The durable history. Gets a small entry after every phase, plus a "Docs Sync"
 entry whenever the four core docs are updated, describing what moved from
 "deviation" to "documented plan." Entries are grouped by development phase
-and date rather than semantic version — this project isn't a versioned
+and date rather than semantic version, this project isn't a versioned
 external release yet. Once the public API ships, its endpoints carry their
 own `/v1/`, `/v2/` versioning independent of this log.
 

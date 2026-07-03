@@ -9,9 +9,9 @@ deprecation window once a v2 exists.
 
 ## Authentication Modes
 
-- **User auth** — JWT bearer token, obtained via the Google login flow below. Used by
+- **User auth**: JWT bearer token, obtained via the Google login flow below. Used by
   the frontend and any user-driven action.
-- **API client auth** (Future) — `X-API-Key` header, used by registered third-party
+- **API client auth** (Future): `X-API-Key` header, used by registered third-party
   consumers hitting public read-only endpoints. Not available in MVP.
 
 ---
@@ -26,19 +26,17 @@ Services, then hands that token to our backend, which verifies it by calling
 Google's own `userinfo` endpoint. This means: no client secret on the backend, no
 redirect-based OAuth dance, and a small, predictable request/response contract.
 
-**One-time setup (Google Cloud Console):**
-1. Create a project (or use an existing one) at console.cloud.google.com.
-2. Configure the OAuth consent screen (External, testing or published as needed).
-3. Create an OAuth 2.0 Client ID of type **Web application**.
-4. Add your frontend's origin(s) under **Authorized JavaScript origins**
-   (e.g. `http://localhost:3000`, and your production domain later).
-5. You only need the **Client ID** on the frontend — no client secret is used
-   anywhere in this flow.
+### One-time setup (Google Cloud Console):
+- Create a project (or use an existing one) at console.cloud.google.com.
+- Configure the OAuth consent screen (External, testing or published as needed).
+- Create an OAuth 2.0 Client ID of type **Web application**.
+- Add your frontend's origin(s) under **Authorized JavaScript origins** (e.g. `http://localhost:3000`, and your production domain later).
+- You only need the **Client ID** on the frontend, no client secret is used anywhere in this flow.
 
-**Frontend flow, step by step:**
-1. Load Google's Identity Services script:
+### Frontend flow, step by step:
+- Load Google's Identity Services script:
    `<script src="https://accounts.google.com/gsi/client" async defer></script>`
-2. Initialize a token client with your Client ID and the scopes
+- Initialize a token client with your Client ID and the scopes
    `email profile`:
    ```js
    const client = google.accounts.oauth2.initTokenClient({
@@ -49,24 +47,14 @@ redirect-based OAuth dance, and a small, predictable request/response contract.
      },
    });
    ```
-3. On your "Sign in with Google" button click, call `client.requestAccessToken()`.
-   This opens Google's consent popup and returns an `access_token` in the callback.
-4. POST that token to our backend:
-   `POST /api/v1/auth/google/` with body `{ "access_token": "<token_from_step_3>" }`.
-5. Our backend verifies the token against Google, creates the user if this is their
-   first login, and returns our own JWT pair (`access`/`refresh`) plus the user
-   object — see the endpoint spec below.
-6. Store the JWT pair (httpOnly cookie is preferred once you're past local dev;
-   in-memory/localStorage is fine for early development) and attach
-   `Authorization: Bearer <access>` to every subsequent authenticated request.
-7. When a request comes back `401` because the access token expired, call
-   `POST /api/v1/auth/refresh/` with the stored refresh token to get a new access
-   token — see below. Note refresh tokens rotate on use, so store the new one
-   returned each time.
-8. On logout, POST the current refresh token to `/api/v1/auth/logout/` (this
-   blacklists it server-side) and clear locally stored tokens.
+- On your "Sign in with Google" button click, call `client.requestAccessToken()`. This opens Google's consent popup and returns an `access_token` in the callback.
+- POST that token to our backend: `POST /api/v1/auth/google/` with body `{ "access_token": "<token_from_step_3>" }`.
+- Our backend verifies the token against Google, creates the user if this is their first login, and returns our own JWT pair (`access`/`refresh`) plus the user object, see the endpoint spec below.
+- Store the JWT pair (httpOnly cookie is preferred once you're past local dev; in-memory/localStorage is fine for early development) and attach `Authorization: Bearer <access>` to every subsequent authenticated request.
+- When a request comes back `401` because the access token expired, call `POST /api/v1/auth/refresh/` with the stored refresh token to get a new access token, see below. Note refresh tokens rotate on use, so store the new one returned each time.
+- On logout, POST the current refresh token to `/api/v1/auth/logout/` (this blacklists it server-side) and clear locally stored tokens.
 
-This is the entire flow — there's no separate "callback URL" or server-rendered
+This is the entire flow, there's no separate "callback URL" or server-rendered
 redirect page to build; it's a client-side popup plus one API call.
 
 ### Google Login
@@ -123,7 +111,7 @@ Behavior notes: first login for an email creates the `User` record automatically
 }
 ```
 
-Refresh tokens rotate on every use and the previous one is blacklisted — always
+Refresh tokens rotate on every use and the previous one is blacklisted, always
 store whichever refresh token was most recently issued.
 
 ---
@@ -271,7 +259,7 @@ obtain new access tokens.
 ---
 
 ### Delete School (Admin Only)
-There is no dedicated `DELETE` endpoint. "Deleting" a school is a soft-delete —
+There is no dedicated `DELETE` endpoint. "Deleting" a school is a soft-delete,
 send `PATCH /api/v1/schools/{school_id}/` with `{"is_active": false}`. This keeps
 foreign-key relationships (hubs, questions, etc.) intact rather than orphaning
 them, and is easily reversible. A deactivated school is excluded from list/detail
@@ -381,7 +369,7 @@ responses for non-admins.
 ```
 
 A new request is blocked if the target school already has an active hub, or if a
-`PENDING` request for that school already exists — this prevents duplicate/spam
+`PENDING` request for that school already exists, this prevents duplicate/spam
 requests from piling up before an admin reviews the first one.
 
 ---
@@ -682,18 +670,17 @@ requests from piling up before an admin reviews the first one.
 
 **Response (200 OK):** Same as GET `/api/v1/questions/{question_id}/`
 
-**Error Responses:**
+**Error Response (403 Forbidden):**
 ```json
-// 403 Forbidden - Not the question author
 {
   "error": "You do not have permission to edit this question"
 }
-
-// 400 Bad Request - Invalid status transition (Open → Solved directly)
-{
-  "status": ["Cannot transition from OPEN to SOLVED without a best answer."]
-}
 ```
+
+Note: `status` is not an editable field on this endpoint. It only changes as a side
+effect of other actions: creating the first answer moves a question from OPEN to
+ANSWERED, marking a best answer moves it to SOLVED, and deleting answers can move it
+back to ANSWERED or OPEN depending on what remains (see Delete Answer below).
 
 ---
 
@@ -805,6 +792,10 @@ requests from piling up before an admin reviews the first one.
 }
 ```
 
+If the deleted answer was the question's best answer and other answers remain, the
+question's status reverts from SOLVED to ANSWERED. If it was the last remaining
+answer on the question, status reverts to OPEN.
+
 ---
 
 ### Mark Best Answer
@@ -837,6 +828,10 @@ requests from piling up before an admin reviews the first one.
   "error": "This answer is already marked as best"
 }
 ```
+
+Marking a different answer as best on an already-solved question transfers the
+best-answer flag to the new answer and leaves the question SOLVED. Only marking the
+same answer that is already best is blocked.
 
 ---
 
@@ -891,6 +886,41 @@ requests from piling up before an admin reviews the first one.
 ---
 
 ## Comments
+
+### List Comments
+**Endpoint:** `GET /api/v1/answers/{answer_id}/comments/`
+
+**Response (200 OK):**
+```json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": "uuid",
+      "body": "Does this vary by school?",
+      "author": {
+        "id": "uuid",
+        "full_name": "John Doe",
+        "avatar": "https://..."
+      },
+      "answer": {
+        "id": "uuid"
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "Answer not found"
+}
+```
 
 ### Create Comment
 **Endpoint:** `POST /api/v1/comments/`
@@ -1059,7 +1089,7 @@ requests from piling up before an admin reviews the first one.
 ```
 
 `related_object_type`/`related_object_id` are serialized from the underlying
-ContentType-based generic relation (see database-schema.md) — the JSON shape
+ContentType-based generic relation (see database-schema.md), the JSON shape
 doesn't change even as new notifiable models are added.
 
 ---
@@ -1119,7 +1149,7 @@ doesn't change even as new notifiable models are added.
 ```
 
 `content_type`/`content_id` are serialized from the underlying ContentType-based
-generic relation (see database-schema.md) — the JSON shape stays stable even as
+generic relation (see database-schema.md), the JSON shape stays stable even as
 new reportable models (e.g. SchoolReview) are added later.
 
 **Error Responses:**
@@ -1295,7 +1325,7 @@ new reportable models (e.g. SchoolReview) are added later.
 
 ---
 
-## API Clients (Future — Public API Phase)
+## API Clients (Future, Public API Phase)
 
 ### Register API Client (Admin Only)
 **Endpoint:** `POST /api/v1/admin/api-clients/`

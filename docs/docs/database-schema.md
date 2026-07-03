@@ -32,7 +32,7 @@ Represents an educational institution.
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
 
-`has_hub` is not a stored field — it's computed from the related `Hub` record.
+`has_hub` is not a stored field, it's computed from the related `Hub` record.
 
 ### Department
 Represents an academic department within a school.
@@ -165,7 +165,7 @@ Represents a notification for a user.
 | object_id | UUID | Nullable | Related object's ID |
 | created_at | DateTime | Auto now | Notification timestamp |
 
-`content_object` is exposed via `GenericForeignKey('content_type', 'object_id')`. The public API still serializes this as `related_object_type` (string) / `related_object_id` (uuid) — see api-contract.md.
+`content_object` is exposed via `GenericForeignKey('content_type', 'object_id')`. The public API still serializes this as `related_object_type` (string) / `related_object_id` (uuid), see api-contract.md.
 
 ### Report
 Represents a user report on content.
@@ -184,7 +184,7 @@ Represents a user report on content.
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
 
-`content_object` is exposed via `GenericForeignKey('content_type', 'object_id')`. Using Django's ContentType framework (instead of a plain string field) means any future model — including SchoolReview — can be reported without a schema change. The public API still serializes this as `content_type: "question"` / `content_id: uuid`.
+`content_object` is exposed via `GenericForeignKey('content_type', 'object_id')`. Using Django's ContentType framework (instead of a plain string field) means any future model, including SchoolReview, can be reported without a schema change. The public API still serializes this as `content_type: "question"` / `content_id: uuid`.
 
 ### ModeratorAssignment
 Represents a user assigned as moderator for a hub.
@@ -214,7 +214,7 @@ Represents a user assigned as school representative for a hub.
 
 Unique constraint: (user, hub) to prevent duplicate assignments.
 
-### APIClient (Future — Public API Phase)
+### APIClient (Future, Public API Phase)
 Represents a registered external consumer of the public API.
 
 | Field | Type | Constraints | Description |
@@ -265,7 +265,7 @@ School (1) ─────── (1) Hub
 ```
 
 `Report` and `Notification` also relate generically (via Django ContentType) to any
-reportable/notifiable model — currently Question, Answer, Comment; SchoolReview will
+reportable/notifiable model, currently Question, Answer, Comment; SchoolReview will
 join this set once built, with no schema change required.
 
 ---
@@ -300,12 +300,12 @@ join this set once built, with no schema change required.
 - Deleting a `Question` → Delete associated `Answer`, `QuestionTag`
 - Deleting an `Answer` → Delete associated `Comment`, `AnswerVote`
 
-In practice, `School` is not hard-deleted through the API — see api-contract.md's
+In practice, `School` is not hard-deleted through the API, see api-contract.md's
 soft-delete note. Hard delete remains available at the database/admin level only.
 
 ---
 
-## Future Models (Not in MVP — reserved for planning)
+## Future Models (Not in MVP, reserved for planning)
 
 ### SchoolReview
 | Field | Type | Constraints | Description |
@@ -385,7 +385,7 @@ may only affect visibility/promotion/verification. They must never gate deletion
 hiding, or suppression of a `SchoolReview`. Reviews are moderated exclusively through
 the existing `Report` pipeline, regardless of the school's subscription status.
 
-### SchoolSubmission (Future — School Data Curation)
+### SchoolSubmission (Future, School Data Curation)
 Represents a user-submitted school not yet in the platform's directory.
 
 | Field | Type | Constraints | Description |

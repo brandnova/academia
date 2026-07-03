@@ -1,48 +1,48 @@
 # FEATURE LIST
 
 ## Authentication
-- [ ] Google Login
-- [ ] Logout
-- [ ] User profile (view only initially)
-- [ ] Avatar from Google
+- [x] Google Login
+- [x] Logout
+- [x] User profile (view only initially)
+- [x] Avatar from Google
 
 ## School Hubs
-- [ ] View school hub
-- [ ] Search for school
-- [ ] Request hub activation
-- [ ] View departments
-- [ ] Filter questions by department
+- [x] View school hub
+- [x] Search for school
+- [x] Request hub activation
+- [x] View departments
+- [x] Filter questions by department
 
 ## Questions
-- [ ] Create question (title, body, school, optional department, tags)
-- [ ] Edit own question
-- [ ] Delete own question
-- [ ] View question
-- [ ] View question list (paginated)
-- [ ] Filter questions by status (Open/Answered/Solved)
-- [ ] Filter questions by school
-- [ ] Filter questions by department
-- [ ] Filter questions by tags
+- [x] Create question (title, body, school, optional department, tags)
+- [x] Edit own question
+- [x] Delete own question
+- [x] View question
+- [x] View question list (paginated)
+- [x] Filter questions by status (Open/Answered/Solved)
+- [x] Filter questions by school (via the hub filter, since a hub maps to exactly one school)
+- [x] Filter questions by department
+- [x] Filter questions by tags
 
 ## Answers
-- [ ] Create answer
-- [ ] Edit own answer
-- [ ] Delete own answer
-- [ ] Mark best answer (question owner only)
-- [ ] Vote on answers (upvote/downvote)
-- [ ] View answers
+- [x] Create answer
+- [x] Edit own answer
+- [x] Delete own answer
+- [x] Mark best answer (question owner only)
+- [x] Vote on answers (upvote/downvote)
+- [x] View answers
 
 ## Comments
-- [ ] Create comment on answer
-- [ ] Edit own comment
-- [ ] Delete own comment
-- [ ] View comments
+- [x] Create comment on answer
+- [x] Edit own comment
+- [x] Delete own comment
+- [x] View comments
 
 ## Tags
-- [ ] Create tags (from question creation)
-- [ ] View questions by tag
-- [ ] Suggest tags (autocomplete)
-- [ ] Popular tags view
+- [x] Create tags (from question creation)
+- [x] View questions by tag
+- [x] Suggest tags (autocomplete, served by the tags search endpoint)
+- [x] Popular tags view
 
 ## Search
 - [ ] Search questions (title + body)
@@ -53,6 +53,10 @@
 
 ## Notifications
 - [ ] Email notifications for major actions
+  - [ ] New answer notification
+  - [ ] School hub activation
+  - [ ] School submission request approved
+- [ ] In-app notifications for major actions
   - [ ] New answer notification
   - [ ] New comment notification
   - [ ] Best answer selected notification
@@ -68,8 +72,8 @@
 - [ ] Resolve reports (admin only)
 
 ## Administration
-- [ ] Manage schools (create/edit/soft-delete via is_active)
-- [ ] Approve hub activation requests
+- [x] Manage schools (create/edit/soft-delete via is_active)
+- [x] Approve hub activation requests
 - [ ] Assign moderators
 - [ ] Assign school representatives
 - [ ] View reports

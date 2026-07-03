@@ -23,6 +23,9 @@ INSTALLED_APPS = [
     "apps.schools",
     "apps.hubs",
     "apps.questions",
+    "apps.tags",
+    "apps.answers",
+    "apps.comments",
 ]
 
 AUTH_USER_MODEL = "accounts.User"

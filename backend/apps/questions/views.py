@@ -48,7 +48,9 @@ class QuestionListCreateView(generics.ListCreateAPIView):
         if search:
             queryset = queryset.filter(Q(title__icontains=search) | Q(body__icontains=search))
 
-        # TODO(Phase 6): tag query param filter once Tag/QuestionTag exist
+        tag = self.request.query_params.get("tag")
+        if tag:
+            queryset = queryset.filter(question_tags__tag__name=tag.strip().lower()).distinct()
 
         ordering_map = {
             "created_at": "created_at",

@@ -40,15 +40,16 @@ class Question(models.Model):
 
     @property
     def answer_count(self):
-        # TODO(Phase 7): return self.answer_set.count()
-        return 0
+        return self.answers.count()
 
     @property
     def best_answer_id(self):
-        # TODO(Phase 7): return getattr(self.answer_set.filter(is_best=True).first(), "id", None)
-        return None
+        best = self.answers.filter(is_best=True).first()
+        return best.id if best else None
 
     @property
     def tags(self):
-        # TODO(Phase 6): return list(self.questiontag_set.values_list("tag__name", flat=True))
-        return []
+        from apps.tags.models import QuestionTag
+        return list(
+            QuestionTag.objects.filter(question=self).values_list("tag__name", flat=True)
+        )
