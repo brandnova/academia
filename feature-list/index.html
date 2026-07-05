@@ -843,8 +843,12 @@
 <h1 id="future-features-not-mvp">Future Features (Not MVP)</h1>
 <h2 id="authentication-future">Authentication (Future)</h2>
 <ul>
-<li>[ ] Email/Password signup</li>
-<li>[ ] Password reset</li>
+<li>[ ] Email/username and password registration</li>
+<li>[ ] Email verification on signup (verification link or code)</li>
+<li>[ ] Email/password login (alongside Google, not replacing it)</li>
+<li>[ ] Password reset (forgot password flow via email)</li>
+<li>[ ] Password change (while logged in)</li>
+<li>[ ] Self-service account deactivation</li>
 <li>[ ] Apple Login</li>
 <li>[ ] Microsoft Login</li>
 </ul>
@@ -883,7 +887,13 @@
 </ul>
 <h2 id="school-data-curation-future">School Data Curation (Future)</h2>
 <ul>
-<li>[ ] Curated database of Nigerian universities, polytechnics, and colleges</li>
+<li>[ ] Curated database of Nigerian universities, polytechnics, and colleges,
+      sourced primarily from NUC, NBTE, and NCCE official lists, cross-referenced
+      against JAMB's institution list and secondary sources</li>
+<li>[ ] Extend the School model with richer fields: institution type
+      (university/polytechnic/college of education), ownership (federal/state/private),
+      state, an official regulatory or JAMB code, source_url, last_verified_at</li>
+<li>[ ] Periodic re-verification workflow so curated data doesn't silently go stale</li>
 <li>[ ] User-submitted "school not listed" request flow</li>
 <li>[ ] Admin verification workflow for submitted schools</li>
 </ul>
@@ -906,6 +916,19 @@
 <li>[ ] Marketplace for academic materials</li>
 <li>[ ] AI-assisted search</li>
 <li>[ ] Nationwide academic knowledge graph</li>
+</ul>
+<h2 id="platform-improvements-future">Platform Improvements (Future)</h2>
+<ul>
+<li>[ ] OpenAPI schema and interactive API docs (drf-spectacular or similar), useful
+      internally and as groundwork for the planned public API</li>
+<li>[ ] Admin action audit log (who resolved which report, who suspended which user)</li>
+<li>[ ] Answer edit history, so a heavily-edited answer's original context isn't lost</li>
+<li>[ ] Lightweight contributor recognition (e.g. a visible count of best-answers given),
+      framed as quality signal, not a leaderboard or engagement mechanic, consistent
+      with Knowledge Over Social Activity</li>
+<li>[ ] Bulk data import tooling to support the school directory curation effort above</li>
+<li>[ ] Celery-backed background tasks for email and notification delivery, so a slow
+      SMTP call never blocks an API response</li>
 </ul>
 
 

@@ -359,6 +359,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#production-readiness-pass-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Readiness Pass (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Production Readiness Pass (Post-MVP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#key-decisions-made" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -567,6 +595,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#production-readiness-pass-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Readiness Pass (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Production Readiness Pass (Post-MVP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#key-decisions-made" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -668,6 +724,44 @@ concerns rather than a feature slice.</p>
   search, report creation). 429 responses normalized to the documented
   {"error": "Rate limit exceeded..."} shape.</li>
 </ul>
+<h2 id="production-readiness-pass-post-mvp">Production Readiness Pass (Post-MVP)</h2>
+<p>Not a numbered phase, infrastructure work following the completed 15-phase MVP.
+Pending your verification before considered final.</p>
+<h3 id="added">Added</h3>
+<ul>
+<li>django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
+  localhost:3000 for local Next.js dev, no credentials (bearer tokens, not cookies)</li>
+<li>Redis caching via django-redis, REDIS_URL env-driven, falls back automatically to
+  LocMemCache when unset. IGNORE_EXCEPTIONS=True means Redis outages fail open
+  (throttling stops blocking, cached views just recompute) rather than crashing</li>
+<li>DRF throttle cache now backed by the same Redis/LocMem cache automatically</li>
+<li>View-level caching added to Schools (list, detail), Hubs (detail, by-school), Tags
+  (list), and Search, all public non-personalized read endpoints. Deliberately NOT
+  added to Questions, Answers, Comments, or Notifications, live content and
+  view-count-incrementing endpoints should not be cached</li>
+<li>Cache invalidation is precise for detail views (School, Hub) via direct key
+  deletion on write; list/search caches rely on short TTLs only (best-effort
+  delete_pattern invalidation via django-redis when available, silent no-op on
+  LocMem fallback)</li>
+<li>DATABASE_URL support added alongside the existing discrete DATABASE_* vars, for
+  compatibility with hosted Postgres providers that issue a single connection string</li>
+<li>Production settings hardened: SECURE_PROXY_SSL_HEADER (required behind PaaS
+  reverse proxies like PythonAnywhere), SECURE_SSL_REDIRECT, HSTS, secure cookies,
+  CSRF_TRUSTED_ORIGINS, all env-configurable</li>
+<li>whitenoise added for static file serving, portable across PythonAnywhere and any
+  future VPS</li>
+<li>Structured console logging added (LOGGING dict in base.py)</li>
+<li>Health check endpoint upgraded to verify real database and cache connectivity,
+  not just process liveness</li>
+<li>Custom handler404/handler500 at the project urls level, so unmatched API routes
+  and uncaught production errors return the documented {"error": "..."} JSON shape
+  instead of Django's default HTML error pages. Non-api paths (like /admin/) still
+  get Django's normal error pages.</li>
+<li>seed_demo_data management command (apps.core), a custom script rather than a
+  Faker dependency, populates schools, hubs, departments, questions across all
+  three statuses, answers, votes, comments, tags, and a sample report, including
+  deliberate empty-state and pending-request scenarios for frontend testing.</li>
+</ul>
 <h2 id="key-decisions-made">Key Decisions Made</h2>
 <ul>
 <li>API namespaced under /api/v1/ from the start</li>
@@ -708,6 +802,13 @@ concerns rather than a feature slice.</p>
 <li>Scoped write-action throttles (question_create, answer_create, etc.) replace the
   general 100/min limit for that specific action rather than stacking with it; GET
   requests on the same endpoints are unaffected by the write-scoped throttle</li>
+<li>Caching philosophy: cache structural/directory data (schools, hubs, tags), never
+  cache live Q&amp;A content or anything with a side effect on read (view_count)
+  or personalized output (notifications)</li>
+<li>Redis failures fail open, not closed. Prioritizing uptime over strict rate-limit
+  enforcement or cache freshness during a Redis outage</li>
+<li>gunicorn added to requirements for VPS portability, even though PythonAnywhere
+  uses its own WSGI dispatch rather than gunicorn directly</li>
 </ul>
 <h2 id="conventions-established">Conventions Established</h2>
 <ul>
@@ -741,14 +842,16 @@ concerns rather than a feature slice.</p>
   HTTP methods should count against a scoped rate</li>
 </ul>
 <h2 id="known-deviations-from-docs">Known Deviations From Docs</h2>
-<p>(none, everything logged through Phase 15 is being folded into the docs sync
-alongside this BUILD_LOG update)</p>
+<ul>
+<li>The 404 fix means unmatched routes now honor api-contract.md's documented
+  404 shape more completely than before, this is a genuine gap-closing fix,
+  not a new deviation, worth a one-line mention at the next docs sync.</li>
+</ul>
 <h2 id="next-immediate-step">Next Immediate Step</h2>
-<p>CORS configuration and general production-readiness prep (not a numbered phase):
-django-cors-headers setup for cross-origin frontend consumption, environment-based
-CORS allowlist, review of production settings (SECURE_* flags, ALLOWED_HOSTS,
-static file serving strategy), and a pass over anything else needed before this
-backend can be safely pointed at by a real frontend deployment.</p>
+<p>Frontend build, starting in a new chat, Next.js decided as the framework. School
+list acquisition (real data sourcing from NUC/NBTE/NCCE) and the extended School
+schema remain queued as future work, not blocking frontend development, since the
+seed command already provides realistic demo data to build against.</p>
 
 
 
