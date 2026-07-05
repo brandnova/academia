@@ -95,8 +95,12 @@
 # Future Features (Not MVP)
 
 ## Authentication (Future)
-- [ ] Email/Password signup
-- [ ] Password reset
+- [ ] Email/username and password registration
+- [ ] Email verification on signup (verification link or code)
+- [ ] Email/password login (alongside Google, not replacing it)
+- [ ] Password reset (forgot password flow via email)
+- [ ] Password change (while logged in)
+- [ ] Self-service account deactivation
 - [ ] Apple Login
 - [ ] Microsoft Login
 
@@ -129,7 +133,13 @@
 - [ ] Verified badge on school profile
 
 ## School Data Curation (Future)
-- [ ] Curated database of Nigerian universities, polytechnics, and colleges
+- [ ] Curated database of Nigerian universities, polytechnics, and colleges,
+      sourced primarily from NUC, NBTE, and NCCE official lists, cross-referenced
+      against JAMB's institution list and secondary sources
+- [ ] Extend the School model with richer fields: institution type
+      (university/polytechnic/college of education), ownership (federal/state/private),
+      state, an official regulatory or JAMB code, source_url, last_verified_at
+- [ ] Periodic re-verification workflow so curated data doesn't silently go stale
 - [ ] User-submitted "school not listed" request flow
 - [ ] Admin verification workflow for submitted schools
 
@@ -149,3 +159,15 @@
 - [ ] Marketplace for academic materials
 - [ ] AI-assisted search
 - [ ] Nationwide academic knowledge graph
+
+## Platform Improvements (Future)
+- [ ] OpenAPI schema and interactive API docs (drf-spectacular or similar), useful
+      internally and as groundwork for the planned public API
+- [ ] Admin action audit log (who resolved which report, who suspended which user)
+- [ ] Answer edit history, so a heavily-edited answer's original context isn't lost
+- [ ] Lightweight contributor recognition (e.g. a visible count of best-answers given),
+      framed as quality signal, not a leaderboard or engagement mechanic, consistent
+      with Knowledge Over Social Activity
+- [ ] Bulk data import tooling to support the school directory curation effort above
+- [ ] Celery-backed background tasks for email and notification delivery, so a slow
+      SMTP call never blocks an API response

@@ -70,6 +70,14 @@ Pending your verification before considered final.
 - Structured console logging added (LOGGING dict in base.py)
 - Health check endpoint upgraded to verify real database and cache connectivity,
   not just process liveness
+- Custom handler404/handler500 at the project urls level, so unmatched API routes
+  and uncaught production errors return the documented {"error": "..."} JSON shape
+  instead of Django's default HTML error pages. Non-api paths (like /admin/) still
+  get Django's normal error pages.
+- seed_demo_data management command (apps.core), a custom script rather than a
+  Faker dependency, populates schools, hubs, departments, questions across all
+  three statuses, answers, votes, comments, tags, and a sample report, including
+  deliberate empty-state and pending-request scenarios for frontend testing.
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -149,9 +157,13 @@ Pending your verification before considered final.
   HTTP methods should count against a scoped rate
 
 ## Known Deviations From Docs
-- None of this affects the four core docs, it's infrastructure, nor API behavior.
-  No sync needed for this pass.
+- The 404 fix means unmatched routes now honor api-contract.md's documented
+  404 shape more completely than before, this is a genuine gap-closing fix,
+  not a new deviation, worth a one-line mention at the next docs sync.
+
 
 ## Next Immediate Step
-None currently queued. Cloudinary media storage is noted for whenever school
-logos or similar media become a real requirement, not built now.
+Frontend build, starting in a new chat, Next.js decided as the framework. School
+list acquisition (real data sourcing from NUC/NBTE/NCCE) and the extended School
+schema remain queued as future work, not blocking frontend development, since the
+seed command already provides realistic demo data to build against.

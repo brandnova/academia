@@ -25,5 +25,8 @@ shell:
 superuser:
 	python manage.py createsuperuser
 
+seed:
+	python manage.py seed_demo_data
+
 test:
 	python manage.py test

@@ -1,5 +1,21 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.http import JsonResponse
+from django.urls import include, path
+from django.views.defaults import page_not_found
+
+
+def custom_404_handler(request, exception=None):
+    if request.path.startswith("/api/"):
+        return JsonResponse({"error": "Resource not found"}, status=404)
+    return page_not_found(request, exception)
+
+
+def custom_500_handler(request):
+    return JsonResponse({"error": "An unexpected error occurred"}, status=500)
+
+
+handler404 = custom_404_handler
+handler500 = custom_500_handler
 
 urlpatterns = [
     path("admin/", admin.site.urls),
