@@ -790,42 +790,45 @@
 </ul>
 <h2 id="search">Search</h2>
 <ul>
-<li>[ ] Search questions (title + body)</li>
-<li>[ ] Search by school</li>
-<li>[ ] Search by department</li>
-<li>[ ] Search by tags</li>
-<li>[ ] Search results ranking (solved &gt; highly voted &gt; recent &gt; relevance)</li>
+<li>[x] Search questions (title + body)</li>
+<li>[x] Search by school</li>
+<li>[x] Search by department</li>
+<li>[x] Search by tags</li>
+<li>[x] Search results ranking (solved &gt; highly voted &gt; recent &gt; relevance)</li>
 </ul>
 <h2 id="notifications">Notifications</h2>
 <ul>
 <li>[ ] Email notifications for major actions</li>
-<li>[ ] New answer notification</li>
-<li>[ ] School hub activation</li>
-<li>[ ] School submission request approved</li>
+<li>[x] New answer notification</li>
+<li>[x] School hub activation</li>
+<li>[ ] School submission request approved (no SchoolSubmission model yet, future)</li>
 <li>[ ] In-app notifications for major actions</li>
-<li>[ ] New answer notification</li>
-<li>[ ] New comment notification</li>
-<li>[ ] Best answer selected notification</li>
-<li>[ ] Vote received notification</li>
-<li>[ ] Moderator assigned notification</li>
-<li>[ ] Hub activated notification</li>
+<li>[x] New answer notification</li>
+<li>[x] New comment notification</li>
+<li>[x] Best answer selected notification</li>
+<li>[x] Vote received notification</li>
+<li>[ ] Moderator assigned notification (assignment endpoint exists since Phase 14,
+        no notification trigger wired to it yet)</li>
+<li>[x] Hub activated notification</li>
 </ul>
 <h2 id="moderation">Moderation</h2>
 <ul>
-<li>[ ] Report content (spam/abuse/misinformation/duplicate)</li>
-<li>[ ] View unanswered questions (moderator only)</li>
-<li>[ ] Escalate content to admin</li>
-<li>[ ] Reports dashboard (admin only)</li>
-<li>[ ] Resolve reports (admin only)</li>
+<li>[x] Report content (spam/abuse/misinformation/duplicate)</li>
+<li>[x] View unanswered questions (moderator only, scoped to assigned hubs)</li>
+<li>[ ] Escalate content to admin (no dedicated escalate action exists; moderators
+      currently use the same Report pipeline as any other user)</li>
+<li>[x] Reports dashboard (admin only)</li>
+<li>[x] Resolve reports (admin only)</li>
 </ul>
 <h2 id="administration">Administration</h2>
 <ul>
 <li>[x] Manage schools (create/edit/soft-delete via is_active)</li>
 <li>[x] Approve hub activation requests</li>
-<li>[ ] Assign moderators</li>
-<li>[ ] Assign school representatives</li>
-<li>[ ] View reports</li>
-<li>[ ] Manage users (view/suspend)</li>
+<li>[x] Assign moderators</li>
+<li>[x] Assign school representatives</li>
+<li>[x] View reports</li>
+<li>[x] Manage users (view/suspend; promoting or demoting admin status is not part
+      of this endpoint)</li>
 </ul>
 <h2 id="user-experience">User Experience</h2>
 <ul>
@@ -847,21 +850,22 @@
 </ul>
 <h2 id="search-future">Search (Future)</h2>
 <ul>
-<li>[ ] Full-text search</li>
-<li>[ ] Search answers</li>
+<li>[ ] Search answers directly, not just questions</li>
+<li>[ ] Precomputed search index (stored tsvector column, GIN index)</li>
 <li>[ ] Elasticsearch/OpenSearch integration</li>
 </ul>
 <h2 id="notifications-future">Notifications (Future)</h2>
 <ul>
-<li>[ ] In-app notification list</li>
 <li>[ ] Push notifications</li>
-<li>[ ] Notification read/unread status</li>
+<li>[ ] Moderator assigned notification trigger</li>
+<li>[ ] School submission approved notification trigger</li>
 </ul>
 <h2 id="moderation-future">Moderation (Future)</h2>
 <ul>
 <li>[ ] Content deletion (moderators)</li>
 <li>[ ] User management (moderators)</li>
 <li>[ ] Flag capabilities (moderators)</li>
+<li>[ ] Dedicated escalate-to-admin action, distinct from the general report pipeline</li>
 </ul>
 <h2 id="school-reviews-future">School Reviews (Future)</h2>
 <ul>

@@ -627,10 +627,19 @@
 <li>Recent content</li>
 <li>Relevance to search terms</li>
 </ol>
+<h3 id="current-implementation">Current Implementation</h3>
+<p>Full-text search is implemented using PostgreSQL's built-in search capabilities
+(SearchVector across title and body, weighted so title matches rank higher, and
+SearchRank for relevance scoring), computed per query rather than against a
+precomputed index. This is adequate at current data volume and requires no
+additional infrastructure.</p>
 <h3 id="future-enhancements">Future Enhancements</h3>
 <ul>
-<li>Full-text search</li>
-<li>Elasticsearch/OpenSearch integration</li>
+<li>Search answers directly, not just questions</li>
+<li>A precomputed search index (stored tsvector column with a GIN index) once query
+  volume or dataset size makes per-query computation too slow</li>
+<li>Elasticsearch/OpenSearch integration if search needs outgrow what PostgreSQL
+  full-text search can comfortably provide</li>
 </ul>
 <hr />
 <h2 id="moderation-philosophy">Moderation Philosophy</h2>
@@ -656,6 +665,19 @@
 - Misinformation
 - Duplicate questions</p>
 <p>Reports are reviewed by administrators. Moderators can escalate content they encounter.</p>
+<hr />
+<h2 id="rate-limiting">Rate Limiting</h2>
+<p>To protect the platform from abuse and keep it usable for everyone, API requests
+are rate limited. Two layers apply:</p>
+<ul>
+<li>A general baseline (100 requests per minute) applies to all API traffic, tracked
+  separately for authenticated users and anonymous requests.</li>
+<li>Specific write-heavy actions have their own tighter, documented limits (see
+  api-contract.md's Rate Limits table), which replace the general baseline for that
+  specific action rather than stacking on top of it.</li>
+</ul>
+<p>Exceeding a limit returns a 429 response with a clear error message, never a silent
+failure or a generic server error.</p>
 <hr />
 <h2 id="roles-and-responsibilities">Roles and Responsibilities</h2>
 <h3 id="user">User</h3>
@@ -689,7 +711,14 @@
 - Approve hub activations
 - Assign representatives
 - Review reports
-- Oversee the health of the platform as a whole</p>
+- Oversee the health of the platform as a whole
+- View and suspend user accounts (promoting or demoting admin status is handled
+  separately, outside this baseline suspension capability)</p>
+<p>Administrators implicitly have the same permissions as a School Representative or
+Moderator for any hub, in addition to whatever is granted by explicit assignments.
+This follows directly from Platform Ownership: an admin who can already approve hub
+activations and manage schools outright should not be blocked from doing what a
+representative or moderator can do.</p>
 <hr />
 <h2 id="api-versioning-public-api-strategy">API Versioning &amp; Public API Strategy</h2>
 <p>The API is namespaced under <code>/api/v1/</code> from day one, even though no external consumer exists yet. This avoids a breaking migration later.</p>
