@@ -1,11 +1,13 @@
+from django.conf import settings
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
-from django.db.models import Case, FloatField, IntegerField, Value, When
+from django.db.models import Case, FloatField, IntegerField, Max, Value, When
 from django.db.models.functions import Coalesce
-from django.db.models import Max
 from rest_framework.permissions import AllowAny
-from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, UserRateThrottle
+from rest_framework.views import APIView
 
+from apps.core.cache import get_cached, make_query_cache_key, set_cached
 from apps.questions.models import Question
 
 from .pagination import SearchPagination
@@ -18,6 +20,11 @@ class SearchQuestionsView(APIView):
     throttle_scope = "search"
 
     def get(self, request):
+        cache_key = make_query_cache_key("search-questions", request)
+        cached = get_cached(cache_key)
+        if cached is not None:
+            return Response(cached)
+
         q = request.query_params.get("q", "").strip()
         queryset = Question.objects.select_related("author", "hub__school", "department")
 
@@ -60,4 +67,7 @@ class SearchQuestionsView(APIView):
         paginator = SearchPagination()
         page = paginator.paginate_queryset(queryset, request)
         serializer = SearchQuestionSerializer(page, many=True)
-        return paginator.get_paginated_response(serializer.data)
+        response_data = paginator.get_paginated_response(serializer.data).data
+
+        set_cached(cache_key, response_data, settings.CACHE_TTL_SEARCH)
+        return Response(response_data)

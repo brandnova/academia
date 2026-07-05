@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -7,6 +8,14 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from apps.core.cache import (
+    cache_get_response,
+    get_cached,
+    invalidate_key,
+    invalidate_prefix,
+    make_cache_key,
+    set_cached,
+)
 from apps.core.permissions import IsPlatformAdmin
 from .models import Department, School
 from .pagination import SchoolPagination
@@ -53,10 +62,15 @@ class SchoolListCreateView(generics.ListCreateAPIView):
 
         return queryset
 
+    @cache_get_response("school-list", timeout_setting="CACHE_TTL_SHORT")
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
     def create(self, request, *args, **kwargs):
         write_serializer = self.get_serializer(data=request.data)
         write_serializer.is_valid(raise_exception=True)
         school = write_serializer.save()
+        invalidate_prefix("school-list")
         return Response(SchoolDetailSerializer(school).data, status=status.HTTP_201_CREATED)
 
 
@@ -82,11 +96,25 @@ class SchoolDetailView(generics.RetrieveUpdateAPIView):
         except Http404:
             raise NotFound("School not found")
 
+    def retrieve(self, request, *args, **kwargs):
+        school_id = kwargs.get("school_id")
+        cache_key = make_cache_key("school-detail", school_id)
+        cached = get_cached(cache_key)
+        if cached is not None:
+            return Response(cached)
+
+        response = super().retrieve(request, *args, **kwargs)
+        if response.status_code == 200:
+            set_cached(cache_key, response.data, settings.CACHE_TTL_MEDIUM)
+        return response
+
     def patch(self, request, *args, **kwargs):
         school = self.get_object()
         write_serializer = self.get_serializer(school, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         school = write_serializer.save()
+        invalidate_key(make_cache_key("school-detail", school.id))
+        invalidate_prefix("school-list")
         return Response(SchoolDetailSerializer(school).data)
 
 
@@ -123,6 +151,7 @@ class DepartmentListCreateView(APIView):
                 {"name": ["A department with this name already exists for this school."]},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+        invalidate_key(make_cache_key("school-detail", school.id))
         return Response(DepartmentSerializer(department).data, status=status.HTTP_201_CREATED)
 
 
@@ -146,4 +175,5 @@ class DepartmentDetailView(APIView):
         write_serializer = DepartmentUpdateSerializer(department, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         department = write_serializer.save()
+        invalidate_key(make_cache_key("school-detail", department.school_id))
         return Response(DepartmentSerializer(department).data)

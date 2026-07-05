@@ -40,6 +40,37 @@ concerns rather than a feature slice.
   search, report creation). 429 responses normalized to the documented
   {"error": "Rate limit exceeded..."} shape.
 
+
+## Production Readiness Pass (Post-MVP)
+Not a numbered phase, infrastructure work following the completed 15-phase MVP.
+Pending your verification before considered final.
+
+### Added
+- django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
+  localhost:3000 for local Next.js dev, no credentials (bearer tokens, not cookies)
+- Redis caching via django-redis, REDIS_URL env-driven, falls back automatically to
+  LocMemCache when unset. IGNORE_EXCEPTIONS=True means Redis outages fail open
+  (throttling stops blocking, cached views just recompute) rather than crashing
+- DRF throttle cache now backed by the same Redis/LocMem cache automatically
+- View-level caching added to Schools (list, detail), Hubs (detail, by-school), Tags
+  (list), and Search, all public non-personalized read endpoints. Deliberately NOT
+  added to Questions, Answers, Comments, or Notifications, live content and
+  view-count-incrementing endpoints should not be cached
+- Cache invalidation is precise for detail views (School, Hub) via direct key
+  deletion on write; list/search caches rely on short TTLs only (best-effort
+  delete_pattern invalidation via django-redis when available, silent no-op on
+  LocMem fallback)
+- DATABASE_URL support added alongside the existing discrete DATABASE_* vars, for
+  compatibility with hosted Postgres providers that issue a single connection string
+- Production settings hardened: SECURE_PROXY_SSL_HEADER (required behind PaaS
+  reverse proxies like PythonAnywhere), SECURE_SSL_REDIRECT, HSTS, secure cookies,
+  CSRF_TRUSTED_ORIGINS, all env-configurable
+- whitenoise added for static file serving, portable across PythonAnywhere and any
+  future VPS
+- Structured console logging added (LOGGING dict in base.py)
+- Health check endpoint upgraded to verify real database and cache connectivity,
+  not just process liveness
+
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
 - Report/Notification use Django ContentType (GenericForeignKey), not string fields
@@ -79,6 +110,13 @@ concerns rather than a feature slice.
 - Scoped write-action throttles (question_create, answer_create, etc.) replace the
   general 100/min limit for that specific action rather than stacking with it; GET
   requests on the same endpoints are unaffected by the write-scoped throttle
+- Caching philosophy: cache structural/directory data (schools, hubs, tags), never
+  cache live Q&A content or anything with a side effect on read (view_count)
+  or personalized output (notifications)
+- Redis failures fail open, not closed. Prioritizing uptime over strict rate-limit
+  enforcement or cache freshness during a Redis outage
+- gunicorn added to requirements for VPS portability, even though PythonAnywhere
+  uses its own WSGI dispatch rather than gunicorn directly
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -111,12 +149,9 @@ concerns rather than a feature slice.
   HTTP methods should count against a scoped rate
 
 ## Known Deviations From Docs
-(none, everything logged through Phase 15 is being folded into the docs sync
-alongside this BUILD_LOG update)
+- None of this affects the four core docs, it's infrastructure, nor API behavior.
+  No sync needed for this pass.
 
 ## Next Immediate Step
-CORS configuration and general production-readiness prep (not a numbered phase):
-django-cors-headers setup for cross-origin frontend consumption, environment-based
-CORS allowlist, review of production settings (SECURE_* flags, ALLOWED_HOSTS,
-static file serving strategy), and a pass over anything else needed before this
-backend can be safely pointed at by a real frontend deployment.
+None currently queued. Cloudinary media storage is noted for whenever school
+logos or similar media become a real requirement, not built now.

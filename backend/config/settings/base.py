@@ -1,4 +1,6 @@
+from datetime import timedelta
 from pathlib import Path
+
 import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -21,6 +23,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "corsheaders",
     "apps.core",
     "apps.accounts",
     "apps.schools",
@@ -34,10 +37,10 @@ INSTALLED_APPS = [
     "apps.reports",
 ]
 
-AUTH_USER_MODEL = "accounts.User"
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -66,16 +69,65 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DATABASE_NAME"),
-        "USER": env("DATABASE_USER"),
-        "PASSWORD": env("DATABASE_PASSWORD"),
-        "HOST": env("DATABASE_HOST", default="localhost"),
-        "PORT": env("DATABASE_PORT", default="5432"),
+# Database: DATABASE_URL is preferred (most free hosted Postgres providers
+# give you one connection string, often including ?sslmode=require). Falls
+# back to discrete DATABASE_* vars if DATABASE_URL isn't set.
+DATABASE_URL = env("DATABASE_URL", default=None)
+
+if DATABASE_URL:
+    DATABASES = {"default": env.db_url("DATABASE_URL")}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": env("DATABASE_NAME"),
+            "USER": env("DATABASE_USER"),
+            "PASSWORD": env("DATABASE_PASSWORD"),
+            "HOST": env("DATABASE_HOST", default="localhost"),
+            "PORT": env("DATABASE_PORT", default="5432"),
+        }
     }
-}
+
+DATABASES["default"]["CONN_MAX_AGE"] = env.int("DATABASE_CONN_MAX_AGE", default=60)
+
+# Cache: Redis when REDIS_URL is set, local in-memory fallback otherwise.
+# IGNORE_EXCEPTIONS means that if Redis becomes unreachable at runtime
+# (network blip, provider outage), cache reads/writes silently no-op instead
+# of raising. Practically this means: throttling fails open (requests are
+# allowed rather than the site breaking), and cached views just recompute on
+# every request. Availability is prioritized over strict cache correctness.
+REDIS_URL = env("REDIS_URL", default=None)
+
+if REDIS_URL:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                "IGNORE_EXCEPTIONS": True,
+            },
+        }
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "academia-locmem",
+        }
+    }
+
+CACHE_TTL_SHORT = env.int("CACHE_TTL_SHORT", default=60)
+CACHE_TTL_MEDIUM = env.int("CACHE_TTL_MEDIUM", default=300)
+CACHE_TTL_SEARCH = env.int("CACHE_TTL_SEARCH", default=30)
+
+# CORS: bearer-token auth (not cookies), so credentials stay False. Origins
+# are env-driven so the Vercel frontend domain can be added without a code
+# change; localhost:3000 is the default for local Next.js dev.
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localhost:3000"])
+CORS_ALLOW_CREDENTIALS = False
+
+AUTH_USER_MODEL = "accounts.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -119,12 +171,25 @@ REST_FRAMEWORK = {
     },
 }
 
-from datetime import timedelta  # add near the top of the file with other imports
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {"format": "[{levelname}] {asctime} {name}: {message}", "style": "{"},
+    },
+    "handlers": {
+        "console": {"class": "logging.StreamHandler", "formatter": "simple"},
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": env("DJANGO_LOG_LEVEL", default="INFO"),
+    },
 }

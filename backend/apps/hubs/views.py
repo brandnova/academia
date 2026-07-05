@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.accounts.models import User
+from apps.core.cache import get_cached, invalidate_key, invalidate_prefix, make_cache_key, set_cached
 from apps.core.permissions import IsPlatformAdmin
 from apps.notifications.models import Notification
 from apps.notifications.services import notify
@@ -24,6 +25,12 @@ from .serializers import (
 )
 
 
+def _invalidate_hub_cache(hub):
+    invalidate_key(make_cache_key("hub-detail", hub.id))
+    invalidate_key(make_cache_key("hub-by-school", hub.school_id))
+    invalidate_key(make_cache_key("school-detail", hub.school_id))
+
+
 class HubDetailView(generics.RetrieveAPIView):
     queryset = Hub.objects.filter(is_active=True)
     serializer_class = HubDetailSerializer
@@ -37,16 +44,36 @@ class HubDetailView(generics.RetrieveAPIView):
         except Http404:
             raise NotFound("Hub not found")
 
+    def retrieve(self, request, *args, **kwargs):
+        hub_id = kwargs.get("hub_id")
+        cache_key = make_cache_key("hub-detail", hub_id)
+        cached = get_cached(cache_key)
+        if cached is not None:
+            return Response(cached)
+
+        response = super().retrieve(request, *args, **kwargs)
+        if response.status_code == 200:
+            set_cached(cache_key, response.data, settings.CACHE_TTL_SHORT)
+        return response
+
 
 class HubBySchoolView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, school_id):
+        cache_key = make_cache_key("hub-by-school", school_id)
+        cached = get_cached(cache_key)
+        if cached is not None:
+            return Response(cached)
+
         try:
             hub = Hub.objects.get(school_id=school_id, is_active=True)
         except (Hub.DoesNotExist, ValueError):
             raise NotFound("Hub not found for this school")
-        return Response(HubDetailSerializer(hub).data)
+
+        data = HubDetailSerializer(hub).data
+        set_cached(cache_key, data, settings.CACHE_TTL_SHORT)
+        return Response(data)
 
 
 class HubActivationRequestListCreateView(generics.ListCreateAPIView):
@@ -107,6 +134,9 @@ class ApproveActivationRequestView(APIView):
         activation_request.reviewed_by = request.user
         activation_request.reviewed_at = timezone.now()
         activation_request.save(update_fields=["status", "reviewed_by", "reviewed_at", "updated_at"])
+
+        _invalidate_hub_cache(hub)
+        invalidate_prefix("school-list")
 
         notify(
             user=activation_request.user,
@@ -208,6 +238,7 @@ class HubModeratorListCreateView(APIView):
         else:
             assignment = ModeratorAssignment.objects.create(hub=hub, user=target_user)
 
+        _invalidate_hub_cache(hub)
         return Response(ModeratorAssignmentSerializer(assignment).data, status=status.HTTP_201_CREATED)
 
 
@@ -230,6 +261,7 @@ class HubModeratorDetailView(APIView):
 
         assignment.is_active = False
         assignment.save(update_fields=["is_active", "updated_at"])
+        _invalidate_hub_cache(hub)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
