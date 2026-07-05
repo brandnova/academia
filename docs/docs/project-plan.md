@@ -238,9 +238,19 @@ Search is the most important feature on the platform.
 3. Recent content
 4. Relevance to search terms
 
+### Current Implementation
+Full-text search is implemented using PostgreSQL's built-in search capabilities
+(SearchVector across title and body, weighted so title matches rank higher, and
+SearchRank for relevance scoring), computed per query rather than against a
+precomputed index. This is adequate at current data volume and requires no
+additional infrastructure.
+
 ### Future Enhancements
-- Full-text search
-- Elasticsearch/OpenSearch integration
+- Search answers directly, not just questions
+- A precomputed search index (stored tsvector column with a GIN index) once query
+  volume or dataset size makes per-query computation too slow
+- Elasticsearch/OpenSearch integration if search needs outgrow what PostgreSQL
+  full-text search can comfortably provide
 
 ---
 
@@ -268,6 +278,22 @@ Users can report:
 - Duplicate questions
 
 Reports are reviewed by administrators. Moderators can escalate content they encounter.
+
+---
+
+## Rate Limiting
+
+To protect the platform from abuse and keep it usable for everyone, API requests
+are rate limited. Two layers apply:
+
+- A general baseline (100 requests per minute) applies to all API traffic, tracked
+  separately for authenticated users and anonymous requests.
+- Specific write-heavy actions have their own tighter, documented limits (see
+  api-contract.md's Rate Limits table), which replace the general baseline for that
+  specific action rather than stacking on top of it.
+
+Exceeding a limit returns a 429 response with a clear error message, never a silent
+failure or a generic server error.
 
 ---
 
@@ -314,6 +340,14 @@ Administrators:
 - Assign representatives
 - Review reports
 - Oversee the health of the platform as a whole
+- View and suspend user accounts (promoting or demoting admin status is handled
+  separately, outside this baseline suspension capability)
+
+Administrators implicitly have the same permissions as a School Representative or
+Moderator for any hub, in addition to whatever is granted by explicit assignments.
+This follows directly from Platform Ownership: an admin who can already approve hub
+activations and manage schools outright should not be blocked from doing what a
+representative or moderator can do.
 
 ---
 

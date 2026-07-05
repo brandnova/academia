@@ -1,0 +1,7 @@
+{% extends "emails/base_email.html" %}
+{% block subject %}Your answer was marked as the best answer{% endblock %}
+{% block content %}
+<p>Hi {{ recipient_name }},</p>
+<p>Good news, your answer on <strong>&ldquo;{{ question_title }}&rdquo;</strong> was marked as the best answer.</p>
+<p><a class="button" href="{{ question_url }}">View the question</a></p>
+{% endblock %}

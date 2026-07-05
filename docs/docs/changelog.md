@@ -6,6 +6,67 @@ semantic version, the project isn't published as a versioned package yet.
 Once a public API is released, that surface will carry its own /v1/,
 /v2/ versioning, tracked separately from this page.
 
+## Docs Sync, July 5, 2026
+
+A larger sync this time, closing out the originally planned 15-phase MVP
+build:
+
+- Full-text search moved from a planned feature to a documented current
+  implementation, using PostgreSQL's built-in search rather than a
+  separate search service for now.
+- Added a Rate Limiting section describing the general request limit and
+  the tighter limits on specific actions like posting or voting.
+- Documented the new user administration endpoints (view and suspend
+  accounts).
+- Clarified a few smaller details found while reviewing Phases 12 through
+  15: how duplicate reports are handled, what the search relevance score
+  actually represents, and a couple of small label inconsistencies.
+- Updated the feature checklist to reflect everything actually built so
+  far, and to be explicit about the handful of things intentionally left
+  for later (like a moderator-assignment notification and a dedicated
+  content escalation action).
+
+## Phase 15, Admin Polish, July 5, 2026
+
+Admins can now view and suspend user accounts (promoting someone to admin
+is handled separately, not part of this). Admins can't suspend their own
+account, to avoid accidental lockout. The rate limits described in the API
+documentation from early on are now actually enforced: a general limit for
+overall traffic, plus tighter limits on things like posting questions or
+voting, so a burst of activity from one source can't overwhelm the
+platform for everyone else.
+
+## Phase 14, Role Assignment, July 4, 2026
+
+School representatives can now assign and remove moderators for their hub,
+and manage their school's departments, without needing full admin access.
+Only admins can assign representatives themselves. The unanswered-questions
+queue now actually respects who's assigned to moderate which hub, rather
+than being admin-only.
+
+## Phase 13, Reports and Moderation, July 4, 2026
+
+Users can report a question, answer, or comment as spam, abuse,
+misinformation, or a duplicate. Admins can review these reports, resolve
+them (optionally removing the reported content), or reject them. You can't
+report the same piece of content twice.
+
+## Phase 12, Search, July 4, 2026
+
+Added a dedicated search endpoint for questions, using PostgreSQL's
+full-text search. Solved questions with well-voted answers rank highest,
+followed by recency and text relevance. Results can be narrowed by school,
+hub, department, or tag, alongside the search text itself.
+
+## Phase 11, Notifications, July 4, 2026
+
+Added notifications for the moments that matter most: someone answers your
+question, your answer gets marked as the best one, or your hub request
+gets approved. These arrive both in-app and by email, since students
+aren't expected to stay logged into the platform between visits. Smaller
+interactions, like a new comment or a vote, show up in-app only, to avoid
+filling inboxes with low-stakes updates.
+
 ## Docs Sync, July 4, 2026
 
 Cleaned up a few loose ends found while reviewing Phases 6 through 10:

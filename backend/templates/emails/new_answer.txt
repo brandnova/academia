@@ -1,0 +1,5 @@
+Hi {{ recipient_name }},
+
+{{ answer_author_name }} answered your question: "{{ question_title }}"
+
+View it here: {{ question_url }}

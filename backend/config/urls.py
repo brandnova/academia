@@ -11,4 +11,7 @@ urlpatterns = [
     path("api/v1/", include("apps.tags.urls")),
     path("api/v1/", include("apps.answers.urls")),
     path("api/v1/", include("apps.comments.urls")),
+    path("api/v1/", include("apps.notifications.urls")),
+    path("api/v1/", include("apps.search.urls")),
+    path("api/v1/", include("apps.reports.urls")),
 ]

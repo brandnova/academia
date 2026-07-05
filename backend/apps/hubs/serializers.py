@@ -3,7 +3,7 @@ from rest_framework import serializers
 from apps.accounts.models import User
 from apps.schools.models import Department, School
 
-from .models import Hub, HubActivationRequest
+from .models import Hub, HubActivationRequest, ModeratorAssignment, SchoolRepresentativeAssignment
 
 
 class SchoolMiniSerializer(serializers.ModelSerializer):
@@ -88,3 +88,33 @@ class HubActivationRequestCreateSerializer(serializers.ModelSerializer):
             user=self.context["request"].user,
             notes=validated_data.get("notes"),
         )
+
+
+class AssignmentUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "full_name", "avatar"]
+
+
+class ModeratorAssignmentSerializer(serializers.ModelSerializer):
+    user = AssignmentUserSerializer(read_only=True)
+    hub = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ModeratorAssignment
+        fields = ["id", "user", "hub", "is_active", "created_at"]
+
+    def get_hub(self, obj):
+        return {"id": str(obj.hub_id)}
+
+
+class RepresentativeAssignmentSerializer(serializers.ModelSerializer):
+    user = AssignmentUserSerializer(read_only=True)
+    hub = serializers.SerializerMethodField()
+
+    class Meta:
+        model = SchoolRepresentativeAssignment
+        fields = ["id", "user", "hub", "is_active", "created_at"]
+
+    def get_hub(self, obj):
+        return {"id": str(obj.hub_id)}

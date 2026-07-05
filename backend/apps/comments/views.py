@@ -4,8 +4,11 @@ from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, UserRateThrottle
 
 from apps.answers.models import Answer
+from apps.notifications.models import Notification
+from apps.notifications.services import notify
 
 from .models import Comment
 from .pagination import CommentPagination
@@ -14,11 +17,23 @@ from .serializers import CommentCreateSerializer, CommentSerializer, CommentUpda
 
 class CommentCreateView(APIView):
     permission_classes = [IsAuthenticated]
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, ScopedRateThrottle]
+    throttle_scope = "comment_create"
 
     def post(self, request):
         write_serializer = CommentCreateSerializer(data=request.data, context={"request": request})
         write_serializer.is_valid(raise_exception=True)
         comment = write_serializer.save()
+
+        answer = comment.answer
+        if answer.author_id != comment.author_id:
+            notify(
+                user=answer.author,
+                notification_type=Notification.Type.NEW_COMMENT,
+                message=f"{comment.author.full_name} commented on your answer",
+                content_object=answer,
+            )
+
         return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
 
 

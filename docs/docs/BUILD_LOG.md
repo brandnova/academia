@@ -1,43 +1,44 @@
 # BUILD LOG
 
 ## Current Phase
-Phase 10, Best Answer / Question Lifecycle (complete, confirmed)
+Phase 15, Admin Polish (complete, confirmed). This closes the originally planned MVP
+phase roadmap. CORS setup and production-readiness prep are next, tracked as
+unnumbered follow-up work rather than a new phase, since they are infrastructure
+concerns rather than a feature slice.
 
 ## Completed Phases
 - Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
   PostgreSQL connected via django-environ, health-check endpoint live at /api/v1/health/.
-- Phase 1: Custom User model (apps.accounts) on UUID PK, email-based auth. Google OAuth
-  verified via Google's userinfo endpoint (not allauth). JWT issued via SimpleJWT with
-  refresh rotation and blacklist. Endpoints: /api/v1/auth/google/, /api/v1/auth/refresh/,
-  /api/v1/auth/logout/, /api/v1/users/me/ (GET/PATCH).
-- Phase 2: School model (apps.schools) with verification_status field. List/search/detail
-  endpoints public; create/update admin-only via IsPlatformAdmin permission. Global
-  error-response normalizer added (apps.core.exceptions).
-- Phase 3: Department model in apps.schools. List (public) + create/update (admin-only)
-  scoped under School. Soft-delete via is_active.
-- Phase 4: Hub + HubActivationRequest models in apps.hubs. GET hub by id and by school
-  (public). Activation request create/list/approve/reject. has_hub wired to real data.
-- Phase 5: Question model in apps.questions, view count incrementing, author-only
-  edit/delete, filtering by hub/department/status/search, ordering. Hub and Department
-  question counts wired to real data.
-- Phase 6: Tag and QuestionTag models in apps.tags, tags normalized to lowercase,
-  deduplicated on save, fully wired into question create/update/list/detail.
-- Phase 7: Answer model in apps.answers, create (auth, blocked on SOLVED questions),
-  author-only edit/delete, auto-transition Question OPEN to ANSWERED on first answer.
-  Question.answer_count, best_answer_id, and nested answers array wired to real data.
-  Question status reverts to OPEN when its last remaining answer is deleted.
-- Phase 8: AnswerVote model in apps.answers. Vote/remove-vote endpoints, vote_score
-  maintained via targeted F() updates. Self-voting and duplicate voting blocked.
-- Phase 9: Comment model in apps.comments, scoped to Answer, author-only edit/delete.
-  Answer.comment_count wired to real data.
-- Phase 10: Mark-best-answer endpoint in apps.answers, question-owner-only, transitions
-  question to SOLVED, allows switching best answer between answers on the same question,
-  blocks only re-marking the same answer already best. Extended the Phase 7 delete-revert
-  logic: deleting the best answer while other answers remain now reverts status from
-  SOLVED to ANSWERED (previously only the "zero answers left" case reverted to OPEN),
-  keeping status and best_answer_id from ever contradicting each other. Added
-  GET /answers/{answer_id}/comments/ (public, paginated), closing a real gap:
-  api-contract.md never documented any way to list/view comments before this.
+- Phase 1: Custom User model, Google OAuth via direct userinfo endpoint (not django-allauth),
+  SimpleJWT with refresh rotation and blacklisting.
+- Phase 2: School model with soft-delete and verification_status, admin-only create/update,
+  global error-response normalizer in apps.core.exceptions.
+- Phase 3: Department as sub-resource of School in apps.schools.
+- Phase 4: Hub and HubActivationRequest in apps.hubs, full activation workflow, has_hub
+  wired to real data.
+- Phase 5: Question model in apps.questions, view count via targeted update, author-only
+  edit/delete, tags accepted but stubbed.
+- Phase 6: Tag and QuestionTag in apps.tags, lowercase normalization, deduplication,
+  fully wired into questions.
+- Phase 7: Answer model, auto-transition Question OPEN to ANSWERED, status revert to
+  OPEN when last answer deleted.
+- Phase 8: AnswerVote with F() expression updates, self-vote and duplicate-vote blocking.
+- Phase 9: Comment model in apps.comments, comment_count wired.
+- Phase 10: Mark-best-answer endpoint, delete-revert logic, GET /answers/{id}/comments/.
+- Phase 11: Notification model with mindful email/in-app channel policy, MailHog wired.
+- Phase 12: Postgres full-text search endpoint, solved then vote then recency then
+  relevance ordering.
+- Phase 13: Report model using Django ContentType, generic across Question/Answer/Comment,
+  admin-only resolve/reject workflow.
+- Phase 14: ModeratorAssignment and SchoolRepresentativeAssignment models, representative
+  and moderator scoped permissions, unanswered queue scoped to real assignments.
+- Phase 15: Admin user management (list/detail/suspend, view-and-suspend scope only, no
+  promote/demote here), self-suspension blocked. Rate limiting from api-contract.md's
+  documented table now actually enforced via DRF throttling: global 100/min default for
+  both anonymous and authenticated requests, plus tighter scoped throttles on specific
+  write actions (auth, question creation, answer creation, comment creation, voting,
+  search, report creation). 429 responses normalized to the documented
+  {"error": "Rate limit exceeded..."} shape.
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -46,7 +47,8 @@ Phase 10, Best Answer / Question Lifecycle (complete, confirmed)
 - Django 6.0.6 on Python 3.12, psycopg3 as DB driver
 - Settings split into config/settings/{base,development,production}.py, env vars via django-environ
 - App code lives under apps/ (apps.core, apps.accounts, apps.schools, apps.hubs,
-  apps.questions, apps.tags, apps.answers, apps.comments so far)
+  apps.questions, apps.tags, apps.answers, apps.comments, apps.notifications,
+  apps.search, apps.reports so far)
 - Backend is a pure API, no server-rendered product pages; frontend framework left fully open
 - Google auth verified by calling Google's userinfo endpoint with the client-supplied
   access_token, instead of django-allauth's full social-auth flow
@@ -54,23 +56,29 @@ Phase 10, Best Answer / Question Lifecycle (complete, confirmed)
   across all future apps
 - School/Department "delete" is soft-delete via is_active through PATCH
 - Sub-resources with no independent lifecycle live in their owning app; sub-resources
-  owning further children (Hub, Question, Tag, Answer) each get their own app
-- Question view_count increments via a targeted .update() call, not a full .save()
+  owning further children each get their own app
 - Fields for not-yet-built relations are implemented as model properties returning safe
   stub values so API response shape never changes when the real feature lands
 - Tag names normalized to lowercase everywhere
-- Answering a SOLVED question returns 400 (field-keyed "question" error), not 403 as
-  api-contract.md currently labels it, matches the actual 400-shaped body already
-  documented there (same label/body mismatch pattern fixed for hub_id earlier)
 - Question status reverts to OPEN when its answer count drops to zero, and to ANSWERED
-  when its best answer specifically is deleted but other answers remain, so status and
-  best_answer_id never contradict each other
-- Question status is never settable directly via PATCH; it only changes as a side effect
-  of answering, marking best, or deleting answers
-- Marking a different answer as best is allowed and transfers the flag; only marking the
-  same answer that is already best is blocked
-- Comments are viewable via a dedicated GET /answers/{answer_id}/comments/ endpoint,
-  not nested inside the question/answer payload, to avoid bloating every question fetch
+  when its best answer specifically is deleted but other answers remain
+- Notification channel policy: email reserved for actions worth pulling a user back to
+  the platform, everything else stays in-app only
+- Search ranking priority is solved status, then vote score, then recency, then relevance
+- A user cannot report the same content twice regardless of the earlier report's status
+- Platform admins implicitly satisfy any representative or moderator permission check
+- Moderator and representative assignment removal is soft-delete via is_active
+- Admin user management is view-and-suspend only in this phase, no is_admin
+  promotion/demotion endpoint, to avoid building a privilege-escalation surface in the
+  same pass as basic suspension
+- An admin cannot suspend their own account, a safeguard to prevent accidental lockout,
+  not documented anywhere before this phase
+- Rate limit throttle cache uses Django's default LocMemCache, fine for local dev and
+  single-process testing, will need a shared cache (Redis) once running multiple
+  workers in production, since per-process counters would otherwise disagree
+- Scoped write-action throttles (question_create, answer_create, etc.) replace the
+  general 100/min limit for that specific action rather than stacking with it; GET
+  requests on the same endpoints are unaffected by the write-scoped throttle
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -81,7 +89,8 @@ Phase 10, Best Answer / Question Lifecycle (complete, confirmed)
   (page_size default 20, configurable max) matching api-contract.md's {count, next,
   previous, results} shape
 - All error responses normalized to api-contract.md's {"error": "..."} shape via
-  apps.core.exceptions.custom_exception_handler; 400s stay field-keyed
+  apps.core.exceptions.custom_exception_handler; 400s stay field-keyed, 429s also
+  normalized to the documented rate-limit error shape
 - is_admin (not is_staff) is the platform-permission flag checked by API views
 - Sub-resources tightly owned by a parent model with no independent lifecycle live in
   the parent's app; sub-resources with their own future sub-resources get their own app
@@ -89,17 +98,25 @@ Phase 10, Best Answer / Question Lifecycle (complete, confirmed)
   explicitly against request.user.id before any write
 - Cross-app model relations use related_name reverse descriptors; cross-app serializer
   references use deferred (in-method) imports to avoid circular imports
-- Aggregate/derived counts (vote_score, question_count, etc.) are recomputed via
-  targeted .update() calls rather than full model .save(), to avoid unwanted
-  side effects on unrelated fields like updated_at
-- Documentation style: no em dash character in any doc content, use commas, colons,
-  or periods instead
+- Aggregate/derived counts are recomputed via targeted .update() calls, not full .save()
+- Documentation style: no em dash character in any doc content, use commas, colons, or periods
+- Email templates live in templates/emails/, extend a shared base_email.html
+- Cross-cutting side effects (notifications) are triggered from the view layer immediately
+  after the write succeeds, not from model signals
+- Query annotations for cross-cutting ranking live in the view, not the model
+- Role-permission checks live in apps.hubs.permissions as small standalone functions,
+  reused via deferred imports across apps
+- Throttle scoping is applied per-view via throttle_classes/throttle_scope, with a
+  custom MethodScopedThrottle (apps.core.throttling) for endpoints where only specific
+  HTTP methods should count against a scoped rate
 
 ## Known Deviations From Docs
-(none, this phase's changes are being folded into the docs sync provided alongside
-this BUILD_LOG update)
+(none, everything logged through Phase 15 is being folded into the docs sync
+alongside this BUILD_LOG update)
 
 ## Next Immediate Step
-Phase 11, Notifications (Notification model via ContentType; in-app list/mark-read/
-mark-all-read; triggered on new answer, new comment, best answer selected, vote
-received, moderator assigned, hub activated)
+CORS configuration and general production-readiness prep (not a numbered phase):
+django-cors-headers setup for cross-origin frontend consumption, environment-based
+CORS allowlist, review of production settings (SECURE_* flags, ALLOWED_HOSTS,
+static file serving strategy), and a pass over anything else needed before this
+backend can be safely pointed at by a real frontend deployment.

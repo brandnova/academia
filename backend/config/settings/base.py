@@ -8,6 +8,9 @@ environ.Env.read_env(BASE_DIR / ".env")
 
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
+SITE_NAME = "Academia"
+FRONTEND_URL = env("FRONTEND_URL", default="http://localhost:3000")
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -26,6 +29,9 @@ INSTALLED_APPS = [
     "apps.tags",
     "apps.answers",
     "apps.comments",
+    "apps.notifications",
+    "apps.search",
+    "apps.reports",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
@@ -96,6 +102,21 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ],
     "EXCEPTION_HANDLER": "apps.core.exceptions.custom_exception_handler",
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "100/minute",
+        "user": "100/minute",
+        "auth": "10/minute",
+        "question_create": "30/hour",
+        "answer_create": "50/hour",
+        "comment_create": "50/hour",
+        "voting": "100/hour",
+        "search": "60/minute",
+        "reports": "10/hour",
+    },
 }
 
 from datetime import timedelta  # add near the top of the file with other imports

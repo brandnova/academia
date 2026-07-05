@@ -1,0 +1,5 @@
+Hi {{ recipient_name }},
+
+Your request to activate a hub for {{ school_name }} has been approved. The hub is now live.
+
+Visit it here: {{ hub_url }}

@@ -9,9 +9,9 @@ deprecation window once a v2 exists.
 
 ## Authentication Modes
 
-- **User auth**: JWT bearer token, obtained via the Google login flow below. Used by
+- **User auth** - JWT bearer token, obtained via the Google login flow below. Used by
   the frontend and any user-driven action.
-- **API client auth** (Future): `X-API-Key` header, used by registered third-party
+- **API client auth** (Future) - `X-API-Key` header, used by registered third-party
   consumers hitting public read-only endpoints. Not available in MVP.
 
 ---
@@ -26,19 +26,21 @@ Services, then hands that token to our backend, which verifies it by calling
 Google's own `userinfo` endpoint. This means: no client secret on the backend, no
 redirect-based OAuth dance, and a small, predictable request/response contract.
 
-### One-time setup (Google Cloud Console):
-- Create a project (or use an existing one) at console.cloud.google.com.
-- Configure the OAuth consent screen (External, testing or published as needed).
-- Create an OAuth 2.0 Client ID of type **Web application**.
-- Add your frontend's origin(s) under **Authorized JavaScript origins** (e.g. `http://localhost:3000`, and your production domain later).
-- You only need the **Client ID** on the frontend, no client secret is used anywhere in this flow.
+**One-time setup (Google Cloud Console):**
+1. Create a project (or use an existing one) at console.cloud.google.com.
+2. Configure the OAuth consent screen (External, testing or published as needed).
+3. Create an OAuth 2.0 Client ID of type **Web application**.
+4. Add your frontend's origin(s) under **Authorized JavaScript origins**
+   (e.g. `http://localhost:3000`, and your production domain later).
+5. You only need the **Client ID** on the frontend, no client secret is used
+   anywhere in this flow.
 
-### Frontend flow, step by step:
-- Load Google's Identity Services script:
+**Frontend flow, step by step:**
+1. Load Google's Identity Services script:
    `<script src="https://accounts.google.com/gsi/client" async defer></script>`
-- Initialize a token client with your Client ID and the scopes
+2. Initialize a token client with your Client ID and the scopes
    `email profile`:
-   ```js
+```js
    const client = google.accounts.oauth2.initTokenClient({
      client_id: "YOUR_CLIENT_ID.apps.googleusercontent.com",
      scope: "email profile",
@@ -46,16 +48,29 @@ redirect-based OAuth dance, and a small, predictable request/response contract.
        // tokenResponse.access_token is what you send to our backend
      },
    });
-   ```
-- On your "Sign in with Google" button click, call `client.requestAccessToken()`. This opens Google's consent popup and returns an `access_token` in the callback.
-- POST that token to our backend: `POST /api/v1/auth/google/` with body `{ "access_token": "<token_from_step_3>" }`.
-- Our backend verifies the token against Google, creates the user if this is their first login, and returns our own JWT pair (`access`/`refresh`) plus the user object, see the endpoint spec below.
-- Store the JWT pair (httpOnly cookie is preferred once you're past local dev; in-memory/localStorage is fine for early development) and attach `Authorization: Bearer <access>` to every subsequent authenticated request.
-- When a request comes back `401` because the access token expired, call `POST /api/v1/auth/refresh/` with the stored refresh token to get a new access token, see below. Note refresh tokens rotate on use, so store the new one returned each time.
-- On logout, POST the current refresh token to `/api/v1/auth/logout/` (this blacklists it server-side) and clear locally stored tokens.
+```
+3. On your "Sign in with Google" button click, call `client.requestAccessToken()`.
+   This opens Google's consent popup and returns an `access_token` in the callback.
+4. POST that token to our backend:
+   `POST /api/v1/auth/google/` with body `{ "access_token": "<token_from_step_3>" }`.
+5. Our backend verifies the token against Google, creates the user if this is their
+   first login, and returns our own JWT pair (`access`/`refresh`) plus the user
+   object, see the endpoint spec below.
+6. Store the JWT pair (httpOnly cookie is preferred once you're past local dev,
+   in-memory/localStorage is fine for early development) and attach
+   `Authorization: Bearer <access>` to every subsequent authenticated request.
+7. When a request comes back `401` because the access token expired, call
+   `POST /api/v1/auth/refresh/` with the stored refresh token to get a new access
+   token, see below. Note refresh tokens rotate on use, so store the new one
+   returned each time.
+8. On logout, POST the current refresh token to `/api/v1/auth/logout/` (this
+   blacklists it server-side) and clear locally stored tokens.
 
 This is the entire flow, there's no separate "callback URL" or server-rendered
-redirect page to build; it's a client-side popup plus one API call.
+redirect page to build, it's a client-side popup plus one API call.
+
+Login and token refresh are both rate limited to 10 requests per minute per client
+(see Rate Limits below), to slow down credential-stuffing style abuse.
 
 ### Google Login
 **Endpoint:** `POST /api/v1/auth/google/`
@@ -128,7 +143,7 @@ store whichever refresh token was most recently issued.
 
 **Response (204 No Content):** Empty
 
-Blacklists the given refresh token server-side; it can no longer be used to
+Blacklists the given refresh token server-side, it can no longer be used to
 obtain new access tokens.
 
 ---
@@ -426,6 +441,9 @@ requests from piling up before an admin reviews the first one.
 }
 ```
 
+Approving sends the requesting user a `HUB_ACTIVATED` notification (in-app and
+email).
+
 ---
 
 ### Reject Activation Request (Admin Only)
@@ -470,7 +488,7 @@ requests from piling up before an admin reviews the first one.
 
 ---
 
-### Create Department (School Representative Only)
+### Create Department (School Representative or Admin)
 **Endpoint:** `POST /api/v1/schools/{school_id}/departments/`
 
 **Request:**
@@ -483,9 +501,19 @@ requests from piling up before an admin reviews the first one.
 
 **Response (201 Created):** Same as department object above
 
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "You do not have permission to perform this action"
+}
+```
+
+Requires an active `SchoolRepresentativeAssignment` for this school's hub, or
+platform admin status.
+
 ---
 
-### Update Department (School Representative Only)
+### Update Department (School Representative or Admin)
 **Endpoint:** `PATCH /api/v1/departments/{department_id}/`
 
 **Request:**
@@ -497,6 +525,8 @@ requests from piling up before an admin reviews the first one.
 ```
 
 **Response (200 OK):** Same as department object
+
+Same permission requirement as Create Department above.
 
 ---
 
@@ -558,6 +588,8 @@ requests from piling up before an admin reviews the first one.
 
 ### Create Question
 **Endpoint:** `POST /api/v1/questions/`
+
+Rate limited to 30 requests per hour per user (see Rate Limits below).
 
 **Request:**
 ```json
@@ -698,7 +730,7 @@ back to ANSWERED or OPEN depending on what remains (see Delete Answer below).
 
 ---
 
-### Get Unanswered Questions (Moderator Only)
+### Get Unanswered Questions (Moderator or Admin)
 **Endpoint:** `GET /api/v1/questions/unanswered/`
 
 **Query Parameters:**
@@ -707,12 +739,25 @@ back to ANSWERED or OPEN depending on what remains (see Delete Answer below).
 
 **Response (200 OK):** Same as list questions, but only OPEN status
 
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "You do not have permission to view unanswered questions"
+}
+```
+
+A platform admin sees unanswered questions across every hub. A user with an active
+`ModeratorAssignment` sees only questions belonging to hub(s) they are assigned to
+moderate. A user with neither is blocked with a 403.
+
 ---
 
 ## Answers
 
 ### Create Answer
 **Endpoint:** `POST /api/v1/answers/`
+
+Rate limited to 50 requests per hour per user (see Rate Limits below).
 
 **Request:**
 ```json
@@ -751,11 +796,14 @@ back to ANSWERED or OPEN depending on what remains (see Delete Answer below).
   "body": ["This field is required."]
 }
 
-// 403 Forbidden - Question is already SOLVED
+// 400 Bad Request - Question is already SOLVED
 {
   "question": ["Cannot add answer to a solved question."]
 }
 ```
+
+Answering someone else's question sends them a `NEW_ANSWER` notification (in-app
+and email).
 
 ---
 
@@ -831,7 +879,9 @@ answer on the question, status reverts to OPEN.
 
 Marking a different answer as best on an already-solved question transfers the
 best-answer flag to the new answer and leaves the question SOLVED. Only marking the
-same answer that is already best is blocked.
+same answer that is already best is blocked. If the newly marked answer belongs to
+someone other than the question owner, they receive a `BEST_ANSWER` notification
+(in-app and email).
 
 ---
 
@@ -839,6 +889,9 @@ same answer that is already best is blocked.
 
 ### Vote on Answer
 **Endpoint:** `POST /api/v1/answers/{answer_id}/vote/`
+
+Rate limited to 100 requests per hour per user, shared with Remove Vote below (see
+Rate Limits below).
 
 **Request:**
 ```json
@@ -868,6 +921,10 @@ same answer that is already best is blocked.
   "error": "You cannot vote on your own answer"
 }
 ```
+
+Voting sends the answer's author a `VOTE` notification, in-app only, no email.
+There is no dedicated "change my vote" endpoint, remove your existing vote first,
+then vote again with the new type.
 
 ---
 
@@ -925,6 +982,8 @@ same answer that is already best is blocked.
 ### Create Comment
 **Endpoint:** `POST /api/v1/comments/`
 
+Rate limited to 50 requests per hour per user (see Rate Limits below).
+
 **Request:**
 ```json
 {
@@ -950,6 +1009,9 @@ same answer that is already best is blocked.
   "updated_at": "2026-01-01T00:00:00Z"
 }
 ```
+
+Commenting on someone else's answer sends them a `NEW_COMMENT` notification,
+in-app only, no email.
 
 ---
 
@@ -1001,6 +1063,9 @@ same answer that is already best is blocked.
 }
 ```
 
+Tag names are normalized to lowercase everywhere, on creation, search, and every
+filter, so "GPA" and "gpa" are always treated as the same tag.
+
 ---
 
 ### Get Questions by Tag
@@ -1009,7 +1074,9 @@ same answer that is already best is blocked.
 **Query Parameters:**
 - Same as list questions
 
-**Response (200 OK):** Same as list questions
+**Response (200 OK):** Same as list questions. A tag name with no matching
+questions returns `200 OK` with an empty result set, not a 404, consistent with
+how every other query-param filter on this API behaves.
 
 ---
 
@@ -1018,9 +1085,12 @@ same answer that is already best is blocked.
 ### Search Questions
 **Endpoint:** `GET /api/v1/search/questions/`
 
+Rate limited to 60 requests per minute (see Rate Limits below).
+
 **Query Parameters:**
 - `q` - Search query
 - `hub` - Filter by hub ID
+- `school` - Filter by school ID
 - `department` - Filter by department ID
 - `tag` - Filter by tag name
 - `page` - Page number
@@ -1035,7 +1105,7 @@ same answer that is already best is blocked.
       "title": "How do I calculate my CGPA?",
       "body": "...",
       "status": "SOLVED",
-      "score": 0.95,
+      "score": 0.4213,
       "author": {
         "id": "uuid",
         "full_name": "John Doe"
@@ -1057,6 +1127,12 @@ same answer that is already best is blocked.
 2. Highly voted answers
 3. Recent content
 4. Relevance to search terms
+
+`score` is a raw PostgreSQL `ts_rank` value, higher means more textually relevant,
+but it has no fixed upper bound (it is not a normalized 0 to 1 percentage). It is
+`null` whenever `q` is omitted, since relevance has no meaning without a query to
+rank against, in that case results still return, ordered by the first three
+ranking priorities above.
 
 ---
 
@@ -1092,6 +1168,11 @@ same answer that is already best is blocked.
 ContentType-based generic relation (see database-schema.md), the JSON shape
 doesn't change even as new notifiable models are added.
 
+**Notification types currently triggered:** `NEW_ANSWER` (email and in-app),
+`BEST_ANSWER` (email and in-app), `HUB_ACTIVATED` (email and in-app),
+`NEW_COMMENT` (in-app only), `VOTE` (in-app only). `MODERATOR_ASSIGNED` exists as
+a type but has no trigger wired to it yet.
+
 ---
 
 ### Mark Notification as Read
@@ -1102,6 +1183,19 @@ doesn't change even as new notifiable models are added.
 {
   "message": "Notification marked as read",
   "is_read": true
+}
+```
+
+**Error Responses:**
+```json
+// 403 Forbidden - Not your notification
+{
+  "error": "You do not have permission to modify this notification"
+}
+
+// 404 Not Found
+{
+  "error": "Notification not found"
 }
 ```
 
@@ -1124,6 +1218,8 @@ doesn't change even as new notifiable models are added.
 
 ### Create Report
 **Endpoint:** `POST /api/v1/reports/`
+
+Rate limited to 10 requests per hour per user (see Rate Limits below).
 
 **Request:**
 ```json
@@ -1150,7 +1246,8 @@ doesn't change even as new notifiable models are added.
 
 `content_type`/`content_id` are serialized from the underlying ContentType-based
 generic relation (see database-schema.md), the JSON shape stays stable even as
-new reportable models (e.g. SchoolReview) are added later.
+new reportable models (e.g. SchoolReview) are added later. Supported values for
+`content_type` are `question`, `answer`, and `comment`.
 
 **Error Responses:**
 ```json
@@ -1158,7 +1255,21 @@ new reportable models (e.g. SchoolReview) are added later.
 {
   "error": "You have already reported this content"
 }
+
+// 400 Bad Request - Invalid content_type
+{
+  "content_type": ["content_type must be one of: question, answer, comment."]
+}
+
+// 400 Bad Request - No matching content
+{
+  "content_id": ["No matching content found for this content_type and content_id."]
+}
 ```
+
+A user cannot report the same piece of content more than once, this restriction
+applies regardless of whether an earlier report on that content was resolved or
+rejected.
 
 ---
 
@@ -1213,6 +1324,18 @@ new reportable models (e.g. SchoolReview) are added later.
 }
 ```
 
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "This report has already been reviewed"
+}
+```
+
+`action: "DELETE_CONTENT"` is the only value with special behavior, it deletes the
+underlying reported object. Any other value, or omitting `action` entirely, resolves
+the report without taking any action on the content itself, useful when a report is
+valid to acknowledge but doesn't warrant removal.
+
 ---
 
 ### Reject Report (Admin Only)
@@ -1227,11 +1350,18 @@ new reportable models (e.g. SchoolReview) are added later.
 }
 ```
 
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "This report has already been reviewed"
+}
+```
+
 ---
 
 ## Moderation
 
-### Assign Moderator (School Representative Only)
+### Assign Moderator (School Representative or Admin)
 **Endpoint:** `POST /api/v1/hubs/{hub_id}/moderators/`
 
 **Request:**
@@ -1265,18 +1395,35 @@ new reportable models (e.g. SchoolReview) are added later.
   "error": "User is already a moderator for this hub"
 }
 
+// 403 Forbidden - Not a representative for this hub, and not an admin
+{
+  "error": "You do not have permission to perform this action"
+}
+
 // 404 Not Found - User doesn't exist
 {
   "user_id": ["User with ID 'uuid' does not exist."]
 }
 ```
 
+Requires an active `SchoolRepresentativeAssignment` for this hub, or platform
+admin status.
+
 ---
 
-### Remove Moderator (School Representative Only)
+### Remove Moderator (School Representative or Admin)
 **Endpoint:** `DELETE /api/v1/hubs/{hub_id}/moderators/{user_id}/`
 
 **Response (204 No Content):** Empty
+
+**Error Response (404 Not Found):**
+```json
+{
+  "error": "Moderator assignment not found"
+}
+```
+
+Removal is a soft-delete (`is_active: false`), not a hard row delete.
 
 ---
 
@@ -1294,11 +1441,17 @@ new reportable models (e.g. SchoolReview) are added later.
         "full_name": "Jane Smith",
         "avatar": "https://..."
       },
-      "assigned_at": "2026-01-01T00:00:00Z"
+      "hub": {
+        "id": "uuid"
+      },
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z"
     }
   ]
 }
 ```
+
+This endpoint is public, no authentication required.
 
 ---
 
@@ -1314,7 +1467,20 @@ new reportable models (e.g. SchoolReview) are added later.
 }
 ```
 
-**Response (201 Created):** Same as moderator assignment
+**Response (201 Created):** Same shape as moderator assignment above
+
+**Error Responses:**
+```json
+// 400 Bad Request - Already a representative
+{
+  "error": "User is already a representative for this hub"
+}
+
+// 404 Not Found - User doesn't exist
+{
+  "user_id": ["User with ID 'uuid' does not exist."]
+}
+```
 
 ---
 
@@ -1322,6 +1488,88 @@ new reportable models (e.g. SchoolReview) are added later.
 **Endpoint:** `DELETE /api/v1/hubs/{hub_id}/representatives/{user_id}/`
 
 **Response (204 No Content):** Empty
+
+**Error Response (404 Not Found):**
+```json
+{
+  "error": "Representative assignment not found"
+}
+```
+
+Removal is a soft-delete (`is_active: false`), not a hard row delete. There is
+currently no List Representatives endpoint, representative assignments can be
+viewed via the Django admin site in the meantime.
+
+---
+
+## User Administration
+
+### List Users (Admin Only)
+**Endpoint:** `GET /api/v1/admin/users/`
+
+**Query Parameters:**
+- `search` - Search by email or full_name
+- `is_active` - Filter by account active status (true/false)
+- `page` - Page number
+
+**Response (200 OK):**
+```json
+{
+  "count": 500,
+  "next": "https://api.academia.com/api/v1/admin/users/?page=2",
+  "previous": null,
+  "results": [
+    {
+      "id": "uuid",
+      "email": "user@example.com",
+      "full_name": "John Doe",
+      "avatar": "https://...",
+      "is_admin": false,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+---
+
+### Get User (Admin Only)
+**Endpoint:** `GET /api/v1/admin/users/{user_id}/`
+
+**Response (200 OK):** Same shape as a single result above
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "User not found"
+}
+```
+
+---
+
+### Suspend or Reactivate User (Admin Only)
+**Endpoint:** `PATCH /api/v1/admin/users/{user_id}/`
+
+**Request:**
+```json
+{
+  "is_active": false
+}
+```
+
+**Response (200 OK):** Same shape as Get User above
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "You cannot suspend your own account"
+}
+```
+
+This endpoint only accepts `is_active`. Promoting or demoting `is_admin` status is
+not available through this endpoint in the MVP. An admin cannot suspend their own
+account, to prevent accidental lockout.
 
 ---
 
@@ -1351,7 +1599,7 @@ new reportable models (e.g. SchoolReview) are added later.
   "created_at": "2026-01-01T00:00:00Z"
 }
 ```
-The `secret` is shown once at creation only; only a hash is stored.
+The `secret` is shown once at creation only, only a hash is stored.
 
 ### Revoke API Client (Admin Only)
 **Endpoint:** `POST /api/v1/admin/api-clients/{client_id}/revoke/`
@@ -1418,16 +1666,25 @@ The `secret` is shown once at creation only; only a hash is stored.
 
 ## Rate Limits
 
+Rate limits are enforced, not just documented. Limits are tracked per authenticated
+user where the request carries a valid access token, and per IP address for
+anonymous requests.
+
 | Endpoint | Limit |
 |----------|-------|
 | Authentication (login/refresh) | 10 requests per minute |
 | Question creation | 30 requests per hour |
 | Answer creation | 50 requests per hour |
 | Comment creation | 50 requests per hour |
-| Voting | 100 requests per hour |
+| Voting (vote and remove-vote combined) | 100 requests per hour |
 | Search | 60 requests per minute |
 | Reports | 10 requests per hour |
-| General API | 100 requests per minute |
+| General API (everything else) | 100 requests per minute |
+
+The scoped limits above (authentication, question/answer/comment creation, voting,
+search, reports) apply in place of the general limit for that specific action, not
+in addition to it. Reading data (GET requests) is never subject to the tighter
+write-action limits, only the general 100 per minute baseline applies to reads.
 
 ---
 

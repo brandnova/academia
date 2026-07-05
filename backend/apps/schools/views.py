@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -93,7 +93,7 @@ class SchoolDetailView(generics.RetrieveUpdateAPIView):
 class DepartmentListCreateView(APIView):
     def get_permissions(self):
         if self.request.method == "POST":
-            return [IsAuthenticated(), IsPlatformAdmin()]
+            return [IsAuthenticated()]
         return [AllowAny()]
 
     def get_school(self, school_id):
@@ -109,6 +109,11 @@ class DepartmentListCreateView(APIView):
 
     def post(self, request, school_id):
         school = self.get_school(school_id)
+
+        from apps.hubs.permissions import user_is_representative_for_school
+        if not user_is_representative_for_school(request.user, school.id):
+            raise PermissionDenied("You do not have permission to perform this action")
+
         write_serializer = DepartmentWriteSerializer(data=request.data)
         write_serializer.is_valid(raise_exception=True)
         try:
@@ -122,7 +127,7 @@ class DepartmentListCreateView(APIView):
 
 
 class DepartmentDetailView(APIView):
-    permission_classes = [IsAuthenticated, IsPlatformAdmin]
+    permission_classes = [IsAuthenticated]
     http_method_names = ["patch", "options"]
 
     def get_department(self, department_id):
@@ -133,6 +138,11 @@ class DepartmentDetailView(APIView):
             department = self.get_department(department_id)
         except Http404:
             raise NotFound("Department not found")
+
+        from apps.hubs.permissions import user_is_representative_for_school
+        if not user_is_representative_for_school(request.user, department.school_id):
+            raise PermissionDenied("You do not have permission to perform this action")
+
         write_serializer = DepartmentUpdateSerializer(department, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         department = write_serializer.save()

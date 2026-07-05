@@ -1,10 +1,15 @@
+from django.conf import settings
 from django.db.models import F
 from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, UserRateThrottle
 
+from apps.core.throttling import MethodScopedThrottle
+from apps.notifications.models import Notification
+from apps.notifications.services import notify
 from apps.questions.models import Question
 
 from .models import Answer, AnswerVote
@@ -13,11 +18,31 @@ from .serializers import AnswerCreateSerializer, AnswerResponseSerializer, Answe
 
 class AnswerCreateView(APIView):
     permission_classes = [IsAuthenticated]
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, ScopedRateThrottle]
+    throttle_scope = "answer_create"
 
     def post(self, request):
         write_serializer = AnswerCreateSerializer(data=request.data, context={"request": request})
         write_serializer.is_valid(raise_exception=True)
         answer = write_serializer.save()
+
+        question = answer.question
+        if question.author_id != answer.author_id:
+            notify(
+                user=question.author,
+                notification_type=Notification.Type.NEW_ANSWER,
+                message=f"{answer.author.full_name} answered your question: '{question.title}'",
+                content_object=question,
+                email_subject="New answer on your question",
+                email_template="new_answer",
+                email_context={
+                    "recipient_name": question.author.full_name,
+                    "answer_author_name": answer.author.full_name,
+                    "question_title": question.title,
+                    "question_url": f"{settings.FRONTEND_URL}/questions/{question.id}",
+                },
+            )
+
         return Response(AnswerResponseSerializer(answer).data, status=status.HTTP_201_CREATED)
 
 
@@ -59,6 +84,9 @@ class AnswerDetailView(APIView):
 
 class AnswerVoteView(APIView):
     permission_classes = [IsAuthenticated]
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, MethodScopedThrottle]
+    throttle_scope = "voting"
+    throttled_methods = ["POST", "DELETE"]
 
     def get_answer(self, answer_id):
         try:
@@ -93,6 +121,14 @@ class AnswerVoteView(APIView):
         Answer.objects.filter(id=answer.id).update(vote_score=F("vote_score") + delta)
         answer.refresh_from_db(fields=["vote_score"])
 
+        verb = "an upvote" if vote_type == AnswerVote.VoteType.UP else "a downvote"
+        notify(
+            user=answer.author,
+            notification_type=Notification.Type.VOTE,
+            message=f"Your answer received {verb}",
+            content_object=answer,
+        )
+
         return Response({
             "message": "Vote recorded",
             "vote_type": vote_type,
@@ -120,7 +156,6 @@ class MarkBestAnswerView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, answer_id):
-        answer = None
         try:
             answer = Answer.objects.select_related("question").get(id=answer_id)
         except (Answer.DoesNotExist, ValueError):
@@ -140,6 +175,21 @@ class MarkBestAnswerView(APIView):
         Answer.objects.filter(question=question, is_best=True).update(is_best=False)
         Answer.objects.filter(id=answer.id).update(is_best=True)
         Question.objects.filter(id=question.id).update(status=Question.Status.SOLVED)
+
+        if answer.author_id != question.author_id:
+            notify(
+                user=answer.author,
+                notification_type=Notification.Type.BEST_ANSWER,
+                message=f"Your answer was marked as best on: '{question.title}'",
+                content_object=question,
+                email_subject="Your answer was marked as the best answer",
+                email_template="best_answer",
+                email_context={
+                    "recipient_name": answer.author.full_name,
+                    "question_title": question.title,
+                    "question_url": f"{settings.FRONTEND_URL}/questions/{question.id}",
+                },
+            )
 
         return Response({
             "message": "Answer marked as best",

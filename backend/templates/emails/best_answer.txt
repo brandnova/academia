@@ -1,0 +1,5 @@
+Hi {{ recipient_name }},
+
+Good news, your answer on "{{ question_title }}" was marked as the best answer.
+
+View it here: {{ question_url }}

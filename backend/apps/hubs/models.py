@@ -26,8 +26,7 @@ class Hub(models.Model):
 
     @property
     def moderator_count(self):
-        # TODO(Phase 14): return self.moderatorassignment_set.filter(is_active=True).count()
-        return 0
+        return self.moderator_assignments.filter(is_active=True).count()
 
 
 class HubActivationRequest(models.Model):
@@ -55,3 +54,39 @@ class HubActivationRequest(models.Model):
 
     def __str__(self):
         return f"{self.school.short_name} - {self.status}"
+
+
+class ModeratorAssignment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, related_name="moderator_assignments", on_delete=models.CASCADE)
+    hub = models.ForeignKey(Hub, related_name="moderator_assignments", on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "moderator_assignments"
+        constraints = [
+            models.UniqueConstraint(fields=["user", "hub"], name="unique_moderator_per_hub")
+        ]
+
+    def __str__(self):
+        return f"{self.user_id} moderates {self.hub_id}"
+
+
+class SchoolRepresentativeAssignment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, related_name="representative_assignments", on_delete=models.CASCADE)
+    hub = models.ForeignKey(Hub, related_name="representative_assignments", on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "school_representative_assignments"
+        constraints = [
+            models.UniqueConstraint(fields=["user", "hub"], name="unique_representative_per_hub")
+        ]
+
+    def __str__(self):
+        return f"{self.user_id} represents {self.hub_id}"

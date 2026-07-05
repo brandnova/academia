@@ -8,39 +8,118 @@ this log.
 
 This file is also published to the docs site as docs/changelog.md.
 
-## [Unreleased]
+## Docs Sync, 2026-07-05
+### Changed
+- project-plan.md: moved full-text search from a future enhancement to a
+  documented current implementation (PostgreSQL SearchVector/SearchRank),
+  narrowed remaining future search enhancements to search-answers, a
+  precomputed index, and Elasticsearch/OpenSearch
+- project-plan.md: added a Rate Limiting section describing the general
+  baseline plus scoped per-action limits
+- project-plan.md: documented that platform admins implicitly satisfy
+  representative and moderator permission checks, and that admin user
+  management in this phase is view-and-suspend only
+- feature-list.md: checked off Search entirely; checked off the completed
+  Notification, Moderation, and Administration sub-items through Phase 15;
+  left School submission approval, moderator-assigned notification triggers,
+  and a dedicated escalate-to-admin action explicitly unchecked with notes
+  on why
+- api-contract.md: documented the school query param on Search Questions
+  (Phase 12 gap)
+- api-contract.md: clarified that score is a raw ts_rank value, not a
+  normalized percentage, and is null when q is omitted
+- api-contract.md: documented that duplicate-report blocking applies
+  regardless of the earlier report's review status
+- api-contract.md: documented that Report resolve's action field only has
+  defined behavior for DELETE_CONTENT, anything else is a no-op resolve
+- api-contract.md: fixed the created_at versus assigned_at label mismatch
+  between Assign Moderator and List Moderators, standardized on created_at
+- api-contract.md: documented that admins implicitly satisfy representative
+  and moderator checks for department and moderator management endpoints
+- api-contract.md: added the full User Administration section (List Users,
+  Get User, Suspend/Reactivate User), previously undocumented since it
+  didn't exist before Phase 15
+- api-contract.md: Rate Limits section now states limits are actually
+  enforced, clarifies per-user versus per-IP tracking, and clarifies that
+  scoped limits replace rather than stack with the general baseline
+
+### Process
+- Folds in everything logged in BUILD_LOG.md's Known Deviations section
+  across Phases 12 through 15
+- This sync closes out the originally planned 15-phase MVP roadmap; CORS
+  setup and production-readiness prep are next, tracked as unnumbered
+  follow-up work rather than a new phase
+
+## Phase 15, Admin Polish, 2026-07-05
+### Added
+- Admin-only user management: list (search, is_active filter), detail,
+  and suspend/reactivate via PATCH is_active
+- Self-suspension blocked for admins
+- Rate limiting from api-contract.md's previously unenforced table is now
+  live via DRF throttling: general 100/minute baseline plus scoped limits
+  on auth, question/answer/comment creation, voting, search, and reports
+- 429 responses normalized to the documented error shape
+
+## Phase 14, Role Assignment, 2026-07-04
+### Added
+- ModeratorAssignment and SchoolRepresentativeAssignment models
+- Representatives (or admins) can assign/remove moderators and manage
+  departments for their school
+- Only admins can assign/remove representatives
+- Unanswered questions queue scoped to a moderator's actual assigned hubs
+- Hub.moderator_count wired to real data
+
+## Phase 13, Reports and Moderation, 2026-07-04
+### Added
+- Report model using Django ContentType, generic across Question, Answer,
+  and Comment
+- Create (auth, blocks duplicate report per user per content), admin-only
+  list (status filter), resolve, and reject
+- Resolve supports action: DELETE_CONTENT to remove the reported object
+
+## Phase 12, Search, 2026-07-04
+### Added
+- Dedicated search endpoint at GET /search/questions/
+- PostgreSQL full-text search (SearchVector, SearchRank) when a query is
+  supplied, filter-only browsing otherwise
+- Ordering by solved status, then top answer vote score, then recency,
+  then relevance
+- hub, school, department, and tag filters, all combinable with q
+
+## Phase 11, Notifications, 2026-07-04
+### Added
+- Notification model using Django ContentType, in-app list with
+  unread_count, is_read filter, mark-read, and mark-all-read
+- Mindful channel policy: email plus in-app for NEW_ANSWER, BEST_ANSWER,
+  and HUB_ACTIVATED; in-app only for NEW_COMMENT and VOTE, since users
+  aren't expected to live on the platform and shouldn't get inbox noise
+  for every minor interaction
+- Email base template plus per-notification HTML and plain text pairs,
+  SMTP configured for MailHog in development
+- Email send failures are caught and logged, never allowed to break the
+  underlying action that triggered them
 
 ## Docs Sync, 2026-07-04
 ### Changed
-- api-contract.md: removed a stray "invalid status transition" error example
-  from Update Question that didn't correspond to any documented request
-  field; added a note that Question.status only changes as a side effect of
-  answering, marking best, or deleting answers
+- api-contract.md: removed a stray invalid status transition error example
+  from Update Question that didn't match any documented field; clarified
+  that Question.status only changes as a side effect of other actions
 - api-contract.md: documented that deleting an answer can revert Question
-  status to ANSWERED (if the deleted answer was best and others remain) or
-  OPEN (if it was the last remaining answer)
+  status to ANSWERED or OPEN depending on what remains
 - api-contract.md: documented that marking a different answer as best
   transfers the flag rather than being blocked
 - api-contract.md: added the previously undocumented List Comments endpoint
-  (GET /answers/{answer_id}/comments/), closing a real gap where comments
-  could be created but never retrieved anywhere
-- feature-list.md: checkboxes updated to reflect actual implementation
-  status through Phase 10 (previously reset to unchecked during an earlier
-  sync as a fresh tracking baseline for this build)
+- feature-list.md: checkboxes brought up to date through Phase 10
 
-### Process
-- Folds in everything logged in BUILD_LOG.md's "Known Deviations" section
-  across Phases 6 through 10
-
-## Phase 10, Best Answer / Question Lifecycle, 2026-07-04
+## Phase 10, Best Answer and Question Lifecycle, 2026-07-04
 ### Added
 - Mark-best-answer endpoint, question-owner-only, transitions question to
-  SOLVED, supports switching the best answer between answers on the same
-  question
-- Extended answer-delete logic: deleting the best answer while other
-  answers remain now reverts status to ANSWERED, not just the "zero answers
-  left reverts to OPEN" case from Phase 7
-- List Comments endpoint (public, paginated), closing the gap noted above
+  SOLVED, supports switching the best answer between answers
+- Deleting the best answer while other answers remain now reverts status
+  to ANSWERED, not just the zero-answers-left case from Phase 7
+- List Comments endpoint, closing a real documentation gap
+
+## [Unreleased]
 
 ## Phase 9, Comments, 2026-07-03
 ### Added

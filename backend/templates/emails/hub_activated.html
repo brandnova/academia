@@ -1,0 +1,7 @@
+{% extends "emails/base_email.html" %}
+{% block subject %}Your hub activation request was approved{% endblock %}
+{% block content %}
+<p>Hi {{ recipient_name }},</p>
+<p>Your request to activate a hub for <strong>{{ school_name }}</strong> has been approved. The hub is now live.</p>
+<p><a class="button" href="{{ hub_url }}">Visit the hub</a></p>
+{% endblock %}

@@ -45,39 +45,42 @@
 - [x] Popular tags view
 
 ## Search
-- [ ] Search questions (title + body)
-- [ ] Search by school
-- [ ] Search by department
-- [ ] Search by tags
-- [ ] Search results ranking (solved > highly voted > recent > relevance)
+- [x] Search questions (title + body)
+- [x] Search by school
+- [x] Search by department
+- [x] Search by tags
+- [x] Search results ranking (solved > highly voted > recent > relevance)
 
 ## Notifications
 - [ ] Email notifications for major actions
-  - [ ] New answer notification
-  - [ ] School hub activation
-  - [ ] School submission request approved
+  - [x] New answer notification
+  - [x] School hub activation
+  - [ ] School submission request approved (no SchoolSubmission model yet, future)
 - [ ] In-app notifications for major actions
-  - [ ] New answer notification
-  - [ ] New comment notification
-  - [ ] Best answer selected notification
-  - [ ] Vote received notification
-  - [ ] Moderator assigned notification
-  - [ ] Hub activated notification
+  - [x] New answer notification
+  - [x] New comment notification
+  - [x] Best answer selected notification
+  - [x] Vote received notification
+  - [ ] Moderator assigned notification (assignment endpoint exists since Phase 14,
+        no notification trigger wired to it yet)
+  - [x] Hub activated notification
 
 ## Moderation
-- [ ] Report content (spam/abuse/misinformation/duplicate)
-- [ ] View unanswered questions (moderator only)
-- [ ] Escalate content to admin
-- [ ] Reports dashboard (admin only)
-- [ ] Resolve reports (admin only)
+- [x] Report content (spam/abuse/misinformation/duplicate)
+- [x] View unanswered questions (moderator only, scoped to assigned hubs)
+- [ ] Escalate content to admin (no dedicated escalate action exists; moderators
+      currently use the same Report pipeline as any other user)
+- [x] Reports dashboard (admin only)
+- [x] Resolve reports (admin only)
 
 ## Administration
 - [x] Manage schools (create/edit/soft-delete via is_active)
 - [x] Approve hub activation requests
-- [ ] Assign moderators
-- [ ] Assign school representatives
-- [ ] View reports
-- [ ] Manage users (view/suspend)
+- [x] Assign moderators
+- [x] Assign school representatives
+- [x] View reports
+- [x] Manage users (view/suspend; promoting or demoting admin status is not part
+      of this endpoint)
 
 ## User Experience
 - [ ] Responsive design (mobile + desktop compatible)
@@ -98,19 +101,20 @@
 - [ ] Microsoft Login
 
 ## Search (Future)
-- [ ] Full-text search
-- [ ] Search answers
+- [ ] Search answers directly, not just questions
+- [ ] Precomputed search index (stored tsvector column, GIN index)
 - [ ] Elasticsearch/OpenSearch integration
 
 ## Notifications (Future)
-- [ ] In-app notification list
 - [ ] Push notifications
-- [ ] Notification read/unread status
+- [ ] Moderator assigned notification trigger
+- [ ] School submission approved notification trigger
 
 ## Moderation (Future)
 - [ ] Content deletion (moderators)
 - [ ] User management (moderators)
 - [ ] Flag capabilities (moderators)
+- [ ] Dedicated escalate-to-admin action, distinct from the general report pipeline
 
 ## School Reviews (Future)
 - [ ] Submit school review (overall rating + category ratings + text)

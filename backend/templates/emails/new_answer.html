@@ -1,0 +1,8 @@
+{% extends "emails/base_email.html" %}
+{% block subject %}New answer on your question{% endblock %}
+{% block content %}
+<p>Hi {{ recipient_name }},</p>
+<p><strong>{{ answer_author_name }}</strong> answered your question:</p>
+<p>&ldquo;{{ question_title }}&rdquo;</p>
+<p><a class="button" href="{{ question_url }}">View the answer</a></p>
+{% endblock %}

@@ -4,8 +4,10 @@ from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
-from apps.core.permissions import IsPlatformAdmin
+from apps.core.throttling import MethodScopedThrottle
+
 from .models import Question
 from .pagination import QuestionPagination
 from .serializers import (
@@ -18,6 +20,9 @@ from .serializers import (
 
 class QuestionListCreateView(generics.ListCreateAPIView):
     pagination_class = QuestionPagination
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, MethodScopedThrottle]
+    throttle_scope = "question_create"
+    throttled_methods = ["POST"]
 
     def get_permissions(self):
         if self.request.method == "POST":
@@ -116,16 +121,32 @@ class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UnansweredQuestionsView(generics.ListAPIView):
-    """Admin-only for now; moves to Moderator-only once ModeratorAssignment exists (Phase 14)."""
+    """
+    Admins see unanswered questions across all hubs. Moderators see unanswered
+    questions only for hubs they are actively assigned to moderate. A user who
+    is neither is blocked with a 403.
+    """
     serializer_class = QuestionListSerializer
     pagination_class = QuestionPagination
-    permission_classes = [IsAuthenticated, IsPlatformAdmin]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        user = self.request.user
         queryset = Question.objects.filter(status=Question.Status.OPEN).select_related(
             "author", "hub__school", "department"
         )
+
+        if not user.is_admin:
+            from apps.hubs.models import ModeratorAssignment
+            moderated_hub_ids = list(
+                ModeratorAssignment.objects.filter(user=user, is_active=True).values_list("hub_id", flat=True)
+            )
+            if not moderated_hub_ids:
+                raise PermissionDenied("You do not have permission to view unanswered questions")
+            queryset = queryset.filter(hub_id__in=moderated_hub_ids)
+
         hub = self.request.query_params.get("hub")
         if hub:
             queryset = queryset.filter(hub_id=hub)
+
         return queryset
