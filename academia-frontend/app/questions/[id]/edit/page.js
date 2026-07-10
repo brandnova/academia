@@ -4,6 +4,7 @@ import { use, useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { clientFetch } from "@/lib/clientApi";
 import { useAuth } from "@/lib/auth-context";
+import { questionUrl } from "@/lib/urls";
 import Skeleton from "@/components/ui/Skeleton";
 import TagInput from "@/components/questions/TagInput";
 
@@ -49,7 +50,7 @@ export default function EditQuestionPage({ params }) {
     setSaveStatus("loading");
     setErrorMsg("");
     try {
-      await clientFetch(`/questions/${id}/`, {
+      const updated = await clientFetch(`/questions/${id}/`, {
         method: "PATCH",
         body: JSON.stringify({
           title,
@@ -58,7 +59,7 @@ export default function EditQuestionPage({ params }) {
           tags,
         }),
       });
-      router.push(`/questions/${id}`);
+      router.push(questionUrl(updated));
     } catch (err) {
       setSaveStatus("error");
       setErrorMsg(err.message);

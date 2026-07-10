@@ -1,11 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2, ThumbsUp, ThumbsDown } from "lucide-react";
+import { CheckCircle2, ThumbsUp, ThumbsDown, Award } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
+import CommentThread from "@/components/comments/CommentThread";
 
-export default function AnswerCard({ answer, questionId, onUpdated, onDeleted }) {
+export default function AnswerCard({
+  answer,
+  questionId,
+  canMarkBest,
+  onMarkBest,
+  onUpdated,
+  onDeleted,
+}) {
   const { user } = useAuth();
   const isAuthor = user && user.id === answer.author.id;
   const canVote = user && !isAuthor;
@@ -17,22 +25,16 @@ export default function AnswerCard({ answer, questionId, onUpdated, onDeleted })
   const [confirming, setConfirming] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Session-only: the API has no field for the current user's existing vote
-  // on an answer, so this only reflects votes cast during this visit.
-  // null = no known vote, "UP"/"DOWN" = voted this session, "blocked" = the
-  // server says we already voted, direction unknown. See BUILD_LOG.
-  const [voteState, setVoteState] = useState(null);
   const [voteStatus, setVoteStatus] = useState("idle");
   const [voteError, setVoteError] = useState("");
 
-  async function refreshVoteScore() {
-    try {
-      const data = await clientFetch(`/questions/${questionId}/`);
-      const fresh = data.answers.find((a) => a.id === answer.id);
-      if (fresh) onUpdated(fresh);
-    } catch {
-      // best-effort, the optimistic UI already reflects the action either way
-    }
+  const [markStatus, setMarkStatus] = useState("idle");
+  const [markError, setMarkError] = useState("");
+
+  async function refreshAnswer() {
+    const data = await clientFetch(`/questions/${questionId}/`);
+    const fresh = data.answers.find((a) => a.id === answer.id);
+    if (fresh) onUpdated(fresh);
   }
 
   async function handleVote(voteType) {
@@ -43,11 +45,10 @@ export default function AnswerCard({ answer, questionId, onUpdated, onDeleted })
         method: "POST",
         body: JSON.stringify({ vote_type: voteType }),
       });
-      setVoteState(voteType);
-      await refreshVoteScore();
+      await refreshAnswer();
     } catch (err) {
       if (err.status === 400 && /already voted/i.test(err.message)) {
-        setVoteState("blocked");
+        await refreshAnswer().catch(() => {});
       } else {
         setVoteError(err.message);
       }
@@ -61,12 +62,23 @@ export default function AnswerCard({ answer, questionId, onUpdated, onDeleted })
     setVoteError("");
     try {
       await clientFetch(`/answers/${answer.id}/vote/`, { method: "DELETE" });
-      setVoteState(null);
-      await refreshVoteScore();
+      await refreshAnswer();
     } catch (err) {
       setVoteError(err.message);
     } finally {
       setVoteStatus("idle");
+    }
+  }
+
+  async function handleMarkBest() {
+    setMarkStatus("loading");
+    setMarkError("");
+    try {
+      await onMarkBest(answer.id);
+      setMarkStatus("idle");
+    } catch (err) {
+      setMarkStatus("error");
+      setMarkError(err.message);
     }
   }
 
@@ -99,6 +111,10 @@ export default function AnswerCard({ answer, questionId, onUpdated, onDeleted })
     }
   }
 
+  function handleCommentCountChange(newCount) {
+    onUpdated({ ...answer, comment_count: newCount });
+  }
+
   function renderVoteControl() {
     if (!canVote) {
       return (
@@ -109,37 +125,18 @@ export default function AnswerCard({ answer, questionId, onUpdated, onDeleted })
       );
     }
 
-    if (voteState === "UP" || voteState === "DOWN") {
-      const Icon = voteState === "UP" ? ThumbsUp : ThumbsDown;
+    if (answer.user_vote === "UP" || answer.user_vote === "DOWN") {
+      const Icon = answer.user_vote === "UP" ? ThumbsUp : ThumbsDown;
       return (
         <span className="flex items-center gap-2">
           <span
             className={`flex items-center gap-1 ${
-              voteState === "UP" ? "text-accent" : "text-red-500"
+              answer.user_vote === "UP" ? "text-accent" : "text-red-500"
             }`}
           >
             <Icon className="w-3.5 h-3.5 fill-current" />
             {answer.vote_score}
           </span>
-          <button
-            onClick={handleRemoveVote}
-            disabled={voteStatus === "loading"}
-            className="text-gray-400 hover:text-red-500 disabled:opacity-50"
-          >
-            Remove vote
-          </button>
-        </span>
-      );
-    }
-
-    if (voteState === "blocked") {
-      return (
-        <span className="flex items-center gap-2">
-          <span className="flex items-center gap-1">
-            <ThumbsUp className="w-3.5 h-3.5" />
-            {answer.vote_score}
-          </span>
-          <span className="text-gray-400">Already voted</span>
           <button
             onClick={handleRemoveVote}
             disabled={voteStatus === "loading"}
@@ -220,16 +217,33 @@ export default function AnswerCard({ answer, questionId, onUpdated, onDeleted })
       )}
 
       <div className="flex flex-wrap items-center justify-between gap-2 mt-3 text-xs text-gray-400">
-        <div className="flex items-center gap-3">
-          {renderVoteControl()}
-          <span className="text-gray-400">
-            {answer.comment_count} comment{answer.comment_count !== 1 ? "s" : ""} (Phase 9)
-          </span>
-        </div>
+        {renderVoteControl()}
         <span>by {answer.author.full_name}</span>
       </div>
 
       {voteError && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{voteError}</p>}
+
+      {canMarkBest && !answer.is_best && (
+        <div className="mt-3">
+          <button
+            onClick={handleMarkBest}
+            disabled={markStatus === "loading"}
+            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border border-accent text-accent hover:bg-accent/5 disabled:opacity-50"
+          >
+            <Award className="w-3.5 h-3.5" />
+            {markStatus === "loading" ? "Marking..." : "Mark as best answer"}
+          </button>
+          {markError && (
+            <p className="text-red-600 dark:text-red-400 text-xs mt-1">{markError}</p>
+          )}
+        </div>
+      )}
+
+      <CommentThread
+        answerId={answer.id}
+        commentCount={answer.comment_count}
+        onCountChange={handleCommentCountChange}
+      />
 
       {isAuthor && !editing && (
         <div className="flex items-center gap-3 mt-3 text-xs">

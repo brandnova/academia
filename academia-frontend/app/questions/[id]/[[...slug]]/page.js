@@ -15,7 +15,8 @@ async function getQuestion(id) {
 }
 
 export default async function QuestionDetailPage({ params }) {
-  const { id } = await params;
+  const { id } = await params; // trailing slug segment, if present, is cosmetic only
+
   const question = await getQuestion(id);
 
   if (!question) notFound();

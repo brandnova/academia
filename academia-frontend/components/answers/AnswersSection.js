@@ -2,12 +2,17 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
+import { clientFetch } from "@/lib/clientApi";
 import AnswerCard from "./AnswerCard";
 import AnswerForm from "./AnswerForm";
 
 export default function AnswersSection({ question }) {
   const router = useRouter();
+  const { user } = useAuth();
   const [answers, setAnswers] = useState(question.answers || []);
+
+  const isQuestionOwner = user && user.id === question.author.id;
 
   function handleCreated(answer) {
     setAnswers((prev) => [...prev, answer]);
@@ -21,6 +26,12 @@ export default function AnswersSection({ question }) {
   function handleDeleted(answerId) {
     setAnswers((prev) => prev.filter((a) => a.id !== answerId));
     router.refresh(); // question status may revert (ANSWERED -> OPEN, or best-answer cleared)
+  }
+
+  async function handleMarkBest(answerId) {
+    await clientFetch(`/answers/${answerId}/mark-best/`, { method: "POST" });
+    setAnswers((prev) => prev.map((a) => ({ ...a, is_best: a.id === answerId })));
+    router.refresh(); // question status moves to (or stays) SOLVED
   }
 
   return (
@@ -40,6 +51,8 @@ export default function AnswersSection({ question }) {
               key={answer.id}
               answer={answer}
               questionId={question.id}
+              canMarkBest={isQuestionOwner}
+              onMarkBest={handleMarkBest}
               onUpdated={handleUpdated}
               onDeleted={handleDeleted}
             />

@@ -4,6 +4,7 @@ import { Suspense, useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { clientFetch } from "@/lib/clientApi";
 import { useAuth } from "@/lib/auth-context";
+import { questionUrl } from "@/lib/urls";
 import SchoolPicker from "@/components/questions/SchoolPicker";
 import TagInput from "@/components/questions/TagInput";
 
@@ -74,7 +75,7 @@ function AskQuestionForm() {
           tags,
         }),
       });
-      router.push(`/questions/${question.id}`);
+      router.push(questionUrl(question));
     } catch (err) {
       setStatus("error");
       setErrorMsg(err.message);

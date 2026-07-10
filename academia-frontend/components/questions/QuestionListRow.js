@@ -1,21 +1,12 @@
 import Link from "next/link";
 import StatusIcon from "./StatusIcon";
-
-function timeAgo(dateStr) {
-  const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
-  if (days === 0) return "today";
-  if (days === 1) return "1 day ago";
-  if (days < 30) return `${days} days ago`;
-  const months = Math.floor(days / 30);
-  if (months < 12) return `${months} month${months !== 1 ? "s" : ""} ago`;
-  const years = Math.floor(months / 12);
-  return `${years} year${years !== 1 ? "s" : ""} ago`;
-}
+import { questionUrl } from "@/lib/urls";
+import { timeAgo } from "@/lib/timeAgo";
 
 export default function QuestionListRow({ question, showSchool = false }) {
   return (
     <Link
-      href={`/questions/${question.id}`}
+      href={questionUrl(question)}
       className="flex items-start gap-3 py-4 px-2 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
     >
       <div className="pt-1">
