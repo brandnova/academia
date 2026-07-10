@@ -22,18 +22,32 @@ class AnswerSerializer(serializers.ModelSerializer):
     """Used when nesting answers inside a question's detail response."""
     author = AnswerAuthorSerializer(read_only=True)
     comment_count = serializers.IntegerField(read_only=True)
+    user_vote = serializers.SerializerMethodField()
 
     class Meta:
         model = Answer
-        fields = ["id", "body", "is_best", "vote_score", "author", "comment_count", "created_at", "updated_at"]
+        fields = [
+            "id", "body", "is_best", "vote_score", "user_vote",
+            "author", "comment_count", "created_at", "updated_at",
+        ]
+
+    def get_user_vote(self, obj):
+        request = self.context.get("request")
+        if not request or not getattr(request, "user", None) or not request.user.is_authenticated:
+            return None
+        vote = obj.votes.filter(user=request.user).first()
+        return vote.vote_type if vote else None
 
 
 class AnswerResponseSerializer(AnswerSerializer):
-    """Used for create/update responses — includes the parent question."""
+    """Used for create/update responses, includes the parent question."""
     question = AnswerQuestionMiniSerializer(read_only=True)
 
     class Meta(AnswerSerializer.Meta):
-        fields = ["id", "body", "question", "author", "is_best", "vote_score", "created_at", "updated_at"]
+        fields = [
+            "id", "body", "question", "author", "is_best",
+            "vote_score", "user_vote", "created_at", "updated_at",
+        ]
 
 
 class AnswerCreateSerializer(serializers.ModelSerializer):

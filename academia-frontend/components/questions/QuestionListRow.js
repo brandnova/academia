@@ -12,7 +12,7 @@ function timeAgo(dateStr) {
   return `${years} year${years !== 1 ? "s" : ""} ago`;
 }
 
-export default function QuestionListRow({ question }) {
+export default function QuestionListRow({ question, showSchool = false }) {
   return (
     <Link
       href={`/questions/${question.id}`}
@@ -25,6 +25,9 @@ export default function QuestionListRow({ question }) {
         <p className="font-medium truncate">{question.title}</p>
         <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{question.body}</p>
         <div className="flex flex-wrap gap-2 mt-1 text-xs text-gray-400">
+          {showSchool && question.hub?.school && (
+            <span className="text-accent">{question.hub.school.short_name}</span>
+          )}
           {question.department && <span>{question.department.name}</span>}
           <span>
             {question.answer_count} answer{question.answer_count !== 1 ? "s" : ""}

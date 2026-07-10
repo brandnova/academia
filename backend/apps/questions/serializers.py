@@ -58,7 +58,7 @@ class QuestionDetailSerializer(QuestionListSerializer):
 
     def get_answers(self, obj):
         from apps.answers.serializers import AnswerSerializer
-        return AnswerSerializer(obj.answers.all(), many=True).data
+        return AnswerSerializer(obj.answers.all(), many=True, context=self.context).data
 
 
 def _sync_tags(question, tag_names):

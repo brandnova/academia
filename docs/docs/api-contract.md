@@ -799,6 +799,7 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
       "body": "To calculate your CGPA...",
       "is_best": true,
       "vote_score": 15,
+      "user_vote": "UP",
       "author": {
         "id": "uuid",
         "full_name": "Jane Smith",
@@ -926,6 +927,7 @@ Rate limited to 50 requests per hour per user (see Rate Limits below).
   },
   "is_best": false,
   "vote_score": 0,
+  "user_vote": null,
   "created_at": "2026-01-01T00:00:00Z",
   "updated_at": "2026-01-01T00:00:00Z"
 }
@@ -1068,6 +1070,13 @@ Rate Limits below).
 Voting sends the answer's author a `VOTE` notification, in-app only, no email.
 There is no dedicated "change my vote" endpoint, remove your existing vote first,
 then vote again with the new type.
+
+`user_vote` (`"UP"`, `"DOWN"`, or `null`) appears on every answer object returned
+from Get Question, Create Answer, and Update Answer, reflecting the requesting
+user's own vote on that specific answer. It is always `null` for anonymous
+requests, and always `null` on an answer's own author (self-voting is blocked).
+Use this to restore vote-button state correctly on page load, without it the
+frontend would only know about votes cast during the current session.
 
 ---
 

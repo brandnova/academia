@@ -74,7 +74,10 @@ class QuestionListCreateView(generics.ListCreateAPIView):
         write_serializer = self.get_serializer(data=request.data, context={"request": request})
         write_serializer.is_valid(raise_exception=True)
         question = write_serializer.save()
-        return Response(QuestionDetailSerializer(question).data, status=status.HTTP_201_CREATED)
+        return Response(
+            QuestionDetailSerializer(question, context={"request": request}).data,
+            status=status.HTTP_201_CREATED,
+        )
 
 
 class QuestionDetailView(APIView):
@@ -94,7 +97,7 @@ class QuestionDetailView(APIView):
         question = self.get_question(question_id)
         Question.objects.filter(id=question.id).update(view_count=question.view_count + 1)
         question.refresh_from_db(fields=["view_count"])
-        return Response(QuestionDetailSerializer(question).data)
+        return Response(QuestionDetailSerializer(question, context={"request": request}).data)
 
     def patch(self, request, question_id):
         question = self.get_question(question_id)
@@ -103,7 +106,7 @@ class QuestionDetailView(APIView):
         write_serializer = QuestionUpdateSerializer(question, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         question = write_serializer.save()
-        return Response(QuestionDetailSerializer(question).data)
+        return Response(QuestionDetailSerializer(question, context={"request": request}).data)
 
     def delete(self, request, question_id):
         question = self.get_question(question_id)

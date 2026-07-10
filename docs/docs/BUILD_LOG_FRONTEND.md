@@ -1,5 +1,5 @@
 ## Current Phase
-Frontend Phase 6, Tags (in progress).
+Frontend Phase 8, Voting (in progress).
 
 ## Completed Phases (Frontend)
 - Frontend Phase 0: Next.js App Router scaffolded, Tailwind v4 CSS-first config (no
@@ -56,6 +56,29 @@ Frontend Phase 6, Tags (in progress).
   popular tags shown on empty query, free-text fallback creates a new tag
   client-side same as the backend's existing create-on-write behavior) shared
   between ask and edit question forms.
+- Frontend Phase 6: Tag browse page (/tags, search + popular/alphabetical toggle,
+  not paginated per the backend contract) and questions-by-tag page
+  (/tags/[name], status filter, paginated, no not-found.js since a tag with zero
+  matches is a valid 200 empty state per api-contract.md, not a 404).
+  QuestionListRow gained an optional showSchool prop since tag results can span
+  multiple schools/hubs, unlike every hub-scoped list built so far. Question
+  detail page's tag chips are now links into this new browse page.
+- Frontend Phase 7: Question detail page now renders real answers instead of a
+  placeholder, using the answers array already nested in GET /questions/{id}/.
+  AnswerForm blocks submission client-side on SOLVED questions and for logged-out
+  users, matching backend rules. AnswerCard supports author-only inline edit and
+  delete with confirm. router.refresh() called after answer create/delete (not
+  edit) since those two actions can move the parent question's status per the
+  documented lifecycle rules (OPEN->ANSWERED, ANSWERED/SOLVED->OPEN on last
+  answer removed), this re-runs the Server Component so the status icon at the
+  page top stays accurate without duplicating that transition logic client-side.
+  is_best renders as a static badge, the actual mark-best action is Phase 10.
+
+## Planned, Not Yet Scheduled
+- Homepage rebuild: unfiltered paginated list of all questions (hub, tags, and
+  other metadata shown per row), load-more pagination, tags and schools shown
+  as side cards, as part of the broader UI polish pass once the full page set
+  exists to draw real content from.
 
 ## Known Deviations From Docs (Frontend)
 - Concurrent-request refresh race not yet mitigated: if multiple requests expire

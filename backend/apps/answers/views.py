@@ -44,7 +44,10 @@ class AnswerCreateView(APIView):
                 },
             )
 
-        return Response(AnswerResponseSerializer(answer).data, status=status.HTTP_201_CREATED)
+        return Response(
+            AnswerResponseSerializer(answer, context={"request": request}).data,
+            status=status.HTTP_201_CREATED,
+        )
 
 
 class AnswerDetailView(APIView):
@@ -65,7 +68,7 @@ class AnswerDetailView(APIView):
         write_serializer = AnswerUpdateSerializer(answer, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         answer = write_serializer.save()
-        return Response(AnswerResponseSerializer(answer).data)
+        return Response(AnswerResponseSerializer(answer, context={"request": request}).data)
 
     def delete(self, request, answer_id):
         answer = self.get_answer(answer_id)

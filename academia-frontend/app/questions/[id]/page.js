@@ -3,6 +3,7 @@ import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import StatusIcon from "@/components/questions/StatusIcon";
 import QuestionActions from "@/components/questions/QuestionActions";
+import AnswersSection from "@/components/answers/AnswersSection";
 
 async function getQuestion(id) {
   try {
@@ -43,12 +44,13 @@ export default async function QuestionDetailPage({ params }) {
       {question.tags?.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-4">
           {question.tags.map((tag) => (
-            <span
+            <Link
               key={tag}
-              className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+              href={`/tags/${encodeURIComponent(tag)}`}
+              className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent transition-colors"
             >
               {tag}
-            </span>
+            </Link>
           ))}
         </div>
       )}
@@ -57,12 +59,7 @@ export default async function QuestionDetailPage({ params }) {
 
       <QuestionActions question={question} />
 
-      <div className="border border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center text-gray-400 mt-8">
-        <p>
-          {question.answer_count} answer{question.answer_count !== 1 ? "s" : ""}. Answer
-          display, voting, and comments arrive in Phase 7 onward.
-        </p>
-      </div>
+      <AnswersSection question={question} />
     </div>
   );
 }

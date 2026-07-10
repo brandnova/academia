@@ -51,6 +51,12 @@ endpoint was never documented, and there was no way for the frontend to know
 whether the current user is a Moderator or School Representative for a given
 hub, nor a way to see who currently holds a hub's representative assignments.
 
+## Vote State Visibility Fix (Post-MVP)
+Not a numbered phase. Addresses a real gap: the answer object embedded in
+question detail exposed vote_score (the aggregate) but never the requesting
+user's own vote, so the frontend had no way to restore correct vote-button
+state after a page reload, only what happened during the current session.
+
 ### Added
 - django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
   localhost:3000 for local Next.js dev, no credentials (bearer tokens, not cookies)
@@ -95,6 +101,15 @@ hub, nor a way to see who currently holds a hub's representative assignments.
 - api-contract.md gained a new Frontend Permission Model section explaining
   roles, how a user acquires one, and a concrete table of what to show when
 - Health Check documented in api-contract.md for the first time
+- user_vote ("UP"/"DOWN"/null) added to the Answer serializer used everywhere
+  an answer object appears: nested in question detail, and in the Create/Update
+  Answer responses. Null for anonymous requests and always null on an answer's
+  own author, since self-voting is blocked
+- Every place that builds a QuestionDetailSerializer or AnswerResponseSerializer
+  now explicitly passes request context, previously several call sites
+  (question detail GET/PATCH, question create response, answer create/update
+  responses) constructed these serializers without context, which would have
+  silently made user_vote resolve to null even for a user who had voted
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -153,6 +168,11 @@ hub, nor a way to see who currently holds a hub's representative assignments.
 - admin's moderator_for/representative_for are not backfilled with every hub,
   is_admin alone is the correct signal for blanket access, keeping the
   response bounded regardless of how many hubs exist
+- user_vote is computed per-request via a SerializerMethodField querying
+  AnswerVote directly, not stored or cached, consistent with how has_hub and
+  question_count are already handled elsewhere as derived, not persisted, data
+- No new model, no migration, this was purely a serialization and context-
+  passing gap
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -201,5 +221,5 @@ in this pass to reflect the slug fields, the two new by-slug endpoints, and the
 ID format validation behavior)
 
 ### Next Immediate Step
-Frontend build, starting in a new chat, per the handoff brief prepared alongside
+Frontend build per the handoff brief prepared alongside
 this update.

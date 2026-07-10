@@ -20,6 +20,12 @@ export default function Header() {
           >
             Schools
           </Link>
+          <Link
+            href="/tags"
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-accent"
+          >
+            Tags
+          </Link>
           {user && (
             <Link
               href="/questions/new"
