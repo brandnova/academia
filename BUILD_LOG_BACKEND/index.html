@@ -12,7 +12,7 @@
         <link rel="prev" href="../project-plan/">
       
       
-        <link rel="next" href="../changelog/">
+        <link rel="next" href="../BUILD_LOG_FRONTEND/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Build Log - Academia</title>
+        <title>Build Log Backend - Academia</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Build Log
+              Build Log Backend
             
           </span>
         </div>
@@ -293,7 +293,7 @@
   <span class="md-ellipsis">
     
   
-    Build Log
+    Build Log Backend
   
 
     
@@ -311,7 +311,7 @@
   <span class="md-ellipsis">
     
   
-    Build Log
+    Build Log Backend
   
 
     
@@ -367,7 +367,29 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Production Readiness Pass (Post-MVP)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-completeness-permission-visibility-pass-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Completeness &amp; Permission Visibility Pass (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vote-state-visibility-fix-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vote State Visibility Fix (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vote State Visibility Fix (Post-MVP)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -409,6 +431,18 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#url-id-ergonomics-pass-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        URL &amp; ID Ergonomics Pass (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="URL &amp; ID Ergonomics Pass (Post-MVP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#known-deviations-from-docs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -418,8 +452,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#next-immediate-step" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -429,11 +463,43 @@
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_FRONTEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Log Frontend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -603,7 +669,29 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Production Readiness Pass (Post-MVP)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-completeness-permission-visibility-pass-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Completeness &amp; Permission Visibility Pass (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vote-state-visibility-fix-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vote State Visibility Fix (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vote State Visibility Fix (Post-MVP)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -645,6 +733,18 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#url-id-ergonomics-pass-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        URL &amp; ID Ergonomics Pass (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="URL &amp; ID Ergonomics Pass (Post-MVP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#known-deviations-from-docs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -654,8 +754,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#next-immediate-step" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -663,6 +763,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -727,6 +832,16 @@ concerns rather than a feature slice.</p>
 <h2 id="production-readiness-pass-post-mvp">Production Readiness Pass (Post-MVP)</h2>
 <p>Not a numbered phase, infrastructure work following the completed 15-phase MVP.
 Pending your verification before considered final.</p>
+<h2 id="api-completeness-permission-visibility-pass-post-mvp">API Completeness &amp; Permission Visibility Pass (Post-MVP)</h2>
+<p>Not a numbered phase. Addresses two real gaps found in review: the health check
+endpoint was never documented, and there was no way for the frontend to know
+whether the current user is a Moderator or School Representative for a given
+hub, nor a way to see who currently holds a hub's representative assignments.</p>
+<h2 id="vote-state-visibility-fix-post-mvp">Vote State Visibility Fix (Post-MVP)</h2>
+<p>Not a numbered phase. Addresses a real gap: the answer object embedded in
+question detail exposed vote_score (the aggregate) but never the requesting
+user's own vote, so the frontend had no way to restore correct vote-button
+state after a page reload, only what happened during the current session.</p>
 <h3 id="added">Added</h3>
 <ul>
 <li>django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
@@ -761,6 +876,26 @@ Pending your verification before considered final.</p>
   Faker dependency, populates schools, hubs, departments, questions across all
   three statuses, answers, votes, comments, tags, and a sample report, including
   deliberate empty-state and pending-request scenarios for frontend testing.</li>
+<li>GET /users/me/ (and the Google Login response's nested user object) now
+  include moderator_for and representative_for, arrays of active hub
+  assignments with nested school id/name/slug</li>
+<li>GET /hubs/{hub_id}/representatives/ (new, public), mirrors the existing
+  List Moderators endpoint, closes the "no way to see current reps" gap</li>
+<li>slug added to every nested school representation across the API (Hub
+  detail, Question's hub.school, activation request's school), so the
+  frontend never needs an extra lookup just to link back to a school page</li>
+<li>api-contract.md gained a new Frontend Permission Model section explaining
+  roles, how a user acquires one, and a concrete table of what to show when</li>
+<li>Health Check documented in api-contract.md for the first time</li>
+<li>user_vote ("UP"/"DOWN"/null) added to the Answer serializer used everywhere
+  an answer object appears: nested in question detail, and in the Create/Update
+  Answer responses. Null for anonymous requests and always null on an answer's
+  own author, since self-voting is blocked</li>
+<li>Every place that builds a QuestionDetailSerializer or AnswerResponseSerializer
+  now explicitly passes request context, previously several call sites
+  (question detail GET/PATCH, question create response, answer create/update
+  responses) constructed these serializers without context, which would have
+  silently made user_vote resolve to null even for a user who had voted</li>
 </ul>
 <h2 id="key-decisions-made">Key Decisions Made</h2>
 <ul>
@@ -809,6 +944,22 @@ Pending your verification before considered final.</p>
   enforcement or cache freshness during a Redis outage</li>
 <li>gunicorn added to requirements for VPS portability, even though PythonAnywhere
   uses its own WSGI dispatch rather than gunicorn directly</li>
+<li>Role visibility is UX-only. The backend enforces every permission
+  independently regardless of what moderator_for/representative_for show,
+  hiding a control is a convenience, never a substitute for the 403 a user
+  would get attempting the action directly</li>
+<li>No push notification exists yet for role assignment (is_moderator/is_rep
+  changes), the frontend is expected to refetch GET /users/me/ after login
+  and when entering a school/hub management context, not rely on it updating
+  mid-session automatically</li>
+<li>admin's moderator_for/representative_for are not backfilled with every hub,
+  is_admin alone is the correct signal for blanket access, keeping the
+  response bounded regardless of how many hubs exist</li>
+<li>user_vote is computed per-request via a SerializerMethodField querying
+  AnswerVote directly, not stored or cached, consistent with how has_hub and
+  question_count are already handled elsewhere as derived, not persisted, data</li>
+<li>No new model, no migration, this was purely a serialization and context-
+  passing gap</li>
 </ul>
 <h2 id="conventions-established">Conventions Established</h2>
 <ul>
@@ -841,17 +992,22 @@ Pending your verification before considered final.</p>
   custom MethodScopedThrottle (apps.core.throttling) for endpoints where only specific
   HTTP methods should count against a scoped rate</li>
 </ul>
-<h2 id="known-deviations-from-docs">Known Deviations From Docs</h2>
-<ul>
-<li>The 404 fix means unmatched routes now honor api-contract.md's documented
-  404 shape more completely than before, this is a genuine gap-closing fix,
-  not a new deviation, worth a one-line mention at the next docs sync.</li>
-</ul>
-<h2 id="next-immediate-step">Next Immediate Step</h2>
-<p>Frontend build, starting in a new chat, Next.js decided as the framework. School
-list acquisition (real data sourcing from NUC/NBTE/NCCE) and the extended School
-schema remain queued as future work, not blocking frontend development, since the
-seed command already provides realistic demo data to build against.</p>
+<h2 id="url-id-ergonomics-pass-post-mvp">URL &amp; ID Ergonomics Pass (Post-MVP)</h2>
+<p>Confirmed working. The one test failure encountered during verification (a chain
+of KeyErrors while running the cURL suite) traced to a test-script issue, not a
+code defect: the verification commands tried to create "University of Lagos" /
+"UNILAG", which seed_demo_data had already inserted, causing a 400 duplicate error
+that cascaded into empty shell variables for the rest of that run. Corrected
+verification (fetching the already-seeded school via search instead of recreating
+it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
+Question slugs, and the 400 Invalid ID format response all work as designed.</p>
+<h3 id="known-deviations-from-docs">Known Deviations From Docs</h3>
+<p>(none, database-schema.md, api-contract.md, and project-overview.md were updated
+in this pass to reflect the slug fields, the two new by-slug endpoints, and the
+ID format validation behavior)</p>
+<h3 id="next-immediate-step">Next Immediate Step</h3>
+<p>Frontend build per the handoff brief prepared alongside
+this update.</p>
 
 
 

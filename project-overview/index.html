@@ -506,14 +506,41 @@
   
   
     <li class="md-nav__item">
-      <a href="../BUILD_LOG/" class="md-nav__link">
+      <a href="../BUILD_LOG_BACKEND/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Build Log
+    Build Log Backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_FRONTEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Log Frontend
   
 
     
@@ -906,7 +933,12 @@ answer that helps someone else later.</em></p>
 </tbody>
 </table>
 <p>Every page's design should make it obvious which of these a visitor currently is,
-most of the UI is shared, but the <em>actions available</em> change per role.</p>
+most of the UI is shared, but the <em>actions available</em> change per role. Determine
+this from <code>GET /users/me/</code>'s <code>is_admin</code>, <code>moderator_for</code>, and <code>representative_for</code>
+fields, see <code>api-contract.md</code>'s "Frontend Permission Model" section for the exact
+rules of what to show when. Hiding a control based on these fields is a UX
+convenience only, the backend enforces every permission independently regardless
+of what the UI shows.</p>
 <hr />
 <h2 id="3-how-the-build-is-sequenced">3. How the Build Is Sequenced</h2>
 <p>The backend is being built in phases, each one a working, testable slice. Rough
@@ -1066,6 +1098,12 @@ even be revisited per-section of the site, without touching the backend.</p>
 client-side, exchange it at <code>POST /api/v1/auth/google/</code> for a JWT pair, and
 attach <code>Authorization: Bearer &lt;access&gt;</code> to subsequent requests, documented
 in <code>api-contract.md</code>.</p>
+<p><strong>URL conventions to build against:</strong> Schools and Hubs each have a stable, unique
+<code>slug</code> (e.g. <code>unilag</code>) suitable as the primary route segment for their public pages,
+<code>/schools/unilag/</code>, <code>/hubs/unilag/</code>, resolved via <code>GET /schools/by-slug/{slug}/</code> and
+<code>GET /hubs/by-slug/{slug}/</code>. Questions have a cosmetic, non-unique <code>slug</code> meant to sit
+alongside the UUID in the URL for readability and SEO, <code>/questions/{id}/{slug}</code>, but
+the UUID is what's actually looked up, the slug can be anything or even omitted.</p>
 <hr />
 <h2 id="10-what-not-to-build-yet">10. What NOT to Build Yet</h2>
 <p>These are documented in the core docs as <strong>future phases</strong>, don't design or

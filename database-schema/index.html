@@ -277,14 +277,41 @@
   
   
     <li class="md-nav__item">
-      <a href="../BUILD_LOG/" class="md-nav__link">
+      <a href="../BUILD_LOG_BACKEND/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Build Log
+    Build Log Backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_FRONTEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Log Frontend
   
 
     
@@ -1314,6 +1341,12 @@
 <td>Abbreviated name</td>
 </tr>
 <tr>
+<td>slug</td>
+<td>String</td>
+<td>Unique, Auto-generated</td>
+<td>URL-friendly identifier, generated once from short_name at creation, never regenerated on edit</td>
+</tr>
+<tr>
 <td>location</td>
 <td>String</td>
 <td>Nullable</td>
@@ -1549,6 +1582,12 @@
 <td>String</td>
 <td>Required</td>
 <td>Question title</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>String</td>
+<td>Auto-generated, not unique</td>
+<td>Cosmetic, SEO-friendly URL segment generated from title. Regenerated on every edit. Never used for lookups, the UUID remains the canonical identifier.</td>
 </tr>
 <tr>
 <td>body</td>
@@ -2203,7 +2242,7 @@ join this set once built, with no schema change required.</p>
 </ul>
 <h3 id="unique-constraints">Unique Constraints</h3>
 <ul>
-<li><code>School</code>: name, short_name</li>
+<li><code>School</code>: name, short_name, slug</li>
 <li><code>Department</code>: (school_id, name)</li>
 <li><code>Hub</code>: school_id</li>
 <li><code>AnswerVote</code>: (answer_id, user_id)</li>
