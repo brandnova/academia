@@ -45,6 +45,12 @@ concerns rather than a feature slice.
 Not a numbered phase, infrastructure work following the completed 15-phase MVP.
 Pending your verification before considered final.
 
+## API Completeness & Permission Visibility Pass (Post-MVP)
+Not a numbered phase. Addresses two real gaps found in review: the health check
+endpoint was never documented, and there was no way for the frontend to know
+whether the current user is a Moderator or School Representative for a given
+hub, nor a way to see who currently holds a hub's representative assignments.
+
 ### Added
 - django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
   localhost:3000 for local Next.js dev, no credentials (bearer tokens, not cookies)
@@ -78,6 +84,17 @@ Pending your verification before considered final.
   Faker dependency, populates schools, hubs, departments, questions across all
   three statuses, answers, votes, comments, tags, and a sample report, including
   deliberate empty-state and pending-request scenarios for frontend testing.
+- GET /users/me/ (and the Google Login response's nested user object) now
+  include moderator_for and representative_for, arrays of active hub
+  assignments with nested school id/name/slug
+- GET /hubs/{hub_id}/representatives/ (new, public), mirrors the existing
+  List Moderators endpoint, closes the "no way to see current reps" gap
+- slug added to every nested school representation across the API (Hub
+  detail, Question's hub.school, activation request's school), so the
+  frontend never needs an extra lookup just to link back to a school page
+- api-contract.md gained a new Frontend Permission Model section explaining
+  roles, how a user acquires one, and a concrete table of what to show when
+- Health Check documented in api-contract.md for the first time
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -125,6 +142,17 @@ Pending your verification before considered final.
   enforcement or cache freshness during a Redis outage
 - gunicorn added to requirements for VPS portability, even though PythonAnywhere
   uses its own WSGI dispatch rather than gunicorn directly
+- Role visibility is UX-only. The backend enforces every permission
+  independently regardless of what moderator_for/representative_for show,
+  hiding a control is a convenience, never a substitute for the 403 a user
+  would get attempting the action directly
+- No push notification exists yet for role assignment (is_moderator/is_rep
+  changes), the frontend is expected to refetch GET /users/me/ after login
+  and when entering a school/hub management context, not rely on it updating
+  mid-session automatically
+- admin's moderator_for/representative_for are not backfilled with every hub,
+  is_admin alone is the correct signal for blanket access, keeping the
+  response bounded regardless of how many hubs exist
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -156,14 +184,22 @@ Pending your verification before considered final.
   custom MethodScopedThrottle (apps.core.throttling) for endpoints where only specific
   HTTP methods should count against a scoped rate
 
-## Known Deviations From Docs
-- The 404 fix means unmatched routes now honor api-contract.md's documented
-  404 shape more completely than before, this is a genuine gap-closing fix,
-  not a new deviation, worth a one-line mention at the next docs sync.
+## URL & ID Ergonomics Pass (Post-MVP)
 
+Confirmed working. The one test failure encountered during verification (a chain
+of KeyErrors while running the cURL suite) traced to a test-script issue, not a
+code defect: the verification commands tried to create "University of Lagos" /
+"UNILAG", which seed_demo_data had already inserted, causing a 400 duplicate error
+that cascaded into empty shell variables for the rest of that run. Corrected
+verification (fetching the already-seeded school via search instead of recreating
+it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
+Question slugs, and the 400 Invalid ID format response all work as designed.
 
-## Next Immediate Step
-Frontend build, starting in a new chat, Next.js decided as the framework. School
-list acquisition (real data sourcing from NUC/NBTE/NCCE) and the extended School
-schema remain queued as future work, not blocking frontend development, since the
-seed command already provides realistic demo data to build against.
+### Known Deviations From Docs
+(none, database-schema.md, api-contract.md, and project-overview.md were updated
+in this pass to reflect the slug fields, the two new by-slug endpoints, and the
+ID format validation behavior)
+
+### Next Immediate Step
+Frontend build, starting in a new chat, per the handoff brief prepared alongside
+this update.

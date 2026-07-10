@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.http import JsonResponse
-from django.urls import include, path
+from django.urls import include, path, register_converter
 from django.views.defaults import page_not_found
+
+from apps.core.converters import LooseIDConverter
+
+register_converter(LooseIDConverter, "looseid")
 
 
 def custom_404_handler(request, exception=None):

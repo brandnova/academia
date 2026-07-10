@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.http import Http404
 from django.utils import timezone
 from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied
@@ -10,8 +9,10 @@ from rest_framework.views import APIView
 from apps.accounts.models import User
 from apps.core.cache import get_cached, invalidate_key, invalidate_prefix, make_cache_key, set_cached
 from apps.core.permissions import IsPlatformAdmin
+from apps.core.utils import validate_uuid
 from apps.notifications.models import Notification
 from apps.notifications.services import notify
+from apps.schools.models import School
 
 from .models import Hub, HubActivationRequest, ModeratorAssignment, SchoolRepresentativeAssignment
 from .pagination import HubActivationRequestPagination
@@ -28,47 +29,63 @@ from .serializers import (
 def _invalidate_hub_cache(hub):
     invalidate_key(make_cache_key("hub-detail", hub.id))
     invalidate_key(make_cache_key("hub-by-school", hub.school_id))
+    invalidate_key(make_cache_key("hub-by-slug", hub.school.slug))
     invalidate_key(make_cache_key("school-detail", hub.school_id))
 
 
-class HubDetailView(generics.RetrieveAPIView):
-    queryset = Hub.objects.filter(is_active=True)
-    serializer_class = HubDetailSerializer
-    lookup_field = "id"
-    lookup_url_kwarg = "hub_id"
+class HubDetailView(APIView):
     permission_classes = [AllowAny]
 
-    def get_object(self):
-        try:
-            return super().get_object()
-        except Http404:
-            raise NotFound("Hub not found")
-
-    def retrieve(self, request, *args, **kwargs):
-        hub_id = kwargs.get("hub_id")
+    def get(self, request, hub_id):
+        parsed_id = validate_uuid(hub_id)
         cache_key = make_cache_key("hub-detail", hub_id)
         cached = get_cached(cache_key)
         if cached is not None:
             return Response(cached)
 
-        response = super().retrieve(request, *args, **kwargs)
-        if response.status_code == 200:
-            set_cached(cache_key, response.data, settings.CACHE_TTL_SHORT)
-        return response
+        try:
+            hub = Hub.objects.get(id=parsed_id, is_active=True)
+        except Hub.DoesNotExist:
+            raise NotFound("Hub not found")
+
+        data = HubDetailSerializer(hub).data
+        set_cached(cache_key, data, settings.CACHE_TTL_SHORT)
+        return Response(data)
 
 
 class HubBySchoolView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, school_id):
+        parsed_id = validate_uuid(school_id)
         cache_key = make_cache_key("hub-by-school", school_id)
         cached = get_cached(cache_key)
         if cached is not None:
             return Response(cached)
 
         try:
-            hub = Hub.objects.get(school_id=school_id, is_active=True)
-        except (Hub.DoesNotExist, ValueError):
+            hub = Hub.objects.get(school_id=parsed_id, is_active=True)
+        except Hub.DoesNotExist:
+            raise NotFound("Hub not found for this school")
+
+        data = HubDetailSerializer(hub).data
+        set_cached(cache_key, data, settings.CACHE_TTL_SHORT)
+        return Response(data)
+
+
+class HubBySlugView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, slug):
+        cache_key = make_cache_key("hub-by-slug", slug)
+        cached = get_cached(cache_key)
+        if cached is not None:
+            return Response(cached)
+
+        try:
+            school = School.objects.get(slug=slug, is_active=True)
+            hub = Hub.objects.get(school=school, is_active=True)
+        except (School.DoesNotExist, Hub.DoesNotExist):
             raise NotFound("Hub not found for this school")
 
         data = HubDetailSerializer(hub).data
@@ -110,9 +127,10 @@ class ApproveActivationRequestView(APIView):
     permission_classes = [IsAuthenticated, IsPlatformAdmin]
 
     def post(self, request, request_id):
+        parsed_id = validate_uuid(request_id)
         try:
-            activation_request = HubActivationRequest.objects.get(id=request_id)
-        except (HubActivationRequest.DoesNotExist, ValueError):
+            activation_request = HubActivationRequest.objects.get(id=parsed_id)
+        except HubActivationRequest.DoesNotExist:
             raise NotFound("Activation request not found")
 
         if activation_request.status != HubActivationRequest.Status.PENDING:
@@ -148,7 +166,7 @@ class ApproveActivationRequestView(APIView):
             email_context={
                 "recipient_name": activation_request.user.full_name,
                 "school_name": hub.school.name,
-                "hub_url": f"{settings.FRONTEND_URL}/hubs/{hub.id}",
+                "hub_url": f"{settings.FRONTEND_URL}/hubs/{hub.school.slug}",
             },
         )
 
@@ -170,9 +188,10 @@ class RejectActivationRequestView(APIView):
     permission_classes = [IsAuthenticated, IsPlatformAdmin]
 
     def post(self, request, request_id):
+        parsed_id = validate_uuid(request_id)
         try:
-            activation_request = HubActivationRequest.objects.get(id=request_id)
-        except (HubActivationRequest.DoesNotExist, ValueError):
+            activation_request = HubActivationRequest.objects.get(id=parsed_id)
+        except HubActivationRequest.DoesNotExist:
             raise NotFound("Activation request not found")
 
         if activation_request.status != HubActivationRequest.Status.PENDING:
@@ -199,9 +218,10 @@ class HubModeratorListCreateView(APIView):
         return [AllowAny()]
 
     def get_hub(self, hub_id):
+        parsed_id = validate_uuid(hub_id)
         try:
-            return Hub.objects.get(id=hub_id, is_active=True)
-        except (Hub.DoesNotExist, ValueError):
+            return Hub.objects.get(id=parsed_id, is_active=True)
+        except Hub.DoesNotExist:
             raise NotFound("Hub not found")
 
     def get(self, request, hub_id):
@@ -217,9 +237,10 @@ class HubModeratorListCreateView(APIView):
         user_id = request.data.get("user_id")
         if not user_id:
             return Response({"user_id": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
+        parsed_user_id = validate_uuid(user_id)
         try:
-            target_user = User.objects.get(id=user_id)
-        except (User.DoesNotExist, ValueError):
+            target_user = User.objects.get(id=parsed_user_id)
+        except User.DoesNotExist:
             return Response(
                 {"user_id": [f"User with ID '{user_id}' does not exist."]},
                 status=status.HTTP_404_NOT_FOUND,
@@ -246,17 +267,19 @@ class HubModeratorDetailView(APIView):
     permission_classes = [IsAuthenticated]
 
     def delete(self, request, hub_id, user_id):
+        parsed_hub_id = validate_uuid(hub_id)
+        parsed_user_id = validate_uuid(user_id)
         try:
-            hub = Hub.objects.get(id=hub_id, is_active=True)
-        except (Hub.DoesNotExist, ValueError):
+            hub = Hub.objects.get(id=parsed_hub_id, is_active=True)
+        except Hub.DoesNotExist:
             raise NotFound("Hub not found")
 
         if not user_is_representative_for_hub(request.user, hub.id):
             raise PermissionDenied("You do not have permission to perform this action")
 
         try:
-            assignment = ModeratorAssignment.objects.get(hub=hub, user_id=user_id, is_active=True)
-        except (ModeratorAssignment.DoesNotExist, ValueError):
+            assignment = ModeratorAssignment.objects.get(hub=hub, user_id=parsed_user_id, is_active=True)
+        except ModeratorAssignment.DoesNotExist:
             raise NotFound("Moderator assignment not found")
 
         assignment.is_active = False
@@ -266,22 +289,34 @@ class HubModeratorDetailView(APIView):
 
 
 class HubRepresentativeListCreateView(APIView):
-    permission_classes = [IsAuthenticated, IsPlatformAdmin]
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [IsAuthenticated(), IsPlatformAdmin()]
+        return [AllowAny()]
 
     def get_hub(self, hub_id):
+        parsed_id = validate_uuid(hub_id)
         try:
-            return Hub.objects.get(id=hub_id, is_active=True)
-        except (Hub.DoesNotExist, ValueError):
+            return Hub.objects.get(id=parsed_id, is_active=True)
+        except Hub.DoesNotExist:
             raise NotFound("Hub not found")
+
+    def get(self, request, hub_id):
+        hub = self.get_hub(hub_id)
+        assignments = SchoolRepresentativeAssignment.objects.filter(
+            hub=hub, is_active=True
+        ).select_related("user")
+        return Response({"results": RepresentativeAssignmentSerializer(assignments, many=True).data})
 
     def post(self, request, hub_id):
         hub = self.get_hub(hub_id)
         user_id = request.data.get("user_id")
         if not user_id:
             return Response({"user_id": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
+        parsed_user_id = validate_uuid(user_id)
         try:
-            target_user = User.objects.get(id=user_id)
-        except (User.DoesNotExist, ValueError):
+            target_user = User.objects.get(id=parsed_user_id)
+        except User.DoesNotExist:
             return Response(
                 {"user_id": [f"User with ID '{user_id}' does not exist."]},
                 status=status.HTTP_404_NOT_FOUND,
@@ -307,14 +342,16 @@ class HubRepresentativeDetailView(APIView):
     permission_classes = [IsAuthenticated, IsPlatformAdmin]
 
     def delete(self, request, hub_id, user_id):
+        parsed_hub_id = validate_uuid(hub_id)
+        parsed_user_id = validate_uuid(user_id)
         try:
-            hub = Hub.objects.get(id=hub_id, is_active=True)
-        except (Hub.DoesNotExist, ValueError):
+            hub = Hub.objects.get(id=parsed_hub_id, is_active=True)
+        except Hub.DoesNotExist:
             raise NotFound("Hub not found")
 
         try:
-            assignment = SchoolRepresentativeAssignment.objects.get(hub=hub, user_id=user_id, is_active=True)
-        except (SchoolRepresentativeAssignment.DoesNotExist, ValueError):
+            assignment = SchoolRepresentativeAssignment.objects.get(hub=hub, user_id=parsed_user_id, is_active=True)
+        except SchoolRepresentativeAssignment.DoesNotExist:
             raise NotFound("Representative assignment not found")
 
         assignment.is_active = False

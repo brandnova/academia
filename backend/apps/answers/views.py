@@ -4,10 +4,11 @@ from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, UserRateThrottle
+from rest_framework.views import APIView
 
 from apps.core.throttling import MethodScopedThrottle
+from apps.core.utils import validate_uuid
 from apps.notifications.models import Notification
 from apps.notifications.services import notify
 from apps.questions.models import Question
@@ -39,7 +40,7 @@ class AnswerCreateView(APIView):
                     "recipient_name": question.author.full_name,
                     "answer_author_name": answer.author.full_name,
                     "question_title": question.title,
-                    "question_url": f"{settings.FRONTEND_URL}/questions/{question.id}",
+                    "question_url": f"{settings.FRONTEND_URL}/questions/{question.id}/{question.slug}",
                 },
             )
 
@@ -51,9 +52,10 @@ class AnswerDetailView(APIView):
     http_method_names = ["patch", "delete", "options"]
 
     def get_answer(self, answer_id):
+        parsed_id = validate_uuid(answer_id)
         try:
-            return Answer.objects.select_related("question").get(id=answer_id)
-        except (Answer.DoesNotExist, ValueError):
+            return Answer.objects.select_related("question").get(id=parsed_id)
+        except Answer.DoesNotExist:
             raise NotFound("Answer not found")
 
     def patch(self, request, answer_id):
@@ -89,9 +91,10 @@ class AnswerVoteView(APIView):
     throttled_methods = ["POST", "DELETE"]
 
     def get_answer(self, answer_id):
+        parsed_id = validate_uuid(answer_id)
         try:
-            return Answer.objects.get(id=answer_id)
-        except (Answer.DoesNotExist, ValueError):
+            return Answer.objects.get(id=parsed_id)
+        except Answer.DoesNotExist:
             raise NotFound("Answer not found")
 
     def post(self, request, answer_id):
@@ -156,9 +159,10 @@ class MarkBestAnswerView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, answer_id):
+        parsed_id = validate_uuid(answer_id)
         try:
-            answer = Answer.objects.select_related("question").get(id=answer_id)
-        except (Answer.DoesNotExist, ValueError):
+            answer = Answer.objects.select_related("question").get(id=parsed_id)
+        except Answer.DoesNotExist:
             raise NotFound("Answer not found")
 
         question = answer.question
@@ -187,7 +191,7 @@ class MarkBestAnswerView(APIView):
                 email_context={
                     "recipient_name": answer.author.full_name,
                     "question_title": question.title,
-                    "question_url": f"{settings.FRONTEND_URL}/questions/{question.id}",
+                    "question_url": f"{settings.FRONTEND_URL}/questions/{question.id}/{question.slug}",
                 },
             )
 

@@ -9,13 +9,13 @@ from .models import Hub, HubActivationRequest, ModeratorAssignment, SchoolRepres
 class SchoolMiniSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
-        fields = ["id", "name", "short_name"]
+        fields = ["id", "name", "short_name", "slug"]
 
 
 class HubSchoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
-        fields = ["id", "name", "short_name", "location"]
+        fields = ["id", "name", "short_name", "slug", "location"]
 
 
 class HubDepartmentSerializer(serializers.ModelSerializer):

@@ -1,12 +1,13 @@
 from django.db.models import Q
-from django.http import Http404
 from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+from rest_framework.views import APIView
 
 from apps.core.throttling import MethodScopedThrottle
+from apps.core.utils import validate_uuid
 
 from .models import Question
 from .pagination import QuestionPagination
@@ -76,44 +77,36 @@ class QuestionListCreateView(generics.ListCreateAPIView):
         return Response(QuestionDetailSerializer(question).data, status=status.HTTP_201_CREATED)
 
 
-class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Question.objects.select_related("author", "hub__school", "department")
-    lookup_field = "id"
-    lookup_url_kwarg = "question_id"
-
+class QuestionDetailView(APIView):
     def get_permissions(self):
         if self.request.method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
 
-    def get_serializer_class(self):
-        if self.request.method == "PATCH":
-            return QuestionUpdateSerializer
-        return QuestionDetailSerializer
-
-    def get_object(self):
+    def get_question(self, question_id):
+        parsed_id = validate_uuid(question_id)
         try:
-            return super().get_object()
-        except Http404:
+            return Question.objects.select_related("author", "hub__school", "department").get(id=parsed_id)
+        except Question.DoesNotExist:
             raise NotFound("Question not found")
 
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        Question.objects.filter(id=instance.id).update(view_count=instance.view_count + 1)
-        instance.refresh_from_db(fields=["view_count"])
-        return Response(QuestionDetailSerializer(instance).data)
+    def get(self, request, question_id):
+        question = self.get_question(question_id)
+        Question.objects.filter(id=question.id).update(view_count=question.view_count + 1)
+        question.refresh_from_db(fields=["view_count"])
+        return Response(QuestionDetailSerializer(question).data)
 
-    def patch(self, request, *args, **kwargs):
-        question = self.get_object()
+    def patch(self, request, question_id):
+        question = self.get_question(question_id)
         if question.author_id != request.user.id:
             raise PermissionDenied("You do not have permission to edit this question")
-        write_serializer = self.get_serializer(question, data=request.data, partial=True)
+        write_serializer = QuestionUpdateSerializer(question, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         question = write_serializer.save()
         return Response(QuestionDetailSerializer(question).data)
 
-    def delete(self, request, *args, **kwargs):
-        question = self.get_object()
+    def delete(self, request, question_id):
+        question = self.get_question(question_id)
         if question.author_id != request.user.id:
             raise PermissionDenied("You do not have permission to delete this question")
         question.delete()
@@ -121,11 +114,6 @@ class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UnansweredQuestionsView(generics.ListAPIView):
-    """
-    Admins see unanswered questions across all hubs. Moderators see unanswered
-    questions only for hubs they are actively assigned to moderate. A user who
-    is neither is blocked with a 403.
-    """
     serializer_class = QuestionListSerializer
     pagination_class = QuestionPagination
     permission_classes = [IsAuthenticated]

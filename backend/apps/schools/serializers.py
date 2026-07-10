@@ -34,7 +34,7 @@ class SchoolListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = School
-        fields = ["id", "name", "short_name", "location", "website", "has_hub", "created_at"]
+        fields = ["id", "name", "short_name", "slug", "location", "website", "has_hub", "created_at"]
 
 
 class SchoolDetailSerializer(serializers.ModelSerializer):
@@ -44,7 +44,7 @@ class SchoolDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
         fields = [
-            "id", "name", "short_name", "location", "website",
+            "id", "name", "short_name", "slug", "location", "website",
             "has_hub", "departments", "verification_status", "created_at",
         ]
 

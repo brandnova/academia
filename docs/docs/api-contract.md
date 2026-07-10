@@ -16,6 +16,31 @@ deprecation window once a v2 exists.
 
 ---
 
+## Health Check
+
+### Health Check
+**Endpoint:** `GET /api/v1/health/`
+
+**Response (200 OK):**
+```json
+{
+  "status": "ok",
+  "service": "academia-backend",
+  "checks": {
+    "database": "ok",
+    "cache": "ok"
+  },
+  "timestamp": "2026-01-01T00:00:00Z"
+}
+```
+
+No authentication required. `status` is `"degraded"` if the database is
+unreachable, a cache outage alone does not count as degraded, caching is
+designed to fail open (see project-plan.md). Useful for uptime monitoring and
+load balancer health checks, not intended for frontend application logic.
+
+---
+
 ## Authentication
 
 ### How Google Auth Works (Frontend Implementation Guide)
@@ -122,7 +147,8 @@ Behavior notes: first login for an email creates the `User` record automatically
 **Response (200 OK):**
 ```json
 {
-  "access": "new_jwt_access_token"
+  "access": "new_jwt_access_token",
+  "refresh": "new_jwt_refresh_token"
 }
 ```
 
@@ -161,9 +187,27 @@ obtain new access tokens.
   "full_name": "John Doe",
   "avatar": "https://lh3.googleusercontent.com/...",
   "is_admin": false,
+  "moderator_for": [
+    {
+      "hub_id": "uuid",
+      "school": { "id": "uuid", "name": "University of Lagos", "slug": "unilag" }
+    }
+  ],
+  "representative_for": [
+    {
+      "hub_id": "uuid",
+      "school": { "id": "uuid", "name": "University of Lagos", "slug": "unilag" }
+    }
+  ],
   "created_at": "2026-01-01T00:00:00Z"
 }
 ```
+
+`moderator_for` and `representative_for` list every hub (with its school) where
+this user currently holds an active assignment. Both are empty arrays for a
+user with no such assignments. This same shape is also returned in the `user`
+field of the Google Login response. See "Frontend Permission Model" below for
+how to use these fields.
 
 ---
 
@@ -178,6 +222,69 @@ obtain new access tokens.
 ```
 
 **Response (200 OK):** Same as GET `/api/v1/users/me/`
+
+---
+
+## Frontend Permission Model
+
+The API enforces every permission independently, server-side, on every write.
+The fields described here exist purely so the frontend can show or hide the
+right links, buttons, and forms without guessing, they are a UX convenience,
+not a substitute for backend enforcement, hiding a button never replaces the
+403 a user would get if they attempted the action directly.
+
+### Roles
+
+- **User**: any authenticated account. Can ask/answer/comment/vote/report/
+  request a hub.
+- **Moderator**: a User with an active entry in that hub's `moderator_for`.
+  Can additionally see that hub's unanswered-questions queue.
+- **School Representative**: a User with an active entry in that hub's
+  `representative_for`. Can additionally manage departments for that hub's
+  school, and assign/remove moderators for that hub.
+- **Admin**: `is_admin: true`. Implicitly satisfies every Moderator and
+  Representative check for every hub, in addition to admin-only actions
+  (approve/reject hub activations, manage schools, assign representatives,
+  resolve reports, manage users). An admin's `moderator_for`/
+  `representative_for` arrays are not artificially populated with every hub,
+  `is_admin` alone is the signal to check for blanket access.
+
+### How a user gets a role
+
+There is no self-service way to become a Moderator or Representative. An
+admin assigns both explicitly:
+- `POST /hubs/{hub_id}/representatives/` (admin only) makes a user a
+  Representative for that hub.
+- `POST /hubs/{hub_id}/moderators/` (admin, or an existing Representative for
+  that hub) makes a user a Moderator for that hub.
+
+The newly assigned user does not see this reflected until their next
+`GET /users/me/` call picks up the new `moderator_for`/`representative_for`
+entry, there is currently no push notification for this (`MODERATOR_ASSIGNED`
+exists as a notification type but has no trigger wired to it yet, tracked in
+feature-list.md). Refetch the current user after login and when navigating
+into a school or hub the person might administer, rather than relying on it
+updating automatically mid-session.
+
+### Deriving what to show
+
+Given the current user's `moderator_for`/`representative_for`/`is_admin`, and
+a specific school or hub the person is viewing:
+
+| Show this... | ...when |
+|---|---|
+| "Ask a question" | any authenticated user |
+| "Request hub activation" | any authenticated user, on a school with `has_hub: false` |
+| "Manage departments" (create/edit) for a school | `is_admin` is `true`, OR that school's `id` appears in `representative_for[].school.id` |
+| "Assign / remove moderators" for a hub | `is_admin` is `true`, OR that hub's `id` appears in `representative_for[].hub_id` |
+| "Assign / remove representatives" for a hub | `is_admin` is `true` only |
+| "Unanswered questions" queue link, scoped to a hub | `is_admin` is `true`, OR that hub's `id` appears in `moderator_for[].hub_id` |
+| Admin dashboard (schools, activation requests, reports, users) | `is_admin` is `true` only |
+
+Matching against `representative_for[].school.id` directly (rather than
+resolving a hub id first) is the fastest way to check department-management
+access for a school page, since the school's own `id` is already on hand
+wherever a school is being displayed.
 
 ---
 
@@ -203,6 +310,7 @@ obtain new access tokens.
       "id": "uuid",
       "name": "University of Lagos",
       "short_name": "UNILAG",
+      "slug": "unilag",
       "location": "Lagos, Nigeria",
       "website": "https://unilag.edu.ng",
       "has_hub": true,
@@ -223,6 +331,7 @@ obtain new access tokens.
   "id": "uuid",
   "name": "University of Lagos",
   "short_name": "UNILAG",
+  "slug": "unilag",
   "location": "Lagos, Nigeria",
   "website": "https://unilag.edu.ng",
   "has_hub": true,
@@ -244,6 +353,25 @@ obtain new access tokens.
   "error": "School not found"
 }
 ```
+
+---
+
+### Get School by Slug
+**Endpoint:** `GET /api/v1/schools/by-slug/{slug}/`
+
+**Response (200 OK):** Same as GET `/api/v1/schools/{school_id}/`
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "School not found"
+}
+```
+
+This is an additive lookup path alongside the existing UUID-based one, both remain
+valid indefinitely. `slug` is generated once at creation from `short_name` and never
+regenerated, so a bookmarked or shared URL never breaks even if `short_name` changes
+later.
 
 ---
 
@@ -295,6 +423,7 @@ responses for non-admins.
     "id": "uuid",
     "name": "University of Lagos",
     "short_name": "UNILAG",
+    "slug": "unilag",
     "location": "Lagos, Nigeria"
   },
   "is_active": true,
@@ -353,7 +482,9 @@ responses for non-admins.
   "school": {
     "id": "uuid",
     "name": "University of Lagos",
-    "short_name": "UNILAG"
+    "short_name": "UNILAG",
+    "slug": "unilag",
+    "location": "Lagos, Nigeria"
   },
   "user": {
     "id": "uuid",
@@ -486,6 +617,9 @@ email).
 }
 ```
 
+This endpoint is not paginated, it returns every active department for the
+school in one response.
+
 ---
 
 ### Create Department (School Representative or Admin)
@@ -555,6 +689,7 @@ Same permission requirement as Create Department above.
     {
       "id": "uuid",
       "title": "How do I calculate my CGPA?",
+      "slug": "how-do-i-calculate-my-cgpa",
       "body": "I'm confused about the grading system...",
       "status": "SOLVED",
       "view_count": 120,
@@ -567,7 +702,8 @@ Same permission requirement as Create Department above.
         "id": "uuid",
         "school": {
           "name": "University of Lagos",
-          "short_name": "UNILAG"
+          "short_name": "UNILAG",
+          "slug": "unilag"
         }
       },
       "department": {
@@ -595,6 +731,7 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 ```json
 {
   "title": "How do I calculate my CGPA?",
+  "slug": "how-do-i-calculate-my-cgpa",
   "body": "I'm confused about the grading system at UNILAG...",
   "hub_id": "uuid",
   "department_id": "uuid",
@@ -634,6 +771,7 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 {
   "id": "uuid",
   "title": "How do I calculate my CGPA?",
+  "slug": "how-do-i-calculate-my-cgpa",
   "body": "I'm confused about the grading system...",
   "status": "SOLVED",
   "view_count": 120,
@@ -694,6 +832,7 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 ```json
 {
   "title": "Updated title",
+  "slug": "updated-slug",
   "body": "Updated body",
   "department_id": "uuid",
   "tags": ["gpa", "updated"]
@@ -709,10 +848,14 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 }
 ```
 
-Note: `status` is not an editable field on this endpoint. It only changes as a side
+Note: 
+- `status` is not an editable field on this endpoint. It only changes as a side
 effect of other actions: creating the first answer moves a question from OPEN to
 ANSWERED, marking a best answer moves it to SOLVED, and deleting answers can move it
 back to ANSWERED or OPEN depending on what remains (see Delete Answer below).
+- `slug` on Question is purely cosmetic, meant for building readable URLs like
+`/questions/{id}/{slug}`, it is not unique and is not used for lookups. Editing a
+question's title regenerates its slug.
 
 ---
 
@@ -1063,6 +1206,7 @@ in-app only, no email.
 }
 ```
 
+This endpoint is not paginated, it returns every matching tag in one response.
 Tag names are normalized to lowercase everywhere, on creation, search, and every
 filter, so "GPA" and "gpa" are always treated as the same tag.
 
@@ -1451,7 +1595,8 @@ Removal is a soft-delete (`is_active: false`), not a hard row delete.
 }
 ```
 
-This endpoint is public, no authentication required.
+This endpoint is public, no authentication required. It is not paginated, it
+returns every active moderator for the hub in one response.
 
 ---
 
@@ -1484,6 +1629,36 @@ This endpoint is public, no authentication required.
 
 ---
 
+### List Representatives
+**Endpoint:** `GET /api/v1/hubs/{hub_id}/representatives/`
+
+**Response (200 OK):**
+```json
+{
+  "results": [
+    {
+      "id": "uuid",
+      "user": {
+        "id": "uuid",
+        "full_name": "Jane Smith",
+        "avatar": "https://..."
+      },
+      "hub": {
+        "id": "uuid"
+      },
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+This endpoint is public, no authentication required, matching List Moderators.
+It is not paginated, it returns every active representative for the hub in
+one response.
+
+---
+
 ### Remove School Representative (Admin Only)
 **Endpoint:** `DELETE /api/v1/hubs/{hub_id}/representatives/{user_id}/`
 
@@ -1496,9 +1671,7 @@ This endpoint is public, no authentication required.
 }
 ```
 
-Removal is a soft-delete (`is_active: false`), not a hard row delete. There is
-currently no List Representatives endpoint, representative assignments can be
-viewed via the Django admin site in the meantime.
+Removal is a soft-delete (`is_active: false`), not a hard row delete.
 
 ---
 
@@ -1659,6 +1832,23 @@ The `secret` is shown once at creation only, only a hash is stored.
 ```json
 {
   "error": "An unexpected error occurred"
+}
+```
+
+---
+
+## ID Format Validation
+
+Every path parameter that identifies a resource (school, hub, question, answer,
+comment, notification, report, department, activation request, user) is validated
+as a well-formed UUID before any lookup happens. A malformed ID (wrong length,
+invalid characters, etc.) returns a 400, distinct from a well-formed ID that simply
+doesn't match anything, which still returns the resource's documented 404.
+
+**Response (400 Bad Request):**
+```json
+{
+  "error": "Invalid ID format"
 }
 ```
 

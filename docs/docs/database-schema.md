@@ -25,6 +25,7 @@ Represents an educational institution.
 | id | UUID | Primary Key | Unique identifier |
 | name | String | Unique, Required | Full institution name |
 | short_name | String | Unique, Required | Abbreviated name |
+| slug | String | Unique, Auto-generated | URL-friendly identifier, generated once from short_name at creation, never regenerated on edit |
 | location | String | Nullable | City/State location |
 | website | String | Nullable | Official website URL |
 | verification_status | Enum | Default: UNVERIFIED | UNVERIFIED/PENDING/VERIFIED |
@@ -81,6 +82,7 @@ Represents a question asked by a user.
 |-------|------|-------------|-------------|
 | id | UUID | Primary Key | Unique identifier |
 | title | String | Required | Question title |
+| slug | String | Auto-generated, not unique | Cosmetic, SEO-friendly URL segment generated from title. Regenerated on every edit. Never used for lookups, the UUID remains the canonical identifier. |
 | body | Text | Required | Question content |
 | author | ForeignKey(User) | Required, CASCADE | Question creator |
 | hub | ForeignKey(Hub) | Required, CASCADE | School hub |
@@ -284,7 +286,7 @@ join this set once built, with no schema change required.
 - `Report`: (content_type_id, object_id) - For generic relation lookups
 
 ### Unique Constraints
-- `School`: name, short_name
+- `School`: name, short_name, slug
 - `Department`: (school_id, name)
 - `Hub`: school_id
 - `AnswerVote`: (answer_id, user_id)

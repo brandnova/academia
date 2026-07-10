@@ -5,13 +5,14 @@ from rest_framework import status
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+from rest_framework.views import APIView
 
 from apps.answers.models import Answer
 from apps.comments.models import Comment
 from apps.core.permissions import IsPlatformAdmin
 from apps.core.throttling import MethodScopedThrottle
+from apps.core.utils import validate_uuid
 from apps.questions.models import Question
 
 from .models import Report
@@ -30,7 +31,7 @@ class ReportListCreateView(APIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle, MethodScopedThrottle]
     throttle_scope = "reports"
     throttled_methods = ["POST"]
-    
+
     def get_permissions(self):
         if self.request.method == "POST":
             return [IsAuthenticated()]
@@ -104,9 +105,10 @@ class ResolveReportView(APIView):
     permission_classes = [IsAuthenticated, IsPlatformAdmin]
 
     def post(self, request, report_id):
+        parsed_id = validate_uuid(report_id)
         try:
-            report = Report.objects.get(id=report_id)
-        except (Report.DoesNotExist, ValueError):
+            report = Report.objects.get(id=parsed_id)
+        except Report.DoesNotExist:
             raise NotFound("Report not found")
 
         if report.status != Report.Status.PENDING:
@@ -139,9 +141,10 @@ class RejectReportView(APIView):
     permission_classes = [IsAuthenticated, IsPlatformAdmin]
 
     def post(self, request, report_id):
+        parsed_id = validate_uuid(report_id)
         try:
-            report = Report.objects.get(id=report_id)
-        except (Report.DoesNotExist, ValueError):
+            report = Report.objects.get(id=parsed_id)
+        except Report.DoesNotExist:
             raise NotFound("Report not found")
 
         if report.status != Report.Status.PENDING:

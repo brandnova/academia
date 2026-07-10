@@ -3,10 +3,11 @@ from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, UserRateThrottle
+from rest_framework.views import APIView
 
 from apps.answers.models import Answer
+from apps.core.utils import validate_uuid
 from apps.notifications.models import Notification
 from apps.notifications.services import notify
 
@@ -42,9 +43,10 @@ class CommentDetailView(APIView):
     http_method_names = ["patch", "delete", "options"]
 
     def get_comment(self, comment_id):
+        parsed_id = validate_uuid(comment_id)
         try:
-            return Comment.objects.get(id=comment_id)
-        except (Comment.DoesNotExist, ValueError):
+            return Comment.objects.get(id=parsed_id)
+        except Comment.DoesNotExist:
             raise NotFound("Comment not found")
 
     def patch(self, request, comment_id):
@@ -70,7 +72,7 @@ class CommentListView(ListAPIView):
     permission_classes = [AllowAny]
 
     def get_queryset(self):
-        answer_id = self.kwargs["answer_id"]
-        if not Answer.objects.filter(id=answer_id).exists():
+        parsed_id = validate_uuid(self.kwargs["answer_id"])
+        if not Answer.objects.filter(id=parsed_id).exists():
             raise NotFound("Answer not found")
-        return Comment.objects.filter(answer_id=answer_id)
+        return Comment.objects.filter(answer_id=parsed_id)

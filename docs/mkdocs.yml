@@ -7,7 +7,8 @@ nav:
   - Home: index.md
   - Project Overview: project-overview.md
   - Project Plan: project-plan.md
-  - Build Log: BUILD_LOG.md
+  - Build Log Backend: BUILD_LOG_BACKEND.md
+  - Build Log Frontend: BUILD_LOG_FRONTEND.md
   - Change Log: changelog.md
   - Features: feature-list.md
   - Database Schema: database-schema.md

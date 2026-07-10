@@ -17,6 +17,7 @@ from apps.core.cache import (
     set_cached,
 )
 from apps.core.permissions import IsPlatformAdmin
+from apps.core.utils import validate_uuid
 from .models import Department, School
 from .pagination import SchoolPagination
 from .serializers import (
@@ -74,48 +75,57 @@ class SchoolListCreateView(generics.ListCreateAPIView):
         return Response(SchoolDetailSerializer(school).data, status=status.HTTP_201_CREATED)
 
 
-class SchoolDetailView(generics.RetrieveUpdateAPIView):
-    queryset = School.objects.filter(is_active=True)
-    lookup_field = "id"
-    lookup_url_kwarg = "school_id"
-    http_method_names = ["get", "patch", "options", "head"]
-
+class SchoolDetailView(APIView):
     def get_permissions(self):
         if self.request.method == "PATCH":
             return [IsAuthenticated(), IsPlatformAdmin()]
         return [AllowAny()]
 
-    def get_serializer_class(self):
-        if self.request.method == "PATCH":
-            return SchoolWriteSerializer
-        return SchoolDetailSerializer
-
-    def get_object(self):
+    def get_school(self, school_id):
+        parsed_id = validate_uuid(school_id)
         try:
-            return super().get_object()
-        except Http404:
+            return School.objects.get(id=parsed_id, is_active=True)
+        except School.DoesNotExist:
             raise NotFound("School not found")
 
-    def retrieve(self, request, *args, **kwargs):
-        school_id = kwargs.get("school_id")
+    def get(self, request, school_id):
         cache_key = make_cache_key("school-detail", school_id)
         cached = get_cached(cache_key)
         if cached is not None:
             return Response(cached)
 
-        response = super().retrieve(request, *args, **kwargs)
-        if response.status_code == 200:
-            set_cached(cache_key, response.data, settings.CACHE_TTL_MEDIUM)
-        return response
+        school = self.get_school(school_id)
+        data = SchoolDetailSerializer(school).data
+        set_cached(cache_key, data, settings.CACHE_TTL_MEDIUM)
+        return Response(data)
 
-    def patch(self, request, *args, **kwargs):
-        school = self.get_object()
-        write_serializer = self.get_serializer(school, data=request.data, partial=True)
+    def patch(self, request, school_id):
+        school = self.get_school(school_id)
+        write_serializer = SchoolWriteSerializer(school, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         school = write_serializer.save()
         invalidate_key(make_cache_key("school-detail", school.id))
         invalidate_prefix("school-list")
         return Response(SchoolDetailSerializer(school).data)
+
+
+class SchoolBySlugView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, slug):
+        cache_key = make_cache_key("school-by-slug", slug)
+        cached = get_cached(cache_key)
+        if cached is not None:
+            return Response(cached)
+
+        try:
+            school = School.objects.get(slug=slug, is_active=True)
+        except School.DoesNotExist:
+            raise NotFound("School not found")
+
+        data = SchoolDetailSerializer(school).data
+        set_cached(cache_key, data, settings.CACHE_TTL_MEDIUM)
+        return Response(data)
 
 
 class DepartmentListCreateView(APIView):
@@ -125,9 +135,10 @@ class DepartmentListCreateView(APIView):
         return [AllowAny()]
 
     def get_school(self, school_id):
+        parsed_id = validate_uuid(school_id)
         try:
-            return School.objects.get(id=school_id, is_active=True)
-        except (School.DoesNotExist, ValueError):
+            return School.objects.get(id=parsed_id, is_active=True)
+        except School.DoesNotExist:
             raise NotFound("School not found")
 
     def get(self, request, school_id):
@@ -160,7 +171,8 @@ class DepartmentDetailView(APIView):
     http_method_names = ["patch", "options"]
 
     def get_department(self, department_id):
-        return get_object_or_404(Department, id=department_id)
+        parsed_id = validate_uuid(department_id)
+        return get_object_or_404(Department, id=parsed_id)
 
     def patch(self, request, department_id):
         try:

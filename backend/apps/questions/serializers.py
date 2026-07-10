@@ -16,7 +16,7 @@ class QuestionAuthorSerializer(serializers.ModelSerializer):
 class QuestionHubSchoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
-        fields = ["name", "short_name"]
+        fields = ["name", "short_name", "slug"]
 
 
 class QuestionHubSerializer(serializers.ModelSerializer):
@@ -44,7 +44,7 @@ class QuestionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = [
-            "id", "title", "body", "status", "view_count", "author", "hub",
+            "id", "title", "slug", "body", "status", "view_count", "author", "hub",
             "department", "tags", "answer_count", "best_answer_id",
             "created_at", "updated_at",
         ]
@@ -62,7 +62,6 @@ class QuestionDetailSerializer(QuestionListSerializer):
 
 
 def _sync_tags(question, tag_names):
-    """Replace a question's tags with the given list of names (normalized to lowercase)."""
     from apps.tags.models import QuestionTag, Tag
 
     if tag_names is None:

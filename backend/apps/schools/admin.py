@@ -5,9 +5,10 @@ from .models import Department, School
 
 @admin.register(School)
 class SchoolAdmin(admin.ModelAdmin):
-    list_display = ["short_name", "name", "verification_status", "is_active", "created_at"]
-    search_fields = ["name", "short_name"]
+    list_display = ["short_name", "name", "slug", "verification_status", "is_active", "created_at"]
+    search_fields = ["name", "short_name", "slug"]
     list_filter = ["verification_status", "is_active"]
+    readonly_fields = ["slug"]
 
 
 @admin.register(Department)

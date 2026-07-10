@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from apps.core.utils import validate_uuid
+
 from .models import Notification
 from .pagination import NotificationPagination
 from .serializers import NotificationSerializer
@@ -33,9 +35,10 @@ class MarkNotificationReadView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, notification_id):
+        parsed_id = validate_uuid(notification_id)
         try:
-            notification = Notification.objects.get(id=notification_id)
-        except (Notification.DoesNotExist, ValueError):
+            notification = Notification.objects.get(id=parsed_id)
+        except Notification.DoesNotExist:
             raise NotFound("Notification not found")
 
         if notification.user_id != request.user.id:

@@ -31,7 +31,12 @@ answer that helps someone else later.*
 | **Admin** | Manages schools, approves hub activation requests, assigns representatives, resolves reports. |
 
 Every page's design should make it obvious which of these a visitor currently is,
-most of the UI is shared, but the *actions available* change per role.
+most of the UI is shared, but the *actions available* change per role. Determine
+this from `GET /users/me/`'s `is_admin`, `moderator_for`, and `representative_for`
+fields, see `api-contract.md`'s "Frontend Permission Model" section for the exact
+rules of what to show when. Hiding a control based on these fields is a UX
+convenience only, the backend enforces every permission independently regardless
+of what the UI shows.
 
 ---
 
@@ -207,6 +212,13 @@ Whatever gets chosen will authenticate the same way: obtain a Google token
 client-side, exchange it at `POST /api/v1/auth/google/` for a JWT pair, and
 attach `Authorization: Bearer <access>` to subsequent requests, documented
 in `api-contract.md`.
+
+**URL conventions to build against:** Schools and Hubs each have a stable, unique
+`slug` (e.g. `unilag`) suitable as the primary route segment for their public pages,
+`/schools/unilag/`, `/hubs/unilag/`, resolved via `GET /schools/by-slug/{slug}/` and
+`GET /hubs/by-slug/{slug}/`. Questions have a cosmetic, non-unique `slug` meant to sit
+alongside the UUID in the URL for readability and SEO, `/questions/{id}/{slug}`, but
+the UUID is what's actually looked up, the slug can be anything or even omitted.
 
 ---
 

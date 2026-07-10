@@ -10,6 +10,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 
 from apps.core.permissions import IsPlatformAdmin
+from apps.core.utils import validate_uuid
 
 from .models import User
 from .pagination import UserPagination
@@ -146,9 +147,10 @@ class AdminUserDetailView(APIView):
     http_method_names = ["get", "patch", "options"]
 
     def get_user(self, user_id):
+        parsed_id = validate_uuid(user_id)
         try:
-            return User.objects.get(id=user_id)
-        except (User.DoesNotExist, ValueError):
+            return User.objects.get(id=parsed_id)
+        except User.DoesNotExist:
             raise NotFound("User not found")
 
     def get(self, request, user_id):
