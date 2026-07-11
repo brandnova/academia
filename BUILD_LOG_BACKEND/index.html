@@ -389,7 +389,29 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Vote State Visibility Fix (Post-MVP)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solved-status-semantics-fix-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLVED Status Semantics Fix (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-search-and-self-profile-pass-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Search and Self Profile Pass (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Search and Self Profile Pass (Post-MVP)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -691,7 +713,29 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Vote State Visibility Fix (Post-MVP)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solved-status-semantics-fix-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLVED Status Semantics Fix (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-search-and-self-profile-pass-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Search and Self Profile Pass (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Search and Self Profile Pass (Post-MVP)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -842,6 +886,13 @@ hub, nor a way to see who currently holds a hub's representative assignments.</p
 question detail exposed vote_score (the aggregate) but never the requesting
 user's own vote, so the frontend had no way to restore correct vote-button
 state after a page reload, only what happened during the current session.</p>
+<h2 id="solved-status-semantics-fix-post-mvp">SOLVED Status Semantics Fix (Post-MVP)</h2>
+<p>Not a numbered phase. Found during frontend testing: creating an answer was
+blocked once a question's status was SOLVED, conflating two separate meanings,
+"has a designated best answer" and "closed to further input." Decoupled these.</p>
+<h2 id="user-search-and-self-profile-pass-post-mvp">User Search and Self Profile Pass (Post-MVP)</h2>
+<p>Not a numbered phase. No migrations, both features are built entirely from
+existing tables and views.</p>
 <h3 id="added">Added</h3>
 <ul>
 <li>django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
@@ -896,6 +947,32 @@ state after a page reload, only what happened during the current session.</p>
   (question detail GET/PATCH, question create response, answer create/update
   responses) constructed these serializers without context, which would have
   silently made user_vote resolve to null even for a user who had voted</li>
+<li>AnswerCreateSerializer no longer blocks answer creation on SOLVED questions,
+  the validate() method that raised "Cannot add answer to a solved question"
+  was removed entirely</li>
+<li>No change needed to the OPEN to ANSWERED transition (already status-gated
+  to OPEN only, so a SOLVED question correctly stays SOLVED when a new plain
+  answer arrives), the delete-answer revert logic, or the mark-best transfer
+  logic, all three were already written in a way consistent with SOLVED
+  meaning has-a-best-answer rather than locked</li>
+<li>user_is_representative_for_any_hub() added to apps.hubs.permissions,
+  intentionally unscoped since the search endpoint isn't hub-specific</li>
+<li>GET /users/search/, admin or any active school representative, returns up
+  to 10 matching users by name/email, not paginated, closes the gap where
+  representatives had no way to find a user_id for the moderator-assignment
+  endpoints without admin access</li>
+<li>GET /users/me/ now includes a stats object (question_count, answer_count,
+  best_answer_count, comment_count), counts only, actual objects are fetched
+  via the endpoints below, deliberately kept out of this payload since it's
+  called frequently (login, entering a hub management context) and shouldn't
+  carry a user's full activity history on every call</li>
+<li>GET /users/me/answers/ and GET /users/me/comments/, both self-scoped and
+  authenticated, paginated, ordered by recency. New AnswerPagination class
+  in apps.answers, first paginated list endpoint that app has needed</li>
+<li>author query param added to GET /questions/, filters by author user ID,
+  validated the same way as path-based IDs, 400 on malformed input, covers
+  "my questions" without a dedicated endpoint since questions are already
+  public</li>
 </ul>
 <h2 id="key-decisions-made">Key Decisions Made</h2>
 <ul>
@@ -960,6 +1037,24 @@ state after a page reload, only what happened during the current session.</p>
   question_count are already handled elsewhere as derived, not persisted, data</li>
 <li>No new model, no migration, this was purely a serialization and context-
   passing gap</li>
+<li>SOLVED is "has a designated best answer," not "closed." A question accepts
+  new answers and can have its best answer reassigned at any status</li>
+<li>A genuine close/lock capability, if ever needed, will be a distinct,
+  deliberate moderator/admin action, not an automatic side effect of picking
+  a best answer, logged in feature-list.md's Moderation backlog, not built</li>
+<li>Reports are never exposed anywhere related to profile/activity data,
+  including to the reporting user themselves in this pass, a private "my
+  reports" view remains a distinct, deliberately unbuilt future item</li>
+<li>best_answer_count remains the platform's one deliberate quality signal,
+  now surfaced only to the user themselves rather than publicly, since there
+  is no public profile view at all right now</li>
+<li>User search is intentionally unscoped to a specific hub, hub-specific
+  enforcement already happens at the point of assignment
+  (POST /hubs/{hub_id}/moderators/ etc), the search endpoint only gates on
+  "is this person an admin or a representative of at least one hub"</li>
+<li>No public user profile endpoint exists in the API at all as of this pass,
+  every user-activity endpoint requires authentication and is scoped to the
+  requester</li>
 </ul>
 <h2 id="conventions-established">Conventions Established</h2>
 <ul>

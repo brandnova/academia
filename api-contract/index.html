@@ -614,6 +614,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#search-users-admin-or-school-representative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search Users (Admin or School Representative)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -780,6 +791,17 @@
     <span class="md-ellipsis">
       
         Get Hub by School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-hub-by-slug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Hub by Slug
       
     </span>
   </a>
@@ -963,6 +985,50 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#follow-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Follow Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unfollow-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unfollow Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-question-admin-representative-or-moderator-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lock Question (Admin, Representative, or Moderator Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unlock-question-admin-representative-or-moderator-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unlock Question (Admin, Representative, or Moderator Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1063,6 +1129,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#list-my-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List My Answers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1118,6 +1195,17 @@
     <span class="md-ellipsis">
       
         Delete Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-my-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List My Comments
       
     </span>
   </a>
@@ -1802,6 +1890,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#search-users-admin-or-school-representative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search Users (Admin or School Representative)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1968,6 +2067,17 @@
     <span class="md-ellipsis">
       
         Get Hub by School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-hub-by-slug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Hub by Slug
       
     </span>
   </a>
@@ -2151,6 +2261,50 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#follow-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Follow Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unfollow-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unfollow Question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-question-admin-representative-or-moderator-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lock Question (Admin, Representative, or Moderator Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unlock-question-admin-representative-or-moderator-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unlock Question (Admin, Representative, or Moderator Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2251,6 +2405,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#list-my-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List My Answers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2306,6 +2471,17 @@
     <span class="md-ellipsis">
       
         Delete Comment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-my-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List My Comments
       
     </span>
   </a>
@@ -2930,6 +3106,11 @@ redirect page to build, it's a client-side popup plus one API call.</p>
   }
 }
 </code></pre>
+<p><strong>Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;access_token is required&quot;
+}
+</code></pre>
 <p><strong>Response (401 Unauthorized):</strong></p>
 <pre><code class="language-json">{
   &quot;error&quot;: &quot;Invalid Google token&quot;
@@ -2952,6 +3133,16 @@ redirect page to build, it's a client-side popup plus one API call.</p>
   &quot;refresh&quot;: &quot;new_jwt_refresh_token&quot;
 }
 </code></pre>
+<p><strong>Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;refresh&quot;: [&quot;This field is required.&quot;]
+}
+</code></pre>
+<p><strong>Response (401 Unauthorized):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Token is invalid or expired&quot;
+}
+</code></pre>
 <p>Refresh tokens rotate on every use and the previous one is blacklisted, always
 store whichever refresh token was most recently issued.</p>
 <hr />
@@ -2963,6 +3154,21 @@ store whichever refresh token was most recently issued.</p>
 }
 </code></pre>
 <p><strong>Response (204 No Content):</strong> Empty</p>
+<p><strong>Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;refresh token is required&quot;
+}
+</code></pre>
+<p>or</p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Invalid or already blacklisted token&quot;
+}
+</code></pre>
+<p><strong>Response (401 Unauthorized):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Authentication credentials were not provided.&quot;
+}
+</code></pre>
 <p>Blacklists the given refresh token server-side, it can no longer be used to
 obtain new access tokens.</p>
 <hr />
@@ -2988,14 +3194,24 @@ obtain new access tokens.</p>
       &quot;school&quot;: { &quot;id&quot;: &quot;uuid&quot;, &quot;name&quot;: &quot;University of Lagos&quot;, &quot;slug&quot;: &quot;unilag&quot; }
     }
   ],
+  &quot;stats&quot;: {
+    &quot;question_count&quot;: 12,
+    &quot;answer_count&quot;: 34,
+    &quot;best_answer_count&quot;: 9,
+    &quot;comment_count&quot;: 21
+  },
   &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
 }
 </code></pre>
 <p><code>moderator_for</code> and <code>representative_for</code> list every hub (with its school) where
 this user currently holds an active assignment. Both are empty arrays for a
-user with no such assignments. This same shape is also returned in the <code>user</code>
-field of the Google Login response. See "Frontend Permission Model" below for
-how to use these fields.</p>
+user with no such assignments. stats is a count-only summary for this user's
+own activity (own question/answer/comment counts, plus how many of their
+answers are marked best), intended for badge-style display (e.g. "Posts (3)"),
+the actual objects are fetched via the endpoints below, not embedded here.
+This same shape, including stats, is also returned in the user field of the
+Google Login response. See "Frontend Permission Model" below for how to use
+the role fields.</p>
 <hr />
 <h3 id="update-current-user">Update Current User</h3>
 <p><strong>Endpoint:</strong> <code>PATCH /api/v1/users/me/</code></p>
@@ -3005,6 +3221,35 @@ how to use these fields.</p>
 }
 </code></pre>
 <p><strong>Response (200 OK):</strong> Same as GET <code>/api/v1/users/me/</code></p>
+<hr />
+<h3 id="search-users-admin-or-school-representative">Search Users (Admin or School Representative)</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/v1/users/search/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>search</code> - Search by email or full_name, required, empty results if omitted</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;full_name&quot;: &quot;Jane Smith&quot;,
+      &quot;email&quot;: &quot;jane@example.com&quot;,
+      &quot;avatar&quot;: &quot;https://...&quot;
+    }
+  ]
+}
+</code></pre>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to search for users&quot;
+}
+</code></pre>
+<p>Available to platform admins and to any user with an active
+SchoolRepresentativeAssignment for at least one hub, not scoped to a specific
+hub, since the assignment endpoints themselves already enforce hub-specific
+permission at the point of use. This exists specifically so a School
+Representative can find a user_id to pass into POST /hubs/{hub_id}/moderators/
+without needing admin access. Not paginated, results capped at 10, matching
+the existing Tags search-as-you-type pattern.</p>
 <hr />
 <h2 id="frontend-permission-model">Frontend Permission Model</h2>
 <p>The API enforces every permission independently, server-side, on every write.
@@ -3110,11 +3355,16 @@ wherever a school is being displayed.</p>
       &quot;location&quot;: &quot;Lagos, Nigeria&quot;,
       &quot;website&quot;: &quot;https://unilag.edu.ng&quot;,
       &quot;has_hub&quot;: true,
+      &quot;is_active&quot;: true,
       &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
     }
   ]
 }
 </code></pre>
+<p><strong>Caching &amp; Visibility Behavior:</strong>
+- <strong>Cache</strong>: Public requests are cached with prefix <code>school-list:query</code> using <code>CACHE_TTL_SHORT</code> (60 seconds).
+- <strong>Admin Bypass</strong>: Authenticated Platform Admins bypass the cache completely (to see live entries and inactive/deactivated schools, which are filtered out for regular users/guests).
+- <strong>Invalidation</strong>: Wiped automatically on POST school creation or PATCH school updates.</p>
 <hr />
 <h3 id="get-school">Get School</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/schools/{school_id}/</code></p>
@@ -3127,12 +3377,15 @@ wherever a school is being displayed.</p>
   &quot;location&quot;: &quot;Lagos, Nigeria&quot;,
   &quot;website&quot;: &quot;https://unilag.edu.ng&quot;,
   &quot;has_hub&quot;: true,
+  &quot;is_active&quot;: true,
   &quot;verification_status&quot;: &quot;VERIFIED&quot;,
   &quot;departments&quot;: [
     {
       &quot;id&quot;: &quot;uuid&quot;,
       &quot;name&quot;: &quot;Computer Science&quot;,
-      &quot;code&quot;: &quot;CSC&quot;
+      &quot;code&quot;: &quot;CSC&quot;,
+      &quot;question_count&quot;: 42,
+      &quot;is_active&quot;: true
     }
   ],
   &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
@@ -3143,6 +3396,10 @@ wherever a school is being displayed.</p>
   &quot;error&quot;: &quot;School not found&quot;
 }
 </code></pre>
+<p><strong>Caching &amp; Visibility Behavior:</strong>
+- <strong>Cache</strong>: Public detail views are cached as <code>school-detail:{school_id}</code> using <code>CACHE_TTL_MEDIUM</code> (300 seconds).
+- <strong>Admin Bypass</strong>: Authenticated Platform Admins bypass this cache entirely and view live data (including inactive status).
+- <strong>Invalidation</strong>: Cleared on PATCH school update of the school, or POST/PATCH operations on the school's departments.</p>
 <hr />
 <h3 id="get-school-by-slug">Get School by Slug</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/schools/by-slug/{slug}/</code></p>
@@ -3152,6 +3409,8 @@ wherever a school is being displayed.</p>
   &quot;error&quot;: &quot;School not found&quot;
 }
 </code></pre>
+<p><strong>Caching Behavior:</strong>
+- <strong>Cache</strong>: Cached as <code>school-by-slug:{slug}</code> using <code>CACHE_TTL_MEDIUM</code> (300 seconds). No admin bypass on this slug lookup path.</p>
 <p>This is an additive lookup path alongside the existing UUID-based one, both remain
 valid indefinitely. <code>slug</code> is generated once at creation from <code>short_name</code> and never
 regenerated, so a bookmarked or shared URL never breaks even if <code>short_name</code> changes
@@ -3167,12 +3426,24 @@ later.</p>
   &quot;website&quot;: &quot;https://ui.edu.ng&quot;
 }
 </code></pre>
+<p><code>short_name</code> is automatically uppercased on save. <code>location</code> and <code>website</code> are
+optional. A <code>slug</code> is auto-generated from <code>short_name</code> (e.g. <code>"UI"</code> → <code>"ui"</code>) and
+is never regenerated.</p>
 <p><strong>Response (201 Created):</strong> Same as GET <code>/api/v1/schools/{school_id}/</code></p>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request - Duplicate school name or short_name
+{
+  &quot;name&quot;: [&quot;school with this name already exists.&quot;],
+  &quot;short_name&quot;: [&quot;school with this short name already exists.&quot;]
+}
+</code></pre>
+<p><strong>Invalidation Note:</strong> Invalidates and clears all entries matching the <code>school-list</code> cache prefix.</p>
 <hr />
 <h3 id="update-school-admin-only">Update School (Admin Only)</h3>
 <p><strong>Endpoint:</strong> <code>PATCH /api/v1/schools/{school_id}/</code></p>
-<p><strong>Request:</strong> Same as POST, all fields optional</p>
+<p><strong>Request:</strong> Same as POST, all fields optional. Accepts <code>"is_active": true/false</code>.</p>
 <p><strong>Response (200 OK):</strong> Same as GET <code>/api/v1/schools/{school_id}/</code></p>
+<p><strong>Invalidation Note:</strong> Invalidates <code>school-detail:{school_id}</code> cache key and the <code>school-list</code> cache prefix.</p>
 <hr />
 <h3 id="delete-school-admin-only">Delete School (Admin Only)</h3>
 <p>There is no dedicated <code>DELETE</code> endpoint. "Deleting" a school is a soft-delete,
@@ -3213,6 +3484,11 @@ responses for non-admins.</p>
   &quot;error&quot;: &quot;Hub not found&quot;
 }
 </code></pre>
+<p><strong>Caching &amp; Visibility Behavior:</strong>
+- <strong>Cache</strong>: Cached as <code>hub-detail:{hub_id}</code> using <code>CACHE_TTL_SHORT</code> (60 seconds).
+- <strong>Invalidation</strong>: Cleared automatically on:
+  - Approve Activation Request (hub activation).
+  - Assign / Remove Moderator.</p>
 <hr />
 <h3 id="get-hub-by-school">Get Hub by School</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/hubs/by-school/{school_id}/</code></p>
@@ -3222,6 +3498,21 @@ responses for non-admins.</p>
   &quot;error&quot;: &quot;Hub not found for this school&quot;
 }
 </code></pre>
+<p><strong>Caching &amp; Visibility Behavior:</strong>
+- <strong>Cache</strong>: Cached as <code>hub-by-school:{school_id}</code> using <code>CACHE_TTL_SHORT</code> (60 seconds).
+- <strong>Invalidation</strong>: Same invalidation triggers as Get Hub.</p>
+<hr />
+<h3 id="get-hub-by-slug">Get Hub by Slug</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/v1/hubs/by-slug/{slug}/</code></p>
+<p><strong>Response (200 OK):</strong> Same as GET <code>/api/v1/hubs/{hub_id}/</code></p>
+<p><strong>Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Hub not found for this school&quot;
+}
+</code></pre>
+<p><strong>Caching &amp; Visibility Behavior:</strong>
+- <strong>Cache</strong>: Cached as <code>hub-by-slug:{slug}</code> using <code>CACHE_TTL_SHORT</code> (60 seconds).
+- <strong>Invalidation</strong>: Same invalidation triggers as Get Hub.</p>
 <hr />
 <h3 id="request-hub-activation">Request Hub Activation</h3>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/hubs/activation-requests/</code></p>
@@ -3314,8 +3605,14 @@ requests from piling up before an admin reviews the first one.</p>
   }
 }
 </code></pre>
+<p><strong>Error Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;This activation request has already been reviewed&quot;
+}
+</code></pre>
 <p>Approving sends the requesting user a <code>HUB_ACTIVATED</code> notification (in-app and
 email).</p>
+<p><strong>Invalidation Note:</strong> Automatically invalidates <code>hub-detail:{hub_id}</code>, <code>hub-by-school:{school_id}</code>, <code>hub-by-slug:{slug}</code>, <code>school-detail:{school_id}</code>, and the <code>school-list</code> prefix.</p>
 <hr />
 <h3 id="reject-activation-request-admin-only">Reject Activation Request (Admin Only)</h3>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/hubs/activation-requests/{request_id}/reject/</code></p>
@@ -3328,6 +3625,11 @@ email).</p>
 <pre><code class="language-json">{
   &quot;message&quot;: &quot;Activation request rejected&quot;,
   &quot;status&quot;: &quot;REJECTED&quot;
+}
+</code></pre>
+<p><strong>Error Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;This activation request has already been reviewed&quot;
 }
 </code></pre>
 <hr />
@@ -3347,8 +3649,10 @@ email).</p>
   ]
 }
 </code></pre>
-<p>This endpoint is not paginated, it returns every active department for the
-school in one response.</p>
+<p>This endpoint is not paginated. For regular users and guests, only active
+departments (<code>is_active: true</code>) are returned. Authenticated Platform Admins and
+School Representatives for this school's hub see all departments, including
+inactive ones (so they can reactivate them via PATCH).</p>
 <hr />
 <h3 id="create-department-school-representative-or-admin">Create Department (School Representative or Admin)</h3>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/schools/{school_id}/departments/</code></p>
@@ -3358,7 +3662,14 @@ school in one response.</p>
   &quot;code&quot;: &quot;DSC&quot;
 }
 </code></pre>
-<p><strong>Response (201 Created):</strong> Same as department object above</p>
+<p><code>code</code> is optional (can be omitted or sent as <code>null</code>). <code>name</code> is required and is
+case-sensitively unique per school (enforced at the database level).</p>
+<p><strong>Response (201 Created):</strong> Same as department object in List Departments above</p>
+<p><strong>Error Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: [&quot;A department with this name already exists for this school.&quot;]
+}
+</code></pre>
 <p><strong>Error Response (403 Forbidden):</strong></p>
 <pre><code class="language-json">{
   &quot;error&quot;: &quot;You do not have permission to perform this action&quot;
@@ -3366,17 +3677,27 @@ school in one response.</p>
 </code></pre>
 <p>Requires an active <code>SchoolRepresentativeAssignment</code> for this school's hub, or
 platform admin status.</p>
+<p><strong>Invalidation Note:</strong> Creating a department invalidates the <code>school-detail:{school_id}</code> cache key of its parent school.</p>
 <hr />
 <h3 id="update-department-school-representative-or-admin">Update Department (School Representative or Admin)</h3>
 <p><strong>Endpoint:</strong> <code>PATCH /api/v1/departments/{department_id}/</code></p>
 <p><strong>Request:</strong></p>
 <pre><code class="language-json">{
   &quot;name&quot;: &quot;Computer Science and Engineering&quot;,
+  &quot;code&quot;: &quot;CSE&quot;,
   &quot;is_active&quot;: false
 }
 </code></pre>
+<p>All fields are optional (partial PATCH). Sending <code>"is_active": false</code> is the
+soft-delete path; setting it back to <code>true</code> reactivates the department.</p>
 <p><strong>Response (200 OK):</strong> Same as department object</p>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to perform this action&quot;
+}
+</code></pre>
 <p>Same permission requirement as Create Department above.</p>
+<p><strong>Invalidation Note:</strong> Updating a department invalidates the <code>school-detail:{school_id}</code> cache key for its corresponding parent school.</p>
 <hr />
 <h2 id="questions">Questions</h2>
 <h3 id="list-questions">List Questions</h3>
@@ -3386,6 +3707,7 @@ platform admin status.</p>
 - <code>department</code> - Filter by department ID
 - <code>status</code> - OPEN/ANSWERED/SOLVED
 - <code>tag</code> - Filter by tag name
+- <code>author</code> - Filter by author user ID
 - <code>search</code> - Search in title and body
 - <code>ordering</code> - created_at/-created_at/views/-views
 - <code>page</code> - Page number
@@ -3403,6 +3725,7 @@ platform admin status.</p>
       &quot;body&quot;: &quot;I'm confused about the grading system...&quot;,
       &quot;status&quot;: &quot;SOLVED&quot;,
       &quot;view_count&quot;: 120,
+      &quot;is_locked&quot;: false,
       &quot;author&quot;: {
         &quot;id&quot;: &quot;uuid&quot;,
         &quot;full_name&quot;: &quot;John Doe&quot;,
@@ -3436,7 +3759,6 @@ platform admin status.</p>
 <p><strong>Request:</strong></p>
 <pre><code class="language-json">{
   &quot;title&quot;: &quot;How do I calculate my CGPA?&quot;,
-  &quot;slug&quot;: &quot;how-do-i-calculate-my-cgpa&quot;,
   &quot;body&quot;: &quot;I'm confused about the grading system at UNILAG...&quot;,
   &quot;hub_id&quot;: &quot;uuid&quot;,
   &quot;department_id&quot;: &quot;uuid&quot;,
@@ -3473,6 +3795,8 @@ platform admin status.</p>
   &quot;body&quot;: &quot;I'm confused about the grading system...&quot;,
   &quot;status&quot;: &quot;SOLVED&quot;,
   &quot;view_count&quot;: 120,
+  &quot;is_locked&quot;: false,
+  &quot;is_following&quot;: false,
   &quot;author&quot;: {
     &quot;id&quot;: &quot;uuid&quot;,
     &quot;full_name&quot;: &quot;John Doe&quot;,
@@ -3481,9 +3805,9 @@ platform admin status.</p>
   &quot;hub&quot;: {
     &quot;id&quot;: &quot;uuid&quot;,
     &quot;school&quot;: {
-      &quot;id&quot;: &quot;uuid&quot;,
       &quot;name&quot;: &quot;University of Lagos&quot;,
-      &quot;short_name&quot;: &quot;UNILAG&quot;
+      &quot;short_name&quot;: &quot;UNILAG&quot;,
+      &quot;slug&quot;: &quot;unilag&quot;
     }
   },
   &quot;department&quot;: {
@@ -3519,13 +3843,20 @@ platform admin status.</p>
   &quot;error&quot;: &quot;Question not found&quot;
 }
 </code></pre>
+<p><code>view_count</code> only increments for authenticated requests, anonymous views are
+never counted. Increments are deduplicated per user for 24 hours (a rolling
+window, not a calendar-day reset), a signed-in user repeatedly refreshing the
+same question within that window will not keep inflating the count. This is
+cache-backed, not a permanent per-user view record, no history of who viewed
+what is stored anywhere.</p>
+<p><code>is_following</code> reflects only the requesting user's own follow state, always
+<code>false</code> for anonymous requests, see Follow Question below.</p>
 <hr />
 <h3 id="update-question">Update Question</h3>
 <p><strong>Endpoint:</strong> <code>PATCH /api/v1/questions/{question_id}/</code></p>
 <p><strong>Request:</strong></p>
 <pre><code class="language-json">{
   &quot;title&quot;: &quot;Updated title&quot;,
-  &quot;slug&quot;: &quot;updated-slug&quot;,
   &quot;body&quot;: &quot;Updated body&quot;,
   &quot;department_id&quot;: &quot;uuid&quot;,
   &quot;tags&quot;: [&quot;gpa&quot;, &quot;updated&quot;]
@@ -3537,12 +3868,18 @@ platform admin status.</p>
   &quot;error&quot;: &quot;You do not have permission to edit this question&quot;
 }
 </code></pre>
-<p>Note: 
-- <code>status</code> is not an editable field on this endpoint. It only changes as a side
-effect of other actions: creating the first answer moves a question from OPEN to
-ANSWERED, marking a best answer moves it to SOLVED, and deleting answers can move it
-back to ANSWERED or OPEN depending on what remains (see Delete Answer below).
-- <code>slug</code> on Question is purely cosmetic, meant for building readable URLs like
+<p>Note:
+- <code>status</code> is not an editable field on this endpoint. It changes only as a side
+effect: creating the first answer moves a question from OPEN to ANSWERED,
+marking a best answer moves it to SOLVED, deleting an answer can move it back
+to ANSWERED or OPEN depending on what remains (see Delete Answer below).
+- SOLVED means "this question has a designated best answer," not "this
+question is closed." New answers can be submitted to a question at any status,
+including SOLVED, a question is never locked to further input purely because
+an owner picked a favorite. Adding a plain answer to a SOLVED question does
+not change its status, only removing the current best answer (or the owner
+marking a different answer best) affects SOLVED status.
+- slug on Question is purely cosmetic, meant for building readable URLs like
 <code>/questions/{id}/{slug}</code>, it is not unique and is not used for lookups. Editing a
 question's title regenerates its slug.</p>
 <hr />
@@ -3569,6 +3906,77 @@ question's title regenerates its slug.</p>
 <p>A platform admin sees unanswered questions across every hub. A user with an active
 <code>ModeratorAssignment</code> sees only questions belonging to hub(s) they are assigned to
 moderate. A user with neither is blocked with a 403.</p>
+<hr />
+<h3 id="follow-question">Follow Question</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/v1/questions/{question_id}/follow/</code></p>
+<p><strong>Response (201 Created):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Now following question&quot;,
+  &quot;is_following&quot;: true
+}
+</code></pre>
+<p><strong>Error Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You are already following this question&quot;
+}
+</code></pre>
+<hr />
+<h3 id="unfollow-question">Unfollow Question</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/v1/questions/{question_id}/follow/</code></p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<p><strong>Error Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You have not followed this question&quot;
+}
+</code></pre>
+<p>Following is independent of authorship, a question's own author can follow
+their own question but doesn't need to, they already receive notifications
+for it by default. Followers get an in-app-only NEW_ANSWER notification
+(varied message text, no new notification type) when the question receives a
+new answer or when a best answer is marked, excluding whichever user is
+already notified through the existing author-facing paths. No follower count
+is exposed anywhere in the API, is_following reflects only the requesting
+user's own follow state.</p>
+<hr />
+<h3 id="lock-question-admin-representative-or-moderator-only">Lock Question (Admin, Representative, or Moderator Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/v1/questions/{question_id}/lock/</code></p>
+<p>Locks the question so that new answers can no longer be added.</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Question locked successfully&quot;,
+  &quot;is_locked&quot;: true
+}
+</code></pre>
+<p><strong>Error Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Question is already locked&quot;
+}
+</code></pre>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to lock this question&quot;
+}
+</code></pre>
+<hr />
+<h3 id="unlock-question-admin-representative-or-moderator-only">Unlock Question (Admin, Representative, or Moderator Only)</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/v1/questions/{question_id}/lock/</code></p>
+<p>Unlocks the question to allow new answers to be submitted again.</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Question unlocked successfully&quot;,
+  &quot;is_locked&quot;: false
+}
+</code></pre>
+<p><strong>Error Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Question is not locked&quot;
+}
+</code></pre>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to unlock this question&quot;
+}
+</code></pre>
 <hr />
 <h2 id="answers">Answers</h2>
 <h3 id="create-answer">Create Answer</h3>
@@ -3607,13 +4015,17 @@ moderate. A user with neither is blocked with a 403.</p>
   &quot;body&quot;: [&quot;This field is required.&quot;]
 }
 
-// 400 Bad Request - Question is already SOLVED
+// 400 Bad Request - Question Locked
 {
-  &quot;question&quot;: [&quot;Cannot add answer to a solved question.&quot;]
+  &quot;question_id&quot;: [&quot;This question is locked and does not accept new answers.&quot;]
 }
 </code></pre>
 <p>Answering someone else's question sends them a <code>NEW_ANSWER</code> notification (in-app
-and email).</p>
+and email), regardless of the question's current status. Answers can be added
+to a question at any status, including SOLVED, see the Update Question note
+below on what SOLVED actually means. Followers of the question (see Follow
+Question above) also receive an in-app-only NEW_ANSWER notification, excluding
+the answering user and the question author.</p>
 <hr />
 <h3 id="update-answer">Update Answer</h3>
 <p><strong>Endpoint:</strong> <code>PATCH /api/v1/answers/{answer_id}/</code></p>
@@ -3671,7 +4083,9 @@ answer on the question, status reverts to OPEN.</p>
 best-answer flag to the new answer and leaves the question SOLVED. Only marking the
 same answer that is already best is blocked. If the newly marked answer belongs to
 someone other than the question owner, they receive a <code>BEST_ANSWER</code> notification
-(in-app and email).</p>
+(in-app and email). Followers of the question also receive an in-app-only
+NEW_ANSWER notification, excluding the question owner and the marked answer's
+author.</p>
 <hr />
 <h2 id="answer-votes">Answer Votes</h2>
 <h3 id="vote-on-answer">Vote on Answer</h3>
@@ -3700,6 +4114,11 @@ Rate Limits below).</p>
 {
   &quot;error&quot;: &quot;You cannot vote on your own answer&quot;
 }
+
+// 400 Bad Request - Invalid vote type
+{
+  &quot;vote_type&quot;: [&quot;This field must be one of: UP, DOWN.&quot;]
+}
 </code></pre>
 <p>Voting sends the answer's author a <code>VOTE</code> notification, in-app only, no email.
 There is no dedicated "change my vote" endpoint, remove your existing vote first,
@@ -3719,6 +4138,14 @@ frontend would only know about votes cast during the current session.</p>
   &quot;error&quot;: &quot;You have not voted on this answer&quot;
 }
 </code></pre>
+<hr />
+<h3 id="list-my-answers">List My Answers</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/v1/users/me/answers/</code></p>
+<p><strong>Response (200 OK):</strong> Same shape as list questions' pagination envelope,
+<code>results</code> are answer objects in the same shape as Create Answer's response
+(includes question, is_best, vote_score, user_vote). Requires authentication,
+always scoped to the requesting user, there is no way to fetch another user's
+answers through this or any other endpoint. Ordered by most recent first.</p>
 <hr />
 <h2 id="comments">Comments</h2>
 <h3 id="list-comments">List Comments</h3>
@@ -3751,6 +4178,9 @@ frontend would only know about votes cast during the current session.</p>
   &quot;error&quot;: &quot;Answer not found&quot;
 }
 </code></pre>
+<p>This endpoint is public — no authentication required. Pagination uses the same
+envelope as all list endpoints (<code>count</code>, <code>next</code>, <code>previous</code>, <code>results</code>).</p>
+<hr />
 <h3 id="create-comment">Create Comment</h3>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/comments/</code></p>
 <p>Rate limited to 50 requests per hour per user (see Rate Limits below).</p>
@@ -3776,6 +4206,18 @@ frontend would only know about votes cast during the current session.</p>
   &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
 }
 </code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request
+{
+  &quot;answer_id&quot;: [&quot;This field is required.&quot;],
+  &quot;body&quot;: [&quot;This field is required.&quot;]
+}
+
+// 404 Not Found - Answer doesn't exist
+{
+  &quot;answer_id&quot;: [&quot;Answer with this ID does not exist.&quot;]
+}
+</code></pre>
 <p>Commenting on someone else's answer sends them a <code>NEW_COMMENT</code> notification,
 in-app only, no email.</p>
 <hr />
@@ -3787,10 +4229,45 @@ in-app only, no email.</p>
 }
 </code></pre>
 <p><strong>Response (200 OK):</strong> Same as comment object</p>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to edit this comment&quot;
+}
+</code></pre>
 <hr />
 <h3 id="delete-comment">Delete Comment</h3>
 <p><strong>Endpoint:</strong> <code>DELETE /api/v1/comments/{comment_id}/</code></p>
 <p><strong>Response (204 No Content):</strong> Empty</p>
+<p><strong>Error Response (403 Forbidden):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;You do not have permission to delete this comment&quot;
+}
+</code></pre>
+<hr />
+<h3 id="list-my-comments">List My Comments</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/v1/users/me/comments/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 21,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;body&quot;: &quot;Does this vary by school?&quot;,
+      &quot;answer&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
+        &quot;question&quot;: { &quot;id&quot;: &quot;uuid&quot;, &quot;title&quot;: &quot;How do I calculate my CGPA?&quot; }
+      },
+      &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;,
+      &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<p>Requires authentication, always scoped to the requesting user. Ordered by
+most recent first. There is no equivalent "my questions" endpoint, use
+GET /questions/?author={my_user_id} with the id from GET /users/me/, since
+questions are already public content and the existing author filter covers
+this without duplicating an endpoint.</p>
 <hr />
 <h2 id="tags">Tags</h2>
 <h3 id="list-tags">List Tags</h3>
@@ -3817,6 +4294,9 @@ in-app only, no email.</p>
 <p>This endpoint is not paginated, it returns every matching tag in one response.
 Tag names are normalized to lowercase everywhere, on creation, search, and every
 filter, so "GPA" and "gpa" are always treated as the same tag.</p>
+<p><strong>Caching &amp; Visibility Behavior:</strong>
+- <strong>Cache</strong>: Public requests are cached using <code>tag-list:&lt;query_params&gt;</code> key for <code>CACHE_TTL_SHORT</code> (60 seconds).
+- <strong>Invalidation</strong>: Clears only when the cache TTL expires (since tags are created implicitly during question creation/update).</p>
 <hr />
 <h3 id="get-questions-by-tag">Get Questions by Tag</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/tags/{tag_name}/questions/</code></p>
@@ -3840,20 +4320,26 @@ how every other query-param filter on this API behaves.</p>
 <p><strong>Response (200 OK):</strong></p>
 <pre><code class="language-json">{
   &quot;count&quot;: 45,
+  &quot;next&quot;: &quot;https://api.academia.com/api/v1/search/questions/?page=2&quot;,
+  &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
       &quot;id&quot;: &quot;uuid&quot;,
       &quot;title&quot;: &quot;How do I calculate my CGPA?&quot;,
-      &quot;body&quot;: &quot;...&quot;,
+      &quot;body&quot;: &quot;I'm confused about the grading system...&quot;,
       &quot;status&quot;: &quot;SOLVED&quot;,
       &quot;score&quot;: 0.4213,
       &quot;author&quot;: {
         &quot;id&quot;: &quot;uuid&quot;,
-        &quot;full_name&quot;: &quot;John Doe&quot;
+        &quot;full_name&quot;: &quot;John Doe&quot;,
+        &quot;avatar&quot;: &quot;https://...&quot;
       },
       &quot;hub&quot;: {
+        &quot;id&quot;: &quot;uuid&quot;,
         &quot;school&quot;: {
-          &quot;name&quot;: &quot;University of Lagos&quot;
+          &quot;name&quot;: &quot;University of Lagos&quot;,
+          &quot;short_name&quot;: &quot;UNILAG&quot;,
+          &quot;slug&quot;: &quot;unilag&quot;
         }
       },
       &quot;tags&quot;: [&quot;gpa&quot;, &quot;grading&quot;],
@@ -3872,6 +4358,9 @@ but it has no fixed upper bound (it is not a normalized 0 to 1 percentage). It i
 <code>null</code> whenever <code>q</code> is omitted, since relevance has no meaning without a query to
 rank against, in that case results still return, ordered by the first three
 ranking priorities above.</p>
+<p><strong>Caching &amp; Visibility Behavior:</strong>
+- <strong>Cache</strong>: Requests are cached using <code>search-questions:&lt;query_params&gt;</code> for <code>CACHE_TTL_SEARCH</code> (15 seconds).
+- <strong>Invalidation</strong>: Clears only when the cache TTL expires.</p>
 <hr />
 <h2 id="notifications">Notifications</h2>
 <h3 id="list-notifications">List Notifications</h3>
@@ -4087,6 +4576,7 @@ valid to acknowledge but doesn't warrant removal.</p>
 </code></pre>
 <p>Requires an active <code>SchoolRepresentativeAssignment</code> for this hub, or platform
 admin status.</p>
+<p><strong>Invalidation Note:</strong> Assigning a moderator invalidates <code>hub-detail:{hub_id}</code>, <code>hub-by-school:{school_id}</code>, <code>hub-by-slug:{slug}</code>, and <code>school-detail:{school_id}</code> cache keys.</p>
 <hr />
 <h3 id="remove-moderator-school-representative-or-admin">Remove Moderator (School Representative or Admin)</h3>
 <p><strong>Endpoint:</strong> <code>DELETE /api/v1/hubs/{hub_id}/moderators/{user_id}/</code></p>
@@ -4097,6 +4587,7 @@ admin status.</p>
 }
 </code></pre>
 <p>Removal is a soft-delete (<code>is_active: false</code>), not a hard row delete.</p>
+<p><strong>Invalidation Note:</strong> Removing a moderator invalidates the same cache keys as Assign Moderator.</p>
 <hr />
 <h3 id="list-moderators">List Moderators</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/hubs/{hub_id}/moderators/</code></p>

@@ -578,6 +578,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#questionfollow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuestionFollow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#notification" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -991,6 +1002,17 @@
     <span class="md-ellipsis">
       
         QuestionTag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questionfollow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuestionFollow
       
     </span>
   </a>
@@ -1626,6 +1648,12 @@
 <td>Number of views</td>
 </tr>
 <tr>
+<td>is_locked</td>
+<td>Boolean</td>
+<td>Default: False</td>
+<td>Locked/Closed status. Preventing new answers from being added</td>
+</tr>
+<tr>
 <td>created_at</td>
 <td>DateTime</td>
 <td>Auto now</td>
@@ -1873,6 +1901,47 @@
 </tbody>
 </table>
 <p>Unique constraint: (question, tag) to prevent duplicates.</p>
+<h3 id="questionfollow">QuestionFollow</h3>
+<p>Represents a user following a question for update notifications, independent of authorship.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>user</td>
+<td>ForeignKey(User)</td>
+<td>Required, CASCADE</td>
+<td>Following user</td>
+</tr>
+<tr>
+<td>question</td>
+<td>ForeignKey(Question)</td>
+<td>Required, CASCADE</td>
+<td>Followed question</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Follow timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>Unique constraint: (question, user) to prevent duplicate follows. No follower
+count is exposed anywhere in the API, only the requesting user's own follow
+state (is_following), consistent with Knowledge Over Social Activity.</p>
 <h3 id="notification">Notification</h3>
 <p>Represents a notification for a user.</p>
 <table>
@@ -2256,7 +2325,7 @@ join this set once built, with no schema change required.</p>
 <li>Deleting a <code>School</code> → Delete associated <code>Hub</code>, <code>Department</code>, <code>HubActivationRequest</code></li>
 <li>Deleting a <code>Hub</code> → Delete associated <code>Question</code>, <code>ModeratorAssignment</code>, <code>SchoolRepresentativeAssignment</code></li>
 <li>Deleting a <code>User</code> → Delete associated <code>Question</code>, <code>Answer</code>, <code>Comment</code>, <code>Notification</code>, <code>Report</code></li>
-<li>Deleting a <code>Question</code> → Delete associated <code>Answer</code>, <code>QuestionTag</code></li>
+<li>Deleting a <code>Question</code> → Delete associated <code>Answer</code>, <code>QuestionTag</code>, <code>QuestionFollow</code></li>
 <li>Deleting an <code>Answer</code> → Delete associated <code>Comment</code>, <code>AnswerVote</code></li>
 </ul>
 <p>In practice, <code>School</code> is not hard-deleted through the API, see api-contract.md's

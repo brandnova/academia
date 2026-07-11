@@ -859,12 +859,17 @@
 </ul>
 <h2 id="user-experience">User Experience</h2>
 <ul>
-<li>[ ] Responsive design (mobile + desktop compatible)</li>
-<li>[ ] Loading states</li>
-<li>[ ] Error handling</li>
-<li>[ ] Empty states</li>
-<li>[ ] Form validation</li>
-<li>[ ] Rich text editor (questions + answers) Use <a href="https://brandnova.github.io/nova-editor/">NovaEditor</a></li>
+<li>[x] Self-view profile stats (question/answer/best-answer/comment counts) on
+      GET /users/me/, plus paginated GET /users/me/answers/ and
+      GET /users/me/comments/ for the actual object lists. Self-only, not a
+      public profile, closes out the "Lightweight contributor recognition"
+      item previously listed under Platform Improvements</li>
+<li>[x] User search by name/email for admins and school representatives</li>
+<li>[x] Responsive design (mobile + desktop compatible)</li>
+<li>[x] Loading states</li>
+<li>[x] Error handling</li>
+<li>[x] Empty states</li>
+<li>[x] Form validation</li>
 </ul>
 <hr />
 <h1 id="future-features-not-mvp">Future Features (Not MVP)</h1>
@@ -897,6 +902,11 @@
 <li>[ ] User management (moderators)</li>
 <li>[ ] Flag capabilities (moderators)</li>
 <li>[ ] Dedicated escalate-to-admin action, distinct from the general report pipeline</li>
+<li>[x] Question lock/close capability, distinct from SOLVED, moderator/admin
+      only, for the rare case a question genuinely needs to stop accepting
+      input (spam magnet, fully resolved administrative question). SOLVED
+      itself no longer implies closed, see project-plan.md's Question
+      Lifecycle note.</li>
 </ul>
 <h2 id="school-reviews-future">School Reviews (Future)</h2>
 <ul>
@@ -948,9 +958,11 @@
 <ul>
 <li>[ ] OpenAPI schema and interactive API docs (drf-spectacular or similar), useful
       internally and as groundwork for the planned public API</li>
+<li>[ ] Private "my submitted reports" view for a user's own account, deliberately
+      not part of the public/self profile page, reports are never shown on any
+      profile to avoid making a reporter's activity identifiable to others</li>
 <li>[ ] Admin action audit log (who resolved which report, who suspended which user)</li>
-<li>[ ] Answer edit history, so a heavily-edited answer's original context isn't lost</li>
-<li>[ ] Lightweight contributor recognition (e.g. a visible count of best-answers given),
+<li>[ ] Answer edit history, so a heavily-edited answer's original context isn't lost
       framed as quality signal, not a leaderboard or engagement mechanic, consistent
       with Knowledge Over Social Activity</li>
 <li>[ ] Bulk data import tooling to support the school directory curation effort above</li>
