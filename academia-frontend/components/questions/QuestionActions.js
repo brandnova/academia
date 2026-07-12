@@ -28,7 +28,7 @@ export default function QuestionActions({ question }) {
   }
 
   return (
-    <div className="flex items-center gap-3 mb-6 text-sm">
+    <div className="flex items-center gap-3 text-sm">
       <Link href={`/questions/${question.id}/edit`} className="text-accent hover:underline">
         Edit
       </Link>

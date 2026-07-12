@@ -43,7 +43,7 @@ export default function ProfileMenu() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-1 w-44 bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg py-1 text-sm">
+        <div className="fixed top-16 right-4 w-44 sm:absolute sm:top-full sm:right-0 sm:mt-2 bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded-lg shadow-lg py-1 text-sm z-50">
           <Link
             href="/profile"
             onClick={() => setOpen(false)}

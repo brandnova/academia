@@ -80,7 +80,7 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-1 w-80 max-w-[90vw] bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg max-h-96 overflow-auto z-50">
+        <div className="fixed top-16 left-4 right-4 sm:absolute sm:top-full sm:left-auto sm:right-0 sm:mt-2 sm:w-80 bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded-lg shadow-lg max-h-[70vh] overflow-auto z-50">
           {status === "loading" && (
             <p className="px-3 py-4 text-sm text-gray-400 text-center">Loading...</p>
           )}
