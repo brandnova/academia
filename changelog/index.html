@@ -391,6 +391,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#frontend-docs-sync-july-12-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Docs Sync, July 12, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-build-phases-0-through-15-july-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Build, Phases 0 through 15, July 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#docs-sync-july-5-2026" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -726,6 +748,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#frontend-docs-sync-july-12-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Docs Sync, July 12, 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-build-phases-0-through-15-july-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Build, Phases 0 through 15, July 2026
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#docs-sync-july-5-2026" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -968,6 +1012,64 @@ documentation. Entries are grouped by development phase and date, not
 semantic version, the project isn't published as a versioned package yet.
 Once a public API is released, that surface will carry its own /v1/,
 /v2/ versioning, tracked separately from this page.</p>
+<h2 id="frontend-docs-sync-july-12-2026">Frontend Docs Sync, July 12, 2026</h2>
+<p>Synced the frontend build's accumulated deviations into the four core docs:</p>
+<ul>
+<li>project-plan.md and project-overview.md updated to reflect the frontend
+  framework decision (Next.js App Router, JavaScript, Tailwind v4) and the
+  httpOnly-cookie auth proxy architecture, replacing the "intentionally left
+  open" placeholder language from the planning phase.</li>
+<li>project-overview.md's "Open Questions for Discussion" resolved: dark mode
+  ships from day one, accent-blue palette picked fresh, no component library
+  used.</li>
+<li>feature-list.md gained explicit entries for department management and
+  question following (backend-complete, frontend following still pending),
+  clarified that question lock/close is backend-complete but not yet wired
+  into the frontend, and added two Platform Improvements items surfaced
+  during the frontend build (refresh-token deduplication, an answer/comment
+  permalink page for notification/report deep-linking).</li>
+<li>api-contract.md and database-schema.md needed no changes, every frontend
+  deviation encountered during this build turned out to be an implementation
+  bug that didn't match already-correct documented behavior, not a real
+  documentation gap.</li>
+<li>One item intentionally left unresolved: api-contract.md's Search Users
+  section documents Admin or School Representative access, a message during
+  development described the intended permission as including Moderators
+  instead, never confirmed which is correct.</li>
+</ul>
+<h2 id="frontend-build-phases-0-through-15-july-2026">Frontend Build, Phases 0 through 15, July 2026</h2>
+<p>The full frontend MVP, built in Next.js against the completed backend API,
+phased the same way the backend was: Phase 0 scaffolding through Phase 15
+admin tooling, each phase confirmed working before moving to the next.</p>
+<ul>
+<li>Auth: Google Identity Services client-side, exchanged through the
+  frontend's own Route Handler proxy, which holds the JWT pair as httpOnly
+  cookies and owns the full refresh lifecycle server-side.</li>
+<li>Core browsing: school directory and profile, hub pages, question list and
+  detail, tag browse, global search, all with debounced search, skeleton
+  loading states, and load-more-append pagination as running conventions.</li>
+<li>Full question lifecycle: ask (school-first flow with a live school
+  picker), answer, vote, comment, mark best answer, with the best answer
+  pinned and highlighted separately from the main answer list.</li>
+<li>Moderation surface split by audience: /moderation for Moderators and
+  School Representatives, scoped to their own hubs (including department
+  management and a self-service path to the unanswered queue by adding
+  themselves as moderator); /admin for platform admins (schools,
+  activation requests, reports, users, cross-hub team assignment).</li>
+<li>Notifications and a rebuilt profile page (editable name, activity stats,
+  merged recent-activity feed, paginated post history by type), reports
+  never surfaced on any profile, including to the reporter, matching the
+  documented privacy design.</li>
+<li>Two backend bugs found and fixed during frontend testing: a report's
+  resolve-with-delete-content action failed on Django's save-time check for
+  a stale GenericForeignKey cache; GET /users/me/comments/ 500'd on a
+  nonexistent path kwarg and had the wrong permission class. Two more
+  visibility bugs, deactivated schools and departments disappearing from
+  every view including the admin/rep view meant to manage them, since both
+  endpoints unconditionally filtered to is_active=True regardless of who
+  was asking, despite api-contract.md already documenting the intended
+  admin/rep-visible behavior correctly.</li>
+</ul>
 <h2 id="docs-sync-july-5-2026">Docs Sync, July 5, 2026</h2>
 <p>A larger sync this time, closing out the originally planned 15-phase MVP
 build:</p>

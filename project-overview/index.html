@@ -454,10 +454,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-open-questions-for-discussion" class="md-nav__link">
+  <a href="#11-decisions-made-during-frontend-build" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Open Questions for Discussion
+        11. Decisions Made During Frontend Build
       
     </span>
   </a>
@@ -859,10 +859,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-open-questions-for-discussion" class="md-nav__link">
+  <a href="#11-decisions-made-during-frontend-build" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Open Questions for Discussion
+        11. Decisions Made During Frontend Build
       
     </span>
   </a>
@@ -1088,16 +1088,19 @@ looks right when the API returns perfect data isn't done.</p>
 server-rendered product pages. The only exception is if we build a throwaway
 internal page purely to smoke-test something during development; that's a
 debugging convenience, not part of the product surface.</p>
-<p><strong>Frontend framework: intentionally left open.</strong> Because the backend has zero
-opinion about how it's consumed, it's JSON in, JSON out, versioned under
-<code>/api/v1/</code>, the frontend can be built with whatever turns out to fit best
-once we're actually looking at real pages: Django templates + Alpine,
-React + Tailwind, Next.js, or a mix. This decision can be made later, and can
-even be revisited per-section of the site, without touching the backend.</p>
-<p>Whatever gets chosen will authenticate the same way: obtain a Google token
-client-side, exchange it at <code>POST /api/v1/auth/google/</code> for a JWT pair, and
-attach <code>Authorization: Bearer &lt;access&gt;</code> to subsequent requests, documented
-in <code>api-contract.md</code>.</p>
+<p><strong>Frontend framework: Next.js (App Router), JavaScript, deployed on Vercel.</strong>
+The backend's zero-opinion JSON API made this an easy choice once real pages
+were underway. Tailwind v4 (CSS-first, no tailwind.config.js) for styling,
+no third-party component library, lucide-react for icons.</p>
+<p>Auth follows the documented Google token exchange, but the JWT pair never
+reaches browser-readable code. The frontend's own Next.js Route Handlers
+proxy every backend call server-side: they hold the tokens as httpOnly
+cookies, attach <code>Authorization: Bearer &lt;access&gt;</code> themselves, and handle
+token refresh (one retry attempt on a 401, rotate both cookies on success,
+clear both and report a logged-out session on failure) before the browser
+ever sees a response. A future non-Next.js consumer of this API would still
+follow the plain documented flow in api-contract.md directly; this proxy
+layer is a frontend implementation choice, not an API requirement.</p>
 <p><strong>URL conventions to build against:</strong> Schools and Hubs each have a stable, unique
 <code>slug</code> (e.g. <code>unilag</code>) suitable as the primary route segment for their public pages,
 <code>/schools/unilag/</code>, <code>/hubs/unilag/</code>, resolved via <code>GET /schools/by-slug/{slug}/</code> and
@@ -1121,13 +1124,22 @@ only ever affect visibility/promotion of a school's <em>own</em> verified conten
 the visibility of what students say. Worth keeping in mind if any future design
 work touches that area.</p>
 <hr />
-<h2 id="11-open-questions-for-discussion">11. Open Questions for Discussion</h2>
+<h2 id="11-decisions-made-during-frontend-build">11. Decisions Made During Frontend Build</h2>
+<p>Resolved during the Phase 0–15 build, kept here for reference:</p>
 <ul>
-<li>Do we want a light/dark mode from the start, or ship light-only for MVP?</li>
-<li>Any existing brand assets (logo, colors) already decided, or are we picking
-  a palette from scratch?</li>
-<li>Preferred component library baseline for the React pieces (shadcn/ui,
-  headless UI, or fully custom Tailwind)?</li>
+<li><strong>Light and dark mode</strong>: both shipped from the start, manual toggle
+  (persisted via localStorage), not just system-preference-following.</li>
+<li><strong>Brand palette</strong>: single accent blue (<code>#2563eb</code>), close to the Google
+  reference's link color, defined once as a CSS variable, easy to retune.
+  No other brand assets existed going in, this was picked fresh.</li>
+<li><strong>Component library</strong>: fully custom Tailwind, no shadcn/ui or headless UI,
+  matching the "no third-party component library" principle from
+  project-plan.md.</li>
+<li><strong>Chrome/page background parity</strong>: sidebar and top bar deliberately read
+  the same CSS variables as the page body, rather than Tailwind's default
+  gray scale, so structural chrome is never a visually distinct "panel."
+  Popover surfaces (profile menu, notification dropdown) are the deliberate
+  exception, meant to read as elevated above the page.</li>
 </ul>
 
 

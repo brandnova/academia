@@ -779,6 +779,8 @@
 <li>[x] Request hub activation</li>
 <li>[x] View departments</li>
 <li>[x] Filter questions by department</li>
+<li>[x] Manage departments (create/edit/deactivate/reactivate), School
+      Representatives and admins</li>
 </ul>
 <h2 id="questions">Questions</h2>
 <ul>
@@ -791,6 +793,8 @@
 <li>[x] Filter questions by school (via the hub filter, since a hub maps to exactly one school)</li>
 <li>[x] Filter questions by department</li>
 <li>[x] Filter questions by tags</li>
+<li>[x] Follow a question for update notifications, independent of authorship
+      (frontend not yet wired, backend endpoints exist and are documented)</li>
 </ul>
 <h2 id="answers">Answers</h2>
 <ul>
@@ -906,7 +910,8 @@
       only, for the rare case a question genuinely needs to stop accepting
       input (spam magnet, fully resolved administrative question). SOLVED
       itself no longer implies closed, see project-plan.md's Question
-      Lifecycle note.</li>
+      Lifecycle note. Backend complete and documented; frontend UI for this
+      is planned for the upcoming polish pass.</li>
 </ul>
 <h2 id="school-reviews-future">School Reviews (Future)</h2>
 <ul>
@@ -968,6 +973,14 @@
 <li>[ ] Bulk data import tooling to support the school directory curation effort above</li>
 <li>[ ] Celery-backed background tasks for email and notification delivery, so a slow
       SMTP call never blocks an API response</li>
+<li>[ ] Refresh-token request deduplication: if multiple requests expire in the
+      same instant, more than one may attempt to use the same refresh token
+      before rotation completes, one could be rejected. Frontend-only
+      concern (Next.js proxy layer), low risk at MVP traffic levels.</li>
+<li>[ ] Standalone answer/comment permalink page, so notifications and reports
+      targeting an answer or comment (VOTE, NEW_COMMENT, non-question
+      reports) can deep-link somewhere real instead of rendering as
+      non-clickable text.</li>
 </ul>
 
 

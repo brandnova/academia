@@ -535,9 +535,14 @@
 <h2 id="technology-stack">Technology Stack</h2>
 <h3 id="frontend">Frontend</h3>
 <ul>
-<li>Framework intentionally left open (Django templates + Alpine, React + Tailwind, or Next.js, decided per-section as real pages get built)</li>
-<li>Full custom Tailwind + hand-written CSS for anything a component library can't cleanly express</li>
-<li>No third-party component library</li>
+<li>Next.js (App Router), JavaScript (not TypeScript), deployed on Vercel</li>
+<li>Tailwind v4 (CSS-first configuration, no tailwind.config.js), full custom
+  styling, no third-party component library</li>
+<li>JWT pair stored as httpOnly cookies, never exposed to browser-readable
+  JS. Next.js Route Handlers proxy every backend call server-side, attach
+  the Authorization header there, and own the token refresh lifecycle
+  (single-attempt refresh on 401, rotate both cookies on success, clear
+  both and surface a logged-out state on failure)</li>
 </ul>
 <h3 id="backend">Backend</h3>
 <ul>
