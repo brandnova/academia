@@ -15,6 +15,16 @@ async function getSchool(id) {
   }
 }
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const school = await getSchool(id);
+  if (!school) return {};
+  return {
+    title: school.name,
+    description: `Questions and answers for ${school.name} students, organized by department.`,
+  };
+}
+
 async function getHub(schoolId) {
   try {
     return await apiFetch(`/hubs/by-school/${schoolId}/`);

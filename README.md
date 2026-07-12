@@ -37,7 +37,7 @@ The project is documented in four core documents plus supporting logs, all under
 
 **Backend: complete.** All 15 planned MVP phases (authentication, schools, departments, hubs, questions, tags, answers, voting, comments, best-answer lifecycle, notifications, search, reports/moderation, role assignments, admin tools) are built, tested, and confirmed working, plus a production-readiness pass (CORS, Redis caching, rate limiting, structured logging, health checks) and a URL/ID ergonomics pass (slugs for schools and questions, clean validation errors for malformed IDs).
 
-**Frontend: In process** using Next.js.
+**Frontend: complete** using Next.js.
 
 Full phase-by-phase history is in `CHANGELOG.md`. Current architectural state and conventions are in `BUILD_LOG.md`.
 

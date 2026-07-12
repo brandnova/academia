@@ -76,6 +76,67 @@ of low-priority, frontend-only implementation notes kept for visibility.
   /admin, closing the gap where reps could manage departments per the docs
   but had no direct path to it from their own management surface.
 
+## UI Polish Pass (Post-MVP, Frontend)
+
+Not a numbered phase. A full visual pass following user feedback, deliberately
+scoped as "touch up the existing interface" rather than a redesign, after a
+full alternative mockup (different layout, card-heavy, pill-shaped
+everything) was reviewed and explicitly rejected in favor of the current
+structure with more personality.
+
+- Typography: switched to Plus Jakarta Sans app-wide via next/font/google
+  (self-hosted, no runtime request), one family, hierarchy via weight only.
+- Color: introduced a warm "milk" light background and matching warm dark
+  background, ink-blue (#3454D1) as the single accent. One iteration
+  overshot this by also re-tinting Tailwind's entire default gray scale,
+  which bled a muddy brown tone into every neutral surface app-wide
+  (sidebar text, popovers, skeletons, borders). Reverted, Tailwind's
+  default gray scale is intentionally left untouched, only --color-bg,
+  --color-text, --color-border, --color-accent, and the red scale (for
+  destructive states) are overridden.
+- Status colors: SOLVED given its own distinct success color instead of
+  reusing the accent; ANSWERED corrected from a leftover unrelated
+  stock blue to the actual accent, so it's visually consistent with every
+  other accent-colored affordance in the app.
+- Skeleton loaders: flat pulse replaced with a real shimmer sweep
+  (.skeleton-shimmer), Skeleton.js is the only component touched, every
+  loading state across the app inherited it automatically.
+- Homepage hero: rebuilt as a full-bleed background panel (image URL is a
+  one-line swap once real artwork exists, currently an accent-tinted
+  placeholder plus a legibility scrim), replacing the earlier two-slot
+  illustration placeholder concept. Required a non-obvious full-bleed CSS
+  fix: the straightforward calc(50% - 50vw) margin trick only produces a
+  correct result when the parent has no max-width of its own; AppShell's
+  centered, capped <main> broke that assumption and introduced a real
+  horizontal scrollbar on wide viewports. Replaced with a margin-left:50%
+  + transform:translateX(-50%) approach, which is correct regardless of
+  parent constraints.
+- Motion: CSS-only throughout, no new dependency. Global button press
+  feedback and consistent focus-visible rings added via plain element
+  selectors in globals.css, no per-component classes needed. Opt-in
+  .stagger-list class added to every question/answer/comment list
+  container for a staggered fade-up on load; new rows appended via "View
+  more" animate in on their own since React only mounts the new elements.
+- Shape language: swept every rounded-full usage except the two genuine
+  pill-shaped search bars and two legitimate circular elements (profile
+  avatar, notification unread-count badge) down to a standard rounded
+  radius, matching the rest of the app's buttons.
+- Question following and locking wired into the frontend for the first
+  time (FollowButton, LockToggle), previously backend-complete but
+  unbuilt. LockToggle shipped with a real bug: the success path never
+  reset local loading state back to idle, only the catch block did, so
+  after a successful lock/unlock the button appeared permanently frozen
+  in a loading state until a full page reload remounted the component.
+  router.refresh() only updates props from the server, it never resets a
+  Client Component's own local state, that reset has to happen explicitly
+  alongside the refresh call. Fixed.
+- School and Hub pages merged into one, /schools/[id] now shows the full
+  hero (location, website, verification, question/moderator counts),
+  Ask a question action, and the complete filterable question list.
+  /hubs/[id] and /hubs/by-school/[schoolId] both reduced to thin redirects
+  into the merged page, kept as real routes since existing bookmarks and
+  email links point at them.
+
 ## Cross-Cutting Fixes (Post-MVP, Frontend)
 - Cookie-Forwarding Fix: apiFetch (every Server Component page) was calling
   the internal /api/backend proxy without forwarding the incoming request's
@@ -173,9 +234,18 @@ of low-priority, frontend-only implementation notes kept for visibility.
 ## Known Deviations From Docs (Frontend)
 - api-contract.md's Search Users section documents "Admin or School
   Representative" access; a message during development described the
-  intended permission as including Moderators instead. Built against the
-  currently documented behavior (Admin/Representative), unconfirmed which
-  is correct. Not merged into the docs sync pending your confirmation.
+  intended permission as including Moderators instead. Still unconfirmed.
+- Notifications and Reports targeting "answer" or "comment" content have no
+  standalone detail page to deep-link to; both render the content as
+  non-clickable plain text instead of a broken link.
+- Concurrent-request refresh race not yet mitigated: if multiple requests
+  expire at the same moment, more than one may attempt to use the same
+  refresh token before rotation completes, one could be rejected. Unlikely
+  at MVP traffic levels.
+- The HTML-entity arrow sweep (&larr; etc. to lucide icons) is incomplete,
+  only the question detail page's back link was converted incidentally
+  during the follow/lock work. At minimum the departments page and tags
+  page back-links still use literal arrow characters.
 
 ## Planned, Not Yet Scheduled (UI/UX Polish Phase)
 - Homepage rebuild: unfiltered paginated question list with hub/tag
@@ -201,3 +271,9 @@ of low-priority, frontend-only implementation notes kept for visibility.
 - Replace remaining HTML entity arrows (&larr; etc.) across the app with
   proper icon components (lucide-react), for visual consistency with every
   other directional/status affordance already built as an icon.
+- School Representative visibility into reports for their own school's
+  content, Reports is admin-only per api-contract.md today.
+- Standalone answer/comment permalink page for notification/report deep-links.
+- Full favicon/OG-image/web-manifest asset pass, deferred until the
+  project's final name and logomark are decided, base technical SEO
+  (metadata, sitemap.js, robots.js) shipped ahead of that.

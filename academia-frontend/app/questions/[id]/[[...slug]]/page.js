@@ -18,6 +18,16 @@ async function getQuestion(id) {
   }
 }
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const question = await getQuestion(id);
+  if (!question) return {};
+  return {
+    title: question.title,
+    description: question.body.slice(0, 155),
+  };
+}
+
 export default async function QuestionDetailPage({ params }) {
   const { id } = await params;
   const question = await getQuestion(id);
