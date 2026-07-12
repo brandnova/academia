@@ -118,7 +118,7 @@ export default function NotificationsPage() {
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`text-sm px-3 py-1.5 rounded-full border ${
+            className={`text-sm px-3 py-1.5 rounded border ${
               filter === f
                 ? "border-accent text-accent"
                 : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"

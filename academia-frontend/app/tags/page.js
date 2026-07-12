@@ -85,7 +85,7 @@ export default function TagsPage() {
             <Link
               key={tag.id}
               href={`/tags/${encodeURIComponent(tag.name)}`}
-              className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full border border-gray-300 dark:border-gray-600 hover:border-accent hover:text-accent transition-colors"
+              className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded border border-gray-300 dark:border-gray-600 hover:border-accent hover:text-accent transition-colors"
             >
               {tag.name}
               <span className="text-xs text-gray-400">{tag.question_count}</span>

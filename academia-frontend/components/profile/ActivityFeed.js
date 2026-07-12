@@ -64,7 +64,7 @@ export default function ActivityFeed({ userId }) {
   }
 
   return (
-    <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)]">
+    <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)] stagger-list">
       {items.map((item) => {
         if (item.type === "question") {
           return (

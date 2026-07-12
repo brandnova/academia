@@ -66,7 +66,7 @@ export default function QuestionsTab({ userId }) {
 
   return (
     <div>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)]">
+      <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)] stagger-list">
         {questions.map((q) => (
           <QuestionListRow key={q.id} question={q} showSchool />
         ))}

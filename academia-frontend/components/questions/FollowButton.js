@@ -36,7 +36,7 @@ export default function FollowButton({ questionId, initialFollowing }) {
       <button
         onClick={toggle}
         disabled={status === "loading"}
-        className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border disabled:opacity-50 ${
+        className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border disabled:opacity-50 ${
           following
             ? "border-accent text-accent"
             : "border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400"

@@ -97,7 +97,7 @@ export default function ActivationRequestsQueue() {
           <button
             key={s}
             onClick={() => setStatusFilter(s)}
-            className={`text-xs px-3 py-1 rounded-full border ${
+            className={`text-xs px-3 py-1 rounded border ${
               statusFilter === s
                 ? "border-accent text-accent"
                 : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"

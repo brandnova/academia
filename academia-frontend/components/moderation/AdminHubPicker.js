@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import SchoolPicker from "@/components/questions/SchoolPicker";
 import HubTeamManager from "./HubTeamManager";
@@ -24,7 +23,7 @@ export default function AdminHubPicker() {
     return (
       <div>
         <button onClick={() => setHub(null)} className="text-xs text-accent hover:underline mb-3">
-          <ArrowLeft className="w-4 h-4" /> Choose a different school
+          Choose a different school
         </button>
         <HubTeamManager
           hub={hub}

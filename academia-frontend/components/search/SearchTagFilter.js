@@ -38,7 +38,7 @@ export default function SearchTagFilter({ value, onChange }) {
 
   if (value) {
     return (
-      <span className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent">
+      <span className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded bg-accent/10 text-accent">
         {value}
         <button onClick={() => onChange(null)} aria-label="Clear tag filter">
           <X className="w-3 h-3" />

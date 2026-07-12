@@ -79,7 +79,7 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
         {value.map((tag) => (
           <span
             key={tag}
-            className="flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-accent/10 text-accent"
+            className="flex items-center gap-1 text-xs px-2 py-1 rounded bg-accent/10 text-accent"
           >
             {tag}
             <button

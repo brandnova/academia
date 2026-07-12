@@ -46,7 +46,7 @@ export default function NotificationItem({ notification, onRead, onNavigate }) {
         <p className="text-xs text-gray-400 mt-0.5">{timeAgo(notification.created_at)}</p>
       </div>
       {!notification.is_read && (
-        <span className="w-2 h-2 rounded-full bg-accent mt-1.5 shrink-0" />
+        <span className="w-2 h-2 rounded bg-accent mt-1.5 shrink-0" />
       )}
     </div>
   );

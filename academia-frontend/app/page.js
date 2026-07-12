@@ -2,7 +2,6 @@ import Link from "next/link";
 import { School, Tag, ArrowRight } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 import HeroSearchBar from "@/components/home/HeroSearchBar";
-import HeroIllustrationSlot from "@/components/home/HeroIllustrationSlot";
 import RecentQuestionsList from "@/components/home/RecentQuestionsList";
 
 async function getSideData() {
@@ -22,26 +21,31 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="text-center py-8 mb-10">
-        <div className="flex items-center justify-center gap-6 mb-6">
-          <HeroIllustrationSlot />
-          <div>
-            <h1 className="text-3xl font-semibold mb-2">Academia</h1>
-            <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
-              Academic answers for Nigerian tertiary students, organized by
-              school, searchable, and here for the next student who asks the
-              same question.
-            </p>
-          </div>
-          <HeroIllustrationSlot />
+      <section className="full-bleed -mt-6 relative overflow-hidden border-b border-gray-200/70 dark:border-gray-800/70 mb-10">
+        {/* Real photo goes here: drop it at /public/hero-cover.png and it
+            appears automatically, no code change needed. Until then, the
+            accent-tinted color beneath shows through as the placeholder. */}
+        <div
+          className="absolute inset-0 bg-accent/15 dark:bg-accent/10 bg-cover bg-center"
+          style={{ backgroundImage: "url('/hero-cover.png')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
+
+        <div className="relative px-6 py-16 sm:py-20 text-center max-w-xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">
+            Academia
+          </h1>
+          <p className="mb-7">
+            Academic answers for Nigerian tertiary students, organized by schools, searchable, and here for the next students who need them.
+          </p>
+          <HeroSearchBar />
+          <Link
+            href="/schools"
+            className="inline-flex items-center gap-1 text-sm text-white hover:text-white/80 underline underline-offset-4 mt-4"
+          >
+            Browse schools <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
-        <HeroSearchBar />
-        <Link
-          href="/schools"
-          className="inline-flex items-center gap-1 text-sm text-accent hover:underline mt-4"
-        >
-          Browse schools <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-[1fr_260px] gap-8">
@@ -92,7 +96,7 @@ export default async function HomePage() {
                   <Link
                     key={t.id}
                     href={`/tags/${encodeURIComponent(t.name)}`}
-                    className="text-xs px-2.5 py-1 rounded-full border border-gray-300 dark:border-gray-600 hover:border-accent hover:text-accent transition-colors"
+                    className="text-xs px-2.5 py-1 rounded border border-gray-300 dark:border-gray-600 hover:border-accent hover:text-accent transition-colors"
                   >
                     {t.name}
                   </Link>

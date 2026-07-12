@@ -87,7 +87,7 @@ export default function UnansweredQueue({ hubId, showSchool = false }) {
   return (
     <div>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{count} unanswered</p>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)]">
+      <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)] stagger-list">
         {questions.map((q) => (
           <QuestionListRow key={q.id} question={q} showSchool={showSchool} />
         ))}

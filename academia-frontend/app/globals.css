@@ -3,22 +3,127 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-accent: #2563eb;
+  --color-accent: #3454D1;
+
+  --color-success: #1D8A6C;
+  --color-success-dark: #3FBF97;
+
+  /* Clean, moderate red, yellow undertone removed so it reads as red, not
+     brown, against the warm background. Overrides Tailwind's default red
+     scale only, deliberately, this was a specific reported problem, the
+     gray scale below is not touched. */
+  --color-red-50: #FDECEC;
+  --color-red-100: #FAD6D6;
+  --color-red-200: #F3B0B0;
+  --color-red-300: #E88686;
+  --color-red-400: #DD6161;
+  --color-red-500: #CE4747;
+  --color-red-600: #B93D3D;
+  --color-red-700: #9A3232;
+  --color-red-800: #7A2828;
+  --color-red-900: #5C1F1F;
+  --color-red-950: #3D1414;
 }
 
 :root {
-  --color-bg: #ffffff;
-  --color-text: #1f1f1f;
-  --color-border: #e0e0e0;
+  --color-bg: #FBFAF8;
+  --color-text: #16140F;
+  --color-border: #E5E3DF;
 }
 
 .dark {
-  --color-bg: #202124;
-  --color-text: #e8eaed;
-  --color-border: #3c4043;
+  --color-bg: #16171C;
+  --color-text: #F5F3EE;
+  --color-border: #2C2D34;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
+  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Skeleton shimmer, replaces the old flat animate-pulse. Uses Tailwind's
+   own default gray scale, deliberately left un-overridden, see the note
+   above the accent/red tokens. */
+.skeleton-shimmer {
+  background-color: var(--color-gray-200);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+.dark .skeleton-shimmer {
+  background-color: var(--color-gray-800);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+}
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+.full-bleed {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Subtle press feedback on every real button in the app, no per-component
+   class needed, this targets the element type directly. Links styled as
+   buttons (e.g. Ask a question in the sidebar) aren't covered by this
+   selector, but the primary actions that matter most, form submissions,
+   toggles, confirmations, are virtually all real <button> elements already. */
+button {
+  transition: transform 150ms ease, background-color 150ms ease,
+    border-color 150ms ease, color 150ms ease;
+}
+button:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+/* Consistent accent-colored focus ring for keyboard navigation, applied
+   once, globally, rather than auditing every input/button's focus classes
+   individually. A couple of existing inputs (the two search bars) already
+   carry their own explicit focus:ring-2 focus:ring-accent classes, those
+   just render alongside this on keyboard focus, same color either way, so
+   there's no visual clash, only slight redundancy on those two elements. */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Staggered fade-in for list rows, opt-in via the stagger-list class on a
+   row-container element. New rows appended by a "View more" click animate in on their own
+   automatically, since React only mounts the newly added elements, already-
+   rendered rows keep their existing DOM nodes and don't replay it. */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.stagger-list > * {
+  animation: fadeInUp 0.4s ease both;
+}
+.stagger-list > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-list > *:nth-child(2) { animation-delay: 40ms; }
+.stagger-list > *:nth-child(3) { animation-delay: 80ms; }
+.stagger-list > *:nth-child(4) { animation-delay: 120ms; }
+.stagger-list > *:nth-child(5) { animation-delay: 160ms; }
+.stagger-list > *:nth-child(6) { animation-delay: 200ms; }
+.stagger-list > *:nth-child(n+7) { animation-delay: 240ms; }

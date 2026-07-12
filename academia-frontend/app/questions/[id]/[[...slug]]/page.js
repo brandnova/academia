@@ -58,7 +58,7 @@ export default async function QuestionDetailPage({ params }) {
             <Link
               key={tag}
               href={`/tags/${encodeURIComponent(tag)}`}
-              className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent transition-colors"
+              className="text-xs px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent transition-colors"
             >
               {tag}
             </Link>

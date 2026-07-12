@@ -26,6 +26,7 @@ export default function LockToggle({ question }) {
     try {
       const method = question.is_locked ? "DELETE" : "POST";
       await clientFetch(`/questions/${question.id}/lock/`, { method });
+      setStatus("idle");
       router.refresh();
     } catch (err) {
       setErrorMsg(err.message);
@@ -38,7 +39,7 @@ export default function LockToggle({ question }) {
       <button
         onClick={toggle}
         disabled={status === "loading"}
-        className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border disabled:opacity-50 ${
+        className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border disabled:opacity-50 ${
           question.is_locked
             ? "border-red-300 text-red-600 dark:text-red-400"
             : "border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400"

@@ -1,7 +1,6 @@
 "use client";
 
 import { use, useState, useEffect, useCallback } from "react";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { clientFetch } from "@/lib/clientApi";
 import Skeleton from "@/components/ui/Skeleton";
@@ -78,7 +77,7 @@ export default function TagQuestionsPage({ params }) {
     <div>
       <p className="text-sm mb-2">
         <Link href="/tags" className="text-accent hover:underline">
-          <ArrowLeft className="w-4 h-4" /> All tags
+          All tags
         </Link>
       </p>
       <h1 className="text-xl font-semibold mb-6">
@@ -131,7 +130,7 @@ export default function TagQuestionsPage({ params }) {
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
                 {count} question{count !== 1 ? "s" : ""}
               </p>
-              <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700">
+              <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700 stagger-list">
                 {questions.map((q) => (
                   <QuestionListRow key={q.id} question={q} showSchool />
                 ))}

@@ -129,7 +129,7 @@ export default function SchoolsPage() {
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
               {count} school{count !== 1 ? "s" : ""}
             </p>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700 stagger-list">
               {schools.map((school) => (
                 <SchoolListRow key={school.id} school={school} />
               ))}

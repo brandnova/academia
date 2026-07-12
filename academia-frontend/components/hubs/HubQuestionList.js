@@ -173,7 +173,7 @@ export default function HubQuestionList({ hubId, departments }) {
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
               {count} question{count !== 1 ? "s" : ""}
             </p>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700 stagger-list">
               {questions.map((q) => (
                 <QuestionListRow key={q.id} question={q} />
               ))}

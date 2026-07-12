@@ -56,7 +56,7 @@ export default function ProfilePage() {
             className="w-16 h-16 rounded-full object-cover border border-[var(--color-border)] shrink-0"
           />
         ) : (
-          <div className="w-16 h-16 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xl font-semibold shrink-0">
+          <div className="w-16 h-16 rounded bg-accent/10 text-accent flex items-center justify-center text-xl font-semibold shrink-0">
             {user.full_name?.[0]?.toUpperCase()}
           </div>
         )}
@@ -91,7 +91,7 @@ export default function ProfilePage() {
               {errorMsg && <p className="text-red-600 dark:text-red-400 text-xs mt-1">{errorMsg}</p>}
             </div>
             {user.is_admin && (
-              <span className="text-xs px-2 py-1 rounded-full bg-accent/10 text-accent shrink-0">Admin</span>
+              <span className="text-xs px-2 py-1 rounded bg-accent/10 text-accent shrink-0">Admin</span>
             )}
           </div>
         </div>

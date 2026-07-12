@@ -98,7 +98,7 @@ export default function UsersManager() {
           <button
             key={t.key}
             onClick={() => setActiveFilter(t.key)}
-            className={`text-xs px-3 py-1 rounded-full border ${
+            className={`text-xs px-3 py-1 rounded border ${
               activeFilter === t.key
                 ? "border-accent text-accent"
                 : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"

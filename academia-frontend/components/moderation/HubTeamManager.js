@@ -45,7 +45,7 @@ export default function HubTeamManager({
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`text-xs px-3 py-1 rounded-full border ${
+              className={`text-xs px-3 py-1 rounded border ${
                 tab === t.key
                   ? "border-accent text-accent"
                   : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
