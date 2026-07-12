@@ -1,9 +1,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ArrowLeft, Lock } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 import StatusIcon from "@/components/questions/StatusIcon";
 import QuestionActions from "@/components/questions/QuestionActions";
 import AnswersSection from "@/components/answers/AnswersSection";
+import ReportButton from "@/components/reports/ReportButton";
+import FollowButton from "@/components/questions/FollowButton";
+import LockToggle from "@/components/questions/LockToggle";
 
 async function getQuestion(id) {
   try {
@@ -15,17 +19,18 @@ async function getQuestion(id) {
 }
 
 export default async function QuestionDetailPage({ params }) {
-  const { id } = await params; // trailing slug segment, if present, is cosmetic only
-
+  const { id } = await params;
   const question = await getQuestion(id);
-
   if (!question) notFound();
 
   return (
     <div className="max-w-3xl">
       <p className="text-sm mb-4">
-        <Link href={`/hubs/${question.hub.id}`} className="text-accent hover:underline">
-          &larr; {question.hub.school.name}
+        <Link
+          href={`/hubs/${question.hub.id}`}
+          className="flex items-center gap-1 text-accent hover:underline w-fit"
+        >
+          <ArrowLeft className="w-4 h-4" /> {question.hub.school.name}
         </Link>
       </p>
 
@@ -33,7 +38,12 @@ export default async function QuestionDetailPage({ params }) {
         <div className="pt-1">
           <StatusIcon status={question.status} showLabel />
         </div>
-        <h1 className="text-xl font-semibold">{question.title}</h1>
+        <h1 className="text-xl font-semibold flex-1">{question.title}</h1>
+        {question.is_locked && (
+          <span className="flex items-center gap-1 text-xs text-red-600 dark:text-red-400 shrink-0 pt-1.5">
+            <Lock className="w-3.5 h-3.5" /> Locked
+          </span>
+        )}
       </div>
 
       <div className="flex flex-wrap gap-3 text-xs text-gray-400 mb-4">
@@ -56,9 +66,14 @@ export default async function QuestionDetailPage({ params }) {
         </div>
       )}
 
-      <div className="text-sm whitespace-pre-wrap mb-6">{question.body}</div>
+      <div className="text-sm whitespace-pre-wrap mb-4">{question.body}</div>
 
-      <QuestionActions question={question} />
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <QuestionActions question={question} />
+        <ReportButton contentType="question" contentId={question.id} authorId={question.author.id} />
+        <FollowButton questionId={question.id} initialFollowing={question.is_following} />
+        <LockToggle question={question} />
+      </div>
 
       <AnswersSection question={question} />
     </div>

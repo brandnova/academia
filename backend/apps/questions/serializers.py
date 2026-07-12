@@ -4,7 +4,7 @@ from apps.accounts.models import User
 from apps.hubs.models import Hub
 from apps.schools.models import Department, School
 
-from .models import Question
+from .models import Question, QuestionFollow
 
 
 class QuestionAuthorSerializer(serializers.ModelSerializer):
@@ -44,7 +44,7 @@ class QuestionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = [
-            "id", "title", "slug", "body", "status", "view_count", "author", "hub",
+            "id", "title", "slug", "body", "status", "view_count", "is_locked", "author", "hub",
             "department", "tags", "answer_count", "best_answer_id",
             "created_at", "updated_at",
         ]
@@ -52,13 +52,20 @@ class QuestionListSerializer(serializers.ModelSerializer):
 
 class QuestionDetailSerializer(QuestionListSerializer):
     answers = serializers.SerializerMethodField()
+    is_following = serializers.SerializerMethodField()
 
     class Meta(QuestionListSerializer.Meta):
-        fields = QuestionListSerializer.Meta.fields + ["answers"]
+        fields = QuestionListSerializer.Meta.fields + ["answers", "is_following"]
 
     def get_answers(self, obj):
         from apps.answers.serializers import AnswerSerializer
         return AnswerSerializer(obj.answers.all(), many=True, context=self.context).data
+
+    def get_is_following(self, obj):
+        request = self.context.get("request")
+        if not request or not getattr(request.user, "is_authenticated", False):
+            return False
+        return QuestionFollow.objects.filter(user=request.user, question=obj).exists()
 
 
 def _sync_tags(question, tag_names):

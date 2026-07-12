@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Globe, MapPin, ShieldCheck, ArrowRight } from "lucide-react";
+import { Globe, MapPin, ShieldCheck, MessageSquare, Users } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 import RequestHubCTA from "@/components/schools/RequestHubCTA";
 import ManageDepartmentsLink from "@/components/schools/ManageDepartmentsLink";
+import HubQuestionList from "@/components/hubs/HubQuestionList";
 
 async function getSchool(id) {
   try {
@@ -14,20 +15,42 @@ async function getSchool(id) {
   }
 }
 
+async function getHub(schoolId) {
+  try {
+    return await apiFetch(`/hubs/by-school/${schoolId}/`);
+  } catch (err) {
+    if (err.status === 404) return null;
+    throw err;
+  }
+}
+
 export default async function SchoolProfilePage({ params }) {
   const { id } = await params;
   const school = await getSchool(id);
-
   if (!school) notFound();
 
+  const hub = school.has_hub ? await getHub(id) : null;
   const activeDepartments = school.departments?.filter((d) => d.is_active) ?? [];
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold">{school.name}</h1>
-        <p className="text-gray-500 dark:text-gray-400">{school.short_name}</p>
-        <div className="flex flex-wrap gap-4 mt-3 text-sm text-gray-500 dark:text-gray-400">
+      <div className="mb-8">
+        <div className="flex items-start justify-between gap-4 flex-wrap mb-2">
+          <div>
+            <h1 className="text-2xl font-semibold">{school.name}</h1>
+            <p className="text-gray-500 dark:text-gray-400">{school.short_name}</p>
+          </div>
+          {hub && (
+            <Link
+              href={`/questions/new?hub=${hub.id}`}
+              className="shrink-0 text-sm px-4 py-2 rounded bg-accent text-white"
+            >
+              Ask a question
+            </Link>
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
           {school.location && (
             <span className="flex items-center gap-1">
               <MapPin className="w-4 h-4" /> {school.location}
@@ -48,37 +71,28 @@ export default async function SchoolProfilePage({ params }) {
               <ShieldCheck className="w-4 h-4" /> Verified
             </span>
           )}
+          {hub && (
+            <>
+              <span className="flex items-center gap-1">
+                <MessageSquare className="w-4 h-4" /> {hub.question_count} question
+                {hub.question_count !== 1 ? "s" : ""}
+              </span>
+              <span className="flex items-center gap-1">
+                <Users className="w-4 h-4" /> {hub.moderator_count} moderator
+                {hub.moderator_count !== 1 ? "s" : ""}
+              </span>
+            </>
+          )}
         </div>
       </div>
 
-      {school.has_hub ? (
-        <div>
-          <Link
-            href={`/hubs/by-school/${school.id}`}
-            className="flex items-center gap-2 text-accent hover:underline mb-6 text-sm font-medium"
-          >
-            Visit hub <ArrowRight className="w-4 h-4" />
-          </Link>
-
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold">Departments</h2>
+      {hub ? (
+        <>
+          <div className="flex justify-end mb-2">
             <ManageDepartmentsLink schoolId={school.id} />
           </div>
-          {activeDepartments.length > 0 ? (
-            <ul className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700">
-              {activeDepartments.map((dept) => (
-                <li key={dept.id} className="py-3 px-2 text-sm">
-                  {dept.name}
-                  {dept.code ? ` (${dept.code})` : ""}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              No departments listed yet.
-            </p>
-          )}
-        </div>
+          <HubQuestionList hubId={hub.id} departments={activeDepartments} />
+        </>
       ) : (
         <RequestHubCTA schoolId={school.id} schoolName={school.name} />
       )}

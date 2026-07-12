@@ -5,6 +5,7 @@ import { CheckCircle2, ThumbsUp, ThumbsDown, Award } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
 import CommentThread from "@/components/comments/CommentThread";
+import ReportButton from "@/components/reports/ReportButton";
 
 export default function AnswerCard({
   answer,
@@ -173,7 +174,8 @@ export default function AnswerCard({
 
   return (
     <div
-      className={`py-5 px-4 rounded-lg border ${
+      id={`answer-${answer.id}`}
+      className={`py-5 px-4 rounded-lg border transition-all ${
         answer.is_best
           ? "border-accent bg-accent/5"
           : "border-gray-200 dark:border-gray-700"
@@ -218,7 +220,14 @@ export default function AnswerCard({
 
       <div className="flex flex-wrap items-center justify-between gap-2 mt-3 text-xs text-gray-400">
         {renderVoteControl()}
-        <span>by {answer.author.full_name}</span>
+        <div className="flex items-center gap-3">
+          <ReportButton
+            contentType="answer"
+            contentId={answer.id}
+            authorId={answer.author.id}
+          />
+          <span>by {answer.author.full_name}</span>
+        </div>
       </div>
 
       {voteError && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{voteError}</p>}

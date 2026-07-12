@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
 
-export default function AnswerForm({ questionId, questionStatus, onCreated }) {
+export default function AnswerForm({ questionId, locked, onCreated }) {
   const { user } = useAuth();
   const [body, setBody] = useState("");
   const [status, setStatus] = useState("idle");
@@ -18,10 +18,10 @@ export default function AnswerForm({ questionId, questionStatus, onCreated }) {
     );
   }
 
-  if (questionStatus === "SOLVED") {
+  if (locked) {
     return (
       <p className="text-sm text-gray-500 dark:text-gray-400">
-        This question has been marked as solved and is no longer accepting answers.
+        This question has been locked and is no longer accepting new answers.
       </p>
     );
   }

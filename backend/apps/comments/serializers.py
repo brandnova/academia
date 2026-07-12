@@ -54,3 +54,22 @@ class CommentUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ["body"]
+
+
+class UserCommentAnswerSerializer(serializers.ModelSerializer):
+    question = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Answer
+        fields = ["id", "question"]
+
+    def get_question(self, obj):
+        return {"id": str(obj.question_id), "title": obj.question.title}
+
+
+class UserCommentSerializer(serializers.ModelSerializer):
+    answer = UserCommentAnswerSerializer(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ["id", "body", "answer", "created_at", "updated_at"]

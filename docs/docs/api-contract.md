@@ -121,6 +121,13 @@ Login and token refresh are both rate limited to 10 requests per minute per clie
 }
 ```
 
+**Response (400 Bad Request):**
+```json
+{
+  "error": "access_token is required"
+}
+```
+
 **Response (401 Unauthorized):**
 ```json
 {
@@ -152,6 +159,20 @@ Behavior notes: first login for an email creates the `User` record automatically
 }
 ```
 
+**Response (400 Bad Request):**
+```json
+{
+  "refresh": ["This field is required."]
+}
+```
+
+**Response (401 Unauthorized):**
+```json
+{
+  "error": "Token is invalid or expired"
+}
+```
+
 Refresh tokens rotate on every use and the previous one is blacklisted, always
 store whichever refresh token was most recently issued.
 
@@ -168,6 +189,26 @@ store whichever refresh token was most recently issued.
 ```
 
 **Response (204 No Content):** Empty
+
+**Response (400 Bad Request):**
+```json
+{
+  "error": "refresh token is required"
+}
+```
+or
+```json
+{
+  "error": "Invalid or already blacklisted token"
+}
+```
+
+**Response (401 Unauthorized):**
+```json
+{
+  "error": "Authentication credentials were not provided."
+}
+```
 
 Blacklists the given refresh token server-side, it can no longer be used to
 obtain new access tokens.
@@ -199,15 +240,25 @@ obtain new access tokens.
       "school": { "id": "uuid", "name": "University of Lagos", "slug": "unilag" }
     }
   ],
+  "stats": {
+    "question_count": 12,
+    "answer_count": 34,
+    "best_answer_count": 9,
+    "comment_count": 21
+  },
   "created_at": "2026-01-01T00:00:00Z"
 }
 ```
 
 `moderator_for` and `representative_for` list every hub (with its school) where
 this user currently holds an active assignment. Both are empty arrays for a
-user with no such assignments. This same shape is also returned in the `user`
-field of the Google Login response. See "Frontend Permission Model" below for
-how to use these fields.
+user with no such assignments. stats is a count-only summary for this user's
+own activity (own question/answer/comment counts, plus how many of their
+answers are marked best), intended for badge-style display (e.g. "Posts (3)"),
+the actual objects are fetched via the endpoints below, not embedded here.
+This same shape, including stats, is also returned in the user field of the
+Google Login response. See "Frontend Permission Model" below for how to use
+the role fields.
 
 ---
 
@@ -222,6 +273,43 @@ how to use these fields.
 ```
 
 **Response (200 OK):** Same as GET `/api/v1/users/me/`
+
+---
+
+### Search Users (Admin or School Representative)
+**Endpoint:** `GET /api/v1/users/search/`
+
+**Query Parameters:**
+- `search` - Search by email or full_name, required, empty results if omitted
+
+**Response (200 OK):**
+```json
+{
+  "results": [
+    {
+      "id": "uuid",
+      "full_name": "Jane Smith",
+      "email": "jane@example.com",
+      "avatar": "https://..."
+    }
+  ]
+}
+```
+
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "You do not have permission to search for users"
+}
+```
+
+Available to platform admins and to any user with an active
+SchoolRepresentativeAssignment for at least one hub, not scoped to a specific
+hub, since the assignment endpoints themselves already enforce hub-specific
+permission at the point of use. This exists specifically so a School
+Representative can find a user_id to pass into POST /hubs/{hub_id}/moderators/
+without needing admin access. Not paginated, results capped at 10, matching
+the existing Tags search-as-you-type pattern.
 
 ---
 
@@ -314,11 +402,17 @@ wherever a school is being displayed.
       "location": "Lagos, Nigeria",
       "website": "https://unilag.edu.ng",
       "has_hub": true,
+      "is_active": true,
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
 }
 ```
+
+**Caching & Visibility Behavior:**
+- **Cache**: Public requests are cached with prefix `school-list:query` using `CACHE_TTL_SHORT` (60 seconds).
+- **Admin Bypass**: Authenticated Platform Admins bypass the cache completely (to see live entries and inactive/deactivated schools, which are filtered out for regular users/guests).
+- **Invalidation**: Wiped automatically on POST school creation or PATCH school updates.
 
 ---
 
@@ -335,12 +429,15 @@ wherever a school is being displayed.
   "location": "Lagos, Nigeria",
   "website": "https://unilag.edu.ng",
   "has_hub": true,
+  "is_active": true,
   "verification_status": "VERIFIED",
   "departments": [
     {
       "id": "uuid",
       "name": "Computer Science",
-      "code": "CSC"
+      "code": "CSC",
+      "question_count": 42,
+      "is_active": true
     }
   ],
   "created_at": "2026-01-01T00:00:00Z"
@@ -353,6 +450,11 @@ wherever a school is being displayed.
   "error": "School not found"
 }
 ```
+
+**Caching & Visibility Behavior:**
+- **Cache**: Public detail views are cached as `school-detail:{school_id}` using `CACHE_TTL_MEDIUM` (300 seconds).
+- **Admin Bypass**: Authenticated Platform Admins bypass this cache entirely and view live data (including inactive status).
+- **Invalidation**: Cleared on PATCH school update of the school, or POST/PATCH operations on the school's departments.
 
 ---
 
@@ -367,6 +469,9 @@ wherever a school is being displayed.
   "error": "School not found"
 }
 ```
+
+**Caching Behavior:**
+- **Cache**: Cached as `school-by-slug:{slug}` using `CACHE_TTL_MEDIUM` (300 seconds). No admin bypass on this slug lookup path.
 
 This is an additive lookup path alongside the existing UUID-based one, both remain
 valid indefinitely. `slug` is generated once at creation from `short_name` and never
@@ -388,16 +493,33 @@ later.
 }
 ```
 
+`short_name` is automatically uppercased on save. `location` and `website` are
+optional. A `slug` is auto-generated from `short_name` (e.g. `"UI"` → `"ui"`) and
+is never regenerated.
+
 **Response (201 Created):** Same as GET `/api/v1/schools/{school_id}/`
+
+**Error Responses:**
+```json
+// 400 Bad Request - Duplicate school name or short_name
+{
+  "name": ["school with this name already exists."],
+  "short_name": ["school with this short name already exists."]
+}
+```
+
+**Invalidation Note:** Invalidates and clears all entries matching the `school-list` cache prefix.
 
 ---
 
 ### Update School (Admin Only)
 **Endpoint:** `PATCH /api/v1/schools/{school_id}/`
 
-**Request:** Same as POST, all fields optional
+**Request:** Same as POST, all fields optional. Accepts `"is_active": true/false`.
 
 **Response (200 OK):** Same as GET `/api/v1/schools/{school_id}/`
+
+**Invalidation Note:** Invalidates `school-detail:{school_id}` cache key and the `school-list` cache prefix.
 
 ---
 
@@ -448,6 +570,12 @@ responses for non-admins.
 }
 ```
 
+**Caching & Visibility Behavior:**
+- **Cache**: Cached as `hub-detail:{hub_id}` using `CACHE_TTL_SHORT` (60 seconds).
+- **Invalidation**: Cleared automatically on:
+  - Approve Activation Request (hub activation).
+  - Assign / Remove Moderator.
+
 ---
 
 ### Get Hub by School
@@ -461,6 +589,28 @@ responses for non-admins.
   "error": "Hub not found for this school"
 }
 ```
+
+**Caching & Visibility Behavior:**
+- **Cache**: Cached as `hub-by-school:{school_id}` using `CACHE_TTL_SHORT` (60 seconds).
+- **Invalidation**: Same invalidation triggers as Get Hub.
+
+---
+
+### Get Hub by Slug
+**Endpoint:** `GET /api/v1/hubs/by-slug/{slug}/`
+
+**Response (200 OK):** Same as GET `/api/v1/hubs/{hub_id}/`
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "Hub not found for this school"
+}
+```
+
+**Caching & Visibility Behavior:**
+- **Cache**: Cached as `hub-by-slug:{slug}` using `CACHE_TTL_SHORT` (60 seconds).
+- **Invalidation**: Same invalidation triggers as Get Hub.
 
 ---
 
@@ -572,8 +722,17 @@ requests from piling up before an admin reviews the first one.
 }
 ```
 
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "This activation request has already been reviewed"
+}
+```
+
 Approving sends the requesting user a `HUB_ACTIVATED` notification (in-app and
 email).
+
+**Invalidation Note:** Automatically invalidates `hub-detail:{hub_id}`, `hub-by-school:{school_id}`, `hub-by-slug:{slug}`, `school-detail:{school_id}`, and the `school-list` prefix.
 
 ---
 
@@ -592,6 +751,13 @@ email).
 {
   "message": "Activation request rejected",
   "status": "REJECTED"
+}
+```
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "This activation request has already been reviewed"
 }
 ```
 
@@ -617,8 +783,10 @@ email).
 }
 ```
 
-This endpoint is not paginated, it returns every active department for the
-school in one response.
+This endpoint is not paginated. For regular users and guests, only active
+departments (`is_active: true`) are returned. Authenticated Platform Admins and
+School Representatives for this school's hub see all departments, including
+inactive ones (so they can reactivate them via PATCH).
 
 ---
 
@@ -633,7 +801,17 @@ school in one response.
 }
 ```
 
-**Response (201 Created):** Same as department object above
+`code` is optional (can be omitted or sent as `null`). `name` is required and is
+case-sensitively unique per school (enforced at the database level).
+
+**Response (201 Created):** Same as department object in List Departments above
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "name": ["A department with this name already exists for this school."]
+}
+```
 
 **Error Response (403 Forbidden):**
 ```json
@@ -645,6 +823,8 @@ school in one response.
 Requires an active `SchoolRepresentativeAssignment` for this school's hub, or
 platform admin status.
 
+**Invalidation Note:** Creating a department invalidates the `school-detail:{school_id}` cache key of its parent school.
+
 ---
 
 ### Update Department (School Representative or Admin)
@@ -654,13 +834,26 @@ platform admin status.
 ```json
 {
   "name": "Computer Science and Engineering",
+  "code": "CSE",
   "is_active": false
 }
 ```
 
+All fields are optional (partial PATCH). Sending `"is_active": false` is the
+soft-delete path; setting it back to `true` reactivates the department.
+
 **Response (200 OK):** Same as department object
 
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "You do not have permission to perform this action"
+}
+```
+
 Same permission requirement as Create Department above.
+
+**Invalidation Note:** Updating a department invalidates the `school-detail:{school_id}` cache key for its corresponding parent school.
 
 ---
 
@@ -674,6 +867,7 @@ Same permission requirement as Create Department above.
 - `department` - Filter by department ID
 - `status` - OPEN/ANSWERED/SOLVED
 - `tag` - Filter by tag name
+- `author` - Filter by author user ID
 - `search` - Search in title and body
 - `ordering` - created_at/-created_at/views/-views
 - `page` - Page number
@@ -693,6 +887,7 @@ Same permission requirement as Create Department above.
       "body": "I'm confused about the grading system...",
       "status": "SOLVED",
       "view_count": 120,
+      "is_locked": false,
       "author": {
         "id": "uuid",
         "full_name": "John Doe",
@@ -731,7 +926,6 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 ```json
 {
   "title": "How do I calculate my CGPA?",
-  "slug": "how-do-i-calculate-my-cgpa",
   "body": "I'm confused about the grading system at UNILAG...",
   "hub_id": "uuid",
   "department_id": "uuid",
@@ -775,6 +969,8 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
   "body": "I'm confused about the grading system...",
   "status": "SOLVED",
   "view_count": 120,
+  "is_locked": false,
+  "is_following": false,
   "author": {
     "id": "uuid",
     "full_name": "John Doe",
@@ -783,9 +979,9 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
   "hub": {
     "id": "uuid",
     "school": {
-      "id": "uuid",
       "name": "University of Lagos",
-      "short_name": "UNILAG"
+      "short_name": "UNILAG",
+      "slug": "unilag"
     }
   },
   "department": {
@@ -824,6 +1020,16 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 }
 ```
 
+`view_count` only increments for authenticated requests, anonymous views are
+never counted. Increments are deduplicated per user for 24 hours (a rolling
+window, not a calendar-day reset), a signed-in user repeatedly refreshing the
+same question within that window will not keep inflating the count. This is
+cache-backed, not a permanent per-user view record, no history of who viewed
+what is stored anywhere.
+
+`is_following` reflects only the requesting user's own follow state, always
+`false` for anonymous requests, see Follow Question below.
+
 ---
 
 ### Update Question
@@ -833,7 +1039,6 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 ```json
 {
   "title": "Updated title",
-  "slug": "updated-slug",
   "body": "Updated body",
   "department_id": "uuid",
   "tags": ["gpa", "updated"]
@@ -849,12 +1054,18 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 }
 ```
 
-Note: 
-- `status` is not an editable field on this endpoint. It only changes as a side
-effect of other actions: creating the first answer moves a question from OPEN to
-ANSWERED, marking a best answer moves it to SOLVED, and deleting answers can move it
-back to ANSWERED or OPEN depending on what remains (see Delete Answer below).
-- `slug` on Question is purely cosmetic, meant for building readable URLs like
+Note:
+- `status` is not an editable field on this endpoint. It changes only as a side
+effect: creating the first answer moves a question from OPEN to ANSWERED,
+marking a best answer moves it to SOLVED, deleting an answer can move it back
+to ANSWERED or OPEN depending on what remains (see Delete Answer below).
+- SOLVED means "this question has a designated best answer," not "this
+question is closed." New answers can be submitted to a question at any status,
+including SOLVED, a question is never locked to further input purely because
+an owner picked a favorite. Adding a plain answer to a SOLVED question does
+not change its status, only removing the current best answer (or the owner
+marking a different answer best) affects SOLVED status.
+- slug on Question is purely cosmetic, meant for building readable URLs like
 `/questions/{id}/{slug}`, it is not unique and is not used for lookups. Editing a
 question's title regenerates its slug.
 
@@ -893,6 +1104,107 @@ question's title regenerates its slug.
 A platform admin sees unanswered questions across every hub. A user with an active
 `ModeratorAssignment` sees only questions belonging to hub(s) they are assigned to
 moderate. A user with neither is blocked with a 403.
+
+---
+
+### Follow Question
+**Endpoint:** `POST /api/v1/questions/{question_id}/follow/`
+
+**Response (201 Created):**
+```json
+{
+  "message": "Now following question",
+  "is_following": true
+}
+```
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "You are already following this question"
+}
+```
+
+---
+
+### Unfollow Question
+**Endpoint:** `DELETE /api/v1/questions/{question_id}/follow/`
+
+**Response (204 No Content):** Empty
+
+**Error Response (404 Not Found):**
+```json
+{
+  "error": "You have not followed this question"
+}
+```
+
+Following is independent of authorship, a question's own author can follow
+their own question but doesn't need to, they already receive notifications
+for it by default. Followers get an in-app-only NEW_ANSWER notification
+(varied message text, no new notification type) when the question receives a
+new answer or when a best answer is marked, excluding whichever user is
+already notified through the existing author-facing paths. No follower count
+is exposed anywhere in the API, is_following reflects only the requesting
+user's own follow state.
+
+---
+
+### Lock Question (Admin, Representative, or Moderator Only)
+**Endpoint:** `POST /api/v1/questions/{question_id}/lock/`
+
+Locks the question so that new answers can no longer be added.
+
+**Response (200 OK):**
+```json
+{
+  "message": "Question locked successfully",
+  "is_locked": true
+}
+```
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "Question is already locked"
+}
+```
+
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "You do not have permission to lock this question"
+}
+```
+
+---
+
+### Unlock Question (Admin, Representative, or Moderator Only)
+**Endpoint:** `DELETE /api/v1/questions/{question_id}/lock/`
+
+Unlocks the question to allow new answers to be submitted again.
+
+**Response (200 OK):**
+```json
+{
+  "message": "Question unlocked successfully",
+  "is_locked": false
+}
+```
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "Question is not locked"
+}
+```
+
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "You do not have permission to unlock this question"
+}
+```
 
 ---
 
@@ -941,14 +1253,18 @@ Rate limited to 50 requests per hour per user (see Rate Limits below).
   "body": ["This field is required."]
 }
 
-// 400 Bad Request - Question is already SOLVED
+// 400 Bad Request - Question Locked
 {
-  "question": ["Cannot add answer to a solved question."]
+  "question_id": ["This question is locked and does not accept new answers."]
 }
 ```
 
 Answering someone else's question sends them a `NEW_ANSWER` notification (in-app
-and email).
+and email), regardless of the question's current status. Answers can be added
+to a question at any status, including SOLVED, see the Update Question note
+below on what SOLVED actually means. Followers of the question (see Follow
+Question above) also receive an in-app-only NEW_ANSWER notification, excluding
+the answering user and the question author.
 
 ---
 
@@ -1026,7 +1342,9 @@ Marking a different answer as best on an already-solved question transfers the
 best-answer flag to the new answer and leaves the question SOLVED. Only marking the
 same answer that is already best is blocked. If the newly marked answer belongs to
 someone other than the question owner, they receive a `BEST_ANSWER` notification
-(in-app and email).
+(in-app and email). Followers of the question also receive an in-app-only
+NEW_ANSWER notification, excluding the question owner and the marked answer's
+author.
 
 ---
 
@@ -1065,6 +1383,11 @@ Rate Limits below).
 {
   "error": "You cannot vote on your own answer"
 }
+
+// 400 Bad Request - Invalid vote type
+{
+  "vote_type": ["This field must be one of: UP, DOWN."]
+}
 ```
 
 Voting sends the answer's author a `VOTE` notification, in-app only, no email.
@@ -1091,6 +1414,17 @@ frontend would only know about votes cast during the current session.
   "error": "You have not voted on this answer"
 }
 ```
+
+---
+
+### List My Answers
+**Endpoint:** `GET /api/v1/users/me/answers/`
+
+**Response (200 OK):** Same shape as list questions' pagination envelope,
+`results` are answer objects in the same shape as Create Answer's response
+(includes question, is_best, vote_score, user_vote). Requires authentication,
+always scoped to the requesting user, there is no way to fetch another user's
+answers through this or any other endpoint. Ordered by most recent first.
 
 ---
 
@@ -1131,6 +1465,11 @@ frontend would only know about votes cast during the current session.
 }
 ```
 
+This endpoint is public — no authentication required. Pagination uses the same
+envelope as all list endpoints (`count`, `next`, `previous`, `results`).
+
+---
+
 ### Create Comment
 **Endpoint:** `POST /api/v1/comments/`
 
@@ -1162,6 +1501,20 @@ Rate limited to 50 requests per hour per user (see Rate Limits below).
 }
 ```
 
+**Error Responses:**
+```json
+// 400 Bad Request
+{
+  "answer_id": ["This field is required."],
+  "body": ["This field is required."]
+}
+
+// 404 Not Found - Answer doesn't exist
+{
+  "answer_id": ["Answer with this ID does not exist."]
+}
+```
+
 Commenting on someone else's answer sends them a `NEW_COMMENT` notification,
 in-app only, no email.
 
@@ -1179,12 +1532,56 @@ in-app only, no email.
 
 **Response (200 OK):** Same as comment object
 
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "You do not have permission to edit this comment"
+}
+```
+
 ---
 
 ### Delete Comment
 **Endpoint:** `DELETE /api/v1/comments/{comment_id}/`
 
 **Response (204 No Content):** Empty
+
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "You do not have permission to delete this comment"
+}
+```
+
+---
+
+### List My Comments
+**Endpoint:** `GET /api/v1/users/me/comments/`
+
+**Response (200 OK):**
+```json
+{
+  "count": 21,
+  "results": [
+    {
+      "id": "uuid",
+      "body": "Does this vary by school?",
+      "answer": {
+        "id": "uuid",
+        "question": { "id": "uuid", "title": "How do I calculate my CGPA?" }
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+Requires authentication, always scoped to the requesting user. Ordered by
+most recent first. There is no equivalent "my questions" endpoint, use
+GET /questions/?author={my_user_id} with the id from GET /users/me/, since
+questions are already public content and the existing author filter covers
+this without duplicating an endpoint.
 
 ---
 
@@ -1219,6 +1616,10 @@ This endpoint is not paginated, it returns every matching tag in one response.
 Tag names are normalized to lowercase everywhere, on creation, search, and every
 filter, so "GPA" and "gpa" are always treated as the same tag.
 
+**Caching & Visibility Behavior:**
+- **Cache**: Public requests are cached using `tag-list:<query_params>` key for `CACHE_TTL_SHORT` (60 seconds).
+- **Invalidation**: Clears only when the cache TTL expires (since tags are created implicitly during question creation/update).
+
 ---
 
 ### Get Questions by Tag
@@ -1252,20 +1653,26 @@ Rate limited to 60 requests per minute (see Rate Limits below).
 ```json
 {
   "count": 45,
+  "next": "https://api.academia.com/api/v1/search/questions/?page=2",
+  "previous": null,
   "results": [
     {
       "id": "uuid",
       "title": "How do I calculate my CGPA?",
-      "body": "...",
+      "body": "I'm confused about the grading system...",
       "status": "SOLVED",
       "score": 0.4213,
       "author": {
         "id": "uuid",
-        "full_name": "John Doe"
+        "full_name": "John Doe",
+        "avatar": "https://..."
       },
       "hub": {
+        "id": "uuid",
         "school": {
-          "name": "University of Lagos"
+          "name": "University of Lagos",
+          "short_name": "UNILAG",
+          "slug": "unilag"
         }
       },
       "tags": ["gpa", "grading"],
@@ -1286,6 +1693,10 @@ but it has no fixed upper bound (it is not a normalized 0 to 1 percentage). It i
 `null` whenever `q` is omitted, since relevance has no meaning without a query to
 rank against, in that case results still return, ordered by the first three
 ranking priorities above.
+
+**Caching & Visibility Behavior:**
+- **Cache**: Requests are cached using `search-questions:<query_params>` for `CACHE_TTL_SEARCH` (15 seconds).
+- **Invalidation**: Clears only when the cache TTL expires.
 
 ---
 
@@ -1562,6 +1973,8 @@ valid to acknowledge but doesn't warrant removal.
 Requires an active `SchoolRepresentativeAssignment` for this hub, or platform
 admin status.
 
+**Invalidation Note:** Assigning a moderator invalidates `hub-detail:{hub_id}`, `hub-by-school:{school_id}`, `hub-by-slug:{slug}`, and `school-detail:{school_id}` cache keys.
+
 ---
 
 ### Remove Moderator (School Representative or Admin)
@@ -1577,6 +1990,8 @@ admin status.
 ```
 
 Removal is a soft-delete (`is_active: false`), not a hard row delete.
+
+**Invalidation Note:** Removing a moderator invalidates the same cache keys as Assign Moderator.
 
 ---
 

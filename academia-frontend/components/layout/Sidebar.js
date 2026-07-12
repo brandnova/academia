@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, School, Tag, PlusCircle } from "lucide-react";
+import { Home, School, Tag, Search, PlusCircle, ShieldCheck, Wrench } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import ThemeToggle from "./ThemeToggle";
 
@@ -10,15 +10,24 @@ const BASE_LINKS = [
   { href: "/", label: "Home", icon: Home },
   { href: "/schools", label: "Schools", icon: School },
   { href: "/tags", label: "Tags", icon: Tag },
+  { href: "/search", label: "Search", icon: Search },
 ];
 
 export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
   const { user } = useAuth();
 
-  const links = user
-    ? [...BASE_LINKS, { href: "/questions/new", label: "Ask a question", icon: PlusCircle }]
-    : BASE_LINKS;
+  const hasModerationAccess =
+    user && ((user.moderator_for?.length ?? 0) > 0 || (user.representative_for?.length ?? 0) > 0);
+
+  const links = [
+    ...BASE_LINKS,
+    ...(user ? [{ href: "/questions/new", label: "Ask a question", icon: PlusCircle }] : []),
+    ...(hasModerationAccess
+      ? [{ href: "/moderation", label: "Moderation", icon: ShieldCheck }]
+      : []),
+    ...(user?.is_admin ? [{ href: "/admin", label: "Admin", icon: Wrench }] : []),
+  ];
 
   return (
     <>

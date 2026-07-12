@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useEffect, useState, useCallback } from "react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
@@ -75,7 +76,7 @@ export default function ManageDepartmentsPage({ params }) {
     <div>
       <div className="mb-6">
         <Link href={`/schools/${id}`} className="text-sm text-accent hover:underline">
-          &larr; Back to {school.name}
+          <ArrowLeft className="w-4 h-4" /> Back to {school.name}
         </Link>
         <h1 className="text-xl font-semibold mt-2">Manage Departments</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">

@@ -201,17 +201,20 @@ server-rendered product pages. The only exception is if we build a throwaway
 internal page purely to smoke-test something during development; that's a
 debugging convenience, not part of the product surface.
 
-**Frontend framework: intentionally left open.** Because the backend has zero
-opinion about how it's consumed, it's JSON in, JSON out, versioned under
-`/api/v1/`, the frontend can be built with whatever turns out to fit best
-once we're actually looking at real pages: Django templates + Alpine,
-React + Tailwind, Next.js, or a mix. This decision can be made later, and can
-even be revisited per-section of the site, without touching the backend.
+**Frontend framework: Next.js (App Router), JavaScript, deployed on Vercel.**
+The backend's zero-opinion JSON API made this an easy choice once real pages
+were underway. Tailwind v4 (CSS-first, no tailwind.config.js) for styling,
+no third-party component library, lucide-react for icons.
 
-Whatever gets chosen will authenticate the same way: obtain a Google token
-client-side, exchange it at `POST /api/v1/auth/google/` for a JWT pair, and
-attach `Authorization: Bearer <access>` to subsequent requests, documented
-in `api-contract.md`.
+Auth follows the documented Google token exchange, but the JWT pair never
+reaches browser-readable code. The frontend's own Next.js Route Handlers
+proxy every backend call server-side: they hold the tokens as httpOnly
+cookies, attach `Authorization: Bearer <access>` themselves, and handle
+token refresh (one retry attempt on a 401, rotate both cookies on success,
+clear both and report a logged-out session on failure) before the browser
+ever sees a response. A future non-Next.js consumer of this API would still
+follow the plain documented flow in api-contract.md directly; this proxy
+layer is a frontend implementation choice, not an API requirement.
 
 **URL conventions to build against:** Schools and Hubs each have a stable, unique
 `slug` (e.g. `unilag`) suitable as the primary route segment for their public pages,
@@ -241,11 +244,21 @@ work touches that area.
 
 ---
 
-## 11. Open Questions for Discussion
+## 11. Decisions Made During Frontend Build
 
-- Do we want a light/dark mode from the start, or ship light-only for MVP?
-- Any existing brand assets (logo, colors) already decided, or are we picking
-  a palette from scratch?
-- Preferred component library baseline for the React pieces (shadcn/ui,
-  headless UI, or fully custom Tailwind)?
+Resolved during the Phase 0–15 build, kept here for reference:
+
+- **Light and dark mode**: both shipped from the start, manual toggle
+  (persisted via localStorage), not just system-preference-following.
+- **Brand palette**: single accent blue (`#2563eb`), close to the Google
+  reference's link color, defined once as a CSS variable, easy to retune.
+  No other brand assets existed going in, this was picked fresh.
+- **Component library**: fully custom Tailwind, no shadcn/ui or headless UI,
+  matching the "no third-party component library" principle from
+  project-plan.md.
+- **Chrome/page background parity**: sidebar and top bar deliberately read
+  the same CSS variables as the page body, rather than Tailwind's default
+  gray scale, so structural chrome is never a visually distinct "panel."
+  Popover surfaces (profile menu, notification dropdown) are the deliberate
+  exception, meant to read as elevated above the page.
   

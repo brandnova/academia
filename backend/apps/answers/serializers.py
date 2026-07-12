@@ -62,15 +62,9 @@ class AnswerCreateSerializer(serializers.ModelSerializer):
             question = Question.objects.get(id=value)
         except Question.DoesNotExist:
             raise serializers.ValidationError("Question with this ID does not exist.")
+        if question.is_locked:
+            raise serializers.ValidationError("This question is locked and does not accept new answers.")
         return question
-
-    def validate(self, attrs):
-        question = attrs.get("question_id")
-        if question and question.status == Question.Status.SOLVED:
-            raise serializers.ValidationError(
-                {"question": ["Cannot add answer to a solved question."]}
-            )
-        return attrs
 
     def create(self, validated_data):
         question = validated_data.pop("question_id")

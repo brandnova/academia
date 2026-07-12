@@ -34,7 +34,7 @@ class SchoolListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = School
-        fields = ["id", "name", "short_name", "slug", "location", "website", "has_hub", "created_at"]
+        fields = ["id", "name", "short_name", "slug", "location", "website", "is_active", "has_hub", "created_at"]
 
 
 class SchoolDetailSerializer(serializers.ModelSerializer):
@@ -44,7 +44,7 @@ class SchoolDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
         fields = [
-            "id", "name", "short_name", "slug", "location", "website",
+            "id", "name", "short_name", "slug", "location", "website", "is_active",
             "has_hub", "departments", "verification_status", "created_at",
         ]
 
@@ -56,7 +56,7 @@ class SchoolDetailSerializer(serializers.ModelSerializer):
 class SchoolWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
-        fields = ["name", "short_name", "location", "website"]
+        fields = ["name", "short_name", "location", "website", "is_active"]
 
     def validate_name(self, value):
         return value.strip()

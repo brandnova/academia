@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.db.models import F
-from rest_framework import status
+from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
@@ -15,7 +15,7 @@ from apps.questions.models import Question
 
 from .models import Answer, AnswerVote
 from .serializers import AnswerCreateSerializer, AnswerResponseSerializer, AnswerUpdateSerializer
-
+from .pagination import AnswerPagination
 
 class AnswerCreateView(APIView):
     permission_classes = [IsAuthenticated]
@@ -43,6 +43,9 @@ class AnswerCreateView(APIView):
                     "question_url": f"{settings.FRONTEND_URL}/questions/{question.id}/{question.slug}",
                 },
             )
+
+        from apps.questions.services import notify_followers_of_new_answer
+        notify_followers_of_new_answer(question, answer, answering_user_id=answer.author_id)
 
         return Response(
             AnswerResponseSerializer(answer, context={"request": request}).data,
@@ -198,6 +201,9 @@ class MarkBestAnswerView(APIView):
                 },
             )
 
+        from apps.questions.services import notify_followers_of_best_answer
+        notify_followers_of_best_answer(question, answer)
+
         return Response({
             "message": "Answer marked as best",
             "answer": {
@@ -209,3 +215,16 @@ class MarkBestAnswerView(APIView):
                 "status": Question.Status.SOLVED,
             },
         })
+
+
+class MyAnswersView(generics.ListAPIView):
+    serializer_class = AnswerResponseSerializer
+    pagination_class = AnswerPagination
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return (
+            Answer.objects.filter(author_id=self.request.user.id)
+            .select_related("question", "author")
+            .order_by("-created_at")
+        )

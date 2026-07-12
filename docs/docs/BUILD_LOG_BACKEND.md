@@ -57,6 +57,15 @@ question detail exposed vote_score (the aggregate) but never the requesting
 user's own vote, so the frontend had no way to restore correct vote-button
 state after a page reload, only what happened during the current session.
 
+## SOLVED Status Semantics Fix (Post-MVP)
+Not a numbered phase. Found during frontend testing: creating an answer was
+blocked once a question's status was SOLVED, conflating two separate meanings,
+"has a designated best answer" and "closed to further input." Decoupled these.
+
+## User Search and Self Profile Pass (Post-MVP)
+Not a numbered phase. No migrations, both features are built entirely from
+existing tables and views.
+
 ### Added
 - django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
   localhost:3000 for local Next.js dev, no credentials (bearer tokens, not cookies)
@@ -110,6 +119,32 @@ state after a page reload, only what happened during the current session.
   (question detail GET/PATCH, question create response, answer create/update
   responses) constructed these serializers without context, which would have
   silently made user_vote resolve to null even for a user who had voted
+- AnswerCreateSerializer no longer blocks answer creation on SOLVED questions,
+  the validate() method that raised "Cannot add answer to a solved question"
+  was removed entirely
+- No change needed to the OPEN to ANSWERED transition (already status-gated
+  to OPEN only, so a SOLVED question correctly stays SOLVED when a new plain
+  answer arrives), the delete-answer revert logic, or the mark-best transfer
+  logic, all three were already written in a way consistent with SOLVED
+  meaning has-a-best-answer rather than locked
+- user_is_representative_for_any_hub() added to apps.hubs.permissions,
+  intentionally unscoped since the search endpoint isn't hub-specific
+- GET /users/search/, admin or any active school representative, returns up
+  to 10 matching users by name/email, not paginated, closes the gap where
+  representatives had no way to find a user_id for the moderator-assignment
+  endpoints without admin access
+- GET /users/me/ now includes a stats object (question_count, answer_count,
+  best_answer_count, comment_count), counts only, actual objects are fetched
+  via the endpoints below, deliberately kept out of this payload since it's
+  called frequently (login, entering a hub management context) and shouldn't
+  carry a user's full activity history on every call
+- GET /users/me/answers/ and GET /users/me/comments/, both self-scoped and
+  authenticated, paginated, ordered by recency. New AnswerPagination class
+  in apps.answers, first paginated list endpoint that app has needed
+- author query param added to GET /questions/, filters by author user ID,
+  validated the same way as path-based IDs, 400 on malformed input, covers
+  "my questions" without a dedicated endpoint since questions are already
+  public
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -173,6 +208,24 @@ state after a page reload, only what happened during the current session.
   question_count are already handled elsewhere as derived, not persisted, data
 - No new model, no migration, this was purely a serialization and context-
   passing gap
+- SOLVED is "has a designated best answer," not "closed." A question accepts
+  new answers and can have its best answer reassigned at any status
+- A genuine close/lock capability, if ever needed, will be a distinct,
+  deliberate moderator/admin action, not an automatic side effect of picking
+  a best answer, logged in feature-list.md's Moderation backlog, not built
+- Reports are never exposed anywhere related to profile/activity data,
+  including to the reporting user themselves in this pass, a private "my
+  reports" view remains a distinct, deliberately unbuilt future item
+- best_answer_count remains the platform's one deliberate quality signal,
+  now surfaced only to the user themselves rather than publicly, since there
+  is no public profile view at all right now
+- User search is intentionally unscoped to a specific hub, hub-specific
+  enforcement already happens at the point of assignment
+  (POST /hubs/{hub_id}/moderators/ etc), the search endpoint only gates on
+  "is this person an admin or a representative of at least one hub"
+- No public user profile endpoint exists in the API at all as of this pass,
+  every user-activity endpoint requires authentication and is scoped to the
+  requester
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env

@@ -1,4 +1,7 @@
+import { slugify } from "./slugify";
+
 export function questionUrl(question) {
   if (!question?.id) return "/questions";
-  return question.slug ? `/questions/${question.id}/${question.slug}` : `/questions/${question.id}`;
+  const slug = question.slug || (question.title ? slugify(question.title) : "");
+  return slug ? `/questions/${question.id}/${slug}` : `/questions/${question.id}`;
 }

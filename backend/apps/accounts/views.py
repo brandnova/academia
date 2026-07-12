@@ -1,7 +1,7 @@
 import requests
 from django.db.models import Q
 from rest_framework import generics, status
-from rest_framework.exceptions import NotFound, ValidationError
+from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle
@@ -14,7 +14,7 @@ from apps.core.utils import validate_uuid
 
 from .models import User
 from .pagination import UserPagination
-from .serializers import AdminUserSerializer, AdminUserUpdateSerializer, UserSerializer
+from .serializers import AdminUserSerializer, AdminUserUpdateSerializer, UserSearchSerializer, UserSerializer
 
 GOOGLE_USERINFO_URL = "https://www.googleapis.com/oauth2/v3/userinfo"
 
@@ -110,7 +110,18 @@ class MeView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response(UserSerializer(request.user).data)
+        from apps.answers.models import Answer
+        from apps.comments.models import Comment
+        from apps.questions.models import Question
+
+        data = UserSerializer(request.user).data
+        data["stats"] = {
+            "question_count": Question.objects.filter(author_id=request.user.id).count(),
+            "answer_count": Answer.objects.filter(author_id=request.user.id).count(),
+            "best_answer_count": Answer.objects.filter(author_id=request.user.id, is_best=True).count(),
+            "comment_count": Comment.objects.filter(author_id=request.user.id).count(),
+        }
+        return Response(data)
 
     def patch(self, request):
         user = request.user
@@ -167,3 +178,25 @@ class AdminUserDetailView(APIView):
         write_serializer.is_valid(raise_exception=True)
         user = write_serializer.save()
         return Response(AdminUserSerializer(user).data)
+
+
+class UserSearchView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        from apps.hubs.permissions import user_is_representative_for_any_hub
+
+        if not (request.user.is_admin or user_is_representative_for_any_hub(request.user)):
+            raise PermissionDenied("You do not have permission to search for users")
+
+        search = request.query_params.get("search", "").strip()
+        if not search:
+            return Response({"results": []})
+
+        users = User.objects.filter(
+            Q(email__icontains=search) | Q(full_name__icontains=search),
+            is_active=True,
+        ).order_by("full_name")[:10]
+
+        return Response({"results": UserSearchSerializer(users, many=True).data})
+

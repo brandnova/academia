@@ -31,7 +31,6 @@ from .serializers import (
 
 
 class SchoolListCreateView(generics.ListCreateAPIView):
-    queryset = School.objects.filter(is_active=True)
     pagination_class = SchoolPagination
 
     def get_permissions(self):
@@ -44,8 +43,15 @@ class SchoolListCreateView(generics.ListCreateAPIView):
             return SchoolWriteSerializer
         return SchoolListSerializer
 
+    def _requesting_user_is_admin(self):
+        user = self.request.user
+        return bool(user and user.is_authenticated and getattr(user, "is_admin", False))
+
     def get_queryset(self):
-        queryset = super().get_queryset()
+        if self._requesting_user_is_admin():
+            queryset = School.objects.all()
+        else:
+            queryset = School.objects.filter(is_active=True)
 
         search = self.request.query_params.get("search")
         if search:
@@ -63,8 +69,15 @@ class SchoolListCreateView(generics.ListCreateAPIView):
 
         return queryset
 
-    @cache_get_response("school-list", timeout_setting="CACHE_TTL_SHORT")
     def list(self, request, *args, **kwargs):
+        # Admins see inactive schools too, so their response must never be
+        # served from (or written to) the shared public cache.
+        if self._requesting_user_is_admin():
+            return super().list(request, *args, **kwargs)
+        return self._cached_list(request, *args, **kwargs)
+
+    @cache_get_response("school-list", timeout_setting="CACHE_TTL_SHORT")
+    def _cached_list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
@@ -81,14 +94,23 @@ class SchoolDetailView(APIView):
             return [IsAuthenticated(), IsPlatformAdmin()]
         return [AllowAny()]
 
-    def get_school(self, school_id):
+    def _requesting_user_is_admin(self):
+        user = self.request.user
+        return bool(user and user.is_authenticated and getattr(user, "is_admin", False))
+
+    def get_school(self, school_id, include_inactive=False):
         parsed_id = validate_uuid(school_id)
+        qs = School.objects.all() if include_inactive else School.objects.filter(is_active=True)
         try:
-            return School.objects.get(id=parsed_id, is_active=True)
+            return qs.get(id=parsed_id)
         except School.DoesNotExist:
             raise NotFound("School not found")
 
     def get(self, request, school_id):
+        if self._requesting_user_is_admin():
+            school = self.get_school(school_id, include_inactive=True)
+            return Response(SchoolDetailSerializer(school).data)
+
         cache_key = make_cache_key("school-detail", school_id)
         cached = get_cached(cache_key)
         if cached is not None:
@@ -100,7 +122,10 @@ class SchoolDetailView(APIView):
         return Response(data)
 
     def patch(self, request, school_id):
-        school = self.get_school(school_id)
+        # Always includes inactive here: this is how a school gets reactivated
+        # in the first place, filtering it out would make reactivation
+        # impossible through the API, forcing a Django admin round-trip.
+        school = self.get_school(school_id, include_inactive=True)
         write_serializer = SchoolWriteSerializer(school, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         school = write_serializer.save()
@@ -143,7 +168,16 @@ class DepartmentListCreateView(APIView):
 
     def get(self, request, school_id):
         school = self.get_school(school_id)
-        departments = school.departments.filter(is_active=True)
+
+        from apps.hubs.permissions import user_is_representative_for_school
+        user = request.user
+        can_manage = bool(
+            user
+            and user.is_authenticated
+            and (getattr(user, "is_admin", False) or user_is_representative_for_school(user, school.id))
+        )
+
+        departments = school.departments.all() if can_manage else school.departments.filter(is_active=True)
         return Response({"results": DepartmentSerializer(departments, many=True).data})
 
     def post(self, request, school_id):

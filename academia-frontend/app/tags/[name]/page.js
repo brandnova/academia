@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useState, useEffect, useCallback } from "react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { clientFetch } from "@/lib/clientApi";
 import Skeleton from "@/components/ui/Skeleton";
@@ -77,7 +78,7 @@ export default function TagQuestionsPage({ params }) {
     <div>
       <p className="text-sm mb-2">
         <Link href="/tags" className="text-accent hover:underline">
-          &larr; All tags
+          <ArrowLeft className="w-4 h-4" /> All tags
         </Link>
       </p>
       <h1 className="text-xl font-semibold mb-6">

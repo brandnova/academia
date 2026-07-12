@@ -103,9 +103,14 @@ Monetization must never compromise the accuracy or completeness of information o
 ## Technology Stack
 
 ### Frontend
-- Framework intentionally left open (Django templates + Alpine, React + Tailwind, or Next.js, decided per-section as real pages get built)
-- Full custom Tailwind + hand-written CSS for anything a component library can't cleanly express
-- No third-party component library
+- Next.js (App Router), JavaScript (not TypeScript), deployed on Vercel
+- Tailwind v4 (CSS-first configuration, no tailwind.config.js), full custom
+  styling, no third-party component library
+- JWT pair stored as httpOnly cookies, never exposed to browser-readable
+  JS. Next.js Route Handlers proxy every backend call server-side, attach
+  the Authorization header there, and own the token refresh lifecycle
+  (single-attempt refresh on 401, rotate both cookies on success, clear
+  both and surface a logged-out state on failure)
 
 ### Backend
 - Django REST Framework, pure API (no server-rendered product pages)
@@ -200,6 +205,13 @@ Every question moves through a simple lifecycle.
 | Open | No answers yet |
 | Answered | Has at least one answer |
 | Solved | Question owner selected a best answer |
+
+SOLVED reflects that a best answer has been designated, it does not close the
+question to further answers. A question can receive new answers, and a new
+best answer can be selected, at any point in its lifecycle. A separate,
+deliberate close/lock capability may be added later as a distinct
+moderator/admin action, see feature-list.md's Moderation backlog, it is not
+an automatic side effect of marking a best answer.
 
 This structure helps users quickly identify unanswered questions while allowing moderators to focus their attention where it is most needed.
 

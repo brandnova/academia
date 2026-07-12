@@ -12,6 +12,8 @@
 - [x] Request hub activation
 - [x] View departments
 - [x] Filter questions by department
+- [x] Manage departments (create/edit/deactivate/reactivate), School
+      Representatives and admins
 
 ## Questions
 - [x] Create question (title, body, school, optional department, tags)
@@ -23,6 +25,8 @@
 - [x] Filter questions by school (via the hub filter, since a hub maps to exactly one school)
 - [x] Filter questions by department
 - [x] Filter questions by tags
+- [x] Follow a question for update notifications, independent of authorship
+      (frontend not yet wired, backend endpoints exist and are documented)
 
 ## Answers
 - [x] Create answer
@@ -83,12 +87,17 @@
       of this endpoint)
 
 ## User Experience
-- [ ] Responsive design (mobile + desktop compatible)
-- [ ] Loading states
-- [ ] Error handling
-- [ ] Empty states
-- [ ] Form validation
-- [ ] Rich text editor (questions + answers) Use [NovaEditor](https://brandnova.github.io/nova-editor/)
+- [x] Self-view profile stats (question/answer/best-answer/comment counts) on
+      GET /users/me/, plus paginated GET /users/me/answers/ and
+      GET /users/me/comments/ for the actual object lists. Self-only, not a
+      public profile, closes out the "Lightweight contributor recognition"
+      item previously listed under Platform Improvements
+- [x] User search by name/email for admins and school representatives
+- [x] Responsive design (mobile + desktop compatible)
+- [x] Loading states
+- [x] Error handling
+- [x] Empty states
+- [x] Form validation
 
 ---
 
@@ -119,6 +128,12 @@
 - [ ] User management (moderators)
 - [ ] Flag capabilities (moderators)
 - [ ] Dedicated escalate-to-admin action, distinct from the general report pipeline
+- [x] Question lock/close capability, distinct from SOLVED, moderator/admin
+      only, for the rare case a question genuinely needs to stop accepting
+      input (spam magnet, fully resolved administrative question). SOLVED
+      itself no longer implies closed, see project-plan.md's Question
+      Lifecycle note. Backend complete and documented; frontend UI for this
+      is planned for the upcoming polish pass.
 
 ## School Reviews (Future)
 - [ ] Submit school review (overall rating + category ratings + text)
@@ -163,11 +178,21 @@
 ## Platform Improvements (Future)
 - [ ] OpenAPI schema and interactive API docs (drf-spectacular or similar), useful
       internally and as groundwork for the planned public API
+- [ ] Private "my submitted reports" view for a user's own account, deliberately
+      not part of the public/self profile page, reports are never shown on any
+      profile to avoid making a reporter's activity identifiable to others
 - [ ] Admin action audit log (who resolved which report, who suspended which user)
 - [ ] Answer edit history, so a heavily-edited answer's original context isn't lost
-- [ ] Lightweight contributor recognition (e.g. a visible count of best-answers given),
       framed as quality signal, not a leaderboard or engagement mechanic, consistent
       with Knowledge Over Social Activity
 - [ ] Bulk data import tooling to support the school directory curation effort above
 - [ ] Celery-backed background tasks for email and notification delivery, so a slow
       SMTP call never blocks an API response
+- [ ] Refresh-token request deduplication: if multiple requests expire in the
+      same instant, more than one may attempt to use the same refresh token
+      before rotation completes, one could be rejected. Frontend-only
+      concern (Next.js proxy layer), low risk at MVP traffic levels.
+- [ ] Standalone answer/comment permalink page, so notifications and reports
+      targeting an answer or comment (VOTE, NEW_COMMENT, non-question
+      reports) can deep-link somewhere real instead of rendering as
+      non-clickable text.

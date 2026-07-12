@@ -25,6 +25,7 @@ class Question(models.Model):
     )
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.OPEN)
     view_count = models.PositiveIntegerField(default=0)
+    is_locked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -59,3 +60,19 @@ class Question(models.Model):
         return list(
             QuestionTag.objects.filter(question=self).values_list("tag__name", flat=True)
         )
+
+
+class QuestionFollow(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, related_name="question_follows", on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, related_name="follows", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "question_follows"
+        constraints = [
+            models.UniqueConstraint(fields=["question", "user"], name="unique_question_follow")
+        ]
+
+    def __str__(self):
+        return f"{self.user_id} follows {self.question_id}"

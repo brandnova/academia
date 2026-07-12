@@ -123,6 +123,13 @@ class ResolveReportView(APIView):
             content_object = report.content_object
             if content_object is not None:
                 content_object.delete()
+                # content_object.delete() sets that instance's pk to None, but
+                # `report` still holds the now-stale cached GenericForeignKey
+                # reference to it. Saving report as-is would trip Django's
+                # save-time check for unsaved related objects. Refreshing
+                # clears every cached relation, safe here since we haven't
+                # set any of the status/resolved_by/resolved_at fields yet.
+                report.refresh_from_db()
 
         report.status = Report.Status.RESOLVED
         report.resolved_by = request.user

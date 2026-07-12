@@ -1,5 +1,9 @@
 export function timeAgo(dateStr) {
-  const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
+  if (!dateStr) return null;
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return null;
+
+  const days = Math.floor((Date.now() - date.getTime()) / 86400000);
   if (days === 0) return "today";
   if (days === 1) return "1 day ago";
   if (days < 30) return `${days} days ago`;

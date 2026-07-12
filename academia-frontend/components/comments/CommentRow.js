@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useAuth } from "@/lib/auth-context";
+import ReportButton from "@/components/reports/ReportButton";
 
 export default function CommentRow({ comment, onUpdate, onDelete }) {
   const { user } = useAuth();
@@ -75,9 +76,9 @@ export default function CommentRow({ comment, onUpdate, onDelete }) {
         <p className="text-xs text-gray-700 dark:text-gray-300 break-words">{comment.body}</p>
       </div>
 
-      {isAuthor && (
-        <div className="text-[11px] flex items-center gap-2 text-gray-400 shrink-0">
-          {confirming ? (
+      <div className="text-[11px] flex items-center gap-2 text-gray-400 shrink-0">
+        {isAuthor ? (
+          confirming ? (
             <>
               <button
                 onClick={remove}
@@ -97,9 +98,15 @@ export default function CommentRow({ comment, onUpdate, onDelete }) {
                 Delete
               </button>
             </>
-          )}
-        </div>
-      )}
+          )
+        ) : (
+          <ReportButton
+            contentType="comment"
+            contentId={comment.id}
+            authorId={comment.author.id}
+          />
+        )}
+      </div>
 
       {errorMsg && <p className="text-[11px] text-red-600 dark:text-red-400 w-full">{errorMsg}</p>}
     </div>

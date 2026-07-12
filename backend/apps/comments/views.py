@@ -1,4 +1,4 @@
-from rest_framework import status
+from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -13,7 +13,7 @@ from apps.notifications.services import notify
 
 from .models import Comment
 from .pagination import CommentPagination
-from .serializers import CommentCreateSerializer, CommentSerializer, CommentUpdateSerializer
+from .serializers import CommentCreateSerializer, CommentSerializer, CommentUpdateSerializer, UserCommentSerializer
 
 
 class CommentCreateView(APIView):
@@ -76,3 +76,16 @@ class CommentListView(ListAPIView):
         if not Answer.objects.filter(id=parsed_id).exists():
             raise NotFound("Answer not found")
         return Comment.objects.filter(answer_id=parsed_id)
+
+
+class MyCommentsView(generics.ListAPIView):
+    serializer_class = UserCommentSerializer
+    pagination_class = CommentPagination
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return (
+            Comment.objects.filter(author_id=self.request.user.id)
+            .select_related("answer__question")
+            .order_by("-created_at")
+        )

@@ -89,6 +89,7 @@ Represents a question asked by a user.
 | department | ForeignKey(Department) | Nullable, SET_NULL | Optional department |
 | status | Enum | Default: OPEN | OPEN/ANSWERED/SOLVED |
 | view_count | Integer | Default: 0 | Number of views |
+| is_locked | Boolean | Default: False | Locked/Closed status. Preventing new answers from being added |
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
 
@@ -152,6 +153,20 @@ Many-to-many relationship between questions and tags.
 | created_at | DateTime | Auto now | Association timestamp |
 
 Unique constraint: (question, tag) to prevent duplicates.
+
+### QuestionFollow
+Represents a user following a question for update notifications, independent of authorship.
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| user | ForeignKey(User) | Required, CASCADE | Following user |
+| question | ForeignKey(Question) | Required, CASCADE | Followed question |
+| created_at | DateTime | Auto now | Follow timestamp |
+
+Unique constraint: (question, user) to prevent duplicate follows. No follower
+count is exposed anywhere in the API, only the requesting user's own follow
+state (is_following), consistent with Knowledge Over Social Activity.
 
 ### Notification
 Represents a notification for a user.
@@ -299,7 +314,7 @@ join this set once built, with no schema change required.
 - Deleting a `School` → Delete associated `Hub`, `Department`, `HubActivationRequest`
 - Deleting a `Hub` → Delete associated `Question`, `ModeratorAssignment`, `SchoolRepresentativeAssignment`
 - Deleting a `User` → Delete associated `Question`, `Answer`, `Comment`, `Notification`, `Report`
-- Deleting a `Question` → Delete associated `Answer`, `QuestionTag`
+- Deleting a `Question` → Delete associated `Answer`, `QuestionTag`, `QuestionFollow`
 - Deleting an `Answer` → Delete associated `Comment`, `AnswerVote`
 
 In practice, `School` is not hard-deleted through the API, see api-contract.md's

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, LogOut } from "lucide-react";
+import Link from "next/link";
+import { ChevronDown, User, LogOut } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import GoogleLoginButton from "@/components/auth/GoogleLoginButton";
 
@@ -42,7 +43,15 @@ export default function ProfileMenu() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-1 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg py-1 text-sm">
+        <div className="absolute right-0 mt-1 w-44 bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg py-1 text-sm">
+          <Link
+            href="/profile"
+            onClick={() => setOpen(false)}
+            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700"
+          >
+            <User className="w-4 h-4" />
+            Your profile
+          </Link>
           <button
             onClick={() => {
               setOpen(false);
