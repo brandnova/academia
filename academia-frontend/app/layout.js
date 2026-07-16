@@ -13,10 +13,10 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: { default: "Academia", template: "%s | Academia" },
-  description: "Academic Q&A for Nigerian tertiary students, organized by school and searchable, so the same question never needs asking twice.",
+  description: "Academic Q&A repository for Nigerian tertiary students, organized by school and searchable, so the same question never needs asking twice.",
   openGraph: {
     title: "Academia",
-    description: "Academic Q&A for Nigerian tertiary students.",
+    description: "Academic Q&A repository for Nigerian tertiary students.",
     type: "website",
   },
   twitter: { card: "summary" },
