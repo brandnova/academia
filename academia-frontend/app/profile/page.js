@@ -65,7 +65,7 @@ export default function ProfilePage() {
           <div className="flex items-start justify-between">
             <div>
               {editing ? (
-                <form onSubmit={saveName} className="flex items-center gap-2">
+                <form onSubmit={saveName} className="flex items-center gap-2 flex-wrap">
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -80,7 +80,7 @@ export default function ProfilePage() {
                   </button>
                 </form>
               ) : (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <h1 className="text-xl font-semibold">{user.full_name}</h1>
                   <button onClick={startEditing} aria-label="Edit name" className="text-gray-400 hover:text-accent">
                     <Pencil className="w-4 h-4" />
