@@ -143,6 +143,7 @@ export default function EditQuestionPage({ params }) {
         >
           {saveStatus === "loading" ? "Saving..." : "Save changes"}
         </button>
+        <button type="button" onClick={() => router.back()} className="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-sm ml-2 hover:bg-gray-50 dark:hover:bg-gray-800">Cancel</button>
       </form>
     </div>
   );
