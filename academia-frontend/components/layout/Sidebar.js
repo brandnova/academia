@@ -20,9 +20,11 @@ export default function Sidebar({ isOpen, onClose }) {
   const hasModerationAccess =
     user && ((user.moderator_for?.length ?? 0) > 0 || (user.representative_for?.length ?? 0) > 0);
 
+  const hasRoleLinks = user && (hasModerationAccess || user?.is_admin);
   const links = [
     ...BASE_LINKS,
     ...(user ? [{ href: "/questions/new", label: "Ask a question", icon: PlusCircle }] : []),
+    ...(hasRoleLinks ? [{ type: "separator" }] : []),
     ...(hasModerationAccess
       ? [{ href: "/moderation", label: "Moderation", icon: ShieldCheck }]
       : []),
@@ -45,7 +47,11 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
-          {links.map(({ href, label, icon: Icon }) => {
+          {links.map((item) => {
+            if (item.type === "separator") {
+              return <div key="sep" className="border-t border-[var(--color-border)] my-2" />;
+            }
+            const { href, label, icon: Icon } = item;
             const active = pathname === href;
             return (
               <Link
