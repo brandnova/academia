@@ -27,12 +27,13 @@ The platform is not a social feed. There is no engagement-driven scrolling or va
 Academia/
 ├── docs/           - Project documentation (MkDocs, published to GitHub Pages)
 ├── backend/        - Django REST Framework API
-├── frontend/       - Next.js application
+├── academia-frontend/       - Next.js application
 ├── CHANGELOG.md    - Durable project history, grouped by phase and date
 ├── CONTRIBUTING.md - How to contribute, setup, branching, PR process
 ├── CODE_OF_CONDUCT.md
 ├── GOVERNANCE.md   - Ownership, decision-making, and recognition policy
 ├── LICENSE
+├── SECURITY.md     - Notice on how to report security issues
 └── README.md       - This file
 ```
 
@@ -47,6 +48,7 @@ The project is documented in four core documents plus supporting logs, all under
 - **project-overview.md** - frontend-facing guide: sitemap, design philosophy, visual direction, component list, required page states
 - **BUILD_LOG_BACKEND.md** / **BUILD_LOG_FRONTEND.md** - short-term working memory of current build state
 - **CHANGELOG.md** / **docs/changelog.md** - durable history, one entry per phase plus docs-sync entries
+- **SECURITY.md** - Guidelines on reporting issues related to security
 
 If you're contributing, these documents are the source of truth. Any deviation from them should be flagged in an issue or PR discussion before it's implemented.
 
