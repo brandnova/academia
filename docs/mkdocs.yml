@@ -13,4 +13,6 @@ nav:
   - Features: feature-list.md
   - Database Schema: database-schema.md
   - API Contract: api-contract.md
-  - Contributors: contributor-backlog.md
+  - Contributors Quickstart: QUICKSTART.md
+  - Contributors Backlog: contributor-backlog.md
+  - Maintainer Playbook: MAINTAINER_PLAYBOOK.md
