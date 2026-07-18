@@ -61,37 +61,39 @@ export default function ProfilePage() {
           </div>
         )}
 
-        <div className="flex-1">
-          <div className="flex items-start justify-between">
-            <div>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+            <div className="min-w-0 w-full">
               {editing ? (
-                <form onSubmit={saveName} className="flex items-center gap-2">
+                <form onSubmit={saveName} className="flex flex-wrap items-center gap-2 w-full">
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-lg font-semibold"
+                    className="px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-lg font-semibold w-full max-w-[200px] sm:max-w-none"
                   />
-                  <button type="submit" disabled={status === "loading"} className="text-sm text-accent">
-                    {status === "loading" ? "Saving..." : "Save"}
-                  </button>
-                  <button type="button" onClick={() => setEditing(false)} className="text-sm text-gray-400">
-                    Cancel
-                  </button>
+                  <div className="flex gap-2 shrink-0">
+                    <button type="submit" disabled={status === "loading"} className="text-sm text-accent font-medium">
+                      {status === "loading" ? "Saving..." : "Save"}
+                    </button>
+                    <button type="button" onClick={() => setEditing(false)} className="text-sm text-gray-400">
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               ) : (
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl font-semibold">{user.full_name}</h1>
-                  <button onClick={startEditing} aria-label="Edit name" className="text-gray-400 hover:text-accent">
+                  <h1 className="text-xl font-semibold truncate">{user.full_name}</h1>
+                  <button onClick={startEditing} aria-label="Edit name" className="text-gray-400 hover:text-accent shrink-0">
                     <Pencil className="w-4 h-4" />
                   </button>
                 </div>
               )}
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{user.email}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 truncate">{user.email}</p>
               {errorMsg && <p className="text-red-600 dark:text-red-400 text-xs mt-1">{errorMsg}</p>}
             </div>
             {user.is_admin && (
-              <span className="text-xs px-2 py-1 rounded bg-accent/10 text-accent shrink-0">Admin</span>
+              <span className="text-xs px-2 py-1 rounded bg-accent/10 text-accent self-start sm:self-auto shrink-0">Admin</span>
             )}
           </div>
         </div>
