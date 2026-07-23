@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
+import MarkdownEditor from "@/components/ui/MarkdownEditor";
 
 export default function AnswerForm({ questionId, locked, onCreated }) {
   const { user } = useAuth();
@@ -46,13 +47,12 @@ export default function AnswerForm({ questionId, locked, onCreated }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-        required
-        rows={4}
-        placeholder="Write your answer..."
-        className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm mb-2"
+      <MarkdownEditor 
+        value={body} 
+        onChange={setBody} 
+        required 
+        placeholder="Write your answer..." 
+        rows={4} 
       />
       {status === "error" && (
         <p className="text-red-600 dark:text-red-400 text-sm mb-2">{errorMsg}</p>

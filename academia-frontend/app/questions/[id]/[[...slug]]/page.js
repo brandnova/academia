@@ -8,6 +8,7 @@ import AnswersSection from "@/components/answers/AnswersSection";
 import ReportButton from "@/components/reports/ReportButton";
 import FollowButton from "@/components/questions/FollowButton";
 import LockToggle from "@/components/questions/LockToggle";
+import MarkdownRenderer from "@/components/ui/MarkdownRenderer"
 
 async function getQuestion(id) {
   try {
@@ -76,7 +77,7 @@ export default async function QuestionDetailPage({ params }) {
         </div>
       )}
 
-      <div className="text-sm whitespace-pre-wrap mb-4">{question.body}</div>
+      <div className="mb-4"><MarkdownRenderer content={question.body} /></div>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
         <QuestionActions question={question} />

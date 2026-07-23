@@ -7,6 +7,7 @@ import { clientFetch } from "@/lib/clientApi";
 import { questionUrl } from "@/lib/urls";
 import { timeAgo } from "@/lib/timeAgo";
 import Skeleton from "@/components/ui/Skeleton";
+import { stripMarkdown } from "@/lib/markdown";
 
 export default function AnswersTab() {
   const [answers, setAnswers] = useState([]);
@@ -77,7 +78,7 @@ export default function AnswersTab() {
               {a.is_best && <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />}
               <span className="truncate">{a.question.title}</span>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-0.5">{a.body}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-0.5">{stripMarkdown(a.body)}</p>
             <div className="flex gap-3 text-xs text-gray-400 mt-1">
               <span>{a.vote_score} votes</span>
               <span>{timeAgo(a.created_at)}</span>
