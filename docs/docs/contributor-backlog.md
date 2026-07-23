@@ -46,7 +46,7 @@ judgment call already made before it's issue-ready.
   role-specific links from the regular nav links.
   Label: `enhancement`, `frontend`, `good-first-issue`
 
-- [ ] **Add a lightweight rich text editor to question and answer forms**
+- [x] **Add a lightweight rich text editor to question and answer forms**
   Needs a library decision first (candidates: Tiptap headless, or a minimal
   markdown textarea with live preview instead of a full WYSIWYG). Mr Nova to
   decide the approach given the "no third-party component library" leaning

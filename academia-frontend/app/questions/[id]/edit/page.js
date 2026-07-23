@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/auth-context";
 import { questionUrl } from "@/lib/urls";
 import Skeleton from "@/components/ui/Skeleton";
 import TagInput from "@/components/questions/TagInput";
+import MarkdownEditor from "@/components/ui/MarkdownEditor";
 
 export default function EditQuestionPage({ params }) {
   const { id } = use(params);
@@ -102,12 +103,12 @@ export default function EditQuestionPage({ params }) {
         </div>
         <div>
           <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Body</label>
-          <textarea
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
+          <MarkdownEditor 
+            value={body} 
+            onChange={setBody} 
             required
-            rows={6}
-            className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+            placeholder="Describe your question in detail..." 
+            rows={6} 
           />
         </div>
         {hubDepartments.length > 0 && (
