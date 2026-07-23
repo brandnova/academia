@@ -69,35 +69,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Database: DATABASE_URL is preferred (most free hosted Postgres providers
-# give you one connection string, often including ?sslmode=require). Falls
-# back to discrete DATABASE_* vars if DATABASE_URL isn't set.
-# DATABASE_URL = env("DATABASE_URL", default=None)
-
-# if DATABASE_URL:
-#     DATABASES = {"default": env.db_url("DATABASE_URL")}
-# else:
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": env("DATABASE_NAME"),
-#             "USER": env("DATABASE_USER"),
-#             "PASSWORD": env("DATABASE_PASSWORD"),
-#             "HOST": env("DATABASE_HOST", default="localhost"),
-#             "PORT": env("DATABASE_PORT", default="5432"),
-#         }
-#     }
-
-# For non Postgres Contributors
-
+# Database: Uses DATABASE_URL when available (recommended for production and
+# local Postgres development). Falls back to a local SQLite database when
+# DATABASE_URL isn't set, allowing contributors to run the project without
+# installing PostgreSQL.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', 
-        'NAME': BASE_DIR / 'db.sqlite3'
-    }
+    "default": env.db(
+        "DATABASE_URL",
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+    )
 }
 
-DATABASES["default"]["CONN_MAX_AGE"] = env.int("DATABASE_CONN_MAX_AGE", default=60)
+DATABASES["default"]["CONN_MAX_AGE"] = env.int(
+    "DATABASE_CONN_MAX_AGE",
+    default=60,
+)
 
 # Cache: Redis when REDIS_URL is set, local in-memory fallback otherwise.
 # IGNORE_EXCEPTIONS means that if Redis becomes unreachable at runtime
