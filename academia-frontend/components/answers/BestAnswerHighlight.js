@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckCircle2, ThumbsUp, ArrowDown } from "lucide-react";
+import { stripMarkdown } from "@/lib/markdown";
 
 export default function BestAnswerHighlight({ answer }) {
   function jumpToAnswer() {
@@ -16,7 +17,7 @@ export default function BestAnswerHighlight({ answer }) {
       <div className="flex items-center gap-1.5 text-accent text-xs font-medium mb-2">
         <CheckCircle2 className="w-4 h-4" /> Best answer
       </div>
-      <p className="text-sm whitespace-pre-wrap line-clamp-4">{answer.body}</p>
+      <p className="text-sm line-clamp-4">{stripMarkdown(answer.body)}</p>
       <div className="flex items-center justify-between mt-3 text-xs text-gray-400">
         <span className="flex items-center gap-1">
           <ThumbsUp className="w-3.5 h-3.5" />

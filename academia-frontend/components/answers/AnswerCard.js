@@ -6,6 +6,8 @@ import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
 import CommentThread from "@/components/comments/CommentThread";
 import ReportButton from "@/components/reports/ReportButton";
+import MarkdownEditor from "@/components/ui/MarkdownEditor";
+import MarkdownRenderer from "@/components/ui/MarkdownRenderer"
 
 export default function AnswerCard({
   answer,
@@ -189,11 +191,10 @@ export default function AnswerCard({
 
       {editing ? (
         <div>
-          <textarea
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            rows={4}
-            className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm mb-2"
+          <MarkdownEditor 
+            value={body} 
+            onChange={setBody} 
+            rows={4} 
           />
           <div className="flex items-center gap-3">
             <button
@@ -215,7 +216,7 @@ export default function AnswerCard({
           </div>
         </div>
       ) : (
-        <p className="text-sm whitespace-pre-wrap">{answer.body}</p>
+        <MarkdownRenderer content={answer.body} />
       )}
 
       <div className="flex flex-wrap items-center justify-between gap-2 mt-3 text-xs text-gray-400">

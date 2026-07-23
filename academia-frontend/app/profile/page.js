@@ -62,22 +62,24 @@ export default function ProfilePage() {
         )}
 
         <div className="flex-1">
-          <div className="flex items-start justify-between">
-            <div>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+            <div className="">
               {editing ? (
-                <form onSubmit={saveName} className="flex items-center gap-2">
+                <form onSubmit={saveName} className="flex flex-col sm:flex-row sm:items-center gap-2">
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                     className="px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-lg font-semibold"
                   />
-                  <button type="submit" disabled={status === "loading"} className="text-sm text-accent">
-                    {status === "loading" ? "Saving..." : "Save"}
-                  </button>
-                  <button type="button" onClick={() => setEditing(false)} className="text-sm text-gray-400">
-                    Cancel
-                  </button>
+                  <div className="flex gap-2 my-2">
+                    <button type="submit" disabled={status === "loading"} className="text-sm text-accent">
+                      {status === "loading" ? "Saving..." : "Save"}
+                    </button>
+                    <button type="button" onClick={() => setEditing(false)} className="text-sm text-gray-400">
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               ) : (
                 <div className="flex items-center gap-2">
@@ -91,7 +93,7 @@ export default function ProfilePage() {
               {errorMsg && <p className="text-red-600 dark:text-red-400 text-xs mt-1">{errorMsg}</p>}
             </div>
             {user.is_admin && (
-              <span className="text-xs px-2 py-1 rounded bg-accent/10 text-accent shrink-0">Admin</span>
+              <span className="w-max text-xs px-2 py-1 rounded bg-accent/10 text-accent shrink-0">Admin</span>
             )}
           </div>
         </div>

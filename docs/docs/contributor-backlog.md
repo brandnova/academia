@@ -41,12 +41,12 @@ judgment call already made before it's issue-ready.
 
 ## UI
 
-- [ ] **Add a visual separator in the sidebar before Moderation/Admin links**
+- [x] **Add a visual separator in the sidebar before Moderation/Admin links**
   A subtle divider (thin border, spacing, or muted label) separating the
   role-specific links from the regular nav links.
   Label: `enhancement`, `frontend`, `good-first-issue`
 
-- [ ] **Add a lightweight rich text editor to question and answer forms**
+- [x] **Add a lightweight rich text editor to question and answer forms**
   Needs a library decision first (candidates: Tiptap headless, or a minimal
   markdown textarea with live preview instead of a full WYSIWYG). Mr Nova to
   decide the approach given the "no third-party component library" leaning
@@ -58,7 +58,7 @@ judgment call already made before it's issue-ready.
 
 ## UX
 
-- [ ] **Add a top-of-page loading bar on navigation**
+- [x] **Add a top-of-page loading bar on navigation**
   A thin progress bar (e.g. nprogress-style) that fires on route change, given
   the app is client-navigated. Self-contained, doesn't touch existing logic.
   Label: `enhancement`, `frontend`, `good-first-issue`

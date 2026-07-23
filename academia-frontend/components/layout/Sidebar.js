@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Home, School, Tag, Search, PlusCircle, ShieldCheck, Wrench } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import ThemeToggle from "./ThemeToggle";
+import { Fragment } from "react"
 
 const BASE_LINKS = [
   { href: "/", label: "Home", icon: Home },
@@ -44,23 +45,33 @@ export default function Sidebar({ isOpen, onClose }) {
           </Link>
         </div>
 
+        {/*  Show Divider top seperate admin/moderator */}
+
         <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
           {links.map(({ href, label, icon: Icon }) => {
             const active = pathname === href;
+
+            const showDivider = href === '/moderation' || href === '/admin';
+
             return (
-              <Link
-                key={href}
-                href={href}
-                onClick={onClose}
-                className={`flex items-center gap-3 px-3 py-2 rounded text-sm transition-colors ${
-                  active
-                    ? "bg-accent/10 text-accent font-medium"
-                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
-                }`}
-              >
-                <Icon className="w-4 h-4" />
-                {label}
-              </Link>
+              <Fragment key={href}>
+                {showDivider && (
+                  <div className="my-3 border-t border-[var(--color-border)]"></div>
+                )}
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={onClose}
+                  className={`flex items-center gap-3 px-3 py-2 rounded text-sm transition-colors ${
+                    active
+                      ? "bg-accent/10 text-accent font-medium"
+                      : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  {label}
+                </Link>
+              </Fragment>
             );
           })}
         </nav>
