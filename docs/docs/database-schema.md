@@ -316,6 +316,7 @@ join this set once built, with no schema change required.
 - Deleting a `User` → Delete associated `Question`, `Answer`, `Comment`, `Notification`, `Report`
 - Deleting a `Question` → Delete associated `Answer`, `QuestionTag`, `QuestionFollow`
 - Deleting an `Answer` → Delete associated `Comment`, `AnswerVote`
+- Deleting a `Tag` → Delete associated `QuestionTag` (only ever happens via explicit admin action, see api-contract.md's Delete Tag / Merge Tag)
 
 In practice, `School` is not hard-deleted through the API, see api-contract.md's
 soft-delete note. Hard delete remains available at the database/admin level only.

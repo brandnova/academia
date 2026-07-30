@@ -1,10 +1,9 @@
 # BUILD LOG
 
 ## Current Phase
-Phase 15, Admin Polish (complete, confirmed). This closes the originally planned MVP
-phase roadmap. CORS setup and production-readiness prep are next, tracked as
-unnumbered follow-up work rather than a new phase, since they are infrastructure
-concerns rather than a feature slice.
+Not a numbered phase. GitHub issue: admins had no way to clean up near-duplicate
+or spam tags beyond a database console, only GET /tags/ and GET
+/tags/{tag_name}/questions/ existed, both read-only.
 
 ## Completed Phases
 - Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
@@ -145,6 +144,14 @@ existing tables and views.
   validated the same way as path-based IDs, 400 on malformed input, covers
   "my questions" without a dedicated endpoint since questions are already
   public
+- DELETE /tags/{tag_id}/ (admin only), blocked by default if the tag has
+  questions attached, ?force=true overrides. Deleting cascades to QuestionTag
+  rows via the existing FK constraint, question content itself is untouched
+- POST /tags/{tag_id}/merge/ (admin only), reassigns every QuestionTag from
+  the source tag onto a target, then deletes the source. Target given as
+  target_tag_id (merge into an existing tag) or target_name (merges by name
+  if that name already exists, otherwise performs a pure rename)
+- Both endpoints invalidate the tag-list cache prefix on success
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -226,6 +233,22 @@ existing tables and views.
 - No public user profile endpoint exists in the API at all as of this pass,
   every user-activity endpoint requires authentication and is scoped to the
   requester
+- No separate rename endpoint. Merge-into-a-name-that-doesn't-exist-yet
+  covers rename exactly, one endpoint, two ways to call it, matches the
+  GitHub issue's own "worth deciding" question with the simpler answer
+- Merge deduplicates rather than erroring: if a question already carries
+  both the source and target tag, the source's QuestionTag row for that
+  question is dropped instead of attempted-and-rejected by the
+  (question, tag) unique constraint. questions_reassigned only counts
+  genuine reassignments, not these drops
+- Reused validate_uuid (and its documented "Invalid ID format" 400 shape)
+  for target_tag_id in the merge request body, not just path parameters,
+  since it's the same malformed-ID problem in a body field instead of a URL
+  segment
+- Tag management is admin-only, not exposed on /moderation, tags are not
+  scoped to a single hub/school the way departments are, a tag can span
+  every school on the platform at once, so this belongs on /admin per the
+  GitHub issue's own reasoning
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -269,9 +292,10 @@ it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
 Question slugs, and the 400 Invalid ID format response all work as designed.
 
 ### Known Deviations From Docs
-(none, database-schema.md, api-contract.md, and project-overview.md were updated
-in this pass to reflect the slug fields, the two new by-slug endpoints, and the
-ID format validation behavior)
+- api-contract.md's ID Format Validation section is framed around path
+  parameters; this pass reuses the same validator and error shape for the
+  target_tag_id body field on Merge Tag, worth a small wording tweak at the
+  next sync to acknowledge body fields can hit this too, not just URLs
 
 ### Next Immediate Step
 Frontend build per the handoff brief prepared alongside
