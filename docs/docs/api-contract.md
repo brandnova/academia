@@ -955,6 +955,10 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 }
 ```
 
+Creating a question sends a `NEW_QUESTION` notification, in-app only, to
+every user with an active `ModeratorAssignment` for that hub, excluding the
+question's own author.
+
 ---
 
 ### Get Question
@@ -1862,8 +1866,11 @@ doesn't change even as new notifiable models are added.
 
 **Notification types currently triggered:** `NEW_ANSWER` (email and in-app),
 `BEST_ANSWER` (email and in-app), `HUB_ACTIVATED` (email and in-app),
-`NEW_COMMENT` (in-app only), `VOTE` (in-app only). `MODERATOR_ASSIGNED` exists as
-a type but has no trigger wired to it yet.
+`NEW_COMMENT` (in-app only), `VOTE` (in-app only), `MODERATOR_ASSIGNED`
+(in-app only, fires for both moderator and representative assignment, message
+text varies to distinguish the two), `NEW_QUESTION` (in-app only, sent to
+every active moderator of the hub a new question is posted in, excluding the
+question's own author).
 
 ---
 
@@ -2098,6 +2105,9 @@ valid to acknowledge but doesn't warrant removal.
 }
 ```
 
+Assigning a moderator sends the assigned user a `MODERATOR_ASSIGNED`
+notification, in-app only, unless they assigned themselves.
+
 Requires an active `SchoolRepresentativeAssignment` for this hub, or platform
 admin status.
 
@@ -2204,6 +2214,10 @@ returns every active moderator for the hub in one response.
   ]
 }
 ```
+
+Assigning a representative sends the assigned user a `MODERATOR_ASSIGNED`
+notification (message text distinguishes the representative role from
+moderator), in-app only, unless they assigned themselves.
 
 This endpoint is public, no authentication required, matching List Moderators.
 It is not paginated, it returns every active representative for the hub in

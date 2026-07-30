@@ -175,7 +175,7 @@ Represents a notification for a user.
 |-------|------|-------------|-------------|
 | id | UUID | Primary Key | Unique identifier |
 | user | ForeignKey(User) | Required, CASCADE | Recipient |
-| type | Enum | Required | NEW_ANSWER/NEW_COMMENT/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED |
+| type | Enum | Required | NEW_ANSWER/NEW_COMMENT/NEW_QUESTION/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED |
 | message | String | Required | Notification text |
 | is_read | Boolean | Default: False | Read status |
 | content_type | ForeignKey(ContentType) | Nullable | Related object's model type (Django ContentType) |

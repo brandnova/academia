@@ -11,6 +11,7 @@ class Notification(models.Model):
     class Type(models.TextChoices):
         NEW_ANSWER = "NEW_ANSWER", "New Answer"
         NEW_COMMENT = "NEW_COMMENT", "New Comment"
+        NEW_QUESTION = "NEW_QUESTION", "New Question"
         BEST_ANSWER = "BEST_ANSWER", "Best Answer"
         VOTE = "VOTE", "Vote"
         MODERATOR_ASSIGNED = "MODERATOR_ASSIGNED", "Moderator Assigned"

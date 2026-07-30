@@ -1,9 +1,12 @@
 # BUILD LOG
 
 ## Current Phase
-Not a numbered phase. GitHub issue: admins had no way to clean up near-duplicate
-or spam tags beyond a database console, only GET /tags/ and GET
-/tags/{tag_name}/questions/ existed, both read-only.
+Not a numbered phase. Two related GitHub issues: MODERATOR_ASSIGNED existed as
+a Notification type and the assignment endpoints existed since Phase 14, but
+nothing ever triggered it. Broader review requested alongside it turned up a
+second real gap: project-plan.md's Moderator Responsibilities section
+describes moderators receiving notifications about new questions in their
+hub, this was documented from the start and never built.
 
 ## Completed Phases
 - Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
@@ -152,6 +155,13 @@ existing tables and views.
   target_tag_id (merge into an existing tag) or target_name (merges by name
   if that name already exists, otherwise performs a pure rename)
 - Both endpoints invalidate the tag-list cache prefix on success
+- Assigning a moderator or a representative now sends the target user a
+  MODERATOR_ASSIGNED notification, in-app only, unless they assigned
+  themselves (self-assignment is an existing allowed flow, doesn't need a
+  notification telling someone what they just did)
+- New NEW_QUESTION notification type. Creating a question notifies every
+  active moderator of that hub, in-app only, excluding the question's own
+  author even if they happen to also moderate that hub
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -249,6 +259,20 @@ existing tables and views.
   scoped to a single hub/school the way departments are, a tag can span
   every school on the platform at once, so this belongs on /admin per the
   GitHub issue's own reasoning
+- Representative assignment reuses MODERATOR_ASSIGNED rather than getting
+  its own type, message text distinguishes the two roles. Matches the
+  precedent set by the question-follow system (reusing NEW_ANSWER for
+  followers instead of adding a type), keeps the frontend's notification
+  icon map from needing another special case for a distinction that's
+  really just "assigned to a hub role"
+- NEW_QUESTION notifies moderators only, not representatives, grounded
+  directly in project-plan.md's existing (never-implemented) description of
+  moderator responsibilities. Representatives are described there as
+  coordinators, not as the audience for new-content alerts
+- Notified via a per-moderator notify() loop, same fan-out shape as the
+  follow system's per-follower notifications, no email involved so this is
+  pure DB writes, fine at MVP scale, same Celery-backlog note applies if
+  moderator counts per hub ever grow large
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env

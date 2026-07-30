@@ -26,10 +26,19 @@ git pull origin main
 git merge develop   # or open a PR develop -> main if you want it reviewable, same idea
 git push origin main
 ```
-
 This will merge the main branch with the develop branch after a number of consecutive PRs have been completed and merged to develop. It will roll them up at once and push them to main for production deployment.
 
+## Update docs
+This will ensure that the docs updates come from the main branch and not the develop branch
 
+```bash
+git checkout main
+git status
+mkdocs build
+mkdocs gh-deploy
+```
+
+This will ensure that al docs updates are synced from the main branch and not the develop branch.
 
 
 TODO=============

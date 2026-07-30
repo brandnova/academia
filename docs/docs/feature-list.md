@@ -65,9 +65,12 @@
   - [x] New comment notification
   - [x] Best answer selected notification
   - [x] Vote received notification
-  - [ ] Moderator assigned notification (assignment endpoint exists since Phase 14,
+  - [x] Moderator assigned notification (assignment endpoint exists since Phase 14,
         no notification trigger wired to it yet)
   - [x] Hub activated notification
+  - [x] New question notification for hub moderators (NEW_QUESTION, in-app only,
+      closes a gap from project-plan.md's Moderator Responsibilities section,
+      which described this but it was never implemented)
 
 ## Moderation
 - [x] Report content (spam/abuse/misinformation/duplicate)
@@ -121,7 +124,6 @@
 
 ## Notifications (Future)
 - [ ] Push notifications
-- [ ] Moderator assigned notification trigger
 - [ ] School submission approved notification trigger
 
 ## Moderation (Future)
