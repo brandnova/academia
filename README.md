@@ -17,7 +17,7 @@ The platform is not a social feed. There is no engagement-driven scrolling or va
 
 ## Live
 
-- **App:** https://academia-prvw.vercel.app/
+- **App:** https://academia.vercel.app *(replace with your actual production domain)*
 - **API:** hosted on PythonAnywhere, documented in full below
 - **Docs:** https://brandnova.github.io/academia/
 
@@ -76,7 +76,7 @@ Please also read **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** before participati
 
 Academia is conceived, founded, and maintained by its original developer as a standalone product under the Brand Nova umbrella. The Brand Nova name, the Academia name, and associated branding are not covered by the code license below and remain the property of the founder. See **[GOVERNANCE.md](GOVERNANCE.md)** for the full explanation of how ownership, decision-making, and contributor recognition work on this project.
 
-All contributors are credited for their work, both on GitHub's own contributor graph and in project materials, see GOVERNANCE.md for specifics.
+All contributors are credited for their work, both on GitHub's own contributor graph and in **[CONTRIBUTORS.md](CONTRIBUTORS.md)**, see GOVERNANCE.md for specifics.
 
 ## Getting Started (Backend)
 
@@ -88,7 +88,7 @@ pip install -r requirements.txt
 cp .env.example .env   # fill in your local values
 python manage.py migrate
 python manage.py createsuperuser
-python manage.py seed_demo_data   # optional, populates realistic demo content
+python manage.py seed_demo_data   # optional, populates realistic demo content; add --clear to reset and reseed
 python manage.py runserver
 ```
 

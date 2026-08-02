@@ -89,6 +89,8 @@
 - [x] Manage users (view/suspend; promoting or demoting admin status is not part
       of this endpoint)
 - [x] Manage tags (rename, merge, delete), admin only
+- [x] Static page management (create/edit/delete, PUBLIC or STAFF visibility,
+      draft/published), admin only
 
 ## User Experience
 - [x] Self-view profile stats (question/answer/best-answer/comment counts) on

@@ -68,6 +68,16 @@ blocked once a question's status was SOLVED, conflating two separate meanings,
 Not a numbered phase. No migrations, both features are built entirely from
 existing tables and views.
 
+## Static Pages Feature (Post-MVP)
+Not a numbered phase. New apps.pages app: admin-managed standalone content
+pages (Privacy Policy, Terms of Service, staff onboarding guides) without
+needing a code deploy to publish them.
+
+## seed_demo_data Upgrade (Post-MVP, Tooling)
+Not a numbered phase, dev tooling only, no contract impact. The command had
+fallen out of sync with the actual models, it predated is_locked,
+QuestionFollow, and StaticPage entirely, none of them were being seeded.
+
 ### Added
 - django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
   localhost:3000 for local Next.js dev, no credentials (bearer tokens, not cookies)
@@ -162,6 +172,35 @@ existing tables and views.
 - New NEW_QUESTION notification type. Creating a question notifies every
   active moderator of that hub, in-app only, excluding the question's own
   author even if they happen to also moderate that hub
+- StaticPage model: title, auto-generated-once slug (School's pattern, not
+  Question's), markdown body (rendered client-side, no server-side markdown
+  processing), visibility (PUBLIC/STAFF), is_published draft flag,
+  created_by (SET_NULL, deleting a user never takes a page down with it)
+- user_is_staff() added to apps.hubs.permissions, checks is_admin or any
+  active moderator/representative assignment globally, not scoped to a
+  specific hub like the existing helpers, since page visibility isn't
+  hub-specific
+- GET /pages/ (list, not paginated) and POST /pages/ (admin only) on one
+  view. GET /pages/{value}/ and PATCH/DELETE /pages/{value}/ share a single
+  URL pattern, method-dispatched: GET treats the value as a slug and is
+  public, PATCH/DELETE treat it as a UUID id and are admin-only
+- 404, not 403, for a page that exists but isn't visible to the requester,
+  same code path as "doesn't exist at all" (_visible_queryset().filter().
+  first() returning None either way), so a STAFF-only or draft page's
+  existence is never confirmable to a request that can't see it
+- Delete is a genuine hard delete, confirmed via testing that a
+  recreated page with the same title reuses the original slug cleanly
+  rather than getting suffixed, proving the original row is truly gone
+- --clear flag, wipes seeded content (schools cascade nearly everything;
+  Tag and StaticPage cleared separately since neither cascades from School)
+  before reseeding fresh
+- Static pages seeded: 3 published PUBLIC, 1 published STAFF, 1 unpublished
+  draft, covering every visibility/published combination
+- First hub gets a representative and moderator assigned automatically, so
+  the admin dashboard isn't empty by default
+- QuestionFollow and is_locked now seeded with reasonable variety
+- Reports now seeded across all three statuses (PENDING/RESOLVED/REJECTED),
+  not just one
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -273,6 +312,25 @@ existing tables and views.
   follow system's per-follower notifications, no email involved so this is
   pure DB writes, fine at MVP scale, same Celery-backlog note applies if
   moderator counts per hub ever grow large
+- created_by uses SET_NULL, not CASCADE, per your explicit call: an admin's
+  account being deactivated or removed shouldn't take institutional content
+  like a Terms of Service page down with it
+- Caching deliberately deferred, matching the issue's own "nice-to-have, not
+  blocking," to keep this pass reviewable; same short-TTL pattern already
+  used for Schools/Tags is the natural follow-up once confirmed working
+- GET-by-slug and PATCH/DELETE-by-id share one URL pattern rather than being
+  split into separate routes, since the documented contract specifies the
+  same path shape for both, just different HTTP methods and different
+  identifier semantics per method
+- --clear never touches the User table, real superuser and Google-OAuth
+  test accounts, plus any manual is_admin promotion, are preserved across
+  resets. Recreating those is real friction (re-auth, re-run
+  createsuperuser) this flag shouldn't force
+- Removed the old hard block on re-running without --clear (previously:
+  warn and exit if any School exists). Since schools/departments/tags are
+  already get_or_create-idempotent, running again now just adds more
+  questions/answers/comments on top, matching the actual intended use:
+  incrementally growing a varied local dataset, not a strict one-shot tool
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env

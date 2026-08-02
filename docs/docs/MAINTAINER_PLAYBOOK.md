@@ -1,6 +1,6 @@
 # Maintainer Playbook (Internal)
 
-This is for Mr Nova, not contributors. It's the operating rhythm that keeps
+This is for Mr Nova (project maintainer), not contributors. It's the operating rhythm that keeps
 Academia's collaboration running without needing a fresh decision every time
 something routine comes up. Revisit and adjust this as the project grows,
 it's a starting point, not a fixed rulebook.
@@ -20,7 +20,10 @@ which is more valuable than being reachable constantly.
    into `main` (this is the actual production release).
 5. If the `Ready` column is getting thin, spend 10 minutes grooming
    `docs/contributor-backlog.md` and promote one or two more items.
-6. Post a short recap in Announcements (see template below).
+6. Update `CONTRIBUTORS.md` with anyone whose work merged this week, one line
+   per person is enough. Do this in the same sitting as the recap post below,
+   they're the same mental step, no separate ritual needed.
+7. Post a short recap in Announcements (see template below).
 
 You do not need to be responsive outside this slot. Setting that expectation
 early, gently, protects you from burnout and is completely normal for open

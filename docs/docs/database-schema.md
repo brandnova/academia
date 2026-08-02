@@ -231,6 +231,29 @@ Represents a user assigned as school representative for a hub.
 
 Unique constraint: (user, hub) to prevent duplicate assignments.
 
+### StaticPage
+Represents an admin-managed standalone content page (Privacy Policy, Terms of
+Service, staff onboarding guides, etc).
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| title | String | Required | Page title |
+| slug | String | Unique, Auto-generated | URL-friendly identifier, generated once from title at creation, never regenerated on edit, same pattern as School |
+| body | Text | Required | Markdown source, rendered client-side |
+| visibility | Enum | Default: PUBLIC | PUBLIC/STAFF |
+| is_published | Boolean | Default: False | Draft status, unpublished pages are only visible to admins |
+| created_by | ForeignKey(User) | Nullable, SET_NULL | Author. Nullable so deleting a user account never takes a page down with it |
+| created_at | DateTime | Auto now | Creation timestamp |
+| updated_at | DateTime | Auto now | Last update timestamp |
+
+"Staff" for visibility purposes means `is_admin`, or an active
+`ModeratorAssignment`/`SchoolRepresentativeAssignment` for any hub (checked
+globally, not scoped to a specific hub, since page visibility isn't
+hub-specific). Deleting a `StaticPage` is a genuine hard delete, unlike
+`School`/`Department`, since nothing else has a foreign key into it and
+draft/publish already covers the "hide without losing" case.
+
 ### APIClient (Future, Public API Phase)
 Represents a registered external consumer of the public API.
 

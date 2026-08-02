@@ -10,6 +10,7 @@ git status
 git pull origin develop
 git checkout -b feature/new-feature-branch
 
+# Implement your code... And then:
 git add -A
 git commit -m "feat: New feature added and commited"
 git push -u origin feature/new-feature-branch
@@ -42,5 +43,3 @@ This will ensure that al docs updates are synced from the main branch and not th
 
 
 TODO=============
-- Create some form of onboarding for Reps and Mods. Either by doing an in-app onboarding where sections and buttons are highlighted one by one with labels and descriptions, or an onboarding page with content and context, or just an onboarding video.
-- 

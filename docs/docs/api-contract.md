@@ -2312,6 +2312,131 @@ account, to prevent accidental lockout.
 
 ---
 
+## Static Pages
+
+### List Pages
+**Endpoint:** `GET /api/v1/pages/`
+
+**Response (200 OK):**
+```json
+{
+  "results": [
+    {
+      "id": "uuid",
+      "title": "Privacy Policy",
+      "slug": "privacy-policy",
+      "visibility": "PUBLIC",
+      "is_published": true,
+      "created_by": { "id": "uuid", "full_name": "Jane Admin" },
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+Not paginated, low volume. Visibility is computed per requester:
+- Anonymous or plain authenticated users see published `PUBLIC` pages only.
+- Staff (`is_admin`, or an active moderator/representative assignment for
+  any hub) additionally see published `STAFF` pages.
+- Admins see everything, including unpublished drafts of either visibility.
+
+`created_by` is `null` if the creating user's account has since been deleted.
+
+---
+
+### Get Page
+**Endpoint:** `GET /api/v1/pages/{slug}/`
+
+**Response (200 OK):**
+```json
+{
+  "id": "uuid",
+  "title": "Privacy Policy",
+  "slug": "privacy-policy",
+  "body": "# Privacy Policy\n\nWe respect your data...",
+  "visibility": "PUBLIC",
+  "is_published": true,
+  "created_by": { "id": "uuid", "full_name": "Jane Admin" },
+  "created_at": "2026-01-01T00:00:00Z",
+  "updated_at": "2026-01-01T00:00:00Z"
+}
+```
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "Page not found"
+}
+```
+
+Same visibility rules as List Pages, applied per-page. A page that exists but
+isn't visible to the requester returns the identical 404 as a page that
+genuinely doesn't exist, a `STAFF`-only or draft page's existence is never
+confirmable to a request that can't see it.
+
+---
+
+### Create Page (Admin Only)
+**Endpoint:** `POST /api/v1/pages/`
+
+**Request:**
+```json
+{
+  "title": "Privacy Policy",
+  "body": "# Privacy Policy\n\nWe respect your data...",
+  "visibility": "PUBLIC",
+  "is_published": true
+}
+```
+
+**Response (201 Created):** Same shape as Get Page
+
+`slug` is auto-generated from `title` and is not accepted in the request
+body, it cannot be set directly on creation.
+
+---
+
+### Update Page (Admin Only)
+**Endpoint:** `PATCH /api/v1/pages/{page_id}/`
+
+**Request:** Same fields as Create, all optional (partial update)
+
+**Response (200 OK):** Same shape as Get Page
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "Invalid ID format"
+}
+```
+
+Note: `{page_id}` here is the page's UUID, not its slug, distinct from Get
+Page above which looks up by slug. Editing `title` does **not** regenerate
+`slug`, it's generated once at creation and never touched again, so a
+linked or bookmarked page URL never breaks even if the title changes later.
+If a genuine slug change is ever needed, that's a direct database edit, not
+something this endpoint supports.
+
+---
+
+### Delete Page (Admin Only)
+**Endpoint:** `DELETE /api/v1/pages/{page_id}/`
+
+**Response (204 No Content):** Empty
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "Page not found"
+}
+```
+
+This is a genuine hard delete, unlike School/Department's soft-delete
+pattern, nothing else references a StaticPage by foreign key, and
+draft/publish already covers hiding a page without losing it.
+
+---
+
 ## API Clients (Future, Public API Phase)
 
 ### Register API Client (Admin Only)
