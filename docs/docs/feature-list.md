@@ -71,6 +71,7 @@
       closes a gap from project-plan.md's Moderator Responsibilities section,
       which described this but it was never implemented)
 - [x] New activation request notification for admins (NEW_ACTIVATION_REQUEST,
+      in-app only) and new report notification for admins (NEW_REPORT,
       in-app only)
 
 ## Moderation

@@ -82,6 +82,11 @@ QuestionFollow, and StaticPage entirely, none of them were being seeded.
 Not a numbered phase. Two follow-ups after your feedback on the previous
 notification pass.
 
+## New Report Admin Notification (Post-MVP)
+Not a numbered phase. Closes the second of the two admin-notification gaps
+flagged during the moderator-assignment notification review: admins had no
+way to know a new Report existed except by polling GET /reports/?status=PENDING.
+
 ### Added
 - django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
   localhost:3000 for local Next.js dev, no credentials (bearer tokens, not cookies)
@@ -213,6 +218,14 @@ notification pass.
 - New NEW_ACTIVATION_REQUEST notification type. Submitting a
   HubActivationRequest now notifies every active admin, in-app only,
   excluding the requester if they happen to be an admin
+- New NEW_REPORT notification type. Submitting a report now notifies every
+  active admin, in-app only, excluding the reporter if they happen to be an
+  admin (admins can and do report content themselves, this isn't a
+  theoretical edge case)
+- Notification message includes the report's type (spam/abuse/etc.,
+  lowercased) for quick triage from the notification list, resolving the
+  open question from this feature's original issue template in favor of
+  including it
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -353,6 +366,12 @@ notification pass.
   monitoring their dashboard as part of the role, so this doesn't need to
   pull anyone back to the platform the way a student-facing notification
   does
+- Same in-app-only channel policy as NEW_ACTIVATION_REQUEST: admins are
+  expected to already be monitoring their dashboard as part of the role,
+  this doesn't need to pull anyone back to the platform
+- Notification fan-out happens after the Report row is successfully
+  created and the duplicate-report check has passed, so a blocked/invalid
+  report submission never generates a stray notification
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env

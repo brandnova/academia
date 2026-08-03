@@ -8,11 +8,14 @@ from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
 
+from apps.accounts.models import User
 from apps.answers.models import Answer
 from apps.comments.models import Comment
 from apps.core.permissions import IsPlatformAdmin
 from apps.core.throttling import MethodScopedThrottle
 from apps.core.utils import validate_uuid
+from apps.notifications.models import Notification
+from apps.notifications.services import notify
 from apps.questions.models import Question
 
 from .models import Report
@@ -97,6 +100,15 @@ class ReportListCreateView(APIView):
             object_id=content_object.pk,
             description=description,
         )
+
+        admin_users = User.objects.filter(is_admin=True, is_active=True).exclude(id=request.user.id)
+        for admin in admin_users:
+            notify(
+                user=admin,
+                notification_type=Notification.Type.NEW_REPORT,
+                message=f"New {report_type.lower()} report submitted",
+                content_object=report,
+            )
 
         return Response(ReportCreateResponseSerializer(report).data, status=status.HTTP_201_CREATED)
 

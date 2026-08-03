@@ -1877,6 +1877,8 @@ representative of the hub a new question is posted in, excluding the
 question's own author, deduplicated if a user holds both roles),
 `NEW_ACTIVATION_REQUEST` (in-app only, sent to every active admin when a
 new hub activation request is submitted, excluding the requester if they
+happen to be an admin), `NEW_REPORT` (in-app only, sent to every active
+admin when a new report is submitted, excluding the reporter if they
 happen to be an admin).
 
 ---
@@ -1972,6 +1974,11 @@ new reportable models (e.g. SchoolReview) are added later. Supported values for
   "content_id": ["No matching content found for this content_type and content_id."]
 }
 ```
+
+Submitting a report sends every active admin a `NEW_REPORT` notification,
+in-app only, excluding the reporter if they happen to be an admin. The
+notification message includes the report's `type` for quick triage from
+the notification list itself, without needing to open the report first.
 
 A user cannot report the same piece of content more than once, this restriction
 applies regardless of whether an earlier report on that content was resolved or
