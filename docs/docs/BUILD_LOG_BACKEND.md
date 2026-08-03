@@ -78,6 +78,10 @@ Not a numbered phase, dev tooling only, no contract impact. The command had
 fallen out of sync with the actual models, it predated is_locked,
 QuestionFollow, and StaticPage entirely, none of them were being seeded.
 
+## Notification Fan-Out Widening + Admin Activation-Request Alert (Post-MVP)
+Not a numbered phase. Two follow-ups after your feedback on the previous
+notification pass.
+
 ### Added
 - django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
   localhost:3000 for local Next.js dev, no credentials (bearer tokens, not cookies)
@@ -201,6 +205,14 @@ QuestionFollow, and StaticPage entirely, none of them were being seeded.
 - QuestionFollow and is_locked now seeded with reasonable variety
 - Reports now seeded across all three statuses (PENDING/RESOLVED/REJECTED),
   not just one
+- NEW_QUESTION now also notifies active School Representatives of the hub,
+  not just Moderators, deduplicated via set union so a user holding both
+  roles for the same hub gets one notification, not two. Message wording
+  changed from moderator-specific phrasing to a role-neutral "New question
+  posted in {school}"
+- New NEW_ACTIVATION_REQUEST notification type. Submitting a
+  HubActivationRequest now notifies every active admin, in-app only,
+  excluding the requester if they happen to be an admin
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -331,6 +343,16 @@ QuestionFollow, and StaticPage entirely, none of them were being seeded.
   already get_or_create-idempotent, running again now just adds more
   questions/answers/comments on top, matching the actual intended use:
   incrementally growing a varied local dataset, not a strict one-shot tool
+- Reps included in NEW_QUESTION specifically because a freshly activated
+  hub can have zero moderators until a rep assigns some, without reps
+  included, a question could be posted into total silence, nobody notified
+  at all. This is a real gap being closed, not just a nice-to-have
+- Admin notifications (activation requests, and reports once implemented)
+  are in-app only, reasoning distinct from the general "email pulls
+  infrequent users back" policy: admins are expected to already be
+  monitoring their dashboard as part of the role, so this doesn't need to
+  pull anyone back to the platform the way a student-facing notification
+  does
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -380,5 +402,8 @@ Question slugs, and the 400 Invalid ID format response all work as designed.
   next sync to acknowledge body fields can hit this too, not just URLs
 
 ### Next Immediate Step
-Frontend build per the handoff brief prepared alongside
-this update.
+NEW_REPORT admin notification (same shape of fix, blocked on getting current
+apps/reports/views.py and apps/reports/models.py, since this project has
+shown real drift from earlier chat sessions and I'm not writing against
+stale memory). This doubles as the first app in the planned full
+system audit.

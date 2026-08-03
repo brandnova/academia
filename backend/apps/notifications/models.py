@@ -16,6 +16,7 @@ class Notification(models.Model):
         VOTE = "VOTE", "Vote"
         MODERATOR_ASSIGNED = "MODERATOR_ASSIGNED", "Moderator Assigned"
         HUB_ACTIVATED = "HUB_ACTIVATED", "Hub Activated"
+        NEW_ACTIVATION_REQUEST = "NEW_ACTIVATION_REQUEST", "New Activation Request"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, related_name="notifications", on_delete=models.CASCADE)

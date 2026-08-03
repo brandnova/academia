@@ -668,6 +668,10 @@ A new request is blocked if the target school already has an active hub, or if a
 `PENDING` request for that school already exists, this prevents duplicate/spam
 requests from piling up before an admin reviews the first one.
 
+Submitting a request sends every active admin a `NEW_ACTIVATION_REQUEST`
+notification, in-app only, excluding the requester if they happen to be an
+admin.
+
 ---
 
 ### List Activation Requests (Admin Only)
@@ -1867,10 +1871,13 @@ doesn't change even as new notifiable models are added.
 **Notification types currently triggered:** `NEW_ANSWER` (email and in-app),
 `BEST_ANSWER` (email and in-app), `HUB_ACTIVATED` (email and in-app),
 `NEW_COMMENT` (in-app only), `VOTE` (in-app only), `MODERATOR_ASSIGNED`
-(in-app only, fires for both moderator and representative assignment, message
-text varies to distinguish the two), `NEW_QUESTION` (in-app only, sent to
-every active moderator of the hub a new question is posted in, excluding the
-question's own author).
+(in-app only, fires for both moderator and representative assignment),
+`NEW_QUESTION` (in-app only, sent to every active moderator AND
+representative of the hub a new question is posted in, excluding the
+question's own author, deduplicated if a user holds both roles),
+`NEW_ACTIVATION_REQUEST` (in-app only, sent to every active admin when a
+new hub activation request is submitted, excluding the requester if they
+happen to be an admin).
 
 ---
 

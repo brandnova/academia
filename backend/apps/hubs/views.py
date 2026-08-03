@@ -117,6 +117,18 @@ class HubActivationRequestListCreateView(generics.ListCreateAPIView):
         write_serializer = self.get_serializer(data=request.data, context={"request": request})
         write_serializer.is_valid(raise_exception=True)
         activation_request = write_serializer.save()
+
+        admin_users = User.objects.filter(is_admin=True, is_active=True).exclude(
+            id=activation_request.user_id
+        )
+        for admin in admin_users:
+            notify(
+                user=admin,
+                notification_type=Notification.Type.NEW_ACTIVATION_REQUEST,
+                message=f"New hub activation request for {activation_request.school.short_name}",
+                content_object=activation_request,
+            )
+
         return Response(
             HubActivationRequestSerializer(activation_request).data,
             status=status.HTTP_201_CREATED,
