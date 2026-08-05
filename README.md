@@ -88,7 +88,10 @@ pip install -r requirements.txt
 cp .env.example .env   # fill in your local values
 python manage.py migrate
 python manage.py createsuperuser
-python manage.py seed_demo_data   # optional, populates realistic demo content; add --clear to reset and reseed
+python manage.py seed_demo_data   # optional, populates realistic demo content
+# add --clear to reset demo data and demo users, --user <email> to also seed
+# an existing real account with a hub role, content, and sample notifications,
+# --second-user <email> for a lighter second real participant
 python manage.py runserver
 ```
 

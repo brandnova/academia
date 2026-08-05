@@ -1,7 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { MessageSquare, Award, CheckCircle2, MessageCircle, ThumbsUp, Bell } from "lucide-react";
+import {
+  MessageSquare,
+  Award,
+  CheckCircle2,
+  MessageCircle,
+  ThumbsUp,
+  ShieldCheck,
+  HelpCircle,
+  Building2,
+  Flag,
+  Bell,
+} from "lucide-react";
 import { notificationTargetUrl } from "@/lib/notificationUrl";
 import { timeAgo } from "@/lib/timeAgo";
 
@@ -11,6 +22,10 @@ const ICONS = {
   HUB_ACTIVATED: CheckCircle2,
   NEW_COMMENT: MessageCircle,
   VOTE: ThumbsUp,
+  MODERATOR_ASSIGNED: ShieldCheck,
+  NEW_QUESTION: HelpCircle,
+  NEW_ACTIVATION_REQUEST: Building2,
+  NEW_REPORT: Flag,
 };
 
 export default function NotificationItem({ notification, onRead, onNavigate }) {
@@ -46,7 +61,7 @@ export default function NotificationItem({ notification, onRead, onNavigate }) {
         <p className="text-xs text-gray-400 mt-0.5">{timeAgo(notification.created_at)}</p>
       </div>
       {!notification.is_read && (
-        <span className="w-2 h-2 rounded bg-accent mt-1.5 shrink-0" />
+        <span className="w-2 h-2 rounded-full bg-accent mt-1.5 shrink-0" />
       )}
     </div>
   );

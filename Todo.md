@@ -43,5 +43,3 @@ This will ensure that al docs updates are synced from the main branch and not th
 
 
 TODO=============
-- [ ] Escalate content to admin (no dedicated escalate action exists; moderators
-      currently use the same Report pipeline as any other user)
