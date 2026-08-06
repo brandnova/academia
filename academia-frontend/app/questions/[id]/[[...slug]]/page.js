@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Lock } from "lucide-react";
+import { ArrowLeft, Lock, Eye, User, Building2 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 import StatusIcon from "@/components/questions/StatusIcon";
 import QuestionActions from "@/components/questions/QuestionActions";
@@ -45,11 +45,11 @@ export default async function QuestionDetailPage({ params }) {
         </Link>
       </p>
 
-      <div className="flex items-start gap-3 mb-2">
+      <div className="md:w-max md:gap-3 flex items-start mb-2">
+        <h1 className="text-xl md:text-3xl font-semibold flex-1">{question.title}</h1>
         <div className="pt-1">
           <StatusIcon status={question.status} showLabel />
         </div>
-        <h1 className="text-xl font-semibold flex-1">{question.title}</h1>
         {question.is_locked && (
           <span className="flex items-center gap-1 text-xs text-red-600 dark:text-red-400 shrink-0 pt-1.5">
             <Lock className="w-3.5 h-3.5" /> Locked
@@ -58,9 +58,9 @@ export default async function QuestionDetailPage({ params }) {
       </div>
 
       <div className="flex flex-wrap gap-3 text-xs text-gray-400 mb-4">
-        <span>Asked by {question.author.full_name}</span>
-        {question.department && <span>{question.department.name}</span>}
-        <span>{question.view_count} views</span>
+        <span className="flex flex-column justify-between items-center gap-1"><User size={16}/> Asked by {question.author.full_name}</span>
+        {question.department && <span className="flex flex-column justify-between items-center gap-1"><Building2 size={16}/> {question.department.name}</span>}
+        <span className="flex flex-column justify-between items-center gap-1"> <Eye size={16}/> {question.view_count} views</span>
       </div>
 
       {question.tags?.length > 0 && (
@@ -77,7 +77,7 @@ export default async function QuestionDetailPage({ params }) {
         </div>
       )}
 
-      <div className="mb-4"><MarkdownRenderer content={question.body} /></div>
+      <div className="mb-4"><MarkdownRenderer content={question.body} className="text-[18px] md:text-2xl!" /></div>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
         <QuestionActions question={question} />

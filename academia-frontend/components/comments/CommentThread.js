@@ -100,18 +100,18 @@ export default function CommentThread({ answerId, commentCount, onCountChange })
             ))}
 
           {user ? (
-            <form onSubmit={handlePost} className="flex items-start gap-2 pt-1">
+            <form onSubmit={handlePost} className="flex items-center gap-2 pt-1">
               <input
                 value={newBody}
                 onChange={(e) => setNewBody(e.target.value)}
                 required
                 placeholder="Add a comment..."
-                className="flex-1 px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs"
+                className="flex-1 px-2 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs"
               />
               <button
                 type="submit"
                 disabled={postStatus === "loading"}
-                className="text-xs px-2 py-1 rounded bg-accent text-white disabled:opacity-50"
+                className="text-xs px-2 py-2 rounded bg-accent text-white disabled:opacity-50"
               >
                 {postStatus === "loading" ? "Posting..." : "Post"}
               </button>
