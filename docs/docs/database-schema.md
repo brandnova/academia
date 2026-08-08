@@ -175,7 +175,7 @@ Represents a notification for a user.
 |-------|------|-------------|-------------|
 | id | UUID | Primary Key | Unique identifier |
 | user | ForeignKey(User) | Required, CASCADE | Recipient |
-| type | Enum | Required | NEW_ANSWER/NEW_COMMENT/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED |
+| type | Enum | Required | NEW_ANSWER/NEW_COMMENT/NEW_QUESTION/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED/NEW_ACTIVATION_REQUEST/NEW_REPORT |
 | message | String | Required | Notification text |
 | is_read | Boolean | Default: False | Read status |
 | content_type | ForeignKey(ContentType) | Nullable | Related object's model type (Django ContentType) |
@@ -230,6 +230,29 @@ Represents a user assigned as school representative for a hub.
 | updated_at | DateTime | Auto now | Last update timestamp |
 
 Unique constraint: (user, hub) to prevent duplicate assignments.
+
+### StaticPage
+Represents an admin-managed standalone content page (Privacy Policy, Terms of
+Service, staff onboarding guides, etc).
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| title | String | Required | Page title |
+| slug | String | Unique, Auto-generated | URL-friendly identifier, generated once from title at creation, never regenerated on edit, same pattern as School |
+| body | Text | Required | Markdown source, rendered client-side |
+| visibility | Enum | Default: PUBLIC | PUBLIC/STAFF |
+| is_published | Boolean | Default: False | Draft status, unpublished pages are only visible to admins |
+| created_by | ForeignKey(User) | Nullable, SET_NULL | Author. Nullable so deleting a user account never takes a page down with it |
+| created_at | DateTime | Auto now | Creation timestamp |
+| updated_at | DateTime | Auto now | Last update timestamp |
+
+"Staff" for visibility purposes means `is_admin`, or an active
+`ModeratorAssignment`/`SchoolRepresentativeAssignment` for any hub (checked
+globally, not scoped to a specific hub, since page visibility isn't
+hub-specific). Deleting a `StaticPage` is a genuine hard delete, unlike
+`School`/`Department`, since nothing else has a foreign key into it and
+draft/publish already covers the "hide without losing" case.
 
 ### APIClient (Future, Public API Phase)
 Represents a registered external consumer of the public API.
@@ -316,6 +339,7 @@ join this set once built, with no schema change required.
 - Deleting a `User` → Delete associated `Question`, `Answer`, `Comment`, `Notification`, `Report`
 - Deleting a `Question` → Delete associated `Answer`, `QuestionTag`, `QuestionFollow`
 - Deleting an `Answer` → Delete associated `Comment`, `AnswerVote`
+- Deleting a `Tag` → Delete associated `QuestionTag` (only ever happens via explicit admin action, see api-contract.md's Delete Tag / Merge Tag)
 
 In practice, `School` is not hard-deleted through the API, see api-contract.md's
 soft-delete note. Hard delete remains available at the database/admin level only.

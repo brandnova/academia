@@ -82,6 +82,24 @@ class QuestionListCreateView(generics.ListCreateAPIView):
         write_serializer = self.get_serializer(data=request.data, context={"request": request})
         write_serializer.is_valid(raise_exception=True)
         question = write_serializer.save()
+
+        from apps.accounts.models import User
+        from apps.hubs.models import ModeratorAssignment
+        from apps.notifications.models import Notification
+        from apps.notifications.services import notify
+
+        moderator_user_ids = ModeratorAssignment.objects.filter(
+            hub=question.hub, is_active=True
+        ).exclude(user_id=question.author_id).values_list("user_id", flat=True)
+
+        for moderator in User.objects.filter(id__in=moderator_user_ids):
+            notify(
+                user=moderator,
+                notification_type=Notification.Type.NEW_QUESTION,
+                message=f"New question in a hub you moderate: '{question.title}'",
+                content_object=question,
+            )
+
         return Response(
             QuestionDetailSerializer(question, context={"request": request}).data,
             status=status.HTTP_201_CREATED,

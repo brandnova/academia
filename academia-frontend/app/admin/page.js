@@ -8,11 +8,13 @@ import ActivationRequestsQueue from "@/components/admin/ActivationRequestsQueue"
 import UsersManager from "@/components/admin/UsersManager";
 import AdminHubPicker from "@/components/moderation/AdminHubPicker";
 import UnansweredQueue from "@/components/moderation/UnansweredQueue";
+import TagsManager from "@/components/admin/TagsManager";
 
 const TABS = [
   { key: "reports", label: "Reports" },
   { key: "schools", label: "Schools" },
   { key: "activation", label: "Activation requests" },
+  { key: "tags", label: "Tags" },
   { key: "users", label: "Users" },
   { key: "hubs", label: "Hub teams" },
   { key: "unanswered", label: "Unanswered" },
@@ -50,6 +52,7 @@ export default function AdminPage() {
       {tab === "reports" && <ReportsDashboard />}
       {tab === "schools" && <SchoolsManager />}
       {tab === "activation" && <ActivationRequestsQueue />}
+      {tab === "tags" && <TagsManager />}
       {tab === "users" && <UsersManager />}
       {tab === "hubs" && <AdminHubPicker />}
       {tab === "unanswered" && <UnansweredQueue showSchool />}

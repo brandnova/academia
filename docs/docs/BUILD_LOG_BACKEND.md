@@ -1,10 +1,12 @@
 # BUILD LOG
 
 ## Current Phase
-Phase 15, Admin Polish (complete, confirmed). This closes the originally planned MVP
-phase roadmap. CORS setup and production-readiness prep are next, tracked as
-unnumbered follow-up work rather than a new phase, since they are infrastructure
-concerns rather than a feature slice.
+Not a numbered phase. Two related GitHub issues: MODERATOR_ASSIGNED existed as
+a Notification type and the assignment endpoints existed since Phase 14, but
+nothing ever triggered it. Broader review requested alongside it turned up a
+second real gap: project-plan.md's Moderator Responsibilities section
+describes moderators receiving notifications about new questions in their
+hub, this was documented from the start and never built.
 
 ## Completed Phases
 - Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
@@ -65,6 +67,25 @@ blocked once a question's status was SOLVED, conflating two separate meanings,
 ## User Search and Self Profile Pass (Post-MVP)
 Not a numbered phase. No migrations, both features are built entirely from
 existing tables and views.
+
+## Static Pages Feature (Post-MVP)
+Not a numbered phase. New apps.pages app: admin-managed standalone content
+pages (Privacy Policy, Terms of Service, staff onboarding guides) without
+needing a code deploy to publish them.
+
+## seed_demo_data Upgrade (Post-MVP, Tooling)
+Not a numbered phase, dev tooling only, no contract impact. The command had
+fallen out of sync with the actual models, it predated is_locked,
+QuestionFollow, and StaticPage entirely, none of them were being seeded.
+
+## Notification Fan-Out Widening + Admin Activation-Request Alert (Post-MVP)
+Not a numbered phase. Two follow-ups after your feedback on the previous
+notification pass.
+
+## New Report Admin Notification (Post-MVP)
+Not a numbered phase. Closes the second of the two admin-notification gaps
+flagged during the moderator-assignment notification review: admins had no
+way to know a new Report existed except by polling GET /reports/?status=PENDING.
 
 ### Added
 - django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
@@ -145,6 +166,66 @@ existing tables and views.
   validated the same way as path-based IDs, 400 on malformed input, covers
   "my questions" without a dedicated endpoint since questions are already
   public
+- DELETE /tags/{tag_id}/ (admin only), blocked by default if the tag has
+  questions attached, ?force=true overrides. Deleting cascades to QuestionTag
+  rows via the existing FK constraint, question content itself is untouched
+- POST /tags/{tag_id}/merge/ (admin only), reassigns every QuestionTag from
+  the source tag onto a target, then deletes the source. Target given as
+  target_tag_id (merge into an existing tag) or target_name (merges by name
+  if that name already exists, otherwise performs a pure rename)
+- Both endpoints invalidate the tag-list cache prefix on success
+- Assigning a moderator or a representative now sends the target user a
+  MODERATOR_ASSIGNED notification, in-app only, unless they assigned
+  themselves (self-assignment is an existing allowed flow, doesn't need a
+  notification telling someone what they just did)
+- New NEW_QUESTION notification type. Creating a question notifies every
+  active moderator of that hub, in-app only, excluding the question's own
+  author even if they happen to also moderate that hub
+- StaticPage model: title, auto-generated-once slug (School's pattern, not
+  Question's), markdown body (rendered client-side, no server-side markdown
+  processing), visibility (PUBLIC/STAFF), is_published draft flag,
+  created_by (SET_NULL, deleting a user never takes a page down with it)
+- user_is_staff() added to apps.hubs.permissions, checks is_admin or any
+  active moderator/representative assignment globally, not scoped to a
+  specific hub like the existing helpers, since page visibility isn't
+  hub-specific
+- GET /pages/ (list, not paginated) and POST /pages/ (admin only) on one
+  view. GET /pages/{value}/ and PATCH/DELETE /pages/{value}/ share a single
+  URL pattern, method-dispatched: GET treats the value as a slug and is
+  public, PATCH/DELETE treat it as a UUID id and are admin-only
+- 404, not 403, for a page that exists but isn't visible to the requester,
+  same code path as "doesn't exist at all" (_visible_queryset().filter().
+  first() returning None either way), so a STAFF-only or draft page's
+  existence is never confirmable to a request that can't see it
+- Delete is a genuine hard delete, confirmed via testing that a
+  recreated page with the same title reuses the original slug cleanly
+  rather than getting suffixed, proving the original row is truly gone
+- --clear flag, wipes seeded content (schools cascade nearly everything;
+  Tag and StaticPage cleared separately since neither cascades from School)
+  before reseeding fresh
+- Static pages seeded: 3 published PUBLIC, 1 published STAFF, 1 unpublished
+  draft, covering every visibility/published combination
+- First hub gets a representative and moderator assigned automatically, so
+  the admin dashboard isn't empty by default
+- QuestionFollow and is_locked now seeded with reasonable variety
+- Reports now seeded across all three statuses (PENDING/RESOLVED/REJECTED),
+  not just one
+- NEW_QUESTION now also notifies active School Representatives of the hub,
+  not just Moderators, deduplicated via set union so a user holding both
+  roles for the same hub gets one notification, not two. Message wording
+  changed from moderator-specific phrasing to a role-neutral "New question
+  posted in {school}"
+- New NEW_ACTIVATION_REQUEST notification type. Submitting a
+  HubActivationRequest now notifies every active admin, in-app only,
+  excluding the requester if they happen to be an admin
+- New NEW_REPORT notification type. Submitting a report now notifies every
+  active admin, in-app only, excluding the reporter if they happen to be an
+  admin (admins can and do report content themselves, this isn't a
+  theoretical edge case)
+- Notification message includes the report's type (spam/abuse/etc.,
+  lowercased) for quick triage from the notification list, resolving the
+  open question from this feature's original issue template in favor of
+  including it
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -226,6 +307,71 @@ existing tables and views.
 - No public user profile endpoint exists in the API at all as of this pass,
   every user-activity endpoint requires authentication and is scoped to the
   requester
+- No separate rename endpoint. Merge-into-a-name-that-doesn't-exist-yet
+  covers rename exactly, one endpoint, two ways to call it, matches the
+  GitHub issue's own "worth deciding" question with the simpler answer
+- Merge deduplicates rather than erroring: if a question already carries
+  both the source and target tag, the source's QuestionTag row for that
+  question is dropped instead of attempted-and-rejected by the
+  (question, tag) unique constraint. questions_reassigned only counts
+  genuine reassignments, not these drops
+- Reused validate_uuid (and its documented "Invalid ID format" 400 shape)
+  for target_tag_id in the merge request body, not just path parameters,
+  since it's the same malformed-ID problem in a body field instead of a URL
+  segment
+- Tag management is admin-only, not exposed on /moderation, tags are not
+  scoped to a single hub/school the way departments are, a tag can span
+  every school on the platform at once, so this belongs on /admin per the
+  GitHub issue's own reasoning
+- Representative assignment reuses MODERATOR_ASSIGNED rather than getting
+  its own type, message text distinguishes the two roles. Matches the
+  precedent set by the question-follow system (reusing NEW_ANSWER for
+  followers instead of adding a type), keeps the frontend's notification
+  icon map from needing another special case for a distinction that's
+  really just "assigned to a hub role"
+- NEW_QUESTION notifies moderators only, not representatives, grounded
+  directly in project-plan.md's existing (never-implemented) description of
+  moderator responsibilities. Representatives are described there as
+  coordinators, not as the audience for new-content alerts
+- Notified via a per-moderator notify() loop, same fan-out shape as the
+  follow system's per-follower notifications, no email involved so this is
+  pure DB writes, fine at MVP scale, same Celery-backlog note applies if
+  moderator counts per hub ever grow large
+- created_by uses SET_NULL, not CASCADE, per your explicit call: an admin's
+  account being deactivated or removed shouldn't take institutional content
+  like a Terms of Service page down with it
+- Caching deliberately deferred, matching the issue's own "nice-to-have, not
+  blocking," to keep this pass reviewable; same short-TTL pattern already
+  used for Schools/Tags is the natural follow-up once confirmed working
+- GET-by-slug and PATCH/DELETE-by-id share one URL pattern rather than being
+  split into separate routes, since the documented contract specifies the
+  same path shape for both, just different HTTP methods and different
+  identifier semantics per method
+- --clear never touches the User table, real superuser and Google-OAuth
+  test accounts, plus any manual is_admin promotion, are preserved across
+  resets. Recreating those is real friction (re-auth, re-run
+  createsuperuser) this flag shouldn't force
+- Removed the old hard block on re-running without --clear (previously:
+  warn and exit if any School exists). Since schools/departments/tags are
+  already get_or_create-idempotent, running again now just adds more
+  questions/answers/comments on top, matching the actual intended use:
+  incrementally growing a varied local dataset, not a strict one-shot tool
+- Reps included in NEW_QUESTION specifically because a freshly activated
+  hub can have zero moderators until a rep assigns some, without reps
+  included, a question could be posted into total silence, nobody notified
+  at all. This is a real gap being closed, not just a nice-to-have
+- Admin notifications (activation requests, and reports once implemented)
+  are in-app only, reasoning distinct from the general "email pulls
+  infrequent users back" policy: admins are expected to already be
+  monitoring their dashboard as part of the role, so this doesn't need to
+  pull anyone back to the platform the way a student-facing notification
+  does
+- Same in-app-only channel policy as NEW_ACTIVATION_REQUEST: admins are
+  expected to already be monitoring their dashboard as part of the role,
+  this doesn't need to pull anyone back to the platform
+- Notification fan-out happens after the Report row is successfully
+  created and the duplicate-report check has passed, so a blocked/invalid
+  report submission never generates a stray notification
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -269,10 +415,14 @@ it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
 Question slugs, and the 400 Invalid ID format response all work as designed.
 
 ### Known Deviations From Docs
-(none, database-schema.md, api-contract.md, and project-overview.md were updated
-in this pass to reflect the slug fields, the two new by-slug endpoints, and the
-ID format validation behavior)
+- api-contract.md's ID Format Validation section is framed around path
+  parameters; this pass reuses the same validator and error shape for the
+  target_tag_id body field on Merge Tag, worth a small wording tweak at the
+  next sync to acknowledge body fields can hit this too, not just URLs
 
 ### Next Immediate Step
-Frontend build per the handoff brief prepared alongside
-this update.
+NEW_REPORT admin notification (same shape of fix, blocked on getting current
+apps/reports/views.py and apps/reports/models.py, since this project has
+shown real drift from earlier chat sessions and I'm not writing against
+stale memory). This doubles as the first app in the planned full
+system audit.

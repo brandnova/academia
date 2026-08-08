@@ -41,7 +41,7 @@ export default function AnswersSection({ question }) {
       {bestAnswer && <BestAnswerHighlight answer={bestAnswer} />}
 
       <h2 className="font-semibold mb-4">
-        {answers.length} answer{answers.length !== 1 ? "s" : ""}
+        {answers.length} Answer{answers.length !== 1 ? "s" : ""}
       </h2>
 
       {answers.length === 0 ? (
@@ -59,6 +59,7 @@ export default function AnswersSection({ question }) {
               onMarkBest={handleMarkBest}
               onUpdated={handleUpdated}
               onDeleted={handleDeleted}
+              highlightBest={false}
             />
           ))}
         </div>

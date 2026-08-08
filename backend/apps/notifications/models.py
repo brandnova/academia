@@ -11,10 +11,13 @@ class Notification(models.Model):
     class Type(models.TextChoices):
         NEW_ANSWER = "NEW_ANSWER", "New Answer"
         NEW_COMMENT = "NEW_COMMENT", "New Comment"
+        NEW_QUESTION = "NEW_QUESTION", "New Question"
         BEST_ANSWER = "BEST_ANSWER", "Best Answer"
         VOTE = "VOTE", "Vote"
         MODERATOR_ASSIGNED = "MODERATOR_ASSIGNED", "Moderator Assigned"
         HUB_ACTIVATED = "HUB_ACTIVATED", "Hub Activated"
+        NEW_ACTIVATION_REQUEST = "NEW_ACTIVATION_REQUEST", "New Activation Request"
+        NEW_REPORT = "NEW_REPORT", "New Report"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, related_name="notifications", on_delete=models.CASCADE)

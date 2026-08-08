@@ -56,18 +56,23 @@
 - [x] Search results ranking (solved > highly voted > recent > relevance)
 
 ## Notifications
-- [ ] Email notifications for major actions
+- [x] Email notifications for major actions
   - [x] New answer notification
   - [x] School hub activation
-  - [ ] School submission request approved (no SchoolSubmission model yet, future)
-- [ ] In-app notifications for major actions
+- [x] In-app notifications for major actions
   - [x] New answer notification
   - [x] New comment notification
   - [x] Best answer selected notification
   - [x] Vote received notification
-  - [ ] Moderator assigned notification (assignment endpoint exists since Phase 14,
+  - [x] Moderator assigned notification (assignment endpoint exists since Phase 14,
         no notification trigger wired to it yet)
   - [x] Hub activated notification
+  - [x] New question notification for hub moderators (NEW_QUESTION, in-app only,
+      closes a gap from project-plan.md's Moderator Responsibilities section,
+      which described this but it was never implemented)
+- [x] New activation request notification for admins (NEW_ACTIVATION_REQUEST,
+      in-app only) and new report notification for admins (NEW_REPORT,
+      in-app only)
 
 ## Moderation
 - [x] Report content (spam/abuse/misinformation/duplicate)
@@ -76,6 +81,12 @@
       currently use the same Report pipeline as any other user)
 - [x] Reports dashboard (admin only)
 - [x] Resolve reports (admin only)
+- [x] Question lock/close capability, distinct from SOLVED, moderator/admin
+      only, for the rare case a question genuinely needs to stop accepting
+      input (spam magnet, fully resolved administrative question). SOLVED
+      itself no longer implies closed, see project-plan.md's Question
+      Lifecycle note. Backend complete and documented; frontend UI for this
+      is planned for the upcoming polish pass.
 
 ## Administration
 - [x] Manage schools (create/edit/soft-delete via is_active)
@@ -85,6 +96,9 @@
 - [x] View reports
 - [x] Manage users (view/suspend; promoting or demoting admin status is not part
       of this endpoint)
+- [x] Manage tags (rename, merge, delete), admin only
+- [x] Static page management (create/edit/delete, PUBLIC or STAFF visibility,
+      draft/published), admin only
 
 ## User Experience
 - [x] Self-view profile stats (question/answer/best-answer/comment counts) on
@@ -120,7 +134,6 @@
 
 ## Notifications (Future)
 - [ ] Push notifications
-- [ ] Moderator assigned notification trigger
 - [ ] School submission approved notification trigger
 
 ## Moderation (Future)
@@ -128,12 +141,7 @@
 - [ ] User management (moderators)
 - [ ] Flag capabilities (moderators)
 - [ ] Dedicated escalate-to-admin action, distinct from the general report pipeline
-- [x] Question lock/close capability, distinct from SOLVED, moderator/admin
-      only, for the rare case a question genuinely needs to stop accepting
-      input (spam magnet, fully resolved administrative question). SOLVED
-      itself no longer implies closed, see project-plan.md's Question
-      Lifecycle note. Backend complete and documented; frontend UI for this
-      is planned for the upcoming polish pass.
+
 
 ## School Reviews (Future)
 - [ ] Submit school review (overall rating + category ratings + text)

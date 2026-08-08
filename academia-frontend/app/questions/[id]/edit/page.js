@@ -137,13 +137,16 @@ export default function EditQuestionPage({ params }) {
         {saveStatus === "error" && (
           <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>
         )}
-        <button
-          type="submit"
-          disabled={saveStatus === "loading"}
-          className="px-4 py-2 rounded bg-accent text-white text-sm disabled:opacity-50"
-        >
-          {saveStatus === "loading" ? "Saving..." : "Save changes"}
-        </button>
+        <div className="w-max flex flex-row justify-between gap-[20px]">
+          <button
+            type="submit"
+            disabled={saveStatus === "loading"}
+            className="px-4 py-2 rounded bg-accent text-white text-sm disabled:opacity-50"
+          >
+            {saveStatus === "loading" ? "Saving..." : "Save changes"}
+          </button>
+          <button type="button" className="px-4 py-2 rounded bg-[#db040f] text-white text-sm cursor-pointer" onClick={() => router.back()}>Cancel Changes</button>
+        </div>
       </form>
     </div>
   );

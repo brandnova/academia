@@ -26,7 +26,7 @@ superuser:
 	python manage.py createsuperuser
 
 seed:
-	python manage.py seed_demo_data
+	python manage.py seed_demo_data --clear
 
 test:
 	python manage.py test

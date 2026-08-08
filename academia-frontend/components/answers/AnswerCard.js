@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2, ThumbsUp, ThumbsDown, Award } from "lucide-react";
+import { CheckCircle2, ThumbsUp, ThumbsDown, Award, User } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
 import CommentThread from "@/components/comments/CommentThread";
@@ -16,6 +16,7 @@ export default function AnswerCard({
   onMarkBest,
   onUpdated,
   onDeleted,
+  highlightBest = true
 }) {
   const { user } = useAuth();
   const isAuthor = user && user.id === answer.author.id;
@@ -178,12 +179,12 @@ export default function AnswerCard({
     <div
       id={`answer-${answer.id}`}
       className={`py-5 px-4 rounded-lg border transition-all ${
-        answer.is_best
+        answer.is_best && highlightBest
           ? "border-accent bg-accent/5"
           : "border-gray-200 dark:border-gray-700"
       }`}
     >
-      {answer.is_best && (
+      {answer.is_best && highlightBest && (
         <div className="flex items-center gap-1.5 text-accent text-xs font-medium mb-2">
           <CheckCircle2 className="w-4 h-4" /> Best answer
         </div>
@@ -216,7 +217,7 @@ export default function AnswerCard({
           </div>
         </div>
       ) : (
-        <MarkdownRenderer content={answer.body} />
+        <MarkdownRenderer content={answer.body} className="text-[18px]!" />
       )}
 
       <div className="flex flex-wrap items-center justify-between gap-2 mt-3 text-xs text-gray-400">
@@ -227,7 +228,7 @@ export default function AnswerCard({
             contentId={answer.id}
             authorId={answer.author.id}
           />
-          <span>by {answer.author.full_name}</span>
+          <span className="flex flex-column justify-between items-center gap-1"><User size={16}/> by {answer.author.full_name}</span>
         </div>
       </div>
 

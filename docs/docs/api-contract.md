@@ -668,6 +668,10 @@ A new request is blocked if the target school already has an active hub, or if a
 `PENDING` request for that school already exists, this prevents duplicate/spam
 requests from piling up before an admin reviews the first one.
 
+Submitting a request sends every active admin a `NEW_ACTIVATION_REQUEST`
+notification, in-app only, excluding the requester if they happen to be an
+admin.
+
 ---
 
 ### List Activation Requests (Admin Only)
@@ -954,6 +958,10 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
   "hub_id": ["Hub with ID 'uuid' does not exist."]
 }
 ```
+
+Creating a question sends a `NEW_QUESTION` notification, in-app only, to
+every user with an active `ModeratorAssignment` for that hub, excluding the
+question's own author.
 
 ---
 
@@ -1634,6 +1642,134 @@ how every other query-param filter on this API behaves.
 
 ---
 
+### Delete Tag (Admin Only)
+**Endpoint:** `DELETE /api/v1/tags/{tag_id}/`
+
+**Query Parameters:**
+- `force` - `true` to delete a tag that still has questions attached (default: not forced)
+
+**Response (204 No Content):** Empty
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "This tag is attached to 12 questions. Pass ?force=true to delete it anyway."
+}
+```
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "Tag not found"
+}
+```
+
+By default, deleting a tag that's still attached to any question is blocked, to
+avoid silently orphaning content. Pass `?force=true` to delete it anyway, this
+removes the tag from every question it's on (via cascade on `QuestionTag`), it
+does not delete the questions themselves.
+
+**Invalidation Note:** Invalidates the `tag-list` cache prefix.
+
+---
+
+### Merge Tag (Admin Only)
+**Endpoint:** `POST /api/v1/tags/{tag_id}/merge/`
+
+Merges the tag in the URL (the source) into a target tag, reassigning every
+question tagged with the source over to the target, then removes the source
+tag. The target can be specified two ways:
+
+**Request, merge into an existing tag:**
+```json
+{
+  "target_tag_id": "uuid"
+}
+```
+
+**Request, rename (or merge-by-name):**
+```json
+{
+  "target_name": "siwes"
+}
+```
+
+Exactly one of `target_tag_id` / `target_name` must be provided. When
+`target_name` is given: if a tag with that name (after lowercase
+normalization) already exists, this behaves identically to `target_tag_id`, a
+real merge. If no tag with that name exists yet, the source tag is simply
+renamed in place, a rename is just a merge into a name nobody holds yet, so
+there is no separate rename endpoint.
+
+**Response (200 OK), merge:**
+```json
+{
+  "message": "Tags merged successfully",
+  "tag": {
+    "id": "uuid",
+    "name": "siwes",
+    "question_count": 40
+  },
+  "questions_reassigned": 15
+}
+```
+
+**Response (200 OK), rename:**
+```json
+{
+  "message": "Tag renamed successfully",
+  "tag": {
+    "id": "uuid",
+    "name": "siwes",
+    "question_count": 12
+  }
+}
+```
+
+`questions_reassigned` only appears on the merge response, and counts
+questions actually moved over, if a question already carried both the source
+and target tag, its duplicate source association is simply dropped rather
+than counted as a reassignment.
+
+**Error Responses:**
+```json
+// 400 Bad Request - Neither field provided
+{
+  "error": "Provide either target_tag_id or target_name."
+}
+
+// 400 Bad Request - Both fields provided
+{
+  "error": "Provide only one of target_tag_id or target_name, not both."
+}
+
+// 400 Bad Request - Merging a tag into itself
+{
+  "error": "Cannot merge a tag into itself."
+}
+
+// 400 Bad Request - target_tag_id doesn't exist
+{
+  "target_tag_id": ["Tag with this ID does not exist."]
+}
+
+// 400 Bad Request - Malformed target_tag_id
+{
+  "error": "Invalid ID format"
+}
+```
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "Tag not found"
+}
+```
+
+**Invalidation Note:** Invalidates the `tag-list` cache prefix.
+
+---
+
 ## Search
 
 ### Search Questions
@@ -1695,8 +1831,8 @@ rank against, in that case results still return, ordered by the first three
 ranking priorities above.
 
 **Caching & Visibility Behavior:**
-- **Cache**: Requests are cached using `search-questions:<query_params>` for `CACHE_TTL_SEARCH` (15 seconds).
-- **Invalidation**: Clears only when the cache TTL expires.
+- **Cache**: Public requests are cached using `tag-list:<query_params>` key for `CACHE_TTL_SHORT` (60 seconds).
+- **Invalidation**: Clears on tag delete or merge (see below), otherwise only when the cache TTL expires, since tags created implicitly during question creation/update don't trigger active invalidation.
 
 ---
 
@@ -1734,8 +1870,16 @@ doesn't change even as new notifiable models are added.
 
 **Notification types currently triggered:** `NEW_ANSWER` (email and in-app),
 `BEST_ANSWER` (email and in-app), `HUB_ACTIVATED` (email and in-app),
-`NEW_COMMENT` (in-app only), `VOTE` (in-app only). `MODERATOR_ASSIGNED` exists as
-a type but has no trigger wired to it yet.
+`NEW_COMMENT` (in-app only), `VOTE` (in-app only), `MODERATOR_ASSIGNED`
+(in-app only, fires for both moderator and representative assignment),
+`NEW_QUESTION` (in-app only, sent to every active moderator AND
+representative of the hub a new question is posted in, excluding the
+question's own author, deduplicated if a user holds both roles),
+`NEW_ACTIVATION_REQUEST` (in-app only, sent to every active admin when a
+new hub activation request is submitted, excluding the requester if they
+happen to be an admin), `NEW_REPORT` (in-app only, sent to every active
+admin when a new report is submitted, excluding the reporter if they
+happen to be an admin).
 
 ---
 
@@ -1830,6 +1974,11 @@ new reportable models (e.g. SchoolReview) are added later. Supported values for
   "content_id": ["No matching content found for this content_type and content_id."]
 }
 ```
+
+Submitting a report sends every active admin a `NEW_REPORT` notification,
+in-app only, excluding the reporter if they happen to be an admin. The
+notification message includes the report's `type` for quick triage from
+the notification list itself, without needing to open the report first.
 
 A user cannot report the same piece of content more than once, this restriction
 applies regardless of whether an earlier report on that content was resolved or
@@ -1970,6 +2119,9 @@ valid to acknowledge but doesn't warrant removal.
 }
 ```
 
+Assigning a moderator sends the assigned user a `MODERATOR_ASSIGNED`
+notification, in-app only, unless they assigned themselves.
+
 Requires an active `SchoolRepresentativeAssignment` for this hub, or platform
 admin status.
 
@@ -2077,6 +2229,10 @@ returns every active moderator for the hub in one response.
 }
 ```
 
+Assigning a representative sends the assigned user a `MODERATOR_ASSIGNED`
+notification (message text distinguishes the representative role from
+moderator), in-app only, unless they assigned themselves.
+
 This endpoint is public, no authentication required, matching List Moderators.
 It is not paginated, it returns every active representative for the hub in
 one response.
@@ -2167,6 +2323,131 @@ Removal is a soft-delete (`is_active: false`), not a hard row delete.
 This endpoint only accepts `is_active`. Promoting or demoting `is_admin` status is
 not available through this endpoint in the MVP. An admin cannot suspend their own
 account, to prevent accidental lockout.
+
+---
+
+## Static Pages
+
+### List Pages
+**Endpoint:** `GET /api/v1/pages/`
+
+**Response (200 OK):**
+```json
+{
+  "results": [
+    {
+      "id": "uuid",
+      "title": "Privacy Policy",
+      "slug": "privacy-policy",
+      "visibility": "PUBLIC",
+      "is_published": true,
+      "created_by": { "id": "uuid", "full_name": "Jane Admin" },
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+Not paginated, low volume. Visibility is computed per requester:
+- Anonymous or plain authenticated users see published `PUBLIC` pages only.
+- Staff (`is_admin`, or an active moderator/representative assignment for
+  any hub) additionally see published `STAFF` pages.
+- Admins see everything, including unpublished drafts of either visibility.
+
+`created_by` is `null` if the creating user's account has since been deleted.
+
+---
+
+### Get Page
+**Endpoint:** `GET /api/v1/pages/{slug}/`
+
+**Response (200 OK):**
+```json
+{
+  "id": "uuid",
+  "title": "Privacy Policy",
+  "slug": "privacy-policy",
+  "body": "# Privacy Policy\n\nWe respect your data...",
+  "visibility": "PUBLIC",
+  "is_published": true,
+  "created_by": { "id": "uuid", "full_name": "Jane Admin" },
+  "created_at": "2026-01-01T00:00:00Z",
+  "updated_at": "2026-01-01T00:00:00Z"
+}
+```
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "Page not found"
+}
+```
+
+Same visibility rules as List Pages, applied per-page. A page that exists but
+isn't visible to the requester returns the identical 404 as a page that
+genuinely doesn't exist, a `STAFF`-only or draft page's existence is never
+confirmable to a request that can't see it.
+
+---
+
+### Create Page (Admin Only)
+**Endpoint:** `POST /api/v1/pages/`
+
+**Request:**
+```json
+{
+  "title": "Privacy Policy",
+  "body": "# Privacy Policy\n\nWe respect your data...",
+  "visibility": "PUBLIC",
+  "is_published": true
+}
+```
+
+**Response (201 Created):** Same shape as Get Page
+
+`slug` is auto-generated from `title` and is not accepted in the request
+body, it cannot be set directly on creation.
+
+---
+
+### Update Page (Admin Only)
+**Endpoint:** `PATCH /api/v1/pages/{page_id}/`
+
+**Request:** Same fields as Create, all optional (partial update)
+
+**Response (200 OK):** Same shape as Get Page
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "Invalid ID format"
+}
+```
+
+Note: `{page_id}` here is the page's UUID, not its slug, distinct from Get
+Page above which looks up by slug. Editing `title` does **not** regenerate
+`slug`, it's generated once at creation and never touched again, so a
+linked or bookmarked page URL never breaks even if the title changes later.
+If a genuine slug change is ever needed, that's a direct database edit, not
+something this endpoint supports.
+
+---
+
+### Delete Page (Admin Only)
+**Endpoint:** `DELETE /api/v1/pages/{page_id}/`
+
+**Response (204 No Content):** Empty
+
+**Response (404 Not Found):**
+```json
+{
+  "error": "Page not found"
+}
+```
+
+This is a genuine hard delete, unlike School/Department's soft-delete
+pattern, nothing else references a StaticPage by foreign key, and
+draft/publish already covers hiding a page without losing it.
 
 ---
 
