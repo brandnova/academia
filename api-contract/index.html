@@ -1253,6 +1253,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#delete-tag-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Tag (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-tag-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merge Tag (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1548,6 +1570,78 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#static-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Static Pages
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Static Pages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Page
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-page-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Page (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-page-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Page (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-page-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Page (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-clients-future-public-api-phase" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1736,33 +1830,6 @@
     
   
     Contributors Quickstart
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../contributor-backlog/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Contributors Backlog
   
 
     
@@ -2610,6 +2677,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#delete-tag-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Tag (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-tag-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merge Tag (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2893,6 +2982,78 @@
     <span class="md-ellipsis">
       
         Suspend or Reactivate User (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Static Pages
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Static Pages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        List Pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Page
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-page-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Page (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-page-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Page (Admin Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-page-admin-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Page (Admin Only)
       
     </span>
   </a>
@@ -3643,6 +3804,9 @@ responses for non-admins.</p>
 <p>A new request is blocked if the target school already has an active hub, or if a
 <code>PENDING</code> request for that school already exists, this prevents duplicate/spam
 requests from piling up before an admin reviews the first one.</p>
+<p>Submitting a request sends every active admin a <code>NEW_ACTIVATION_REQUEST</code>
+notification, in-app only, excluding the requester if they happen to be an
+admin.</p>
 <hr />
 <h3 id="list-activation-requests-admin-only">List Activation Requests (Admin Only)</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/hubs/activation-requests/</code></p>
@@ -3867,6 +4031,9 @@ soft-delete path; setting it back to <code>true</code> reactivates the departmen
   &quot;hub_id&quot;: [&quot;Hub with ID 'uuid' does not exist.&quot;]
 }
 </code></pre>
+<p>Creating a question sends a <code>NEW_QUESTION</code> notification, in-app only, to
+every user with an active <code>ModeratorAssignment</code> for that hub, excluding the
+question's own author.</p>
 <hr />
 <h3 id="get-question">Get Question</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/questions/{question_id}/</code></p>
@@ -4296,7 +4463,7 @@ envelope as all list endpoints (<code>count</code>, <code>next</code>, <code>pre
   &quot;body&quot;: [&quot;This field is required.&quot;]
 }
 
-// 404 Not Found - Answer doesn't exist
+// 400 Bad Request - Answer doesn't exist
 {
   &quot;answer_id&quot;: [&quot;Answer with this ID does not exist.&quot;]
 }
@@ -4389,6 +4556,106 @@ filter, so "GPA" and "gpa" are always treated as the same tag.</p>
 questions returns <code>200 OK</code> with an empty result set, not a 404, consistent with
 how every other query-param filter on this API behaves.</p>
 <hr />
+<h3 id="delete-tag-admin-only">Delete Tag (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/v1/tags/{tag_id}/</code></p>
+<p><strong>Query Parameters:</strong>
+- <code>force</code> - <code>true</code> to delete a tag that still has questions attached (default: not forced)</p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<p><strong>Error Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;This tag is attached to 12 questions. Pass ?force=true to delete it anyway.&quot;
+}
+</code></pre>
+<p><strong>Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Tag not found&quot;
+}
+</code></pre>
+<p>By default, deleting a tag that's still attached to any question is blocked, to
+avoid silently orphaning content. Pass <code>?force=true</code> to delete it anyway, this
+removes the tag from every question it's on (via cascade on <code>QuestionTag</code>), it
+does not delete the questions themselves.</p>
+<p><strong>Invalidation Note:</strong> Invalidates the <code>tag-list</code> cache prefix.</p>
+<hr />
+<h3 id="merge-tag-admin-only">Merge Tag (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/v1/tags/{tag_id}/merge/</code></p>
+<p>Merges the tag in the URL (the source) into a target tag, reassigning every
+question tagged with the source over to the target, then removes the source
+tag. The target can be specified two ways:</p>
+<p><strong>Request, merge into an existing tag:</strong></p>
+<pre><code class="language-json">{
+  &quot;target_tag_id&quot;: &quot;uuid&quot;
+}
+</code></pre>
+<p><strong>Request, rename (or merge-by-name):</strong></p>
+<pre><code class="language-json">{
+  &quot;target_name&quot;: &quot;siwes&quot;
+}
+</code></pre>
+<p>Exactly one of <code>target_tag_id</code> / <code>target_name</code> must be provided. When
+<code>target_name</code> is given: if a tag with that name (after lowercase
+normalization) already exists, this behaves identically to <code>target_tag_id</code>, a
+real merge. If no tag with that name exists yet, the source tag is simply
+renamed in place, a rename is just a merge into a name nobody holds yet, so
+there is no separate rename endpoint.</p>
+<p><strong>Response (200 OK), merge:</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Tags merged successfully&quot;,
+  &quot;tag&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;name&quot;: &quot;siwes&quot;,
+    &quot;question_count&quot;: 40
+  },
+  &quot;questions_reassigned&quot;: 15
+}
+</code></pre>
+<p><strong>Response (200 OK), rename:</strong></p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;Tag renamed successfully&quot;,
+  &quot;tag&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;name&quot;: &quot;siwes&quot;,
+    &quot;question_count&quot;: 12
+  }
+}
+</code></pre>
+<p><code>questions_reassigned</code> only appears on the merge response, and counts
+questions actually moved over, if a question already carried both the source
+and target tag, its duplicate source association is simply dropped rather
+than counted as a reassignment.</p>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request - Neither field provided
+{
+  &quot;error&quot;: &quot;Provide either target_tag_id or target_name.&quot;
+}
+
+// 400 Bad Request - Both fields provided
+{
+  &quot;error&quot;: &quot;Provide only one of target_tag_id or target_name, not both.&quot;
+}
+
+// 400 Bad Request - Merging a tag into itself
+{
+  &quot;error&quot;: &quot;Cannot merge a tag into itself.&quot;
+}
+
+// 400 Bad Request - target_tag_id doesn't exist
+{
+  &quot;target_tag_id&quot;: [&quot;Tag with this ID does not exist.&quot;]
+}
+
+// 400 Bad Request - Malformed target_tag_id
+{
+  &quot;error&quot;: &quot;Invalid ID format&quot;
+}
+</code></pre>
+<p><strong>Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Tag not found&quot;
+}
+</code></pre>
+<p><strong>Invalidation Note:</strong> Invalidates the <code>tag-list</code> cache prefix.</p>
+<hr />
 <h2 id="search">Search</h2>
 <h3 id="search-questions">Search Questions</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/search/questions/</code></p>
@@ -4442,8 +4709,8 @@ but it has no fixed upper bound (it is not a normalized 0 to 1 percentage). It i
 rank against, in that case results still return, ordered by the first three
 ranking priorities above.</p>
 <p><strong>Caching &amp; Visibility Behavior:</strong>
-- <strong>Cache</strong>: Requests are cached using <code>search-questions:&lt;query_params&gt;</code> for <code>CACHE_TTL_SEARCH</code> (15 seconds).
-- <strong>Invalidation</strong>: Clears only when the cache TTL expires.</p>
+- <strong>Cache</strong>: Public requests are cached using <code>search-questions:&lt;query_params&gt;</code> key for <code>CACHE_TTL_SEARCH</code> (30 seconds).
+- <strong>Invalidation</strong>: TTL expiry only, no active invalidation trigger exists for search results, given the short TTL and the volume of writes (new answers, votes, status changes) that could affect ranking, active invalidation wasn't worth the complexity.</p>
 <hr />
 <h2 id="notifications">Notifications</h2>
 <h3 id="list-notifications">List Notifications</h3>
@@ -4473,8 +4740,16 @@ ContentType-based generic relation (see database-schema.md), the JSON shape
 doesn't change even as new notifiable models are added.</p>
 <p><strong>Notification types currently triggered:</strong> <code>NEW_ANSWER</code> (email and in-app),
 <code>BEST_ANSWER</code> (email and in-app), <code>HUB_ACTIVATED</code> (email and in-app),
-<code>NEW_COMMENT</code> (in-app only), <code>VOTE</code> (in-app only). <code>MODERATOR_ASSIGNED</code> exists as
-a type but has no trigger wired to it yet.</p>
+<code>NEW_COMMENT</code> (in-app only), <code>VOTE</code> (in-app only), <code>MODERATOR_ASSIGNED</code>
+(in-app only, fires for both moderator and representative assignment),
+<code>NEW_QUESTION</code> (in-app only, sent to every active moderator AND
+representative of the hub a new question is posted in, excluding the
+question's own author, deduplicated if a user holds both roles),
+<code>NEW_ACTIVATION_REQUEST</code> (in-app only, sent to every active admin when a
+new hub activation request is submitted, excluding the requester if they
+happen to be an admin), <code>NEW_REPORT</code> (in-app only, sent to every active
+admin when a new report is submitted, excluding the reporter if they
+happen to be an admin).</p>
 <hr />
 <h3 id="mark-notification-as-read">Mark Notification as Read</h3>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/notifications/{notification_id}/mark-read/</code></p>
@@ -4548,6 +4823,10 @@ new reportable models (e.g. SchoolReview) are added later. Supported values for
   &quot;content_id&quot;: [&quot;No matching content found for this content_type and content_id.&quot;]
 }
 </code></pre>
+<p>Submitting a report sends every active admin a <code>NEW_REPORT</code> notification,
+in-app only, excluding the reporter if they happen to be an admin. The
+notification message includes the report's <code>type</code> for quick triage from
+the notification list itself, without needing to open the report first.</p>
 <p>A user cannot report the same piece of content more than once, this restriction
 applies regardless of whether an earlier report on that content was resolved or
 rejected.</p>
@@ -4657,6 +4936,8 @@ valid to acknowledge but doesn't warrant removal.</p>
   &quot;user_id&quot;: [&quot;User with ID 'uuid' does not exist.&quot;]
 }
 </code></pre>
+<p>Assigning a moderator sends the assigned user a <code>MODERATOR_ASSIGNED</code>
+notification, in-app only, unless they assigned themselves.</p>
 <p>Requires an active <code>SchoolRepresentativeAssignment</code> for this hub, or platform
 admin status.</p>
 <p><strong>Invalidation Note:</strong> Assigning a moderator invalidates <code>hub-detail:{hub_id}</code>, <code>hub-by-school:{school_id}</code>, <code>hub-by-slug:{slug}</code>, and <code>school-detail:{school_id}</code> cache keys.</p>
@@ -4738,6 +5019,9 @@ returns every active moderator for the hub in one response.</p>
   ]
 }
 </code></pre>
+<p>Assigning a representative sends the assigned user a <code>MODERATOR_ASSIGNED</code>
+notification (message text distinguishes the representative role from
+moderator), in-app only, unless they assigned themselves.</p>
 <p>This endpoint is public, no authentication required, matching List Moderators.
 It is not paginated, it returns every active representative for the hub in
 one response.</p>
@@ -4803,6 +5087,98 @@ one response.</p>
 <p>This endpoint only accepts <code>is_active</code>. Promoting or demoting <code>is_admin</code> status is
 not available through this endpoint in the MVP. An admin cannot suspend their own
 account, to prevent accidental lockout.</p>
+<hr />
+<h2 id="static-pages">Static Pages</h2>
+<h3 id="list-pages">List Pages</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/v1/pages/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Privacy Policy&quot;,
+      &quot;slug&quot;: &quot;privacy-policy&quot;,
+      &quot;visibility&quot;: &quot;PUBLIC&quot;,
+      &quot;is_published&quot;: true,
+      &quot;created_by&quot;: { &quot;id&quot;: &quot;uuid&quot;, &quot;full_name&quot;: &quot;Jane Admin&quot; },
+      &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+    }
+  ]
+}
+</code></pre>
+<p>Not paginated, low volume. Visibility is computed per requester:
+- Anonymous or plain authenticated users see published <code>PUBLIC</code> pages only.
+- Staff (<code>is_admin</code>, or an active moderator/representative assignment for
+  any hub) additionally see published <code>STAFF</code> pages.
+- Admins see everything, including unpublished drafts of either visibility.</p>
+<p><code>created_by</code> is <code>null</code> if the creating user's account has since been deleted.</p>
+<hr />
+<h3 id="get-page">Get Page</h3>
+<p><strong>Endpoint:</strong> <code>GET /api/v1/pages/{slug}/</code></p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;title&quot;: &quot;Privacy Policy&quot;,
+  &quot;slug&quot;: &quot;privacy-policy&quot;,
+  &quot;body&quot;: &quot;# Privacy Policy\n\nWe respect your data...&quot;,
+  &quot;visibility&quot;: &quot;PUBLIC&quot;,
+  &quot;is_published&quot;: true,
+  &quot;created_by&quot;: { &quot;id&quot;: &quot;uuid&quot;, &quot;full_name&quot;: &quot;Jane Admin&quot; },
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;,
+  &quot;updated_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<p><strong>Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Page not found&quot;
+}
+</code></pre>
+<p>Same visibility rules as List Pages, applied per-page. A page that exists but
+isn't visible to the requester returns the identical 404 as a page that
+genuinely doesn't exist, a <code>STAFF</code>-only or draft page's existence is never
+confirmable to a request that can't see it.</p>
+<hr />
+<h3 id="create-page-admin-only">Create Page (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/v1/pages/</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Privacy Policy&quot;,
+  &quot;body&quot;: &quot;# Privacy Policy\n\nWe respect your data...&quot;,
+  &quot;visibility&quot;: &quot;PUBLIC&quot;,
+  &quot;is_published&quot;: true
+}
+</code></pre>
+<p><strong>Response (201 Created):</strong> Same shape as Get Page</p>
+<p><code>slug</code> is auto-generated from <code>title</code> and is not accepted in the request
+body, it cannot be set directly on creation.</p>
+<hr />
+<h3 id="update-page-admin-only">Update Page (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>PATCH /api/v1/pages/{page_id}/</code></p>
+<p><strong>Request:</strong> Same fields as Create, all optional (partial update)</p>
+<p><strong>Response (200 OK):</strong> Same shape as Get Page</p>
+<p><strong>Error Response (400 Bad Request):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Invalid ID format&quot;
+}
+</code></pre>
+<p>Note: <code>{page_id}</code> here is the page's UUID, not its slug, distinct from Get
+Page above which looks up by slug. Editing <code>title</code> does <strong>not</strong> regenerate
+<code>slug</code>, it's generated once at creation and never touched again, so a
+linked or bookmarked page URL never breaks even if the title changes later.
+If a genuine slug change is ever needed, that's a direct database edit, not
+something this endpoint supports.</p>
+<hr />
+<h3 id="delete-page-admin-only">Delete Page (Admin Only)</h3>
+<p><strong>Endpoint:</strong> <code>DELETE /api/v1/pages/{page_id}/</code></p>
+<p><strong>Response (204 No Content):</strong> Empty</p>
+<p><strong>Response (404 Not Found):</strong></p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Page not found&quot;
+}
+</code></pre>
+<p>This is a genuine hard delete, unlike School/Department's soft-delete
+pattern, nothing else references a StaticPage by foreign key, and
+draft/publish already covers hiding a page without losing it.</p>
 <hr />
 <h2 id="api-clients-future-public-api-phase">API Clients (Future, Public API Phase)</h2>
 <h3 id="register-api-client-admin-only">Register API Client (Admin Only)</h3>

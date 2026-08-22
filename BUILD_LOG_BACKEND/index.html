@@ -411,7 +411,62 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="User Search and Self Profile Pass (Post-MVP)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-pages-feature-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Static Pages Feature (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seed_demo_data-upgrade-post-mvp-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        seed_demo_data Upgrade (Post-MVP, Tooling)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notification-fan-out-widening-admin-activation-request-alert-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification Fan-Out Widening + Admin Activation-Request Alert (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-report-admin-notification-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Report Admin Notification (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-count-dedup-fix-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View Count Dedup Fix (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="View Count Dedup Fix (Post-MVP)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -668,33 +723,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../contributor-backlog/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Contributors Backlog
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../MAINTAINER_PLAYBOOK/" class="md-nav__link">
         
   
@@ -816,7 +844,62 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="User Search and Self Profile Pass (Post-MVP)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-pages-feature-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Static Pages Feature (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seed_demo_data-upgrade-post-mvp-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        seed_demo_data Upgrade (Post-MVP, Tooling)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notification-fan-out-widening-admin-activation-request-alert-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification Fan-Out Widening + Admin Activation-Request Alert (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-report-admin-notification-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Report Admin Notification (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-count-dedup-fix-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View Count Dedup Fix (Post-MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="View Count Dedup Fix (Post-MVP)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -915,10 +998,12 @@
 
 <h1 id="build-log">BUILD LOG</h1>
 <h2 id="current-phase">Current Phase</h2>
-<p>Phase 15, Admin Polish (complete, confirmed). This closes the originally planned MVP
-phase roadmap. CORS setup and production-readiness prep are next, tracked as
-unnumbered follow-up work rather than a new phase, since they are infrastructure
-concerns rather than a feature slice.</p>
+<p>Not a numbered phase. Two related GitHub issues: MODERATOR_ASSIGNED existed as
+a Notification type and the assignment endpoints existed since Phase 14, but
+nothing ever triggered it. Broader review requested alongside it turned up a
+second real gap: project-plan.md's Moderator Responsibilities section
+describes moderators receiving notifications about new questions in their
+hub, this was documented from the start and never built.</p>
 <h2 id="completed-phases">Completed Phases</h2>
 <ul>
 <li>Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
@@ -974,6 +1059,25 @@ blocked once a question's status was SOLVED, conflating two separate meanings,
 <h2 id="user-search-and-self-profile-pass-post-mvp">User Search and Self Profile Pass (Post-MVP)</h2>
 <p>Not a numbered phase. No migrations, both features are built entirely from
 existing tables and views.</p>
+<h2 id="static-pages-feature-post-mvp">Static Pages Feature (Post-MVP)</h2>
+<p>Not a numbered phase. New apps.pages app: admin-managed standalone content
+pages (Privacy Policy, Terms of Service, staff onboarding guides) without
+needing a code deploy to publish them.</p>
+<h2 id="seed_demo_data-upgrade-post-mvp-tooling">seed_demo_data Upgrade (Post-MVP, Tooling)</h2>
+<p>Not a numbered phase, dev tooling only, no contract impact. The command had
+fallen out of sync with the actual models, it predated is_locked,
+QuestionFollow, and StaticPage entirely, none of them were being seeded.</p>
+<h2 id="notification-fan-out-widening-admin-activation-request-alert-post-mvp">Notification Fan-Out Widening + Admin Activation-Request Alert (Post-MVP)</h2>
+<p>Not a numbered phase. Two follow-ups after your feedback on the previous
+notification pass.</p>
+<h2 id="new-report-admin-notification-post-mvp">New Report Admin Notification (Post-MVP)</h2>
+<p>Not a numbered phase. Closes the second of the two admin-notification gaps
+flagged during the moderator-assignment notification review: admins had no
+way to know a new Report existed except by polling GET /reports/?status=PENDING.</p>
+<h2 id="view-count-dedup-fix-post-mvp">View Count Dedup Fix (Post-MVP)</h2>
+<p>Not a numbered phase. Bug: view_count was documented and implemented as
+deduplicated per authenticated user for a rolling 24-hour window, but was
+observed incrementing on every refresh in practice.</p>
 <h3 id="added">Added</h3>
 <ul>
 <li>django-cors-headers configured, CORS_ALLOWED_ORIGINS env-driven, defaults to
@@ -1054,6 +1158,73 @@ existing tables and views.</p>
   validated the same way as path-based IDs, 400 on malformed input, covers
   "my questions" without a dedicated endpoint since questions are already
   public</li>
+<li>DELETE /tags/{tag_id}/ (admin only), blocked by default if the tag has
+  questions attached, ?force=true overrides. Deleting cascades to QuestionTag
+  rows via the existing FK constraint, question content itself is untouched</li>
+<li>POST /tags/{tag_id}/merge/ (admin only), reassigns every QuestionTag from
+  the source tag onto a target, then deletes the source. Target given as
+  target_tag_id (merge into an existing tag) or target_name (merges by name
+  if that name already exists, otherwise performs a pure rename)</li>
+<li>Both endpoints invalidate the tag-list cache prefix on success</li>
+<li>Assigning a moderator or a representative now sends the target user a
+  MODERATOR_ASSIGNED notification, in-app only, unless they assigned
+  themselves (self-assignment is an existing allowed flow, doesn't need a
+  notification telling someone what they just did)</li>
+<li>New NEW_QUESTION notification type. Creating a question notifies every
+  active moderator of that hub, in-app only, excluding the question's own
+  author even if they happen to also moderate that hub</li>
+<li>StaticPage model: title, auto-generated-once slug (School's pattern, not
+  Question's), markdown body (rendered client-side, no server-side markdown
+  processing), visibility (PUBLIC/STAFF), is_published draft flag,
+  created_by (SET_NULL, deleting a user never takes a page down with it)</li>
+<li>user_is_staff() added to apps.hubs.permissions, checks is_admin or any
+  active moderator/representative assignment globally, not scoped to a
+  specific hub like the existing helpers, since page visibility isn't
+  hub-specific</li>
+<li>GET /pages/ (list, not paginated) and POST /pages/ (admin only) on one
+  view. GET /pages/{value}/ and PATCH/DELETE /pages/{value}/ share a single
+  URL pattern, method-dispatched: GET treats the value as a slug and is
+  public, PATCH/DELETE treat it as a UUID id and are admin-only</li>
+<li>404, not 403, for a page that exists but isn't visible to the requester,
+  same code path as "doesn't exist at all" (_visible_queryset().filter().
+  first() returning None either way), so a STAFF-only or draft page's
+  existence is never confirmable to a request that can't see it</li>
+<li>Delete is a genuine hard delete, confirmed via testing that a
+  recreated page with the same title reuses the original slug cleanly
+  rather than getting suffixed, proving the original row is truly gone</li>
+<li>--clear flag, wipes seeded content (schools cascade nearly everything;
+  Tag and StaticPage cleared separately since neither cascades from School)
+  before reseeding fresh</li>
+<li>Static pages seeded: 3 published PUBLIC, 1 published STAFF, 1 unpublished
+  draft, covering every visibility/published combination</li>
+<li>First hub gets a representative and moderator assigned automatically, so
+  the admin dashboard isn't empty by default</li>
+<li>QuestionFollow and is_locked now seeded with reasonable variety</li>
+<li>Reports now seeded across all three statuses (PENDING/RESOLVED/REJECTED),
+  not just one</li>
+<li>NEW_QUESTION now also notifies active School Representatives of the hub,
+  not just Moderators, deduplicated via set union so a user holding both
+  roles for the same hub gets one notification, not two. Message wording
+  changed from moderator-specific phrasing to a role-neutral "New question
+  posted in {school}"</li>
+<li>New NEW_ACTIVATION_REQUEST notification type. Submitting a
+  HubActivationRequest now notifies every active admin, in-app only,
+  excluding the requester if they happen to be an admin</li>
+<li>New NEW_REPORT notification type. Submitting a report now notifies every
+  active admin, in-app only, excluding the reporter if they happen to be an
+  admin (admins can and do report content themselves, this isn't a
+  theoretical edge case)</li>
+<li>Notification message includes the report's type (spam/abuse/etc.,
+  lowercased) for quick triage from the notification list, resolving the
+  open question from this feature's original issue template in favor of
+  including it</li>
+<li>QuestionDetailView.get()'s view-count dedup now routes through
+  apps.core.cache's get_cached/set_cached instead of importing Django's
+  cache module directly, so a cache read/write failure here logs a warning
+  like every other cache use in the codebase, instead of failing silently</li>
+<li>Cache key now uses the academia:v1: prefix, matching every other cache
+  key generated by make_cache_key/make_query_cache_key, previously this
+  one key shape was the sole exception</li>
 </ul>
 <h2 id="key-decisions-made">Key Decisions Made</h2>
 <ul>
@@ -1136,6 +1307,85 @@ existing tables and views.</p>
 <li>No public user profile endpoint exists in the API at all as of this pass,
   every user-activity endpoint requires authentication and is scoped to the
   requester</li>
+<li>No separate rename endpoint. Merge-into-a-name-that-doesn't-exist-yet
+  covers rename exactly, one endpoint, two ways to call it, matches the
+  GitHub issue's own "worth deciding" question with the simpler answer</li>
+<li>Merge deduplicates rather than erroring: if a question already carries
+  both the source and target tag, the source's QuestionTag row for that
+  question is dropped instead of attempted-and-rejected by the
+  (question, tag) unique constraint. questions_reassigned only counts
+  genuine reassignments, not these drops</li>
+<li>Reused validate_uuid (and its documented "Invalid ID format" 400 shape)
+  for target_tag_id in the merge request body, not just path parameters,
+  since it's the same malformed-ID problem in a body field instead of a URL
+  segment</li>
+<li>Tag management is admin-only, not exposed on /moderation, tags are not
+  scoped to a single hub/school the way departments are, a tag can span
+  every school on the platform at once, so this belongs on /admin per the
+  GitHub issue's own reasoning</li>
+<li>Representative assignment reuses MODERATOR_ASSIGNED rather than getting
+  its own type, message text distinguishes the two roles. Matches the
+  precedent set by the question-follow system (reusing NEW_ANSWER for
+  followers instead of adding a type), keeps the frontend's notification
+  icon map from needing another special case for a distinction that's
+  really just "assigned to a hub role"</li>
+<li>NEW_QUESTION notifies moderators only, not representatives, grounded
+  directly in project-plan.md's existing (never-implemented) description of
+  moderator responsibilities. Representatives are described there as
+  coordinators, not as the audience for new-content alerts</li>
+<li>Notified via a per-moderator notify() loop, same fan-out shape as the
+  follow system's per-follower notifications, no email involved so this is
+  pure DB writes, fine at MVP scale, same Celery-backlog note applies if
+  moderator counts per hub ever grow large</li>
+<li>created_by uses SET_NULL, not CASCADE, per your explicit call: an admin's
+  account being deactivated or removed shouldn't take institutional content
+  like a Terms of Service page down with it</li>
+<li>Caching deliberately deferred, matching the issue's own "nice-to-have, not
+  blocking," to keep this pass reviewable; same short-TTL pattern already
+  used for Schools/Tags is the natural follow-up once confirmed working</li>
+<li>GET-by-slug and PATCH/DELETE-by-id share one URL pattern rather than being
+  split into separate routes, since the documented contract specifies the
+  same path shape for both, just different HTTP methods and different
+  identifier semantics per method</li>
+<li>--clear never touches the User table, real superuser and Google-OAuth
+  test accounts, plus any manual is_admin promotion, are preserved across
+  resets. Recreating those is real friction (re-auth, re-run
+  createsuperuser) this flag shouldn't force</li>
+<li>Removed the old hard block on re-running without --clear (previously:
+  warn and exit if any School exists). Since schools/departments/tags are
+  already get_or_create-idempotent, running again now just adds more
+  questions/answers/comments on top, matching the actual intended use:
+  incrementally growing a varied local dataset, not a strict one-shot tool</li>
+<li>Reps included in NEW_QUESTION specifically because a freshly activated
+  hub can have zero moderators until a rep assigns some, without reps
+  included, a question could be posted into total silence, nobody notified
+  at all. This is a real gap being closed, not just a nice-to-have</li>
+<li>Admin notifications (activation requests, and reports once implemented)
+  are in-app only, reasoning distinct from the general "email pulls
+  infrequent users back" policy: admins are expected to already be
+  monitoring their dashboard as part of the role, so this doesn't need to
+  pull anyone back to the platform the way a student-facing notification
+  does</li>
+<li>Same in-app-only channel policy as NEW_ACTIVATION_REQUEST: admins are
+  expected to already be monitoring their dashboard as part of the role,
+  this doesn't need to pull anyone back to the platform</li>
+<li>Notification fan-out happens after the Report row is successfully
+  created and the duplicate-report check has passed, so a blocked/invalid
+  report submission never generates a stray notification</li>
+<li>Root cause was very likely a Redis connectivity issue combined with
+  IGNORE_EXCEPTIONS=True: a cache.get() against an unreachable Redis
+  instance returns None rather than raising, which is indistinguishable
+  from "genuinely not cached yet," so the dedup check always took the
+  increment branch. This is the correct fail-open behavior for
+  throttling and read-heavy view caching, but for THIS specific use
+  (correctness of a stored count, not just performance), a silent failure
+  actively corrupts data rather than just degrading gracefully. The fix
+  doesn't change the fail-open behavior itself, that's still the right
+  call platform-wide, it makes the failure visible via logging instead</li>
+<li>Did not add alerting/monitoring on this specific log line, that's
+  general infrastructure work (Sentry or similar), already noted in the
+  production-readiness durability list from an earlier pass, not scoped
+  into this fix</li>
 </ul>
 <h2 id="conventions-established">Conventions Established</h2>
 <ul>
@@ -1178,12 +1428,18 @@ verification (fetching the already-seeded school via search instead of recreatin
 it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
 Question slugs, and the 400 Invalid ID format response all work as designed.</p>
 <h3 id="known-deviations-from-docs">Known Deviations From Docs</h3>
-<p>(none, database-schema.md, api-contract.md, and project-overview.md were updated
-in this pass to reflect the slug fields, the two new by-slug endpoints, and the
-ID format validation behavior)</p>
+<ul>
+<li>api-contract.md's ID Format Validation section is framed around path
+  parameters; this pass reuses the same validator and error shape for the
+  target_tag_id body field on Merge Tag, worth a small wording tweak at the
+  next sync to acknowledge body fields can hit this too, not just URLs</li>
+</ul>
 <h3 id="next-immediate-step">Next Immediate Step</h3>
-<p>Frontend build per the handoff brief prepared alongside
-this update.</p>
+<p>NEW_REPORT admin notification (same shape of fix, blocked on getting current
+apps/reports/views.py and apps/reports/models.py, since this project has
+shown real drift from earlier chat sessions and I'm not writing against
+stale memory). This doubles as the first app in the planned full
+system audit.</p>
 
 
 

@@ -633,6 +633,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#staticpage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StaticPage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#apiclient-future-public-api-phase" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -883,33 +894,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../contributor-backlog/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Contributors Backlog
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../MAINTAINER_PLAYBOOK/" class="md-nav__link">
         
   
@@ -1138,6 +1122,17 @@
     <span class="md-ellipsis">
       
         SchoolRepresentativeAssignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#staticpage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StaticPage
       
     </span>
   </a>
@@ -2051,7 +2046,7 @@ state (is_following), consistent with Knowledge Over Social Activity.</p>
 <td>type</td>
 <td>Enum</td>
 <td>Required</td>
-<td>NEW_ANSWER/NEW_COMMENT/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED</td>
+<td>NEW_ANSWER/NEW_COMMENT/NEW_QUESTION/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED/NEW_ACTIVATION_REQUEST/NEW_REPORT</td>
 </tr>
 <tr>
 <td>message</td>
@@ -2269,6 +2264,81 @@ state (is_following), consistent with Knowledge Over Social Activity.</p>
 </tbody>
 </table>
 <p>Unique constraint: (user, hub) to prevent duplicate assignments.</p>
+<h3 id="staticpage">StaticPage</h3>
+<p>Represents an admin-managed standalone content page (Privacy Policy, Terms of
+Service, staff onboarding guides, etc).</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Required</td>
+<td>Page title</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>String</td>
+<td>Unique, Auto-generated</td>
+<td>URL-friendly identifier, generated once from title at creation, never regenerated on edit, same pattern as School</td>
+</tr>
+<tr>
+<td>body</td>
+<td>Text</td>
+<td>Required</td>
+<td>Markdown source, rendered client-side</td>
+</tr>
+<tr>
+<td>visibility</td>
+<td>Enum</td>
+<td>Default: PUBLIC</td>
+<td>PUBLIC/STAFF</td>
+</tr>
+<tr>
+<td>is_published</td>
+<td>Boolean</td>
+<td>Default: False</td>
+<td>Draft status, unpublished pages are only visible to admins</td>
+</tr>
+<tr>
+<td>created_by</td>
+<td>ForeignKey(User)</td>
+<td>Nullable, SET_NULL</td>
+<td>Author. Nullable so deleting a user account never takes a page down with it</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
+<p>"Staff" for visibility purposes means <code>is_admin</code>, or an active
+<code>ModeratorAssignment</code>/<code>SchoolRepresentativeAssignment</code> for any hub (checked
+globally, not scoped to a specific hub, since page visibility isn't
+hub-specific). Deleting a <code>StaticPage</code> is a genuine hard delete, unlike
+<code>School</code>/<code>Department</code>, since nothing else has a foreign key into it and
+draft/publish already covers the "hide without losing" case.</p>
 <h3 id="apiclient-future-public-api-phase">APIClient (Future, Public API Phase)</h3>
 <p>Represents a registered external consumer of the public API.</p>
 <table>
@@ -2408,6 +2478,7 @@ join this set once built, with no schema change required.</p>
 <li>Deleting a <code>User</code> → Delete associated <code>Question</code>, <code>Answer</code>, <code>Comment</code>, <code>Notification</code>, <code>Report</code></li>
 <li>Deleting a <code>Question</code> → Delete associated <code>Answer</code>, <code>QuestionTag</code>, <code>QuestionFollow</code></li>
 <li>Deleting an <code>Answer</code> → Delete associated <code>Comment</code>, <code>AnswerVote</code></li>
+<li>Deleting a <code>Tag</code> → Delete associated <code>QuestionTag</code> (only ever happens via explicit admin action, see api-contract.md's Delete Tag / Merge Tag)</li>
 </ul>
 <p>In practice, <code>School</code> is not hard-deleted through the API, see api-contract.md's
 soft-delete note. Hard delete remains available at the database/admin level only.</p>
