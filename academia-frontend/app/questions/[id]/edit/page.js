@@ -48,6 +48,11 @@ export default function EditQuestionPage({ params }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!body.trim()) {
+      setSaveStatus("error");
+      setErrorMsg("Body is required.");
+      return;
+    }
     setSaveStatus("loading");
     setErrorMsg("");
     try {
@@ -106,7 +111,6 @@ export default function EditQuestionPage({ params }) {
           <MarkdownEditor 
             value={body} 
             onChange={setBody} 
-            required
             placeholder="Describe your question in detail..." 
             rows={6} 
           />
@@ -145,7 +149,13 @@ export default function EditQuestionPage({ params }) {
           >
             {saveStatus === "loading" ? "Saving..." : "Save changes"}
           </button>
-          <button type="button" className="px-4 py-2 rounded bg-[#db040f] text-white text-sm cursor-pointer" onClick={() => router.back()}>Cancel Changes</button>
+          <button
+            type="button"
+            className="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-sm cursor-pointer"
+            onClick={() => router.push(questionUrl(question))}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>

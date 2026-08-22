@@ -8,6 +8,7 @@ from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, User
 from rest_framework.views import APIView
 
 from apps.core.cache import get_cached, make_query_cache_key, set_cached
+from apps.core.utils import validate_uuid
 from apps.questions.models import Question
 
 from .pagination import SearchPagination
@@ -30,14 +31,17 @@ class SearchQuestionsView(APIView):
 
         hub = request.query_params.get("hub")
         if hub:
+            hub = validate_uuid(hub)
             queryset = queryset.filter(hub_id=hub)
 
         school = request.query_params.get("school")
         if school:
+            school = validate_uuid(school)
             queryset = queryset.filter(hub__school_id=school)
 
         department = request.query_params.get("department")
         if department:
+            department = validate_uuid(department)
             queryset = queryset.filter(department_id=department)
 
         tag = request.query_params.get("tag")

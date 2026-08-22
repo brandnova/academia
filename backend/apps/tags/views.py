@@ -64,10 +64,12 @@ class TagQuestionsView(ListAPIView):
 
         hub = self.request.query_params.get("hub")
         if hub:
+            hub = validate_uuid(hub)
             queryset = queryset.filter(hub_id=hub)
 
         department = self.request.query_params.get("department")
         if department:
+            department = validate_uuid(department)
             queryset = queryset.filter(department_id=department)
 
         status_param = self.request.query_params.get("status")

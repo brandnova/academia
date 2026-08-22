@@ -61,10 +61,10 @@ export default function HubTeamManager({
         <HubDepartmentsTab schoolId={hub.school.id} />
       )}
       {tab === "moderators" && canManageModerators && (
-        <TeamMemberList hubId={hub.id} role="moderators" canManage />
+        <TeamMemberList hubId={hub.id} role="moderators" canManage isAdmin={canManageRepresentatives} />
       )}
       {tab === "representatives" && canManageRepresentatives && (
-        <TeamMemberList hubId={hub.id} role="representatives" canManage />
+        <TeamMemberList hubId={hub.id} role="representatives" canManage isAdmin={canManageRepresentatives} />
       )}
       {tab === "unanswered" && <HubUnansweredTab hubId={hub.id} isModerator={isModerator} />}
     </div>

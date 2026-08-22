@@ -45,7 +45,7 @@ export default async function QuestionDetailPage({ params }) {
         </Link>
       </p>
 
-      <div className="md:w-max md:gap-3 flex items-start mb-2">
+      <div className="flex items-start gap-3 mb-2">
         <h1 className="text-xl md:text-3xl font-semibold flex-1">{question.title}</h1>
         <div className="pt-1">
           <StatusIcon status={question.status} showLabel />
@@ -58,9 +58,17 @@ export default async function QuestionDetailPage({ params }) {
       </div>
 
       <div className="flex flex-wrap gap-3 text-xs text-gray-400 mb-4">
-        <span className="flex flex-column justify-between items-center gap-1"><User size={16}/> Asked by {question.author.full_name}</span>
-        {question.department && <span className="flex flex-column justify-between items-center gap-1"><Building2 size={16}/> {question.department.name}</span>}
-        <span className="flex flex-column justify-between items-center gap-1"> <Eye size={16}/> {question.view_count} views</span>
+        <span className="flex items-center gap-1">
+          <User size={14} /> Asked by {question.author.full_name}
+        </span>
+        {question.department && (
+          <span className="flex items-center gap-1">
+            <Building2 size={14} /> {question.department.name}
+          </span>
+        )}
+        <span className="flex items-center gap-1">
+          <Eye size={14} /> {question.view_count} views
+        </span>
       </div>
 
       {question.tags?.length > 0 && (
@@ -77,7 +85,9 @@ export default async function QuestionDetailPage({ params }) {
         </div>
       )}
 
-      <div className="mb-4"><MarkdownRenderer content={question.body} className="text-[18px] md:text-2xl!" /></div>
+      <div className="mb-4">
+        <MarkdownRenderer content={question.body} className="text-[18px] md:text-2xl!" />
+      </div>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
         <QuestionActions question={question} />

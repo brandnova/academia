@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/lib/auth-context";
 import HubTeamManager from "@/components/moderation/HubTeamManager";
+import StaffGuides from "@/components/moderation/StaffGuides";
 
 export default function ModerationPage() {
   const { user, loading } = useAuth();
@@ -28,7 +29,13 @@ export default function ModerationPage() {
   });
   const ownHubs = Array.from(ownHubMap.values());
 
-  if (ownHubs.length === 0) {
+  // is_admin alone counts as staff, admin authority is blanket per the
+  // permission model, not backfilled into moderator_for/representative_for,
+  // so gating this page purely on ownHubs would hide it from a real admin
+  // who happens to have no explicit assignment anywhere.
+  const isStaff = user.is_admin || ownHubs.length > 0;
+
+  if (!isStaff) {
     return (
       <p className="text-gray-500 dark:text-gray-400">
         You don't currently hold a moderator or representative role for any hub.
@@ -42,16 +49,26 @@ export default function ModerationPage() {
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
         Tools for the hubs you help manage.
       </p>
-      {ownHubs.map((hub) => (
-        <HubTeamManager
-          key={hub.id}
-          hub={hub}
-          canManageModerators={hub.isRep}
-          canManageRepresentatives={false}
-          canManageDepartments={hub.isRep}
-          isModerator={hub.isMod}
-        />
-      ))}
+
+      <StaffGuides />
+
+      {ownHubs.length > 0 ? (
+        ownHubs.map((hub) => (
+          <HubTeamManager
+            key={hub.id}
+            hub={hub}
+            canManageModerators={hub.isRep}
+            canManageRepresentatives={false}
+            canManageDepartments={hub.isRep}
+            isModerator={hub.isMod}
+          />
+        ))
+      ) : (
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          You're an admin without an explicit assignment for any specific hub.
+          Hub-level management tools live on /admin.
+        </p>
+      )}
     </div>
   );
 }

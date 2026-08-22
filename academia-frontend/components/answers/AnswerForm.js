@@ -29,6 +29,11 @@ export default function AnswerForm({ questionId, locked, onCreated }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!body.trim()) {
+      setStatus("error");
+      setErrorMsg("Answer body is required.");
+      return;
+    }
     setStatus("loading");
     setErrorMsg("");
     try {
@@ -47,12 +52,11 @@ export default function AnswerForm({ questionId, locked, onCreated }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <MarkdownEditor 
-        value={body} 
-        onChange={setBody} 
-        required 
-        placeholder="Write your answer..." 
-        rows={4} 
+      <MarkdownEditor
+        value={body}
+        onChange={setBody}
+        placeholder="Write your answer..."
+        rows={4}
       />
       {status === "error" && (
         <p className="text-red-600 dark:text-red-400 text-sm mb-2">{errorMsg}</p>

@@ -100,7 +100,7 @@ export default function TagsManager() {
                 <div className="flex items-center gap-3 text-gray-400">
                   <button
                     onClick={() => setMergingId(mergingId === tag.id ? null : tag.id)}
-                    className="hover:text-accent"
+                    className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-accent transition-colors"
                     aria-label={`Merge ${tag.name}`}
                   >
                     <GitMerge className="w-4 h-4" />
@@ -108,7 +108,7 @@ export default function TagsManager() {
                   <button
                     onClick={() => (deleteConfirmId === tag.id ? handleDelete(tag, true) : handleDelete(tag))}
                     disabled={deletingId === tag.id}
-                    className="hover:text-red-500 disabled:opacity-50"
+                    className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 disabled:opacity-50 transition-colors"
                     aria-label={`Delete ${tag.name}`}
                   >
                     <Trash2 className="w-4 h-4" />

@@ -158,7 +158,7 @@ export default function AnswerCard({
           onClick={() => handleVote("UP")}
           disabled={voteStatus === "loading"}
           aria-label="Upvote"
-          className="hover:text-accent disabled:opacity-50"
+          className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-accent transition-colors"
         >
           <ThumbsUp className="w-3.5 h-3.5" />
         </button>
@@ -167,7 +167,7 @@ export default function AnswerCard({
           onClick={() => handleVote("DOWN")}
           disabled={voteStatus === "loading"}
           aria-label="Downvote"
-          className="hover:text-red-500 disabled:opacity-50"
+          className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 transition-colors"
         >
           <ThumbsDown className="w-3.5 h-3.5" />
         </button>
@@ -228,7 +228,9 @@ export default function AnswerCard({
             contentId={answer.id}
             authorId={answer.author.id}
           />
-          <span className="flex flex-column justify-between items-center gap-1"><User size={16}/> by {answer.author.full_name}</span>
+          <span className="flex items-center gap-1">
+            <User size={14} /> by {answer.author.full_name}
+          </span>
         </div>
       </div>
 
