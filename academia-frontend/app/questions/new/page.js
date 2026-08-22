@@ -63,6 +63,11 @@ function AskQuestionForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!body.trim()) {
+      setStatus("error");
+      setErrorMsg("Body is required.");
+      return;
+    }
     setStatus("loading");
     setErrorMsg("");
     try {
@@ -132,12 +137,11 @@ function AskQuestionForm() {
         </div>
         <div>
           <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Body</label>
-          <MarkdownEditor 
-            value={body} 
-            onChange={setBody} 
-            required
-            placeholder="Describe your question in detail..." 
-            rows={6} 
+          <MarkdownEditor
+            value={body}
+            onChange={setBody}
+            placeholder="Describe your question in detail..."
+            rows={6}
           />
         </div>
         {hub.departments?.length > 0 && (

@@ -90,6 +90,16 @@ export default function ActivationRequestsQueue() {
     }
   }
 
+  function openReject(id) {
+    setRejectingId(id);
+    setRejectReason("");
+  }
+
+  function cancelReject() {
+    setRejectingId(null);
+    setRejectReason("");
+  }
+
   return (
     <div>
       <div className="flex gap-2 mb-4">
@@ -156,7 +166,7 @@ export default function ActivationRequestsQueue() {
                       >
                         Confirm reject
                       </button>
-                      <button onClick={() => setRejectingId(null)} className="text-xs text-gray-400">
+                      <button onClick={cancelReject} className="text-xs text-gray-400">
                         Cancel
                       </button>
                     </div>
@@ -170,7 +180,7 @@ export default function ActivationRequestsQueue() {
                         {actioningId === req.id ? "Approving..." : "Approve"}
                       </button>
                       <button
-                        onClick={() => setRejectingId(req.id)}
+                        onClick={() => openReject(req.id)}
                         className="text-xs px-3 py-1 rounded border border-[var(--color-border)]"
                       >
                         Reject

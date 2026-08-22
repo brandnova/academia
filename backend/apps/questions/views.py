@@ -1,4 +1,3 @@
-from django.core.cache import cache
 from django.db.models import F, Q
 from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied
@@ -7,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
 
+from apps.core.cache import get_cached, set_cached
 from apps.core.throttling import MethodScopedThrottle
 from apps.core.utils import validate_uuid
 
@@ -43,6 +43,7 @@ class QuestionListCreateView(generics.ListCreateAPIView):
 
         hub = self.request.query_params.get("hub")
         if hub:
+            hub = validate_uuid(hub)
             queryset = queryset.filter(hub_id=hub)
 
         author = self.request.query_params.get("author")
@@ -52,6 +53,7 @@ class QuestionListCreateView(generics.ListCreateAPIView):
 
         department = self.request.query_params.get("department")
         if department:
+            department = validate_uuid(department)
             queryset = queryset.filter(department_id=department)
 
         status_param = self.request.query_params.get("status")
@@ -123,11 +125,11 @@ class QuestionDetailView(APIView):
         question = self.get_question(question_id)
 
         if request.user and request.user.is_authenticated:
-            cache_key = f"question_view:{question.id}:user:{request.user.id}"
-            if cache.get(cache_key) is None:
+            cache_key = f"academia:v1:question-view:{question.id}:user:{request.user.id}"
+            if get_cached(cache_key) is None:
                 Question.objects.filter(id=question.id).update(view_count=F("view_count") + 1)
                 question.refresh_from_db(fields=["view_count"])
-                cache.set(cache_key, True, timeout=VIEW_DEDUP_TTL_SECONDS)
+                set_cached(cache_key, True, VIEW_DEDUP_TTL_SECONDS)
 
         return Response(QuestionDetailSerializer(question, context={"request": request}).data)
 
@@ -170,6 +172,7 @@ class UnansweredQuestionsView(generics.ListAPIView):
 
         hub = self.request.query_params.get("hub")
         if hub:
+            hub = validate_uuid(hub)
             queryset = queryset.filter(hub_id=hub)
 
         return queryset

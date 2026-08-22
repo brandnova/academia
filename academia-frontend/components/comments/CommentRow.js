@@ -73,8 +73,11 @@ export default function CommentRow({ comment, onUpdate, onDelete }) {
   return (
     <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
       <div className="min-w-0 flex-1 mb-4">
-        <p className="text-[14px] text-gray-400 mb-3 flex flex-colum gap-1 items-center"><User size={16}/>{comment.author.full_name}</p>
-        <p className="text-[14px] text-gray-700 dark:text-gray-300 break-words">{comment.body}</p>
+        <p className="text-[11px] text-gray-400 mb-0.5 flex items-center gap-1">
+          <User size={12} />
+          {comment.author.full_name}
+        </p>
+        <p className="text-xs text-gray-700 dark:text-gray-300 break-words">{comment.body}</p>
       </div>
 
       <div className="text-[11px] flex items-center gap-2 text-gray-400 shrink-0">

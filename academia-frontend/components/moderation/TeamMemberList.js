@@ -6,7 +6,12 @@ import { clientFetch } from "@/lib/clientApi";
 import Skeleton from "@/components/ui/Skeleton";
 import UserSearchPicker from "./UserSearchPicker";
 
-export default function TeamMemberList({ hubId, role, canManage }) {
+// Representative assignment is admin-only per api-contract.md
+// (POST /hubs/{hub_id}/representatives/), regardless of what a parent
+// component passes as canManage. This is a deliberate second check, not
+// trusting the caller alone, so a future change to a parent's prop wiring
+// can't silently reopen this by mistake.
+export default function TeamMemberList({ hubId, role, canManage, isAdmin = false }) {
   const [members, setMembers] = useState([]);
   const [status, setStatus] = useState("loading");
   const [errorMsg, setErrorMsg] = useState("");
@@ -14,6 +19,8 @@ export default function TeamMemberList({ hubId, role, canManage }) {
   const [removeError, setRemoveError] = useState("");
   const [addStatus, setAddStatus] = useState("idle");
   const [addError, setAddError] = useState("");
+
+  const canActuallyManage = canManage && (role !== "representatives" || isAdmin);
 
   const load = useCallback(async () => {
     setStatus("loading");
@@ -33,6 +40,7 @@ export default function TeamMemberList({ hubId, role, canManage }) {
   }, [load]);
 
   async function handleAdd(selectedUser) {
+    if (addStatus === "loading") return;
     setAddStatus("loading");
     setAddError("");
     try {
@@ -71,15 +79,15 @@ export default function TeamMemberList({ hubId, role, canManage }) {
       {members.length === 0 ? (
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">None assigned yet.</p>
       ) : (
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)] mb-3">
+        <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] mb-3">
           {members.map((m) => (
             <li key={m.id} className="flex items-center justify-between py-2 px-2 text-sm">
               <span>{m.user.full_name}</span>
-              {canManage && (
+              {canActuallyManage && (
                 <button
                   onClick={() => handleRemove(m.user.id)}
                   disabled={removingId === m.user.id}
-                  className="text-gray-400 hover:text-red-500 disabled:opacity-50"
+                  className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 disabled:opacity-50 transition-colors"
                   aria-label={`Remove ${m.user.full_name}`}
                 >
                   <Trash2 className="w-4 h-4" />
@@ -92,9 +100,13 @@ export default function TeamMemberList({ hubId, role, canManage }) {
 
       {removeError && <p className="text-red-600 dark:text-red-400 text-xs mb-2">{removeError}</p>}
 
-      {canManage && (
+      {canActuallyManage && (
         <>
-          <UserSearchPicker onSelect={handleAdd} excludeIds={members.map((m) => m.user.id)} />
+          <UserSearchPicker
+            onSelect={handleAdd}
+            excludeIds={members.map((m) => m.user.id)}
+            disabled={addStatus === "loading"}
+          />
           {addStatus === "loading" && <p className="text-xs text-gray-400 mt-1">Adding...</p>}
           {addStatus === "error" && (
             <p className="text-red-600 dark:text-red-400 text-xs mt-1">{addError}</p>

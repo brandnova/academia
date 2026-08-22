@@ -56,7 +56,7 @@ export default function ProfilePage() {
             className="w-16 h-16 rounded-full object-cover border border-[var(--color-border)] shrink-0"
           />
         ) : (
-          <div className="w-16 h-16 rounded bg-accent/10 text-accent flex items-center justify-center text-xl font-semibold shrink-0">
+          <div className="w-16 h-16 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xl font-semibold shrink-0">
             {user.full_name?.[0]?.toUpperCase()}
           </div>
         )}
@@ -84,7 +84,7 @@ export default function ProfilePage() {
               ) : (
                 <div className="flex items-center gap-2">
                   <h1 className="text-xl font-semibold">{user.full_name}</h1>
-                  <button onClick={startEditing} aria-label="Edit name" className="text-gray-400 hover:text-accent">
+                  <button onClick={startEditing} aria-label="Edit name" className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-accent transition-colors">
                     <Pencil className="w-4 h-4" />
                   </button>
                 </div>

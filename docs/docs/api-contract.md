@@ -1517,7 +1517,7 @@ Rate limited to 50 requests per hour per user (see Rate Limits below).
   "body": ["This field is required."]
 }
 
-// 404 Not Found - Answer doesn't exist
+// 400 Bad Request - Answer doesn't exist
 {
   "answer_id": ["Answer with this ID does not exist."]
 }
@@ -1831,8 +1831,8 @@ rank against, in that case results still return, ordered by the first three
 ranking priorities above.
 
 **Caching & Visibility Behavior:**
-- **Cache**: Public requests are cached using `tag-list:<query_params>` key for `CACHE_TTL_SHORT` (60 seconds).
-- **Invalidation**: Clears on tag delete or merge (see below), otherwise only when the cache TTL expires, since tags created implicitly during question creation/update don't trigger active invalidation.
+- **Cache**: Public requests are cached using `search-questions:<query_params>` key for `CACHE_TTL_SEARCH` (30 seconds).
+- **Invalidation**: TTL expiry only, no active invalidation trigger exists for search results, given the short TTL and the volume of writes (new answers, votes, status changes) that could affect ranking, active invalidation wasn't worth the complexity.
 
 ---
 
