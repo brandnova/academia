@@ -21,8 +21,8 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
       const payload = {
         name,
         short_name: shortName,
-        location: location || undefined,
-        website: website || undefined,
+        location: location.trim() || null,
+        website: website.trim() || null,
       };
       const saved = isEdit
         ? await clientFetch(`/schools/${school.id}/`, {

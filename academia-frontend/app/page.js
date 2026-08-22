@@ -22,9 +22,6 @@ export default async function HomePage() {
   return (
     <div>
       <section className="full-bleed -mt-6 relative overflow-hidden border-b border-gray-200/70 dark:border-gray-800/70 mb-10">
-        {/* Real photo goes here: drop it at /public/hero-cover.png and it
-            appears automatically, no code change needed. Until then, the
-            accent-tinted color beneath shows through as the placeholder. */}
         <div
           className="absolute inset-0 bg-accent/15 dark:bg-accent/10 bg-cover bg-center"
           style={{ backgroundImage: "url('/hero-cover.png')" }}

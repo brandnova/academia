@@ -6,13 +6,18 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 
 export default function GoogleLoginButton() {
+  const [scriptReady, setScriptReady] = useState(false);
   const [status, setStatus] = useState("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
   const { refreshUser } = useAuth();
 
   function handleClick() {
-    if (!window.google) return;
+    if (!scriptReady || !window.google) {
+      setStatus("error");
+      setErrorMsg("Still loading Google sign-in, try again in a moment.");
+      return;
+    }
     setStatus("loading");
     setErrorMsg("");
 
@@ -50,7 +55,15 @@ export default function GoogleLoginButton() {
 
   return (
     <div>
-      <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" />
+      <Script
+        src="https://accounts.google.com/gsi/client"
+        strategy="afterInteractive"
+        onLoad={() => setScriptReady(true)}
+        onError={() => {
+          setStatus("error");
+          setErrorMsg("Couldn't load Google sign-in. Check your connection and refresh.");
+        }}
+      />
       <button
         onClick={handleClick}
         disabled={status === "loading"}

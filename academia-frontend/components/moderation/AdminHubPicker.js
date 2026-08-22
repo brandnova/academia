@@ -19,10 +19,15 @@ export default function AdminHubPicker() {
     }
   }
 
+  function handleChooseDifferent() {
+    setHub(null);
+    setErrorMsg("");
+  }
+
   if (hub) {
     return (
       <div>
-        <button onClick={() => setHub(null)} className="text-xs text-accent hover:underline mb-3">
+        <button onClick={handleChooseDifferent} className="text-xs text-accent hover:underline mb-3">
           Choose a different school
         </button>
         <HubTeamManager
@@ -30,7 +35,11 @@ export default function AdminHubPicker() {
           canManageModerators
           canManageRepresentatives
           canManageDepartments
-          isModerator
+          // Admins implicitly hold every hub's moderator permission per
+          // api-contract.md's Frontend Permission Model, this isn't a real
+          // ModeratorAssignment lookup, it's the documented blanket grant,
+          // named explicitly so it's never mistaken for one.
+          isModerator="admin-implicit"
         />
       </div>
     );

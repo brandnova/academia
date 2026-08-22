@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { clientFetch } from "@/lib/clientApi";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 
-export default function UserSearchPicker({ onSelect, excludeIds = [] }) {
+export default function UserSearchPicker({ onSelect, excludeIds = [], disabled = false }) {
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebouncedValue(query, 500);
   const [results, setResults] = useState([]);
@@ -50,7 +50,8 @@ export default function UserSearchPicker({ onSelect, excludeIds = [] }) {
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => setOpen(true)}
         placeholder="Search by name or email..."
-        className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+        disabled={disabled}
+        className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm disabled:opacity-50"
       />
       {open && debouncedQuery && (
         <div className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg max-h-48 overflow-auto">

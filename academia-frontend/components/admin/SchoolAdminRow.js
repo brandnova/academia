@@ -44,7 +44,7 @@ export default function SchoolAdminRow({ school, onUpdated }) {
         {errorMsg && <p className="text-red-600 dark:text-red-400 text-xs mt-0.5">{errorMsg}</p>}
       </div>
       <div className="flex items-center gap-3 shrink-0 text-gray-400">
-        <button onClick={() => setEditing(true)} className="hover:text-accent" aria-label="Edit school">
+        <button onClick={() => setEditing(true)} className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-accent transition-colors" aria-label="Edit school">
           <Pencil className="w-4 h-4" />
         </button>
         <button

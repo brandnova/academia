@@ -272,6 +272,15 @@ class HubModeratorListCreateView(APIView):
             assignment = ModeratorAssignment.objects.create(hub=hub, user=target_user)
 
         _invalidate_hub_cache(hub)
+
+        if target_user.id != request.user.id:
+            notify(
+                user=target_user,
+                notification_type=Notification.Type.MODERATOR_ASSIGNED,
+                message=f"You've been assigned as a moderator for {hub.school.short_name}",
+                content_object=hub,
+            )
+
         return Response(ModeratorAssignmentSerializer(assignment).data, status=status.HTTP_201_CREATED)
 
 
@@ -346,6 +355,14 @@ class HubRepresentativeListCreateView(APIView):
             assignment = existing
         else:
             assignment = SchoolRepresentativeAssignment.objects.create(hub=hub, user=target_user)
+
+        if target_user.id != request.user.id:
+            notify(
+                user=target_user,
+                notification_type=Notification.Type.MODERATOR_ASSIGNED,
+                message=f"You've been assigned as a school representative for {hub.school.short_name}",
+                content_object=hub,
+            )
 
         return Response(RepresentativeAssignmentSerializer(assignment).data, status=status.HTTP_201_CREATED)
 

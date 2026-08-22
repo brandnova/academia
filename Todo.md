@@ -36,10 +36,11 @@ This will ensure that the docs updates come from the main branch and not the dev
 git checkout main
 git status
 mkdocs build
-mkdocs gh-deploy
+mkdocs gh-deploy --clean
 ```
 
-This will ensure that al docs updates are synced from the main branch and not the develop branch.
+This will ensure that all docs updates are synced from the main branch and not the develop branch.
 
 
 TODO=============
+- Email templates (Optimize and test)

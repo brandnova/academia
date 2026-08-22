@@ -74,7 +74,7 @@ export default function DepartmentRow({ department, onUpdated }) {
 
       {!editing && (
         <div className="flex items-center gap-3 shrink-0">
-          <button onClick={() => setEditing(true)} className="text-gray-400 hover:text-accent">
+          <button onClick={() => setEditing(true)} className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-accent transition-colors">
             <Pencil className="w-4 h-4" />
           </button>
           <button

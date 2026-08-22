@@ -108,6 +108,27 @@ npm run dev
 
 The frontend expects the backend running locally (or points at a deployed backend URL via env var). See `project-overview.md` for the sitemap, design system, and page states every screen needs to handle.
 
+## Documentation Tooling
+
+If your contribution includes changes to the project documentation under `docs/`, install the documentation tooling dependencies before working on those changes:
+
+```bash
+pip install -r requirements-docs.txt
+```
+
+This installs the MkDocs toolchain used to build and preview the documentation locally, including the Material theme and documentation plugins.
+
+Once installed, you can run the local documentation server from the project root:
+
+```bash
+mkdocs serve
+```
+
+MkDocs will start a local development server and watch the `docs/` directory for changes, allowing you to preview documentation updates before submitting your contribution.
+
+The documentation dependencies are kept separate from the application's main `requirements.txt` because they are only needed when working on or building the project documentation.
+
+
 ## License
 
 The Academia codebase is released under the [MIT License](LICENSE). The Academia and Brand Nova names and branding are excluded from this license, see [GOVERNANCE.md](GOVERNANCE.md).

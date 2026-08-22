@@ -3,12 +3,16 @@ import sanitizeHtml from "sanitize-html";
 
 marked.setOptions({ breaks: true, gfm: true });
 
-const ALLOWED_TAGS = ["p", "strong", "em", "del", "a", "ul", "ol", "li", "code", "pre", "blockquote", "br"];
+const BASE_TAGS = ["p", "strong", "em", "del", "a", "ul", "ol", "li", "code", "pre", "blockquote", "br"];
+const HEADING_TAGS = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
-export function renderMarkdown(text) {
+// allowHeadings defaults false: Q&A content stays exactly as restrictive as
+// before, static pages opt in explicitly. Same sanitizer, same base rules,
+// nothing loosened for the case that doesn't need it.
+export function renderMarkdown(text, { allowHeadings = false } = {}) {
   const rawHtml = marked.parse(text || "");
   return sanitizeHtml(rawHtml, {
-    allowedTags: ALLOWED_TAGS,
+    allowedTags: allowHeadings ? [...BASE_TAGS, ...HEADING_TAGS] : BASE_TAGS,
     allowedAttributes: { a: ["href", "target", "rel"] },
     allowedSchemes: ["http", "https", "mailto"],
     transformTags: {
