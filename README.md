@@ -89,9 +89,10 @@ cp .env.example .env   # fill in your local values
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py seed_demo_data   # optional, populates realistic demo content
-# add --clear to reset demo data and demo users, --user <email> to also seed
-# an existing real account with a hub role, content, and sample notifications,
-# --second-user <email> for a lighter second real participant
+# add --clear to reset, --admin-email <email> to promote a real account to admin
+# creates 3 fixed test users (admin/staff/regular) with predictable emails,
+# run: eval "$(python manage.py print_test_tokens)" to get instant JWTs for
+# all three without going through Google OAuth (local dev only, requires DEBUG=True)
 python manage.py runserver
 ```
 

@@ -198,6 +198,8 @@ Represents a user report on content.
 | status | Enum | Default: PENDING | PENDING/RESOLVED/REJECTED |
 | resolved_by | ForeignKey(User) | Nullable, SET_NULL | Admin who resolved |
 | resolved_at | DateTime | Nullable | Resolution timestamp |
+| is_escalated | Boolean | Default: False | Set when a moderator or representative flags an existing report for priority admin review |
+| escalated_by | ForeignKey(User) | Nullable, SET_NULL | Moderator/representative/admin who escalated |
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
 
@@ -322,6 +324,7 @@ join this set once built, with no schema change required.
 - `Notification`: (content_type_id, object_id) - For generic relation lookups
 - `Report`: (status, created_at DESC) - For reports dashboard
 - `Report`: (content_type_id, object_id) - For generic relation lookups
+- `Report`: (is_escalated, created_at DESC) - For escalated reports triage
 
 ### Unique Constraints
 - `School`: name, short_name, slug

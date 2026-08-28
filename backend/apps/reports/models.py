@@ -31,6 +31,10 @@ class Report(models.Model):
         User, null=True, blank=True, related_name="resolved_reports", on_delete=models.SET_NULL
     )
     resolved_at = models.DateTimeField(null=True, blank=True)
+    is_escalated = models.BooleanField(default=False)
+    escalated_by = models.ForeignKey(
+        User, null=True, blank=True, related_name="escalated_reports", on_delete=models.SET_NULL
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -40,6 +44,7 @@ class Report(models.Model):
         indexes = [
             models.Index(fields=["status", "-created_at"]),
             models.Index(fields=["content_type", "object_id"]),
+            models.Index(fields=["is_escalated", "-created_at"]),
         ]
         constraints = [
             models.UniqueConstraint(

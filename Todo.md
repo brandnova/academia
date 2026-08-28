@@ -44,3 +44,4 @@ This will ensure that all docs updates are synced from the main branch and not t
 
 TODO=============
 - Email templates (Optimize and test)
+- Verified badge on institution Hubs to signify active verification and endorsement by the school body itself

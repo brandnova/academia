@@ -28,6 +28,9 @@ class ReportCreateResponseSerializer(serializers.ModelSerializer):
 
 class ReportSerializer(ReportCreateResponseSerializer):
     reporter = ReporterSerializer(read_only=True)
+    escalated_by = ReporterSerializer(read_only=True)
 
     class Meta(ReportCreateResponseSerializer.Meta):
-        fields = ReportCreateResponseSerializer.Meta.fields + ["reporter"]
+        fields = ReportCreateResponseSerializer.Meta.fields + [
+            "reporter", "is_escalated", "escalated_by",
+        ]
