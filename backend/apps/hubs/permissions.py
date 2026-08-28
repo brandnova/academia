@@ -41,3 +41,18 @@ def user_is_staff(user):
     if ModeratorAssignment.objects.filter(user=user, is_active=True).exists():
         return True
     return SchoolRepresentativeAssignment.objects.filter(user=user, is_active=True).exists()
+
+
+def user_is_moderator_or_representative_for_hub(user, hub_id):
+    """Combined check: does this user hold ANY active staff role
+    (Moderator or Representative) for this specific hub, or are they admin.
+    New helper, not yet wired into QuestionLockView's inline duplicate of
+    this same logic, that's a separate tracked backlog item."""
+    if not (user and user.is_authenticated):
+        return False
+    if user.is_admin:
+        return True
+    from .models import ModeratorAssignment, SchoolRepresentativeAssignment
+    if ModeratorAssignment.objects.filter(hub_id=hub_id, user=user, is_active=True).exists():
+        return True
+    return SchoolRepresentativeAssignment.objects.filter(hub_id=hub_id, user=user, is_active=True).exists()

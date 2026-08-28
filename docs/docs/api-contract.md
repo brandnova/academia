@@ -1991,6 +1991,7 @@ rejected.
 
 **Query Parameters:**
 - `status` - PENDING/RESOLVED/REJECTED
+- `is_escalated` - true/false
 - `page` - Page number
 
 **Response (200 OK):**
@@ -2009,6 +2010,8 @@ rejected.
         "id": "uuid",
         "full_name": "John Doe"
       },
+      "is_escalated": false,
+      "escalated_by": null,
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -2069,6 +2072,69 @@ valid to acknowledge but doesn't warrant removal.
   "error": "This report has already been reviewed"
 }
 ```
+
+---
+
+### Escalate Report
+**Endpoint:** `POST /api/v1/reports/{report_id}/escalate/`
+
+Restricted to an active Moderator or Representative for the reported content's
+hub, or an admin. Marks an existing PENDING report as escalated, signaling
+that a staff member's judgment (not just a student complaint) flagged it for
+priority review. Requires an existing report, there is no way to escalate
+unreported content directly, file a report first via `POST /reports/` then
+escalate it.
+
+**Response (200 OK):**
+```json
+{
+  "id": "uuid",
+  "content_type": "question",
+  "content_id": "uuid",
+  "type": "SPAM",
+  "description": "This appears to be promotional content",
+  "status": "PENDING",
+  "reporter": {
+    "id": "uuid",
+    "full_name": "John Doe"
+  },
+  "is_escalated": true,
+  "escalated_by": {
+    "id": "uuid",
+    "full_name": "Jane Moderator"
+  },
+  "created_at": "2026-01-01T00:00:00Z"
+}
+```
+
+**Error Responses:**
+```json
+// 400 Bad Request - Already reviewed
+{
+  "error": "This report has already been reviewed"
+}
+
+// 400 Bad Request - Already escalated
+{
+  "error": "This report has already been escalated"
+}
+
+// 400 Bad Request - Reported content no longer exists
+{
+  "error": "The reported content no longer exists"
+}
+
+// 403 Forbidden - No moderator/representative role for this hub, and not admin
+{
+  "error": "You do not have permission to perform this action"
+}
+```
+
+Escalating sends every active admin a `NEW_REPORT` notification, in-app only,
+excluding the escalator if they happen to be an admin. This reuses the same
+notification type as report creation, with message text that specifically
+frames it as an escalation, matching the project's precedent of reusing
+notification types over adding new ones for closely related events.
 
 ---
 

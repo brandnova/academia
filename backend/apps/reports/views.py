@@ -14,6 +14,7 @@ from apps.comments.models import Comment
 from apps.core.permissions import IsPlatformAdmin
 from apps.core.throttling import MethodScopedThrottle
 from apps.core.utils import validate_uuid
+from apps.hubs.permissions import user_is_moderator_or_representative_for_hub
 from apps.notifications.models import Notification
 from apps.notifications.services import notify
 from apps.questions.models import Question
@@ -29,6 +30,19 @@ CONTENT_TYPE_MODEL_MAP = {
 }
 
 
+def _get_hub_for_content(content_type_str, content_object):
+    """Resolves the owning Hub for a reportable object, regardless of which
+    of the three reportable models it is. Question owns hub directly,
+    Answer and Comment resolve it by walking up to their parent Question."""
+    if content_type_str == "question":
+        return content_object.hub
+    if content_type_str == "answer":
+        return content_object.question.hub
+    if content_type_str == "comment":
+        return content_object.answer.question.hub
+    return None
+
+
 class ReportListCreateView(APIView):
     pagination_class = ReportPagination
     throttle_classes = [AnonRateThrottle, UserRateThrottle, MethodScopedThrottle]
@@ -41,10 +55,14 @@ class ReportListCreateView(APIView):
         return [IsAuthenticated(), IsPlatformAdmin()]
 
     def get(self, request):
-        queryset = Report.objects.select_related("reporter", "content_type")
+        queryset = Report.objects.select_related("reporter", "content_type", "escalated_by")
         status_param = request.query_params.get("status")
         if status_param:
             queryset = queryset.filter(status=status_param.upper())
+
+        is_escalated_param = request.query_params.get("is_escalated")
+        if is_escalated_param is not None:
+            queryset = queryset.filter(is_escalated=is_escalated_param.lower() == "true")
 
         paginator = self.pagination_class()
         page = paginator.paginate_queryset(queryset, request)
@@ -135,12 +153,6 @@ class ResolveReportView(APIView):
             content_object = report.content_object
             if content_object is not None:
                 content_object.delete()
-                # content_object.delete() sets that instance's pk to None, but
-                # `report` still holds the now-stale cached GenericForeignKey
-                # reference to it. Saving report as-is would trip Django's
-                # save-time check for unsaved related objects. Refreshing
-                # clears every cached relation, safe here since we haven't
-                # set any of the status/resolved_by/resolved_at fields yet.
                 report.refresh_from_db()
 
         report.status = Report.Status.RESOLVED
@@ -182,3 +194,59 @@ class RejectReportView(APIView):
             "status": "REJECTED",
             "resolved_at": report.resolved_at,
         })
+
+
+class EscalateReportView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, report_id):
+        parsed_id = validate_uuid(report_id)
+        try:
+            report = Report.objects.select_related("content_type").get(id=parsed_id)
+        except Report.DoesNotExist:
+            raise NotFound("Report not found")
+
+        if report.status != Report.Status.PENDING:
+            return Response(
+                {"error": "This report has already been reviewed"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if report.is_escalated:
+            return Response(
+                {"error": "This report has already been escalated"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        content_object = report.content_object
+        if content_object is None:
+            return Response(
+                {"error": "The reported content no longer exists"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        hub = _get_hub_for_content(report.content_type.model, content_object)
+
+        if not (
+            request.user.is_admin
+            or (hub is not None and user_is_moderator_or_representative_for_hub(request.user, hub.id))
+        ):
+            return Response(
+                {"error": "You do not have permission to perform this action"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        report.is_escalated = True
+        report.escalated_by = request.user
+        report.save(update_fields=["is_escalated", "escalated_by", "updated_at"])
+
+        admin_users = User.objects.filter(is_admin=True, is_active=True).exclude(id=request.user.id)
+        for admin in admin_users:
+            notify(
+                user=admin,
+                notification_type=Notification.Type.NEW_REPORT,
+                message=f"Escalated by a moderator: {report.type.lower()} report needs priority review",
+                content_object=report,
+            )
+
+        return Response(ReportSerializer(report).data, status=status.HTTP_200_OK)
