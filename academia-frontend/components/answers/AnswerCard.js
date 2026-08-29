@@ -1,17 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2, ThumbsUp, ThumbsDown, Award, User } from "lucide-react";
+import { CheckCircle2, ThumbsUp, ThumbsDown, Award, User, Pencil, Trash2, Flag, ShieldAlert } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
 import CommentThread from "@/components/comments/CommentThread";
 import ReportButton from "@/components/reports/ReportButton";
+import EscalateButton, { canEscalate } from "@/components/reports/EscalateButton";
+import ActionsMenu from "@/components/ui/ActionsMenu";
 import MarkdownEditor from "@/components/ui/MarkdownEditor";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer"
 
 export default function AnswerCard({
   answer,
   questionId,
+  hubId,
   canMarkBest,
   onMarkBest,
   onUpdated,
@@ -26,7 +29,7 @@ export default function AnswerCard({
   const [body, setBody] = useState(answer.body);
   const [saveStatus, setSaveStatus] = useState("idle");
   const [deleteStatus, setDeleteStatus] = useState("idle");
-  const [confirming, setConfirming] = useState(false);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const [voteStatus, setVoteStatus] = useState("idle");
@@ -34,6 +37,8 @@ export default function AnswerCard({
 
   const [markStatus, setMarkStatus] = useState("idle");
   const [markError, setMarkError] = useState("");
+
+  const [activeModal, setActiveModal] = useState(null); // "report" | "escalate" | null
 
   async function refreshAnswer() {
     const data = await clientFetch(`/questions/${questionId}/`);
@@ -112,6 +117,7 @@ export default function AnswerCard({
     } catch (err) {
       setDeleteStatus("error");
       setErrorMsg(err.message);
+      setConfirmingDelete(false);
     }
   }
 
@@ -175,6 +181,21 @@ export default function AnswerCard({
     );
   }
 
+  const menuItems = isAuthor
+    ? [
+        { label: "Edit", icon: Pencil, onClick: () => setEditing(true) },
+        { label: "Delete", icon: Trash2, danger: true, onClick: () => setConfirmingDelete(true) },
+      ]
+    : [
+        user && { label: "Report", icon: Flag, onClick: () => setActiveModal("report") },
+        canEscalate(user, hubId) && {
+          label: "Escalate to admin",
+          icon: ShieldAlert,
+          accent: true,
+          onClick: () => setActiveModal("escalate"),
+        },
+      ].filter(Boolean);
+
   return (
     <div
       id={`answer-${answer.id}`}
@@ -189,6 +210,13 @@ export default function AnswerCard({
           <CheckCircle2 className="w-4 h-4" /> Best answer
         </div>
       )}
+
+      <div className="flex items-start justify-between gap-2 mb-1.5">
+        <span className="flex items-center gap-1 text-xs text-gray-400">
+          <User size={14} /> by {answer.author.full_name}
+        </span>
+        {menuItems.length > 0 && <ActionsMenu items={menuItems} />}
+      </div>
 
       {editing ? (
         <div>
@@ -220,18 +248,24 @@ export default function AnswerCard({
         <MarkdownRenderer content={answer.body} className="text-[18px]!" />
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-2 mt-3 text-xs text-gray-400">
-        {renderVoteControl()}
-        <div className="flex items-center gap-3">
-          <ReportButton
-            contentType="answer"
-            contentId={answer.id}
-            authorId={answer.author.id}
-          />
-          <span className="flex items-center gap-1">
-            <User size={14} /> by {answer.author.full_name}
-          </span>
+      {confirmingDelete && (
+        <div className="flex items-center gap-2 text-xs mt-2">
+          <span className="text-gray-500">Delete this answer?</span>
+          <button
+            onClick={handleDelete}
+            disabled={deleteStatus === "loading"}
+            className="text-red-600 dark:text-red-400 disabled:opacity-50"
+          >
+            {deleteStatus === "loading" ? "Deleting..." : "Confirm"}
+          </button>
+          <button onClick={() => setConfirmingDelete(false)} className="text-gray-400">
+            Cancel
+          </button>
         </div>
+      )}
+
+      <div className="flex items-center gap-2 mt-3 text-xs text-gray-400">
+        {renderVoteControl()}
       </div>
 
       {voteError && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{voteError}</p>}
@@ -254,39 +288,23 @@ export default function AnswerCard({
 
       <CommentThread
         answerId={answer.id}
+        hubId={hubId}
         commentCount={answer.comment_count}
         onCountChange={handleCommentCountChange}
       />
 
-      {isAuthor && !editing && (
-        <div className="flex items-center gap-3 mt-3 text-xs">
-          <button onClick={() => setEditing(true)} className="text-accent hover:underline">
-            Edit
-          </button>
-          {confirming ? (
-            <span className="flex items-center gap-2">
-              <span className="text-gray-500">Delete?</span>
-              <button
-                onClick={handleDelete}
-                disabled={deleteStatus === "loading"}
-                className="text-red-600 dark:text-red-400 disabled:opacity-50"
-              >
-                {deleteStatus === "loading" ? "Deleting..." : "Confirm"}
-              </button>
-              <button onClick={() => setConfirming(false)} className="text-gray-400">
-                Cancel
-              </button>
-            </span>
-          ) : (
-            <button
-              onClick={() => setConfirming(true)}
-              className="text-red-600 dark:text-red-400 hover:underline"
-            >
-              Delete
-            </button>
-          )}
-        </div>
-      )}
+      <ReportButton
+        contentType="answer"
+        contentId={answer.id}
+        open={activeModal === "report"}
+        onClose={() => setActiveModal(null)}
+      />
+      <EscalateButton
+        contentType="answer"
+        contentId={answer.id}
+        open={activeModal === "escalate"}
+        onClose={() => setActiveModal(null)}
+      />
 
       {errorMsg && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{errorMsg}</p>}
     </div>

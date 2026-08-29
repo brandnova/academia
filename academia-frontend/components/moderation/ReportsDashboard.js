@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { ShieldAlert } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import Skeleton from "@/components/ui/Skeleton";
 import { timeAgo } from "@/lib/timeAgo";
@@ -16,6 +17,7 @@ const TYPE_LABELS = {
 
 export default function ReportsDashboard() {
   const [statusFilter, setStatusFilter] = useState("PENDING");
+  const [escalatedOnly, setEscalatedOnly] = useState(false);
   const [reports, setReports] = useState([]);
   const [count, setCount] = useState(0);
   const [nextPage, setNextPage] = useState(null);
@@ -28,10 +30,11 @@ export default function ReportsDashboard() {
     async (page) => {
       const params = new URLSearchParams();
       params.set("status", statusFilter);
+      if (escalatedOnly) params.set("is_escalated", "true");
       params.set("page", page);
       return clientFetch(`/reports/?${params.toString()}`);
     },
-    [statusFilter]
+    [statusFilter, escalatedOnly]
   );
 
   useEffect(() => {
@@ -99,20 +102,33 @@ export default function ReportsDashboard() {
 
   return (
     <div>
-      <div className="flex gap-2 mb-4">
-        {STATUS_TABS.map((s) => (
-          <button
-            key={s}
-            onClick={() => setStatusFilter(s)}
-            className={`text-xs px-3 py-1 rounded border ${
-              statusFilter === s
-                ? "border-accent text-accent"
-                : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
-            }`}
-          >
-            {s.charAt(0) + s.slice(1).toLowerCase()}
-          </button>
-        ))}
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div className="flex gap-2">
+          {STATUS_TABS.map((s) => (
+            <button
+              key={s}
+              onClick={() => setStatusFilter(s)}
+              className={`text-xs px-3 py-1 rounded border ${
+                statusFilter === s
+                  ? "border-accent text-accent"
+                  : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+              }`}
+            >
+              {s.charAt(0) + s.slice(1).toLowerCase()}
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={() => setEscalatedOnly((v) => !v)}
+          className={`flex items-center gap-1 text-xs px-3 py-1 rounded border ${
+            escalatedOnly
+              ? "border-accent bg-accent/10 text-accent"
+              : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+          }`}
+        >
+          <ShieldAlert className="w-3.5 h-3.5" />
+          Escalated only
+        </button>
       </div>
 
       {status === "loading" && (
@@ -131,7 +147,7 @@ export default function ReportsDashboard() {
 
       {status === "ready" && reports.length === 0 && (
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          No {statusFilter.toLowerCase()} reports.
+          No {escalatedOnly ? "escalated " : ""}{statusFilter.toLowerCase()} reports.
         </p>
       )}
 
@@ -142,7 +158,20 @@ export default function ReportsDashboard() {
           </p>
           <div className="space-y-2">
             {reports.map((report) => (
-              <div key={report.id} className="border border-[var(--color-border)] rounded-lg p-3 text-sm">
+              <div
+                key={report.id}
+                className={`border rounded-lg p-3 text-sm ${
+                  report.is_escalated
+                    ? "border-accent bg-accent/5"
+                    : "border-[var(--color-border)]"
+                }`}
+              >
+                {report.is_escalated && (
+                  <p className="flex items-center gap-1 text-xs text-accent font-medium mb-1.5">
+                    <ShieldAlert className="w-3.5 h-3.5" />
+                    Escalated{report.escalated_by ? ` by ${report.escalated_by.full_name}` : ""}
+                  </p>
+                )}
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
                   <span className="font-medium">{TYPE_LABELS[report.type] || report.type}</span>
                   <span className="text-xs text-gray-400">{timeAgo(report.created_at)}</span>

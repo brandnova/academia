@@ -136,6 +136,21 @@ structure with more personality.
   /hubs/[id] and /hubs/by-school/[schoolId] both reduced to thin redirects
   into the merged page, kept as real routes since existing bookmarks and
   email links point at them.
+- Actions menu / kebab pattern: question, answer, and comment action rows
+  (Edit, Delete, Report, Escalate) consolidated into a shared Dropdown +
+  ActionsMenu pair, replacing an inline row that had grown too long after
+  Report and Escalate landed. Visible-vs-collapsed split: Follow stays
+  inline on questions, vote control and Mark-best-answer stay inline on
+  answers, everything else (including Lock/Unlock, not yet migrated,
+  pending LockToggle.js review) collapses into the menu. Required
+  ReportButton/EscalateButton to become controlled components
+  (open/onClose props instead of owning their own trigger), so their
+  modal state survives the menu closing on item click. AnswerCard's
+  byline moved above the body, small and muted, matching CommentRow's
+  existing pattern, so the answer content reads as the visual priority.
+  ProfileMenu and NotificationBell later migrated onto the same Dropdown
+  primitive for consistency, picking up Escape-to-close as a side benefit
+  neither had before.
 
 ## Cross-Cutting Fixes (Post-MVP, Frontend)
 - Cookie-Forwarding Fix: apiFetch (every Server Component page) was calling

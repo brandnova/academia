@@ -141,7 +141,7 @@
 - [ ] Content deletion (moderators)
 - [ ] User management (moderators)
 - [ ] Flag capabilities (moderators)
-- [ ] Dedicated escalate-to-admin action, distinct from the general report
+- [x] Dedicated escalate-to-admin action, distinct from the general report
       pipeline (already has a written issue and a backend/frontend split,
       see the two escalation issue templates)
 

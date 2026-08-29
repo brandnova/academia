@@ -5,7 +5,7 @@ import { clientFetch } from "@/lib/clientApi";
 import { useAuth } from "@/lib/auth-context";
 import CommentRow from "./CommentRow";
 
-export default function CommentThread({ answerId, commentCount, onCountChange }) {
+export default function CommentThread({ answerId, hubId, commentCount, onCountChange }) {
   const { user } = useAuth();
   const [expanded, setExpanded] = useState(false);
   const [comments, setComments] = useState([]);
@@ -94,6 +94,7 @@ export default function CommentThread({ answerId, commentCount, onCountChange })
               <CommentRow
                 key={comment.id}
                 comment={comment}
+                hubId={hubId}
                 onUpdate={handleUpdate}
                 onDelete={handleDelete}
               />

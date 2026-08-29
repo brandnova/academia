@@ -55,6 +55,7 @@ export default function AnswersSection({ question }) {
               key={answer.id}
               answer={answer}
               questionId={question.id}
+              hubId={question.hub.id}
               canMarkBest={isQuestionOwner}
               onMarkBest={handleMarkBest}
               onUpdated={handleUpdated}
