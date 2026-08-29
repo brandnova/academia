@@ -45,3 +45,7 @@ This will ensure that all docs updates are synced from the main branch and not t
 TODO=============
 - Email templates (Optimize and test)
 - Verified badge on institution Hubs to signify active verification and endorsement by the school body itself
+- Notifications to admins on escalated issues
+- Actions dropdown (vertical elipses) for questions, answers, and comments. This will streamline the interfaces clustered appearance.
+- Probably do something about answer and comment editing.
+- Review whether there is the option to unmark best answer or to just select a new best answer

@@ -5,7 +5,6 @@ import { apiFetch } from "@/lib/api";
 import StatusIcon from "@/components/questions/StatusIcon";
 import QuestionActions from "@/components/questions/QuestionActions";
 import AnswersSection from "@/components/answers/AnswersSection";
-import ReportButton from "@/components/reports/ReportButton";
 import FollowButton from "@/components/questions/FollowButton";
 import LockToggle from "@/components/questions/LockToggle";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer"
@@ -90,10 +89,9 @@ export default async function QuestionDetailPage({ params }) {
       </div>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <QuestionActions question={question} />
-        <ReportButton contentType="question" contentId={question.id} authorId={question.author.id} />
         <FollowButton questionId={question.id} initialFollowing={question.is_following} />
         <LockToggle question={question} />
+        <QuestionActions question={question} />
       </div>
 
       <AnswersSection question={question} />

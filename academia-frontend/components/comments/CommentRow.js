@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Pencil, Trash2, Flag, ShieldAlert, User } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import ReportButton from "@/components/reports/ReportButton";
-import { User } from "lucide-react";
+import EscalateButton, { canEscalate } from "@/components/reports/EscalateButton";
+import ActionsMenu from "@/components/ui/ActionsMenu";
 
-export default function CommentRow({ comment, onUpdate, onDelete }) {
+export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
   const { user } = useAuth();
   const isAuthor = user && user.id === comment.author.id;
 
@@ -14,6 +16,7 @@ export default function CommentRow({ comment, onUpdate, onDelete }) {
   const [status, setStatus] = useState("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [confirming, setConfirming] = useState(false);
+  const [activeModal, setActiveModal] = useState(null); // "report" | "escalate" | null
 
   async function save() {
     setStatus("loading");
@@ -36,6 +39,7 @@ export default function CommentRow({ comment, onUpdate, onDelete }) {
     } catch (err) {
       setErrorMsg(err.message);
       setStatus("idle");
+      setConfirming(false);
     }
   }
 
@@ -70,6 +74,21 @@ export default function CommentRow({ comment, onUpdate, onDelete }) {
     );
   }
 
+  const menuItems = isAuthor
+    ? [
+        { label: "Edit", icon: Pencil, onClick: () => setEditing(true) },
+        { label: "Delete", icon: Trash2, danger: true, onClick: () => setConfirming(true) },
+      ]
+    : [
+        user && { label: "Report", icon: Flag, onClick: () => setActiveModal("report") },
+        canEscalate(user, hubId) && {
+          label: "Escalate to admin",
+          icon: ShieldAlert,
+          accent: true,
+          onClick: () => setActiveModal("escalate"),
+        },
+      ].filter(Boolean);
+
   return (
     <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
       <div className="min-w-0 flex-1 mb-4">
@@ -81,38 +100,36 @@ export default function CommentRow({ comment, onUpdate, onDelete }) {
       </div>
 
       <div className="text-[11px] flex items-center gap-2 text-gray-400 shrink-0">
-        {isAuthor ? (
-          confirming ? (
-            <>
-              <button
-                onClick={remove}
-                disabled={status === "loading"}
-                className="hover:text-red-500"
-              >
-                {status === "loading" ? "Deleting..." : "Confirm delete"}
-              </button>
-              <button onClick={() => setConfirming(false)}>Cancel</button>
-            </>
-          ) : (
-            <>
-              <button onClick={() => setEditing(true)} className="hover:text-accent">
-                Edit
-              </button>
-              <button onClick={() => setConfirming(true)} className="hover:text-red-500">
-                Delete
-              </button>
-            </>
-          )
+        {confirming ? (
+          <>
+            <button
+              onClick={remove}
+              disabled={status === "loading"}
+              className="hover:text-red-500"
+            >
+              {status === "loading" ? "Deleting..." : "Confirm delete"}
+            </button>
+            <button onClick={() => setConfirming(false)}>Cancel</button>
+          </>
         ) : (
-          <ReportButton
-            contentType="comment"
-            contentId={comment.id}
-            authorId={comment.author.id}
-          />
+          menuItems.length > 0 && <ActionsMenu items={menuItems} />
         )}
       </div>
 
       {errorMsg && <p className="text-[11px] text-red-600 dark:text-red-400 w-full">{errorMsg}</p>}
+
+      <ReportButton
+        contentType="comment"
+        contentId={comment.id}
+        open={activeModal === "report"}
+        onClose={() => setActiveModal(null)}
+      />
+      <EscalateButton
+        contentType="comment"
+        contentId={comment.id}
+        open={activeModal === "escalate"}
+        onClose={() => setActiveModal(null)}
+      />
     </div>
   );
 }

@@ -183,6 +183,13 @@ Both are content-first, but this one leans more utilitarian and dense. Principle
 - Vote control, tag chip, comment thread item, hub header, notification
   bell, report modal, role-aware action bar, unchanged from the original
   list, just restyled to the new visual direction.
+- **Dropdown / kebab actions menu**: `Dropdown` (generic popover shell, click-outside
+  and Escape-to-close, trigger and content both render props) and `ActionsMenu`
+  (kebab-icon trigger, role-aware action list) built on top of it. Used for
+  question/answer/comment action rows and the shared TopBar popovers
+  (ProfileMenu, NotificationBell). Popover elevation styling (bg-white
+  dark:bg-gray-800, border, shadow) lives once in `Dropdown`, panel
+  size/position varies per consumer via `panelClassName`.
 
 ---
 
