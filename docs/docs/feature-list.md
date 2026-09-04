@@ -253,9 +253,9 @@ truthfulness or presence of content students post.
 - [ ] GoogleLoginView should explicitly reject login for suspended
       (is_active=False) accounts with a clear error, rather than issuing a
       token pair that only fails on the next authenticated request
-- [ ] PATCH /users/me/ should validate full_name isn't blank/whitespace-only
+- [x] PATCH /users/me/ should validate full_name isn't blank/whitespace-only
       and return a proper field error, instead of silently no-op'ing
-- [ ] GET /users/search/ should share the existing "search" throttle scope
+- [x] GET /users/search/ should share the existing "search" throttle scope
       (60/min) rather than falling back to the general 100/min limit, it's a
       type-ahead endpoint and will be called more rapidly than that implies
 - [ ] Google login should verify email_verified from Google's userinfo
@@ -309,7 +309,7 @@ truthfulness or presence of content students post.
       logic inline for a third time (Schools and Hubs audits flagged the
       same pattern already), worth one shared "is moderator or rep for this
       hub" helper in apps.hubs.permissions instead
-- [ ] Django admin's Question list view doesn't surface is_locked, hard to
+- [x] Django admin's Question list view doesn't surface is_locked, hard to
       tell which questions are locked without opening each one
 - [ ] Search results omit slug (and department, view_count, is_locked) from
       each question, matching the documented contract exactly today, but
@@ -337,7 +337,7 @@ truthfulness or presence of content students post.
       admins, worth prioritizing
 - [ ] Extend the existing "Admin action audit log" item to also cover tag
       merge/delete actions, not just report resolution and user suspension
-- [ ] Django admin's Tag list doesn't surface question_count (would need an
+- [x] Django admin's Tag list doesn't surface question_count (would need an
       admin method since it's computed, not a model field)
 - [ ] Resolving a report with DELETE_CONTENT can orphan other pending
       reports pointing at content that gets cascade-deleted along with it
@@ -384,14 +384,14 @@ truthfulness or presence of content students post.
       anything (icons render, builds pass), but worth confirming via
       npm ls lucide-react whether this is a genuine 1.0 release or a typo,
       and spot-checking that no icon names changed if it's the former
-- [ ] TopBar's "Academia" wordmark is plain text, not a link, inconsistent
+- [x] TopBar's "Academia" wordmark is plain text, not a link, inconsistent
       with Sidebar's identical-looking wordmark which does navigate home.
       TopBar is the persistently visible one, worth making it a Link too
 - [ ] No centralized z-index scale, ad hoc values (TopBar z-30, sidebar
       backdrop z-40, sidebar/ProfileMenu dropdown both z-50,
       NavigationProgressBar z-[100]) risk collisions as more overlays are
       added. Worth a small shared constants pass before that happens
-- [ ] Minor accessibility gaps in the shell layer: the mobile sidebar
+- [x] Minor accessibility gaps in the shell layer: the mobile sidebar
       backdrop is a bare div with onClick, no keyboard equivalent or
       button semantics; ThemeToggle's button doesn't expose aria-pressed
       for its current state. Cheap, low-risk, worth doing together
