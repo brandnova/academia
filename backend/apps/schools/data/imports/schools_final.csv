@@ -1,0 +1,1340 @@
+canonical_id,name,short_name,institution_type,ownership,state,country,website,regulatory_code,source_url,last_verified_at,merged_from_row_ids
+1,"Abubakar Tafawa Balewa University, Bauchi",ATBU,UNIVERSITY,FEDERAL,Bauchi,Nigeria,https://www.atbu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,1
+2,"Ahmadu Bello University, Zaria",ABU,UNIVERSITY,FEDERAL,,Nigeria,https://www.abu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,2
+3,"Bayero University, Kano",BUK,UNIVERSITY,FEDERAL,Kano,Nigeria,https://www.buk.edu.ng,,https://www.nuc.edu.ng,2026-09-04,3
+4,"Federal University Gashua, Yobe",FUGASHUA,UNIVERSITY,FEDERAL,Yobe,Nigeria,https://www.fugashua.edu.ng,,https://www.nuc.edu.ng,2026-09-04,4
+5,"Federal University of Petroleum Resources, Effurun",FUPRE,UNIVERSITY,FEDERAL,,Nigeria,https://www.fupre.edu.ng,,https://www.nuc.edu.ng,2026-09-04,5
+6,"Federal University of Technology, Akure",FUTA,UNIVERSITY,FEDERAL,,Nigeria,https://www.futa.edu.ng,,https://www.nuc.edu.ng,2026-09-04,6
+7,"Federal University of Technology, Minna",FUTMINNA,UNIVERSITY,FEDERAL,,Nigeria,https://www.futminna.edu.ng,,https://www.nuc.edu.ng,2026-09-04,7
+8,"Federal University of Technology, Owerri",FUTO,UNIVERSITY,FEDERAL,,Nigeria,https://www.futo.edu.ng,,https://www.nuc.edu.ng,2026-09-04,8
+9,"Federal University, Dutse, Jigawa State",FUD,UNIVERSITY,FEDERAL,Jigawa,Nigeria,https://www.fud.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,9
+10,"Federal University, Dutsin-Ma, Katsina",FUDUTSINMA,UNIVERSITY,FEDERAL,Katsina,Nigeria,https://www.fudutsinma.edu.ng,,https://www.nuc.edu.ng,2026-09-04,10
+11,"Federal University, Kashere, Gombe State",FUKASHERE,UNIVERSITY,FEDERAL,Gombe,Nigeria,https://www.fukashere.edu.ng,,https://www.nuc.edu.ng,2026-09-04,11
+12,"Federal University, Lafia, Nasarawa State",FULAFIA,UNIVERSITY,FEDERAL,Nasarawa,Nigeria,https://www.fulafia.edu.ng,,https://www.nuc.edu.ng,2026-09-04,12
+13,"Federal University, Lokoja, Kogi State",FULOKOJA,UNIVERSITY,FEDERAL,Kogi,Nigeria,https://www.fulokoja.edu.ng,,https://www.nuc.edu.ng,2026-09-04,13
+14,"Alex Ekwueme University, Ndufu-Alike, Ebonyi State",FUNAI,UNIVERSITY,FEDERAL,Ebonyi,Nigeria,https://www.funai.edu.ng,,https://www.nuc.edu.ng,2026-09-04,14
+15,"Federal University, Otuoke, Bayelsa",FUOTUOKE,UNIVERSITY,FEDERAL,Bayelsa,Nigeria,https://www.fuotuoke.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,15
+16,"Federal University, Oye-Ekiti, Ekiti State",FUOYE,UNIVERSITY,FEDERAL,Ekiti,Nigeria,https://www.fuoye.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,16
+17,"Federal University, Wukari, Taraba State",FUWUKARI,UNIVERSITY,FEDERAL,Taraba,Nigeria,https://www.fuwukari.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,17
+18,"Federal University, Birnin Kebbi",FUBK,UNIVERSITY,FEDERAL,Kebbi,Nigeria,https://www.fubk.edu.ng,,https://www.nuc.edu.ng,2026-09-04,18
+19,"Federal University, Gusau Zamfara",FUGUSAU,UNIVERSITY,FEDERAL,Zamfara,Nigeria,https://www.fugusau.edu.ng,,https://www.nuc.edu.ng,2026-09-04,19
+20,Michael Okpara University of Agricultural Umudike,MOUAU,UNIVERSITY,FEDERAL,,Nigeria,https://www.mouau.edu.ng,,https://www.nuc.edu.ng,2026-09-04,20
+21,"Modibbo Adama University of Technology, Yola",MAUTECH,UNIVERSITY,FEDERAL,,Nigeria,https://www.mautech.edu.ng,,https://www.nuc.edu.ng,2026-09-04,21
+22,"National Open University of Nigeria, Abuja",NOU,UNIVERSITY,FEDERAL,FCT,Nigeria,https://www.nou.edu.ng,,https://www.nuc.edu.ng,2026-09-04,22
+23,Nigeria Police Academy Wudil,POLAC,UNIVERSITY,FEDERAL,,Nigeria,https://polac.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,23
+24,Nigerian Defence Academy Kaduna,NDA,UNIVERSITY,FEDERAL,Kaduna,Nigeria,https://www.nda.edu.ng,,https://www.nuc.edu.ng,2026-09-04,24
+25,"Nnamdi Azikiwe University, Awka",UNIZIK,UNIVERSITY,FEDERAL,,Nigeria,https://www.unizik.edu.ng,,https://www.nuc.edu.ng,2026-09-04,25
+26,"Obafemi Awolowo University,Ile-Ife",OAUIFE,UNIVERSITY,FEDERAL,,Nigeria,https://www.oauife.edu.ng,,https://www.nuc.edu.ng,2026-09-04,26
+27,"University of Abuja, Gwagwalada",UNIABUJA,UNIVERSITY,FEDERAL,FCT,Nigeria,https://www.uniabuja.edu.ng,,https://www.nuc.edu.ng,2026-09-04,27
+28,"Federal University of Agriculture, Abeokuta",UNAAB,UNIVERSITY,FEDERAL,,Nigeria,https://www.unaab.edu.ng,,https://www.nuc.edu.ng,2026-09-04,28
+29,"Joseph Sarwuan Tarka University, Makurdi",UAM,UNIVERSITY,FEDERAL,,Nigeria,https://www.uam.edu.ng,,https://www.nuc.edu.ng,2026-09-04,29
+30,University of Benin,UNIBEN,UNIVERSITY,FEDERAL,,Nigeria,https://www.uniben.edu.ng,,https://www.nuc.edu.ng,2026-09-04,30
+31,University of Calabar,UNICAL,UNIVERSITY,FEDERAL,,Nigeria,https://www.unical.edu.ng,,https://www.nuc.edu.ng,2026-09-04,31
+32,University of Ibadan,UI,UNIVERSITY,FEDERAL,,Nigeria,https://www.ui.edu.ng,,https://www.nuc.edu.ng,2026-09-04,32
+33,University of Ilorin,UNILORIN,UNIVERSITY,FEDERAL,,Nigeria,https://www.unilorin.edu.ng,,https://www.nuc.edu.ng,2026-09-04,33
+34,University of Jos,UNIJOS,UNIVERSITY,FEDERAL,,Nigeria,https://www.unijos.edu.ng,,https://www.nuc.edu.ng,2026-09-04,34
+35,University of Lagos,UNILAG,UNIVERSITY,FEDERAL,Lagos,Nigeria,https://www.unilag.edu.ng,,https://www.nuc.edu.ng,2026-09-04,35
+36,University of Maiduguri,UNIMAID,UNIVERSITY,FEDERAL,,Nigeria,https://www.unimaid.edu.ng,,https://www.nuc.edu.ng,2026-09-04,36
+37,"University of Nigeria, Nsukka",UNN,UNIVERSITY,FEDERAL,,Nigeria,https://www.unn.edu.ng,,https://www.nuc.edu.ng,2026-09-04,37
+38,University of Port-Harcourt,UNIPORT,UNIVERSITY,FEDERAL,,Nigeria,https://www.uniport.edu.ng,,https://www.nuc.edu.ng,2026-09-04,38
+39,University of Uyo,UNIUYO,UNIVERSITY,FEDERAL,,Nigeria,https://www.uniuyo.edu.ng,,https://www.nuc.edu.ng,2026-09-04,39
+40,Usumanu Danfodiyo University,UDUSOK,UNIVERSITY,FEDERAL,,Nigeria,https://www.udusok.edu.ng,,https://www.nuc.edu.ng,2026-09-04,40
+41,"Nigerian Maritime University Okerenkoko, Delta State",NMU,UNIVERSITY,FEDERAL,Delta,Nigeria,https://www.nmu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,41
+42,"Air Force Institute of Technology, Kaduna",AFIT,UNIVERSITY,FEDERAL,Kaduna,Nigeria,https://afit.edu.ng,,https://www.nuc.edu.ng,2026-09-04,42
+43,Nigerian Army University Biu,NAUB,UNIVERSITY,FEDERAL,,Nigeria,https://naub.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,43
+44,"Federal University of Health Sciences, Otukpo, Benue State",UOB,UNIVERSITY,FEDERAL,Benue,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,44
+45,"Federal University of Agriculture, Zuru, Kebbi State",UZK,UNIVERSITY,FEDERAL,Kebbi,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,45
+46,"Federal University of Technology, Babura, Jigawa State",UBJ,UNIVERSITY,FEDERAL,Jigawa,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,46
+47,"Federal University of Technology, Ikot Abasi, Akwa Ibom State",UIAAI,UNIVERSITY,FEDERAL,Akwa Ibom,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,47
+48,"Federal University of Health Sciences, Azare, Bauchi State",UAB,UNIVERSITY,FEDERAL,Bauchi,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,48
+49,"Federal University of Health Sciences, Ila Orangun, Osun State",UIOO,UNIVERSITY,FEDERAL,Osun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,49
+50,"David Nweze Umahi Federal University of Medical Sciences, Uburu",KDUMS,UNIVERSITY,FEDERAL,,Nigeria,https://kdums.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,50
+51,"Admiralty University Ibusa, Delta State",ADUN,UNIVERSITY,FEDERAL,Delta,Nigeria,https://adun.edu.ng,,https://www.nuc.edu.ng,2026-09-04,51
+52,"Federal University of Transportation Daura, Katsina",FUTD,UNIVERSITY,FEDERAL,Katsina,Nigeria,https://www.futd.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,52
+53,African Aviation and Aerospace University,AAAU,UNIVERSITY,FEDERAL,,Nigeria,https://aaau.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,53
+54,"National University of Science and Technology, Abuja",UA,UNIVERSITY,FEDERAL,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,54
+55,"Federal University of Agriculture Bassam-Biri, Bayelsa",UBBB,UNIVERSITY,FEDERAL,Bayelsa,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,55
+56,"Federal University of Health Sciences Kwale, Delta State",UKD,UNIVERSITY,FEDERAL,Delta,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,56
+57,"Federal University of Health Sciences, Katsina",UK,UNIVERSITY,FEDERAL,Katsina,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,57
+58,"Federal University of Agriculture, Mubi",UM,UNIVERSITY,FEDERAL,,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,58
+59,"Federal University of Education, Zaria, Kaduna State",UZK-KAD,UNIVERSITY,FEDERAL,Kaduna,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,59
+60,"Alvan Ikoku Federal University of Education, Owerri, Imo State",AIUOI,UNIVERSITY,FEDERAL,Imo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,60
+61,"Yusuf Maitama Sule Federal University of Education, Kano",YMSUK,UNIVERSITY,FEDERAL,Kano,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,61
+62,"Adeyemi Federal University of Education, Ondo",AUO,UNIVERSITY,FEDERAL,Ondo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,62
+63,"Federal University of Allied Health Sciences, Enugu",FUAHSE,UNIVERSITY,FEDERAL,Enugu,Nigeria,https://fuahse.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,63
+64,"Federal University of Medicine and Medical Sciences, Abeokuta",FUMMSA,UNIVERSITY,FEDERAL,,Nigeria,https://fummsa.net,,https://www.nuc.edu.ng,2026-09-04,64
+65,"Federal University of Education Pankshin, Plateau State",UPP,UNIVERSITY,FEDERAL,Plateau,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,65
+66,"Federal University of Education Kontagora, Niger State",UKN,UNIVERSITY,FEDERAL,Niger,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,66
+67,"University of Maritime Studies, Oron, Akwa Ibom State",UMOAI,UNIVERSITY,FEDERAL,Akwa Ibom,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,67
+68,"Federal University of Environment and Technology, Tai Town, Ogoniland, Rivers State",UETTOR,UNIVERSITY,FEDERAL,Rivers,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,68
+69,"Federal University of Applied Sciences, Kachia, Kaduna State",UAKK,UNIVERSITY,FEDERAL,Kaduna,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,69
+70,"Tai Solarin Federal University of Education, Ijagun, Ijebu Ode",TSUIIO,UNIVERSITY,FEDERAL,,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,70
+71,"Federal University of Agriculture and Developmental Studies, Iragbuji, Osun State",UDIO,UNIVERSITY,FEDERAL,Osun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,71
+72,"Federal University of Technology and Environmental Studies, Iyin-Ekiti, Ekiti State.",UEIEE,UNIVERSITY,FEDERAL,Ekiti,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,72
+73,"Federal University of Agriculture and Technology Okeho, Oyo State",UOO,UNIVERSITY,FEDERAL,Oyo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,73
+74,"Federal University of Health Science and Technology, Tsafe",UT,UNIVERSITY,FEDERAL,,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,74
+75,Federal University of Agriculture and Technology Obio-Akpa Akwa Ibom State,UOAAI,UNIVERSITY,FEDERAL,Akwa Ibom,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,75
+76,"Federal University of Science and Technology, Epe",UE,UNIVERSITY,FEDERAL,,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,76
+77,"Federal University of Science and Technology, Kabo, Kano",FUSTKABO,UNIVERSITY,FEDERAL,Kano,Nigeria,https://fustkabo.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,77
+78,Rivers State University,RSU,UNIVERSITY,STATE,Rivers,Nigeria,https://www.rsu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,78
+79,"Ambrose Alli University, Ekpoma",AAUEKPOMA,UNIVERSITY,STATE,,Nigeria,https://www.aauekpoma.edu.ng,,https://www.nuc.edu.ng,2026-09-04,79
+80,"Abia State University, Uturu",ABIASTATEUNIVERSITY,UNIVERSITY,STATE,Abia,Nigeria,https://www.abiastateuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,80
+81,Ekiti State University,EKSU,UNIVERSITY,STATE,Ekiti,Nigeria,https://www.eksu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,81
+82,"Enugu State University of Science and Technology, Enugu",ESUT,UNIVERSITY,STATE,Enugu,Nigeria,https://www.esut.edu.ng,,https://www.nuc.edu.ng,2026-09-04,82
+83,"Olabisi Onabanjo University, Ago Iwoye",OOUAGOIWOYE,UNIVERSITY,STATE,,Nigeria,https://www.oouagoiwoye.edu.ng,,https://www.nuc.edu.ng,2026-09-04,83
+84,"Lagos State University, Ojo",LASU,UNIVERSITY,STATE,Lagos,Nigeria,https://www.lasu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,84
+85,"Ladoke Akintola University of Technology, Ogbomoso",LAUTECH,UNIVERSITY,STATE,,Nigeria,https://www.lautech.edu.ng,,https://www.nuc.edu.ng,2026-09-04,85
+86,"Rev. Fr. Moses Orshio Adasu (Formerly, Benue State University), Makurdi",BSUM,UNIVERSITY,STATE,Benue,Nigeria,https://www.bsum.edu.ng,,https://www.nuc.edu.ng,2026-09-04,86
+87,Delta State University Abraka,DELSU,UNIVERSITY,STATE,Delta,Nigeria,https://www.delsu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,87
+88,"Imo State University, Owerri",IMSU,UNIVERSITY,STATE,Imo,Nigeria,https://www.imsu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,88
+89,"Adekunle Ajasin University, Akungba",AAUA,UNIVERSITY,STATE,,Nigeria,https://www.aaua.edu.ng,,https://www.nuc.edu.ng,2026-09-04,89
+90,Prince Abubakar Audu University Anyigba,KSU,UNIVERSITY,STATE,,Nigeria,https://www.ksu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,90
+91,"Chukwuemeka Odumegwu Ojukwu University, Uli",COOU,UNIVERSITY,STATE,,Nigeria,https://coou.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,91
+92,"Ebonyi State University, Abakaliki",EBSU,UNIVERSITY,STATE,Ebonyi,Nigeria,https://www.ebsu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,92
+93,"Aliko Dangote university of Science & Technology, Wudil",KUST,UNIVERSITY,STATE,,Nigeria,https://www.kust.edu.ng,,https://www.nuc.edu.ng,2026-09-04,93
+94,Niger Delta University Yenagoa,NDU,UNIVERSITY,STATE,Niger,Nigeria,https://www.ndu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,94
+95,Adamawa State University Mubi,ADSU,UNIVERSITY,STATE,Adamawa,Nigeria,https://www.adsu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,95
+96,Nasarawa State University Keffi,NSUK,UNIVERSITY,STATE,Nasarawa,Nigeria,https://www.nsuk.edu.ng,,https://www.nuc.edu.ng,2026-09-04,96
+97,"University of Cross River State, Calabar",CRUTECH,UNIVERSITY,STATE,Cross River,Nigeria,https://www.crutech.edu.ng,,https://www.nuc.edu.ng,2026-09-04,97
+98,"Gombe State Univeristy, Gombe",GSU,UNIVERSITY,STATE,Gombe,Nigeria,https://www.gsu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,98
+99,"Kaduna State University, Kaduna",KASU,UNIVERSITY,STATE,Kaduna,Nigeria,https://www.kasu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,99
+100,"Ibrahim Badamasi Babangida University, Lapai",IBBU,UNIVERSITY,STATE,,Nigeria,https://www.ibbu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,100
+101,Plateau State University Bokkos,PLASU,UNIVERSITY,STATE,Plateau,Nigeria,https://www.plasu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,101
+102,"Yobe State University, Damaturu",YSU,UNIVERSITY,STATE,Yobe,Nigeria,https://www.ysu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,102
+103,"Kebbi State University of Science and Technology, Aliero",KSUSTA,UNIVERSITY,STATE,Kebbi,Nigeria,https://www.ksusta.edu.ng,,https://www.nuc.edu.ng,2026-09-04,103
+104,Umar Musa Yar' Adua University Katsina,UMYU,UNIVERSITY,STATE,Katsina,Nigeria,https://www.umyu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,104
+105,Osun State University Osogbo,UNIOSUN,UNIVERSITY,STATE,Osun,Nigeria,https://www.uniosun.edu.ng,,https://www.nuc.edu.ng,2026-09-04,105
+106,"Olusegun Agagu University of Sc. & Tech., Okitipupa, Ondo",OSUSTECH,UNIVERSITY,STATE,Ondo,Nigeria,https://www.osustech.edu.ng,,https://www.nuc.edu.ng,2026-09-04,106
+107,"Taraba State University, Jalingo",TSUNIVERSITY,UNIVERSITY,STATE,Taraba,Nigeria,https://www.tsuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,107
+108,"Kwara State University, Ilorin",KWASU,UNIVERSITY,STATE,Kwara,Nigeria,https://www.kwasu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,108
+109,Sokoto State University,SSU,UNIVERSITY,STATE,Sokoto,Nigeria,https://www.ssu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,109
+110,"Akwa Ibom State University, Ikot Akpaden",AKSU,UNIVERSITY,STATE,Akwa Ibom,Nigeria,https://www.aksu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,110
+111,"Ignatius Ajuru University of Education,Rumuolumeni",IAUE,UNIVERSITY,STATE,,Nigeria,https://www.iaue.edu.ng,,https://www.nuc.edu.ng,2026-09-04,111
+112,"Bauchi State University, Gadau",BASUG,UNIVERSITY,STATE,Bauchi,Nigeria,https://www.basug.edu.ng,,https://www.nuc.edu.ng,2026-09-04,112
+113,Northwest University Kano,NWU,UNIVERSITY,STATE,Kano,Nigeria,https://www.nwu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,113
+114,First Technical University Ibadan,TECHU,UNIVERSITY,STATE,,Nigeria,https://tech-u.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,114
+115,"Sule Lamido University, Kafin Hausa, Jigawa",SLU,UNIVERSITY,STATE,Jigawa,Nigeria,https://www.slu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,115
+116,"University of Medical Sciences, Ondo City, Ondo State",UNIMED,UNIVERSITY,STATE,Ondo,Nigeria,https://www.unimed.edu.ng,,https://www.nuc.edu.ng,2026-09-04,116
+117,"Edo State University, Iyamho",EDOUNIVERSITY,UNIVERSITY,STATE,Edo,Nigeria,https://www.edouniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,117
+118,"Kingsley Ozumba Mbadiwe University Ogboko, Imo State",KOMU,UNIVERSITY,STATE,Imo,Nigeria,https://www.komu.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,118
+119,"University of Africa Toru Orua, Bayelsa State",UAT,UNIVERSITY,STATE,Bayelsa,Nigeria,https://www.uat.edu.ng/public/,,https://www.nuc.edu.ng,2026-09-04,119
+120,"Kashim Ibrahim ( formerly Bornu State) University, Maiduguri",KIFBUM,UNIVERSITY,STATE,,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,120
+121,Moshood Abiola University of Science and Technology Abeokuta,MAUA,UNIVERSITY,STATE,,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,121
+122,Zamfara State University,ZU,UNIVERSITY,STATE,Zamfara,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,122
+123,Bayelsa Medical University,BMU,UNIVERSITY,STATE,Bayelsa,Nigeria,https://bmu.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,123
+124,"University of Agriculture and Environmental Sciences Umuagwo, Imo State",UAES,UNIVERSITY,STATE,Imo,Nigeria,https://www.uaes.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,124
+125,"Confluence University of Science and Technology Osara, Kogi",CUSTECH,UNIVERSITY,STATE,Kogi,Nigeria,https://custech.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,125
+126,"Bamidele Olumilua University of Science and Technology Ikere, Ekiti State",BOUESTI,UNIVERSITY,STATE,Ekiti,Nigeria,https://bouesti.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,126
+127,"University of Delta, Agbor",UNIDEL,UNIVERSITY,STATE,Delta,Nigeria,https://unidel.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,127
+128,"Delta University of Science and Technology, Ozoro",DSUST,UNIVERSITY,STATE,Delta,Nigeria,https://dsust.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,128;383
+129,"Dennis Osadebe University, Asaba",DOU,UNIVERSITY,STATE,,Nigeria,https://www.dou.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,129
+130,"Lagos State University of Education, Ijanikin",LUI,UNIVERSITY,STATE,Lagos,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,130
+131,Lagos State University of Science and Technology Ikorodu,LUI-LAG,UNIVERSITY,STATE,Lagos,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,131;401
+132,"Shehu Shagari University of Education, Sokoto",SSUS,UNIVERSITY,STATE,Sokoto,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,132
+133,"State University of Medical and Applied Sciences, Igbo-Eno, Enugu",UMAIEE,UNIVERSITY,STATE,Enugu,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,133
+134,"University of Ilesa, Osun State",UIO,UNIVERSITY,STATE,Osun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,134
+135,Emanuel Alayande University of Education Oyo,EAUO,UNIVERSITY,STATE,Oyo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,135
+136,"Kogi State University, Kabba",KUK,UNIVERSITY,STATE,Kogi,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,136
+137,"AbdulKadir Kure University, Minna Niger State",AKUMN,UNIVERSITY,STATE,Niger,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,137
+138,"Kwara State University of Education, Ilorin, Kwara State",KUIK,UNIVERSITY,STATE,Kwara,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,138
+139,"Abdulsalam Abubakar University of Agriculture and Climate Action, Mokwa, Niger State",AAUCAM,UNIVERSITY,STATE,Niger,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,139
+140,"Ebonyi State University of ICT, Science and Technology, Oferekpe, Ebonyi State",EUIOE,UNIVERSITY,STATE,Ebonyi,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,140
+141,"Cross River University of Education and Entrepeneurship, Akampa, Cross River State",CRUEAC,UNIVERSITY,STATE,Cross River,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,141
+142,"Benue State University of Agriculture Science and Technology, Ihugh.",BUI,UNIVERSITY,STATE,Benue,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,142
+143,"University of Aeronautics and Aerospace Engineering Ezza, Ebonyi State",UAAEEE,UNIVERSITY,STATE,Ebonyi,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,143
+144,"University of Innovation, Science and Technology, Omuma, Imo State",UIOI,UNIVERSITY,STATE,Imo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,144
+145,"Taraba State University of Tropical Agriculture, Science, Technology and Climate Action, Gembu",TUTCAG,UNIVERSITY,STATE,Taraba,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,145
+146,"Jigawa State University of Medical and Allied Health Sciences, Majia",JUMM,UNIVERSITY,STATE,Jigawa,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,146
+147,"Babcock University,Ilishan-Remo",BABCOCK,UNIVERSITY,PRIVATE,,Nigeria,https://www.babcock.edu.ng,,https://www.nuc.edu.ng,2026-09-04,147
+148,Igbinedion University Okada,IUOKADA,UNIVERSITY,PRIVATE,,Nigeria,https://www.iuokada.edu.ng,,https://www.nuc.edu.ng,2026-09-04,148
+149,"Madonna University, Okija",MADONNAUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.madonnauniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,149
+150,"Bowen University, Iwo",BOWEN,UNIVERSITY,PRIVATE,,Nigeria,https://www.bowen.edu.ng,,https://www.nuc.edu.ng,2026-09-04,150
+151,"Benson Idahosa University, Benin City",BIU,UNIVERSITY,PRIVATE,,Nigeria,https://www.biu.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,151
+152,Covenant University Ota,COVENANTUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.covenantuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,152
+153,"Pan-Atlantic University, Lagos",PAU,UNIVERSITY,PRIVATE,Lagos,Nigeria,https://www.pau.edu.ng,,https://www.nuc.edu.ng,2026-09-04,153
+154,"American University of Nigeria, Yola",AUN,UNIVERSITY,PRIVATE,,Nigeria,https://www.aun.edu.ng,,https://www.nuc.edu.ng,2026-09-04,154
+155,"Ajayi Crowther University, Ibadan",ACU,UNIVERSITY,PRIVATE,,Nigeria,https://www.acu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,155
+156,"Al-Hikmah University, Ilorin",ALHIKMAH,UNIVERSITY,PRIVATE,,Nigeria,https://www.alhikmah.edu.ng,,https://www.nuc.edu.ng,2026-09-04,156
+157,"Al-Qalam University, Katsina",AUK,UNIVERSITY,PRIVATE,Katsina,Nigeria,https://www.auk.edu.ng,,https://www.nuc.edu.ng,2026-09-04,157
+158,"Bells University of Technology, Otta",BELLSUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.bellsuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,158
+159,"Bingham University, New Karu",BINGHAMUNI,UNIVERSITY,PRIVATE,,Nigeria,https://www.binghamuni.edu.ng,,https://www.nuc.edu.ng,2026-09-04,159
+160,"Caritas University, Enugu",CARITASUNI,UNIVERSITY,PRIVATE,Enugu,Nigeria,https://www.caritasuni.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,160
+161,Crawford University Igbesa,CRAWFORDUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.crawforduniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,161
+162,Crescent University,CRESCENTUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.crescent-university.edu.ng,,https://www.nuc.edu.ng,2026-09-04,162
+163,"Kwararafa University, Wukari",KWARARAFAUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.kwararafauniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,163
+164,"Lead City University, Ibadan",LCU,UNIVERSITY,PRIVATE,,Nigeria,https://www.lcu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,164
+165,"Novena University, Ogume",NOVENAUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.novenauniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,165
+166,"Redeemer's University, Ede",RUN,UNIVERSITY,PRIVATE,,Nigeria,https://www.run.edu.ng,,https://www.nuc.edu.ng,2026-09-04,166
+167,"Renaissance University, Enugu",RNU,UNIVERSITY,PRIVATE,Enugu,Nigeria,https://www.rnu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,167
+168,"University of Mkar, Mkar",UNIMKAR,UNIVERSITY,PRIVATE,,Nigeria,https://www.unimkar.edu.ng,,https://www.nuc.edu.ng,2026-09-04,168
+169,"Joseph Ayo Babalola University, Ikeji-Arakeji",JABU,UNIVERSITY,PRIVATE,,Nigeria,https://www.jabu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,169
+170,"Achievers University, Owo",ACHIEVERS,UNIVERSITY,PRIVATE,,Nigeria,https://www.achievers.edu.ng,,https://www.nuc.edu.ng,2026-09-04,170
+171,"Caleb University, Lagos",CALEBUNIVERSITY,UNIVERSITY,PRIVATE,Lagos,Nigeria,https://www.calebuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,171
+172,"Fountain Unveristy, Oshogbo",FUO,UNIVERSITY,PRIVATE,,Nigeria,https://www.fuo.edu.ng,,https://www.nuc.edu.ng,2026-09-04,172
+173,"African University of Science and Technology, Abuja",AUST,UNIVERSITY,PRIVATE,FCT,Nigeria,http://aust.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,173
+174,"Obong University, Obong Ntak",OBONGUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.obonguniversity.net,,https://www.nuc.edu.ng,2026-09-04,174
+175,"Salem University, Lokoja",SALEMUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.salemuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,175
+176,"Tansian University, Umunya",TANSIANUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://tansianuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,176
+177,"Veritas University, Abuja",VERITAS,UNIVERSITY,PRIVATE,FCT,Nigeria,https://www.veritas.edu.ng,,https://www.nuc.edu.ng,2026-09-04,177
+178,Wesley University Ondo,WESLEYUNI,UNIVERSITY,PRIVATE,Ondo,Nigeria,https://www.wesleyuni.edu.ng,,https://www.nuc.edu.ng,2026-09-04,178
+179,"Western Delta University, Oghara Delta State",WDU,UNIVERSITY,PRIVATE,Delta,Nigeria,https://wdu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,179
+180,"Afe Babalola University, Ado-Ekiti - Ekiti State",ABUAD,UNIVERSITY,PRIVATE,Ekiti,Nigeria,https://www.abuad.edu.ng,,https://www.nuc.edu.ng,2026-09-04,180
+181,"Godfrey Okoye University, Ugwuomu-Nike - Enugu State",GOUNI,UNIVERSITY,PRIVATE,Enugu,Nigeria,https://www.gouni.edu.ng,,https://www.nuc.edu.ng,2026-09-04,181
+182,"Nile University of Nigeria, Abuja",NILEUNIVERSITY,UNIVERSITY,PRIVATE,FCT,Nigeria,https://www.nileuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,182
+183,"Oduduwa University, Ipetumodu - Osun State",ODUDUWAUNIVERSITY,UNIVERSITY,PRIVATE,Osun,Nigeria,https://www.oduduwauniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,183
+184,"Paul University, Awka - Anambra State",PAULUNIVERSITY,UNIVERSITY,PRIVATE,Anambra,Nigeria,https://www.pauluniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,184
+185,"Rhema University, Obeama-Asa - Rivers State",RHEMAUNIVERSITY,UNIVERSITY,PRIVATE,Rivers,Nigeria,https://www.rhemauniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,185
+186,"Wellspring University, Evbuobanosa - Edo State",WELLSPRINGUNIVERSITY,UNIVERSITY,PRIVATE,Edo,Nigeria,https://www.wellspringuniversity.net,,https://www.nuc.edu.ng,2026-09-04,186
+187,"Adeleke University, Ede",ADELEKEUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.adelekeuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,187
+188,Baze University,BAZEUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.bazeuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,188
+189,"Landmark University, Omu-Aran.",LMU,UNIVERSITY,PRIVATE,,Nigeria,https://www.lmu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,189
+190,"Glorious Vision University, Ogwa, Edo State.",SAU,UNIVERSITY,PRIVATE,Edo,Nigeria,https://www.sau.edu.ng,,https://www.nuc.edu.ng,2026-09-04,190
+191,"Elizade University, Ilara-Mokin",ELIZADEUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.elizadeuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,191
+192,"Evangel University, Akaeze",EVANGELUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.evangeluniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,192
+193,"Gregory University, Uturu",GREGORYUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.gregoryuniversity.com,,https://www.nuc.edu.ng,2026-09-04,193
+194,"Mcpherson University, Seriki Sotayo, Ajebo",MCU,UNIVERSITY,PRIVATE,,Nigeria,https://www.mcu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,194
+195,"Southwestern University, Oku Owa",SOUTHWESTERNUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.southwesternuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,195
+196,Augustine University,AUGUSTINEUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.augustineuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,196
+197,Chrisland University,CHRISLANDUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.chrislanduniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,197
+198,"Edwin Clark University, Kaigbodo",EDWINCLARKUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.edwinclarkuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,198
+199,"Hallmark University, Ijebi Itele, Ogun",HALLMARK,UNIVERSITY,PRIVATE,Ogun,Nigeria,https://www.hallmark.edu.ng,,https://www.nuc.edu.ng,2026-09-04,199
+200,"Hezekiah University, Umudi",HEZEKIAH,UNIVERSITY,PRIVATE,,Nigeria,https://hezekiah.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,200
+201,"Kings University, Ode Omu",KINGSUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.kingsuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,201
+202,Micheal & Cecilia Ibru University,MCIU,UNIVERSITY,PRIVATE,,Nigeria,https://mciu.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,202
+203,Mountain Top University,MTU,UNIVERSITY,PRIVATE,,Nigeria,https://www.mtu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,203
+204,"Ritman University, Ikot Ekpene, Akwa Ibom",RITMANUNIVERSITY,UNIVERSITY,PRIVATE,Akwa Ibom,Nigeria,https://www.ritmanuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,204
+205,"Summit University, Offa",SUMMITUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.summituniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,205
+206,Christopher University Mowe,CHRISTOPHERUNIVERSITY,UNIVERSITY,PRIVATE,,Nigeria,https://www.christopheruniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,206
+207,"Kola Daisi University Ibadan, Oyo State",KOLADAISIUNIVERSITY,UNIVERSITY,PRIVATE,Oyo,Nigeria,https://www.koladaisiuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,207
+208,Anchor University Ayobo Lagos State,AUL,UNIVERSITY,PRIVATE,Lagos,Nigeria,https://www.aul.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,208
+209,Dominican University Ibadan Oyo State,DUI,UNIVERSITY,PRIVATE,Oyo,Nigeria,https://www.dui.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,209
+210,"Legacy University, Okija Anambra State",LEGACYUNIVERSITY,UNIVERSITY,PRIVATE,Anambra,Nigeria,https://www.legacyuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,210
+211,Arthur Javis University Akpoyubo Cross river State,ARTHURJARVISUNIVERSITY,UNIVERSITY,PRIVATE,Cross River,Nigeria,https://www.arthurjarvisuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,211
+212,"Ojaja University Eiyenkorin, Kwara State",CROWNHILLUNIVERSITY,UNIVERSITY,PRIVATE,Kwara,Nigeria,https://www.crownhilluniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,212
+213,Coal City University Enugu State,CCU,UNIVERSITY,PRIVATE,Enugu,Nigeria,https://www.ccu.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,213
+214,Clifford University Owerrinta Abia State,CLIFFORDUNI,UNIVERSITY,PRIVATE,Abia,Nigeria,https://www.clifforduni.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,214
+215,"Spiritan University, Nneochi Abia State",SPIRITANUNIVERSITY,UNIVERSITY,PRIVATE,Abia,Nigeria,https://www.spiritanuniversity.edu.ng,,https://www.nuc.edu.ng,2026-09-04,215
+216,"Precious Cornerstone University, Oyo",PCU,UNIVERSITY,PRIVATE,Oyo,Nigeria,https://www.pcu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,216
+217,"PAMO University of Medical Sciences, Portharcourt",PUMS,UNIVERSITY,PRIVATE,,Nigeria,https://www.pums.edu.ng,,https://www.nuc.edu.ng,2026-09-04,217
+218,Atiba University Oyo,AUO-OYO,UNIVERSITY,PRIVATE,Oyo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,218
+219,"Eko University of Medical and Health Sciences Ijanikin, Lagos",EKOUNIVMED,UNIVERSITY,PRIVATE,Lagos,Nigeria,https://www.ekounivmed.edu.ng,,https://www.nuc.edu.ng,2026-09-04,219
+220,"Skyline University, Kano",SUN,UNIVERSITY,PRIVATE,Kano,Nigeria,https://www.sun.edu.ng,,https://www.nuc.edu.ng,2026-09-04,220
+221,"Greenfield University, Kaduna",GFU,UNIVERSITY,PRIVATE,Kaduna,Nigeria,https://www.gfu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,221
+222,"Dominion University Ibadan, Oyo State",DOMINIONUNIVERSITY,UNIVERSITY,PRIVATE,Oyo,Nigeria,https://www.dominionuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,222
+223,Trinity University Ogun State,TRINITYUNIVERSITY,UNIVERSITY,PRIVATE,Ogun,Nigeria,https://www.trinityuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,223
+224,"Westland University Iwo, Osun State",WUIO,UNIVERSITY,PRIVATE,Osun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,224
+225,"Topfaith University, Mkpatak, Akwa Ibom State",TUMAI,UNIVERSITY,PRIVATE,Akwa Ibom,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,225
+226,"Thomas Adewumi University, Oko-Irese, Kwara State",TAU,UNIVERSITY,PRIVATE,Kwara,Nigeria,https://www.tau.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,226
+227,"Maranatha University, Lagos",MUL,UNIVERSITY,PRIVATE,Lagos,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,227
+228,"Ave Maria University, Piyanko, Nasarawa State",AMUPN,UNIVERSITY,PRIVATE,Nasarawa,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,228
+229,"Al-Istiqama University, Sumaila, Kano State",AIUSK,UNIVERSITY,PRIVATE,Kano,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,229
+230,"Mudiame University, Irrua, Edo State",MUIE,UNIVERSITY,PRIVATE,Edo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,230
+231,"Havilla University, Nde-Ikom, Cross River State",HAVILLAUNIVERSITY,UNIVERSITY,PRIVATE,Cross River,Nigeria,https://havillauniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,231
+232,"Claretian University of Nigeria, Nekede, Imo State",CUNNI,UNIVERSITY,PRIVATE,Imo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,232
+233,"Karl-Kumm University, Vom, Plateau State",KKUVP,UNIVERSITY,PRIVATE,Plateau,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,233
+234,"James Hope University, Lagos, Lagos State",JHU,UNIVERSITY,PRIVATE,Lagos,Nigeria,https://www.jhu.edu.ng,,https://www.nuc.edu.ng,2026-09-04,234
+235,"Maryam Abacha American University of Nigeria, Kano State",MAAUN,UNIVERSITY,PRIVATE,Kano,Nigeria,https://www.maaun.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,235
+236,"Capital City University, Kano State",CCUK,UNIVERSITY,PRIVATE,Kano,Nigeria,https://www.ccuk.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,236
+237,"Ahman Pategi University, Kwara State",APUK,UNIVERSITY,PRIVATE,Kwara,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,237
+238,"University of Offa, Kwara State",UOK,UNIVERSITY,PRIVATE,Kwara,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,238
+239,"Mewar International University, Masaka, Nasarawa State",MIU,UNIVERSITY,PRIVATE,Nasarawa,Nigeria,https://www.miu.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,239
+240,"Edusoko University, Bida, Niger State",EUBN,UNIVERSITY,PRIVATE,Niger,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,240
+241,"Philomath University, Kuje, Abuja",PUKA,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,241
+242,"Anan University, Kwall, Plateau State",AUKP,UNIVERSITY,PRIVATE,Plateau,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,242
+243,"North Eastern University, Gombe",PRU,UNIVERSITY,PRIVATE,Gombe,Nigeria,https://pru.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,243
+244,"Al-Ansar University, Maiduguri, Borno",AAUMB,UNIVERSITY,PRIVATE,Borno,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,244
+245,"Margaret Lawrence University, Umunede, Delta State",MLUUD,UNIVERSITY,PRIVATE,Delta,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,245
+246,"Khalifa Isiyaku Rabiu University, Kano",KIRUK,UNIVERSITY,PRIVATE,Kano,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,246
+247,"Sports University, Idumuje, Ugboko, Delta State",SUIUD,UNIVERSITY,PRIVATE,Delta,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,247
+248,"Baba Ahmed University, Kano State",BAUK,UNIVERSITY,PRIVATE,Kano,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,248
+249,"Saisa University of Medical Sciences and Technology, Sokoto State",SUMS,UNIVERSITY,PRIVATE,Sokoto,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,249
+250,"Nigerian British University, Asa, Abia State",NBU,UNIVERSITY,PRIVATE,Abia,Nigeria,https://nbu.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,250
+251,"Peter University, Achina-Onneh Anambra State",PUAOA,UNIVERSITY,PRIVATE,Anambra,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,251
+252,"Newgate University, MInna, Niger State.",NUMN,UNIVERSITY,PRIVATE,Niger,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,252
+253,"European University of Nigeria, Duboyi, FCT",EUNDF,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,253
+254,NorthWest University Sokoto State,NWUS,UNIVERSITY,PRIVATE,Sokoto,Nigeria,https://nwus.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,254
+255,"Rayhaan University, Kebbi",RUK,UNIVERSITY,PRIVATE,Kebbi,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,255
+256,Muhammad Kamalud University Kwara,MKUK,UNIVERSITY,PRIVATE,Kwara,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,256
+257,"Sam Maris University, Ondo",SMUO,UNIVERSITY,PRIVATE,Ondo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,257
+258,"Aletheia University, Ago-Iwoye Ogun State",AUAIO,UNIVERSITY,PRIVATE,Ogun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,258
+259,"Lux Mundi University Umuahia, Abia State",LMUUA,UNIVERSITY,PRIVATE,Abia,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,259
+260,"Maduka University, Ekwegbe, Enugu State",MUEE,UNIVERSITY,PRIVATE,Enugu,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,260
+261,"PeaceLand University, Enugu State",PUE,UNIVERSITY,PRIVATE,Enugu,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,261
+262,"Amadeus University, Amizi, Abia State",AUAA,UNIVERSITY,PRIVATE,Abia,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,262
+263,"Vision University, Ikogbo, Ogun State",VUIO,UNIVERSITY,PRIVATE,Ogun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,263
+264,"Azman University, Kano State",AUK-KAN,UNIVERSITY,PRIVATE,Kano,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,264
+265,"Huda University, Gusau, Zamafara State",HUGZ,UNIVERSITY,PRIVATE,,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,265
+266,"Franco British International University, Kaduna State",FBIU,UNIVERSITY,PRIVATE,Kaduna,Nigeria,https://fbiu.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,266
+267,"Canadian University of Nigeria, Abuja",CUNA,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,267
+268,"Gerar University of Medical Science Imope Ijebu, Ogun State.",GUMIIO,UNIVERSITY,PRIVATE,Ogun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,268
+269,"British Canadian University, Obufu Cross River State",BCUOCR,UNIVERSITY,PRIVATE,Cross River,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,269
+270,"Hensard University, Toru-Orua, Sagbama, Bayelsa State",HUTOSB,UNIVERSITY,PRIVATE,Bayelsa,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,270
+271,"Amaj University, Kwali, Abuja",AUKA,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,271
+272,"Phoenix University, Agwada, Nasarawa State",PUAN,UNIVERSITY,PRIVATE,Nasarawa,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,272
+273,"Wigwe University, Isiokpo Rivers State",WUIR,UNIVERSITY,PRIVATE,Rivers,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,273
+274,"Hillside University of Science and Technology, Okemisi, Ekiti State",HUST,UNIVERSITY,PRIVATE,Ekiti,Nigeria,https://www.hust.edu.ng,,https://www.nuc.edu.ng,2026-09-04,274
+275,"University on the Niger, Umunya, Anambra state",UNUA,UNIVERSITY,PRIVATE,Anambra,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,275
+276,"Elrazi Medical University Yargaya University, Kano State",EMUYUK,UNIVERSITY,PRIVATE,Kano,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,276
+277,"Venite University, Iloro-Ekiti, Ekiti State",VUIEE,UNIVERSITY,PRIVATE,Ekiti,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,277
+278,"Shanahan University Onitsha, Anambra State",SUOA,UNIVERSITY,PRIVATE,Anambra,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,278
+279,"The Duke Medical University, Calabar, Cross River State",DMUCCR,UNIVERSITY,PRIVATE,Cross River,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,279
+280,"Mercy Medical University, Iwo, Ogun State",MMUIO,UNIVERSITY,PRIVATE,Ogun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,280
+281,Cosmopolitan University Abuja,CUA,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,281
+282,"Miva Open University, Abuja FCT",MIVA,UNIVERSITY,PRIVATE,FCT,Nigeria,https://miva.university/,,https://www.nuc.edu.ng,2026-09-04,282
+283,"Iconic Open University, Sokoto State.",IOUS,UNIVERSITY,PRIVATE,Sokoto,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,283
+284,"West Midlands Open University, Ibadan, Oyo State",WMOUIO,UNIVERSITY,PRIVATE,Oyo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,284
+285,"Al-Muhibbah Open University, Abuja",AMOUA,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,285
+286,"El-Amin University, Minna, Niger State",EAUMN,UNIVERSITY,PRIVATE,Niger,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,286
+287,"College of Petroleum and Energy Studies, Kaduna State",CPEK,UNIVERSITY,PRIVATE,Kaduna,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,287
+288,"Jewel University, Gombe state",JUG,UNIVERSITY,PRIVATE,Gombe,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,288
+289,"Prime University, Kuje, FCT Abuja",PUKFA,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,289
+290,"Nigerian University of Technology and Management, Apapa, Lagos State",NUAL,UNIVERSITY,PRIVATE,Lagos,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,290
+291,"Al-Bayan University, Ankpa, Kogi State",ABUAK,UNIVERSITY,PRIVATE,Kogi,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,291
+292,"Lighthouse University, Evbobanosa, Edo State",LUEE,UNIVERSITY,PRIVATE,Edo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,292
+293,"African University of Economics, FCT, Abuja",AUEFA,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,293
+294,"New City University, Ayetoro, Ogun State",NCUAO,UNIVERSITY,PRIVATE,Ogun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,294
+295,"University of Fortune, Igbotako, Ondo State",UFIO,UNIVERSITY,PRIVATE,Ondo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,295
+296,"Eranova University, Abuja",ERANOVA,UNIVERSITY,PRIVATE,FCT,Nigeria,https://eranova.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,296
+297,"Minaret University, Ikirun, Osun State",MUIO,UNIVERSITY,PRIVATE,Osun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,297
+298,"Abdulrasaq Abubakar Toyin University, Oke-Ogba, Ganmo, Ilorin, Kwara State",AATUOO,UNIVERSITY,PRIVATE,Kwara,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,298
+299,"Southern Atlantic University, Uyo, Akwa Ibom State",SAUUAI,UNIVERSITY,PRIVATE,Akwa Ibom,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,299
+300,"Lens University, Ilemona, Kwara State",LUIK,UNIVERSITY,PRIVATE,Kwara,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,300
+301,"Monarch University, Iyesi-Ota, Ogun State",MUIOO,UNIVERSITY,PRIVATE,Ogun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,301
+302,"Tonine Iredia University of Communication, Benin City, Edo State",TIUCBC,UNIVERSITY,PRIVATE,Edo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,302
+303,"Isaac Balami University of Aeronautics and Management, Lagos State",IBUAL,UNIVERSITY,PRIVATE,Lagos,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,303
+304,"Kevin Eze University, Mgbowo, Enugu State",KEUME,UNIVERSITY,PRIVATE,Enugu,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,304
+305,"Tazkiyah University, Kaduna, Kaduna State",TUKK,UNIVERSITY,PRIVATE,Kaduna,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,305
+306,"Leadership University, Abuja, FCT",LUAF,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,306
+307,"Jimoh Babalola University, Ilorin, Kwara State",JBUIK,UNIVERSITY,PRIVATE,Kwara,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,307
+308,"Bridget University Mbaise, Okirika-Nweke, Imo State",BUMONI,UNIVERSITY,PRIVATE,Imo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,308
+309,"Greenland University, Jalingo, Taraba State",GUJT,UNIVERSITY,PRIVATE,Taraba,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,309
+310,"JEFAP University, Suleja, Niger State",JUSN,UNIVERSITY,PRIVATE,Niger,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,310
+311,"Azione Verde University, Amaigbo, Imo State",AVUAI,UNIVERSITY,PRIVATE,Imo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,311
+312,"Unique Open University, Ojo, Lagos State",UOUOL,UNIVERSITY,PRIVATE,Lagos,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,312
+313,"American Open University, Abeokuta, Ogun State",AOUAO,UNIVERSITY,PRIVATE,Ogun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,313
+314,"Millenium Crest University, Ikare Akoko, Ondo State",MCUIAO,UNIVERSITY,PRIVATE,Ondo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,314
+315,"Abdulfattah Durojaiye University, Abeokuta Ogun State",ADUAO,UNIVERSITY,PRIVATE,Ogun,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,315
+316,"Euston University, Abakaliki, Ebonyi State",EUAE,UNIVERSITY,PRIVATE,Ebonyi,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,316
+317,"Adeche Momoh University, Igarra, Edo State",AMUIE,UNIVERSITY,PRIVATE,Edo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,317
+318,"Sani Bello University, Kontagora Niger State",SBUKN,UNIVERSITY,PRIVATE,Niger,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,318
+319,"Godday Erewa University, Sapele, Delta State",GEUSD,UNIVERSITY,PRIVATE,Delta,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,319
+320,"Owolabi University, Oke Ila Orangun",OUOIO,UNIVERSITY,PRIVATE,,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,320
+321,"Regnum Medical University, Anthony, Lagos State",RMUAL,UNIVERSITY,PRIVATE,Lagos,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,321
+322,City University Abuja,CITYUNIVERSITY,UNIVERSITY,PRIVATE,FCT,Nigeria,https://www.cityuniversity.edu.ng/,,https://www.nuc.edu.ng,2026-09-04,322
+323,"Transatlantic University of Medine and Health Sciences, Umuchukwu, Anambra State",TUMUA,UNIVERSITY,PRIVATE,Anambra,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,323
+324,"Maria Assumpta University Owerri, Imo State",MAUOI,UNIVERSITY,PRIVATE,Imo,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,324
+325,"High Flyers University, Ikere-Ekiti, Ekiti State",HFUIEE,UNIVERSITY,PRIVATE,Ekiti,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,325
+326,"Ummah University of Nigeria, Abuja",UUNA,UNIVERSITY,PRIVATE,FCT,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,326
+327,"Pearl University, Calabar, Cross river",PUCCR,UNIVERSITY,PRIVATE,Cross River,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,327
+328,Omega University Kaduna,OUK,UNIVERSITY,PRIVATE,Kaduna,Nigeria,,,https://www.nuc.edu.ng,2026-09-04,328
+329,FEDERAL POLYTECHNIC NGODO ISUOCHI,PNI,POLYTECHNIC,FEDERAL,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,329
+330,"Federal Polytechnic, Mubi",PM,POLYTECHNIC,FEDERAL,Adamawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,330
+331,"Maritime Academy of Nigeria, Oron",MANO,POLYTECHNIC,FEDERAL,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,331
+332,"Federal Polytechnic, Ukana",PU,POLYTECHNIC,FEDERAL,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,332
+333,"Federal Polytechnic, Oko",PO,POLYTECHNIC,FEDERAL,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,333
+334,"Federal Polytechnic, Bauchi",PB,POLYTECHNIC,FEDERAL,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,334
+335,Federal Polytechnic Ekowe,PE,POLYTECHNIC,FEDERAL,Bayelsa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,335
+336,"Nigerian Army College of Environmental Science and Technology, Makurdi",NACEM,POLYTECHNIC,FEDERAL,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,336
+337,"Federal Polytechnic, Wannune",PW,POLYTECHNIC,FEDERAL,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,337
+338,"Federal Polytechnic, Monguno",PM-BOR,POLYTECHNIC,FEDERAL,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,338
+339,"Federal Polytechnic, Ugep",PU-CRO,POLYTECHNIC,FEDERAL,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,339
+340,"Federal Polytechnic, Orogun,",PO-DEL,POLYTECHNIC,FEDERAL,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,340
+341,"Petroleum Training Institute, Effurun Delta State",PTED,POLYTECHNIC,FEDERAL,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,341
+342,"Akanu Ibiam Federal Polytechnic, Unwana-Afikpo",AIPUA,POLYTECHNIC,FEDERAL,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,342
+343,"Auchi Polytechnic, Auchi",APA,POLYTECHNIC,FEDERAL,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,343
+344,"National Institute of Construction Technology and Management, Uromi",CU,POLYTECHNIC,FEDERAL,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,344
+345,"Federal Polytechnic, Ado Ekiti",PAE,POLYTECHNIC,FEDERAL,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,345
+346,"Federal Polytechnic, Ohodo",PO-ENU,POLYTECHNIC,FEDERAL,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,346
+347,Federal Polytechnic Kaltungo,PK,POLYTECHNIC,FEDERAL,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,347
+348,"Federal Polytechnic, Nekede",PN,POLYTECHNIC,FEDERAL,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,348
+349,"Hussaini Adamu Federal Polytechnic, Kazaure",HAPK,POLYTECHNIC,FEDERAL,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,349
+350,"Kaduna Polytechnic, Kaduna",KPK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,350;1258
+351,"Nigerian College of Aviation Technology, Zaria, Kaduna State",NCAZK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,351
+352,"Air Force Institute of Technology (AFIT), Airforce Base, Kaduna",AFAABK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,352
+353,Federal Polytechnic Kabo,PK-KAN,POLYTECHNIC,FEDERAL,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,353
+354,"Federal Polytechnic, Daura",PD,POLYTECHNIC,FEDERAL,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,354
+355,"Waziri Umaru Federal Polytechnic, Birnin-Kebbi",WUPBK,POLYTECHNIC,FEDERAL,Kebbi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,355;1352
+356,Federal Polytechnic Idah,PI,POLYTECHNIC,FEDERAL,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,356
+357,"Federal Polytechnic, offa",PO-KWA,POLYTECHNIC,FEDERAL,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,357
+358,"Yaba College of Technology, Yaba",YCY,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,358
+359,"Federal Polytechnic, Nasarawa",PN-NAS,POLYTECHNIC,FEDERAL,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,359
+360,"Federal Polytechnic, Bida",PB-NIG,POLYTECHNIC,FEDERAL,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,360
+361,"Federal Polytechnic, Ilaro",PI-OGU,POLYTECHNIC,FEDERAL,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,361
+362,Federal Polytechnic Ile-Oluji,PIO,POLYTECHNIC,FEDERAL,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,362
+363,"Federal Polytechnic, Ede",PE-OSU,POLYTECHNIC,FEDERAL,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,363
+364,"Federal Polytechnic, Ayede",PA,POLYTECHNIC,FEDERAL,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,364
+365,"Federal Polytechnic, Nyak, Shendam",PNS,POLYTECHNIC,FEDERAL,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,365
+366,"Federal Polytechnic of Oil And Gas,Bonny,",POGB,POLYTECHNIC,FEDERAL,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,366
+367,"Federal Polytechnic, Bali",PB-TAR,POLYTECHNIC,FEDERAL,Taraba,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,367
+368,"Federal Polytechnic, Damaturu",PD-YOB,POLYTECHNIC,FEDERAL,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,368
+369,Federal Polytechnic Kaura-Namoda,PKN,POLYTECHNIC,FEDERAL,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,369
+370,Minna Institute of Technology and Innovation,MI,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,370
+371,"Abia State Polytechnic, Aba",APA-ABI,POLYTECHNIC,STATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,371
+372,"Adamawa State Polytechnic, Yola",APY,POLYTECHNIC,STATE,Adamawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,372
+373,"Akwa Ibom State Polytechnic, Ikot Osurua",AIPIO,POLYTECHNIC,STATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,373
+374,"Akwa Ibom State College of Arts & Science, Nung Ukim",AICANU,POLYTECHNIC,STATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,374
+375,"Anambra State Polytechnic, Mgbakwu",APM,POLYTECHNIC,STATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,375
+377,"Bayelsa State Polytechnic, Aleibiri, Bayelsa",BPAB,POLYTECHNIC,STATE,Bayelsa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,377
+378,"Akawe Torkula Polytechnic, Makurdi",ATPM,POLYTECHNIC,STATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,378
+379,"Ramat Polytechnic, Maiduguri",RPM,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,379
+380,"Cross River Institute of Technology And Management, Ugep",CRU,POLYTECHNIC,STATE,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,380
+381,"Delta State Polytechnic, Ogwashi-Uku",DPOU,POLYTECHNIC,STATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,381
+382,"Delta State Polytechnic, Otefe-Oghara",DPOO,POLYTECHNIC,STATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,382
+383,"Delta State Maritime Polytechnic, Burutu",DMPB,POLYTECHNIC,STATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,384
+384,"Benue State Polytechnic, Ugbokolo",BPU,POLYTECHNIC,STATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,385
+385,"Edo State Polytechnic, Usen",EPU,POLYTECHNIC,STATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,386
+386,"Ekiti State Polytecnic, Isan-Ekiti",EPIE,POLYTECHNIC,STATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,387
+387,"Enugu State Polytechnic, Iwollo",EPI,POLYTECHNIC,STATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,388
+388,"Institute of Management And Technology, Enugu",E,POLYTECHNIC,STATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,389
+389,"Gombe State Polytechnic, Bajoga",GPB,POLYTECHNIC,STATE,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,390
+390,"Imo State Polytechnic, Omuma",IPO,POLYTECHNIC,STATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,391
+391,"Binyamu Usman Polytechnic, Hadejia",BUPH,POLYTECHNIC,STATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,392
+392,"Jigawa State Polytechnic, Dutse",JPD,POLYTECHNIC,STATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,393;1255
+394,"Kano State Polytechnic, Kano",KPK-KAN,POLYTECHNIC,STATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,395;1261
+395,"Katsina Institute of Technology And Management, Katsina",KK,POLYTECHNIC,STATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,396
+396,"Hassan Usman Katsina Polytechnic, Katshina",HUKPK,POLYTECHNIC,STATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,397;1231
+398,"Kogi State Polytechnic, Lokoja",KPL,POLYTECHNIC,STATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,399
+399,"Kwara State Polytechnic, Ilorin",KPI,POLYTECHNIC,STATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,400
+400,"Isa Mustapha Agwai Polytechnic, Lafia",IMAPL,POLYTECHNIC,STATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,402
+401,"Nasarawa State College of Agriculture, Science and Technology Lafia",NCL,POLYTECHNIC,STATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,403
+402,"College of Agriculture, Science and Technology, Lafia",CL,POLYTECHNIC,STATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,404
+403,"Niger State Polytechnic, Zungeru",NPZ,POLYTECHNIC,STATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,405
+404,"Gateway Polytechnic, Saapade",GPS,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,406
+405,"Moshood Abiola Polytechnic, Abeokuta",MAPA,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,407
+406,"Ogun State Institute of Technology, Igbesa,",OI,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,408
+407,"Abraham Adesanya Polytechnic, Ijebu-Igbo",AAPII,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,409
+408,"D.S. Adegbenro Ict Polytechnic, Itori- Ewekoro",DAIPIE,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,410
+409,"Kenule Beeson Saro-Wiwa Polytechnic, Bori",KBSWPB,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,411
+410,"Rufus Giwa Polytechnic, Owo",RGPO,POLYTECHNIC,STATE,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,412
+411,"Osun State College of Technology, Esa ? Oke,",OCEO,POLYTECHNIC,STATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,413
+412,"Osun State Polytechnic, Iree",OPI,POLYTECHNIC,STATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,414
+413,"The Polytechnic, Iresi",PI-OSU,POLYTECHNIC,STATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,415
+414,"Adeseun Ogundoyin Polytechnic, Eruwa",AOPE,POLYTECHNIC,STATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,416
+415,"Ogun State Polytechnic, Ipokia (Yet To Commence Academic Activities)",OPIYTC,POLYTECHNIC,STATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,417
+416,"Oyo State College of Agriculture And Technology, Igbo-Ora",OCIO,POLYTECHNIC,STATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,418
+417,"The Polytechnic, Ibadan",PI-OYO,POLYTECHNIC,STATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,419
+418,"The Oke-Ogun Polytechnic, Saki (Tops)",OOPST,POLYTECHNIC,STATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,420
+419,"Plateau State Polytechnic, Barkin-Ladi",PPBL,POLYTECHNIC,STATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,421;1311
+420,"Port-Harcourt Polytechnic, Port-Harcourt",PHPPH,POLYTECHNIC,STATE,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,422
+421,"Umaru Ali Shinkafi Polytechnic, Sokoto",UASPS,POLYTECHNIC,STATE,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,423
+422,"Taraba State Polytechnic, Suntai",TPS,POLYTECHNIC,STATE,Taraba,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,424
+423,"College of Agriculture, Science And Technology, Gujba",CG,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,425
+424,"Mai-Idris Alooma Polytechnic, Geidam.",MIAPG,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,426
+425,"College of Administration, Management And Technology, Potiskum",CAP,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,427
+426,"Abdu Gusau Polytechnic, Talata Mafara",AGPTM,POLYTECHNIC,STATE,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,428
+427,Eko College of Management and Technology,EC,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,429
+428,"Covenant Polytechnic, Aba",CPA,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,430
+429,"Iheachukwu Madubuike Institute of Technology, Isouchi",IMI,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,431
+430,"Temple Gate Polytechnic, Aba",TGPA,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,432
+431,"Uma Ukpai Polytechnic, Ohafia",UUPO,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,433
+432,"Valley View Polytechnic, Ohafia",VVPO,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,434
+433,"MADONNA COLLEGE OF HEALTH TECHNOLOGY, OLOKORO UMUAHIA",MCOU,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,435
+434,"Brainfill Polytechnic, Ikot-Ekpene",BPIE,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,436
+435,"Foundation Polytechnic, Ikot Ekpene",FPIE,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,437
+436,"Heritage Polytechnic, Eket",HPE,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,438
+437,"Hope Polytechnic, Ikono",HPI,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,439
+438,"Ibom Metropolitan Polytchnic, Uyo",IMPU,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,440
+439,"Loam Polytechnic, Ikono",LPI,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,441
+440,"Southern Atlantic Polytechnic, Uyo",SAPU,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,442
+441,"Sure Foundation Polytechnic, Ikot-Akai",SFPIA,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,443
+442,"Trinity Polytechnic, Uyo",TPU,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,444
+443,"Ultra Excellence Polytechnic, Uyo",UEPU,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,445
+444,"Uyo City Polytechnic, Uyo",UCPU,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,446
+445,"El-Thomp Polytechnic, Abak. Akwa-Ibom State",ETPAAI,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,447
+446,"Gestric Polytechnic, Uyo, Akwa Ibom State",GPUAI,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,448
+447,"Grundtvig Polytechnic, Oba",GPO,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,449
+448,"GOZIE ANYACHEBELU ORAGRAM POLYTECHNIC ORAUKWU, ANAMBRA STATE",GAOPOA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,450
+449,"Renaissance Modern Polytechnic, Mbaukwu, Anambra",RMPMA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,451
+450,"Ashi Polytechnic, Anyin,",APA-BEN,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,452
+451,"Fidei Polytechnic, Gboko",FPG,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,453
+452,"Gboko Polytechnic, Gboko",GPG,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,454
+453,"Harry Pass Polytechnic, Gboko",HPPG,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,455
+454,"The Polytechnic, Adoka",PA-BEN,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,456
+455,"Intercontinental College of Technology, Makurdi, Benue State",ICMB,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,457
+456,"NOGAK Polytechnic, Ikom",NPI,POLYTECHNIC,PRIVATE,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,458
+457,"Odaji Agbo Polytechnic, Ayeko Yala",OAPAY,POLYTECHNIC,PRIVATE,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,459
+458,"Bellarks Polytechnic, Kwale",BPK,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,460
+459,"Calvary Polytechnic, Owo-Oyibu, Delta State",CPOOD,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,461
+460,Nation Builders Polytechnic. Asaba.,NBPA,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,462
+461,"Global Polytechnic, Benin",GPB-EDO,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,463
+462,"Kings Polytechnic, Ubiaja",KPU,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,464
+463,"Lighthouse Polytechnic, Evbuobanosa",LPE,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,465
+464,"Oduduwa Polytechnic, Idimu",OPI-EDO,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,466
+465,"Shaka Polytechnic, Benin City",SPBC,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,467
+466,"Speedway Polytechnic, Osoba",SPO,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,468
+467,"Ajayi Polytechnic, Ara-Ekiti",APAE,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,469
+468,"Crown Polytechnic, Ado-Ekiti,",CPAE,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,470
+469,Ekiti City Polytechnic Umuooke Ekiti,ECPUE,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,471
+470,"Teedek Polytechnic, Ilogbo-Ekiti",TPIE,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,472
+471,"The Polytechnic, Omuo-Ekiti",POE,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,473
+472,Montgomery Polytechnic,MP,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,474
+473,"Marist Polytechnic, Emene",MPE,POLYTECHNIC,PRIVATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,475
+474,"Mater Dei Polytechnic, Egwuoba",MDPE,POLYTECHNIC,PRIVATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,476
+475,"Our Saviour Institute of Science, Agriculture & Technology, Enugu",OSE,POLYTECHNIC,PRIVATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,477
+476,"Citi Polytechnic, Abuja",CPA-FED,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,478
+477,Dorben Polytechnic Bwari,DPB,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,479
+478,"LeadTech School of Management and Technology, Abuja, FCT",LAF,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,480
+479,"Raindrops Institute of Management and Technology, Amannachi, Orsu LGA, Imo State",RAOLI,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,481
+480,"Raindrops Institute of Management and Technology, Amannachi, Orsu LGA, Imo State",RAOLI-IMO,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,482
+481,"Raindrops Institute of Management and Technology Amannchi, Orsu LGA, Imo State",RAOLI-IMO2,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,483
+482,Mustibrah College of Information Technology and Management Studies,MCI,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,484
+483,"Gloryland Polytechnic, Ankpa",GPA,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,485
+484,"Prime Polytechnic, Jida Bassa, Ajaokuta",PPJBA,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,486
+485,"Graceland Polytechnic, offa",GPO-KWA,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,487
+486,"Harvard Polytechnic, Ilorin",HPI-KWA,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,488
+487,"Lens Polytechnic, offa",LPO,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,489
+488,"Newland Polytechnic, Ilorin",NPI-KWA,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,490
+489,The Polytechnic Aran-Orin,PAO,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,491
+490,"The Polytechnic, Igbo-Owu",PIO-KWA,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,492
+491,"The Polytechnic, Ojoku-Offa",POO,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,493
+492,"Coastal Polytechnic, Badagry",CPB,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,494
+493,"Enville Institute of Management and Technology, Ikeja",EI,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,495
+494,"Grace Polytechnic, Surulere",GPS-LAG,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,496
+495,"Inspire Polytechnic, Lagos",IPL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,497
+496,"Kalac Crystal Polytechnic, Lekki",KCPL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,498
+497,"Lagos City Polytechnic, Ikeja",LCPI,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,499
+498,"Paramount Polytechnic, Ejigbo",PPE,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,500
+499,"Ronik Polytechnic, Ejigbo, Ikeja",RPEI,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,501
+500,"Timeon Kairos Polytechnic, Lagos",TKPL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,502
+501,"Unique College of Management and Technology, Lagos",UCL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,503
+502,"Al-Hikma Polytechnic, Karu",AHPK,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,504
+503,"NACABS Polytechnic, Akwanga",NPA,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,505
+504,Vineyard Polytechnic,VP,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,506
+505,"St. Mary Polytechnic, Kwamba, Suleja",SMPKS,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,507
+506,"Allover Central Polytechnic, Sango-Ota",ACPSO,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,508
+507,"I-Con Universal Polytechnic, Osogbo",ICUPO,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,509
+508,"Landmark Polytechnic, Ayetoro",LPA,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,510
+509,"Redeemers College of Technology And Management, Mowe",RCM,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,511
+510,"Stars Polytechnic, Ota",SPO-OGU,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,512
+511,"First City Polytechnic, Abeokuta, Ogun State",FCPAO,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,513
+512,"First City Polytechnic, Abeokuta, Ogun State",FCPAO-OGU,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,514
+513,"Best Solution Polytechnic, Akure",BSPA,POLYTECHNIC,PRIVATE,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,515
+514,"British Transatlantic Polytechnic, Akure",BTPA,POLYTECHNIC,PRIVATE,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,516
+515,"Edward Olaseni Polytechnic, Ajowa- Akoko, Ondo State",EOPAAO,POLYTECHNIC,PRIVATE,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,517
+516,"Distinct Polytechnic, Ekosin",DPE,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,518
+517,"Igbajo Polytechnic, Igbajo",IPI,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,519
+518,"Interlink Polytechnic, Ijebu-Jesa",IPIJ,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,520
+519,"Iwo City Polytechnic, Iwo",ICPI,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,521
+520,"The Polytechnic, Ile-Ife",PII,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,522
+521,"Villanova Polytechnic, Imesi-Ile",VPII,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,523
+522,"Westland Polytechnic, Ilobu, Osun",WPIO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,524
+523,"Wolex Polytechnic, Iwo, Osun State",WPIO-OSU,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,525
+524,Daboss Polytechnic,DP,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,526
+525,"Bolmor Polytechnic, Ibadan",BPI,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,527
+526,"Ibadan City Polytechnic, Ibadan",ICPI-OYO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,528
+527,"Novelty Polytechnic, Kishi",NPK,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,529
+528,"Saf Polytechnic, Iseyin",SPI,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,530
+529,"Tower Polytechnic, Ibadan",TPI,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,531
+530,The West African Polytechnic,WAP,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,532
+531,"American Polytechnic, Wasimi",APW,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,533
+532,"United Polytechnic, Jos",UPJ,POLYTECHNIC,PRIVATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,534
+533,"Eastern Polytechnic, Port Harcourt",EPPH,POLYTECHNIC,PRIVATE,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,535
+534,Yenagoa Polytechnic,YP,POLYTECHNIC,,Bayelsa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,536
+535,Bauchi State College of Agriculture,BC,POLYTECHNIC,STATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,537
+536,"College of Agriculture and Animal Health, Bakura",CAB,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,538
+537,"College of Agriculture, Zuru",CZ,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,539
+538,"Edo State College of Agriculture, Iguoriakhi",ECI,POLYTECHNIC,STATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,540
+539,"Federal College of Agricultural Produce, Kano",CPK,POLYTECHNIC,FEDERAL,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,541
+540,"Federal College of Agriculture, Moor-Plantation, Ibadan",CMPI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,542
+541,"Federal College of Agriculture, Ishiagu",CI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,543
+542,"Federal College of Animal Health & Production Technology, Ibadan,",CAPI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,544
+543,"Federal College of Animal Health & Production Technology, Vom",CAPV,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,545
+544,"Federal College of Fisheries & Marine Technology, Victoria Island",CFMVI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,546
+545,"Federal College of Forestry, Ibadan",CFI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,547
+546,"Federal College of Forestry, Jos",CFJ,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,548
+547,"Federal College of Forestry Mechanization, Afaka",CFMA,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,549
+548,"Federal College of Forestry Resources Management, Fugar",CFRF,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,550
+549,"Federal College of Forestry Resources Management, Ishiagu",CFRI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,551
+550,"Federal College of Forestry Resources Management, Maiduguri",CFRM,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,552
+551,"Federal College of Freshwater Fisheries Technology, New Bussa",CFFNB,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,553
+552,"Federal College of Horticultural Technology, Dadin Kowa",CHDK,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,554
+553,"Federal College of Land Resources Technology, Kuru",CLRK,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,555
+554,"Federal College of Land Resources Technology, Owerri",CLRO,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,556
+555,"Federal College of Veterinary and Medical Laboratory Technology, Vom",CVMLV,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,557
+556,"Mohammet Lawan College of Agriculture, Maiduguri",MLCM,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,558
+557,"Plateau State College of Agriculture, Garkawa",PCG,POLYTECHNIC,STATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,559
+558,"Samaru College of Agriculture, DAC ABU, Zaria",SCDAZ,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,560
+559,"Usteem College of Agriculture, Osogbo",UCO,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,561
+560,"Yobe State College of Agriculture, Gujba",YCG,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,562
+561,"Federal School of Dental Technology & Therapy, Enugu",DTE,POLYTECHNIC,FEDERAL,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,563
+562,"Nigerian Army School of Medical Sciences, Ojo",NAMO,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,564
+563,"School of Biomedical Engineering Technology, ABUTH, Shika-Zaria",BEASZ,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,565
+564,"School of Biomedical Engineering Technology, Luth, Idi Araba",BELIA,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,566
+565,"School of Biomedical Engineering, UBTH, Benin",BEUB,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,567
+566,"School of Biomedical Engineering, UMTH, Maiduguri",BEUM,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,568
+567,"School of Laundry and Dry Cleaning Technology, AKTH, Kano",LDCAK,POLYTECHNIC,FEDERAL,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,569
+568,"School of Social Development, UPTH, Port-Harcourt",SDUPH,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,570
+569,"Bala Abdullahi College of Administration, Funtua",BACAF,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,571
+570,"Centre for Advanced Library and Information Management, Enugu",CALIE,POLYTECHNIC,FEDERAL,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,572
+571,"College of Business and Management Studies, Konduga",CBK,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,573
+572,"College of Administration, Management & Technology, Potiskum",CAP-1,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,574
+573,"College of Arabic and Islamic Legal Studies, Ilorin, Kwara State",CAIIK,POLYTECHNIC,STATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,575
+574,"Commonwealth College of Technology, Gboko, Benue State",CCGB,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,576
+575,"ED-John Institute of Management and Technology Ikorodu, Lagos State",EJIL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,577
+576,"Federal Cooperative College, Kaduna",CCK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,578
+577,"Federal School of Social Works, Emene, Enugu",SWEE,POLYTECHNIC,FEDERAL,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,579
+578,"Federal Training Centre, Kaduna",TCK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,580
+579,"Federal Training Centre, Maiduguri",TCM,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,581
+580,"Harvarde College of Business and Management Studies, Abeokuta",HCBA,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,582
+581,"Institute of Administration, ABU, Zaria",AAZ,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,583
+582,"Jigawa State College of Remedial and and Advance Studies, Babura",JCRAB,POLYTECHNIC,STATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,584
+583,"Jigawa State Institute of Information Technology, Kazaure",JIK,POLYTECHNIC,STATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,585
+584,"Joemarine Institute of Nautical Studies and Research Effurun, Delta State",JNRED,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,586
+585,"Lagos State Co-operative College, Agege, Lagos State",LCOCAL,POLYTECHNIC,STATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,587
+586,Lapo Institute for Microfinance and Management Studies Benin,LMB,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,588
+587,"Metallurgical Training Institute, Onitsha",MTO,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,589
+588,"Michael Imodu National Institute for Labour Studies, Ilorin",MILI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,590
+589,Muhammadu Buhari Meteorological Institute of Science and Technology Katsina,MBMK,POLYTECHNIC,FEDERAL,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,591
+590,"Muson School of Music, Marina Onikan, Lagos State",MMMOL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,592
+591,"National Institute for Cultural Orientation, Lagos Training School, Lagos State",COLTL,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,593
+592,"National Institute for Hospitality and Tourism Bagauda, Kano",HTBK,POLYTECHNIC,FEDERAL,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,594
+593,"National Institute for Legislative and Democratic Studies, Abuja",LDA,POLYTECHNIC,FEDERAL,FCT,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,595
+594,"National Water Resources Institute, Mando, Kaduna",WRMK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,596
+595,"Nigerian Army School of Finance and Administration, Apapa, Lagos",NAFAAL,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,597
+596,"Nigerian Navy College of Accounts & Finance Owerrinta, Abia State",NNCAFO,POLYTECHNIC,FEDERAL,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,598
+597,"Nigerian Navy Engineering College, Sapele",NNECS,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,599
+598,"Savannah Institute of Technology Abakaliki, Ebonyi State",SAE,POLYTECHNIC,PRIVATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,600
+599,"Wavecrest College of Catering and Hospitality Management, Lagos.",WCCHL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,601
+600,Asteven Energy Institute,AE,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,602
+601,Lagos Aviation and Maritime Business (LAMB) Academy,LAMBLA,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,603
+602,Mario Institute of Hospitality Management and Entreprenuership Education Uhunowerre,MHEU,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,604
+603,Nigeria-Korea Friendship Institute of Vocational and Advanced Technology,NKFVA,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,605
+604,Nigerian Institute of Transport & Technology,NT,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,606
+605,"Nigerian Television Authority (NTA), Television College",NTANTC,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,607
+606,"International College of Technology, Makurdi, Benue State",ICMB-BEN,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,608
+607,"Osun College of Management Science Ipetu Ijesha, Osun State",OCIIO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,609
+608,"Fati Lami Abubakar Institute for Legal and Administrative Studies Minna, Niger State",FLAAMN,POLYTECHNIC,STATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,610
+609,"Nigerian Navy College of Accounts and Finance Owerrinta, Abia State",NNCAFO-ABI,POLYTECHNIC,FEDERAL,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,611
+610,"COLLEGE FOR LEGAL STUDIES, YOLA ADAMAWA STATE",CYA,POLYTECHNIC,STATE,Adamawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,612
+611,"Adamawa State College of Agriculture, Science and Technology, Ganye",ACG,POLYTECHNIC,STATE,Adamawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,613
+612,"Mekaria institute of Technology and Administration, Obosi, Anambra state.",MAOA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,614
+613,"A.D Rufai College of Education, Legal & General Studies, Misau, Bauchi State",ARCMB,POLYTECHNIC,STATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,615
+614,Bauchi Oil and Gas Academy,BOGA,POLYTECHNIC,STATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,616
+615,"International Institute of Tourism, Yenagoa, Bayelsa State",ITYB,POLYTECHNIC,STATE,Bayelsa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,617
+616,"International Institute of Tourism and Hospitality Yenagoa, Bayelsa State",ITHYB,POLYTECHNIC,STATE,Bayelsa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,618
+617,"Federal College of Freshwater Fisheries Technology, Baga",CFFB,POLYTECHNIC,FEDERAL,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,619
+618,"Federal College of Wildlife Management, New Bussa",CWNB,POLYTECHNIC,FEDERAL,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,620
+619,"Federal Training Centre, Calabar",TCC,POLYTECHNIC,FEDERAL,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,621
+620,"Thomas Mcgettrick Institute of Technology, Ogoja, Cross River State",TMOCR,POLYTECHNIC,PRIVATE,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,622
+621,"College of Agriculture, Obubura, Cross River state",COCR,POLYTECHNIC,STATE,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,623
+622,"All Nations Institute of Marine and Technology, Oghara-Otefe, Delta State",ANMOOD,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,624
+623,"Global Maritime Academy, Ughelli South Local Government Area, Delta State",GMAUSL,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,625
+624,"Naval Institute of Technology, Naval Base, New Port - Ogorode, Sapele, Delta State",NNBNPO,POLYTECHNIC,FEDERAL,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,626
+625,"Delta Central College of Business and Management Studies, Ughelli, Delta State",DCCBUD,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,627
+626,"Izisco Obos Institute of Marine Studies and Technology, Warri, Delta",IOMWD,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,628
+627,"Federal College of Forest Resources Management, Ishiagu, Ebonyi State",CFRIE,POLYTECHNIC,FEDERAL,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,629
+628,EFON ALAAYE COLLEGE OF MANAGEMENT AND TECHNOLOGY,EAC,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,630
+629,"Federal Cooperative College, Oji ? River",CCOR,POLYTECHNIC,FEDERAL,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,631
+630,"Federal Training Centre, Enugu",TCE,POLYTECHNIC,FEDERAL,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,632
+631,"Eastwing Aviation Institute, Emene, Enugu State",EAEE,POLYTECHNIC,PRIVATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,633
+632,"LeadTech School of Management and Technology, Abuja",LA,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,634
+633,"SMEDAN Inspire, Create, Start and Scale Institute",SICSS,POLYTECHNIC,FEDERAL,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,635
+634,"Masterminds Academy for Tourism, Culinary Arts and Hospitality",MATCAH,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,636
+635,NBTE Test School,NT-GOM,POLYTECHNIC,FEDERAL,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,637
+636,"Gombe state College of Education and legal Studies, Nafada, Gombe State",GCNG,POLYTECHNIC,STATE,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,638
+637,"Federal College of Horticulture, Dadin-Kowa, Gombe State",CHDKG,POLYTECHNIC,FEDERAL,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,639
+638,MBARA OZIOMA COLLEGE OF TECHNOLOGY,MOC,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,640
+639,"College of Agriculture and Animal Science, DAC-ABU, Mando",CADAM,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,641
+640,"Federal School of Statistics, Manchok",SM,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,642
+641,"Khemsafe College of Management, Science and Technology",KC,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,643
+642,"Khemsafe College of Management, Science, and Technology, Kaduna, Kaduna State",KCKK,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,644
+643,"Nigerian Airforce School of Medical Sciences and Aviation Medicine, Kaduna.",NAMAMK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,645
+644,"Audu Bako College of Agriculture, Danbatta",ABCD,POLYTECHNIC,STATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,646
+645,Mustibrah College of Information Technology and Management Studies,MCI-KAN,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,647
+646,"Kano State Institute of Horticulture, Bagauda",KHB,POLYTECHNIC,STATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,648
+647,"Federal College of Agriculture & Technology, Nabanje",CN,POLYTECHNIC,FEDERAL,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,649
+648,"Federal Teaching Hospital, Birnin Kebbi, Kebbi State - (School of Dispensing Opticianry)",THBKKD,POLYTECHNIC,FEDERAL,Kebbi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,650
+649,"College of Agriculture, DAC ABU, Kabba",CDAK,POLYTECHNIC,FEDERAL,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,651
+650,"Federal Training Centre, Ilorin",TCI,POLYTECHNIC,FEDERAL,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,652
+651,"SHARIFAT INSTITUTE OF PROFESSIONAL AND ISLAMIC LEGAL STUDIES, ILORIN",SPII,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,653
+652,"Federal Training Centre, Ikoyi",TCI-LAG,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,654
+653,"National Institute for Sports, Surulere, Lagos",SSL,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,655
+654,"Nigerian Army School of Signals, Apapa, Lagos",NASAL,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,656
+655,"Nigerian Institute of Journalism, Ikeja, Lagos",NJIL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,657
+656,"OAK Business School, OPIC, River View Estate, Ogun State",OBORVE,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,658
+657,DALEWARES INSTITUTE OF TECHNOLOGY LTD,DL,POLYTECHNIC,,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,659
+658,"Nubian American Advanced College, Off Chevron Drive, Lekki, Lagos State",NAACOC,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,660
+659,"Arabic and Islamic Training Centre (Markaz), Agege, Lagos",AITCMA,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,661
+660,"Western Coast Maritime Academy, Lagos",WCMAL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,662
+661,"Certified Institute of Shsipping, Badagry, Lagos",CSBL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,663
+662,"Abuja School of Pensions and Retirement Planning, Abuja",APRPA,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,664
+663,"Pemgo College of Business and Management Studies Karu, Nasarawa State",PCBKN,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,665
+664,"Niger State College of Agriculture, Mokwa",NCM,POLYTECHNIC,STATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,666
+665,STARS MARITIME ACADEMY,SMA,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,667
+666,"Federal College of Agriculture, Akure",CA,POLYTECHNIC,FEDERAL,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,668
+667,"Arosurge College of Survey and Geo-informatics, Oshogbo, Osun State",ACSGIO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,669
+668,"Adecom College of Business and Management Studies, Ibadan",ACBI,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,670
+669,"Federal Cooperative College, Ibadan",CCI,POLYTECHNIC,FEDERAL,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,671
+670,"Federal School of Statistics, Ibadan",SI,POLYTECHNIC,FEDERAL,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,672
+671,"Federal School of Surveying, Oyo",SO,POLYTECHNIC,FEDERAL,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,673
+672,HIGHLAND COLLEGE OF TECHNOLOGY,HC,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,674
+673,"TNM Media Academy, Dugbe, Ibadan",TMADI,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,675
+674,Soteria Business School,SB,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,676
+675,"Impact School of Broadcasting and Communication, Ibadan",IBCI,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,677
+676,"Soteria Business School, Oke-Ado Ibadan, Oyo",SBOAIO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,678
+677,"Nigerian Institute of Leather Sciences and Technology, Samaru, Zaria",NLSZ,POLYTECHNIC,FEDERAL,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,679
+678,"Nigerian Institute of Mining and Geoscience, Jos, Plateau State",NMGJP,POLYTECHNIC,FEDERAL,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,680
+679,"Charkin Maritime Academy, Port Harcourt, Rivers State",CMAPHR,POLYTECHNIC,PRIVATE,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,681
+680,"Rivers state University Teaching Hospital, Port Harcourt.",RUTHPH,POLYTECHNIC,STATE,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,682
+681,"College of Agriculture, Science and Technology, Jalingo",CJ,POLYTECHNIC,STATE,Taraba,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,683
+682,"College of Education & Legal Studies, Nguru",CN-YOB,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,684
+683,"Zamfara College of Arts and Science, Gusau",ZCAG,POLYTECHNIC,STATE,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,685
+684,"Zamfara Institute of Information Technology, ZIIT, Gusau",ZIZG,POLYTECHNIC,STATE,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,686
+685,"Abia State College of Health Technology, Aba",ACA,POLYTECHNIC,STATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,687
+686,ABUTH School of Health Information Mgt.,AIM,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,688
+687,"Al-Maarif College of Health Sciences & Technology, Potiskum",AMCP,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,689
+688,"Aminu Dabo College of Health Sciences and Technology, Kano",ADCK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,690
+689,"Anambra State College of Health Technology, Obosi",ACO,POLYTECHNIC,STATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,691
+690,"Babalola Academy College of Health Technology Oloru, Ilorin",BACOI,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,692
+691,"Bartholomew College of Health Technology, Shao",BCS,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,693
+692,"Bayelsa State College of Health Technology, Otuogidi",BCO,POLYTECHNIC,STATE,Bayelsa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,694
+693,"Bill and Melinda Gates College of Health Technology, Ninigi",BMGCN,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,695
+694,Centenary College of Health Science and Technology Emohua,CCE,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,696
+695,"College of Health Science and Technology, Idah",CI-1,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,697
+696,"College of Health Science and Technology, Ile-Ife",CII,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,698
+697,"College of Health Technology , Ezzangbo",CE,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,699
+698,"College of Health Technology, Zawan",CZ-1,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,700
+699,"Cross Rivers State College of Health Technology, Calabar",CRCC,POLYTECHNIC,STATE,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,701
+700,"De-Potter College of Health Technology, Ogun State",DPCO,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,702
+701,"Ekiti State College of Health Sciences andTechnology, Ijero Ekiti",ECAIE,POLYTECHNIC,STATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,703
+702,"Emirates College of Health Sciences and Technology, Kabuga",ECK,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,704
+703,"Eucharistic Heart College of Health Technology Orba, Nsukka",EHCON,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,705
+704,"Fabotas College of Health Science and Technology, Ado Ekiti",FCAE,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,706
+705,"Federal College of Orthorpaedic Technology, NOH, Igbobi, Lagos",CONIL,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,707
+706,"Kano State College of Health Sciences and Technology, B.U.K Road",KCBR,POLYTECHNIC,STATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,708
+707,"Kano State College of Health Sciences and Technology, Sani Marshall Rd.",KCSMR,POLYTECHNIC,STATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,709
+708,"Kwara State College of Health Technology, Offa",KCO,POLYTECHNIC,STATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,710
+709,"Lagos State College of Health Technology, Yaba",LCY,POLYTECHNIC,STATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,711
+710,"Malikiya College of Health and Social Sciences, Bauchi",MCSB,POLYTECHNIC,PRIVATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,712
+711,"Millenneium College of Health Technology, Akure",MCA,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,713
+712,"Nasarawa State College of Health Science and Technology, Keffi",NCK,POLYTECHNIC,STATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,714
+713,"Nazareth College of Health Science and Technology, Makurdi",NCM-1,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,715
+714,"NKST College of Health Technology, Mkar, Gboko",NCMG,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,716
+715,"Ogun State Polytechnic of Health and Allied Sciences, Ilese-Ijebu",OPII,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,717
+716,"Ondo College of Health Sciences and Technology, Ondo",OCO,POLYTECHNIC,PRIVATE,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,718
+717,"Oyo State College of Health Sciences and Technology, Eleyele, Ibadan",OCEI,POLYTECHNIC,STATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,719
+718,"Osun State College of Health Technology, Ilesa",OCI,POLYTECHNIC,STATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,720
+719,"Pogil College of Health Technology, Ijebu-Ode",PCIO,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,721
+720,"Rivers State College of Health Technology, Port Harcourt",RCPH,POLYTECHNIC,STATE,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,722
+721,"School of Health Information Management, AKTH, Kano",IAK,POLYTECHNIC,FEDERAL,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,723
+722,"School of Health Information Management, ATBUTH, Bauchi",IAB,POLYTECHNIC,FEDERAL,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,724
+723,"School of Health Information Management, NAUTH, Nnewi",INN,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,725
+724,"School of Health Information Management, OAUTH, Ile-Ife",IOII,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,726
+725,"School of Health Information Management, UBTH, Benin",IUB,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,727
+726,"School of Health Information Management, UCTH, Calabar",IUC,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,728
+727,"School of Health Information Management, UCH, Ibadan",IUI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,729
+728,"School of Health Information Management, UDUTH, Sokoto",IUS,POLYTECHNIC,FEDERAL,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,730
+729,"School of Health Information Management, UITH, Ilorin",IUI-1,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,731
+730,"School of Health Information Management, UMTH, Maiduguri",IUM,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,732
+731,"School of Health Information Management, UPTH, Port-Harcourt",IUPH,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,733
+732,"School of Health Information Management, LUTH, Idi Araba, Lagos",ILIAL,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,734
+733,"School of Health Information Management, University of Uyo",IUU,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,735
+734,"School of Health Technology, Akure",A,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,736
+735,"School of Orthopaedic Cast Technology, LASUTH Ikeja, Lagos State",OCLIL,POLYTECHNIC,STATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,737
+736,"School of Orthopaedic Cast Technology, NOH, Dala, Kano",OCNDK,POLYTECHNIC,FEDERAL,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,738
+737,"School of Orthopedic Cast Technology, UITH, Ilorin",OCUI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,739
+738,"Shehu Idris College of Health Sciences and Technology, Makarfi",SICM,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,740
+739,"Zamfara State College of Health Sciences and Tchnology, Tsafe",ZCTT,POLYTECHNIC,STATE,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,741
+740,National Orthopaedic Hospital Igbobi Lagos,OHIL,POLYTECHNIC,FEDERAL,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,742
+741,Taraba State College of Health Technology Takum,TCT,POLYTECHNIC,STATE,Taraba,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,743
+742,"School of Health Information Management, Federal Teaching Hospital Gombe",ITHG,POLYTECHNIC,FEDERAL,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,744
+743,"Penfield College of Health Sciences and Technology, Kaduna, Kaduna State",PCKK,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,745
+744,"School of Health Information Management, Delta State University Teaching Hospital, Oghara, Delta State",IDUTHO,POLYTECHNIC,,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,746
+745,"Sultan Abdulrahman College of Health Technology Gwadabawa, Sokot State",SACGS,POLYTECHNIC,,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,747
+746,"School of Health Information Management, Aminu Kano Teaching Hospital, Kano",IAKTHK,POLYTECHNIC,,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,748
+747,"Adamawa State College of Health Technology Michika, Adamawa State",ACMA,POLYTECHNIC,,Adamawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,749
+748,"Nigerian Navy College of Health Technology, Offa, Kwara State",NNCOK,POLYTECHNIC,FEDERAL,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,750
+749,"College of Health Science and technology, Nguru, Yobe state.",CNY,POLYTECHNIC,,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,751
+750,Delta state College of Health Science and technology,DC,POLYTECHNIC,,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,752
+751,"Enica College of Health Technology, Bekwarra, Cross-river.",ECBCR,POLYTECHNIC,,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,753
+752,"School of Orthopedic Cast Technology, University of Ilorin Teaching Hospital, Ilorin",OCUITH,POLYTECHNIC,,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,754
+753,"Abia State College of Health Science and Management Technology, Aba",ACA-ABI,POLYTECHNIC,STATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,755
+754,Woclif College of Health Technology Akwa Ibom State,WCAI,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,756
+755,"LASBERY COLLEGE OF HEALTH TECHNOLOGY OGIDI, ANAMBRA STATE",LCOA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,757
+756,"Our Lady of Lourdes Hospital Health Colleges, Ihiala, Anambra State",OLLHIA,POLYTECHNIC,STATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,758
+757,GARU ISLAMIC COLLEGE OF HEALTH TECHNOLOGY BAUCHI,GICB,POLYTECHNIC,PRIVATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,759
+758,"Bayelsa state college of Health Technology, Otuogidi-Ogbia, Bayelsa state",BCOOB,POLYTECHNIC,STATE,Bayelsa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,760
+759,"Asoka College of Health Science and Technology, Otukpo, Benue state",ACOB,POLYTECHNIC,STATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,761
+760,"Adoka College of Health Science and Technology, Otukpo, Benue State",ACOB-BEN,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,762
+761,"Prestige School of Health Technology, Tarka",PT,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,763
+762,"Makurdi College of Health and Medical Laboratory Science, Makurdi, Benue State",MCMLMB,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,764
+763,"Mbagen College of Health Technology, Benue State",MCB,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,765
+764,"College of Health Technology Aliade, Benue State",CAB-BEN,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,766
+765,"Borno State College of Health Technology, Maiduguri",BCM,POLYTECHNIC,STATE,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,767
+766,OBUDU COLLEGE OF HEALTH TECHNOLOGY,OC,POLYTECHNIC,PRIVATE,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,768
+767,Favour College of Health Science and Technology,FC,POLYTECHNIC,PRIVATE,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,769
+768,"Delta State School of Health Technology, Ugheli",DU,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,770
+769,Blessed Martins' International Institute of Science and Technology,BMI,POLYTECHNIC,PRIVATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,771
+770,"Institute of Health Technology, University Teaching Hospital, Benin",UTHB,POLYTECHNIC,FEDERAL,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,772
+771,"University of Benin Teaching Hospital, Institute of Health Science and Technology, Benin, Edo state",UBTHBE,POLYTECHNIC,FEDERAL,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,773
+772,"Havilah College of Health Sciences and Technology Ise-Ekiti, Ekiti State",HCIEE,POLYTECHNIC,PRIVATE,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,774
+773,Peaceland College of Health Sciences & Technology Enugu,PCE,POLYTECHNIC,PRIVATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,775
+774,"School of Orthopaedic Cast Technology, NOH, Enugu",OCNE,POLYTECHNIC,FEDERAL,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,776
+775,"School of Medical Laboratory Technicians, Bishop Shanahan Specialist Hospital, Nsukka, Enugu State.",MLTBSS,POLYTECHNIC,STATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,777
+776,"Horizon College of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja",HCAGFA,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,778
+777,"Gombe State College of Health Science & Technology, Kaltungo",GCK,POLYTECHNIC,STATE,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,779
+778,"Maryam Khuddam College of Health Sciences and Technology, Kazaure, Jigawa State",MKCKJ,POLYTECHNIC,PRIVATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,780
+779,"College of Health Sciences and Technology, Hadejia",CH,POLYTECHNIC,PRIVATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,781
+780,"Dagamas College of Health Sciences and Technology, Zaria",DCZ,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,782
+781,"IDRIS MIKA'IL COLLAGE OF HEALTH SCIENCES AND TECHNOLOGY, RIKOCHI",IMCR,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,783
+782,"AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.",AHCZ,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,784
+783,"Islamic Medical Foundation College of Health Science and Technology, Tudun Wada, Kaduna, Kaduna State",IMFCTW,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,785
+784,"Beijing College of Health Sciences & Technology, Kaduna",BCK,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,786
+785,"ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA",ACK,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,787
+786,AREWA AMBASSADOR INTERNATIONAL COLLEGE OF HEALTH SCIENCE AND TECHNOLOGY ZARIA,AAICZ,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,788;793
+787,UMARU DANGALADIMA SCHOOL OF HEALTH TECHNOLOGY EDUCATIONAL FOUNDATION,UDEF,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,789
+788,"Al-kausar College of Health Technology Foundation, Kaduna",AKCFK,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,790
+789,"School of Health Information Management, National Ear Care Centre Kaduna",IECCK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,791
+790,"Charity College of Health Science and Technology, Mando, Kaduna State",CCMK,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,792
+792,"Bichi Academy College of Science and Health Technology, Bichi Kano State",BACBK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,794
+793,"Flagship College of Nursing Science, Bichi Kano.",FCBK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,795
+794,SCHOOL OF PARAMEDICS AMINU KANO TEACHING HOSPITAL KANO,PAKTHK,POLYTECHNIC,FEDERAL,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,796
+795,"Katsina State College of Health Science & Technology, Kankia",KCK,POLYTECHNIC,STATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,797
+796,"Muslim Community College of Health Technology, Funtua, Katsina State",MCCFK,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,798
+797,"Cherish College of Health Sciences and Technology, Katsina",CCK-KAT,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,799
+798,"Kebram College of Health Science and Technology, Katsina, Katsina State",KCKK-KAT,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,800
+799,"KATSINA STATE COLLEGE HEALTH SCIENCES and TECHNOLOGY, DAURA",KCD,POLYTECHNIC,STATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,801
+800,KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA,KCK-KAT,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,802
+801,"Cognate Community College of Health Science and Technology, Katsina",CCCK,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,803
+802,"College of Health Sciences and Environmental, Funtua, Katsina State",CEFK,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,804
+803,"College of Health Sciences and Technology, Jega, Kebbi State",CJK,POLYTECHNIC,STATE,Kebbi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,805
+804,Al-Ihsan College of Health Science and Technology,AIC,POLYTECHNIC,PRIVATE,Kebbi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,806
+805,"Mahdi Adamu College of SCience and Health Technology, Wara",MACW,POLYTECHNIC,PRIVATE,Kebbi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,807
+806,"Nigerian Navy College of Health Sciences ,Offa",NNCO,POLYTECHNIC,FEDERAL,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,808
+807,"Yusjib College of Health Sciences and Technology, Ilorin, Kwara",YCIK,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,809
+808,"Osi College of Health and Technology Osi, Kwara State.",OCOK,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,810
+809,"Eco Africa College of Health Science and Technology, Lagos State",EACL,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,811
+810,LASUTH Institute for Allied Health Sciences and Management ( LIASHM) Lagos State,LLL,POLYTECHNIC,STATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,812
+811,"O'MARK SCHOOL OF HEALTH TECHNOLOGY, IGANDO",OI-LAG,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,813
+812,Jubilation College of Health Sciences and Technology LTD,JCL,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,814
+813,"Newgate College of Health Technology, Minna, Niger State",NCMN,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,815
+814,"School of Health Technology, Eastern Bye Pass Behind F-Layout, P.O Box 137 Minna, Niger State.",EBPBFL,POLYTECHNIC,STATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,816
+815,"Ar-Rahmaniyya College of Health Technology, Minna",ARCM,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,817
+816,"Rahma College of Technology, Sciences and Management Studies, Suleja, Niger State",RCSN,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,818
+817,"Alheri College of Health Science and Technology, Salka, Niger",ACSN,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,819
+818,"School of Health Technology Suleja, Niger State",SN,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,820
+819,Rhema College of Health Science and Technology,RC,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,821
+820,Royal Institute of Health Technology,R,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,822
+821,"Ogun Polytechnic of Health and Allied Sciences, Ilese Ijebu",OPII-OGU,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,823
+822,"South Western Nigerian College of Health Technology, Sotubo, Sagamu, Ogun State",SWNCSS,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,824
+823,"Caribbean College of Health Science and Technology, Shagamu, Ogun State",CCSO,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,825
+824,"COLLEGE OF HEALTH TECHNOLOGY EJIGBO,OSUN STATE",CEO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,826
+825,"Foreign Links College of Health and Management Sciences, Moro, Ife-North, Osun State.",FLCMIN,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,827
+826,"Crest field College of Health & Management Technology, Erin-Osun, Osun State",CFCEOO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,828
+827,"PATHFINDER COLLEGE OF HEALTH TECHNOLOGY IRAGBIJI, OSUN STATE",PCIO-OSU,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,829
+828,"Hamzainab College of Health Technology Osogbo, Osun State",HCOO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,830
+829,"Iseyin Collage of Science and Health Technology, iseyin, Oyo State",ICIO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,831
+830,"Iseyin College of Science & Health Technology Iseyin, Oyo State",ICIO-OYO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,832
+831,Mwaghavul College of Health Technology Pushit,MCP,POLYTECHNIC,PRIVATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,833
+832,"Community School of Health Technology Gusau, Zamfara State",CGZ,POLYTECHNIC,PRIVATE,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,834
+833,"Aliko Dangote College of Nursing & Midwifery, Bauchi, Bauchi State",ADCMBB,POLYTECHNIC,STATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,835
+834,"College of Nursing and Midwifery, Gombe",CMG,POLYTECHNIC,STATE,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,836
+835,College of Nursing Obangede,CO,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,837
+836,"College of Nursing Sciences, ABUTH, Zaria",CAZ,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,838
+837,College of Nursing Sciences Tambuwal,CT,POLYTECHNIC,STATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,839
+838,"Cross Rivers State College of Nursing & Midwifery Sciences, Itigidi",CRCMI,POLYTECHNIC,STATE,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,840
+839,"Ezeala College of Nursing Science, Umuseke-Okwudor",ECUO,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,841
+840,"Imo State College of Health Sciences & Management Technology, Amaigbo",ICA,POLYTECHNIC,STATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,842
+841,"Kebbi State College of Nursing Sciences, Birnin Kebbi",KCBK,POLYTECHNIC,STATE,Kebbi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,843
+842,"Lagos State College of Nursing Sciences, Igando",LCI,POLYTECHNIC,STATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,844
+843,"Nigerian Army College of Nursing, Yaba",NACY,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,845
+844,"Oyo State College of Nursing and Midwifery, Eleyele, Ibadan",OCMEI,POLYTECHNIC,STATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,846
+845,"School of Nursing, Ekiti State University Teaching Hospital, Ado-Ekiti",EUTHAE,POLYTECHNIC,FEDERAL,Ekiti,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,847
+846,"School of Nursing, Lagos State University Teaching Hospital (LUTH)",LUTHL,POLYTECHNIC,STATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,848
+847,"School of Nursing and Midwifery, A.T.B.U.T.H. Bauchi",MAB,POLYTECHNIC,FEDERAL,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,849
+848,"School of Nursing Obafemi Owolowo University OAU Teachinh Hospital complx, Ile=Ife",OOUOTH,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,850
+849,"School of Nursing University of Benin Teaching Hospital, Benin City",UBTHBC,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,851
+850,"School of Nursing Wesley Guild`s Hospital, OAU, Ilesa",WGSHOI,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,852
+851,"Shehu Sule College of Nursing & Midwifery, Damaturu, Yobe State",SSCMDY,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,853
+852,"College of Nursing Sciences, Our Lady of Lourdes Hospital Complex Ihiala",COLLHC,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,854
+853,Anambra State College of Nursing Sciences,AC,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,855
+854,Kwara State College of Nursing Sciences Ilorin,KCI,POLYTECHNIC,STATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,856
+855,"College of Nursing Science, Ahmadu Bello University Teaching Hospital Zaria",CABUTH,POLYTECHNIC,FEDERAL,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,857
+856,"College of Nursing Sciences, Federal Teaching Hospital Gombe",CTHG,POLYTECHNIC,FEDERAL,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,858
+857,"College of Nursing Sciences, Adazi Nnukwu",CAN,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,859
+858,Al-Maarif College of Nursing Sciences,AMC,POLYTECHNIC,PRIVATE,,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,860
+859,College of Nursing Sciences Mbano Imo State,CMI,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,861
+860,"College of Nursing Sciences, St. Gerald Catholic Hospital Kakuri Kaduna State",CSGCHK,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,862
+861,"College of Nursing Sciences, Alor Anambra State",CAA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,863
+862,"International Christian College of Nursing Sciences, Owerri, Imo State",ICCOI,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,864
+863,"Iqra College of Nursing Sciences Dutse, Jigawa State",ICDJ,POLYTECHNIC,PRIVATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,865
+864,"Nana College of Nursing Sciences, Otakuhi Okpo, Anyigba, Kogi State",NCOOAK,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,866
+865,"College of Nursing Sciencea, University of Calabar Teaching Hospital, Cross River State",CSUCTH,POLYTECHNIC,FEDERAL,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,867
+866,"College of Nursing Sciences, Tambuwal, Sokoto State",CTS,POLYTECHNIC,,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,868
+867,Kano State College of Nursing Sciences Madobi,KCM,POLYTECHNIC,,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,869
+868,Kano State College of Nursing Sciences Dambatta,KCD-KAN,POLYTECHNIC,,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,870
+869,Kano State College of Nursing Scinnces Gwarzo,KCSG,POLYTECHNIC,,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,871
+870,Bayelsa State College of Nursing,BC-BAY,POLYTECHNIC,STATE,Bayelsa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,872
+871,Adamawa State College of Nursing Science,AC-ADA,POLYTECHNIC,STATE,Adamawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,873
+872,"College of Nursing Sciences St. Camillus, Catholic Hospital, Uromi, Edo State",CSCCHU,POLYTECHNIC,,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,874
+873,"Rivers State College of Nursing Sciences, Port-Harcourt",RCPH-RIV,POLYTECHNIC,,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,875
+874,"Benue State College of Nursing Science, Makurdi",BCM-BEN,POLYTECHNIC,STATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,876
+875,ARCHBISHOP CHARLES HEEREY MEMORIAL COLLEGE OF NURSING SCIENCES,ACHMC,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,877
+876,"Janet Frank College of Nursing Sciences, Aba, Abia State",JFCAA,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,878
+877,"College of Nursing Sciences, Obohia- Ndoki, Ukwa East LGA, Abia State.",CONUEL,POLYTECHNIC,STATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,879
+878,"Madonna College of Health Technology, Olokoro Umuahia, Abia State",MCOUA,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,880
+879,Marjorie Bash College of Nursing Sciences,MBC,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,881
+880,"ST. ANTONY COLLEGE OF NURSING SCIENCE, ABA",SACA,POLYTECHNIC,PRIVATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,882
+881,"Abia State College of Nursing Sciences, Aba Campus, Abia State",ACACA,POLYTECHNIC,STATE,Abia,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,883
+882,"Zamaki College of Health Sciences and Technology, Yola, Adamawa State",ZCYA,POLYTECHNIC,PRIVATE,Adamawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,884
+883,JASACOMPTON CHRISTIAN COLLEGE OF HEALTH TECHNOLOGY LTD,JCCL,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,885
+884,"Maurid College of Nursing Sciences, Mbiaso",MCM,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,886
+885,"Akwa Ibom State College of Health Technology, Etinan",AICE,POLYTECHNIC,STATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,887
+886,"College of Nursing Sciences, University of Uyo Teaching Hospital (UUTH)",CUUTHU,POLYTECHNIC,FEDERAL,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,888
+887,Fortune International College of Nursing Sciences,FIC,POLYTECHNIC,PRIVATE,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,889
+888,"College of Nursing Sciences, University of Uyo Teaching Hospital",CUUTH,POLYTECHNIC,FEDERAL,Akwa Ibom,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,890
+889,"College of Nursing Sciences, ST. Charles Borromeo Specialist Hospital, Onitsha, Anambra State.",CSCBSH,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,891
+890,"College of Nursing Sciences, Diocesan Hospital, Amichi, Anambra state.",CDHAA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,892
+891,"Apex College of Nursing Sciences, Ugbo-Ukwu Agunta Anambra State",ACUUAA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,893
+892,"Millennium College of Nursing Sciences, Awka Anambra State",MCAA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,894
+893,"Regina Caeli College of Nursing Science, Akwa",RCCA,POLYTECHNIC,STATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,895
+894,College of Nursing Sciences Iyienu Hospital,CIH,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,896
+895,"Margaret College of Nursing Sciences, Amichi",MCA-ANA,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,897
+896,Testing Process,TP,POLYTECHNIC,FEDERAL,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,898
+897,"Alive College of Nursing Sciences, Nnewi",ACN,POLYTECHNIC,PRIVATE,Anambra,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,899
+898,"Malikiya College of Nursing Sciences, Bauchi, Bauchi State.",MCBB,POLYTECHNIC,PRIVATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,900
+899,Adamu Adamu College Of Nursing Sciences,AAC,POLYTECHNIC,FEDERAL,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,901
+900,"Al-Huda College of Nursing Sciences, Bauchi",AHCB,POLYTECHNIC,PRIVATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,902
+901,"Mama Yalwa College of Nursing Sciences, Federal Medical Centre Misau",MYCMCM,POLYTECHNIC,FEDERAL,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,903
+902,SA'ADU ZUNGUR COLLEGE OF NURSING SCIENCES,SZC,POLYTECHNIC,STATE,Bauchi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,904
+903,"NKST COLLEGE OF NURSING SCIENCES, MKAR",NCM-BEN,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,905
+904,"Dr. John Adah College of Health Technology, Otukpo",DJACO,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,906
+905,Makurdi College of Nursing Sciences,MC,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,907
+906,"Labe College of Nursing Sciences, Gboko",LCG,POLYTECHNIC,PRIVATE,Benue,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,908
+907,"College of Nursing Sciences, Maiduguri, Borno state",CMB,POLYTECHNIC,STATE,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,909
+908,"College of Nursing Sciences, University of Maiduguri Teaching Hospital ,Maiduguri",CUMTHM,POLYTECHNIC,PRIVATE,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,910
+909,College of Nursing Sciences Federal Neuropsychiatric Hospital Maiduguri,CNHM,POLYTECHNIC,FEDERAL,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,911
+910,"College of Nursing Sciences, Gwoza",CG-BOR,POLYTECHNIC,STATE,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,912
+911,College of Nursing Sciences Monguno,CM,POLYTECHNIC,STATE,Borno,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,913
+912,"University of Calabar Teaching Hospital, Calabar. College of Nursing Sciences.",UCTHCC,POLYTECHNIC,FEDERAL,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,914
+913,"Cross River State College of Nursing Sciences, Calabar",CRCC-CRO,POLYTECHNIC,STATE,Cross River,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,915
+914,"Anchor College of Nursing Sciences, Asaba, Delta State",ACAD,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,916
+915,Delta State College of Nursing Sciences,DCAC,POLYTECHNIC,STATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,917;919;920;921;922;923;924
+916,Delta College of Nursing Sciences Agbor Campus Delta State.,DCACD,POLYTECHNIC,STATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,918
+923,Royal Mira College of Nursing Sciences,RMC,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,925
+924,"ST. PIO COLLEGE OF NURSING SCIENCES, ASABA",SPCA,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,926
+925,"Royal Mira College of Nursing Sciences, Owa-Oyibu, Delta",RMCOOD,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,927
+926,"Soarster College of Nursing Science, Asaba, Delta State",SCAD,POLYTECHNIC,PRIVATE,Delta,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,928
+927,COLLEGE OF NURSING SCIENCES ALEX EKWUEME FEDERAL UNIVERSITY TEACHING HOSPITAL ABAKALIKI,CAEUTH,POLYTECHNIC,FEDERAL,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,929
+928,"Blessed Martins College of Nursing Sciences, Ohatekwe Amagu, Ikwo LGA, Ebonyi State",BMCOAI,POLYTECHNIC,PRIVATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,930
+929,"Royal College of Nursing Sciences, Ezzamgbo, Ebonyi State",RCEE,POLYTECHNIC,PRIVATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,931
+930,"Eastern Oak College of Nursing Sciences, Inyimagu Ngbo",EOCIN,POLYTECHNIC,PRIVATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,932
+931,"Ebonyi State College of Nursing Sciences, Uburu",ECU,POLYTECHNIC,STATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,933
+932,"Mater Misericordiae College of Nursing Sciences, Afikpo",MMCA,POLYTECHNIC,PRIVATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,934
+933,"Kacci Renown College of Nursing and Midwifery, Afikpo",KRCMA,POLYTECHNIC,PRIVATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,935
+934,"Eagles College of Nursing Sciences, National Obstetrics and Fistula Center",ECOFC,POLYTECHNIC,PRIVATE,Ebonyi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,936
+935,"Edo State College of Nursing Sciences, Benin City",ECBC,POLYTECHNIC,STATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,937
+936,"Igbinedion University Teaching Hospital College of Nursing Sciences, Okada, Edo State",IUTHCO,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,938
+937,"Sancta Maria Catholic College of Nursing Sciences, Uzairue, Edo State",SMCCUE,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,939
+938,St Matthew Royal College of Nursing Sciences Eidenu-Irrua,SMRCEI,POLYTECHNIC,PRIVATE,Edo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,940
+939,"COLLEGE OF NURSING SCIENCES, BISHOP SHANAHAN SPECIALIST HOPITAL NSUKKA.",CBSSHN,POLYTECHNIC,PRIVATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,941
+940,"ENUGU STATE COLLEGE OF NURSING SCIENCES ENUGU, PARK LANE",ECEPL,POLYTECHNIC,,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,942
+941,"Peaceland College of Nursing Sciences, Enugu, Enugu State",PCEE,POLYTECHNIC,PRIVATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,943
+942,"Enugu State College of Health Technology, Orji River",ECOR,POLYTECHNIC,STATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,944
+943,College of Nursing Sciences Oji River Mission Specialist Hospital,CORMSH,POLYTECHNIC,STATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,945
+944,"La Vera College of Nursing Sciences, Nsukka, Enugu State",LVCNE,POLYTECHNIC,PRIVATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,946
+945,"Enugu State College of Nursing Sciences, Awgu",ECA,POLYTECHNIC,STATE,Enugu,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,947
+946,"YAGONGWO COLLEGE OF NURSING SCIENCES, KUJE-ABUJA",YCKA,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,948
+947,"Horizon Collage of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja",HCAGFA-FED,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,949
+948,"Horizon College of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja",HCAGFA-FED2,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,950
+949,"Oasis College of Nursing Sciences, Kuje, FCT Abuja",OCKFA,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,951
+950,"College of Nursing Sciences, Jahi, FCT Abuja",CJFA,POLYTECHNIC,PRIVATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,952
+951,FCT College of Nursing Sciences,FC-FED,POLYTECHNIC,STATE,Federal Capital Territory,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,953
+952,"Jewel College of Nursing Sciences, Gombe, Gombe State",JCGG,POLYTECHNIC,PRIVATE,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,954
+953,"Adamu Fura College of Nursing Sciences, Gombe, Gombe State",AFCGG,POLYTECHNIC,PRIVATE,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,955
+954,"Jewel College of Nursing Sciences, Gombe",JCG,POLYTECHNIC,PRIVATE,Gombe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,956
+955,"Vision College of Medical Sciences and Health Technology, Mbaise, Imo State",VCMMI,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,957
+956,"College of Nursing Sciences, ST. Mary's Joint Hospital, Amaigbo, Imo State",CSMJHA,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,958
+957,Merit College Of Nursing Sciences Orlu,MCO,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,959
+958,Mother of Mercy College of Nursing Sciences,MMC,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,960
+959,"Imo State College of Nursing Sciences, Orlu",ICO,POLYTECHNIC,STATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,961
+960,Kings College of Nursing Sciences,KC-IMO,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,962
+961,College of Nursing sciences holy Rosary hospital Emekuku Owerri,CHRHEO,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,963
+962,"College of Nursing Sciences Umulogho, Imo",CUI,POLYTECHNIC,PRIVATE,Imo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,964
+963,"G-City College of Health Sciences and Technology, Gwaram, Jigawa State",GCCGJ,POLYTECHNIC,PRIVATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,965
+964,"Jigawa State College of Health Science and Technology, Jahun",JCJ,POLYTECHNIC,STATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,966
+965,Ameenatu College of Nursing,AC-JIG,POLYTECHNIC,PRIVATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,967
+966,"Jigawa State College of Nursing Sciences, Babura",JCB,POLYTECHNIC,STATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,968
+967,"Jigawa State College of Nursing Sciences, Birnin Kudu",JCBK,POLYTECHNIC,STATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,969
+968,"Jigawa State College of Nursing Sciences, Hadejia",JCH,POLYTECHNIC,STATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,970
+969,Belba College of Nursing Sciences Jigawa State,BCJ,POLYTECHNIC,PRIVATE,Jigawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,971
+970,Nigerian Airforce College of Nursing Sciences Kaduna,NACK,POLYTECHNIC,FEDERAL,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,972
+971,Elite college of health science and technology,EC-KAD,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,973
+972,"Nana Fatima Umar College of Nursing Sciences, Kaduna",NFUCK,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,974
+973,"Almadina College of Nursing Sciences, Zaria",ACZ,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,975
+974,"Al-Haroon College of Health Sciences and Technology, Zaria",AHCZ-KAD,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,976
+975,"Muh'd Ibn El Barau College of Nursing Science, Zaria",MIEBCZ,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,977
+976,"Al-Kausar College of Health Technology Foundation, Kaduna",AKCFK-KAD,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,978
+977,Kaduna State College of Nursing & Midwifery Pambegua,KCMP,POLYTECHNIC,STATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,979
+978,Kaduna State College of Nursing & Midwifery Tudun Wada,KCMTW,POLYTECHNIC,STATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,980
+979,Kaduna State College of Nursing & Midwifery Kafanchan,KCMK,POLYTECHNIC,STATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,981
+980,Throneroom College of Nursing Sciences LTD,TCL,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,982
+981,"College of Nursing Sciences St Luke's Anglican Hospital, Wusasa, Zaria",CSLAHW,POLYTECHNIC,PRIVATE,Kaduna,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,983
+982,"National Orthopedic Hospital, Dala College of Nursing, Kano, Kano state",OHDCKK,POLYTECHNIC,FEDERAL,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,984
+983,"Flagship Collage of Nursing Sciences, Bichi, Kano State",FCBK-KAN,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,985
+984,"Alhassan Ibrahim Dawanau Collage of Health Sciences and Technology, Hotoro, Kano, Kano State",AIDCHK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,986
+985,"Emirates Collage of Nursing Sciences, Tudun Yola, Kabuga Satellite Town, Kano, Kano State",ECTYKS,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,987
+986,"Emirates College of Nursing Sciences, Tudun Yola, Kabuga Satellite Town, Kano, Kano State",ECTYKS-KAN,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,988
+987,"Alhassan Ibrahim Dawanau College of Health Sciences and Technology, Hotoro, Kano, Kano State",AIDCHK-KAN,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,989
+988,"Flagship College of Nursing Sciences, Bichi, Kano State",FCBK-KAN2,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,990
+989,"Alhassan Ibrahim Dawanau Collage of Health Sciences and Technology, Hotoro, Kano,",AIDCHK-KAN2,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,991
+990,"Sudawa College of Nursing and Midwifery, Danbare, Kano State",SCMDK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,992
+991,"Hamdala College of Nursing Sciences Kano, Kano State",HCKK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,993
+992,"Jamilu Ibrahim Imperial College of Health Sciences Technology, Kano, Kano State",JIICKK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,994
+993,"Autan Bawo College of Health and Social Science, Rano",ABCSR,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,995
+994,"Al-Ikhlas College of Health Sciences and Technology, Wudil",AICW,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,996
+995,"Jameel Chiroma College of Health Science and Technology, Kano",JCCK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,997
+996,"Tropical College of Health Sciences & Tech, Kano",TCTK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,998
+997,Dansharif College of Nursing Sciences,DC-KAN,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,999
+998,"Kano State College of Nursing and Midwifery, Kano",KCMK-KAN,POLYTECHNIC,STATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1000
+999,"IMAN COLLEGE OF NURSING SCIENCES, KANO",ICK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1001
+1000,"Nafisatu College of Nursing Sciences, Kwankwaso, Kano State.",NCKK,POLYTECHNIC,PRIVATE,Kano,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1002
+1001,Katsina State College of Nursing & Midwifery Katsina,KCMK-KAT,POLYTECHNIC,STATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1003
+1002,"Cherish College of Nursing and Midwifery, Batsari",CCMB,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1004
+1003,"ESSEMM College of Nursing Sciences, Katsina, Katsina State",ECKK,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1005
+1004,"Cherish College of Nursing and Midwifery, Batsari, Katsina State",CCMBK,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1006
+1005,"North West College of Nursing Sciences, Katsina, Katsina State",NWCKK,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1007
+1006,"Bawo College of Nursing Sciences, Daura, Katsina State",BCDK,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1008
+1007,Nana Babajo College of Nursing and Midwifery Malumfashi,NBCMM,POLYTECHNIC,STATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1009
+1008,"Nexus College of Nursing Sciences, Katsina",NCK-KAT,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1010
+1009,"Khuddam College of Health Science and Technology, Katsina",KCK-KAT2,POLYTECHNIC,PRIVATE,Katsina,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1011
+1010,SAJO COLLEGE OF NURSING SCIENCES,SC,POLYTECHNIC,PRIVATE,Kebbi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1012
+1011,"Kauran Gwandu College of Nursing and Midwifery Sciences, Ambursa",KGCMA,POLYTECHNIC,PRIVATE,Kebbi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1013
+1012,"U.E.C College of Nursing Sciences, Ochadamu, Kogi State",UCOK,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1014
+1013,"U.E.C College of Nursing Sciences, Ochadamu, Kogi State",UCOK-KOG,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1015
+1014,Abobo Confluence College of Health Technology,ACC,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1016
+1015,"ECWA College of Nursing Sciences, Egbe, Kogi State",ECEK,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1017
+1016,MINISTRY OF MERCY COLLEGE OF NURSING SCIENCES,MMC-KOG,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1018
+1017,"Nana College of Nursing and Health Sciences, Otakuhi Okpo",NCOO,POLYTECHNIC,PRIVATE,Kogi,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1019
+1018,Adewale Ibrahim College of Health Science and Technology Buari,AICB,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1020
+1019,"Adeshina College of Health Sciences and Technology, Share, Kwara State",ACSK,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1021
+1020,"Barthlomew College of Nursing Sciences, Luma-Shao, Kwara State",BCLSK,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1022
+1021,"Grandplus College of Health Sciences and Technology, Ilorin, Kwara State",GCIK,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1023
+1022,"Best College of Health Technology, Offa",BCO-KWA,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1024
+1023,Heartsavers College of Nursing Sciences,HC-KWA,POLYTECHNIC,PRIVATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1025
+1024,"Kwara State College of Nursing Sciences, Oke-Ode",KCOO,POLYTECHNIC,STATE,Kwara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1026
+1025,HERITAGE GLOBAL SCHOOL OF HEALTH TECHNOLOGY,HG,POLYTECHNIC,PRIVATE,Lagos,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1027
+1026,"THE SIGNATURE COLLEGE OF NURSING SCIENCES, KARU, NASARAWA STATE",SCKN,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1028
+1027,"Famsas Collage Health Sciences and Technology, Keffi, Nasarawa State",FCKN,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1029
+1028,"Famsas College of Health Sciences and Technology, Keffi, Nasarawa State",FCKN-NAS,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1030
+1029,"Nasarawa State College of Nursing Sciences, Lafia",NCL-NAS,POLYTECHNIC,STATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1031
+1030,"Kariyoma College of Nursing Sciences Lafia, Nassarawa State",KCLN,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1032
+1031,"Signature College of Nursing Sciences Karu, Nassarawa State",SCKN-NAS,POLYTECHNIC,PRIVATE,Nasarawa,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1033
+1032,"Dako College of Nursing Sciences, Suleja, Niger State",DCSN,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1034
+1033,"Standard College of Nursing Sciences, Minna, Niger State.",SCMN,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1035
+1034,"Delight College of Health Sciences and Technology Minna, Niger State",DCMN,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1036
+1035,"Crown College of Health Sciences and Technology, Minna",CCM,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1037
+1036,Niger State College of Nursing Sciences,NC,POLYTECHNIC,STATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1038
+1037,Ya'ilu College of Nursing Sciences LTD/GTE,YCLG,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1039
+1038,"Niger State College of Nursing Sciences, Bida",NCB,POLYTECHNIC,STATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1040
+1039,"Niger State College of Nursing Sciences, Kontagora",NCK-NIG,POLYTECHNIC,STATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1041
+1040,"Degalaxy College of Nursing Sciences, Minna, Niger State",DCMN-NIG,POLYTECHNIC,PRIVATE,Niger,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1042
+1041,SOUTH WESTERN NIGERIA COLLEGE OF NURSING SCIENCE,SWNC,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1043
+1042,"Ogun State College of Nursing Sciences, Ijebu-Ode Campus",OCIOC,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1044
+1043,"Ogun State College of Nursing Sciences, Ilaro Campus",OCIC,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1045
+1044,"Ogun State College of Nursing Sciences, Main Campus, Idi-Aba Abeokuta",OCMCIA,POLYTECHNIC,STATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1046
+1045,"Jafad College of Nursing Sciences, Oru Ijebu, Ogun State",JCOIO,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1047
+1046,"Sacred Heart College of Nursing Sciences, Lantoro",SHCL,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1048
+1047,CHEP COLLEGE OF NURSING SCIENCES LTD_GTE,CCL,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1049
+1048,"Southwestern College of Nursing Sciences, Sagamu",SCS,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1050
+1049,"Chep College of Nursing Sciences, Ota",CCO,POLYTECHNIC,PRIVATE,Ogun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1051
+1050,"Peacock College Of Nursing Sciences, Akure, Ondo State",PCAO,POLYTECHNIC,PRIVATE,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1052
+1051,OAR College of Nursing Sciences,OC-OND,POLYTECHNIC,PRIVATE,Ondo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1053
+1052,SEVENTH-DAY ADVENTIST COLLEGE OF NURSING ILE-IFE OSUN STATE,SDACII,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1054
+1053,"Ikirun College of Health Sciences and Technology, Ikirun, Osun State",ICIO-OSU,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1055
+1054,"Seventh-Day Adventist College of Health Sciences and Technology Ile-Ife, Osun State",SDACII-OSU,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1056
+1055,"Premier College of Nursing Sciences and Midwifery, Ejigbo, Osun State",PCMEO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1057
+1056,"Mercy College of Nursing Sciences, Iwara, Osun State",MCIO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1058
+1057,"Adonis American College of Health Technology, Osun State",AACO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1059
+1058,"Dee Perfect Class College of Health Sciences and Technology, Ifon, Osun State",DPCCIO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1060
+1059,"Skyward College of Nursing Sciences, Iwo , Osun State",SCIO,POLYTECHNIC,PRIVATE,Osun,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1061
+1060,"COLLEGE OF NURSING SCIENCES , BAPTIST MEDICAL CENTRE, SAKI",CBMCS,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1062
+1061,"COLLEGE OF NURSING SCIENCES, MUSLIM MEDICAL FOUNDATION, SAKI",CMMFS,POLYTECHNIC,,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1063
+1062,"Adeniyi College of Nursing Sciences, Igbope, Oyo State",ACIO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1064
+1063,"Adeniyi College of Nursing Sciences, Igbope, Oyo State",ACIO-OYO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1065
+1064,"Adeniyi College of Nursing Sciences, Igbope, Oyo State",ACIO-OYO2,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1066
+1065,"CAI College of Nursing Sciences, Ibadan, Oyo State",CCIO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1067
+1066,Ajorosun Ibadan College of Nursing,AIC-OYO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1068
+1067,"College of Nursing Sciences, Bowen University Teaching Hospital, Ogbomosho",CBUTHO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1069
+1068,"CAI College of Nursing Sciences, Ibadan",CCI-OYO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1070
+1069,"College of Nursing Sciences Muslim Medical Foundation Saki, Oyo State",CMMFSO,POLYTECHNIC,PRIVATE,Oyo,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1071
+1070,"Hill College of Nursing Sciences, Jos, Plateau State",HCJP,POLYTECHNIC,PRIVATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1072
+1071,"Plateau State College of Health Technology, Pankshin",PCP,POLYTECHNIC,STATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1073
+1072,"Plateau State College of Health Technology, Pankshin",PCP-PLA,POLYTECHNIC,STATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1074
+1073,"Lowland College of Health Science and Technology, Shendam",LCS,POLYTECHNIC,PRIVATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1075
+1074,"Jibape Memorial College of Nursing Sciences, Jengre",JMCJ,POLYTECHNIC,PRIVATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1076
+1075,SAHLAN COLLEGE OF NURSING AND MIDWIFERY,SCM,POLYTECHNIC,PRIVATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1077
+1076,"Plateau State College of Nursing and Midwifery, VOM",PCMV,POLYTECHNIC,STATE,Plateau,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1078
+1077,"College of Nursing Sciences, University of Port- Harcourt Teaching Hospital",CUPHTH,POLYTECHNIC,FEDERAL,Rivers,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1079
+1078,"Sokoto State College of Nursing, Sokoto",SCS-SOK,POLYTECHNIC,STATE,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1080
+1079,"Fatima College of Nursing Sciences, Bodinga, Sokoto State",FCBS,POLYTECHNIC,PRIVATE,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1081
+1080,"Fatima College of Nursing Sciences, Bodinga, Sokoto State",FCBS-SOK,POLYTECHNIC,PRIVATE,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1082
+1081,"Gamji College of Nursing Sciences, Sokoto, Sokoto State",GCSS,POLYTECHNIC,PRIVATE,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1083
+1082,"Gamji College of Nursing Sciences, Sokoto, Sokoto State",GCSS-SOK,POLYTECHNIC,PRIVATE,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1084
+1083,"Caliphate College of Health Sciences and Technology, Shuni",CCS,POLYTECHNIC,PRIVATE,Sokoto,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1085
+1084,"AB Naibi College of Nursing Sciences, Lau, Taraba State",ANCLT,POLYTECHNIC,PRIVATE,Taraba,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1086
+1085,Taraba State College of Nursing & Midwifery,TCM-TAR,POLYTECHNIC,STATE,Taraba,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1087
+1086,"Shehu Sule College of Nursing and Midwifery, Damaturu, Yobe State",SSCMDY-YOB,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1088
+1087,Galtima Mai Kyari College of Health Sciences & Technology Nguru,GMKCN,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1089
+1088,"College of Nursing Sciences Federal Medical Centre, Nguru",CMCN,POLYTECHNIC,STATE,Yobe,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1090
+1089,"Umar Bin Kaddabi College of Nursing Sciences, Kaura Namoda Zamfara State",UBKCKN,POLYTECHNIC,PRIVATE,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1091
+1090,College of Nursing Sciences Gusau,CG-ZAM,POLYTECHNIC,STATE,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1092
+1091,"Ba'illa College of Nursing Sciences, Kaura Namoda",BCKN,POLYTECHNIC,PRIVATE,Zamfara,Nigeria,,,https://digitalnbte.nbte.gov.ng,2026-09-04,1093
+1092,"A.D. Rufa'i College of Education, Legal and General Studies",ARC,COLLEGE_OF_EDUCATION,STATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1094
+1093,"Abdullahi Maikano College of Education, Wase",AMCW,COLLEGE_OF_EDUCATION,PRIVATE,Plateau,Nigeria,,,https://ncce.gov.ng,2026-09-04,1095
+1094,"Abubakar Garba Zagada- Zagada College of Education, Bajoga",AGZZCB,COLLEGE_OF_EDUCATION,PRIVATE,Gombe,Nigeria,,,https://ncce.gov.ng,2026-09-04,1096
+1095,Abubakar Tatari Polytechnic,RECTORATAPOLYBAUCI,COLLEGE_OF_EDUCATION,,Bauchi,Nigeria,rector@atapolybauci.com,,https://ncce.gov.ng,2026-09-04,376;1097
+1096,"Adamu Augie College of Education, Argungu",AACA,COLLEGE_OF_EDUCATION,STATE,Kebbi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1098
+1097,"Adamu Garkuwa COE, Toro",AGCT,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1099
+1098,"Adamu Tafawa Balewa COE, Kangere",ATBCK,COLLEGE_OF_EDUCATION,STATE,Bauchi,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1100
+1099,"Adesina College of Education, Share, Kwara State",ADESINACOLLEGE,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,www.adesinacollege.edu.ng,,https://ncce.gov.ng,2026-09-04,1101
+1100,"Adigrace COE, Byepyi",ACB,COLLEGE_OF_EDUCATION,PRIVATE,Taraba,Nigeria,,,https://ncce.gov.ng,2026-09-04,1102
+1101,"African Thinkers Community of Inquiry COE, Enugu",ATCOICOE,COLLEGE_OF_EDUCATION,PRIVATE,Enugu,Nigeria,www.atcoicoe.edu.ng,,https://ncce.gov.ng,2026-09-04,1103
+1102,"Ahlus-Suffah COE, Ira",ASCI,COLLEGE_OF_EDUCATION,PRIVATE,Kaduna,Nigeria,,,https://ncce.gov.ng,2026-09-04,1104
+1103,"Ajetumobi COE, Ira",ACI,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1105
+1104,"Akwa Ibom State College of Education, Afahansit",AICA,COLLEGE_OF_EDUCATION,STATE,Akwa Ibom,Nigeria,,,https://ncce.gov.ng,2026-09-04,1106
+1105,"AL HIKMA COLLEGE OF EDUCATION, ANKPA",AHCA,COLLEGE_OF_EDUCATION,PRIVATE,Kogi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1107
+1106,"Al-fajr College of Education, Kano",AFCK,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1108
+1107,Al-Ibadan COE,AIC-IBA,COLLEGE_OF_EDUCATION,PRIVATE,Ibadan,Nigeria,,,https://ncce.gov.ng,2026-09-04,1109
+1108,Al-Iman College of Education,AIC-PLA,COLLEGE_OF_EDUCATION,PRIVATE,Plateau,Nigeria,,,https://ncce.gov.ng,2026-09-04,1110
+1109,Al-Madinah COE Oshogbo,AMCO,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1111
+1110,"Al-Mustafa College of Education, Kano",MCEKANO,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,mcekano.edu.ng,,https://ncce.gov.ng,2026-09-04,1112
+1111,Al-Ummah COE (UMCOED),AUCU,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1113
+1112,Ameenuddeen College of Education,ACE,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1114
+1113,"Ameer Shehu Idris College of Advanced Studies, Zaria",ASICAZ,COLLEGE_OF_EDUCATION,PRIVATE,Kaduna,Nigeria,,,https://ncce.gov.ng,2026-09-04,1115
+1114,Aminu Kano College of Education,AKC,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1116
+1115,Aminu Kano College of Islamic and Legal Studies,AKCI,COLLEGE_OF_EDUCATION,,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1117
+1116,"Aminu Sale College of Education, Azare",ASCA,COLLEGE_OF_EDUCATION,STATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1118
+1117,Angel Crown COE,ACC-FCT,COLLEGE_OF_EDUCATION,PRIVATE,FCT Abuja,Nigeria,,,https://ncce.gov.ng,2026-09-04,1119
+1118,Annur College of Education Kano,ACK-KAN,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1120
+1119,"Ansar-Ud-Deen College of Education, Isolo",AUDCI,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1121
+1120,"Apa COE, Aido",ACA-BEN,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1122
+1121,"Archbishop Alexander Ibezim COE, Anambra",NONE-ANA,COLLEGE_OF_EDUCATION,PRIVATE,Anambra,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1123
+1122,"Assanusiya COE, Odeomu, Osun",ACOO,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1124
+1123,Awori District COE,ADC,COLLEGE_OF_EDUCATION,PRIVATE,Ogun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1125
+1124,Bauchi Institute for Arabic and Islamic Studies,BAI,COLLEGE_OF_EDUCATION,,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1126
+1125,"Bayo Tijani COE, Lagos",BTCL,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1127
+1126,"Benjamin Uwajumogu (State) College of Education, Ihitte Uboma",IMSCED,COLLEGE_OF_EDUCATION,STATE,Imo,Nigeria,imsced.edu.ng,,https://ncce.gov.ng,2026-09-04,1128
+1127,Best Legacy COE Ogbomoso,BLCO,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1129
+1128,"BETHEL COE IJARE, ONDO",BCIO,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1130
+1129,Biga College of Education,BC-SOK,COLLEGE_OF_EDUCATION,PRIVATE,Sokoto,Nigeria,,,https://ncce.gov.ng,2026-09-04,1131
+1130,Bogoro College of Education,BC-BAU,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1132
+1131,"Bright College of Education, Kachia",BCEK,COLLEGE_OF_EDUCATION,PRIVATE,Kaduna,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1133
+1132,Calvin Foundation COE,CFC,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1134
+1133,Christian Chukwuma Onoh COE,CCOC,COLLEGE_OF_EDUCATION,PRIVATE,Enugu,Nigeria,,,https://ncce.gov.ng,2026-09-04,1135
+1134,"Christian College of Education, Gombe",CCG,COLLEGE_OF_EDUCATION,PRIVATE,Gombe,Nigeria,,,https://ncce.gov.ng,2026-09-04,1136
+1135,"City College of Education, Mararaba",CCM-FCT,COLLEGE_OF_EDUCATION,PRIVATE,FCT Abuja,Nigeria,,,https://ncce.gov.ng,2026-09-04,1137
+1136,"Climax College of Education, Bauchi",CCEB,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,NULL,,https://ncce.gov.ng,2026-09-04,1138
+1137,COASTLINE COLLEGE OF EDUCATION,COASTLINECOLLEGE,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,coastlinecollege.edu.ng,,https://ncce.gov.ng,2026-09-04,1139
+1138,"COE, Moro, Ife-North",CMIN,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1140
+1139,COKWILLS COLLEGE OF EDUCATION,TAECOED,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,www.taecoed.edu.ng,,https://ncce.gov.ng,2026-09-04,1141
+1140,"College of Education (Technical), Dass",NONE-BAU,COLLEGE_OF_EDUCATION,STATE,Bauchi,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1142
+1141,College of Education Akwanga,COEAKWANGA,COLLEGE_OF_EDUCATION,STATE,Nasarawa,Nigeria,coeakwanga.edu.ng,,https://ncce.gov.ng,2026-09-04,1143
+1142,"College of Education and Entrepreneurship Studies, Lessel",CEESL,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1144
+1143,"College of Education and Legal Studies, Nguru",COELSNGURU,COLLEGE_OF_EDUCATION,STATE,Yobe,Nigeria,coelsnguru.edu.ng,,https://ncce.gov.ng,2026-09-04,1145
+1144,College of Education Ilemona,CI-KWA,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1146
+1145,College of Education Kura,CK,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1147
+1146,College of Education llorin,NONE-KWA,COLLEGE_OF_EDUCATION,STATE,Kwara,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1148
+1147,College of Education Oju,CO-BEN,COLLEGE_OF_EDUCATION,STATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1149
+1148,College of Education Oro,CO-KWA,COLLEGE_OF_EDUCATION,STATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1150
+1149,"College of Education, Arochukwu, Abia",CAA-ABI,COLLEGE_OF_EDUCATION,STATE,Abia,Nigeria,,,https://ncce.gov.ng,2026-09-04,1151
+1150,"College of Education, Billiri",CB,COLLEGE_OF_EDUCATION,STATE,Gombe,Nigeria,,,https://ncce.gov.ng,2026-09-04,1152
+1151,"College of Education, Darazo",CD,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1153
+1152,"College of Education, Dutsen Tanshi",SOMETHINGEDU-BAU,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1154
+1153,"College of Education, Gindiri",COEG,COLLEGE_OF_EDUCATION,STATE,Plateau,Nigeria,coeg.edu.ng,,https://ncce.gov.ng,2026-09-04,1155
+1154,"College of Education, Hong",CH-YOL,COLLEGE_OF_EDUCATION,STATE,Yola,Nigeria,,,https://ncce.gov.ng,2026-09-04,1156
+1155,"College of Education, Ikere-Ekiti",COEIKERE,COLLEGE_OF_EDUCATION,STATE,Ekiti,Nigeria,www.coeikere.edu.ng,,https://ncce.gov.ng,2026-09-04,1157
+1156,"College of Education, Ila-Orangun, Osun State",OSCOEDILESA,COLLEGE_OF_EDUCATION,STATE,Osun,Nigeria,oscoedilesa.edu.ng,,https://ncce.gov.ng,2026-09-04,1158
+1157,"College of Education, katsina-Ala",CKA,COLLEGE_OF_EDUCATION,STATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1159
+1158,"College of Education, Waka BIU",CWB,COLLEGE_OF_EDUCATION,STATE,Borno,Nigeria,,,https://ncce.gov.ng,2026-09-04,1160
+1159,"College of Education, Warri",COEWARRI,COLLEGE_OF_EDUCATION,STATE,Delta,Nigeria,www.coewarri.edu.ng,,https://ncce.gov.ng,2026-09-04,1161
+1160,"College of Education, Zing",CZ-TAR,COLLEGE_OF_EDUCATION,STATE,Taraba,Nigeria,,,https://ncce.gov.ng,2026-09-04,1162
+1161,"Community COE, Kano",FCEKANO,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,fcekano.edu.ng,,https://ncce.gov.ng,2026-09-04,1163
+1162,"Corner Stone College of Education, Ikeja",CSCI,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1164
+1163,Corona COE Lekki,CCL-LAG,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1165
+1164,Covenant College of Education (CCOE),CCC,COLLEGE_OF_EDUCATION,PRIVATE,Abia,Nigeria,,,https://ncce.gov.ng,2026-09-04,1166
+1165,"Crescent Pearls Technical College of Education, Abuja",CPTCEA,COLLEGE_OF_EDUCATION,PRIVATE,FCT Abuja,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1167
+1166,CRESTFIELD COLLEGE OF EDUCATION,CC,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1168
+1167,"Cross River State Coll. of Education, Akampa",CRCA,COLLEGE_OF_EDUCATION,STATE,Cross River,Nigeria,,,https://ncce.gov.ng,2026-09-04,1169
+1168,"Dala College of Education, Kano",DCK,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1170
+1169,"Danyaya College of Education, Ningi",DCN,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1171
+1170,"Dee-Perfect Class College of Education, Ifon-Osun, Osun State",DPCCIO-OSU,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1172
+1171,Delar College of Education,DC-OYO,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1173
+1172,"Delta State College of Education, Mosogar",DCEM,COLLEGE_OF_EDUCATION,STATE,Delta,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1174
+1173,"DIAMOND COLLEGE OF EDUCATION, ABA",DCE,COLLEGE_OF_EDUCATION,PRIVATE,Abia,Nigeria,www.dce.edu.ng,,https://ncce.gov.ng,2026-09-04,1175
+1174,"Doviana COE, Gboko",DCG,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1176
+1175,Eagle Mountain College of Education Abo Mbaise,EMCEAM,COLLEGE_OF_EDUCATION,PRIVATE,Imo,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1177
+1176,Ebenezer College of Education Amangwu,ECA-EBO,COLLEGE_OF_EDUCATION,PRIVATE,Ebonyi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1178
+1177,"Ebonyi State College of Education, (T) Ikwo",ECTI,COLLEGE_OF_EDUCATION,STATE,Ebonyi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1179
+1178,ECWA COE Igbaja,ECI-KWA,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1180
+1179,"ECWA COE, Bayara",ECB,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1181
+1180,"ECWA College of Education, Jos (ECOEJ)",JETS,COLLEGE_OF_EDUCATION,PRIVATE,Plateau,Nigeria,www.jets.edu.ng,,https://ncce.gov.ng,2026-09-04,1182
+1181,Edexcel College of Education,SOMETHINGEDU-BEN,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1183
+1182,"Edo State College of Education, Igueben",ECI-EDO,COLLEGE_OF_EDUCATION,STATE,Edo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1184
+1183,"Elder Oyama Memorial COE, Ofat",EOMCO,COLLEGE_OF_EDUCATION,PRIVATE,Cross River,Nigeria,,,https://ncce.gov.ng,2026-09-04,1185
+1184,Elibest College of Education,EC-OND,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1186
+1185,Elizabeth Memorial College of Education Nsukka,EMCN,COLLEGE_OF_EDUCATION,PRIVATE,Enugu,Nigeria,,,https://ncce.gov.ng,2026-09-04,1187
+1186,Emamor College of Education,EC-RIV,COLLEGE_OF_EDUCATION,PRIVATE,Rivers,Nigeria,,,https://ncce.gov.ng,2026-09-04,1188
+1187,Emirate College of Education,SOMETHINGEDU-BAU2,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1189
+1188,Emmanuel Ebije Ikwue College Of Education,SOMETHINGEDU-BEN2,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1190
+1189,"Enugu State Coll. of Education (T), Enugu",ECTE,COLLEGE_OF_EDUCATION,STATE,Enugu,Nigeria,,,https://ncce.gov.ng,2026-09-04,1191
+1190,"FCT College of Education, Zuba",FCTCOEZUBA,COLLEGE_OF_EDUCATION,,FCT Abuja,Nigeria,fctcoezuba.com.ng,,https://ncce.gov.ng,2026-09-04,1192
+1191,Federal College of Education (FCE) Gwoza,CEFG,COLLEGE_OF_EDUCATION,FEDERAL,Borno,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1193
+1192,"Federal College of Education (Special), Oyo",FCEOYO,COLLEGE_OF_EDUCATION,,Oyo,Nigeria,www.fceoyo.edu.ng,,https://ncce.gov.ng,2026-09-04,1194
+1193,"Federal College of Education (T), ISU Ebonyi State",CTIE,COLLEGE_OF_EDUCATION,FEDERAL,Ebonyi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1195
+1194,"Federal College of Education (T), Umunze",FCETUMUNZE,COLLEGE_OF_EDUCATION,,Anambra,Nigeria,www.fcetumunze.edu.ng,,https://ncce.gov.ng,2026-09-04,1196
+1195,"Federal College of Education (Tech), Potiskum",FCETPOTISKUM,COLLEGE_OF_EDUCATION,FEDERAL,Yobe,Nigeria,fcetpotiskum.edu.ng,,https://ncce.gov.ng,2026-09-04,1197
+1196,Federal College of Education (Technical) in Yauri,CETY,COLLEGE_OF_EDUCATION,FEDERAL,Kebbi,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1198
+1197,"Federal College of Education (Technical), Akoka",CA-LAG,COLLEGE_OF_EDUCATION,FEDERAL,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1199
+1198,"Federal College of Education (Technical), Asaba",CA-DEL,COLLEGE_OF_EDUCATION,FEDERAL,Delta,Nigeria,,,https://ncce.gov.ng,2026-09-04,1200
+1199,"Federal College of Education (Technical), Bichi",FCETBICHI,COLLEGE_OF_EDUCATION,FEDERAL,Kano,Nigeria,www.fcetbichi.edu.ng,,https://ncce.gov.ng,2026-09-04,1201
+1200,"Federal College of Education (Technical), Gombe",CG-GOM,COLLEGE_OF_EDUCATION,FEDERAL,Gombe,Nigeria,,,https://ncce.gov.ng,2026-09-04,1202
+1201,"Federal College of Education (Technical), Gusau",CG-ZAM2,COLLEGE_OF_EDUCATION,FEDERAL,Zamfara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1203
+1202,"Federal College of Education (Technical), Omoku",INFORFCETOMOKU,COLLEGE_OF_EDUCATION,FEDERAL,Rivers,Nigeria,www.infor@fcetomoku.edu.com,,https://ncce.gov.ng,2026-09-04,1204
+1203,Federal College of Education Bauchi,CB-BAU,COLLEGE_OF_EDUCATION,FEDERAL,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1205
+1204,Federal College of Education Edo,CE-EDO,COLLEGE_OF_EDUCATION,FEDERAL,Edo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1206
+1205,Federal College of Education Ilawe-Ekiti,NONE-EKI,COLLEGE_OF_EDUCATION,FEDERAL,Ekiti,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1207
+1206,Federal College of Education Ofeme-Ohuhu,CEOO,COLLEGE_OF_EDUCATION,,Abia,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1208
+1207,Federal College of Education Osun,FCEIWO,COLLEGE_OF_EDUCATION,FEDERAL,Osun,Nigeria,www.fceiwo.edu.ng,,https://ncce.gov.ng,2026-09-04,1209
+1208,Federal College of Education Sokoto,CS,COLLEGE_OF_EDUCATION,FEDERAL,Sokoto,Nigeria,,,https://ncce.gov.ng,2026-09-04,1210
+1209,"Federal College of Education, Abeokuta",FCE,COLLEGE_OF_EDUCATION,FEDERAL,Ogun,Nigeria,www.fce.abeokuta.edu.ng,,https://ncce.gov.ng,2026-09-04,1211
+1210,"Federal College of Education, Eha-Amufu",CEA,COLLEGE_OF_EDUCATION,FEDERAL,Enugu,Nigeria,,,https://ncce.gov.ng,2026-09-04,1212
+1211,"Federal College of Education, Ididep",NONE-AKW,COLLEGE_OF_EDUCATION,FEDERAL,Akwa Ibom,Nigeria,www.none.com,,https://ncce.gov.ng,2026-09-04,1213
+1212,"Federal College of Education, Katsina",CK-KAT,COLLEGE_OF_EDUCATION,FEDERAL,Katsina,Nigeria,,,https://ncce.gov.ng,2026-09-04,1214
+1213,"Federal College of Education, Obudu",FCEOBUDU,COLLEGE_OF_EDUCATION,FEDERAL,Cross River,Nigeria,www.fceobudu.edu.ng,,https://ncce.gov.ng,2026-09-04,1215
+1214,"Federal College of Education, Odugbo, Benue State",COB,COLLEGE_OF_EDUCATION,FEDERAL,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1216
+1215,"Federal College of Education, Okene",FCEOKENE,COLLEGE_OF_EDUCATION,FEDERAL,Kogi,Nigeria,www.fceokene.edu.ng,,https://ncce.gov.ng,2026-09-04,1217
+1216,"Federal College of Education, Yola",FCEYOLANIGERIA,COLLEGE_OF_EDUCATION,FEDERAL,Adamawa,Nigeria,www.fceyolanigeria.org,,https://ncce.gov.ng,2026-09-04,1218
+1217,"Federal College Of Education(Technical), Keana",CETK,COLLEGE_OF_EDUCATION,FEDERAL,Nasarawa,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1219
+1218,"FESTMED COLLEGE OF EDUCATION, ONDO STATE",COEAEDU,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,www.coea-edu.com,,https://ncce.gov.ng,2026-09-04,1220
+1219,"First De-Wise College of Education, Ilorin",FDWCEI,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1221
+1220,Folrac Fortified College of Education,FFCOE,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,ffcoe.edu.ng,,https://ncce.gov.ng,2026-09-04,1222
+1221,Gand-Plus College of Education,GPC,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1223
+1222,Gboko College of Education Benue State,GCB,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1224
+1223,"Global COE, Bukuru",GCB-PLA,COLLEGE_OF_EDUCATION,PRIVATE,Plateau,Nigeria,,,https://ncce.gov.ng,2026-09-04,1225
+1224,"Gombe State COE, NAFADA",GCN,COLLEGE_OF_EDUCATION,STATE,Gombe,Nigeria,,,https://ncce.gov.ng,2026-09-04,1226
+1225,Good Shepperd COE,GSC,COLLEGE_OF_EDUCATION,PRIVATE,Ogun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1227
+1226,Grace City College of Education,SOMETHING,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,Something.Edu.ng,,https://ncce.gov.ng,2026-09-04,1228
+1227,GRACE COLLEGE OF EDUCATION,GC,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1229
+1228,"Hamzainab College of Education, Oshogbo",HCO,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1230
+1230,"Havard Wilson College of Education, Aba",HWCA,COLLEGE_OF_EDUCATION,PRIVATE,Abia,Nigeria,,,https://ncce.gov.ng,2026-09-04,1232
+1231,"Hill COE, Gwanje, Akwanga",NOTAVAILABLE,COLLEGE_OF_EDUCATION,PRIVATE,Nasarawa,Nigeria,Not Available,,https://ncce.gov.ng,2026-09-04,1233
+1232,"His Grace College of Education, Ilorin",HGCI,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1234
+1233,Hope and Anchor College of Education,HAC,COLLEGE_OF_EDUCATION,PRIVATE,Niger,Nigeria,,,https://ncce.gov.ng,2026-09-04,1235
+1234,"Ife College of Education, Abejukolo, Omala",ICEAO,COLLEGE_OF_EDUCATION,PRIVATE,Kogi,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1236
+1235,Ikeduru College of Education,NONE-IMO,COLLEGE_OF_EDUCATION,PRIVATE,Imo,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1237
+1236,"Imam Hamzat COE, Ilorin",IHCI,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1238
+1237,"Imam Saidu COE, Funtua",ISCF,COLLEGE_OF_EDUCATION,PRIVATE,Katsina,Nigeria,,,https://ncce.gov.ng,2026-09-04,1239
+1238,"Innovative College of Education, Karu",ICK-NAS,COLLEGE_OF_EDUCATION,PRIVATE,Nasarawa,Nigeria,,,https://ncce.gov.ng,2026-09-04,1240
+1239,Institute of Ecumenical Education (Thinkers Corner),ETC,COLLEGE_OF_EDUCATION,,Enugu,Nigeria,,,https://ncce.gov.ng,2026-09-04,1241
+1240,"International College of Education, Langtang",SOMETHINGEDU-PLA,COLLEGE_OF_EDUCATION,PRIVATE,Plateau,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1242
+1241,"Isa Kaita College of Education, Dutsin-Ma",IKCDM,COLLEGE_OF_EDUCATION,STATE,Katsina,Nigeria,,,https://ncce.gov.ng,2026-09-04,1243
+1242,"Isaac Jasper Boro COE, Sagbama",IJBCS,COLLEGE_OF_EDUCATION,,Bayelsa,Nigeria,,,https://ncce.gov.ng,2026-09-04,1244
+1243,"Islamic COE, Potiskum",NOTAVAILABLE-YOB,COLLEGE_OF_EDUCATION,PRIVATE,Yobe,Nigeria,Not Available,,https://ncce.gov.ng,2026-09-04,1245
+1244,"JIBWIS COE, Jama'are",JCJ-BAU,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1246
+1245,"JIBWIS COE, Jega, Kebbi",NONE-KEB,COLLEGE_OF_EDUCATION,PRIVATE,Kebbi,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1247
+1246,"Jibwis COE, Zuru, Kebbi State",JCZK,COLLEGE_OF_EDUCATION,PRIVATE,Kebbi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1248
+1247,JIBWIS College of Education,JC,COLLEGE_OF_EDUCATION,PRIVATE,Nasarawa,Nigeria,,,https://ncce.gov.ng,2026-09-04,1249
+1248,JIBWIS College of Education Gombe,JCG-GOM,COLLEGE_OF_EDUCATION,PRIVATE,Gombe,Nigeria,,,https://ncce.gov.ng,2026-09-04,1250
+1249,JIBWIS College of Education Jos,JCJ-PLA,COLLEGE_OF_EDUCATION,PRIVATE,Plateau,Nigeria,,,https://ncce.gov.ng,2026-09-04,1251
+1250,"Jibwis College of Education, Gumau",JCG-BAU,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1252
+1251,"JIGAWA STATE COLLEGE OF EDUCATION AND LEGAL STUDIES, RINGIM",JSCILSRINGIM,COLLEGE_OF_EDUCATION,STATE,Jigawa,Nigeria,www.jscilsringim.edu.ng,,https://ncce.gov.ng,2026-09-04,1253
+1252,"Jigawa State College of Education, Gumel",JSCOEG,COLLEGE_OF_EDUCATION,STATE,Jigawa,Nigeria,jscoeg.edu.ng,,https://ncce.gov.ng,2026-09-04,1254
+1254,"Job College of Education, Ila-Orangun",JCEIO,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1256
+1255,Jornato College of Education,JC-BEN,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1257
+1257,"Kaduna State College of Education, Gidan-Waya, Kafanchan",KCGWK,COLLEGE_OF_EDUCATION,STATE,Kaduna,Nigeria,,,https://ncce.gov.ng,2026-09-04,1259
+1258,Kano State College of Education and Preliminary Studies (KASCEPTS),NONE-KAN,COLLEGE_OF_EDUCATION,STATE,Kano,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1260
+1260,Kashim Ibrahim College of Education,NONE-BOR,COLLEGE_OF_EDUCATION,STATE,Borno,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1262
+1261,Kazaure College of Education,KC-JIG,COLLEGE_OF_EDUCATION,PRIVATE,Jigawa,Nigeria,,,https://ncce.gov.ng,2026-09-04,1263
+1262,Kebbi State Polytechnic,NONE-KEB2,COLLEGE_OF_EDUCATION,,Kebbi,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,398;1264
+1263,Kogi East College of Education,KEC,COLLEGE_OF_EDUCATION,PRIVATE,Kogi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1265
+1264,"Kogi State College of Education, Ankpa",KSCOEANKPA,COLLEGE_OF_EDUCATION,STATE,Kogi,Nigeria,www.kscoeankpa.edu.ng,,https://ncce.gov.ng,2026-09-04,1266
+1265,"Kogi State College of Education, Kabba",KCK-KOG,COLLEGE_OF_EDUCATION,STATE,Kogi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1267
+1266,"Kwaine COE, Gombe",NON,COLLEGE_OF_EDUCATION,PRIVATE,Gombe,Nigeria,non.edu.ng,,https://ncce.gov.ng,2026-09-04,1268
+1267,"Kwara State College of Education (Technical), Lafiagi",KWACOET,COLLEGE_OF_EDUCATION,STATE,Kwara,Nigeria,https://www.kwacoet.edu.ng,,https://ncce.gov.ng,2026-09-04,1269
+1268,"Kwararafa COE, Otukpo",KCO-BEN,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1270
+1269,"Lakeview COE, Jalingo",LCJ,COLLEGE_OF_EDUCATION,PRIVATE,Taraba,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1271
+1270,"Lasting Glory College of Education, Erunmu Egbeda",LGCEEE,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1272
+1271,Lessel COE Gboko,LCG-BEN,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1273
+1272,"Lifegate College of Education, Asa",LCA,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1274
+1273,MARYAM IDRIS UMAR COLLEGE OF EDUCATION LIMITED,SOMETHINGEDU-KAN,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1275
+1274,"MCF COE Agbarha-Otor, Delta",MCAOD,COLLEGE_OF_EDUCATION,PRIVATE,Delta,Nigeria,,,https://ncce.gov.ng,2026-09-04,1276
+1275,Meadow Hall COE,MHC,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1277
+1276,"Metro COE, Adogi-Lafia",MCAL,COLLEGE_OF_EDUCATION,PRIVATE,Nasarawa,Nigeria,,,https://ncce.gov.ng,2026-09-04,1278
+1277,"Moje College of Education, Erin-Ile",MCEI,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1279
+1278,"Muftau Olanihun College of Education, Ibadan",MOCI,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1280
+1279,Muhammad Goni College of Legal and Islamic Studies (MOGOLIS),MGCIM,COLLEGE_OF_EDUCATION,,Borno,Nigeria,,,https://ncce.gov.ng,2026-09-04,1281
+1280,"Muhyideen College of Education, Ilorin",MCI-KWA,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1282
+1281,"Muritadha COE, Olodo",MCO1,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1283
+1282,Mus'ab Bn Umair College of Education Bajoga,MBUCB,COLLEGE_OF_EDUCATION,PRIVATE,Gombe,Nigeria,,,https://ncce.gov.ng,2026-09-04,1284
+1283,Nana Aishat Memorial COE,NAMC,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1285
+1284,National Institute for Nigerian Languages,NONE-ABI,COLLEGE_OF_EDUCATION,,Abia,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1286
+1285,National Teachers Institute(NTI),TN,COLLEGE_OF_EDUCATION,,Kaduna,Nigeria,,,https://ncce.gov.ng,2026-09-04,1287
+1286,"Niger State College of Education, Minna",COEMINNA,COLLEGE_OF_EDUCATION,STATE,Niger,Nigeria,www.coeminna.edu.ng,,https://ncce.gov.ng,2026-09-04,1288
+1287,"Nigerian Army College of Education (NACOE), Ilorin",NACOE,COLLEGE_OF_EDUCATION,,Kwara,Nigeria,nacoe.edu.ng,,https://ncce.gov.ng,2026-09-04,1289
+1288,"Nosakhare COE, Benin City",NCBC,COLLEGE_OF_EDUCATION,PRIVATE,Edo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1290
+1289,Nuhu Bamalli Polytechnic,NUBAPOLY,COLLEGE_OF_EDUCATION,,Kaduna,Nigeria,nubapoly.edu.ng,,https://ncce.gov.ng,2026-09-04,394;1291
+1290,"Nwafor Orizu College of Education, Nsugbe",NOCEN,COLLEGE_OF_EDUCATION,STATE,Anambra,Nigeria,nocen.edu.ng,,https://ncce.gov.ng,2026-09-04,1292
+1291,Olekamba College of Education,OC-OND2,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,,,https://ncce.gov.ng,2026-09-04,1293
+1292,Omaga aejigbo College of education Ajiolo-Ojiaji,OACAO,COLLEGE_OF_EDUCATION,PRIVATE,Kogi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1294
+1293,"ONIT COE, Abagana",OCA,COLLEGE_OF_EDUCATION,PRIVATE,Anambra,Nigeria,,,https://ncce.gov.ng,2026-09-04,1295
+1294,"Osan Ekiti COE, Ekiti State",OSANEKITICOE,COLLEGE_OF_EDUCATION,PRIVATE,Ekiti,Nigeria,osanekiticoe.com,,https://ncce.gov.ng,2026-09-04,1296
+1295,Osi College of Education,OCE,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1297
+1296,"Osisa Tech. College of Education, Enugu",OTCE,COLLEGE_OF_EDUCATION,PRIVATE,Enugu,Nigeria,,,https://ncce.gov.ng,2026-09-04,1298
+1297,Oswald Waller COE Shendam,OWCS,COLLEGE_OF_EDUCATION,PRIVATE,Plateau,Nigeria,,,https://ncce.gov.ng,2026-09-04,1299
+1298,Owu College of Education,OC-OGU,COLLEGE_OF_EDUCATION,PRIVATE,Ogu,Nigeria,,,https://ncce.gov.ng,2026-09-04,1300
+1299,"Oyo State College of Education, Lanlate",OYSCOEL,COLLEGE_OF_EDUCATION,STATE,Oyo,Nigeria,oyscoel.edu.ng,,https://ncce.gov.ng,2026-09-04,1301
+1300,Pan Africa Entrepreneurship and Vocational College of Education,PANAFRICANINSTITUTE,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,panafricaninstitute.org,,https://ncce.gov.ng,2026-09-04,1302
+1301,PAN African COE Offa,PACO,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1303
+1302,Peace College Of Education Ankpa,PCA,COLLEGE_OF_EDUCATION,PRIVATE,Kogi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1304
+1303,"Peaceland College of Education, Enugu",PEACELAND,COLLEGE_OF_EDUCATION,PRIVATE,Enugu,Nigeria,"www.peaceland.edu,ng",,https://ncce.gov.ng,2026-09-04,1305
+1304,Peacock College of Education Jalingo,PCJ,COLLEGE_OF_EDUCATION,PRIVATE,Taraba,Nigeria,,,https://ncce.gov.ng,2026-09-04,1306
+1305,Peter Oyeleye Fasua College of Education,POFCE,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1307
+1306,Petriot College of Education,PCE1,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1308
+1307,Piaget College of Education,NOTAVAILABLE-OGU,COLLEGE_OF_EDUCATION,PRIVATE,Ogun,Nigeria,Not Available,,https://ncce.gov.ng,2026-09-04,1309
+1308,Pineville College of Education,PCE2,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1310
+1310,"Premier COE, Osun",PCO,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1312
+1311,Pristine College of Education,PCE3,COLLEGE_OF_EDUCATION,PRIVATE,Imo,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1313
+1312,"Providence International College of Education, Ibadan",PICEI,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1314
+1313,Ramat Polytechnic,RP,COLLEGE_OF_EDUCATION,,Borno,Nigeria,,,https://ncce.gov.ng,2026-09-04,1315
+1314,Raphat COE,RC-OSU,COLLEGE_OF_EDUCATION,PRIVATE,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1316
+1315,"Royal City COE, Iyesi-Ota",RCCIO,COLLEGE_OF_EDUCATION,PRIVATE,Ogun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1317
+1316,"Royal COE, Ikeja, Lagos State",RCIL,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1318
+1317,"Royal College of Education, Ogun State",RCO,COLLEGE_OF_EDUCATION,PRIVATE,Ogun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1319
+1318,"S. Light College of Education, Kano",SLCEK,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1320
+1319,"Sa'adatu Rimi College of Education, Kumbotso, Kano",SRCKK,COLLEGE_OF_EDUCATION,STATE,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1321
+1320,Sam Ale College of Education,SAC,COLLEGE_OF_EDUCATION,PRIVATE,FCT Abuja,Nigeria,,,https://ncce.gov.ng,2026-09-04,1322
+1321,Sarkin Yama Community College of Education,SYCC,COLLEGE_OF_EDUCATION,PRIVATE,Bauchi,Nigeria,,,https://ncce.gov.ng,2026-09-04,1323
+1322,Sharifat Institute of Professional and Islamic Legal Studies,SHARIFATCOEILS,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,sharifatcoeils.edu.ng,,https://ncce.gov.ng,2026-09-04,1324
+1323,"Shehu Shagari College of Education, Sokoto",SSCS,COLLEGE_OF_EDUCATION,STATE,Sokoto,Nigeria,,,https://ncce.gov.ng,2026-09-04,1325
+1324,"Sikiru Adetona College of Education, Science and Technology, Omu-Ajose",TASCE,COLLEGE_OF_EDUCATION,STATE,Ogun,Nigeria,www.tasce.edu.ng,,https://ncce.gov.ng,2026-09-04,1326
+1325,"Sinai COE & Ent. Studies Gboko, Benue",SCEGB,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,,,https://ncce.gov.ng,2026-09-04,1327
+1326,"St. Augustine College of Education Akoka, Lagos",SACAL,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1328
+1327,"St. Frances Asissi College of Education, Zaria",SFACZ,COLLEGE_OF_EDUCATION,PRIVATE,Kaduna,Nigeria,,,https://ncce.gov.ng,2026-09-04,1329
+1328,St. Paul's College of Education NNewi,SPCN,COLLEGE_OF_EDUCATION,PRIVATE,Anambra,Nigeria,,,https://ncce.gov.ng,2026-09-04,1330
+1329,"STEADY FLOW COE, IKOM",SFCI,COLLEGE_OF_EDUCATION,PRIVATE,Cross River,Nigeria,,,https://ncce.gov.ng,2026-09-04,1331
+1330,"Talent Finders College of Education, Ilala, Kwara State",SOMETHINGEDU-KWA,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1332
+1331,"Tamic COE, Lagos",NON-LAG,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,NON.EDU.NG,,https://ncce.gov.ng,2026-09-04,1333
+1332,"TCNN College of Education, Bukuru",TCB,COLLEGE_OF_EDUCATION,PRIVATE,Plateau,Nigeria,,,https://ncce.gov.ng,2026-09-04,1334
+1333,The College of Education Iseyin,COEDISEYIN,COLLEGE_OF_EDUCATION,PRIVATE,Oyo,Nigeria,coediseyin.edukate.ng,,https://ncce.gov.ng,2026-09-04,1335
+1334,"The College of Education, Nsukka",CN-ENU,COLLEGE_OF_EDUCATION,PRIVATE,Enugu,Nigeria,,,https://ncce.gov.ng,2026-09-04,1336
+1335,The Heritage College of Education,SOMETHINGEDU-OND,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,SomethingEdu.ng,,https://ncce.gov.ng,2026-09-04,1337
+1336,"The Polytechnic Iree, Osun State",PIO-OSU,COLLEGE_OF_EDUCATION,,Osun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1338
+1337,Tijjani Ibrahim College of Education,TIC,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1339
+1338,Tony G Erewa College of Education,TONYGEREWACOE,COLLEGE_OF_EDUCATION,PRIVATE,Delta,Nigeria,tonygerewacoe.com.ng,,https://ncce.gov.ng,2026-09-04,1340
+1339,"Top Sprout Coe, Ilorin",NONE-KWA2,COLLEGE_OF_EDUCATION,PRIVATE,Kwara,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1341
+1340,"Top-Most COE, Ipaja-Agbado",TMCIA,COLLEGE_OF_EDUCATION,PRIVATE,Lagos,Nigeria,,,https://ncce.gov.ng,2026-09-04,1342
+1341,"Turath COE, Kano",TCK-KAN,COLLEGE_OF_EDUCATION,PRIVATE,Kano,Nigeria,,,https://ncce.gov.ng,2026-09-04,1343
+1342,"Uli College of Education, Uli",UCU,COLLEGE_OF_EDUCATION,PRIVATE,Anambra,Nigeria,,,https://ncce.gov.ng,2026-09-04,1344
+1343,"Umar Bun Khatab College of Education, Tudun Nupawa, Kaduna",UBKCTN,COLLEGE_OF_EDUCATION,PRIVATE,Kaduna,Nigeria,,,https://ncce.gov.ng,2026-09-04,1345
+1344,"Umar Ibn Ibrahim El-Kanemi College of Education, Science and Technology, Bama",UIIEKC,COLLEGE_OF_EDUCATION,STATE,Borno,Nigeria,,,https://ncce.gov.ng,2026-09-04,1346
+1345,Umar Suleiman College of Education Gashua,NONE-YOB,COLLEGE_OF_EDUCATION,STATE,Yobe,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1347
+1346,"Unity College of Education, Aukpa Adoka, Benue",UCAAB,COLLEGE_OF_EDUCATION,PRIVATE,Benue,Nigeria,-,,https://ncce.gov.ng,2026-09-04,1348
+1347,"Upland College of Education, Science and Technology",UPLAND,COLLEGE_OF_EDUCATION,PRIVATE,Ondo,Nigeria,upland.edu.ng,,https://ncce.gov.ng,2026-09-04,1349
+1348,"Victory Belt College of Education,Iyale",VICTORYBELTINTLMINITRIES,COLLEGE_OF_EDUCATION,PRIVATE,Kogi,Nigeria,victorybeltintlminitries.com/college-of-education/,,https://ncce.gov.ng,2026-09-04,1350
+1349,WATERSIDE COLLEGE OF EDUCATION,WCE,COLLEGE_OF_EDUCATION,PRIVATE,Ogun,Nigeria,nodomain.edu.ng,,https://ncce.gov.ng,2026-09-04,1351
+1351,"Yewa Central College of Education, Ayetoro, Abeokuta",YCCAA,COLLEGE_OF_EDUCATION,PRIVATE,Ogun,Nigeria,,,https://ncce.gov.ng,2026-09-04,1353
+1352,"Yusuf Bala Usman CoE and Legal Studies, Daura",NONE-KAT,COLLEGE_OF_EDUCATION,STATE,Katsina,Nigeria,none.edu.ng,,https://ncce.gov.ng,2026-09-04,1354
+1353,"Yusuf Maitama Sule COE and Lege Studeis, Ghari",YUMSCEAS,COLLEGE_OF_EDUCATION,STATE,Kano,Nigeria,yumsceas.com.ng,,https://ncce.gov.ng,2026-09-04,1355
+1354,"Zamfara State College of Education, Maru",ZCM,COLLEGE_OF_EDUCATION,STATE,Zamfara,Nigeria,,,https://ncce.gov.ng,2026-09-04,1356
+1355,Zaria Institute of Information Technology,ZI,COLLEGE_OF_EDUCATION,,Kaduna,Nigeria,,,https://ncce.gov.ng,2026-09-04,1357

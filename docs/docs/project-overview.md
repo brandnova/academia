@@ -190,6 +190,12 @@ Both are content-first, but this one leans more utilitarian and dense. Principle
   (ProfileMenu, NotificationBell). Popover elevation styling (bg-white
   dark:bg-gray-800, border, shadow) lives once in `Dropdown`, panel
   size/position varies per consumer via `panelClassName`.
+- **School meta badges**: `SchoolMetaBadge` (icon + conditional label, null-safe)
+  displays institution type, ownership, and state on the school profile hero,
+  reusing the same icon-label pattern as status icons and question meta rows.
+  Enum-to-label mappings for institution_type/ownership live in
+  `lib/schoolLabels.js`, the single source of truth also consumed by the
+  admin school form.
 
 ---
 
