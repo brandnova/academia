@@ -30,18 +30,21 @@ from apps.schools.models import Department, School
 from apps.tags.models import QuestionTag, Tag
 
 SCHOOL_DATA = [
-    ("University of Lagos", "UNILAG", "Lagos, Nigeria"),
-    ("University of Ibadan", "UI", "Ibadan, Nigeria"),
-    ("Obafemi Awolowo University", "OAU", "Ile-Ife, Nigeria"),
-    ("Ahmadu Bello University", "ABU", "Zaria, Nigeria"),
-    ("University of Nigeria, Nsukka", "UNN", "Nsukka, Nigeria"),
-    ("Federal University of Technology, Akure", "FUTA", "Akure, Nigeria"),
-    ("Lagos State University", "LASU", "Lagos, Nigeria"),
-    ("Covenant University", "CU", "Ota, Nigeria"),
-    ("University of Benin", "UNIBEN", "Benin City, Nigeria"),
-    ("Nnamdi Azikiwe University", "UNIZIK", "Awka, Nigeria"),
-    ("Bayero University Kano", "BUK", "Kano, Nigeria"),
-    ("Federal University of Technology, Minna", "FUTMINNA", "Minna, Nigeria"),
+    # (name, short_name, location, institution_type, ownership, state)
+    ("University of Lagos", "UNILAG", "Lagos, Nigeria", "UNIVERSITY", "FEDERAL", "Lagos"),
+    ("University of Ibadan", "UI", "Ibadan, Nigeria", "UNIVERSITY", "FEDERAL", "Oyo"),
+    ("Obafemi Awolowo University", "OAU", "Ile-Ife, Nigeria", "UNIVERSITY", "FEDERAL", "Osun"),
+    ("Ahmadu Bello University", "ABU", "Zaria, Nigeria", "UNIVERSITY", "FEDERAL", "Kaduna"),
+    ("University of Nigeria, Nsukka", "UNN", "Nsukka, Nigeria", "UNIVERSITY", "FEDERAL", "Enugu"),
+    ("Federal University of Technology, Akure", "FUTA", "Akure, Nigeria", "UNIVERSITY", "FEDERAL", "Ondo"),
+    ("Lagos State University", "LASU", "Lagos, Nigeria", "UNIVERSITY", "STATE", "Lagos"),
+    ("Covenant University", "CU", "Ota, Nigeria", "UNIVERSITY", "PRIVATE", "Ogun"),
+    ("University of Benin", "UNIBEN", "Benin City, Nigeria", "UNIVERSITY", "FEDERAL", "Edo"),
+    ("Nnamdi Azikiwe University", "UNIZIK", "Awka, Nigeria", "UNIVERSITY", "FEDERAL", "Anambra"),
+    ("Yaba College of Technology", "YABATECH", "Lagos, Nigeria", "POLYTECHNIC", "FEDERAL", "Lagos"),
+    ("Federal College of Education, Zaria", "FCE ZARIA", "Zaria, Nigeria", "COLLEGE_OF_EDUCATION", "FEDERAL", "Kaduna"),
+    ("Bayero University Kano", "BUK", "Kano, Nigeria", "UNIVERSITY", "FEDERAL", "Kano"),
+    ("Federal University of Technology, Minna", "FUTMINNA", "Minna, Nigeria", "UNIVERSITY", "FEDERAL", "Niger"),
 ]
 
 DEPARTMENT_NAMES = [
@@ -590,12 +593,16 @@ class Command(BaseCommand):
     def _create_schools(self):
         self.stdout.write("Creating schools...")
         schools = []
-        for name, short_name, location in SCHOOL_DATA:
+        for name, short_name, location, institution_type, ownership, state in SCHOOL_DATA:
             school, _ = School.objects.get_or_create(
                 short_name=short_name,
                 defaults={
                     "name": name, "location": location,
                     "verification_status": School.VerificationStatus.VERIFIED,
+                    "institution_type": institution_type,
+                    "ownership": ownership,
+                    "state": state,
+                    "country": "Nigeria",
                 },
             )
             schools.append(school)

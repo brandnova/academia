@@ -32,6 +32,10 @@ Rather than forcing students to depend on temporary conversations or fragmented 
 
 The platform should gradually evolve into a living archive of institutional knowledge built through contributions from students, alumni, moderators, and school representatives.
 
+### Market Strategy
+
+Academia is launching first with Nigerian tertiary institutions, where the founder's own experience with fragmented, unreliable institutional information originated. Nigeria is the platform's starting market, not its permanent identity. The data model, URL structure, and core architecture are built to extend to institutions in other countries as the Nigerian market is proven out, expansion into a new country is a data and content effort, not a redesign.
+
 ---
 
 ## Core Principles

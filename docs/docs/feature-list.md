@@ -145,6 +145,16 @@
       pipeline (already has a written issue and a backend/frontend split,
       see the two escalation issue templates)
 
+## Internationalization (Future)
+- [ ] Make the Globe2/country badge on the school profile page permanently
+      visible for every school, including Nigerian ones, once a genuine
+      second-country presence exists. Currently conditional
+      (`country !== "Nigeria"`) specifically to avoid a 100%-redundant badge
+      on a single-country dataset, see the School Directory Fields Display
+      entry in BUILD_LOG_FRONTEND.md for the original reasoning. Marked with
+      a TODO(i18n) comment at the exact line in
+      app/schools/[id]/page.js.
+
 ## School Reviews (Future)
 - [ ] Submit school review (Still deciding the details)
 - [ ] Edit/delete own review
@@ -160,16 +170,33 @@
 ## School Data Curation (Future)
 - [ ] Curated database of Nigerian universities, polytechnics, and colleges,
       sourced primarily from NUC, NBTE, and NCCE official lists,
-      cross-referenced against JAMB's institution list and secondary sources
-- [ ] Extend the School model with richer fields: institution type
+      cross-referenced against JAMB's institution list and secondary sources. 
+      This is the first of what may become several country-specific data pipelines 
+      as Academia expands.
+- [x] Extend the School model with richer fields: institution type
       (university/polytechnic/college of education), ownership
       (federal/state/private), state, an official regulatory or JAMB code,
-      source_url, last_verified_at
+      source_url, last_verified_at, plus a forward-compatible country field
+      for eventual multi-country expansion. SchoolSourceRecord model added
+      alongside for per-regulator provenance tracking. Schema, serializers,
+      views (three new List Schools filters), and admin all landed.
+      Consuming a real cleaned NUC/NBTE/NCCE dataset via an import command
+      is still pending, tracked separately below.
 - [ ] Periodic re-verification workflow so curated data doesn't silently go
       stale
 - [ ] User-submitted "school not listed" request flow (SchoolSubmission)
 - [ ] Bulk data import tooling to support the school directory curation effort above
 - [ ] Admin verification workflow for submitted schools
+- [ ] School directory/search page filter controls for institution_type,
+      ownership, and state, GET /schools/ already supports all three as
+      query params, no frontend UI built against them yet
+- [x] Admin school form (SchoolFormModal) gained inputs for
+      institution_type, ownership, state, and country, previously only
+      settable via direct API calls
+- [x] School directory/search page filter controls for institution_type,
+      ownership, and state, GET /schools/ already supported all three as
+      query params, now wired into app/schools/page.js
+
 
 ## Monetization (Future. Needs further review)
 Every item here must hold to Integrity Over Monetization (project-plan.md):

@@ -36,6 +36,12 @@ The goal is simple:
 
 ---
 
+## Market Strategy
+
+Academia is launching first with Nigerian tertiary institutions, where the problem it solves originated. Nigeria is the platform's starting market, not its permanent identity. The data model, URL structure, and core architecture are built to extend to institutions in other countries as the Nigerian market is proven out.
+
+---
+
 ## Core Principles
 
 Academia is built around a few simple ideas:
@@ -50,27 +56,22 @@ Academia is built around a few simple ideas:
 
 ## Documentation
 
-The project documentation is intentionally lightweight and organized around four core documents.
-
-### Project Overview (Read this first)
-
-A quick structured snapshot of the project and what's expected of it.
+The project documentation is organized around four core documents, plus supporting logs.
 
 ### Project Plan
-
 Defines the vision, goals, structure, and guiding decisions behind the platform.
 
 ### Feature List
-
-Defines the complete list of planned features and requirements.
+Defines the complete list of features, what's built, and what's planned for later.
 
 ### Database Schema
-
 Defines the application's data structures, models, and relationships.
 
 ### API Contract
-
 Defines the communication contract between the frontend and backend systems.
+
+### Project Overview
+The frontend-facing guide: sitemap, design philosophy, visual direction, and component list.
 
 ---
 
@@ -78,7 +79,7 @@ Defines the communication contract between the frontend and backend systems.
 
 Academia follows an API-first development approach.
 
-Before implementation begins, system behavior, data structures, and API responses are documented and agreed upon. Frontend and backend development then proceed independently using the same documented contracts.
+System behavior, data structures, and API responses are documented and agreed upon before implementation. Frontend and backend development then proceed independently using the same documented contracts.
 
 This reduces integration issues, allows parallel development, and keeps both sides aligned throughout the project.
 
@@ -86,16 +87,11 @@ This reduces integration issues, allows parallel development, and keeps both sid
 
 ## Current Status
 
-**Phase:** Planning & Documentation
+**Phase:** Post-MVP, pre-launch
 
-The project is currently focused on:
+The backend is complete: all 15 planned MVP phases, plus post-MVP passes for production readiness, URL/ID ergonomics, and API completeness. The frontend MVP (Phases 0 through 15) is also complete and live on Vercel. Both are functional and deployed.
 
-* Finalizing documentation
-* Defining data structures
-* Establishing API contracts
-* Planning implementation details
-
-Application development begins after documentation approval.
+The project is currently in a final audit-and-fix pass, working through a tracked backlog of smaller bugs and polish items before opening the platform to real users. See `feature-list.md`'s Platform Improvements section for the active list.
 
 ---
 
@@ -104,24 +100,28 @@ Application development begins after documentation approval.
 ```text
 Academia/
 │
-├── docs/
-├── backend/
-├── frontend/
+├── docs/                    - Project documentation (MkDocs, published to GitHub Pages)
+├── backend/                 - Django REST Framework API
+├── academia-frontend/       - Next.js application
 │
-├── README.md
-└── .gitignore
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── GOVERNANCE.md
+├── LICENSE
+├── SECURITY.md
+└── README.md
 ```
 
 ---
 
 ## Next Steps
 
-1. Complete the Feature List.
-2. Design the Database Schema.
-3. Define API Contracts.
-4. Begin backend and frontend implementation in parallel.
-5. Integrate and test.
+1. Work through the post-MVP audit backlog (see `feature-list.md`).
+2. Complete the Nigerian school directory import (data cleaning in progress).
+3. Onboard initial moderators and school representatives.
+4. Open the platform to real users.
 
 ---
 
-*Academia aims to become the most useful destination for students seeking answers to academic questions.*
+*Academia aims to become the most useful destination for students seeking answers to academic questions, starting in Nigeria.*
