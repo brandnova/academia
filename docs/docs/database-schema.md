@@ -30,10 +30,50 @@ Represents an educational institution.
 | website | String | Nullable | Official website URL |
 | verification_status | Enum | Default: UNVERIFIED | UNVERIFIED/PENDING/VERIFIED |
 | is_active | Boolean | Default: True | School active status (also used as soft-delete) |
+| institution_type | Enum | Nullable | UNIVERSITY/POLYTECHNIC/COLLEGE_OF_EDUCATION. Deliberately kept to three values, see School Data Curation note below |
+| ownership | Enum | Nullable | FEDERAL/STATE/PRIVATE |
+| state | String | Nullable | Nigerian state, free text |
+| regulatory_code | String | Nullable, Unique | Reserved for a JAMB institution code, not populated by the initial NUC/NBTE/NCCE import |
+| source_url | String | Nullable | The regulator page this record's data was last confirmed against |
+| last_verified_at | DateTime | Nullable | Set explicitly by the import process or an admin correction, not auto-derived |
+| country | String | Default: "Nigeria" | Forward-compatible field for eventual multi-country expansion, no multi-country logic exists yet |
 | created_at | DateTime | Auto now | Creation timestamp |
 | updated_at | DateTime | Auto now | Last update timestamp |
 
 `has_hub` is not a stored field, it's computed from the related `Hub` record.
+
+**School Data Curation note on `institution_type`:** source regulator data contains
+six raw categories (universities, polytechnics, colleges of education, allied
+institutions, colleges of health technology, colleges of nursing). Allied
+institutions, colleges of health technology, and colleges of nursing all collapse
+into `POLYTECHNIC` as their nearest general category, since all three are
+NBTE-regulated, sub-degree/technical institutions structurally closer to a
+polytechnic than to a university or a college of education. The original,
+more specific category string is preserved per-record on `SchoolSourceRecord.raw_category`
+below, nothing from the source is actually lost, it's just not promoted to a
+first-class `School` field.
+
+### SchoolSourceRecord
+Per-regulator provenance for a School, one row per source confirmation. Exists
+specifically to support "never auto-deactivate a School based on one source
+disappearing" (see project-plan.md's Schools Are Platform Data principle): a
+future re-pull of a regulator's list flips `is_current` to False here rather
+than touching `School.is_active` directly, leaving deactivation a deliberate,
+reviewed admin decision instead of an automatic side effect. No independent
+API endpoint, admin-visible only (inline under School in Django admin).
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| school | ForeignKey(School) | Required, CASCADE | The school this record confirms |
+| regulator | Enum | Required | NUC/NBTE/NCCE |
+| raw_category | String | Required | The exact original source label (e.g. "Allied Institution", "College of Nursing"), preserved even though it's collapsed into a simpler School.institution_type |
+| raw_payload | JSON | Default: empty object | VC/provost name, year established, anything else the source carried that isn't a dedicated School column |
+| source_url | String | Required | The regulator page this record was sourced from |
+| fetched_at | DateTime | Required | When this source data was pulled |
+| is_current | Boolean | Default: True | Flipped False when a later re-pull of that regulator's list no longer finds this institution |
+| created_at | DateTime | Auto now | Creation timestamp |
+| updated_at | DateTime | Auto now | Last update timestamp |
 
 ### Department
 Represents an academic department within a school.
@@ -327,7 +367,7 @@ join this set once built, with no schema change required.
 - `Report`: (is_escalated, created_at DESC) - For escalated reports triage
 
 ### Unique Constraints
-- `School`: name, short_name, slug
+- `School`: name, short_name, slug, regulatory_code
 - `Department`: (school_id, name)
 - `Hub`: school_id
 - `AnswerVote`: (answer_id, user_id)
@@ -337,7 +377,7 @@ join this set once built, with no schema change required.
 - `APIClient`: key_prefix
 
 ### Cascade Behavior
-- Deleting a `School` → Delete associated `Hub`, `Department`, `HubActivationRequest`
+- Deleting a `School` → Delete associated `Hub`, `Department`, `HubActivationRequest`, `SchoolSourceRecord`
 - Deleting a `Hub` → Delete associated `Question`, `ModeratorAssignment`, `SchoolRepresentativeAssignment`
 - Deleting a `User` → Delete associated `Question`, `Answer`, `Comment`, `Notification`, `Report`
 - Deleting a `Question` → Delete associated `Answer`, `QuestionTag`, `QuestionFollow`

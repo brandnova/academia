@@ -76,6 +76,43 @@ of low-priority, frontend-only implementation notes kept for visibility.
   /admin, closing the gap where reps could manage departments per the docs
   but had no direct path to it from their own management surface.
 
+## School Directory Fields Display (Post-MVP, Frontend)
+
+Displays the four new School fields (institution_type, ownership, state,
+country) added by the backend's School Data Curation pass. Built and
+verified against the null case specifically, since the real NUC/NBTE/NCCE
+import hadn't landed yet at the time of this work, every field renders
+independently and conditionally, a school with only one of the three
+populated shows exactly one badge, not three slots with two hidden.
+
+- lib/schoolLabels.js: single source of truth for institution_type/ownership
+  enum-to-label mappings, consumed by both the school profile page and the
+  admin SchoolFormModal, to avoid two hand-written copies drifting.
+- SchoolMetaBadge: shared icon+label component for the profile hero.
+- Profile hero restructured from one continuous wrapped meta line into three
+  sectioned rows (primary facts, institutional classification, hub
+  activity), each with its own top border, done alongside this since the
+  single-line layout wouldn't have scaled to the added fields on mobile.
+- country intentionally has no permanent badge, renders only when the value
+  is something other than "Nigeria", per the issue's explicit reasoning:
+  a single-country dataset showing "Nigeria" on every school page is noise,
+  not information.
+- SchoolFormModal gained inputs for all four fields (admin follow-up,
+  approved alongside the main issue), institution_type/ownership default
+  to "Not set" rather than a first-option default, since both are
+  genuinely nullable and shouldn't be forced.
+- Known follow-up, not built in this pass: school directory page filter
+  controls for these same three fields, tracked in feature-list.md's
+  School Data Curation section.
+- Directory filter controls landed: app/schools/page.js gained
+  institution_type/ownership selects (reusing lib/schoolLabels.js's option
+  lists) and a debounced free-text state filter, alongside the existing
+  search and has_hub checkbox. hasActiveFilters and the empty-state message
+  now account for all four filters together, not just has_hub. Bundled fix:
+  the two remaining border-gray-200/700 literals in this file (border-y and
+  divide) swapped for the --color-border token, same drift item tracked
+  since Project_audit_notes.md's Pass 5/7/9 findings.
+
 ## UI Polish Pass (Post-MVP, Frontend)
 
 Not a numbered phase. A full visual pass following user feedback, deliberately

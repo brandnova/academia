@@ -7,7 +7,9 @@
 ![Docs](https://img.shields.io/badge/docs-gh--pages-blue)
 ![Contributions](https://img.shields.io/badge/contributions-welcome-orange)
 
-Academia is a school-focused academic knowledge platform that helps students find answers, solve academic problems, and preserve institutional knowledge in a searchable, organized way. Think Stack Overflow, but organized by Nigerian tertiary school and department instead of programming tags, and focused on things like GPA calculation, clearance, registration, and SIWES, not code.
+Academia is a school-focused academic knowledge platform that helps students find answers, solve academic problems, and preserve institutional knowledge in a searchable, organized way. Think Stack Overflow or Quora, but organized by tertiary school and department, and focused on providing reliable answers and info on academic processes with things like GPA calculation, clearance, registration, SIWES, and so on.
+
+Academia is launching first with Nigerian tertiary institutions, where the problem it solves originated. The platform is built to extend to institutions in other countries as the model proves out, see project-plan.md's Product Vision for more.
 
 The platform is not a social feed. There is no engagement-driven scrolling or vanity metrics. The measure of success is simple: did this person find, or leave, an answer that helps someone else later.
 

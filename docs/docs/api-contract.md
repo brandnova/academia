@@ -384,6 +384,9 @@ wherever a school is being displayed.
 **Query Parameters:**
 - `search` - Search by name or short_name
 - `has_hub` - Filter schools with/without hub (true/false)
+- `institution_type` - Filter by UNIVERSITY/POLYTECHNIC/COLLEGE_OF_EDUCATION
+- `ownership` - Filter by FEDERAL/STATE/PRIVATE
+- `state` - Filter by Nigerian state (exact match, case-insensitive)
 - `page` - Page number (default: 1)
 - `page_size` - Items per page (default: 20, max: 100)
 
@@ -403,6 +406,10 @@ wherever a school is being displayed.
       "website": "https://unilag.edu.ng",
       "has_hub": true,
       "is_active": true,
+      "institution_type": "UNIVERSITY",
+      "ownership": "FEDERAL",
+      "state": "Lagos",
+      "country": "Nigeria",
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -413,6 +420,11 @@ wherever a school is being displayed.
 - **Cache**: Public requests are cached with prefix `school-list:query` using `CACHE_TTL_SHORT` (60 seconds).
 - **Admin Bypass**: Authenticated Platform Admins bypass the cache completely (to see live entries and inactive/deactivated schools, which are filtered out for regular users/guests).
 - **Invalidation**: Wiped automatically on POST school creation or PATCH school updates.
+
+All three new filters combine with AND when used together, and with the
+existing `search`/`has_hub` filters. `institution_type` and `ownership`
+values are case-insensitive on input (uppercased before matching), `state`
+matches case-insensitively against the stored value.
 
 ---
 
@@ -431,6 +443,13 @@ wherever a school is being displayed.
   "has_hub": true,
   "is_active": true,
   "verification_status": "VERIFIED",
+  "institution_type": "UNIVERSITY",
+  "ownership": "FEDERAL",
+  "state": "Lagos",
+  "country": "Nigeria",
+  "regulatory_code": null,
+  "source_url": null,
+  "last_verified_at": null,
   "departments": [
     {
       "id": "uuid",
@@ -455,6 +474,11 @@ wherever a school is being displayed.
 - **Cache**: Public detail views are cached as `school-detail:{school_id}` using `CACHE_TTL_MEDIUM` (300 seconds).
 - **Admin Bypass**: Authenticated Platform Admins bypass this cache entirely and view live data (including inactive status).
 - **Invalidation**: Cleared on PATCH school update of the school, or POST/PATCH operations on the school's departments.
+
+`regulatory_code`, `source_url`, and `last_verified_at` are null for every
+school until the NUC/NBTE/NCCE directory import lands and/or an admin sets
+them manually. `institution_type`, `ownership`, and `state` are also
+nullable, expect null on any school created before that import.
 
 ---
 
@@ -489,13 +513,21 @@ later.
   "name": "University of Ibadan",
   "short_name": "UI",
   "location": "Ibadan, Nigeria",
-  "website": "https://ui.edu.ng"
+  "website": "https://ui.edu.ng",
+  "institution_type": "UNIVERSITY",
+  "ownership": "FEDERAL",
+  "state": "Oyo",
+  "country": "Nigeria",
+  "regulatory_code": null,
+  "source_url": null,
+  "last_verified_at": null
 }
 ```
 
-`short_name` is automatically uppercased on save. `location` and `website` are
-optional. A `slug` is auto-generated from `short_name` (e.g. `"UI"` → `"ui"`) and
-is never regenerated.
+`short_name` is automatically uppercased on save. `location`, `website`, and
+every field from `institution_type` through `last_verified_at` are optional.
+A `slug` is auto-generated from `short_name` (e.g. `"UI"` → `"ui"`) and
+is never regenerated. `country` defaults to `"Nigeria"` if omitted.
 
 **Response (201 Created):** Same as GET `/api/v1/schools/{school_id}/`
 
@@ -506,6 +538,11 @@ is never regenerated.
   "name": ["school with this name already exists."],
   "short_name": ["school with this short name already exists."]
 }
+
+// 400 Bad Request - Duplicate regulatory_code
+{
+  "regulatory_code": ["school with this regulatory code already exists."]
+}
 ```
 
 **Invalidation Note:** Invalidates and clears all entries matching the `school-list` cache prefix.
@@ -515,7 +552,10 @@ is never regenerated.
 ### Update School (Admin Only)
 **Endpoint:** `PATCH /api/v1/schools/{school_id}/`
 
-**Request:** Same as POST, all fields optional. Accepts `"is_active": true/false`.
+**Request:** Same fields as POST (see Create School above), all optional. Accepts
+`"is_active": true/false`. This is also how `regulatory_code`, `source_url`, and
+`last_verified_at` get set or corrected after the fact, whether by the import
+process or by an admin.
 
 **Response (200 OK):** Same as GET `/api/v1/schools/{school_id}/`
 

@@ -67,6 +67,18 @@ class SchoolListCreateView(generics.ListCreateAPIView):
             else:
                 queryset = queryset.exclude(hub__is_active=True)
 
+        institution_type = self.request.query_params.get("institution_type")
+        if institution_type:
+            queryset = queryset.filter(institution_type=institution_type.strip().upper())
+
+        ownership = self.request.query_params.get("ownership")
+        if ownership:
+            queryset = queryset.filter(ownership=ownership.strip().upper())
+
+        state = self.request.query_params.get("state")
+        if state:
+            queryset = queryset.filter(state__iexact=state.strip())
+
         return queryset
 
     def list(self, request, *args, **kwargs):
