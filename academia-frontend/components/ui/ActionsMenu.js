@@ -19,7 +19,7 @@ export default function ActionsMenu({ items, align = "right", triggerLabel = "Mo
           aria-label={triggerLabel}
           aria-expanded={open}
           aria-haspopup="true"
-          className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
         >
           <MoreVertical className="w-4 h-4" />
         </button>

@@ -16,7 +16,7 @@ class QuestionAuthorSerializer(serializers.ModelSerializer):
 class QuestionHubSchoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
-        fields = ["name", "short_name", "slug"]
+        fields = ["id", "name", "short_name", "slug"]
 
 
 class QuestionHubSerializer(serializers.ModelSerializer):

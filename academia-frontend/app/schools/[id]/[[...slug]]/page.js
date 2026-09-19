@@ -2,11 +2,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Globe, Globe2, MapPin, Map, Landmark, Shield, ShieldCheck, MessageSquare, Users } from "lucide-react";
 import { apiFetch } from "@/lib/api";
+import { schoolUrl } from "@/lib/urls";
 import { INSTITUTION_TYPE_LABELS, OWNERSHIP_LABELS } from "@/lib/schoolLabels";
 import SchoolMetaBadge from "@/components/schools/SchoolMetaBadge";
 import RequestHubCTA from "@/components/schools/RequestHubCTA";
 import ManageDepartmentsLink from "@/components/schools/ManageDepartmentsLink";
 import HubQuestionList from "@/components/hubs/HubQuestionList";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 async function getSchool(id) {
   try {
@@ -17,16 +20,6 @@ async function getSchool(id) {
   }
 }
 
-export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const school = await getSchool(id);
-  if (!school) return {};
-  return {
-    title: school.name,
-    description: `Questions and answers for ${school.name} students, organized by department.`,
-  };
-}
-
 async function getHub(schoolId) {
   try {
     return await apiFetch(`/hubs/by-school/${schoolId}/`);
@@ -34,6 +27,36 @@ async function getHub(schoolId) {
     if (err.status === 404) return null;
     throw err;
   }
+}
+
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const school = await getSchool(id);
+  if (!school) return {};
+
+  const title = `${school.name} (${school.short_name})`;
+  const description = `Ask and find answers to academic questions for ${school.name} students${
+    school.location ? `, located in ${school.location}` : ""
+  }, organized by department on Academia.`;
+  const canonicalPath = schoolUrl(school);
+
+  return {
+    title,
+    description,
+    alternates: { canonical: canonicalPath },
+    openGraph: {
+      title,
+      description,
+      url: canonicalPath,
+      type: "website",
+      siteName: "Academia",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function SchoolProfilePage({ params }) {
@@ -47,8 +70,29 @@ export default async function SchoolProfilePage({ params }) {
   const hasClassificationMeta =
     school.institution_type || school.ownership || school.state || school.country !== "Nigeria";
 
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Academia", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Schools", item: `${SITE_URL}/schools` },
+      { "@type": "ListItem", position: 3, name: school.name, item: `${SITE_URL}${schoolUrl(school)}` },
+    ],
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+
+      <nav aria-label="Breadcrumb" className="mb-2 text-sm">
+        <Link href="/schools" className="text-accent hover:underline">
+          Schools
+        </Link>
+      </nav>
+
       <div className="mb-8">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
           <div className="min-w-0">
@@ -100,12 +144,8 @@ export default async function SchoolProfilePage({ params }) {
               TODO(i18n): once Academia establishes a genuine multi-country
               presence, remove the `school.country !== "Nigeria"` guard above
               so the Globe2 badge renders unconditionally for every school,
-              Nigerian ones included. The guard exists only because a
-              single-country dataset showing "Nigeria" on 100% of schools is
-              noise, not information, see the original issue's reasoning.
-              That reasoning stops applying the moment a second country is
-              real. Tracked in feature-list.md's Internationalization
-              (Future) section, not part of the current audit-fix backlog.
+              Nigerian ones included. See feature-list.md's
+              Internationalization (Future) section.
             */}
           </div>
         )}

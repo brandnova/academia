@@ -263,6 +263,12 @@ School Data Curation sourcing line.
   (apps/schools/data/imports/), ~470 name-similarity duplicate candidates
   the cleaning pipeline could not safely auto-resolve, tracked as an open
   backlog item, not yet reviewed
+- QuestionHubSchoolSerializer gained an `id` field (School PK), the
+  Question list/detail response's nested hub.school previously exposed
+  only name/short_name/slug. Closes a real frontend gap: the question
+  detail page's "back to school" link had no id to link with directly and
+  was routing through the /hubs/{id} redirect as a workaround. Purely
+  additive, no other field changed.
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start

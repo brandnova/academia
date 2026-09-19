@@ -1,8 +1,31 @@
 import Link from "next/link";
 import { School, Tag, ArrowRight } from "lucide-react";
 import { apiFetch } from "@/lib/api";
+import { schoolUrl } from "@/lib/urls";
 import HeroSearchBar from "@/components/home/HeroSearchBar";
 import RecentQuestionsList from "@/components/home/RecentQuestionsList";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+export const metadata = {
+  title: "Academia | Academic Q&A for Nigerian Tertiary Students",
+  description:
+    "Find and share answers to academic questions, GPA calculation, clearance, registration, SIWES, and more, organized by school and department so the same question never needs asking twice.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Academia",
+    description:
+      "Academic Q&A repository for Nigerian tertiary students, organized by school and searchable.",
+    url: "/",
+    type: "website",
+    siteName: "Academia",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Academia",
+    description: "Academic Q&A repository for Nigerian tertiary students.",
+  },
+};
 
 async function getSideData() {
   try {
@@ -19,8 +42,27 @@ async function getSideData() {
 export default async function HomePage() {
   const { schools, tags } = await getSideData();
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Academia",
+    url: SITE_URL,
+    description:
+      "Academic Q&A repository for Nigerian tertiary students, organized by school and department.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <section className="full-bleed -mt-6 relative overflow-hidden border-b border-gray-200/70 dark:border-gray-800/70 mb-10">
         <div
           className="absolute inset-0 bg-accent/15 dark:bg-accent/10 bg-cover bg-center"
@@ -67,7 +109,7 @@ export default async function HomePage() {
               <ul className="space-y-2">
                 {schools.map((s) => (
                   <li key={s.id}>
-                    <Link href={`/schools/${s.id}`} className="text-sm hover:text-accent">
+                    <Link href={schoolUrl(s)} className="text-sm hover:text-accent">
                       {s.name}
                     </Link>
                   </li>

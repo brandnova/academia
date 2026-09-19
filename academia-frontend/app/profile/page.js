@@ -84,7 +84,7 @@ export default function ProfilePage() {
               ) : (
                 <div className="flex items-center gap-2">
                   <h1 className="text-xl font-semibold">{user.full_name}</h1>
-                  <button onClick={startEditing} aria-label="Edit name" className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-accent transition-colors">
+                  <button onClick={startEditing} aria-label="Edit name" className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-accent transition-colors">
                     <Pencil className="w-4 h-4" />
                   </button>
                 </div>

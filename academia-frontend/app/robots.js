@@ -5,7 +5,15 @@ export default function robots() {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin", "/moderation", "/profile", "/notifications"],
+      disallow: [
+        "/admin",
+        "/moderation",
+        "/profile",
+        "/notifications",
+        "/questions/new",
+        "/questions/*/edit",
+        "/schools/*/departments",
+      ],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

@@ -229,12 +229,18 @@ ever sees a response. A future non-Next.js consumer of this API would still
 follow the plain documented flow in api-contract.md directly; this proxy
 layer is a frontend implementation choice, not an API requirement.
 
-**URL conventions to build against:** Schools and Hubs each have a stable, unique
-`slug` (e.g. `unilag`) suitable as the primary route segment for their public pages,
-`/schools/unilag/`, `/hubs/unilag/`, resolved via `GET /schools/by-slug/{slug}/` and
-`GET /hubs/by-slug/{slug}/`. Questions have a cosmetic, non-unique `slug` meant to sit
-alongside the UUID in the URL for readability and SEO, `/questions/{id}/{slug}`, but
-the UUID is what's actually looked up, the slug can be anything or even omitted.
+**URL conventions to build against:** Schools and Questions both use a
+UUID-primary URL with a cosmetic, SEO-friendly slug appended for
+readability, `/schools/{id}/{slug}` and `/questions/{id}/{slug}`. The UUID
+is what's actually looked up in both cases; the slug is never used for
+lookup and can be anything or even omitted, `lib/urls.js`'s `schoolUrl()`
+and `questionUrl()` build these consistently and fall back to a
+client-generated slug (`lib/slugify.js`) when a response omits one.
+`GET /schools/by-slug/{slug}/` and `GET /hubs/by-slug/{slug}/` remain
+available and documented in api-contract.md, but the frontend doesn't
+route through them as the primary path today, that's a documented
+deviation from the original plan, corrected here to match what actually
+shipped.
 
 ---
 
