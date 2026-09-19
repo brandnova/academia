@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
+import { schoolUrl } from "@/lib/urls";
 import Skeleton from "@/components/ui/Skeleton";
 import DepartmentForm from "@/components/departments/DepartmentForm";
 import DepartmentRow from "@/components/departments/DepartmentRow";
@@ -78,7 +79,7 @@ export default function ManageDepartmentsPage({ params }) {
   return (
     <div>
       <div className="mb-6">
-        <Link href={`/schools/${id}`} className="text-sm text-accent hover:underline">
+        <Link href={schoolUrl(school)} className="flex items-center gap-1.5 text-sm text-accent hover:underline w-fit">
           <ArrowLeft className="w-4 h-4" /> Back to {school.name}
         </Link>
         <h1 className="text-xl font-semibold mt-2">Manage Departments</h1>

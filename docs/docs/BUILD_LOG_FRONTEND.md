@@ -76,6 +76,66 @@ of low-priority, frontend-only implementation notes kept for visibility.
   /admin, closing the gap where reps could manage departments per the docs
   but had no direct path to it from their own management surface.
 
+## School Cosmetic Slug (Post-MVP, Frontend)
+
+Schools gained the same UUID-primary, cosmetic-slug URL pattern questions
+already use: /schools/{id}/{slug}, via schoolUrl() in lib/urls.js. School
+already had an unused slug field for this purpose (generated once from
+short_name, never regenerated, matching School's soft-delete/never-changing
+identity pattern). app/schools/[id]/page.js moved to
+app/schools/[id]/[[...slug]]/page.js, a Next.js optional catch-all; the
+sibling departments/page.js static route is unaffected, static segments
+resolve ahead of catch-alls at the same level. Every internal link to a
+school page (SchoolListRow, homepage sidebar, HubTeamManager's "Visit
+school", the departments page's back link) now goes through schoolUrl()
+rather than hardcoding /schools/{id}.
+
+Known gap, not fixed here: the question detail page's "back to school"
+link still routes through /hubs/{id} (a permanent redirect) rather than
+linking to schoolUrl() directly, since Question detail's nested
+hub.school object has no id field per api-contract.md, only
+name/short_name/slug. A prior BUILD_LOG note claimed this id was already
+available; it isn't, per the actual documented response shape. Corrected
+here rather than propagated. Needs a small backend addition
+(hub.school.id on Question detail) before this can close.
+
+## School Directory Fields Display (Post-MVP, Frontend)
+
+Displays the four new School fields (institution_type, ownership, state,
+country) added by the backend's School Data Curation pass. Built and
+verified against the null case specifically, since the real NUC/NBTE/NCCE
+import hadn't landed yet at the time of this work, every field renders
+independently and conditionally, a school with only one of the three
+populated shows exactly one badge, not three slots with two hidden.
+
+- lib/schoolLabels.js: single source of truth for institution_type/ownership
+  enum-to-label mappings, consumed by both the school profile page and the
+  admin SchoolFormModal, to avoid two hand-written copies drifting.
+- SchoolMetaBadge: shared icon+label component for the profile hero.
+- Profile hero restructured from one continuous wrapped meta line into three
+  sectioned rows (primary facts, institutional classification, hub
+  activity), each with its own top border, done alongside this since the
+  single-line layout wouldn't have scaled to the added fields on mobile.
+- country intentionally has no permanent badge, renders only when the value
+  is something other than "Nigeria", per the issue's explicit reasoning:
+  a single-country dataset showing "Nigeria" on every school page is noise,
+  not information.
+- SchoolFormModal gained inputs for all four fields (admin follow-up,
+  approved alongside the main issue), institution_type/ownership default
+  to "Not set" rather than a first-option default, since both are
+  genuinely nullable and shouldn't be forced.
+- Known follow-up, not built in this pass: school directory page filter
+  controls for these same three fields, tracked in feature-list.md's
+  School Data Curation section.
+- Directory filter controls landed: app/schools/page.js gained
+  institution_type/ownership selects (reusing lib/schoolLabels.js's option
+  lists) and a debounced free-text state filter, alongside the existing
+  search and has_hub checkbox. hasActiveFilters and the empty-state message
+  now account for all four filters together, not just has_hub. Bundled fix:
+  the two remaining border-gray-200/700 literals in this file (border-y and
+  divide) swapped for the --color-border token, same drift item tracked
+  since Project_audit_notes.md's Pass 5/7/9 findings.
+
 ## UI Polish Pass (Post-MVP, Frontend)
 
 Not a numbered phase. A full visual pass following user feedback, deliberately
@@ -136,6 +196,21 @@ structure with more personality.
   /hubs/[id] and /hubs/by-school/[schoolId] both reduced to thin redirects
   into the merged page, kept as real routes since existing bookmarks and
   email links point at them.
+- Actions menu / kebab pattern: question, answer, and comment action rows
+  (Edit, Delete, Report, Escalate) consolidated into a shared Dropdown +
+  ActionsMenu pair, replacing an inline row that had grown too long after
+  Report and Escalate landed. Visible-vs-collapsed split: Follow stays
+  inline on questions, vote control and Mark-best-answer stay inline on
+  answers, everything else (including Lock/Unlock, not yet migrated,
+  pending LockToggle.js review) collapses into the menu. Required
+  ReportButton/EscalateButton to become controlled components
+  (open/onClose props instead of owning their own trigger), so their
+  modal state survives the menu closing on item click. AnswerCard's
+  byline moved above the body, small and muted, matching CommentRow's
+  existing pattern, so the answer content reads as the visual priority.
+  ProfileMenu and NotificationBell later migrated onto the same Dropdown
+  primitive for consistency, picking up Escape-to-close as a side benefit
+  neither had before.
 
 ## Cross-Cutting Fixes (Post-MVP, Frontend)
 - Cookie-Forwarding Fix: apiFetch (every Server Component page) was calling
@@ -277,3 +352,47 @@ structure with more personality.
 - Full favicon/OG-image/web-manifest asset pass, deferred until the
   project's final name and logomark are decided, base technical SEO
   (metadata, sitemap.js, robots.js) shipped ahead of that.
+- Dynamic OG images (Phase C): lib/og.js holds the shared OgCard layout,
+  Google Fonts glyph-subset loader, and hex color tokens transcribed from
+  globals.css (Satori/ImageResponse can't read CSS variables or Tailwind
+  classes, inline style objects only). opengraph-image.js route files added
+  for the homepage (also the site-wide fallback via Next's file-convention
+  inheritance), schools, questions, and tags. The public/og-default.png
+  placeholder requested during the earlier metadata pass is no longer
+  needed and was removed from app/layout.js's static openGraph/twitter
+  image references, this system replaces it entirely.
+- OG content refinements: schools now carry a self-explanatory one-line
+  description ("Academic Q&A hub for {short_name} students") in place of
+  the raw location string. Questions gained an answer-count stat line
+  (explicitly handles the zero-answer case rather than showing "0
+  answers"), folded SOLVED status into that same line instead of a
+  separate badge, tags gained a "{N} questions answered" stat, deliberately
+  framed as evidence of usefulness rather than a bare count, consistent
+  with project-plan.md's Knowledge Over Social Activity principle.
+- Phase D: BreadcrumbList structured data added to school and question
+  pages. School page's back-link changed from an arrow-back pattern to a
+  plain "Schools" breadcrumb nav, since it now has multiple valid entry
+  points (directory, homepage, search) rather than one obvious parent to
+  arrow back to; question page kept its arrow-back pattern, which still
+  fits since a question has exactly one clear parent (its school). Both
+  back/breadcrumb links wrapped in <nav aria-label="Breadcrumb"> for real
+  semantic correctness, not just visual styling. Technical SEO review
+  (headings, alt text, semantic HTML) found no outstanding issues across
+  every page checked, including QuestionListRow, no raw <img> tags exist
+  anywhere in the app today (avatars are never rendered as images, only
+  full_name next to a generic User icon), so there was no alt-text gap to
+  close.
+
+## Platform Account Marker (Post-MVP, Frontend)
+
+Not a role system: lib/platformAccount.js compares a single hardcoded
+account id (NEXT_PUBLIC_PLATFORM_ACCOUNT_ID, unset by default) against an
+author's id, nothing else. PlatformAuthorBadge (a small BadgeCheck icon)
+renders next to that one account's name wherever an author is shown
+(question "Asked by", answer and comment bylines), and renders nothing for
+every other account, and nothing at all anywhere if the env var is unset.
+No is_admin exposure on any serializer, no per-user role logic. Exists to
+give Academia's own seed/editorial account (used to post initial content
+ahead of real user growth) a visible identity mark, since avatars aren't
+rendered anywhere in the current UI and full_name alone was judged not
+distinctive enough on its own.

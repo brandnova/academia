@@ -6,11 +6,16 @@ import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
 import SchoolListRow from "@/components/schools/SchoolListRow";
+import { INSTITUTION_TYPE_OPTIONS, OWNERSHIP_OPTIONS } from "@/lib/schoolLabels";
 
 export default function SchoolsPage() {
   const [query, setQuery] = useState("");
   const [hasHubOnly, setHasHubOnly] = useState(false);
+  const [institutionType, setInstitutionType] = useState("");
+  const [ownership, setOwnership] = useState("");
+  const [stateQuery, setStateQuery] = useState("");
   const debouncedQuery = useDebouncedValue(query, 500);
+  const debouncedState = useDebouncedValue(stateQuery, 500);
 
   const [schools, setSchools] = useState([]);
   const [count, setCount] = useState(0);
@@ -25,10 +30,13 @@ export default function SchoolsPage() {
       const params = new URLSearchParams();
       if (debouncedQuery) params.set("search", debouncedQuery);
       if (hasHubOnly) params.set("has_hub", "true");
+      if (institutionType) params.set("institution_type", institutionType);
+      if (ownership) params.set("ownership", ownership);
+      if (debouncedState) params.set("state", debouncedState);
       params.set("page", page);
       return clientFetch(`/schools/?${params.toString()}`);
     },
-    [debouncedQuery, hasHubOnly]
+    [debouncedQuery, hasHubOnly, institutionType, ownership, debouncedState]
   );
 
   useEffect(() => {
@@ -69,12 +77,31 @@ export default function SchoolsPage() {
     }
   }
 
+  const hasActiveFilters = Boolean(
+    hasHubOnly || institutionType || ownership || stateQuery
+  );
+
+  function clearFilters() {
+    setHasHubOnly(false);
+    setInstitutionType("");
+    setOwnership("");
+    setStateQuery("");
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-8">
-      <aside className="space-y-3">
-        <h2 className="font-semibold text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-          Filter
-        </h2>
+      <aside className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="font-semibold text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+            Filter
+          </h2>
+          {hasActiveFilters && (
+            <button onClick={clearFilters} className="text-xs text-accent hover:underline">
+              Clear all
+            </button>
+          )}
+        </div>
+
         <label className="flex items-center gap-2 text-sm cursor-pointer">
           <input
             type="checkbox"
@@ -84,14 +111,54 @@ export default function SchoolsPage() {
           />
           Has active hub
         </label>
-        {hasHubOnly && (
-          <button
-            onClick={() => setHasHubOnly(false)}
-            className="text-sm text-accent hover:underline"
+
+        <div>
+          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+            Institution type
+          </label>
+          <select
+            value={institutionType}
+            onChange={(e) => setInstitutionType(e.target.value)}
+            className="w-full px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
           >
-            Clear all
-          </button>
-        )}
+            <option value="">All types</option>
+            {INSTITUTION_TYPE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+            Ownership
+          </label>
+          <select
+            value={ownership}
+            onChange={(e) => setOwnership(e.target.value)}
+            className="w-full px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+          >
+            <option value="">All ownership types</option>
+            {OWNERSHIP_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+            State
+          </label>
+          <input
+            value={stateQuery}
+            onChange={(e) => setStateQuery(e.target.value)}
+            placeholder="e.g. Lagos"
+            className="w-full px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+          />
+        </div>
       </aside>
 
       <div>
@@ -120,7 +187,9 @@ export default function SchoolsPage() {
 
         {status === "ready" && schools.length === 0 && (
           <p className="text-gray-500 dark:text-gray-400 text-sm">
-            No schools found{debouncedQuery ? ` for "${debouncedQuery}"` : ""}.
+            No schools found
+            {debouncedQuery ? ` for "${debouncedQuery}"` : ""}
+            {hasActiveFilters ? " matching these filters" : ""}.
           </p>
         )}
 
@@ -129,7 +198,7 @@ export default function SchoolsPage() {
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
               {count} school{count !== 1 ? "s" : ""}
             </p>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700 stagger-list">
+            <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
               {schools.map((school) => (
                 <SchoolListRow key={school.id} school={school} />
               ))}

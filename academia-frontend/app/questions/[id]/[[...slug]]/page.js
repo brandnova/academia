@@ -2,13 +2,16 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Lock, Eye, User, Building2 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
+import { schoolUrl } from "@/lib/urls";
 import StatusIcon from "@/components/questions/StatusIcon";
 import QuestionActions from "@/components/questions/QuestionActions";
 import AnswersSection from "@/components/answers/AnswersSection";
-import ReportButton from "@/components/reports/ReportButton";
 import FollowButton from "@/components/questions/FollowButton";
 import LockToggle from "@/components/questions/LockToggle";
+import PlatformAuthorBadge from "@/components/ui/PlatformAuthorBadge";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer"
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 async function getQuestion(id) {
   try {
@@ -23,9 +26,28 @@ export async function generateMetadata({ params }) {
   const { id } = await params;
   const question = await getQuestion(id);
   if (!question) return {};
+
+  const description = question.body.replace(/\s+/g, " ").trim().slice(0, 155);
+  const canonicalPath = `/questions/${question.id}/${question.slug}`;
+  const schoolName = question.hub?.school?.name;
+
   return {
     title: question.title,
-    description: question.body.slice(0, 155),
+    description,
+    alternates: { canonical: canonicalPath },
+    openGraph: {
+      title: question.title,
+      description,
+      url: canonicalPath,
+      type: "article",
+      siteName: "Academia",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: question.title,
+      description,
+    },
+    other: schoolName ? { "og:section": schoolName } : undefined,
   };
 }
 
@@ -34,16 +56,44 @@ export default async function QuestionDetailPage({ params }) {
   const question = await getQuestion(id);
   if (!question) notFound();
 
+  const schoolPath = schoolUrl(question.hub.school);
+  const questionPath = `/questions/${question.id}/${question.slug}`;
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Academia", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: question.hub.school.name,
+        item: `${SITE_URL}${schoolPath}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: question.title,
+        item: `${SITE_URL}${questionPath}`,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-3xl">
-      <p className="text-sm mb-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+
+      <nav aria-label="Breadcrumb" className="mb-4 text-sm">
         <Link
-          href={`/hubs/${question.hub.id}`}
-          className="flex items-center gap-1 text-accent hover:underline w-fit"
+          href={schoolPath}
+          className="flex items-center gap-1.5 text-accent hover:underline w-fit"
         >
           <ArrowLeft className="w-4 h-4" /> {question.hub.school.name}
         </Link>
-      </p>
+      </nav>
 
       <div className="flex items-start gap-3 mb-2">
         <h1 className="text-xl md:text-3xl font-semibold flex-1">{question.title}</h1>
@@ -60,6 +110,7 @@ export default async function QuestionDetailPage({ params }) {
       <div className="flex flex-wrap gap-3 text-xs text-gray-400 mb-4">
         <span className="flex items-center gap-1">
           <User size={14} /> Asked by {question.author.full_name}
+          <PlatformAuthorBadge authorId={question.author.id} />
         </span>
         {question.department && (
           <span className="flex items-center gap-1">
@@ -90,10 +141,9 @@ export default async function QuestionDetailPage({ params }) {
       </div>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <QuestionActions question={question} />
-        <ReportButton contentType="question" contentId={question.id} authorId={question.author.id} />
         <FollowButton questionId={question.id} initialFollowing={question.is_following} />
         <LockToggle question={question} />
+        <QuestionActions question={question} />
       </div>
 
       <AnswersSection question={question} />

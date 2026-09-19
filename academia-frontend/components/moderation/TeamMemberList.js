@@ -87,7 +87,7 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
                 <button
                   onClick={() => handleRemove(m.user.id)}
                   disabled={removingId === m.user.id}
-                  className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 disabled:opacity-50 transition-colors"
+                  className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-red-500 disabled:opacity-50 transition-colors"
                   aria-label={`Remove ${m.user.full_name}`}
                 >
                   <Trash2 className="w-4 h-4" />

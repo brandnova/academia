@@ -141,9 +141,22 @@
 - [ ] Content deletion (moderators)
 - [ ] User management (moderators)
 - [ ] Flag capabilities (moderators)
-- [ ] Dedicated escalate-to-admin action, distinct from the general report
+- [x] Dedicated escalate-to-admin action, distinct from the general report
       pipeline (already has a written issue and a backend/frontend split,
       see the two escalation issue templates)
+- [ ] Answer/source verification - Allow trusted contributors or moderators 
+      to attach supporting sources or verification notes to answers, and 
+      indicate when an answer has been verified against an authoritative source.
+
+## Internationalization (Future)
+- [ ] Make the Globe2/country badge on the school profile page permanently
+      visible for every school, including Nigerian ones, once a genuine
+      second-country presence exists. Currently conditional
+      (`country !== "Nigeria"`) specifically to avoid a 100%-redundant badge
+      on a single-country dataset, see the School Directory Fields Display
+      entry in BUILD_LOG_FRONTEND.md for the original reasoning. Marked with
+      a TODO(i18n) comment at the exact line in
+      app/schools/[id]/page.js.
 
 ## School Reviews (Future)
 - [ ] Submit school review (Still deciding the details)
@@ -160,16 +173,49 @@
 ## School Data Curation (Future)
 - [ ] Curated database of Nigerian universities, polytechnics, and colleges,
       sourced primarily from NUC, NBTE, and NCCE official lists,
-      cross-referenced against JAMB's institution list and secondary sources
-- [ ] Extend the School model with richer fields: institution type
+      cross-referenced against JAMB's institution list and secondary sources. 
+      This is the first of what may become several country-specific data pipelines 
+      as Academia expands.
+- [x] Extend the School model with richer fields: institution type
       (university/polytechnic/college of education), ownership
       (federal/state/private), state, an official regulatory or JAMB code,
-      source_url, last_verified_at
+      source_url, last_verified_at, plus a forward-compatible country field
+      for eventual multi-country expansion. SchoolSourceRecord model added
+      alongside for per-regulator provenance tracking. Schema, serializers,
+      views (three new List Schools filters), and admin all landed.
+      Consuming a real cleaned NUC/NBTE/NCCE dataset via an import command
+      is still pending, tracked separately below.
 - [ ] Periodic re-verification workflow so curated data doesn't silently go
       stale
 - [ ] User-submitted "school not listed" request flow (SchoolSubmission)
 - [ ] Bulk data import tooling to support the school directory curation effort above
 - [ ] Admin verification workflow for submitted schools
+- [ ] School directory/search page filter controls for institution_type,
+      ownership, and state, GET /schools/ already supports all three as
+      query params, no frontend UI built against them yet
+- [x] Admin school form (SchoolFormModal) gained inputs for
+      institution_type, ownership, state, and country, previously only
+      settable via direct API calls
+- [x] School directory/search page filter controls for institution_type,
+      ownership, and state, GET /schools/ already supported all three as
+      query params, now wired into app/schools/page.js
+
+## SEO & Discoverability (Future)
+- [x] Site-wide SEO and social share metadata overhaul: root layout
+      defaults, per-page generateMetadata for schools/hubs/questions/tags/
+      listings/search/homepage, canonical URL strategy (schools now match
+      questions' UUID-primary/cosmetic-slug pattern via lib/urls.js's
+      schoolUrl()), robots/indexing rules (search results noindex when
+      queried), sitemap.js covering schools/tags/questions, dynamic Open
+      Graph image generation (lib/og.js, reusable OgCard) for homepage/
+      schools/questions/tags, WebSite+SearchAction and BreadcrumbList
+      structured data, and a technical SEO pass. Landed in four phases,
+      see BUILD_LOG_FRONTEND.md.
+
+- [x] Platform account visual marker: a single known account id (env-
+      configured, unset by default) gets a small badge next to its name
+      wherever an author is shown, for Academia's own seed/editorial
+      account. Not a role system, no is_admin exposure.
 
 ## Monetization (Future. Needs further review)
 Every item here must hold to Integrity Over Monetization (project-plan.md):
@@ -253,9 +299,9 @@ truthfulness or presence of content students post.
 - [ ] GoogleLoginView should explicitly reject login for suspended
       (is_active=False) accounts with a clear error, rather than issuing a
       token pair that only fails on the next authenticated request
-- [ ] PATCH /users/me/ should validate full_name isn't blank/whitespace-only
+- [x] PATCH /users/me/ should validate full_name isn't blank/whitespace-only
       and return a proper field error, instead of silently no-op'ing
-- [ ] GET /users/search/ should share the existing "search" throttle scope
+- [x] GET /users/search/ should share the existing "search" throttle scope
       (60/min) rather than falling back to the general 100/min limit, it's a
       type-ahead endpoint and will be called more rapidly than that implies
 - [ ] Google login should verify email_verified from Google's userinfo
@@ -309,7 +355,7 @@ truthfulness or presence of content students post.
       logic inline for a third time (Schools and Hubs audits flagged the
       same pattern already), worth one shared "is moderator or rep for this
       hub" helper in apps.hubs.permissions instead
-- [ ] Django admin's Question list view doesn't surface is_locked, hard to
+- [x] Django admin's Question list view doesn't surface is_locked, hard to
       tell which questions are locked without opening each one
 - [ ] Search results omit slug (and department, view_count, is_locked) from
       each question, matching the documented contract exactly today, but
@@ -317,6 +363,10 @@ truthfulness or presence of content students post.
       directly from a search result without a follow-up request. Worth
       deciding whether slug specifically should be added to
       SearchQuestionSerializer
+- [x] Search results now include slug (#NN), added to SearchQuestionSerializer
+      so the frontend can build /questions/{id}/{slug} directly from a
+      result; department, view_count, and is_locked remain intentionally
+      out of the search response
 - [ ] Static Pages endpoints (list and detail) have no caching, unlike
       Schools/Hubs/Tags which all use the same short-TTL public-read
       pattern. Deliberately deferred at build time as non-blocking, worth
@@ -337,7 +387,7 @@ truthfulness or presence of content students post.
       admins, worth prioritizing
 - [ ] Extend the existing "Admin action audit log" item to also cover tag
       merge/delete actions, not just report resolution and user suspension
-- [ ] Django admin's Tag list doesn't surface question_count (would need an
+- [x] Django admin's Tag list doesn't surface question_count (would need an
       admin method since it's computed, not a model field)
 - [ ] Resolving a report with DELETE_CONTENT can orphan other pending
       reports pointing at content that gets cascade-deleted along with it
@@ -384,14 +434,14 @@ truthfulness or presence of content students post.
       anything (icons render, builds pass), but worth confirming via
       npm ls lucide-react whether this is a genuine 1.0 release or a typo,
       and spot-checking that no icon names changed if it's the former
-- [ ] TopBar's "Academia" wordmark is plain text, not a link, inconsistent
+- [x] TopBar's "Academia" wordmark is plain text, not a link, inconsistent
       with Sidebar's identical-looking wordmark which does navigate home.
       TopBar is the persistently visible one, worth making it a Link too
 - [ ] No centralized z-index scale, ad hoc values (TopBar z-30, sidebar
       backdrop z-40, sidebar/ProfileMenu dropdown both z-50,
       NavigationProgressBar z-[100]) risk collisions as more overlays are
       added. Worth a small shared constants pass before that happens
-- [ ] Minor accessibility gaps in the shell layer: the mobile sidebar
+- [x] Minor accessibility gaps in the shell layer: the mobile sidebar
       backdrop is a bare div with onClick, no keyboard equivalent or
       button semantics; ThemeToggle's button doesn't expose aria-pressed
       for its current state. Cheap, low-risk, worth doing together
@@ -421,11 +471,10 @@ truthfulness or presence of content students post.
       cancelled-flag unmount guard their own initial-fetch useEffect already
       uses. Low real-world risk (manual click, not an automatic effect),
       but worth the same consistency treatment
-- [ ] Question detail's "back to school" link routes through /hubs/{id},
-      which now just redirects to /schools/{id} since the school/hub merge.
-      Works correctly but adds an unnecessary redirect hop,
-      question.hub.school.id is already available on the response and
-      could link directly to /schools/{that id}
+- [x] Question detail's "back to school" link now routes directly via
+      schoolUrl() instead of through the /hubs/{id} redirect hop.
+      QuestionHubSchoolSerializer gained an id field, additive, needed
+      for the link to be buildable at all.
 - [ ] Meta-row pattern (small icon + label, e.g. author/department/views on
       question detail, "by {author}" on answers and comments) has been
       copy-pasted across multiple files with drifting icon sizes relative

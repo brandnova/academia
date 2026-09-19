@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 
 export default async function HubRedirectPage({ params }) {
@@ -10,5 +10,5 @@ export default async function HubRedirectPage({ params }) {
     if (err.status === 404) notFound();
     throw err;
   }
-  redirect(`/schools/${hub.school.id}`);
+  permanentRedirect(`/schools/${hub.school.id}`);
 }

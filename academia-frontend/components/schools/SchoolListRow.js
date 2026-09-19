@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { CheckCircle2, Circle } from "lucide-react";
+import { schoolUrl } from "@/lib/urls";
 
 export default function SchoolListRow({ school }) {
   return (
     <Link
-      href={`/schools/${school.id}`}
+      href={schoolUrl(school)}
       className="flex items-center justify-between py-4 px-2 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
     >
       <div className="flex items-center gap-3 min-w-0">

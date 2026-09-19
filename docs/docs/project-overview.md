@@ -183,6 +183,19 @@ Both are content-first, but this one leans more utilitarian and dense. Principle
 - Vote control, tag chip, comment thread item, hub header, notification
   bell, report modal, role-aware action bar, unchanged from the original
   list, just restyled to the new visual direction.
+- **Dropdown / kebab actions menu**: `Dropdown` (generic popover shell, click-outside
+  and Escape-to-close, trigger and content both render props) and `ActionsMenu`
+  (kebab-icon trigger, role-aware action list) built on top of it. Used for
+  question/answer/comment action rows and the shared TopBar popovers
+  (ProfileMenu, NotificationBell). Popover elevation styling (bg-white
+  dark:bg-gray-800, border, shadow) lives once in `Dropdown`, panel
+  size/position varies per consumer via `panelClassName`.
+- **School meta badges**: `SchoolMetaBadge` (icon + conditional label, null-safe)
+  displays institution type, ownership, and state on the school profile hero,
+  reusing the same icon-label pattern as status icons and question meta rows.
+  Enum-to-label mappings for institution_type/ownership live in
+  `lib/schoolLabels.js`, the single source of truth also consumed by the
+  admin school form.
 
 ---
 
@@ -216,12 +229,18 @@ ever sees a response. A future non-Next.js consumer of this API would still
 follow the plain documented flow in api-contract.md directly; this proxy
 layer is a frontend implementation choice, not an API requirement.
 
-**URL conventions to build against:** Schools and Hubs each have a stable, unique
-`slug` (e.g. `unilag`) suitable as the primary route segment for their public pages,
-`/schools/unilag/`, `/hubs/unilag/`, resolved via `GET /schools/by-slug/{slug}/` and
-`GET /hubs/by-slug/{slug}/`. Questions have a cosmetic, non-unique `slug` meant to sit
-alongside the UUID in the URL for readability and SEO, `/questions/{id}/{slug}`, but
-the UUID is what's actually looked up, the slug can be anything or even omitted.
+**URL conventions to build against:** Schools and Questions both use a
+UUID-primary URL with a cosmetic, SEO-friendly slug appended for
+readability, `/schools/{id}/{slug}` and `/questions/{id}/{slug}`. The UUID
+is what's actually looked up in both cases; the slug is never used for
+lookup and can be anything or even omitted, `lib/urls.js`'s `schoolUrl()`
+and `questionUrl()` build these consistently and fall back to a
+client-generated slug (`lib/slugify.js`) when a response omits one.
+`GET /schools/by-slug/{slug}/` and `GET /hubs/by-slug/{slug}/` remain
+available and documented in api-contract.md, but the frontend doesn't
+route through them as the primary path today, that's a documented
+deviation from the original plan, corrected here to match what actually
+shipped.
 
 ---
 

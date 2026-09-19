@@ -384,6 +384,9 @@ wherever a school is being displayed.
 **Query Parameters:**
 - `search` - Search by name or short_name
 - `has_hub` - Filter schools with/without hub (true/false)
+- `institution_type` - Filter by UNIVERSITY/POLYTECHNIC/COLLEGE_OF_EDUCATION
+- `ownership` - Filter by FEDERAL/STATE/PRIVATE
+- `state` - Filter by Nigerian state (exact match, case-insensitive)
 - `page` - Page number (default: 1)
 - `page_size` - Items per page (default: 20, max: 100)
 
@@ -403,6 +406,10 @@ wherever a school is being displayed.
       "website": "https://unilag.edu.ng",
       "has_hub": true,
       "is_active": true,
+      "institution_type": "UNIVERSITY",
+      "ownership": "FEDERAL",
+      "state": "Lagos",
+      "country": "Nigeria",
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -413,6 +420,11 @@ wherever a school is being displayed.
 - **Cache**: Public requests are cached with prefix `school-list:query` using `CACHE_TTL_SHORT` (60 seconds).
 - **Admin Bypass**: Authenticated Platform Admins bypass the cache completely (to see live entries and inactive/deactivated schools, which are filtered out for regular users/guests).
 - **Invalidation**: Wiped automatically on POST school creation or PATCH school updates.
+
+All three new filters combine with AND when used together, and with the
+existing `search`/`has_hub` filters. `institution_type` and `ownership`
+values are case-insensitive on input (uppercased before matching), `state`
+matches case-insensitively against the stored value.
 
 ---
 
@@ -431,6 +443,13 @@ wherever a school is being displayed.
   "has_hub": true,
   "is_active": true,
   "verification_status": "VERIFIED",
+  "institution_type": "UNIVERSITY",
+  "ownership": "FEDERAL",
+  "state": "Lagos",
+  "country": "Nigeria",
+  "regulatory_code": null,
+  "source_url": null,
+  "last_verified_at": null,
   "departments": [
     {
       "id": "uuid",
@@ -455,6 +474,11 @@ wherever a school is being displayed.
 - **Cache**: Public detail views are cached as `school-detail:{school_id}` using `CACHE_TTL_MEDIUM` (300 seconds).
 - **Admin Bypass**: Authenticated Platform Admins bypass this cache entirely and view live data (including inactive status).
 - **Invalidation**: Cleared on PATCH school update of the school, or POST/PATCH operations on the school's departments.
+
+`regulatory_code`, `source_url`, and `last_verified_at` are null for every
+school until the NUC/NBTE/NCCE directory import lands and/or an admin sets
+them manually. `institution_type`, `ownership`, and `state` are also
+nullable, expect null on any school created before that import.
 
 ---
 
@@ -489,13 +513,21 @@ later.
   "name": "University of Ibadan",
   "short_name": "UI",
   "location": "Ibadan, Nigeria",
-  "website": "https://ui.edu.ng"
+  "website": "https://ui.edu.ng",
+  "institution_type": "UNIVERSITY",
+  "ownership": "FEDERAL",
+  "state": "Oyo",
+  "country": "Nigeria",
+  "regulatory_code": null,
+  "source_url": null,
+  "last_verified_at": null
 }
 ```
 
-`short_name` is automatically uppercased on save. `location` and `website` are
-optional. A `slug` is auto-generated from `short_name` (e.g. `"UI"` → `"ui"`) and
-is never regenerated.
+`short_name` is automatically uppercased on save. `location`, `website`, and
+every field from `institution_type` through `last_verified_at` are optional.
+A `slug` is auto-generated from `short_name` (e.g. `"UI"` → `"ui"`) and
+is never regenerated. `country` defaults to `"Nigeria"` if omitted.
 
 **Response (201 Created):** Same as GET `/api/v1/schools/{school_id}/`
 
@@ -506,6 +538,11 @@ is never regenerated.
   "name": ["school with this name already exists."],
   "short_name": ["school with this short name already exists."]
 }
+
+// 400 Bad Request - Duplicate regulatory_code
+{
+  "regulatory_code": ["school with this regulatory code already exists."]
+}
 ```
 
 **Invalidation Note:** Invalidates and clears all entries matching the `school-list` cache prefix.
@@ -515,7 +552,10 @@ is never regenerated.
 ### Update School (Admin Only)
 **Endpoint:** `PATCH /api/v1/schools/{school_id}/`
 
-**Request:** Same as POST, all fields optional. Accepts `"is_active": true/false`.
+**Request:** Same fields as POST (see Create School above), all optional. Accepts
+`"is_active": true/false`. This is also how `regulatory_code`, `source_url`, and
+`last_verified_at` get set or corrected after the fact, whether by the import
+process or by an admin.
 
 **Response (200 OK):** Same as GET `/api/v1/schools/{school_id}/`
 
@@ -1795,6 +1835,7 @@ Rate limited to 60 requests per minute (see Rate Limits below).
     {
       "id": "uuid",
       "title": "How do I calculate my CGPA?",
+      "slug": "how-do-i-calculate-my-cgpa",
       "body": "I'm confused about the grading system...",
       "status": "SOLVED",
       "score": 0.4213,
@@ -1991,6 +2032,7 @@ rejected.
 
 **Query Parameters:**
 - `status` - PENDING/RESOLVED/REJECTED
+- `is_escalated` - true/false
 - `page` - Page number
 
 **Response (200 OK):**
@@ -2009,6 +2051,8 @@ rejected.
         "id": "uuid",
         "full_name": "John Doe"
       },
+      "is_escalated": false,
+      "escalated_by": null,
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -2069,6 +2113,69 @@ valid to acknowledge but doesn't warrant removal.
   "error": "This report has already been reviewed"
 }
 ```
+
+---
+
+### Escalate Report
+**Endpoint:** `POST /api/v1/reports/{report_id}/escalate/`
+
+Restricted to an active Moderator or Representative for the reported content's
+hub, or an admin. Marks an existing PENDING report as escalated, signaling
+that a staff member's judgment (not just a student complaint) flagged it for
+priority review. Requires an existing report, there is no way to escalate
+unreported content directly, file a report first via `POST /reports/` then
+escalate it.
+
+**Response (200 OK):**
+```json
+{
+  "id": "uuid",
+  "content_type": "question",
+  "content_id": "uuid",
+  "type": "SPAM",
+  "description": "This appears to be promotional content",
+  "status": "PENDING",
+  "reporter": {
+    "id": "uuid",
+    "full_name": "John Doe"
+  },
+  "is_escalated": true,
+  "escalated_by": {
+    "id": "uuid",
+    "full_name": "Jane Moderator"
+  },
+  "created_at": "2026-01-01T00:00:00Z"
+}
+```
+
+**Error Responses:**
+```json
+// 400 Bad Request - Already reviewed
+{
+  "error": "This report has already been reviewed"
+}
+
+// 400 Bad Request - Already escalated
+{
+  "error": "This report has already been escalated"
+}
+
+// 400 Bad Request - Reported content no longer exists
+{
+  "error": "The reported content no longer exists"
+}
+
+// 403 Forbidden - No moderator/representative role for this hub, and not admin
+{
+  "error": "You do not have permission to perform this action"
+}
+```
+
+Escalating sends every active admin a `NEW_REPORT` notification, in-app only,
+excluding the escalator if they happen to be an admin. This reuses the same
+notification type as report creation, with message text that specifically
+frames it as an escalation, matching the project's precedent of reusing
+notification types over adding new ones for closely related events.
 
 ---
 
