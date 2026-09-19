@@ -134,7 +134,7 @@ export default function PagesManager() {
                 <button
                   onClick={() => openEdit(page)}
                   disabled={modalLoading}
-                  className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-accent disabled:opacity-40 transition-colors"
+                  className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-accent disabled:opacity-40 transition-colors"
                   aria-label={`Edit ${page.title}`}
                 >
                   <Pencil className="w-4 h-4" />
@@ -159,7 +159,7 @@ export default function PagesManager() {
                 ) : (
                   <button
                     onClick={() => setDeleteConfirmId(page.id)}
-                    className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 transition-colors"
+                    className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-red-500 transition-colors"
                     aria-label={`Delete ${page.title}`}
                   >
                     <Trash2 className="w-4 h-4" />

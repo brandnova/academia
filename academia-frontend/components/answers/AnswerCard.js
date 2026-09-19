@@ -8,6 +8,7 @@ import CommentThread from "@/components/comments/CommentThread";
 import ReportButton from "@/components/reports/ReportButton";
 import EscalateButton, { canEscalate } from "@/components/reports/EscalateButton";
 import ActionsMenu from "@/components/ui/ActionsMenu";
+import PlatformAuthorBadge from "@/components/ui/PlatformAuthorBadge";
 import MarkdownEditor from "@/components/ui/MarkdownEditor";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer"
 
@@ -214,6 +215,7 @@ export default function AnswerCard({
       <div className="flex items-start justify-between gap-2 mb-1.5">
         <span className="flex items-center gap-1 text-xs text-gray-400">
           <User size={14} /> by {answer.author.full_name}
+          <PlatformAuthorBadge authorId={answer.author.id} />
         </span>
         {menuItems.length > 0 && <ActionsMenu items={menuItems} />}
       </div>

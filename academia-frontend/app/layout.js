@@ -13,13 +13,20 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: { default: "Academia", template: "%s | Academia" },
-  description: "Academic Q&A repository for Nigerian tertiary students, organized by school and searchable, so the same question never needs asking twice.",
+  description:
+    "Academic Q&A repository for Nigerian tertiary students, organized by school and searchable, so the same question never needs asking twice.",
   openGraph: {
+    siteName: "Academia",
     title: "Academia",
     description: "Academic Q&A repository for Nigerian tertiary students.",
     type: "website",
   },
-  twitter: { card: "summary" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Academia",
+    description: "Academic Q&A repository for Nigerian tertiary students.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }) {

@@ -44,4 +44,4 @@ This will ensure that all docs updates are synced from the main branch and not t
 
 TODO=============
 - Email templates (Optimize and test)
-- Work on an upgraded pagination. Maybe one that queries per page and lot merely a `Load more` button. But this should only be for management interfaces.
+- Work on an upgraded pagination. Maybe one that queries per page and lot merely a `Load more` button. But this should only be for management interfaces. (Actually, just add filters to school list on admin page so that the long list of schools can be filtered for ones with active hub, and other filter parameters. The same should also apply to other tabs on the admin page with content that could tent to get really long.)

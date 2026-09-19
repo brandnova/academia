@@ -144,6 +144,9 @@
 - [x] Dedicated escalate-to-admin action, distinct from the general report
       pipeline (already has a written issue and a backend/frontend split,
       see the two escalation issue templates)
+- [ ] Answer/source verification - Allow trusted contributors or moderators 
+      to attach supporting sources or verification notes to answers, and 
+      indicate when an answer has been verified against an authoritative source.
 
 ## Internationalization (Future)
 - [ ] Make the Globe2/country badge on the school profile page permanently
@@ -197,6 +200,22 @@
       ownership, and state, GET /schools/ already supported all three as
       query params, now wired into app/schools/page.js
 
+## SEO & Discoverability (Future)
+- [x] Site-wide SEO and social share metadata overhaul: root layout
+      defaults, per-page generateMetadata for schools/hubs/questions/tags/
+      listings/search/homepage, canonical URL strategy (schools now match
+      questions' UUID-primary/cosmetic-slug pattern via lib/urls.js's
+      schoolUrl()), robots/indexing rules (search results noindex when
+      queried), sitemap.js covering schools/tags/questions, dynamic Open
+      Graph image generation (lib/og.js, reusable OgCard) for homepage/
+      schools/questions/tags, WebSite+SearchAction and BreadcrumbList
+      structured data, and a technical SEO pass. Landed in four phases,
+      see BUILD_LOG_FRONTEND.md.
+
+- [x] Platform account visual marker: a single known account id (env-
+      configured, unset by default) gets a small badge next to its name
+      wherever an author is shown, for Academia's own seed/editorial
+      account. Not a role system, no is_admin exposure.
 
 ## Monetization (Future. Needs further review)
 Every item here must hold to Integrity Over Monetization (project-plan.md):
@@ -344,6 +363,10 @@ truthfulness or presence of content students post.
       directly from a search result without a follow-up request. Worth
       deciding whether slug specifically should be added to
       SearchQuestionSerializer
+- [x] Search results now include slug (#NN), added to SearchQuestionSerializer
+      so the frontend can build /questions/{id}/{slug} directly from a
+      result; department, view_count, and is_locked remain intentionally
+      out of the search response
 - [ ] Static Pages endpoints (list and detail) have no caching, unlike
       Schools/Hubs/Tags which all use the same short-TTL public-read
       pattern. Deliberately deferred at build time as non-blocking, worth
@@ -448,11 +471,10 @@ truthfulness or presence of content students post.
       cancelled-flag unmount guard their own initial-fetch useEffect already
       uses. Low real-world risk (manual click, not an automatic effect),
       but worth the same consistency treatment
-- [ ] Question detail's "back to school" link routes through /hubs/{id},
-      which now just redirects to /schools/{id} since the school/hub merge.
-      Works correctly but adds an unnecessary redirect hop,
-      question.hub.school.id is already available on the response and
-      could link directly to /schools/{that id}
+- [x] Question detail's "back to school" link now routes directly via
+      schoolUrl() instead of through the /hubs/{id} redirect hop.
+      QuestionHubSchoolSerializer gained an id field, additive, needed
+      for the link to be buildable at all.
 - [ ] Meta-row pattern (small icon + label, e.g. author/department/views on
       question detail, "by {author}" on answers and comments) has been
       copy-pasted across multiple files with drifting icon sizes relative

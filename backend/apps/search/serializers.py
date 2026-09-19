@@ -12,7 +12,7 @@ class SearchQuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ["id", "title", "body", "status", "score", "author", "hub", "tags", "created_at"]
+        fields = ["id", "title", "slug", "body", "status", "score", "author", "hub", "tags", "created_at"]
 
     def get_score(self, obj):
         rank = getattr(obj, "rank", None)

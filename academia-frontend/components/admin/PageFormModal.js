@@ -42,7 +42,7 @@ export default function PageFormModal({ page, onClose, onSaved }) {
           <h2 className="font-semibold">{isEdit ? "Edit page" : "New page"}</h2>
           <button
             onClick={onClose}
-            className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-gray-600"
+            className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-400 hover:text-gray-600"
           >
             <X className="w-5 h-5" />
           </button>

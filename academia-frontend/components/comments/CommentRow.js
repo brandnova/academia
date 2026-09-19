@@ -6,6 +6,7 @@ import { useAuth } from "@/lib/auth-context";
 import ReportButton from "@/components/reports/ReportButton";
 import EscalateButton, { canEscalate } from "@/components/reports/EscalateButton";
 import ActionsMenu from "@/components/ui/ActionsMenu";
+import PlatformAuthorBadge from "@/components/ui/PlatformAuthorBadge";
 
 export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
   const { user } = useAuth();
@@ -95,6 +96,7 @@ export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
         <p className="text-[11px] text-gray-400 mb-0.5 flex items-center gap-1">
           <User size={12} />
           {comment.author.full_name}
+          <PlatformAuthorBadge authorId={comment.author.id} />
         </p>
         <p className="text-xs text-gray-700 dark:text-gray-300 break-words">{comment.body}</p>
       </div>

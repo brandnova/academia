@@ -5,6 +5,7 @@ import Link from "next/link";
 import TeamMemberList from "./TeamMemberList";
 import HubDepartmentsTab from "./HubDepartmentsTab";
 import HubUnansweredTab from "./HubUnansweredTab";
+import { schoolUrl } from "@/lib/urls";
 
 export default function HubTeamManager({
   hub,
@@ -34,7 +35,7 @@ export default function HubTeamManager({
     <div className="border border-[var(--color-border)] rounded-lg p-4 mb-4">
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-medium text-sm">{hub.school.name}</h3>
-        <Link href={`/schools/${hub.school.id}`} className="text-xs text-accent hover:underline">
+        <Link href={schoolUrl(hub.school)} className="text-xs text-accent hover:underline">
           Visit school
         </Link>
       </div>

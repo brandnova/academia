@@ -1835,6 +1835,7 @@ Rate limited to 60 requests per minute (see Rate Limits below).
     {
       "id": "uuid",
       "title": "How do I calculate my CGPA?",
+      "slug": "how-do-i-calculate-my-cgpa",
       "body": "I'm confused about the grading system...",
       "status": "SOLVED",
       "score": 0.4213,

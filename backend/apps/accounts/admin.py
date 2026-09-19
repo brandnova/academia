@@ -10,7 +10,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ["email", "full_name"]
     readonly_fields = ["id", "created_at", "updated_at"]
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("email", "password", "id")}),
         ("Personal info", {"fields": ("full_name", "avatar")}),
         ("Permissions", {"fields": ("is_active", "is_admin", "is_staff", "is_superuser", "groups", "user_permissions")}),
         ("Important dates", {"fields": ("last_login", "created_at", "updated_at")}),

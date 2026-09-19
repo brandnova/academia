@@ -5,3 +5,9 @@ export function questionUrl(question) {
   const slug = question.slug || (question.title ? slugify(question.title) : "");
   return slug ? `/questions/${question.id}/${slug}` : `/questions/${question.id}`;
 }
+
+export function schoolUrl(school) {
+  if (!school?.id) return "/schools";
+  const slug = school.slug || (school.name ? slugify(school.name) : "");
+  return slug ? `/schools/${school.id}/${slug}` : `/schools/${school.id}`;
+}
