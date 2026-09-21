@@ -18,6 +18,9 @@ class Notification(models.Model):
         HUB_ACTIVATED = "HUB_ACTIVATED", "Hub Activated"
         NEW_ACTIVATION_REQUEST = "NEW_ACTIVATION_REQUEST", "New Activation Request"
         NEW_REPORT = "NEW_REPORT", "New Report"
+        USER_SUSPENDED = "USER_SUSPENDED", "User Suspended"
+        HUB_ACTIVATION_REJECTED = "HUB_ACTIVATION_REJECTED", "Hub Activation Rejected"
+        REPORT_REVIEWED = "REPORT_REVIEWED", "Report Reviewed"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, related_name="notifications", on_delete=models.CASCADE)

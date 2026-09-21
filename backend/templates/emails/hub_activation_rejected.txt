@@ -1,0 +1,8 @@
+Hi {{ recipient_name }},
+
+Your request to activate a hub for {{ school_name }} was not approved.
+{% if reason %}
+Reason: {{ reason }}
+{% endif %}
+
+You're welcome to submit a new request later if circumstances change.

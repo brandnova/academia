@@ -295,6 +295,10 @@ structure with more personality.
   aren't also moderators for a hub see a message explaining they can
   self-assign as moderator via the Moderators tab to unlock it, rather than
   the tab disappearing and hiding that workflow entirely.
+- FilterSidebar's activeCount prop (added last round but left unwired) is
+  now passed a real number from every consumer (HubQuestionList,
+  TagQuestionsClient, SearchResultsClient), so the mobile toggle's badge
+  shows an actual count instead of a generic dot.
 - Best answer highlight: the question detail page now pins a compact,
   read-only preview of the current best answer directly under the question
   body, with a "View in list" control that smooth-scrolls to and briefly
@@ -305,6 +309,11 @@ structure with more personality.
   owned by the one real AnswerCard in the list. Updates automatically when
   a different answer is marked best, since it's derived from the same
   answers state AnswersSection already tracks.
+- UnansweredQueue switched from client-side loaded-page filtering to a
+  real debounced server-side search, now that GET /questions/unanswered/
+  supports a search param. Matches HubQuestionList's existing pattern.
+  Closes the last remaining "search only covers what's loaded" caveat from
+  the Admin/Moderation Filter Pass.
 
 ## Known Deviations From Docs (Frontend)
 - api-contract.md's Search Users section documents "Admin or School

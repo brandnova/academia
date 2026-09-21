@@ -1,0 +1,10 @@
+{% extends "emails/base_email.html" %}
+{% block subject %}Your hub activation request was not approved{% endblock %}
+{% block content %}
+<p>Hi {{ recipient_name }},</p>
+<p>Your request to activate a hub for <strong>{{ school_name }}</strong> was not approved.</p>
+{% if reason %}
+<p class="quote">{{ reason }}</p>
+{% endif %}
+<p>You're welcome to submit a new request later if circumstances change.</p>
+{% endblock %}

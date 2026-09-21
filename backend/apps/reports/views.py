@@ -160,6 +160,14 @@ class ResolveReportView(APIView):
         report.resolved_at = timezone.now()
         report.save(update_fields=["status", "resolved_by", "resolved_at", "updated_at"])
 
+        if report.reporter_id != request.user.id:
+            notify(
+                user=report.reporter,
+                notification_type=Notification.Type.REPORT_REVIEWED,
+                message=f"Your {report.type.lower()} report was resolved",
+                content_object=report,
+            )
+
         return Response({
             "message": "Report resolved",
             "status": "RESOLVED",
@@ -188,6 +196,14 @@ class RejectReportView(APIView):
         report.resolved_by = request.user
         report.resolved_at = timezone.now()
         report.save(update_fields=["status", "resolved_by", "resolved_at", "updated_at"])
+
+        if report.reporter_id != request.user.id:
+            notify(
+                user=report.reporter,
+                notification_type=Notification.Type.REPORT_REVIEWED,
+                message=f"Your {report.type.lower()} report was rejected",
+                content_object=report,
+            )
 
         return Response({
             "message": "Report rejected",

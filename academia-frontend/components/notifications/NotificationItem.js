@@ -1,18 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  MessageSquare,
-  Award,
-  CheckCircle2,
-  MessageCircle,
-  ThumbsUp,
-  ShieldCheck,
-  HelpCircle,
-  Building2,
-  Flag,
-  Bell,
-} from "lucide-react";
+import {MessageSquare, Award, CheckCircle2, MessageCircle, ThumbsUp, ShieldCheck, HelpCircle, Building2, Flag, Bell, Ban, XCircle, FileCheck2} from "lucide-react";
 import { notificationTargetUrl } from "@/lib/notificationUrl";
 import { timeAgo } from "@/lib/timeAgo";
 
@@ -26,6 +15,9 @@ const ICONS = {
   NEW_QUESTION: HelpCircle,
   NEW_ACTIVATION_REQUEST: Building2,
   NEW_REPORT: Flag,
+  USER_SUSPENDED: Ban,
+  HUB_ACTIVATION_REJECTED: XCircle,
+  REPORT_REVIEWED: FileCheck2,
 };
 
 export default function NotificationItem({ notification, onRead, onNavigate }) {

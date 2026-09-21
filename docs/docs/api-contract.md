@@ -805,6 +805,11 @@ email).
 }
 ```
 
+Rejecting sends the requesting user a `HUB_ACTIVATION_REJECTED` notification
+(email and in-app). The `reason` field is used in the email body if provided,
+but is not currently persisted anywhere, it does not appear in
+`GET /hubs/activation-requests/` or anywhere else after the email sends.
+
 ---
 
 ## Departments
@@ -1138,6 +1143,7 @@ question's title regenerates its slug.
 
 **Query Parameters:**
 - `hub` - Filter by hub ID
+- `search` - Search in title and body
 - `page` - Page number
 
 **Response (200 OK):** Same as list questions, but only OPEN status
@@ -1920,7 +1926,13 @@ question's own author, deduplicated if a user holds both roles),
 new hub activation request is submitted, excluding the requester if they
 happen to be an admin), `NEW_REPORT` (in-app only, sent to every active
 admin when a new report is submitted, excluding the reporter if they
-happen to be an admin).
+happen to be an admin), `USER_SUSPENDED` (email and in-app, fires only on
+the transition from active to suspended, not on a repeated suspend call
+or on reactivation), `HUB_ACTIVATION_REJECTED` (email and in-app, sent to
+the original requester when their activation request is rejected),
+`REPORT_REVIEWED` (in-app only, sent to the original reporter when their
+report is resolved or rejected, excluding the reporter if they happen to
+be the reviewing admin).
 
 ---
 
@@ -2088,6 +2100,9 @@ rejected.
 }
 ```
 
+Resolving sends the original reporter a `REPORT_REVIEWED` notification,
+in-app only, excluding the reporter if they are also the resolving admin.
+
 `action: "DELETE_CONTENT"` is the only value with special behavior, it deletes the
 underlying reported object. Any other value, or omitting `action` entirely, resolves
 the report without taking any action on the content itself, useful when a report is
@@ -2113,6 +2128,72 @@ valid to acknowledge but doesn't warrant removal.
   "error": "This report has already been reviewed"
 }
 ```
+
+Rejecting sends the original reporter a `REPORT_REVIEWED` notification,
+in-app only, excluding the reporter if they are also the rejecting admin.
+
+---
+
+### Escalate Report
+**Endpoint:** `POST /api/v1/reports/{report_id}/escalate/`
+
+Restricted to an active Moderator or Representative for the reported content's
+hub, or an admin. Marks an existing PENDING report as escalated, signaling
+that a staff member's judgment (not just a student complaint) flagged it for
+priority review. Requires an existing report, there is no way to escalate
+unreported content directly, file a report first via `POST /reports/` then
+escalate it.
+
+**Response (200 OK):**
+```json
+{
+  "id": "uuid",
+  "content_type": "question",
+  "content_id": "uuid",
+  "type": "SPAM",
+  "description": "This appears to be promotional content",
+  "status": "PENDING",
+  "reporter": {
+    "id": "uuid",
+    "full_name": "John Doe"
+  },
+  "is_escalated": true,
+  "escalated_by": {
+    "id": "uuid",
+    "full_name": "Jane Moderator"
+  },
+  "created_at": "2026-01-01T00:00:00Z"
+}
+```
+
+**Error Responses:**
+```json
+// 400 Bad Request - Already reviewed
+{
+  "error": "This report has already been reviewed"
+}
+
+// 400 Bad Request - Already escalated
+{
+  "error": "This report has already been escalated"
+}
+
+// 400 Bad Request - Reported content no longer exists
+{
+  "error": "The reported content no longer exists"
+}
+
+// 403 Forbidden - No moderator/representative role for this hub, and not admin
+{
+  "error": "You do not have permission to perform this action"
+}
+```
+
+Escalating sends every active admin a `NEW_REPORT` notification, in-app only,
+excluding the escalator if they happen to be an admin. This reuses the same
+notification type as report creation, with message text that specifically
+frames it as an escalation, matching the project's precedent of reusing
+notification types over adding new ones for closely related events.
 
 ---
 
