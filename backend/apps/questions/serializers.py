@@ -105,6 +105,21 @@ class QuestionCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Hub with this ID does not exist.")
         return hub
 
+    def validate_tags(self, value):
+        from apps.tags.utils import MAX_TAG_NAME_LENGTH, is_valid_tag_name_length
+
+        normalized = []
+        for raw_name in value:
+            name = raw_name.strip().lower()
+            if not name:
+                continue
+            if not is_valid_tag_name_length(name):
+                raise serializers.ValidationError(
+                    f"Tag names must be {MAX_TAG_NAME_LENGTH} characters or fewer."
+                )
+            normalized.append(name)
+        return normalized
+
     def validate(self, attrs):
         department_id = attrs.get("department_id")
         if department_id:
@@ -146,6 +161,21 @@ class QuestionUpdateSerializer(serializers.ModelSerializer):
 
     def validate_title(self, value):
         return value.strip()
+
+    def validate_tags(self, value):
+            from apps.tags.utils import MAX_TAG_NAME_LENGTH, is_valid_tag_name_length
+    
+            normalized = []
+            for raw_name in value:
+                name = raw_name.strip().lower()
+                if not name:
+                    continue
+                if not is_valid_tag_name_length(name):
+                    raise serializers.ValidationError(
+                        f"Tag names must be {MAX_TAG_NAME_LENGTH} characters or fewer."
+                    )
+                normalized.append(name)
+            return normalized
 
     def validate(self, attrs):
         department_id = attrs.get("department_id")

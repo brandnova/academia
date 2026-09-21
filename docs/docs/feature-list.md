@@ -180,7 +180,7 @@
 - [ ] Verified badge on school profile
 
 ## School Data Curation (Future)
-- [ ] Curated database of Nigerian universities, polytechnics, and colleges,
+- [x] Curated database of Nigerian universities, polytechnics, and colleges,
       sourced primarily from NUC, NBTE, and NCCE official lists,
       cross-referenced against JAMB's institution list and secondary sources. 
       This is the first of what may become several country-specific data pipelines 
@@ -199,7 +199,7 @@
 - [ ] User-submitted "school not listed" request flow (SchoolSubmission)
 - [ ] Bulk data import tooling to support the school directory curation effort above
 - [ ] Admin verification workflow for submitted schools
-- [ ] School directory/search page filter controls for institution_type,
+- [x] School directory/search page filter controls for institution_type,
       ownership, and state, GET /schools/ already supports all three as
       query params, no frontend UI built against them yet
 - [x] Admin school form (SchoolFormModal) gained inputs for
@@ -341,11 +341,11 @@ truthfulness or presence of content students post.
       so a deactivated school is a dead-end 404 via slug even for admins.
       Worth reconsidering now that reactivation is a real admin workflow and
       project-overview.md recommends slug as the primary school URL
-- [ ] Shared "is this request from a platform admin" check duplicated across
+- [x] Shared "is this request from a platform admin" check duplicated across
       SchoolListCreateView, SchoolDetailView, and inlined again in
       DepartmentListCreateView.get(), should be a single helper in
       apps.core.permissions
-- [ ] GET /schools/ has no is_active filter for admins, who currently see
+- [x] GET /schools/ has no is_active filter for admins, who currently see
       active and inactive schools in one combined list with no way to
       narrow to just one, AdminUserListView already has this exact pattern
       for users, worth matching here
@@ -381,16 +381,12 @@ truthfulness or presence of content students post.
       hub" helper in apps.hubs.permissions instead
 - [x] Django admin's Question list view doesn't surface is_locked, hard to
       tell which questions are locked without opening each one
-- [ ] Search results omit slug (and department, view_count, is_locked) from
+- [x] Search results omit slug (and department, view_count, is_locked) from
       each question, matching the documented contract exactly today, but
       meaning the frontend can't build a /questions/{id}/{slug} URL
       directly from a search result without a follow-up request. Worth
       deciding whether slug specifically should be added to
       SearchQuestionSerializer
-- [x] Search results now include slug (#NN), added to SearchQuestionSerializer
-      so the frontend can build /questions/{id}/{slug} directly from a
-      result; department, view_count, and is_locked remain intentionally
-      out of the search response
 - [ ] Static Pages endpoints (list and detail) have no caching, unlike
       Schools/Hubs/Tags which all use the same short-TTL public-read
       pattern. Deliberately deferred at build time as non-blocking, worth
@@ -402,7 +398,7 @@ truthfulness or presence of content students post.
       ({"results": [...]} becomes {count, next, previous, results}), needs
       to be scoped as a coordinated backend+frontend issue, not a silent
       backend-only change
-- [ ] Tag name (max_length=50) is never validated for length before hitting
+- [x] Tag name (max_length=50) is never validated for length before hitting
       the database on either write path (TagMergeView's rename branch, and
       _sync_tags() in apps/questions/serializers.py, the implicit
       tag-creation path any authenticated user hits via question tagging).

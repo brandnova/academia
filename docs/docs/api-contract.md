@@ -387,6 +387,9 @@ wherever a school is being displayed.
 - `institution_type` - Filter by UNIVERSITY/POLYTECHNIC/COLLEGE_OF_EDUCATION
 - `ownership` - Filter by FEDERAL/STATE/PRIVATE
 - `state` - Filter by Nigerian state (exact match, case-insensitive)
+- `is_active` - Admin only, filter by active status (true/false). Ignored
+  for non-admin requests, which are always restricted to active schools
+  regardless of this param
 - `page` - Page number (default: 1)
 - `page_size` - Items per page (default: 20, max: 100)
 
@@ -1001,6 +1004,11 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 // 400 Bad Request - Hub doesn't exist
 {
   "hub_id": ["Hub with ID 'uuid' does not exist."]
+}
+
+// 400 Bad Request - tag name too long
+{
+  "tags": ["Tag names must be 50 characters or fewer."]
 }
 ```
 
@@ -1802,6 +1810,11 @@ than counted as a reassignment.
 // 400 Bad Request - Malformed target_tag_id
 {
   "error": "Invalid ID format"
+}
+
+// 400 Bad Request - target_name too long
+{
+  "target_name": ["Tag names must be 50 characters or fewer."]
 }
 ```
 

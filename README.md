@@ -19,7 +19,7 @@ The platform is not a social feed. There is no engagement-driven scrolling or va
 
 ## Live
 
-- **App:** https://academia.vercel.app *(replace with your actual production domain)*
+- **App:** https://academia-prvw.vercel.app
 - **API:** hosted on PythonAnywhere, documented in full below
 - **Docs:** https://brandnova.github.io/academia/
 

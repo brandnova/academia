@@ -515,6 +515,19 @@ School Data Curation sourcing line.
   twice consecutively and identically, treated as a paste artifact and
   deduplicated, not a real functional bug since Python's later definition
   silently wins either way
+- Small batch, three independent fixes landed together: a shared
+  user_is_platform_admin() helper in apps.core.permissions replacing three
+  duplicated inline checks (SchoolListCreateView, SchoolDetailView,
+  DepartmentListCreateView), an is_active filter added to GET /schools/ for
+  admins matching AdminUserListView's existing pattern, and tag name length
+  validation added to both write paths (question tagging via
+  validate_tags(), and TagMergeView's rename branch) closing a gap any
+  regular user could hit, not just admins
+- Tag length check lives in apps.tags.utils rather than apps.tags.models,
+  since it needs to be importable from apps.questions.serializers via the
+  same deferred-import convention _sync_tags already uses to avoid a
+  circular import (apps.tags.models imports apps.questions.models directly
+  at module level)
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
