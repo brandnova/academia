@@ -16,7 +16,7 @@ from apps.core.cache import (
     make_cache_key,
     set_cached,
 )
-from apps.core.permissions import IsPlatformAdmin
+from apps.core.permissions import IsPlatformAdmin, user_is_platform_admin
 from apps.core.utils import validate_uuid
 from .models import Department, School
 from .pagination import SchoolPagination
@@ -43,13 +43,12 @@ class SchoolListCreateView(generics.ListCreateAPIView):
             return SchoolWriteSerializer
         return SchoolListSerializer
 
-    def _requesting_user_is_admin(self):
-        user = self.request.user
-        return bool(user and user.is_authenticated and getattr(user, "is_admin", False))
-
     def get_queryset(self):
-        if self._requesting_user_is_admin():
+        if user_is_platform_admin(self.request.user):
             queryset = School.objects.all()
+            is_active_param = self.request.query_params.get("is_active")
+            if is_active_param is not None:
+                queryset = queryset.filter(is_active=is_active_param.lower() == "true")
         else:
             queryset = School.objects.filter(is_active=True)
 
@@ -84,7 +83,7 @@ class SchoolListCreateView(generics.ListCreateAPIView):
     def list(self, request, *args, **kwargs):
         # Admins see inactive schools too, so their response must never be
         # served from (or written to) the shared public cache.
-        if self._requesting_user_is_admin():
+        if user_is_platform_admin(request.user):
             return super().list(request, *args, **kwargs)
         return self._cached_list(request, *args, **kwargs)
 
@@ -106,10 +105,6 @@ class SchoolDetailView(APIView):
             return [IsAuthenticated(), IsPlatformAdmin()]
         return [AllowAny()]
 
-    def _requesting_user_is_admin(self):
-        user = self.request.user
-        return bool(user and user.is_authenticated and getattr(user, "is_admin", False))
-
     def get_school(self, school_id, include_inactive=False):
         parsed_id = validate_uuid(school_id)
         qs = School.objects.all() if include_inactive else School.objects.filter(is_active=True)
@@ -119,7 +114,7 @@ class SchoolDetailView(APIView):
             raise NotFound("School not found")
 
     def get(self, request, school_id):
-        if self._requesting_user_is_admin():
+        if user_is_platform_admin(request.user):
             school = self.get_school(school_id, include_inactive=True)
             return Response(SchoolDetailSerializer(school).data)
 
@@ -183,10 +178,8 @@ class DepartmentListCreateView(APIView):
 
         from apps.hubs.permissions import user_is_representative_for_school
         user = request.user
-        can_manage = bool(
-            user
-            and user.is_authenticated
-            and (getattr(user, "is_admin", False) or user_is_representative_for_school(user, school.id))
+        can_manage = user_is_platform_admin(user) or (
+            bool(user and user.is_authenticated) and user_is_representative_for_school(user, school.id)
         )
 
         departments = school.departments.all() if can_manage else school.departments.filter(is_active=True)

@@ -16,7 +16,7 @@ from apps.questions.serializers import QuestionListSerializer
 
 from .models import QuestionTag, Tag
 from .serializers import TagSerializer
-
+from .utils import MAX_TAG_NAME_LENGTH, is_valid_tag_name_length
 
 class TagListView(APIView):
     permission_classes = [AllowAny]
@@ -178,6 +178,11 @@ class TagMergeView(APIView):
         if not normalized_name:
             return Response(
                 {"target_name": ["This field may not be blank."]},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        if not is_valid_tag_name_length(normalized_name):
+            return Response(
+                {"target_name": [f"Tag names must be {MAX_TAG_NAME_LENGTH} characters or fewer."]},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
