@@ -70,9 +70,18 @@
   - [x] New question notification for hub moderators (NEW_QUESTION, in-app only,
       closes a gap from project-plan.md's Moderator Responsibilities section,
       which described this but it was never implemented)
-- [x] New activation request notification for admins (NEW_ACTIVATION_REQUEST,
+  - [x] New activation request notification for admins (NEW_ACTIVATION_REQUEST,
       in-app only) and new report notification for admins (NEW_REPORT,
       in-app only)
+  - [x] Account suspended notification (USER_SUSPENDED, email and in-app,
+        closes a real UX gap: a suspended user previously had no way to
+        know why login stopped working)
+  - [x] Hub activation rejected notification (HUB_ACTIVATION_REJECTED,
+        email and in-app), closes the asymmetry where approval emailed
+        the requester but rejection sent nothing at all
+  - [x] Report reviewed notification for the original reporter
+        (REPORT_REVIEWED, in-app only), closes the previously-tracked
+        Platform Improvements backlog item
 
 ## Moderation
 - [x] Report content (spam/abuse/misinformation/duplicate)
@@ -211,11 +220,26 @@
       schools/questions/tags, WebSite+SearchAction and BreadcrumbList
       structured data, and a technical SEO pass. Landed in four phases,
       see BUILD_LOG_FRONTEND.md.
-
 - [x] Platform account visual marker: a single known account id (env-
       configured, unset by default) gets a small badge next to its name
       wherever an author is shown, for Academia's own seed/editorial
       account. Not a role system, no is_admin exposure.
+
+## Admin & Moderation UX (Post-MVP)
+- [x] Collapsible mobile filter sidebar (was previously always-expanded,
+      stacking above results awkwardly on narrow screens)
+- [x] Search/filter controls added to Pages, Team (moderators/
+      representatives), Activation Requests, and Unanswered Questions
+      management surfaces
+- [x] FilterSidebar's mobile badge now shows a real active-filter count
+      instead of a generic dot, wired into HubQuestionList,
+      TagQuestionsClient, and SearchResultsClient
+- [x] Real server-side search added to GET /questions/unanswered/,
+      UnansweredQueue now searches the full result set, not just the
+      loaded page
+- [ ] GET /hubs/activation-requests/ intentionally kept as loaded-page-
+      only search in ActivationRequestsQueue, a deliberate choice, not a
+      gap, "bug turned feature"
 
 ## Monetization (Future. Needs further review)
 Every item here must hold to Integrity Over Monetization (project-plan.md):
@@ -394,7 +418,7 @@ truthfulness or presence of content students post.
       (e.g. a Question's report deletes it, cascading to an Answer that had
       its own separate pending report). Already handled defensively (won't
       crash), but nothing surfaces or auto-resolves these dangling reports
-- [ ] Consider notifying the original reporter when their report is
+- [x] Consider notifying the original reporter when their report is
       resolved or rejected, matching the "close the loop" pattern already
       used elsewhere in the notification system, not currently required by
       any doc but a natural fit

@@ -175,6 +175,10 @@ class UnansweredQuestionsView(generics.ListAPIView):
             hub = validate_uuid(hub)
             queryset = queryset.filter(hub_id=hub)
 
+        search = self.request.query_params.get("search")
+        if search:
+            queryset = queryset.filter(Q(title__icontains=search) | Q(body__icontains=search))
+
         return queryset
 
 

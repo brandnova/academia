@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { clientFetch } from "@/lib/clientApi";
+import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
 import { timeAgo } from "@/lib/timeAgo";
 
@@ -17,6 +18,7 @@ export default function ActivationRequestsQueue() {
   const [actionError, setActionError] = useState("");
   const [rejectingId, setRejectingId] = useState(null);
   const [rejectReason, setRejectReason] = useState("");
+  const [query, setQuery] = useState("");
 
   const fetchPage = useCallback(
     async (page) => {
@@ -48,6 +50,18 @@ export default function ActivationRequestsQueue() {
       cancelled = true;
     };
   }, [fetchPage]);
+
+  // GET /hubs/activation-requests/ has no documented search param (only
+  // status/page), so this filters the already-loaded page only, not the
+  // full server-side dataset. Said explicitly in the UI below rather than
+  // implying a fuller search than what's actually happening.
+  const filteredRequests = useMemo(() => {
+    if (!query) return requests;
+    const q = query.toLowerCase();
+    return requests.filter(
+      (r) => r.school.name.toLowerCase().includes(q) || r.user.full_name.toLowerCase().includes(q)
+    );
+  }, [requests, query]);
 
   async function handleLoadMore() {
     try {
@@ -118,6 +132,16 @@ export default function ActivationRequestsQueue() {
         ))}
       </div>
 
+      {status === "ready" && requests.length > 0 && (
+        <div className="mb-4">
+          <SearchBar value={query} onChange={setQuery} placeholder="Search by school or requester..." />
+          <p className="text-xs text-gray-400 mt-1">
+            Searches the {requests.length} request{requests.length !== 1 ? "s" : ""} loaded so far.
+            {nextPage && ' Load more below to search further.'}
+          </p>
+        </div>
+      )}
+
       {status === "loading" && (
         <div className="space-y-2">
           {[...Array(3)].map((_, i) => (
@@ -131,10 +155,15 @@ export default function ActivationRequestsQueue() {
           No {statusFilter.toLowerCase()} requests.
         </p>
       )}
+      {status === "ready" && requests.length > 0 && filteredRequests.length === 0 && (
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          No loaded requests match "{query}".
+        </p>
+      )}
 
-      {status === "ready" && requests.length > 0 && (
+      {status === "ready" && filteredRequests.length > 0 && (
         <div className="space-y-2">
-          {requests.map((req) => (
+          {filteredRequests.map((req) => (
             <div key={req.id} className="border border-[var(--color-border)] rounded-lg p-3 text-sm">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="font-medium">{req.school.name}</span>

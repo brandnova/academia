@@ -70,6 +70,8 @@ export default function TagQuestionsClient({ tagName }) {
     }
   }
 
+  const activeCount = statusFilter ? 1 : 0;
+
   return (
     <div>
       <p className="text-sm mb-2">
@@ -82,7 +84,11 @@ export default function TagQuestionsClient({ tagName }) {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8">
-        <FilterSidebar hasActiveFilters={Boolean(statusFilter)} onClear={() => setStatusFilter("")}>
+        <FilterSidebar
+          hasActiveFilters={activeCount > 0}
+          activeCount={activeCount}
+          onClear={() => setStatusFilter("")}
+        >
           <FilterSection title="Status">
             <div className="space-y-1">
               {STATUS_OPTIONS.map((opt) => (

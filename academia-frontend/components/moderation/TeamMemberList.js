@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Trash2 } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import Skeleton from "@/components/ui/Skeleton";
+import SearchBar from "@/components/ui/SearchBar";
 import UserSearchPicker from "./UserSearchPicker";
+
+const SEARCH_THRESHOLD = 6;
 
 // Representative assignment is admin-only per api-contract.md
 // (POST /hubs/{hub_id}/representatives/), regardless of what a parent
@@ -19,6 +22,7 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
   const [removeError, setRemoveError] = useState("");
   const [addStatus, setAddStatus] = useState("idle");
   const [addError, setAddError] = useState("");
+  const [query, setQuery] = useState("");
 
   const canActuallyManage = canManage && (role !== "representatives" || isAdmin);
 
@@ -38,6 +42,11 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
   useEffect(() => {
     load();
   }, [load]);
+
+  const filteredMembers = useMemo(() => {
+    if (!query) return members;
+    return members.filter((m) => m.user.full_name.toLowerCase().includes(query.toLowerCase()));
+  }, [members, query]);
 
   async function handleAdd(selectedUser) {
     if (addStatus === "loading") return;
@@ -76,11 +85,21 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
 
   return (
     <div>
+      {members.length >= SEARCH_THRESHOLD && (
+        <div className="mb-3">
+          <SearchBar value={query} onChange={setQuery} placeholder="Search by name..." />
+        </div>
+      )}
+
       {members.length === 0 ? (
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">None assigned yet.</p>
+      ) : filteredMembers.length === 0 ? (
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+          No one matches "{query}".
+        </p>
       ) : (
         <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] mb-3">
-          {members.map((m) => (
+          {filteredMembers.map((m) => (
             <li key={m.id} className="flex items-center justify-between py-2 px-2 text-sm">
               <span>{m.user.full_name}</span>
               {canActuallyManage && (

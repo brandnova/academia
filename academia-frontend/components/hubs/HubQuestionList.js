@@ -80,12 +80,14 @@ export default function HubQuestionList({ hubId, departments }) {
     }
   }
 
-  const hasActiveFilters = Boolean(statusFilter || departmentFilter);
+  const activeCount = Number(Boolean(statusFilter)) + Number(Boolean(departmentFilter));
+  const hasActiveFilters = activeCount > 0;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 mt-8">
       <FilterSidebar
         hasActiveFilters={hasActiveFilters}
+        activeCount={activeCount}
         onClear={() => {
           setStatusFilter("");
           setDepartmentFilter("");

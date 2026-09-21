@@ -182,8 +182,8 @@ export default function MarkdownEditor({ value, onChange, placeholder, rows = 6,
 
   return (
     <div className="my-3 border border-gray-300 dark:border-gray-600 rounded overflow-hidden">
-      <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-800/50 border-b border-gray-300 dark:border-gray-600 px-2 py-1">
-        <div className="flex items-center gap-0.5">
+      <div className="flex flex-wrap items-center gap-2 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-300 dark:border-gray-600 px-2 py-1">
+        <div className="flex flex-wrap items-center gap-0.5">
           {allActions.map((action) => (
             <button
               key={action.key}
@@ -200,7 +200,7 @@ export default function MarkdownEditor({ value, onChange, placeholder, rows = 6,
         <button
           type="button"
           onClick={() => setPreview((p) => !p)}
-          className="flex items-center gap-1 rounded px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-accent transition-colors"
+          className="flex items-center gap-1 rounded px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-accent transition-colors ml-auto"
         >
           {preview ? <Pencil className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
           {preview ? "Write" : "Preview"}
