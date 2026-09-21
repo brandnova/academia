@@ -276,6 +276,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#market-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Market Strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#core-principles" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -297,17 +308,6 @@
   
     <nav class="md-nav" aria-label="Documentation">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#project-overview-read-this-first" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Project Overview (Read this first)
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#project-plan" class="md-nav__link">
@@ -347,6 +347,17 @@
     <span class="md-ellipsis">
       
         API Contract
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Overview
       
     </span>
   </a>
@@ -729,6 +740,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#market-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Market Strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#core-principles" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -750,17 +772,6 @@
   
     <nav class="md-nav" aria-label="Documentation">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#project-overview-read-this-first" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Project Overview (Read this first)
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#project-plan" class="md-nav__link">
@@ -800,6 +811,17 @@
     <span class="md-ellipsis">
       
         API Contract
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Overview
       
     </span>
   </a>
@@ -899,6 +921,9 @@ Student gets an answer.
 Future students find that answer without asking the same question again.</p>
 </blockquote>
 <hr />
+<h2 id="market-strategy">Market Strategy</h2>
+<p>Academia is launching first with Nigerian tertiary institutions, where the problem it solves originated. Nigeria is the platform's starting market, not its permanent identity. The data model, URL structure, and core architecture are built to extend to institutions in other countries as the Nigerian market is proven out.</p>
+<hr />
 <h2 id="core-principles">Core Principles</h2>
 <p>Academia is built around a few simple ideas:</p>
 <ul>
@@ -910,55 +935,53 @@ Future students find that answer without asking the same question again.</p>
 </ul>
 <hr />
 <h2 id="documentation">Documentation</h2>
-<p>The project documentation is intentionally lightweight and organized around four core documents.</p>
-<h3 id="project-overview-read-this-first">Project Overview (Read this first)</h3>
-<p>A quick structured snapshot of the project and what's expected of it.</p>
+<p>The project documentation is organized around four core documents, plus supporting logs.</p>
 <h3 id="project-plan">Project Plan</h3>
 <p>Defines the vision, goals, structure, and guiding decisions behind the platform.</p>
 <h3 id="feature-list">Feature List</h3>
-<p>Defines the complete list of planned features and requirements.</p>
+<p>Defines the complete list of features, what's built, and what's planned for later.</p>
 <h3 id="database-schema">Database Schema</h3>
 <p>Defines the application's data structures, models, and relationships.</p>
 <h3 id="api-contract">API Contract</h3>
 <p>Defines the communication contract between the frontend and backend systems.</p>
+<h3 id="project-overview">Project Overview</h3>
+<p>The frontend-facing guide: sitemap, design philosophy, visual direction, and component list.</p>
 <hr />
 <h2 id="development-philosophy">Development Philosophy</h2>
 <p>Academia follows an API-first development approach.</p>
-<p>Before implementation begins, system behavior, data structures, and API responses are documented and agreed upon. Frontend and backend development then proceed independently using the same documented contracts.</p>
+<p>System behavior, data structures, and API responses are documented and agreed upon before implementation. Frontend and backend development then proceed independently using the same documented contracts.</p>
 <p>This reduces integration issues, allows parallel development, and keeps both sides aligned throughout the project.</p>
 <hr />
 <h2 id="current-status">Current Status</h2>
-<p><strong>Phase:</strong> Planning &amp; Documentation</p>
-<p>The project is currently focused on:</p>
-<ul>
-<li>Finalizing documentation</li>
-<li>Defining data structures</li>
-<li>Establishing API contracts</li>
-<li>Planning implementation details</li>
-</ul>
-<p>Application development begins after documentation approval.</p>
+<p><strong>Phase:</strong> Post-MVP, pre-launch</p>
+<p>The backend is complete: all 15 planned MVP phases, plus post-MVP passes for production readiness, URL/ID ergonomics, and API completeness. The frontend MVP (Phases 0 through 15) is also complete and live on Vercel. Both are functional and deployed.</p>
+<p>The project is currently in a final audit-and-fix pass, working through a tracked backlog of smaller bugs and polish items before opening the platform to real users. See <code>feature-list.md</code>'s Platform Improvements section for the active list.</p>
 <hr />
 <h2 id="repository-structure">Repository Structure</h2>
 <pre><code class="language-text">Academia/
 │
-├── docs/
-├── backend/
-├── frontend/
+├── docs/                    - Project documentation (MkDocs, published to GitHub Pages)
+├── backend/                 - Django REST Framework API
+├── academia-frontend/       - Next.js application
 │
-├── README.md
-└── .gitignore
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── GOVERNANCE.md
+├── LICENSE
+├── SECURITY.md
+└── README.md
 </code></pre>
 <hr />
 <h2 id="next-steps">Next Steps</h2>
 <ol>
-<li>Complete the Feature List.</li>
-<li>Design the Database Schema.</li>
-<li>Define API Contracts.</li>
-<li>Begin backend and frontend implementation in parallel.</li>
-<li>Integrate and test.</li>
+<li>Work through the post-MVP audit backlog (see <code>feature-list.md</code>).</li>
+<li>Complete the Nigerian school directory import (data cleaning in progress).</li>
+<li>Onboard initial moderators and school representatives.</li>
+<li>Open the platform to real users.</li>
 </ol>
 <hr />
-<p><em>Academia aims to become the most useful destination for students seeking answers to academic questions.</em></p>
+<p><em>Academia aims to become the most useful destination for students seeking answers to academic questions, starting in Nigeria.</em></p>
 
 
 

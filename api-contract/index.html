@@ -1414,6 +1414,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#escalate-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escalate Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escalate-report_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escalate Report
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2838,6 +2860,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#escalate-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escalate Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escalate-report_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escalate Report
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3583,6 +3627,9 @@ wherever a school is being displayed.</p>
 <p><strong>Query Parameters:</strong>
 - <code>search</code> - Search by name or short_name
 - <code>has_hub</code> - Filter schools with/without hub (true/false)
+- <code>institution_type</code> - Filter by UNIVERSITY/POLYTECHNIC/COLLEGE_OF_EDUCATION
+- <code>ownership</code> - Filter by FEDERAL/STATE/PRIVATE
+- <code>state</code> - Filter by Nigerian state (exact match, case-insensitive)
 - <code>page</code> - Page number (default: 1)
 - <code>page_size</code> - Items per page (default: 20, max: 100)</p>
 <p><strong>Response (200 OK):</strong></p>
@@ -3600,6 +3647,10 @@ wherever a school is being displayed.</p>
       &quot;website&quot;: &quot;https://unilag.edu.ng&quot;,
       &quot;has_hub&quot;: true,
       &quot;is_active&quot;: true,
+      &quot;institution_type&quot;: &quot;UNIVERSITY&quot;,
+      &quot;ownership&quot;: &quot;FEDERAL&quot;,
+      &quot;state&quot;: &quot;Lagos&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
       &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
     }
   ]
@@ -3609,6 +3660,10 @@ wherever a school is being displayed.</p>
 - <strong>Cache</strong>: Public requests are cached with prefix <code>school-list:query</code> using <code>CACHE_TTL_SHORT</code> (60 seconds).
 - <strong>Admin Bypass</strong>: Authenticated Platform Admins bypass the cache completely (to see live entries and inactive/deactivated schools, which are filtered out for regular users/guests).
 - <strong>Invalidation</strong>: Wiped automatically on POST school creation or PATCH school updates.</p>
+<p>All three new filters combine with AND when used together, and with the
+existing <code>search</code>/<code>has_hub</code> filters. <code>institution_type</code> and <code>ownership</code>
+values are case-insensitive on input (uppercased before matching), <code>state</code>
+matches case-insensitively against the stored value.</p>
 <hr />
 <h3 id="get-school">Get School</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/schools/{school_id}/</code></p>
@@ -3623,6 +3678,13 @@ wherever a school is being displayed.</p>
   &quot;has_hub&quot;: true,
   &quot;is_active&quot;: true,
   &quot;verification_status&quot;: &quot;VERIFIED&quot;,
+  &quot;institution_type&quot;: &quot;UNIVERSITY&quot;,
+  &quot;ownership&quot;: &quot;FEDERAL&quot;,
+  &quot;state&quot;: &quot;Lagos&quot;,
+  &quot;country&quot;: &quot;Nigeria&quot;,
+  &quot;regulatory_code&quot;: null,
+  &quot;source_url&quot;: null,
+  &quot;last_verified_at&quot;: null,
   &quot;departments&quot;: [
     {
       &quot;id&quot;: &quot;uuid&quot;,
@@ -3644,6 +3706,10 @@ wherever a school is being displayed.</p>
 - <strong>Cache</strong>: Public detail views are cached as <code>school-detail:{school_id}</code> using <code>CACHE_TTL_MEDIUM</code> (300 seconds).
 - <strong>Admin Bypass</strong>: Authenticated Platform Admins bypass this cache entirely and view live data (including inactive status).
 - <strong>Invalidation</strong>: Cleared on PATCH school update of the school, or POST/PATCH operations on the school's departments.</p>
+<p><code>regulatory_code</code>, <code>source_url</code>, and <code>last_verified_at</code> are null for every
+school until the NUC/NBTE/NCCE directory import lands and/or an admin sets
+them manually. <code>institution_type</code>, <code>ownership</code>, and <code>state</code> are also
+nullable, expect null on any school created before that import.</p>
 <hr />
 <h3 id="get-school-by-slug">Get School by Slug</h3>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/schools/by-slug/{slug}/</code></p>
@@ -3667,12 +3733,20 @@ later.</p>
   &quot;name&quot;: &quot;University of Ibadan&quot;,
   &quot;short_name&quot;: &quot;UI&quot;,
   &quot;location&quot;: &quot;Ibadan, Nigeria&quot;,
-  &quot;website&quot;: &quot;https://ui.edu.ng&quot;
+  &quot;website&quot;: &quot;https://ui.edu.ng&quot;,
+  &quot;institution_type&quot;: &quot;UNIVERSITY&quot;,
+  &quot;ownership&quot;: &quot;FEDERAL&quot;,
+  &quot;state&quot;: &quot;Oyo&quot;,
+  &quot;country&quot;: &quot;Nigeria&quot;,
+  &quot;regulatory_code&quot;: null,
+  &quot;source_url&quot;: null,
+  &quot;last_verified_at&quot;: null
 }
 </code></pre>
-<p><code>short_name</code> is automatically uppercased on save. <code>location</code> and <code>website</code> are
-optional. A <code>slug</code> is auto-generated from <code>short_name</code> (e.g. <code>"UI"</code> → <code>"ui"</code>) and
-is never regenerated.</p>
+<p><code>short_name</code> is automatically uppercased on save. <code>location</code>, <code>website</code>, and
+every field from <code>institution_type</code> through <code>last_verified_at</code> are optional.
+A <code>slug</code> is auto-generated from <code>short_name</code> (e.g. <code>"UI"</code> → <code>"ui"</code>) and
+is never regenerated. <code>country</code> defaults to <code>"Nigeria"</code> if omitted.</p>
 <p><strong>Response (201 Created):</strong> Same as GET <code>/api/v1/schools/{school_id}/</code></p>
 <p><strong>Error Responses:</strong></p>
 <pre><code class="language-json">// 400 Bad Request - Duplicate school name or short_name
@@ -3680,12 +3754,20 @@ is never regenerated.</p>
   &quot;name&quot;: [&quot;school with this name already exists.&quot;],
   &quot;short_name&quot;: [&quot;school with this short name already exists.&quot;]
 }
+
+// 400 Bad Request - Duplicate regulatory_code
+{
+  &quot;regulatory_code&quot;: [&quot;school with this regulatory code already exists.&quot;]
+}
 </code></pre>
 <p><strong>Invalidation Note:</strong> Invalidates and clears all entries matching the <code>school-list</code> cache prefix.</p>
 <hr />
 <h3 id="update-school-admin-only">Update School (Admin Only)</h3>
 <p><strong>Endpoint:</strong> <code>PATCH /api/v1/schools/{school_id}/</code></p>
-<p><strong>Request:</strong> Same as POST, all fields optional. Accepts <code>"is_active": true/false</code>.</p>
+<p><strong>Request:</strong> Same fields as POST (see Create School above), all optional. Accepts
+<code>"is_active": true/false</code>. This is also how <code>regulatory_code</code>, <code>source_url</code>, and
+<code>last_verified_at</code> get set or corrected after the fact, whether by the import
+process or by an admin.</p>
 <p><strong>Response (200 OK):</strong> Same as GET <code>/api/v1/schools/{school_id}/</code></p>
 <p><strong>Invalidation Note:</strong> Invalidates <code>school-detail:{school_id}</code> cache key and the <code>school-list</code> cache prefix.</p>
 <hr />
@@ -3879,6 +3961,10 @@ email).</p>
   &quot;error&quot;: &quot;This activation request has already been reviewed&quot;
 }
 </code></pre>
+<p>Rejecting sends the requesting user a <code>HUB_ACTIVATION_REJECTED</code> notification
+(email and in-app). The <code>reason</code> field is used in the email body if provided,
+but is not currently persisted anywhere, it does not appear in
+<code>GET /hubs/activation-requests/</code> or anywhere else after the email sends.</p>
 <hr />
 <h2 id="departments">Departments</h2>
 <h3 id="list-departments">List Departments</h3>
@@ -4146,6 +4232,7 @@ question's title regenerates its slug.</p>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/questions/unanswered/</code></p>
 <p><strong>Query Parameters:</strong>
 - <code>hub</code> - Filter by hub ID
+- <code>search</code> - Search in title and body
 - <code>page</code> - Page number</p>
 <p><strong>Response (200 OK):</strong> Same as list questions, but only OPEN status</p>
 <p><strong>Error Response (403 Forbidden):</strong></p>
@@ -4676,6 +4763,7 @@ than counted as a reassignment.</p>
     {
       &quot;id&quot;: &quot;uuid&quot;,
       &quot;title&quot;: &quot;How do I calculate my CGPA?&quot;,
+      &quot;slug&quot;: &quot;how-do-i-calculate-my-cgpa&quot;,
       &quot;body&quot;: &quot;I'm confused about the grading system...&quot;,
       &quot;status&quot;: &quot;SOLVED&quot;,
       &quot;score&quot;: 0.4213,
@@ -4749,7 +4837,13 @@ question's own author, deduplicated if a user holds both roles),
 new hub activation request is submitted, excluding the requester if they
 happen to be an admin), <code>NEW_REPORT</code> (in-app only, sent to every active
 admin when a new report is submitted, excluding the reporter if they
-happen to be an admin).</p>
+happen to be an admin), <code>USER_SUSPENDED</code> (email and in-app, fires only on
+the transition from active to suspended, not on a repeated suspend call
+or on reactivation), <code>HUB_ACTIVATION_REJECTED</code> (email and in-app, sent to
+the original requester when their activation request is rejected),
+<code>REPORT_REVIEWED</code> (in-app only, sent to the original reporter when their
+report is resolved or rejected, excluding the reporter if they happen to
+be the reviewing admin).</p>
 <hr />
 <h3 id="mark-notification-as-read">Mark Notification as Read</h3>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/notifications/{notification_id}/mark-read/</code></p>
@@ -4835,6 +4929,7 @@ rejected.</p>
 <p><strong>Endpoint:</strong> <code>GET /api/v1/reports/</code></p>
 <p><strong>Query Parameters:</strong>
 - <code>status</code> - PENDING/RESOLVED/REJECTED
+- <code>is_escalated</code> - true/false
 - <code>page</code> - Page number</p>
 <p><strong>Response (200 OK):</strong></p>
 <pre><code class="language-json">{
@@ -4851,6 +4946,8 @@ rejected.</p>
         &quot;id&quot;: &quot;uuid&quot;,
         &quot;full_name&quot;: &quot;John Doe&quot;
       },
+      &quot;is_escalated&quot;: false,
+      &quot;escalated_by&quot;: null,
       &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
     }
   ]
@@ -4877,6 +4974,8 @@ rejected.</p>
   &quot;error&quot;: &quot;This report has already been reviewed&quot;
 }
 </code></pre>
+<p>Resolving sends the original reporter a <code>REPORT_REVIEWED</code> notification,
+in-app only, excluding the reporter if they are also the resolving admin.</p>
 <p><code>action: "DELETE_CONTENT"</code> is the only value with special behavior, it deletes the
 underlying reported object. Any other value, or omitting <code>action</code> entirely, resolves
 the report without taking any action on the content itself, useful when a report is
@@ -4896,6 +4995,118 @@ valid to acknowledge but doesn't warrant removal.</p>
   &quot;error&quot;: &quot;This report has already been reviewed&quot;
 }
 </code></pre>
+<p>Rejecting sends the original reporter a <code>REPORT_REVIEWED</code> notification,
+in-app only, excluding the reporter if they are also the rejecting admin.</p>
+<hr />
+<h3 id="escalate-report">Escalate Report</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/v1/reports/{report_id}/escalate/</code></p>
+<p>Restricted to an active Moderator or Representative for the reported content's
+hub, or an admin. Marks an existing PENDING report as escalated, signaling
+that a staff member's judgment (not just a student complaint) flagged it for
+priority review. Requires an existing report, there is no way to escalate
+unreported content directly, file a report first via <code>POST /reports/</code> then
+escalate it.</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;content_type&quot;: &quot;question&quot;,
+  &quot;content_id&quot;: &quot;uuid&quot;,
+  &quot;type&quot;: &quot;SPAM&quot;,
+  &quot;description&quot;: &quot;This appears to be promotional content&quot;,
+  &quot;status&quot;: &quot;PENDING&quot;,
+  &quot;reporter&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;John Doe&quot;
+  },
+  &quot;is_escalated&quot;: true,
+  &quot;escalated_by&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;Jane Moderator&quot;
+  },
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request - Already reviewed
+{
+  &quot;error&quot;: &quot;This report has already been reviewed&quot;
+}
+
+// 400 Bad Request - Already escalated
+{
+  &quot;error&quot;: &quot;This report has already been escalated&quot;
+}
+
+// 400 Bad Request - Reported content no longer exists
+{
+  &quot;error&quot;: &quot;The reported content no longer exists&quot;
+}
+
+// 403 Forbidden - No moderator/representative role for this hub, and not admin
+{
+  &quot;error&quot;: &quot;You do not have permission to perform this action&quot;
+}
+</code></pre>
+<p>Escalating sends every active admin a <code>NEW_REPORT</code> notification, in-app only,
+excluding the escalator if they happen to be an admin. This reuses the same
+notification type as report creation, with message text that specifically
+frames it as an escalation, matching the project's precedent of reusing
+notification types over adding new ones for closely related events.</p>
+<hr />
+<h3 id="escalate-report_1">Escalate Report</h3>
+<p><strong>Endpoint:</strong> <code>POST /api/v1/reports/{report_id}/escalate/</code></p>
+<p>Restricted to an active Moderator or Representative for the reported content's
+hub, or an admin. Marks an existing PENDING report as escalated, signaling
+that a staff member's judgment (not just a student complaint) flagged it for
+priority review. Requires an existing report, there is no way to escalate
+unreported content directly, file a report first via <code>POST /reports/</code> then
+escalate it.</p>
+<p><strong>Response (200 OK):</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;content_type&quot;: &quot;question&quot;,
+  &quot;content_id&quot;: &quot;uuid&quot;,
+  &quot;type&quot;: &quot;SPAM&quot;,
+  &quot;description&quot;: &quot;This appears to be promotional content&quot;,
+  &quot;status&quot;: &quot;PENDING&quot;,
+  &quot;reporter&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;John Doe&quot;
+  },
+  &quot;is_escalated&quot;: true,
+  &quot;escalated_by&quot;: {
+    &quot;id&quot;: &quot;uuid&quot;,
+    &quot;full_name&quot;: &quot;Jane Moderator&quot;
+  },
+  &quot;created_at&quot;: &quot;2026-01-01T00:00:00Z&quot;
+}
+</code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// 400 Bad Request - Already reviewed
+{
+  &quot;error&quot;: &quot;This report has already been reviewed&quot;
+}
+
+// 400 Bad Request - Already escalated
+{
+  &quot;error&quot;: &quot;This report has already been escalated&quot;
+}
+
+// 400 Bad Request - Reported content no longer exists
+{
+  &quot;error&quot;: &quot;The reported content no longer exists&quot;
+}
+
+// 403 Forbidden - No moderator/representative role for this hub, and not admin
+{
+  &quot;error&quot;: &quot;You do not have permission to perform this action&quot;
+}
+</code></pre>
+<p>Escalating sends every active admin a <code>NEW_REPORT</code> notification, in-app only,
+excluding the escalator if they happen to be an admin. This reuses the same
+notification type as report creation, with message text that specifically
+frames it as an escalation, matching the project's precedent of reusing
+notification types over adding new ones for closely related events.</p>
 <hr />
 <h2 id="moderation">Moderation</h2>
 <h3 id="assign-moderator-school-representative-or-admin">Assign Moderator (School Representative or Admin)</h3>

@@ -479,6 +479,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#schoolsourcerecord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SchoolSourceRecord
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#department" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -968,6 +979,17 @@
     <span class="md-ellipsis">
       
         School
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schoolsourcerecord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SchoolSourceRecord
       
     </span>
   </a>
@@ -1469,6 +1491,48 @@
 <td>School active status (also used as soft-delete)</td>
 </tr>
 <tr>
+<td>institution_type</td>
+<td>Enum</td>
+<td>Nullable</td>
+<td>UNIVERSITY/POLYTECHNIC/COLLEGE_OF_EDUCATION. Deliberately kept to three values, see School Data Curation note below</td>
+</tr>
+<tr>
+<td>ownership</td>
+<td>Enum</td>
+<td>Nullable</td>
+<td>FEDERAL/STATE/PRIVATE</td>
+</tr>
+<tr>
+<td>state</td>
+<td>String</td>
+<td>Nullable</td>
+<td>Nigerian state, free text</td>
+</tr>
+<tr>
+<td>regulatory_code</td>
+<td>String</td>
+<td>Nullable, Unique</td>
+<td>Reserved for a JAMB institution code, not populated by the initial NUC/NBTE/NCCE import</td>
+</tr>
+<tr>
+<td>source_url</td>
+<td>String</td>
+<td>Nullable</td>
+<td>The regulator page this record's data was last confirmed against</td>
+</tr>
+<tr>
+<td>last_verified_at</td>
+<td>DateTime</td>
+<td>Nullable</td>
+<td>Set explicitly by the import process or an admin correction, not auto-derived</td>
+</tr>
+<tr>
+<td>country</td>
+<td>String</td>
+<td>Default: "Nigeria"</td>
+<td>Forward-compatible field for eventual multi-country expansion, no multi-country logic exists yet</td>
+</tr>
+<tr>
 <td>created_at</td>
 <td>DateTime</td>
 <td>Auto now</td>
@@ -1483,6 +1547,96 @@
 </tbody>
 </table>
 <p><code>has_hub</code> is not a stored field, it's computed from the related <code>Hub</code> record.</p>
+<p><strong>School Data Curation note on <code>institution_type</code>:</strong> source regulator data contains
+six raw categories (universities, polytechnics, colleges of education, allied
+institutions, colleges of health technology, colleges of nursing). Allied
+institutions, colleges of health technology, and colleges of nursing all collapse
+into <code>POLYTECHNIC</code> as their nearest general category, since all three are
+NBTE-regulated, sub-degree/technical institutions structurally closer to a
+polytechnic than to a university or a college of education. The original,
+more specific category string is preserved per-record on <code>SchoolSourceRecord.raw_category</code>
+below, nothing from the source is actually lost, it's just not promoted to a
+first-class <code>School</code> field.</p>
+<h3 id="schoolsourcerecord">SchoolSourceRecord</h3>
+<p>Per-regulator provenance for a School, one row per source confirmation. Exists
+specifically to support "never auto-deactivate a School based on one source
+disappearing" (see project-plan.md's Schools Are Platform Data principle): a
+future re-pull of a regulator's list flips <code>is_current</code> to False here rather
+than touching <code>School.is_active</code> directly, leaving deactivation a deliberate,
+reviewed admin decision instead of an automatic side effect. No independent
+API endpoint, admin-visible only (inline under School in Django admin).</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>UUID</td>
+<td>Primary Key</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>school</td>
+<td>ForeignKey(School)</td>
+<td>Required, CASCADE</td>
+<td>The school this record confirms</td>
+</tr>
+<tr>
+<td>regulator</td>
+<td>Enum</td>
+<td>Required</td>
+<td>NUC/NBTE/NCCE</td>
+</tr>
+<tr>
+<td>raw_category</td>
+<td>String</td>
+<td>Required</td>
+<td>The exact original source label (e.g. "Allied Institution", "College of Nursing"), preserved even though it's collapsed into a simpler School.institution_type</td>
+</tr>
+<tr>
+<td>raw_payload</td>
+<td>JSON</td>
+<td>Default: empty object</td>
+<td>VC/provost name, year established, anything else the source carried that isn't a dedicated School column</td>
+</tr>
+<tr>
+<td>source_url</td>
+<td>String</td>
+<td>Required</td>
+<td>The regulator page this record was sourced from</td>
+</tr>
+<tr>
+<td>fetched_at</td>
+<td>DateTime</td>
+<td>Required</td>
+<td>When this source data was pulled</td>
+</tr>
+<tr>
+<td>is_current</td>
+<td>Boolean</td>
+<td>Default: True</td>
+<td>Flipped False when a later re-pull of that regulator's list no longer finds this institution</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>DateTime</td>
+<td>Auto now</td>
+<td>Last update timestamp</td>
+</tr>
+</tbody>
+</table>
 <h3 id="department">Department</h3>
 <p>Represents an academic department within a school.</p>
 <table>
@@ -2046,7 +2200,7 @@ state (is_following), consistent with Knowledge Over Social Activity.</p>
 <td>type</td>
 <td>Enum</td>
 <td>Required</td>
-<td>NEW_ANSWER/NEW_COMMENT/NEW_QUESTION/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED/NEW_ACTIVATION_REQUEST/NEW_REPORT</td>
+<td>NEW_ANSWER/NEW_COMMENT/NEW_QUESTION/BEST_ANSWER/VOTE/MODERATOR_ASSIGNED/HUB_ACTIVATED/NEW_ACTIVATION_REQUEST/NEW_REPORT/USER_SUSPENDED/HUB_ACTIVATION_REJECTED/REPORT_REVIEWED</td>
 </tr>
 <tr>
 <td>message</td>
@@ -2146,6 +2300,18 @@ state (is_following), consistent with Knowledge Over Social Activity.</p>
 <td>DateTime</td>
 <td>Nullable</td>
 <td>Resolution timestamp</td>
+</tr>
+<tr>
+<td>is_escalated</td>
+<td>Boolean</td>
+<td>Default: False</td>
+<td>Set when a moderator or representative flags an existing report for priority admin review</td>
+</tr>
+<tr>
+<td>escalated_by</td>
+<td>ForeignKey(User)</td>
+<td>Nullable, SET_NULL</td>
+<td>Moderator/representative/admin who escalated</td>
 </tr>
 <tr>
 <td>created_at</td>
@@ -2459,10 +2625,11 @@ join this set once built, with no schema change required.</p>
 <li><code>Notification</code>: (content_type_id, object_id) - For generic relation lookups</li>
 <li><code>Report</code>: (status, created_at DESC) - For reports dashboard</li>
 <li><code>Report</code>: (content_type_id, object_id) - For generic relation lookups</li>
+<li><code>Report</code>: (is_escalated, created_at DESC) - For escalated reports triage</li>
 </ul>
 <h3 id="unique-constraints">Unique Constraints</h3>
 <ul>
-<li><code>School</code>: name, short_name, slug</li>
+<li><code>School</code>: name, short_name, slug, regulatory_code</li>
 <li><code>Department</code>: (school_id, name)</li>
 <li><code>Hub</code>: school_id</li>
 <li><code>AnswerVote</code>: (answer_id, user_id)</li>
@@ -2473,7 +2640,7 @@ join this set once built, with no schema change required.</p>
 </ul>
 <h3 id="cascade-behavior">Cascade Behavior</h3>
 <ul>
-<li>Deleting a <code>School</code> → Delete associated <code>Hub</code>, <code>Department</code>, <code>HubActivationRequest</code></li>
+<li>Deleting a <code>School</code> → Delete associated <code>Hub</code>, <code>Department</code>, <code>HubActivationRequest</code>, <code>SchoolSourceRecord</code></li>
 <li>Deleting a <code>Hub</code> → Delete associated <code>Question</code>, <code>ModeratorAssignment</code>, <code>SchoolRepresentativeAssignment</code></li>
 <li>Deleting a <code>User</code> → Delete associated <code>Question</code>, <code>Answer</code>, <code>Comment</code>, <code>Notification</code>, <code>Report</code></li>
 <li>Deleting a <code>Question</code> → Delete associated <code>Answer</code>, <code>QuestionTag</code>, <code>QuestionFollow</code></li>

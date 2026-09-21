@@ -1130,6 +1130,19 @@ Both are content-first, but this one leans more utilitarian and dense. Principle
 <li>Vote control, tag chip, comment thread item, hub header, notification
   bell, report modal, role-aware action bar, unchanged from the original
   list, just restyled to the new visual direction.</li>
+<li><strong>Dropdown / kebab actions menu</strong>: <code>Dropdown</code> (generic popover shell, click-outside
+  and Escape-to-close, trigger and content both render props) and <code>ActionsMenu</code>
+  (kebab-icon trigger, role-aware action list) built on top of it. Used for
+  question/answer/comment action rows and the shared TopBar popovers
+  (ProfileMenu, NotificationBell). Popover elevation styling (bg-white
+  dark:bg-gray-800, border, shadow) lives once in <code>Dropdown</code>, panel
+  size/position varies per consumer via <code>panelClassName</code>.</li>
+<li><strong>School meta badges</strong>: <code>SchoolMetaBadge</code> (icon + conditional label, null-safe)
+  displays institution type, ownership, and state on the school profile hero,
+  reusing the same icon-label pattern as status icons and question meta rows.
+  Enum-to-label mappings for institution_type/ownership live in
+  <code>lib/schoolLabels.js</code>, the single source of truth also consumed by the
+  admin school form.</li>
 </ul>
 <hr />
 <h2 id="8-states-every-page-must-handle">8. States Every Page Must Handle</h2>
@@ -1155,12 +1168,18 @@ clear both and report a logged-out session on failure) before the browser
 ever sees a response. A future non-Next.js consumer of this API would still
 follow the plain documented flow in api-contract.md directly; this proxy
 layer is a frontend implementation choice, not an API requirement.</p>
-<p><strong>URL conventions to build against:</strong> Schools and Hubs each have a stable, unique
-<code>slug</code> (e.g. <code>unilag</code>) suitable as the primary route segment for their public pages,
-<code>/schools/unilag/</code>, <code>/hubs/unilag/</code>, resolved via <code>GET /schools/by-slug/{slug}/</code> and
-<code>GET /hubs/by-slug/{slug}/</code>. Questions have a cosmetic, non-unique <code>slug</code> meant to sit
-alongside the UUID in the URL for readability and SEO, <code>/questions/{id}/{slug}</code>, but
-the UUID is what's actually looked up, the slug can be anything or even omitted.</p>
+<p><strong>URL conventions to build against:</strong> Schools and Questions both use a
+UUID-primary URL with a cosmetic, SEO-friendly slug appended for
+readability, <code>/schools/{id}/{slug}</code> and <code>/questions/{id}/{slug}</code>. The UUID
+is what's actually looked up in both cases; the slug is never used for
+lookup and can be anything or even omitted, <code>lib/urls.js</code>'s <code>schoolUrl()</code>
+and <code>questionUrl()</code> build these consistently and fall back to a
+client-generated slug (<code>lib/slugify.js</code>) when a response omits one.
+<code>GET /schools/by-slug/{slug}/</code> and <code>GET /hubs/by-slug/{slug}/</code> remain
+available and documented in api-contract.md, but the frontend doesn't
+route through them as the primary path today, that's a documented
+deviation from the original plan, corrected here to match what actually
+shipped.</p>
 <hr />
 <h2 id="10-what-not-to-build-yet">10. What NOT to Build Yet</h2>
 <p>These are documented in the core docs as <strong>future phases</strong>, don't design or
