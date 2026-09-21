@@ -1,0 +1,7 @@
+{% extends "emails/base_email.html" %}
+{% block subject %}Your account has been suspended{% endblock %}
+{% block content %}
+<p>Hi {{ recipient_name }},</p>
+<p>Your account on {{ site_name }} has been suspended by an administrator. You won't be able to sign in or use the platform while your account remains suspended.</p>
+<p>If you believe this was a mistake, contact us at <a href="mailto:brandnova.dev@gmail.com">brandnova.dev@gmail.com</a>.</p>
+{% endblock %}

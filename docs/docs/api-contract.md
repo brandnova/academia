@@ -805,6 +805,11 @@ email).
 }
 ```
 
+Rejecting sends the requesting user a `HUB_ACTIVATION_REJECTED` notification
+(email and in-app). The `reason` field is used in the email body if provided,
+but is not currently persisted anywhere, it does not appear in
+`GET /hubs/activation-requests/` or anywhere else after the email sends.
+
 ---
 
 ## Departments
@@ -1138,6 +1143,7 @@ question's title regenerates its slug.
 
 **Query Parameters:**
 - `hub` - Filter by hub ID
+- `search` - Search in title and body
 - `page` - Page number
 
 **Response (200 OK):** Same as list questions, but only OPEN status
@@ -1920,7 +1926,13 @@ question's own author, deduplicated if a user holds both roles),
 new hub activation request is submitted, excluding the requester if they
 happen to be an admin), `NEW_REPORT` (in-app only, sent to every active
 admin when a new report is submitted, excluding the reporter if they
-happen to be an admin).
+happen to be an admin), `USER_SUSPENDED` (email and in-app, fires only on
+the transition from active to suspended, not on a repeated suspend call
+or on reactivation), `HUB_ACTIVATION_REJECTED` (email and in-app, sent to
+the original requester when their activation request is rejected),
+`REPORT_REVIEWED` (in-app only, sent to the original reporter when their
+report is resolved or rejected, excluding the reporter if they happen to
+be the reviewing admin).
 
 ---
 
@@ -2088,6 +2100,9 @@ rejected.
 }
 ```
 
+Resolving sends the original reporter a `REPORT_REVIEWED` notification,
+in-app only, excluding the reporter if they are also the resolving admin.
+
 `action: "DELETE_CONTENT"` is the only value with special behavior, it deletes the
 underlying reported object. Any other value, or omitting `action` entirely, resolves
 the report without taking any action on the content itself, useful when a report is
@@ -2113,6 +2128,9 @@ valid to acknowledge but doesn't warrant removal.
   "error": "This report has already been reviewed"
 }
 ```
+
+Rejecting sends the original reporter a `REPORT_REVIEWED` notification,
+in-app only, excluding the reporter if they are also the rejecting admin.
 
 ---
 

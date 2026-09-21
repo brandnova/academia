@@ -269,6 +269,10 @@ School Data Curation sourcing line.
   detail page's "back to school" link had no id to link with directly and
   was routing through the /hubs/{id} redirect as a workaround. Purely
   additive, no other field changed.
+- GET /questions/unanswered/ gained a `search` query param (title/body,
+  same icontains pattern already used on GET /questions/), closing the
+  last "frontend-filters-loaded-page-only" gap flagged during the frontend
+  audit-fix pass. No response shape change.
 
 ## Key Decisions Made
 - API namespaced under /api/v1/ from the start
@@ -491,6 +495,26 @@ School Data Curation sourcing line.
 - Preview/production database was wiped and freshly imported directly,
   rather than migrated forward from seed data, since seed_demo_data output
   was never intended to reach a real deployment
+- Email/notification audit pass: confirmed the existing pipeline (NEW_ANSWER,
+  BEST_ANSWER, HUB_ACTIVATED) was already correct, the "missing email" report
+  that prompted this pass turned out to be expected self-notification
+  suppression, not a bug, same-account ask-and-answer correctly sends nothing
+- Three new notification types added: USER_SUSPENDED (email and in-app, only
+  on the genuine active-to-suspended transition, checked via a before/after
+  comparison rather than trusting the request payload alone), 
+  HUB_ACTIVATION_REJECTED (email and in-app, mirrors HUB_ACTIVATED's channel
+  choice), REPORT_REVIEWED (in-app only, matches the existing follow-
+  notification precedent for informational close-the-loop updates)
+- Found and fixed during this pass: RejectActivationRequestView never read
+  request.data at all, silently discarding the documented reason field.
+  Now reads it for the rejection email's context, still not persisted
+  anywhere (HubActivationRequest has no column for it), that remains a
+  separate, smaller backlog item
+- Found during this pass: apps/hubs/views.py had HubModeratorListCreateView,
+  HubModeratorDetailView, and HubRepresentativeListCreateView each defined
+  twice consecutively and identically, treated as a paste artifact and
+  deduplicated, not a real functional bug since Python's later definition
+  silently wins either way
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env

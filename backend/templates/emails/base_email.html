@@ -3,24 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
 <title>{% block subject %}{{ site_name }}{% endblock %}</title>
 <style>
-  body { margin:0; padding:0; background-color:#f5f5f5; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:#1a1a1a; }
-  .wrapper { width:100%; background-color:#f5f5f5; padding:32px 0; }
-  .container { max-width:480px; margin:0 auto; background-color:#ffffff; border-radius:8px; overflow:hidden; border:1px solid #e5e5e5; }
-  .header { padding:24px 32px; border-bottom:1px solid #e5e5e5; }
-  .header a { font-size:18px; font-weight:600; color:#1a1a1a; text-decoration:none; }
-  .content { padding:32px; font-size:15px; line-height:1.6; color:#333333; }
+  body { margin:0; padding:0; background-color:#FBFAF8; font-family: "Plus Jakarta Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:#16140F; }
+  .wrapper { width:100%; background-color:#FBFAF8; padding:40px 16px; }
+  .container { max-width:480px; margin:0 auto; background-color:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #E5E3DF; }
+  .header { padding:24px 32px; border-bottom:1px solid #E5E3DF; }
+  .header table { border-collapse:collapse; }
+  .logo-mark { width:28px; height:28px; border-radius:8px; background-color:#3454D1; text-align:center; vertical-align:middle; }
+  .logo-mark span { display:block; color:#ffffff; font-size:14px; font-weight:800; line-height:28px; font-family: "Plus Jakarta Sans", -apple-system, sans-serif; }
+  .wordmark { padding-left:10px; font-size:16px; font-weight:700; color:#16140F; letter-spacing:0.2px; vertical-align:middle; }
+  .content { padding:32px; font-size:15px; line-height:1.6; color:#3A382F; }
   .content p { margin:0 0 16px; }
-  .button { display:inline-block; padding:12px 24px; background-color:#2563eb; color:#ffffff !important; text-decoration:none; border-radius:6px; font-weight:600; font-size:14px; }
-  .footer { padding:24px 32px; font-size:12px; color:#999999; border-top:1px solid #e5e5e5; }
+  .content p:last-child { margin-bottom:0; }
+  .quote { margin:0 0 20px; padding:2px 0 2px 16px; border-left:3px solid #3454D1; color:#16140F; font-size:15px; font-style:normal; }
+  .quote strong { color:#16140F; }
+  .button { display:inline-block; padding:12px 24px; background-color:#3454D1; color:#ffffff !important; text-decoration:none; border-radius:8px; font-weight:600; font-size:14px; }
+  .footer { padding:20px 32px; font-size:12px; line-height:1.5; color:#8A8778; border-top:1px solid #E5E3DF; }
+  .footer p { margin:0; }
+  a { color:#3454D1; }
 </style>
 </head>
 <body>
 <div class="wrapper">
   <div class="container">
     <div class="header">
-      <a href="{{ frontend_url }}">{{ site_name }}</a>
+      <table role="presentation" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="logo-mark"><span>A</span></td>
+          <td class="wordmark">
+            <a href="{{ frontend_url }}" style="color:#16140F; text-decoration:none;">{{ site_name }}</a>
+          </td>
+        </tr>
+      </table>
     </div>
     <div class="content">
       {% block content %}{% endblock %}

@@ -11,6 +11,8 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 from apps.core.permissions import IsPlatformAdmin
 from apps.core.utils import validate_uuid
+from apps.notifications.models import Notification
+from apps.notifications.services import notify
 
 from .models import User
 from .pagination import UserPagination
@@ -174,9 +176,22 @@ class AdminUserDetailView(APIView):
         if user.id == request.user.id and "is_active" in request.data and not request.data["is_active"]:
             raise ValidationError({"error": "You cannot suspend your own account"})
 
+        was_active = user.is_active
+
         write_serializer = AdminUserUpdateSerializer(user, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         user = write_serializer.save()
+
+        if was_active and not user.is_active:
+            notify(
+                user=user,
+                notification_type=Notification.Type.USER_SUSPENDED,
+                message="Your account has been suspended",
+                email_subject="Your account has been suspended",
+                email_template="account_suspended",
+                email_context={"recipient_name": user.full_name},
+            )
+
         return Response(AdminUserSerializer(user).data)
 
 
