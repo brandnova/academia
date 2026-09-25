@@ -43,3 +43,5 @@ This will ensure that all docs updates are synced from the main branch and not t
 
 
 TODO=============
+- Check notifications dropdown. Make sure it is only showing a set list of recent messages and that the "View All" button is fixed and isn't affected by the horizontal scroll of the dropdown.
+- In user profile page, swap "Recent Activities" and "Your Posts" sections

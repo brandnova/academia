@@ -53,7 +53,19 @@ class GoogleLoginView(APIView):
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
-        user, _ = User.objects.get_or_create(
+        # The v3 userinfo endpoint returns email_verified as a real JSON
+        # boolean. An unverified email means Google itself isn't vouching
+        # that this account controls that address, trusting it implicitly
+        # would let someone sign in as an email they don't actually own.
+        # Reuses the existing generic message rather than a new one, this
+        # tightens behavior without adding new documented response text.
+        if not google_data.get("email_verified", False):
+            return Response(
+                {"error": "Invalid Google token"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        user, created = User.objects.get_or_create(
             email=email,
             defaults={
                 "full_name": google_data.get("name", email.split("@")[0]),
@@ -61,15 +73,31 @@ class GoogleLoginView(APIView):
             },
         )
 
+        if created:
+            # get_or_create() calls the base manager's plain create(), never
+            # UserManager._create_user(), so password was left at Django's
+            # blank default rather than genuinely unusable. Harmless today
+            # with no password-auth path at all, but worth hardening
+            # explicitly before email/password auth ships.
+            user.set_unusable_password()
+            user.save(update_fields=["password"])
+
+        if not user.is_active:
+            return Response(
+                {"error": "Your account has been suspended"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
         updated_fields = []
-        if google_data.get("picture") and user.avatar != google_data.get("picture"):
-            user.avatar = google_data.get("picture")
-            updated_fields.append("avatar")
-        if google_data.get("name") and user.full_name != google_data.get("name"):
-            user.full_name = google_data.get("name")
-            updated_fields.append("full_name")
-        if updated_fields:
-            user.save(update_fields=updated_fields + ["updated_at"])
+        if not created:
+            if google_data.get("picture") and user.avatar != google_data.get("picture"):
+                user.avatar = google_data.get("picture")
+                updated_fields.append("avatar")
+            if google_data.get("name") and user.full_name != google_data.get("name"):
+                user.full_name = google_data.get("name")
+                updated_fields.append("full_name")
+            if updated_fields:
+                user.save(update_fields=updated_fields + ["updated_at"])
 
         refresh = RefreshToken.for_user(user)
 
@@ -112,18 +140,9 @@ class MeView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        from apps.answers.models import Answer
-        from apps.comments.models import Comment
-        from apps.questions.models import Question
-
-        data = UserSerializer(request.user).data
-        data["stats"] = {
-            "question_count": Question.objects.filter(author_id=request.user.id).count(),
-            "answer_count": Answer.objects.filter(author_id=request.user.id).count(),
-            "best_answer_count": Answer.objects.filter(author_id=request.user.id, is_best=True).count(),
-            "comment_count": Comment.objects.filter(author_id=request.user.id).count(),
-        }
-        return Response(data)
+        # stats is now a SerializerMethodField on UserSerializer itself,
+        # no longer bolted onto the response dict here manually.
+        return Response(UserSerializer(request.user).data)
 
     def patch(self, request):
         user = request.user
@@ -214,4 +233,3 @@ class UserSearchView(APIView):
         ).order_by("full_name")[:10]
 
         return Response({"results": UserSearchSerializer(users, many=True).data})
-

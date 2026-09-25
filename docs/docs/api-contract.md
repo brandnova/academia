@@ -135,9 +135,23 @@ Login and token refresh are both rate limited to 10 requests per minute per clie
 }
 ```
 
+**Response (403 Forbidden):**
+```json
+{
+  "error": "Your account has been suspended"
+}
+```
+
 Behavior notes: first login for an email creates the `User` record automatically
 (no separate signup step); subsequent logins reuse the same user and refresh
 `full_name`/`avatar` from Google if they've changed.
+A suspended account (`is_active: false`) is rejected at login with a 403 and
+a clear message, rather than issuing a token pair that only fails on the
+next authenticated request. Google-authenticated accounts also have
+set_unusable_password() called explicitly at creation, and a Google
+userinfo response with email_verified: false is rejected the same as an
+invalid token, closing two hardening gaps ahead of the planned email/
+password auth phase.
 
 ---
 
