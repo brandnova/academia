@@ -312,15 +312,15 @@ truthfulness or presence of content students post.
       targeting an answer or comment (VOTE, NEW_COMMENT, non-question
       reports) can deep-link somewhere real instead of rendering as
       non-clickable text.
-- [ ] UserSerializer's stats field, currently only attached ad hoc in MeView,
+- [x] UserSerializer's stats field, currently only attached ad hoc in MeView,
       should become a proper SerializerMethodField on the serializer itself,
       so it's included everywhere UserSerializer is used (this also closes a
       real doc/code mismatch, api-contract.md documents stats as present on
       the Google Login response, but it currently isn't)
-- [ ] Google-authenticated users should have set_unusable_password() called
+- [x] Google-authenticated users should have set_unusable_password() called
       explicitly at creation, currently left at Django's blank default,
       harmless today but worth hardening before email/password auth ships
-- [ ] GoogleLoginView should explicitly reject login for suspended
+- [x] GoogleLoginView should explicitly reject login for suspended
       (is_active=False) accounts with a clear error, rather than issuing a
       token pair that only fails on the next authenticated request
 - [x] PATCH /users/me/ should validate full_name isn't blank/whitespace-only
@@ -328,7 +328,7 @@ truthfulness or presence of content students post.
 - [x] GET /users/search/ should share the existing "search" throttle scope
       (60/min) rather than falling back to the general 100/min limit, it's a
       type-ahead endpoint and will be called more rapidly than that implies
-- [ ] Google login should verify email_verified from Google's userinfo
+- [x] Google login should verify email_verified from Google's userinfo
       response before creating/logging in a user, currently trusted
       implicitly
 - [ ] Cache invalidation gap: PATCH /schools/{id}/, POST department creation,

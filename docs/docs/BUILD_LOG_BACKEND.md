@@ -528,6 +528,21 @@ School Data Curation sourcing line.
   same deferred-import convention _sync_tags already uses to avoid a
   circular import (apps.tags.models imports apps.questions.models directly
   at module level)
+- Accounts app hardening batch: stats promoted to a SerializerMethodField
+  on UserSerializer (closes a real doc/code mismatch on the Google Login
+  response, plus an incidental second one on PATCH /users/me/ that hadn't
+  been noticed before), set_unusable_password() now called explicitly for
+  Google-created users, suspended accounts rejected at login with a 403
+  instead of a token pair that fails on the next request, and email_verified
+  checked before creating or logging in a user
+- GoogleLoginView keeps get_or_create() for its atomicity guarantee rather
+  than splitting into a separate lookup-then-create, the unusable-password
+  step is applied afterward conditioned on the created flag instead, to
+  avoid reintroducing a race on simultaneous first-time logins for the same
+  new email
+- email_verified failure reuses the existing "Invalid Google token" message
+  rather than a new one, tightens behavior without expanding documented
+  error surface
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
