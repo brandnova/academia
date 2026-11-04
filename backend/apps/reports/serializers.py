@@ -29,8 +29,15 @@ class ReportCreateResponseSerializer(serializers.ModelSerializer):
 class ReportSerializer(ReportCreateResponseSerializer):
     reporter = ReporterSerializer(read_only=True)
     escalated_by = ReporterSerializer(read_only=True)
+    content_exists = serializers.SerializerMethodField()
 
     class Meta(ReportCreateResponseSerializer.Meta):
         fields = ReportCreateResponseSerializer.Meta.fields + [
-            "reporter", "is_escalated", "escalated_by",
+            "reporter", "is_escalated", "escalated_by", "content_exists",
         ]
+
+    def get_content_exists(self, obj):
+        # False when the reported content was deleted by some path that
+        # doesn't auto-resolve its reports (e.g. an author deleting their
+        # own question). Lets an admin spot and clear these manually.
+        return obj.content_object is not None

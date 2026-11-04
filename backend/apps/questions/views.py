@@ -162,13 +162,19 @@ class UnansweredQuestionsView(generics.ListAPIView):
         )
 
         if not user.is_admin:
-            from apps.hubs.models import ModeratorAssignment
-            moderated_hub_ids = list(
+            from apps.hubs.models import ModeratorAssignment, SchoolRepresentativeAssignment
+            moderated_hub_ids = set(
                 ModeratorAssignment.objects.filter(user=user, is_active=True).values_list("hub_id", flat=True)
             )
-            if not moderated_hub_ids:
+            represented_hub_ids = set(
+                SchoolRepresentativeAssignment.objects.filter(
+                    user=user, is_active=True
+                ).values_list("hub_id", flat=True)
+            )
+            allowed_hub_ids = moderated_hub_ids | represented_hub_ids
+            if not allowed_hub_ids:
                 raise PermissionDenied("You do not have permission to view unanswered questions")
-            queryset = queryset.filter(hub_id__in=moderated_hub_ids)
+            queryset = queryset.filter(hub_id__in=allowed_hub_ids)
 
         hub = self.request.query_params.get("hub")
         if hub:
@@ -227,20 +233,13 @@ class QuestionLockView(APIView):
             raise NotFound("Question not found")
 
     def check_lock_permission(self, user, question):
-        if user.is_admin:
-            return True
-
-        from apps.hubs.models import ModeratorAssignment, SchoolRepresentativeAssignment
-        
-        # Check moderator
-        if ModeratorAssignment.objects.filter(hub=question.hub, user=user, is_active=True).exists():
-            return True
-
-        # Check school representative
-        if SchoolRepresentativeAssignment.objects.filter(hub=question.hub, user=user, is_active=True).exists():
-            return True
-
-        return False
+        # Third occurrence of this exact check (Schools and Hubs audits
+        # flagged the same inline pattern already), now delegates to the
+        # shared helper written for the Report escalation feature instead
+        # of a fourth copy. user_is_moderator_or_representative_for_hub
+        # already covers the is_admin case internally too.
+        from apps.hubs.permissions import user_is_moderator_or_representative_for_hub
+        return user_is_moderator_or_representative_for_hub(user, question.hub_id)
 
     def post(self, request, question_id):
         question = self.get_question(question_id)

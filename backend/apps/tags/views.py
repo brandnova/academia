@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db import transaction
 from django.db.models import Count, Q
 from rest_framework import status
 from rest_framework.exceptions import NotFound
@@ -7,7 +8,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from apps.core.audit import log_admin_action
 from apps.core.cache import get_cached, invalidate_prefix, make_query_cache_key, set_cached
+from apps.core.models import AdminActionLog
 from apps.core.permissions import IsPlatformAdmin
 from apps.core.utils import validate_uuid
 from apps.questions.models import Question
@@ -17,6 +20,7 @@ from apps.questions.serializers import QuestionListSerializer
 from .models import QuestionTag, Tag
 from .serializers import TagSerializer
 from .utils import MAX_TAG_NAME_LENGTH, is_valid_tag_name_length
+
 
 class TagListView(APIView):
     permission_classes = [AllowAny]
@@ -119,7 +123,22 @@ class TagDetailView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        tag.delete()
+        # Captured before delete(): Django sets the instance's pk to None
+        # once it's deleted, so tag.id is unusable afterwards.
+        deleted_tag_id = tag.id
+        deleted_tag_name = tag.name
+
+        with transaction.atomic():
+            tag.delete()
+            log_admin_action(
+                actor=request.user,
+                action=AdminActionLog.Action.TAG_DELETED,
+                target_type="tag",
+                target_id=deleted_tag_id,
+                target_label=deleted_tag_name,
+                metadata={"force": force, "question_count": question_count},
+            )
+
         invalidate_prefix("tag-list")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -172,7 +191,7 @@ class TagMergeView(APIView):
                     {"error": "Cannot merge a tag into itself."},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            return self._merge(source_tag, target_tag)
+            return self._merge(source_tag, target_tag, request.user)
 
         normalized_name = str(target_name).strip().lower()
         if not normalized_name:
@@ -188,32 +207,62 @@ class TagMergeView(APIView):
 
         existing_target = Tag.objects.filter(name=normalized_name).exclude(id=source_tag.id).first()
         if existing_target:
-            return self._merge(source_tag, existing_target)
+            return self._merge(source_tag, existing_target, request.user)
 
-        source_tag.name = normalized_name
-        source_tag.save(update_fields=["name", "updated_at"])
+        old_name = source_tag.name
+        with transaction.atomic():
+            source_tag.name = normalized_name
+            source_tag.save(update_fields=["name", "updated_at"])
+            log_admin_action(
+                actor=request.user,
+                action=AdminActionLog.Action.TAG_RENAMED,
+                target_type="tag",
+                target_id=source_tag.id,
+                target_label=old_name,
+                metadata={"old_name": old_name, "new_name": normalized_name},
+            )
+
         invalidate_prefix("tag-list")
         return Response({
             "message": "Tag renamed successfully",
             "tag": TagSerializer(source_tag).data,
         })
 
-    def _merge(self, source_tag, target_tag):
-        source_question_tags = QuestionTag.objects.filter(tag=source_tag)
-        existing_target_question_ids = set(
-            QuestionTag.objects.filter(tag=target_tag).values_list("question_id", flat=True)
-        )
+    def _merge(self, source_tag, target_tag, actor):
+        # Captured before delete(), same pk-becomes-None reason as above.
+        source_id = source_tag.id
+        source_name = source_tag.name
 
-        reassigned_count = 0
-        for question_tag in source_question_tags:
-            if question_tag.question_id in existing_target_question_ids:
-                question_tag.delete()
-            else:
-                question_tag.tag = target_tag
-                question_tag.save(update_fields=["tag"])
-                reassigned_count += 1
+        with transaction.atomic():
+            source_question_tags = QuestionTag.objects.filter(tag=source_tag)
+            existing_target_question_ids = set(
+                QuestionTag.objects.filter(tag=target_tag).values_list("question_id", flat=True)
+            )
 
-        source_tag.delete()
+            reassigned_count = 0
+            for question_tag in source_question_tags:
+                if question_tag.question_id in existing_target_question_ids:
+                    question_tag.delete()
+                else:
+                    question_tag.tag = target_tag
+                    question_tag.save(update_fields=["tag"])
+                    reassigned_count += 1
+
+            source_tag.delete()
+
+            log_admin_action(
+                actor=actor,
+                action=AdminActionLog.Action.TAG_MERGED,
+                target_type="tag",
+                target_id=source_id,
+                target_label=source_name,
+                metadata={
+                    "merged_into_id": str(target_tag.id),
+                    "merged_into_name": target_tag.name,
+                    "questions_reassigned": reassigned_count,
+                },
+            )
+
         invalidate_prefix("tag-list")
 
         return Response({

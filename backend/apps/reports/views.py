@@ -1,5 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.db import transaction
+from django.db.models import Q
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.exceptions import NotFound
@@ -11,6 +13,8 @@ from rest_framework.views import APIView
 from apps.accounts.models import User
 from apps.answers.models import Answer
 from apps.comments.models import Comment
+from apps.core.audit import log_admin_action
+from apps.core.models import AdminActionLog
 from apps.core.permissions import IsPlatformAdmin
 from apps.core.throttling import MethodScopedThrottle
 from apps.core.utils import validate_uuid
@@ -43,6 +47,63 @@ def _get_hub_for_content(content_type_str, content_object):
     return None
 
 
+def _cascade_targets(content_type_str, content_object):
+    """Every (model, pk) that deleting content_object will remove, itself
+    included: a Question takes its Answers and their Comments with it, an
+    Answer takes its Comments. Must run BEFORE the delete, afterwards the
+    cascaded rows are gone and their ids can't be looked up. Queried by
+    field name rather than reverse accessors, so it doesn't depend on
+    related_name choices in other apps."""
+    targets = [(type(content_object), content_object.pk)]
+    if content_type_str == "question":
+        answer_ids = list(
+            Answer.objects.filter(question=content_object).values_list("id", flat=True)
+        )
+        comment_ids = list(
+            Comment.objects.filter(answer_id__in=answer_ids).values_list("id", flat=True)
+        )
+        targets += [(Answer, pk) for pk in answer_ids]
+        targets += [(Comment, pk) for pk in comment_ids]
+    elif content_type_str == "answer":
+        comment_ids = list(
+            Comment.objects.filter(answer=content_object).values_list("id", flat=True)
+        )
+        targets += [(Comment, pk) for pk in comment_ids]
+    return targets
+
+
+def _auto_resolve_orphaned_reports(targets, exclude_report_id, resolver):
+    """Resolves every other PENDING report pointing at content that was just
+    deleted (the content itself, or anything cascade-deleted with it).
+    Returns the affected reports so the caller can notify their reporters.
+    Uses a queryset update(), not per-instance save(), so the stale
+    GenericForeignKey caches that bit ResolveReportView before can't
+    interfere."""
+    by_model = {}
+    for model_class, pk in targets:
+        by_model.setdefault(model_class, []).append(pk)
+
+    query = Q()
+    for model_class, ids in by_model.items():
+        content_type = ContentType.objects.get_for_model(model_class)
+        query |= Q(content_type=content_type, object_id__in=ids)
+
+    orphaned = list(
+        Report.objects.filter(query, status=Report.Status.PENDING)
+        .exclude(id=exclude_report_id)
+        .select_related("reporter")
+    )
+    if orphaned:
+        now = timezone.now()
+        Report.objects.filter(id__in=[r.id for r in orphaned]).update(
+            status=Report.Status.RESOLVED,
+            resolved_by=resolver,
+            resolved_at=now,
+            updated_at=now,
+        )
+    return orphaned
+
+
 class ReportListCreateView(APIView):
     pagination_class = ReportPagination
     throttle_classes = [AnonRateThrottle, UserRateThrottle, MethodScopedThrottle]
@@ -55,7 +116,10 @@ class ReportListCreateView(APIView):
         return [IsAuthenticated(), IsPlatformAdmin()]
 
     def get(self, request):
-        queryset = Report.objects.select_related("reporter", "content_type", "escalated_by")
+        queryset = (
+            Report.objects.select_related("reporter", "content_type", "escalated_by")
+            .prefetch_related("content_object")
+        )
         status_param = request.query_params.get("status")
         if status_param:
             queryset = queryset.filter(status=status_param.upper())
@@ -63,6 +127,16 @@ class ReportListCreateView(APIView):
         is_escalated_param = request.query_params.get("is_escalated")
         if is_escalated_param is not None:
             queryset = queryset.filter(is_escalated=is_escalated_param.lower() == "true")
+
+        content_type_param = request.query_params.get("content_type")
+        if content_type_param:
+            model_class = CONTENT_TYPE_MODEL_MAP.get(content_type_param.strip().lower())
+            if model_class is None:
+                return Response(
+                    {"content_type": ["content_type must be one of: question, answer, comment."]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            queryset = queryset.filter(content_type=ContentType.objects.get_for_model(model_class))
 
         paginator = self.pagination_class()
         page = paginator.paginate_queryset(queryset, request)
@@ -137,7 +211,7 @@ class ResolveReportView(APIView):
     def post(self, request, report_id):
         parsed_id = validate_uuid(report_id)
         try:
-            report = Report.objects.get(id=parsed_id)
+            report = Report.objects.select_related("content_type", "reporter").get(id=parsed_id)
         except Report.DoesNotExist:
             raise NotFound("Report not found")
 
@@ -149,16 +223,44 @@ class ResolveReportView(APIView):
 
         action = request.data.get("action", "NO_ACTION")
 
-        if action == "DELETE_CONTENT":
-            content_object = report.content_object
-            if content_object is not None:
-                content_object.delete()
-                report.refresh_from_db()
+        # Captured up front: after the delete and refresh_from_db() below,
+        # the cached content_type relation and the deleted instance's pk
+        # can't be relied on.
+        content_type_str = report.content_type.model
+        content_id = report.object_id
+        auto_resolved = []
 
-        report.status = Report.Status.RESOLVED
-        report.resolved_by = request.user
-        report.resolved_at = timezone.now()
-        report.save(update_fields=["status", "resolved_by", "resolved_at", "updated_at"])
+        with transaction.atomic():
+            if action == "DELETE_CONTENT":
+                content_object = report.content_object
+                if content_object is not None:
+                    # Collected BEFORE the delete, afterwards the cascaded
+                    # answers and comments (and their ids) are gone.
+                    targets = _cascade_targets(content_type_str, content_object)
+                    content_object.delete()
+                    report.refresh_from_db()
+                    auto_resolved = _auto_resolve_orphaned_reports(
+                        targets, report.id, request.user
+                    )
+
+            report.status = Report.Status.RESOLVED
+            report.resolved_by = request.user
+            report.resolved_at = timezone.now()
+            report.save(update_fields=["status", "resolved_by", "resolved_at", "updated_at"])
+
+            log_admin_action(
+                actor=request.user,
+                action=AdminActionLog.Action.REPORT_RESOLVED,
+                target_type="report",
+                target_id=report.id,
+                target_label=f"{report.type} report on {content_type_str}",
+                metadata={
+                    "action_taken": action,
+                    "content_type": content_type_str,
+                    "content_id": str(content_id),
+                    "auto_resolved_count": len(auto_resolved),
+                },
+            )
 
         if report.reporter_id != request.user.id:
             notify(
@@ -168,10 +270,20 @@ class ResolveReportView(APIView):
                 content_object=report,
             )
 
+        for orphan in auto_resolved:
+            if orphan.reporter_id != request.user.id:
+                notify(
+                    user=orphan.reporter,
+                    notification_type=Notification.Type.REPORT_REVIEWED,
+                    message=f"Your {orphan.type.lower()} report was resolved",
+                    content_object=orphan,
+                )
+
         return Response({
             "message": "Report resolved",
             "status": "RESOLVED",
             "action_taken": action,
+            "auto_resolved_count": len(auto_resolved),
             "resolved_at": report.resolved_at,
         })
 
@@ -182,7 +294,7 @@ class RejectReportView(APIView):
     def post(self, request, report_id):
         parsed_id = validate_uuid(report_id)
         try:
-            report = Report.objects.get(id=parsed_id)
+            report = Report.objects.select_related("content_type", "reporter").get(id=parsed_id)
         except Report.DoesNotExist:
             raise NotFound("Report not found")
 
@@ -192,10 +304,23 @@ class RejectReportView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        report.status = Report.Status.REJECTED
-        report.resolved_by = request.user
-        report.resolved_at = timezone.now()
-        report.save(update_fields=["status", "resolved_by", "resolved_at", "updated_at"])
+        with transaction.atomic():
+            report.status = Report.Status.REJECTED
+            report.resolved_by = request.user
+            report.resolved_at = timezone.now()
+            report.save(update_fields=["status", "resolved_by", "resolved_at", "updated_at"])
+
+            log_admin_action(
+                actor=request.user,
+                action=AdminActionLog.Action.REPORT_REJECTED,
+                target_type="report",
+                target_id=report.id,
+                target_label=f"{report.type} report on {report.content_type.model}",
+                metadata={
+                    "content_type": report.content_type.model,
+                    "content_id": str(report.object_id),
+                },
+            )
 
         if report.reporter_id != request.user.id:
             notify(

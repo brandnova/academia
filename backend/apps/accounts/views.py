@@ -1,4 +1,5 @@
 import requests
+from django.db import transaction
 from django.db.models import Q
 from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
@@ -9,6 +10,8 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 
+from apps.core.audit import log_admin_action
+from apps.core.models import AdminActionLog
 from apps.core.permissions import IsPlatformAdmin
 from apps.core.utils import validate_uuid
 from apps.notifications.models import Notification
@@ -199,7 +202,24 @@ class AdminUserDetailView(APIView):
 
         write_serializer = AdminUserUpdateSerializer(user, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
-        user = write_serializer.save()
+
+        with transaction.atomic():
+            user = write_serializer.save()
+
+            # Logged only on a genuine transition, not on a repeated
+            # suspend/reactivate call that changes nothing.
+            if was_active != user.is_active:
+                log_admin_action(
+                    actor=request.user,
+                    action=(
+                        AdminActionLog.Action.USER_REACTIVATED
+                        if user.is_active
+                        else AdminActionLog.Action.USER_SUSPENDED
+                    ),
+                    target_type="user",
+                    target_id=user.id,
+                    target_label=user.email,
+                )
 
         if was_active and not user.is_active:
             notify(

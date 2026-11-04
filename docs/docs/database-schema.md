@@ -296,6 +296,30 @@ hub-specific). Deleting a `StaticPage` is a genuine hard delete, unlike
 `School`/`Department`, since nothing else has a foreign key into it and
 draft/publish already covers the "hide without losing" case.
 
+### AdminActionLog
+Append-only record of privileged admin actions that otherwise leave no
+trace. `Report` and `HubActivationRequest` already store `resolved_by` /
+`reviewed_by`, this covers what had no record at all: who suspended or
+reactivated a user, who merged, renamed, or deleted a tag (the source tag no
+longer exists afterward), and which action was taken when resolving a
+report. Written by the API inside the same transaction as the action it
+records, visible and read-only in Django admin, no API endpoint. Lives in
+`apps.core` since it spans reports, accounts, and tags.
+
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| id | UUID | Primary Key | Unique identifier |
+| actor | ForeignKey(User) | Nullable, SET_NULL | Admin who performed the action. Nullable so deleting an admin account never deletes the history |
+| action | Enum | Required | REPORT_RESOLVED/REPORT_REJECTED/USER_SUSPENDED/USER_REACTIVATED/TAG_MERGED/TAG_RENAMED/TAG_DELETED |
+| target_type | String | Required | `report`, `user`, or `tag` |
+| target_id | UUID | Required | Plain UUID, not a foreign key, so an entry survives its target being deleted |
+| target_label | String | Blank allowed | Human-readable snapshot taken at write time (tag name, user email, report summary) |
+| metadata | JSON | Default: empty object | Action-specific detail, e.g. `action_taken` and `auto_resolved_count` for a resolved report, `merged_into_name` and `questions_reassigned` for a merge |
+| created_at | DateTime | Auto now | When the action happened |
+
+Only genuine state changes are logged: a repeated suspend of an already
+suspended account, or a request blocked with a 400, writes nothing.
+
 ### APIClient (Future, Public API Phase)
 Represents a registered external consumer of the public API.
 
@@ -365,6 +389,8 @@ join this set once built, with no schema change required.
 - `Report`: (status, created_at DESC) - For reports dashboard
 - `Report`: (content_type_id, object_id) - For generic relation lookups
 - `Report`: (is_escalated, created_at DESC) - For escalated reports triage
+- `AdminActionLog`: (target_type, target_id) - For looking up the history of one object
+- `AdminActionLog`: (actor_id, created_at DESC) - For looking up everything one admin did
 
 ### Unique Constraints
 - `School`: name, short_name, slug, regulatory_code
@@ -380,6 +406,7 @@ join this set once built, with no schema change required.
 - Deleting a `School` → Delete associated `Hub`, `Department`, `HubActivationRequest`, `SchoolSourceRecord`
 - Deleting a `Hub` → Delete associated `Question`, `ModeratorAssignment`, `SchoolRepresentativeAssignment`
 - Deleting a `User` → Delete associated `Question`, `Answer`, `Comment`, `Notification`, `Report`
+- Deleting a `User` → `AdminActionLog.actor` is set to NULL, log entries are kept
 - Deleting a `Question` → Delete associated `Answer`, `QuestionTag`, `QuestionFollow`
 - Deleting an `Answer` → Delete associated `Comment`, `AnswerVote`
 - Deleting a `Tag` → Delete associated `QuestionTag` (only ever happens via explicit admin action, see api-contract.md's Delete Tag / Merge Tag)
