@@ -300,7 +300,7 @@ truthfulness or presence of content students post.
 - [ ] Private "my submitted reports" view for a user's own account, deliberately
       not part of the public/self profile page, reports are never shown on any
       profile to avoid making a reporter's activity identifiable to others
-- [ ] Admin action audit log (who resolved which report, who suspended which user)
+- [x] Admin action audit log (who resolved which report, who suspended which user)
 - [ ] Answer edit history, so a heavily-edited answer's original context isn't lost
       framed as quality signal, not a leaderboard or engagement mechanic, consistent
       with Knowledge Over Social Activity
@@ -331,13 +331,13 @@ truthfulness or presence of content students post.
 - [x] Google login should verify email_verified from Google's userinfo
       response before creating/logging in a user, currently trusted
       implicitly
-- [ ] Cache invalidation gap: PATCH /schools/{id}/, POST department creation,
+- [x] Cache invalidation gap: PATCH /schools/{id}/, POST department creation,
       and PATCH department updates all invalidate school-detail and/or
       school-list but never school-by-slug, so slug-based lookups can serve
       stale data (including a deactivated school still appearing active) for
       up to CACHE_TTL_MEDIUM after a write. apps.hubs already does this
       correctly for hub-by-slug, apps.schools needs the same fix
-- [ ] SchoolBySlugView has no admin bypass at all (unlike the by-id route),
+- [x] SchoolBySlugView has no admin bypass at all (unlike the by-id route),
       so a deactivated school is a dead-end 404 via slug even for admins.
       Worth reconsidering now that reactivation is a real admin workflow and
       project-overview.md recommends slug as the primary school URL
@@ -369,13 +369,13 @@ truthfulness or presence of content students post.
       school's slug-based lookup can show stale has_hub for up to
       CACHE_TTL_MEDIUM after activation. Worth a shared invalidation helper
       used by both apps.schools and apps.hubs so this can't drift again
-- [ ] Unanswered questions queue (GET /questions/unanswered/) only checks
+- [x] Unanswered questions queue (GET /questions/unanswered/) only checks
       ModeratorAssignment, not SchoolRepresentativeAssignment, meaning a rep
       managing a hub with no moderator assigned yet cannot see their own
       hub's queue at all. Directly inconsistent with the reasoning already
       applied to NEW_QUESTION's fan-out (widened to include reps for exactly
       this zero-moderator-hub scenario), same fix belongs here
-- [ ] QuestionLockView.check_lock_permission() duplicates hub-role-check
+- [x] QuestionLockView.check_lock_permission() duplicates hub-role-check
       logic inline for a third time (Schools and Hubs audits flagged the
       same pattern already), worth one shared "is moderator or rep for this
       hub" helper in apps.hubs.permissions instead
@@ -409,7 +409,7 @@ truthfulness or presence of content students post.
       merge/delete actions, not just report resolution and user suspension
 - [x] Django admin's Tag list doesn't surface question_count (would need an
       admin method since it's computed, not a model field)
-- [ ] Resolving a report with DELETE_CONTENT can orphan other pending
+- [x] Resolving a report with DELETE_CONTENT can orphan other pending
       reports pointing at content that gets cascade-deleted along with it
       (e.g. a Question's report deletes it, cascading to an Answer that had
       its own separate pending report). Already handled defensively (won't
@@ -418,7 +418,7 @@ truthfulness or presence of content students post.
       resolved or rejected, matching the "close the loop" pattern already
       used elsewhere in the notification system, not currently required by
       any doc but a natural fit
-- [ ] GET /reports/ only supports a status filter, adding a content_type
+- [x] GET /reports/ only supports a status filter, adding a content_type
       filter (question/answer/comment) would let admins scope their review
       more precisely
 - [ ] generate_unique_slug() has a TOCTOU race: the uniqueness check and the

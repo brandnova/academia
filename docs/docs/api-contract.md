@@ -1177,9 +1177,11 @@ question's title regenerates its slug.
 }
 ```
 
-A platform admin sees unanswered questions across every hub. A user with an active
-`ModeratorAssignment` sees only questions belonging to hub(s) they are assigned to
-moderate. A user with neither is blocked with a 403.
+A platform admin sees unanswered questions across every hub. A user with an
+active `ModeratorAssignment` or `SchoolRepresentativeAssignment` for a hub
+sees unanswered questions belonging to that hub, this includes a
+freshly-activated hub with representatives assigned but no moderator yet.
+A user with none of these is blocked with a 403.
 
 ---
 
@@ -1739,6 +1741,8 @@ does not delete the questions themselves.
 
 **Invalidation Note:** Invalidates the `tag-list` cache prefix.
 
+This action is recorded in the admin action log (visible in Django admin).
+
 ---
 
 ### Merge Tag (Admin Only)
@@ -1840,6 +1844,8 @@ than counted as a reassignment.
 ```
 
 **Invalidation Note:** Invalidates the `tag-list` cache prefix.
+
+This action is recorded in the admin action log (visible in Django admin).
 
 ---
 
@@ -2072,6 +2078,8 @@ rejected.
 **Query Parameters:**
 - `status` - PENDING/RESOLVED/REJECTED
 - `is_escalated` - true/false
+- `content_type` - question/answer/comment. An unrecognized value returns a
+  400 with the same message as Create Report's `content_type` error
 - `page` - Page number
 
 **Response (200 OK):**
@@ -2092,11 +2100,18 @@ rejected.
       },
       "is_escalated": false,
       "escalated_by": null,
+      "content_exists": true,
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
 }
 ```
+
+`content_exists` is `false` when the reported content has since been deleted
+by a path that doesn't auto-resolve its reports (for example an author
+deleting their own question). Such a report stays PENDING until an admin
+rejects it or resolves it, resolving with `DELETE_CONTENT` is safe, it simply
+finds nothing to delete.
 
 ---
 
@@ -2116,6 +2131,7 @@ rejected.
   "message": "Report resolved",
   "status": "RESOLVED",
   "action_taken": "DELETE_CONTENT",
+  "auto_resolved_count": 3,
   "resolved_at": "2026-01-01T00:00:00Z"
 }
 ```
@@ -2129,6 +2145,14 @@ rejected.
 
 Resolving sends the original reporter a `REPORT_REVIEWED` notification,
 in-app only, excluding the reporter if they are also the resolving admin.
+
+When `action` is `DELETE_CONTENT`, every other PENDING report pointing at the
+deleted content, or at answers and comments removed along with it by cascade
+(deleting a question removes its answers and their comments), is resolved in
+the same request. Their reporters receive the same `REPORT_REVIEWED`
+notification, excluding the resolving admin. `auto_resolved_count` says how
+many were closed this way, `0` for any other action. The resolution is
+recorded in the admin action log.
 
 `action: "DELETE_CONTENT"` is the only value with special behavior, it deletes the
 underlying reported object. Any other value, or omitting `action` entirely, resolves
@@ -2158,6 +2182,8 @@ valid to acknowledge but doesn't warrant removal.
 
 Rejecting sends the original reporter a `REPORT_REVIEWED` notification,
 in-app only, excluding the reporter if they are also the rejecting admin.
+
+This action is recorded in the admin action log (visible in Django admin).
 
 ---
 
@@ -2189,6 +2215,7 @@ escalate it.
     "id": "uuid",
     "full_name": "Jane Moderator"
   },
+  "content_exists": true,
   "created_at": "2026-01-01T00:00:00Z"
 }
 ```
@@ -2538,6 +2565,8 @@ Removal is a soft-delete (`is_active: false`), not a hard row delete.
 This endpoint only accepts `is_active`. Promoting or demoting `is_admin` status is
 not available through this endpoint in the MVP. An admin cannot suspend their own
 account, to prevent accidental lockout.
+
+This action is recorded in the admin action log (visible in Django admin).
 
 ---
 

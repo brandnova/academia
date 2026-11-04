@@ -13,6 +13,7 @@ from apps.core.utils import validate_uuid
 from apps.notifications.models import Notification
 from apps.notifications.services import notify
 from apps.schools.models import School
+from apps.schools.cache import invalidate_school_cache
 
 from .models import Hub, HubActivationRequest, ModeratorAssignment, SchoolRepresentativeAssignment
 from .pagination import HubActivationRequestPagination
@@ -30,7 +31,7 @@ def _invalidate_hub_cache(hub):
     invalidate_key(make_cache_key("hub-detail", hub.id))
     invalidate_key(make_cache_key("hub-by-school", hub.school_id))
     invalidate_key(make_cache_key("hub-by-slug", hub.school.slug))
-    invalidate_key(make_cache_key("school-detail", hub.school_id))
+    invalidate_school_cache(hub.school)
 
 
 class HubDetailView(APIView):
@@ -166,7 +167,6 @@ class ApproveActivationRequestView(APIView):
         activation_request.save(update_fields=["status", "reviewed_by", "reviewed_at", "updated_at"])
 
         _invalidate_hub_cache(hub)
-        invalidate_prefix("school-list")
 
         notify(
             user=activation_request.user,

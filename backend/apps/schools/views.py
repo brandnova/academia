@@ -11,13 +11,13 @@ from rest_framework.views import APIView
 from apps.core.cache import (
     cache_get_response,
     get_cached,
-    invalidate_key,
     invalidate_prefix,
     make_cache_key,
     set_cached,
 )
 from apps.core.permissions import IsPlatformAdmin, user_is_platform_admin
 from apps.core.utils import validate_uuid
+from .cache import invalidate_school_cache
 from .models import Department, School
 from .pagination import SchoolPagination
 from .serializers import (
@@ -136,8 +136,7 @@ class SchoolDetailView(APIView):
         write_serializer = SchoolWriteSerializer(school, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         school = write_serializer.save()
-        invalidate_key(make_cache_key("school-detail", school.id))
-        invalidate_prefix("school-list")
+        invalidate_school_cache(school)
         return Response(SchoolDetailSerializer(school).data)
 
 
@@ -145,6 +144,16 @@ class SchoolBySlugView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, slug):
+        # Admin bypass, mirroring SchoolDetailView.get(): without this, a
+        # deactivated school was a dead-end 404 via slug even for the admin
+        # trying to reactivate it, only the raw UUID route worked.
+        if user_is_platform_admin(request.user):
+            try:
+                school = School.objects.get(slug=slug)
+            except School.DoesNotExist:
+                raise NotFound("School not found")
+            return Response(SchoolDetailSerializer(school).data)
+
         cache_key = make_cache_key("school-by-slug", slug)
         cached = get_cached(cache_key)
         if cached is not None:
@@ -201,7 +210,7 @@ class DepartmentListCreateView(APIView):
                 {"name": ["A department with this name already exists for this school."]},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        invalidate_key(make_cache_key("school-detail", school.id))
+        invalidate_school_cache(school)
         return Response(DepartmentSerializer(department).data, status=status.HTTP_201_CREATED)
 
 
@@ -226,5 +235,5 @@ class DepartmentDetailView(APIView):
         write_serializer = DepartmentUpdateSerializer(department, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         department = write_serializer.save()
-        invalidate_key(make_cache_key("school-detail", department.school_id))
+        invalidate_school_cache(department.school)
         return Response(DepartmentSerializer(department).data)

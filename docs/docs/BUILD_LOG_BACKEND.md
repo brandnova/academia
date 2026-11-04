@@ -543,6 +543,47 @@ School Data Curation sourcing line.
 - email_verified failure reuses the existing "Invalid Google token" message
   rather than a new one, tightens behavior without expanding documented
   error surface
+- Cache invalidation gap (combined with the school-by-slug finding from
+  the Schools audit): approving a hub activation request changes
+  School.has_hub but never invalidates school-by-slug:{slug}, so a
+  school's slug-based lookup can show stale has_hub for up to
+  CACHE_TTL_MEDIUM after activation. Worth a shared invalidation helper
+  used by both apps.schools and apps.hubs so this can't drift again
+- Reps included in NEW_QUESTION specifically because a freshly activated
+  hub can have zero moderators until a rep assigns some, without reps
+  included, a question could be posted into total silence, nobody notified
+  at all. This is a real gap being closed, not just a nice-to-have
+- AdminActionLog lives in apps.core, the first model that app has, since the
+  log spans reports, accounts, and tags. Requires makemigrations core with
+  the explicit app label. Chosen scope: only actions that left no trace
+  (user suspend/reactivate, tag merge/rename/delete, and the action taken
+  when resolving or rejecting a report). Report and HubActivationRequest
+  already record resolved_by/reviewed_by, so hub approvals and rejections
+  are not logged. Read-only in Django admin, no API endpoint yet. target_id
+  is a plain UUID and target_label a snapshot, so entries survive their
+  target's deletion
+- Audit writes happen inside the same transaction.atomic() block as the
+  action they record, so an action and its log entry succeed or roll back
+  together. Only genuine state changes log: repeated suspends and requests
+  blocked with a 400 write nothing. Tag merge's multi-write loop gained an
+  atomic wrapper as part of this, it previously could leave a half-finished
+  merge on failure
+- Model.delete() sets the instance's pk to None, so ids and names needed for
+  logging (tag id and name, report content id) are captured before the
+  delete, the same trap as the stale GenericForeignKey cache fixed earlier
+- Orphaned reports: auto-resolve covers only the DELETE_CONTENT cascade,
+  where the full set of deleted rows can be computed up front (a Question
+  takes its Answers and their Comments, an Answer takes its Comments). Other
+  orphan sources, mainly an author deleting their own content, are surfaced
+  with a content_exists flag on ReportSerializer rather than auto-resolved.
+  Auto-resolving them would need model signals (against this project's
+  convention of triggering side effects from the view layer) or a
+  GenericRelation, which would delete the reports themselves and touch three
+  other apps' models. That is a design decision for later, not a quiet fix
+- Auto-resolved reports use a queryset update() rather than per-instance
+  save(), sidestepping the stale GenericForeignKey cache problem, and
+  their reporters get the same in-app REPORT_REVIEWED notification as the
+  primary report's reporter, excluding the acting admin
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
