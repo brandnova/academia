@@ -2600,6 +2600,16 @@ Not paginated, low volume. Visibility is computed per requester:
 
 `created_by` is `null` if the creating user's account has since been deleted.
 
+**Caching Behavior:**
+- **Cache**: Responses for anonymous/plain users and for staff are cached
+  separately (two visibility tiers, never per user), using `CACHE_TTL_MEDIUM`
+  (300 seconds). The tier is part of every cache key, so a page visible only
+  to staff can never be served to a public request.
+- **Admin Bypass**: Admins always read live data, including drafts, and never
+  populate the shared cache.
+- **Invalidation**: Creating, updating, or deleting a page clears its cached
+  list and detail entries for both tiers immediately. A 404 is never cached.
+
 ---
 
 ### Get Page
@@ -2631,6 +2641,16 @@ Same visibility rules as List Pages, applied per-page. A page that exists but
 isn't visible to the requester returns the identical 404 as a page that
 genuinely doesn't exist, a `STAFF`-only or draft page's existence is never
 confirmable to a request that can't see it.
+
+**Caching Behavior:**
+- **Cache**: Responses for anonymous/plain users and for staff are cached
+  separately (two visibility tiers, never per user), using `CACHE_TTL_MEDIUM`
+  (300 seconds). The tier is part of every cache key, so a page visible only
+  to staff can never be served to a public request.
+- **Admin Bypass**: Admins always read live data, including drafts, and never
+  populate the shared cache.
+- **Invalidation**: Creating, updating, or deleting a page clears its cached
+  list and detail entries for both tiers immediately. A 404 is never cached.
 
 ---
 
@@ -2815,6 +2835,8 @@ anonymous requests.
 | Question creation | 30 requests per hour |
 | Answer creation | 50 requests per hour |
 | Comment creation | 50 requests per hour |
+| Edit or delete an answer or comment (one shared pool) | 60 requests per hour |
+| Mark best answer | 30 requests per hour |
 | Voting (vote and remove-vote combined) | 100 requests per hour |
 | Search | 60 requests per minute |
 | Reports | 10 requests per hour |
@@ -2824,6 +2846,13 @@ The scoped limits above (authentication, question/answer/comment creation, votin
 search, reports) apply in place of the general limit for that specific action, not
 in addition to it. Reading data (GET requests) is never subject to the tighter
 write-action limits, only the general 100 per minute baseline applies to reads.
+
+The edit/delete limit counts PATCH and DELETE on both answers and comments
+against a single per-user pool. Mark best answer is limited more tightly
+because each successful call can send an email and follower notifications.
+School, Department, and Static Page creation are intentionally left on the
+general 100 per minute baseline: all three are restricted to admins or
+school representatives, so they are not open to abuse by ordinary accounts.
 
 ---
 

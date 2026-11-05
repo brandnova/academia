@@ -584,6 +584,27 @@ School Data Curation sourcing line.
   save(), sidestepping the stale GenericForeignKey cache problem, and
   their reporters get the same in-app REPORT_REVIEWED notification as the
   primary report's reporter, excluding the acting admin
+- Throttle scopes were decided per endpoint, not blanket-applied. Answer and
+  comment edit/delete share one "content_edit" pool (60/hour), Mark Best
+  Answer has its own "mark_best" scope (30/hour) because each success can
+  send an email plus follower notifications. School, Department, and Static
+  Page creation deliberately stay on the general limit since only admins and
+  representatives can reach them. New scope names must exist in
+  DEFAULT_THROTTLE_RATES or the view raises ImproperlyConfigured (a 500)
+- Static Pages caching is keyed by visibility TIER (public/staff), never by
+  user, and the tier is part of every key, which is what keeps staff-only
+  pages from ever reaching a public request. Admins bypass the cache (they
+  see drafts). Only 200s are cached, so the 404-not-403 property holds.
+  Invalidation deletes exact keys instead of a prefix wipe so it also works
+  on the LocMemCache fallback. _visible_queryset(user) kept as a thin
+  wrapper over the new tier helpers
+- generate_unique_slug() only checks, it cannot reserve. save_with_unique_slug()
+  in apps.core.slugs wraps the INSERT in a savepoint and retries with a fresh
+  slug only when the failed slug now exists in the table, so a duplicate
+  name/short_name IntegrityError is re-raised untouched rather than retried
+  forever. Known remaining edge: simultaneous identical name/short_name
+  submissions still hit an IntegrityError, since that uniqueness is checked
+  in the serializer. Admin-only, left alone
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env

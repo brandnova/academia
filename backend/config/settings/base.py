@@ -161,6 +161,8 @@ REST_FRAMEWORK = {
         "question_create": "30/hour",
         "answer_create": "50/hour",
         "comment_create": "50/hour",
+        "content_edit": "60/hour",
+        "mark_best": "30/hour",
         "voting": "100/hour",
         "search": "60/minute",
         "reports": "10/hour",
