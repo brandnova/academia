@@ -1734,11 +1734,16 @@ this without duplicating an endpoint.
 
 **Query Parameters:**
 - `search` - Search by tag name
-- `popular` - Sort by question count (true/false)
+- `popular` - Sort by question count (true/false), ties broken by name
+- `page` - Page number (default: 1)
+- `page_size` - Items per page (default: 50, max: 100)
 
 **Response (200 OK):**
 ```json
 {
+  "count": 120,
+  "next": "https://api.academia.com/api/v1/tags/?page=2",
+  "previous": null,
   "results": [
     {
       "id": "uuid",
@@ -1754,13 +1759,17 @@ this without duplicating an endpoint.
 }
 ```
 
-This endpoint is not paginated, it returns every matching tag in one response.
 Tag names are normalized to lowercase everywhere, on creation, search, and every
-filter, so "GPA" and "gpa" are always treated as the same tag.
+filter, so "GPA" and "gpa" are always treated as the same tag. Results are
+ordered alphabetically, or by question count with `popular=true`, with the name
+as a tiebreaker so pages never overlap. Requesting a page past the end returns
+a 404. This endpoint was unpaginated before: the new envelope is a superset of
+the old `{"results": [...]}` shape, but a client that assumed it received every
+tag now only sees the first page.
 
 **Caching & Visibility Behavior:**
-- **Cache**: Public requests are cached using `tag-list:<query_params>` key for `CACHE_TTL_SHORT` (60 seconds).
-- **Invalidation**: Clears only when the cache TTL expires (since tags are created implicitly during question creation/update).
+- **Cache**: Public requests are cached using `tag-list:<query_params>` key for `CACHE_TTL_SHORT` (60 seconds), page and page_size included.
+- **Invalidation**: Cleared when a tag is merged, renamed, or deleted. New tags created implicitly through question tagging appear when the TTL expires.
 
 ---
 
@@ -1997,11 +2006,16 @@ ranking priorities above.
   "results": [
     {
       "id": "uuid",
-      "type": "NEW_ANSWER",
-      "message": "Jane Smith answered your question: 'How do I calculate my CGPA?'",
+      "type": "NEW_COMMENT",
+      "message": "Jane Smith commented on your answer",
       "is_read": false,
       "related_object_id": "uuid",
-      "related_object_type": "question",
+      "related_object_type": "answer",
+      "link_target": {
+        "question_id": "uuid",
+        "question_slug": "how-do-i-calculate-my-cgpa",
+        "answer_id": "uuid"
+      },
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -2030,6 +2044,15 @@ the original requester when their activation request is rejected),
 `REPORT_REVIEWED` (in-app only, sent to the original reporter when their
 report is resolved or rejected, excluding the reporter if they happen to
 be the reviewing admin).
+
+`link_target` says where to send the user: the question page, optionally
+anchored to an answer, e.g.
+`/questions/{question_id}/{question_slug}#answer-{answer_id}`. It is set when
+the related object is a question, answer, or comment. For a comment,
+`answer_id` is the comment's parent answer (comments render inside their
+answer). It is `null` when there is nothing to link to: hubs, activation
+requests, reports, account notices, or content that has since been deleted.
+`page_size` is supported (default 20, max 100).
 
 ---
 
@@ -2165,6 +2188,11 @@ rejected.
       "is_escalated": false,
       "escalated_by": null,
       "content_exists": true,
+      "link_target": {
+        "question_id": "uuid",
+        "question_slug": "how-do-i-calculate-my-cgpa",
+        "answer_id": "uuid"
+      },
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -2176,6 +2204,10 @@ by a path that doesn't auto-resolve its reports (for example an author
 deleting their own question). Such a report stays PENDING until an admin
 rejects it or resolves it, resolving with `DELETE_CONTENT` is safe, it simply
 finds nothing to delete.
+
+`link_target` has the same shape and meaning as on notifications: the
+question, plus the answer to anchor to when the reported content is an answer
+or a comment. It is `null` whenever `content_exists` is `false`.
 
 ---
 
@@ -2280,6 +2312,11 @@ escalate it.
     "full_name": "Jane Moderator"
   },
   "content_exists": true,
+    "link_target": {
+      "question_id": "uuid",
+      "question_slug": "how-do-i-calculate-my-cgpa",
+      "answer_id": "uuid"
+    },
   "created_at": "2026-01-01T00:00:00Z"
 }
 ```

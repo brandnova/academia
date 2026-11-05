@@ -309,7 +309,7 @@ truthfulness or presence of content students post.
       same instant, more than one may attempt to use the same refresh token
       before rotation completes, one could be rejected. Frontend-only
       concern (Next.js proxy layer), low risk at MVP traffic levels.
-- [ ] Standalone answer/comment permalink page, so notifications and reports
+- [x] Standalone answer/comment permalink page, so notifications and reports
       targeting an answer or comment (VOTE, NEW_COMMENT, non-question
       reports) can deep-link somewhere real instead of rendering as
       non-clickable text.
@@ -392,7 +392,7 @@ truthfulness or presence of content students post.
       Schools/Hubs/Tags which all use the same short-TTL public-read
       pattern. Deliberately deferred at build time as non-blocking, worth
       picking up now that it's a formally tracked item
-- [ ] Tag list (GET /tags/) is fully unpaginated by design, reasonable at
+- [x] Tag list (GET /tags/) is fully unpaginated by design, reasonable at
       current volume but a real scaling risk given tags are free-text and
       community-generated with no curation. Recommend adding standard
       pagination now while cheap. This IS a breaking response-shape change

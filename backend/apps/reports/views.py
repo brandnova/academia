@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.prefetch import GenericPrefetch
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.db import transaction
 from django.db.models import Q
@@ -116,9 +117,22 @@ class ReportListCreateView(APIView):
         return [IsAuthenticated(), IsPlatformAdmin()]
 
     def get(self, request):
+        # GenericPrefetch loads the reported objects (and, for answers and
+        # comments, their parent question) in a handful of queries for the
+        # whole page, instead of 2 to 3 per row for content_exists and
+        # link_target.
         queryset = (
             Report.objects.select_related("reporter", "content_type", "escalated_by")
-            .prefetch_related("content_object")
+            .prefetch_related(
+                GenericPrefetch(
+                    "content_object",
+                    [
+                        Question.objects.all(),
+                        Answer.objects.select_related("question"),
+                        Comment.objects.select_related("answer__question"),
+                    ],
+                )
+            )
         )
         status_param = request.query_params.get("status")
         if status_param:

@@ -20,12 +20,17 @@ from apps.questions.serializers import QuestionListSerializer
 from .models import QuestionTag, Tag
 from .serializers import TagSerializer
 from .utils import MAX_TAG_NAME_LENGTH, is_valid_tag_name_length
+from .pagination import TagPagination
 
 
 class TagListView(APIView):
     permission_classes = [AllowAny]
+    pagination_class = TagPagination
 
     def get(self, request):
+        # The cache key already includes the full query string, so page and
+        # page_size are part of it automatically. Write paths clear the
+        # whole tag-list prefix.
         cache_key = make_query_cache_key("tag-list", request)
         cached = get_cached(cache_key)
         if cached is not None:
@@ -37,13 +42,17 @@ class TagListView(APIView):
         if search:
             queryset = queryset.filter(name__icontains=search.strip().lower())
 
+        # Both orderings end in name, which is unique, so page boundaries
+        # are stable.
         popular = request.query_params.get("popular")
         if popular and popular.lower() == "true":
             queryset = queryset.order_by("-qcount", "name")
         else:
             queryset = queryset.order_by("name")
 
-        data = {"results": TagSerializer(queryset, many=True).data}
+        paginator = self.pagination_class()
+        page = paginator.paginate_queryset(queryset, request)
+        data = paginator.get_paginated_response(TagSerializer(page, many=True).data).data
         set_cached(cache_key, data, settings.CACHE_TTL_SHORT)
         return Response(data)
 
