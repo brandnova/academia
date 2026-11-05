@@ -616,6 +616,25 @@ School Data Curation sourcing line.
   package was added: Django 6 compatibility of the Cloudinary storage
   package could not be confirmed, and no feature exercises uploads yet.
   Decide and verify the backend alongside the first upload feature
+- Hub deactivation is a soft-delete through PATCH /hubs/{id}/ (is_active
+  only, admin only, idempotent), logged to AdminActionLog as HUB_DEACTIVATED
+  and HUB_REACTIVATED only on a genuine transition. Deliberately scoped:
+  existing questions, answers and comments stay readable and answerable
+  because hiding them would touch the question, search, tag and unanswered
+  views and contradict the knowledge-preservation principle, only NEW
+  questions are blocked (validate_hub_id already required an active hub).
+  Moderator and representative assignments are never altered, so
+  reactivation restores the team, but UserSerializer's moderator_for and
+  representative_for now list only active hubs so the frontend never gets a
+  management card for a hub that 404s
+- Users can still file an activation request for a school whose hub was
+  deactivated, and approving it reactivates the existing hub. Left as-is
+  on purpose, it works as an admin-reviewed appeal. Revisit if it gets
+  spammed
+- Not done, by choice: no notification to a deactivated hub's team (a new
+  notification type needs a frontend icon-map change), and hub approvals
+  and rejections remain unlogged because HubActivationRequest already
+  records the reviewer
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env

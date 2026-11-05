@@ -18,8 +18,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_moderator_for(self, obj):
         from apps.hubs.models import ModeratorAssignment
+        # hub__is_active: a deactivated hub is a 404 for non-admins, so
+        # listing it here would hand the frontend a management card whose
+        # hub can't be loaded. The assignment itself is kept, reactivating
+        # the hub brings it straight back.
         assignments = ModeratorAssignment.objects.filter(
-            user=obj, is_active=True
+            user=obj, is_active=True, hub__is_active=True
         ).select_related("hub__school")
         return [
             {
@@ -36,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
     def get_representative_for(self, obj):
         from apps.hubs.models import SchoolRepresentativeAssignment
         assignments = SchoolRepresentativeAssignment.objects.filter(
-            user=obj, is_active=True
+            user=obj, is_active=True, hub__is_active=True
         ).select_related("hub__school")
         return [
             {

@@ -106,6 +106,7 @@
 - [x] Manage tags (rename, merge, delete), admin only
 - [x] Static page management (create/edit/delete, PUBLIC or STAFF visibility,
       draft/published), admin only
+- [x] Deactivate and reactivate hubs (admin only).
 
 ## User Experience
 - [x] Self-view profile stats (question/answer/best-answer/comment counts) on
@@ -356,10 +357,10 @@ truthfulness or presence of content students post.
       Worth a deliberate pass deciding which of these actually need tighter
       scoping versus being fine on the general limit, rather than the
       current case-by-case inconsistency
-- [ ] Hub deactivation endpoint (admin only), mirroring School's soft-delete
+- [x] Hub deactivation endpoint (admin only), mirroring School's soft-delete
       pattern. Currently no API path exists to take an active hub offline,
       is_active on Hub can only ever be set to True through the API today
-- [ ] If Hub deactivation is added, HubDetailView/HubBySchoolView/
+- [x] If Hub deactivation is added, HubDetailView/HubBySchoolView/
       HubBySlugView need the same admin-bypass-for-inactive pattern
       SchoolDetailView already has, otherwise a deactivated hub becomes
       unreachable even to the admin who deactivated it

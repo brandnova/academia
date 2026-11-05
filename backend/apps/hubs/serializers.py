@@ -44,6 +44,12 @@ class HubDetailSerializer(serializers.ModelSerializer):
         return HubDepartmentSerializer(departments, many=True).data
 
 
+class HubUpdateSerializer(serializers.Serializer):
+    """Only is_active is editable on a Hub. Required, so a PATCH that omits
+    it is a clean 400 rather than a silent no-op."""
+    is_active = serializers.BooleanField()
+    
+
 class ActivationRequestUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

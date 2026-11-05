@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db import transaction
 from django.utils import timezone
 from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied
@@ -7,13 +8,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.accounts.models import User
+from apps.core.audit import log_admin_action
 from apps.core.cache import get_cached, invalidate_key, invalidate_prefix, make_cache_key, set_cached
-from apps.core.permissions import IsPlatformAdmin
+from apps.core.models import AdminActionLog
+from apps.core.permissions import IsPlatformAdmin, user_is_platform_admin
 from apps.core.utils import validate_uuid
 from apps.notifications.models import Notification
 from apps.notifications.services import notify
-from apps.schools.models import School
 from apps.schools.cache import invalidate_school_cache
+from apps.schools.models import School
 
 from .models import Hub, HubActivationRequest, ModeratorAssignment, SchoolRepresentativeAssignment
 from .pagination import HubActivationRequestPagination
@@ -22,6 +25,7 @@ from .serializers import (
     HubActivationRequestCreateSerializer,
     HubActivationRequestSerializer,
     HubDetailSerializer,
+    HubUpdateSerializer,
     ModeratorAssignmentSerializer,
     RepresentativeAssignmentSerializer,
 )
@@ -35,10 +39,25 @@ def _invalidate_hub_cache(hub):
 
 
 class HubDetailView(APIView):
-    permission_classes = [AllowAny]
+    def get_permissions(self):
+        if self.request.method == "PATCH":
+            return [IsAuthenticated(), IsPlatformAdmin()]
+        return [AllowAny()]
 
     def get(self, request, hub_id):
         parsed_id = validate_uuid(hub_id)
+
+        # Admin bypass, mirroring SchoolDetailView: a deactivated hub is a
+        # 404 for everyone else, but must stay reachable to the admin who
+        # deactivated it, otherwise it could never be reactivated from its
+        # own page. Admin responses never touch the shared public cache.
+        if user_is_platform_admin(request.user):
+            try:
+                hub = Hub.objects.select_related("school").get(id=parsed_id)
+            except Hub.DoesNotExist:
+                raise NotFound("Hub not found")
+            return Response(HubDetailSerializer(hub).data)
+
         cache_key = make_cache_key("hub-detail", hub_id)
         cached = get_cached(cache_key)
         if cached is not None:
@@ -53,12 +72,63 @@ class HubDetailView(APIView):
         set_cached(cache_key, data, settings.CACHE_TTL_SHORT)
         return Response(data)
 
+    def patch(self, request, hub_id):
+        parsed_id = validate_uuid(hub_id)
+        try:
+            hub = Hub.objects.select_related("school").get(id=parsed_id)
+        except Hub.DoesNotExist:
+            raise NotFound("Hub not found")
+
+        write_serializer = HubUpdateSerializer(data=request.data)
+        write_serializer.is_valid(raise_exception=True)
+        new_is_active = write_serializer.validated_data["is_active"]
+
+        # Only a genuine transition writes anything: repeating the current
+        # state is a harmless 200, no save, no audit entry, no cache churn.
+        if hub.is_active != new_is_active:
+            with transaction.atomic():
+                hub.is_active = new_is_active
+                if new_is_active and hub.activated_at is None:
+                    hub.activated_at = timezone.now()
+                hub.save(update_fields=["is_active", "activated_at", "updated_at"])
+
+                log_admin_action(
+                    actor=request.user,
+                    action=(
+                        AdminActionLog.Action.HUB_REACTIVATED
+                        if new_is_active
+                        else AdminActionLog.Action.HUB_DEACTIVATED
+                    ),
+                    target_type="hub",
+                    target_id=hub.id,
+                    target_label=hub.school.short_name,
+                    metadata={
+                        "school_id": str(hub.school_id),
+                        "school_slug": hub.school.slug,
+                    },
+                )
+
+            # Covers hub-detail, hub-by-school, hub-by-slug, and (through
+            # invalidate_school_cache) the school's own detail, by-slug and
+            # list caches, since School.has_hub just changed.
+            _invalidate_hub_cache(hub)
+
+        return Response(HubDetailSerializer(hub).data)
+
 
 class HubBySchoolView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, school_id):
         parsed_id = validate_uuid(school_id)
+
+        if user_is_platform_admin(request.user):
+            try:
+                hub = Hub.objects.select_related("school").get(school_id=parsed_id)
+            except Hub.DoesNotExist:
+                raise NotFound("Hub not found for this school")
+            return Response(HubDetailSerializer(hub).data)
+
         cache_key = make_cache_key("hub-by-school", school_id)
         cached = get_cached(cache_key)
         if cached is not None:
@@ -78,6 +148,13 @@ class HubBySlugView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, slug):
+        if user_is_platform_admin(request.user):
+            try:
+                hub = Hub.objects.select_related("school").get(school__slug=slug)
+            except Hub.DoesNotExist:
+                raise NotFound("Hub not found for this school")
+            return Response(HubDetailSerializer(hub).data)
+
         cache_key = make_cache_key("hub-by-slug", slug)
         cached = get_cached(cache_key)
         if cached is not None:
