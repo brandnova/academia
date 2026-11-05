@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
+from rest_framework import generics, status
 
 from apps.accounts.models import User
 from apps.answers.models import Answer
@@ -26,7 +27,7 @@ from apps.questions.models import Question
 
 from .models import Report
 from .pagination import ReportPagination
-from .serializers import ReportCreateResponseSerializer, ReportSerializer
+from .serializers import MyReportSerializer, ReportCreateResponseSerializer, ReportSerializer
 
 CONTENT_TYPE_MODEL_MAP = {
     "question": Question,
@@ -105,6 +106,22 @@ def _auto_resolve_orphaned_reports(targets, exclude_report_id, resolver):
     return orphaned
 
 
+def _with_reported_content(queryset):
+    """Loads each report's content type and reported object (plus the parent
+    question for answers and comments) in a handful of queries for a whole
+    page, instead of 2 to 3 per row for content_exists and link_target."""
+    return queryset.select_related("content_type").prefetch_related(
+        GenericPrefetch(
+            "content_object",
+            [
+                Question.objects.all(),
+                Answer.objects.select_related("question"),
+                Comment.objects.select_related("answer__question"),
+            ],
+        )
+    )
+
+
 class ReportListCreateView(APIView):
     pagination_class = ReportPagination
     throttle_classes = [AnonRateThrottle, UserRateThrottle, MethodScopedThrottle]
@@ -117,22 +134,8 @@ class ReportListCreateView(APIView):
         return [IsAuthenticated(), IsPlatformAdmin()]
 
     def get(self, request):
-        # GenericPrefetch loads the reported objects (and, for answers and
-        # comments, their parent question) in a handful of queries for the
-        # whole page, instead of 2 to 3 per row for content_exists and
-        # link_target.
-        queryset = (
-            Report.objects.select_related("reporter", "content_type", "escalated_by")
-            .prefetch_related(
-                GenericPrefetch(
-                    "content_object",
-                    [
-                        Question.objects.all(),
-                        Answer.objects.select_related("question"),
-                        Comment.objects.select_related("answer__question"),
-                    ],
-                )
-            )
+        queryset = _with_reported_content(
+            Report.objects.select_related("reporter", "escalated_by")
         )
         status_param = request.query_params.get("status")
         if status_param:
@@ -405,3 +408,19 @@ class EscalateReportView(APIView):
             )
 
         return Response(ReportSerializer(report).data, status=status.HTTP_200_OK)
+
+
+class MyReportsView(generics.ListAPIView):
+    """The requester's own reports, newest first (the model's default
+    ordering). Self-scoped like GET /users/me/answers/: there is no way to
+    see another user's reports through this or any other endpoint."""
+    serializer_class = MyReportSerializer
+    pagination_class = ReportPagination
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = _with_reported_content(Report.objects.filter(reporter=self.request.user))
+        status_param = self.request.query_params.get("status")
+        if status_param:
+            queryset = queryset.filter(status=status_param.upper())
+        return queryset

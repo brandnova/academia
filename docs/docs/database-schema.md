@@ -110,6 +110,7 @@ Represents a user request to activate a hub.
 | user | ForeignKey(User) | Required, CASCADE | User who requested |
 | status | Enum | Default: PENDING | PENDING/APPROVED/REJECTED |
 | notes | Text | Nullable | Additional notes from user |
+| rejection_reason | Text | Nullable | Admin's stated reason when the request was rejected, also emailed to the requester. Capped at 1000 characters by the API |
 | reviewed_by | ForeignKey(User) | Nullable | Admin who reviewed |
 | reviewed_at | DateTime | Nullable | Review timestamp |
 | created_at | DateTime | Auto now | Creation timestamp |

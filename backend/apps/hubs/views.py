@@ -30,6 +30,8 @@ from .serializers import (
     RepresentativeAssignmentSerializer,
 )
 
+MAX_REJECTION_REASON_LENGTH = 1000
+
 
 def _invalidate_hub_cache(hub):
     invalidate_key(make_cache_key("hub-detail", hub.id))
@@ -289,16 +291,26 @@ class RejectActivationRequestView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Accepted per api-contract.md but not persisted anywhere, see the
-        # deviation note in chat: no HubActivationRequest field exists to
-        # store an admin's rejection reason today. Used here for the email
-        # only, then discarded, same as before this change.
-        reason = request.data.get("reason")
+        # Optional. Whitespace-only counts as no reason. Now persisted, so
+        # it is validated: it must be text, and capped, since it is stored
+        # and also goes into an email body.
+        raw_reason = request.data.get("reason")
+        if raw_reason is not None and not isinstance(raw_reason, str):
+            return Response({"reason": ["Not a valid string."]}, status=status.HTTP_400_BAD_REQUEST)
+        reason = (raw_reason or "").strip()
+        if len(reason) > MAX_REJECTION_REASON_LENGTH:
+            return Response(
+                {"reason": [f"Ensure this field has no more than {MAX_REJECTION_REASON_LENGTH} characters."]},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         activation_request.status = HubActivationRequest.Status.REJECTED
+        activation_request.rejection_reason = reason or None
         activation_request.reviewed_by = request.user
         activation_request.reviewed_at = timezone.now()
-        activation_request.save(update_fields=["status", "reviewed_by", "reviewed_at", "updated_at"])
+        activation_request.save(
+            update_fields=["status", "rejection_reason", "reviewed_by", "reviewed_at", "updated_at"]
+        )
 
         notify(
             user=activation_request.user,
@@ -310,7 +322,7 @@ class RejectActivationRequestView(APIView):
             email_context={
                 "recipient_name": activation_request.user.full_name,
                 "school_name": activation_request.school.name,
-                "reason": reason,
+                "reason": reason or None,
             },
         )
 

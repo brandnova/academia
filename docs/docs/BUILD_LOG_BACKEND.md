@@ -1,12 +1,11 @@
 # BUILD LOG
 
 ## Current Phase
-Not a numbered phase. Two related GitHub issues: MODERATOR_ASSIGNED existed as
-a Notification type and the assignment endpoints existed since Phase 14, but
-nothing ever triggered it. Broader review requested alongside it turned up a
-second real gap: project-plan.md's Moderator Responsibilities section
-describes moderators receiving notifications about new questions in their
-hub, this was documented from the start and never built.
+Not a numbered phase. The post-MVP backend audit backlog is complete: every
+item from Project_audit_notes.md and feature-list.md's Platform Improvements
+section has shipped or was deliberately decided against. Production runs on
+Vercel (Supabase Postgres, Upstash Redis), PythonAnywhere remains the
+preview and testing backend.
 
 ## Completed Phases
 - Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
@@ -652,6 +651,20 @@ School Data Curation sourcing line.
   backend can deploy ahead of the frontend without breaking it, the only
   effect is truncation at 50 until the frontend adopts load-more. Both
   orderings end in the unique name column so page boundaries are stable
+- GET /reports/mine/ is a self-scoped list with its own serializer
+  (MyReportSerializer) that omits reporter, resolved_by, is_escalated and
+  escalated_by, so a reporter learns the outcome of their report without
+  learning anything about who handled it. It reuses the admin list's
+  prefetching helper. Resolves the earlier decision that a private view
+  stays distinct from profile and activity data
+- rejection_reason is validated (string, at most 1000 characters,
+  whitespace-only treated as none) because it is now stored and emailed.
+  This is a small addition to the documented contract. The rejection
+  response shape itself is unchanged, the reason is not echoed back
+- Found during this pass: two Accounts items had been marked done in
+  feature-list.md without being in the code (blank full_name handling and
+  the user search throttle scope). Implemented here, the full_name check
+  reads the model's max_length so an over-long name is a 400, not a 500
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -695,14 +708,12 @@ it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
 Question slugs, and the 400 Invalid ID format response all work as designed.
 
 ### Known Deviations From Docs
-- api-contract.md's ID Format Validation section is framed around path
-  parameters; this pass reuses the same validator and error shape for the
-  target_tag_id body field on Merge Tag, worth a small wording tweak at the
-  next sync to acknowledge body fields can hit this too, not just URLs
+None, cleared by the November 5, 2026 docs sync.
 
 ### Next Immediate Step
-NEW_REPORT admin notification (same shape of fix, blocked on getting current
-apps/reports/views.py and apps/reports/models.py, since this project has
-shown real drift from earlier chat sessions and I'm not writing against
-stale memory). This doubles as the first app in the planned full
-system audit.
+Backend backlog closed. Deferred on purpose: answer edit history, a cloud
+media storage backend (decide and verify alongside the first upload
+feature), a read endpoint for AdminActionLog, and rep-scoped report
+visibility (needs a decision, also needs frontend work). Next is the
+pre-launch checklist, run together with the frontend's: error alerting,
+database backups, email delivery limits, and rotating secrets.

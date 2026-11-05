@@ -91,7 +91,7 @@ This reduces integration issues, allows parallel development, and keeps both sid
 
 The backend is complete: all 15 planned MVP phases, plus post-MVP passes for production readiness, URL/ID ergonomics, and API completeness. The frontend MVP (Phases 0 through 15) is also complete and live on Vercel. Both are functional and deployed.
 
-The project is currently in a final audit-and-fix pass, working through a tracked backlog of smaller bugs and polish items before opening the platform to real users. See `feature-list.md`'s Platform Improvements section for the active list.
+The backend audit backlog is complete. The frontend is in its own audit-and-fix pass, working through the frontend list in `feature-list.md`'s Platform Improvements section. Production runs on Vercel, with the original PythonAnywhere and Vercel deployments kept as the preview and testing environment.
 
 ---
 
@@ -117,7 +117,7 @@ Academia/
 
 ## Next Steps
 
-1. Work through the post-MVP audit backlog (see `feature-list.md`).
+1. Finish the frontend audit pass (see `feature-list.md`), then run the pre-launch checklist for both halves.
 2. Complete the Nigerian school directory import (data cleaning in progress).
 3. Onboard initial moderators and school representatives.
 4. Open the platform to real users.

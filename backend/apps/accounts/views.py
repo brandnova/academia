@@ -5,7 +5,7 @@ from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle
+from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -149,10 +149,25 @@ class MeView(APIView):
 
     def patch(self, request):
         user = request.user
-        full_name = request.data.get("full_name")
-        if full_name:
-            user.full_name = full_name
-            user.save(update_fields=["full_name", "updated_at"])
+        # Only touch the name when the client actually sent the field.
+        # Previously a blank value was indistinguishable from an omitted
+        # one and silently did nothing, with a 200, unlike every other
+        # write path in this codebase. The length check reads the model's
+        # own limit, so an over-long name is a clean 400 instead of a
+        # database error.
+        if "full_name" in request.data:
+            raw_name = request.data.get("full_name")
+            full_name = raw_name.strip() if isinstance(raw_name, str) else ""
+            if not full_name:
+                raise ValidationError({"full_name": ["This field may not be blank."]})
+            max_length = User._meta.get_field("full_name").max_length
+            if max_length and len(full_name) > max_length:
+                raise ValidationError(
+                    {"full_name": [f"Ensure this field has no more than {max_length} characters."]}
+                )
+            if full_name != user.full_name:
+                user.full_name = full_name
+                user.save(update_fields=["full_name", "updated_at"])
         return Response(UserSerializer(user).data)
 
 
@@ -236,6 +251,11 @@ class AdminUserDetailView(APIView):
 
 class UserSearchView(APIView):
     permission_classes = [IsAuthenticated]
+    # Type-ahead picker, so it is hit far more rapidly than a typical
+    # endpoint. Shares the existing "search" scope (60/min) instead of
+    # falling back to the generic limit.
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, ScopedRateThrottle]
+    throttle_scope = "search"
 
     def get(self, request):
         from apps.hubs.permissions import user_is_representative_for_any_hub

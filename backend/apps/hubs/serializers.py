@@ -62,7 +62,7 @@ class HubActivationRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HubActivationRequest
-        fields = ["id", "school", "user", "status", "notes", "created_at"]
+        fields = ["id", "school", "user", "status", "notes", "rejection_reason", "created_at"]
 
 
 class HubActivationRequestCreateSerializer(serializers.ModelSerializer):
