@@ -427,7 +427,7 @@ truthfulness or presence of content students post.
       would raise an uncaught IntegrityError (raw 500) instead of a clean
       error. Narrow edge case, but worth a retry-on-collision fix before
       real concurrent traffic exists
-- [ ] .env.example documents discrete DATABASE_NAME/USER/PASSWORD/HOST/PORT
+- [x] .env.example documents discrete DATABASE_NAME/USER/PASSWORD/HOST/PORT
       vars as a fallback when DATABASE_URL is unset, but base.py's actual
       DATABASES config only ever reads DATABASE_URL via env.db(), those five
       vars are dead and unused. If DATABASE_URL is left unset while only the
@@ -435,14 +435,14 @@ truthfulness or presence of content students post.
       SQLite with no warning, a real risk on first deploy. Needs a decision:
       restore genuine discrete-var fallback logic, or remove the misleading
       vars from .env.example and document DATABASE_URL as the only path
-- [ ] STORAGES["default"] in production.py is hardcoded to FileSystemStorage.
-      No media uploads exist yet, but this needs to change to Cloudinary (or
-      similar) before any file-upload feature ships, local disk storage is
-      unreliable/ephemeral on most PaaS hosts
-- [ ] DRF's browsable HTML API renderer isn't restricted to JSON-only in
+- [ ] STORAGES["default"]: now overridable via DEFAULT_FILE_STORAGE_BACKEND
+      but still FileSystemStorage. A cloud backend must be installed and
+      verified against Django 6 before any upload feature ships (Supabase
+      S3-compatible storage via django-storages is the first candidate)
+- [x] DRF's browsable HTML API renderer isn't restricted to JSON-only in
       production, minor hardening, mostly informational exposure rather
       than a real vulnerability
-- [ ] DEFAULT_PERMISSION_CLASSES is globally AllowAny, a deliberate and
+- [x] DEFAULT_PERMISSION_CLASSES is globally AllowAny, a deliberate and
       reasonable choice for this platform, but worth keeping in mind as a
       standing discipline point: any future view that omits
       permission_classes is open-by-default, not closed-by-default

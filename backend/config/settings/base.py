@@ -146,6 +146,9 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    # Open by default on purpose: this is a mostly-public-read platform. The
+    # flip side is that any NEW view that forgets permission_classes is
+    # public, not private. Every view must set permissions explicitly.
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],

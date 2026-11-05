@@ -605,6 +605,17 @@ School Data Curation sourcing line.
   forever. Known remaining edge: simultaneous identical name/short_name
   submissions still hit an IntegrityError, since that uniqueness is checked
   in the serializer. Admin-only, left alone
+- Production settings guard against SQLite: base.py's SQLite fallback is
+  kept for contributors, production.py raises ImproperlyConfigured on it
+  unless DJANGO_ALLOW_SQLITE=True. The opt-out exists because the
+  PythonAnywhere preview site intentionally runs production settings on
+  SQLite. The guard also fires during Vercel builds, so DATABASE_URL must
+  be scoped to every environment that deploys
+- Media storage backend deliberately NOT wired to a cloud provider yet. The
+  default backend is env-overridable (DEFAULT_FILE_STORAGE_BACKEND) but no
+  package was added: Django 6 compatibility of the Cloudinary storage
+  package could not be confirmed, and no feature exercises uploads yet.
+  Decide and verify the backend alongside the first upload feature
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
