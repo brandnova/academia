@@ -287,6 +287,16 @@ assignments are kept but hidden here until the hub is reactivated.
 }
 ```
 
+**Error Response (400 Bad Request):**
+```json
+{
+  "full_name": ["This field may not be blank."]
+}
+```
+A blank, whitespace-only, or null `full_name` is rejected, as is one longer
+than the field's maximum length. Omitting `full_name` leaves the account
+unchanged and returns 200. The name is stored trimmed.
+
 **Response (200 OK):** Same as GET `/api/v1/users/me/`
 
 ---
@@ -820,6 +830,7 @@ request reactivates the existing hub.
       },
       "status": "PENDING",
       "notes": "Our university needs a hub for students",
+      "rejection_reason": null,
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -887,9 +898,12 @@ email).
 ```
 
 Rejecting sends the requesting user a `HUB_ACTIVATION_REJECTED` notification
-(email and in-app). The `reason` field is used in the email body if provided,
-but is not currently persisted anywhere, it does not appear in
-`GET /hubs/activation-requests/` or anywhere else after the email sends.
+(email and in-app). The `reason` field is optional text of at most 1000
+characters (whitespace-only counts as no reason, a non-string or over-long
+value returns a 400 field error and leaves the request pending). It is
+stored as `rejection_reason`, shown in `GET /hubs/activation-requests/`, and
+quoted in the email. `rejection_reason` is `null` for approved and pending
+requests and for rejections made without a reason.
 
 ---
 
@@ -2211,6 +2225,56 @@ or a comment. It is `null` whenever `content_exists` is `false`.
 
 ---
 
+### List My Reports
+**Endpoint:** `GET /api/v1/reports/mine/`
+
+Requires authentication. Returns only reports the requesting user filed,
+newest first, so a reporter can see whether anything came of them. It is
+deliberately minimal and self-scoped: there is no way to see another user's
+reports, and nothing about the review itself (who reviewed it, whether a
+moderator escalated it) is exposed, since reports are private in both
+directions.
+
+**Query Parameters:**
+- `status` - PENDING/RESOLVED/REJECTED
+- `page` - Page number
+- `page_size` - Items per page
+
+**Response (200 OK):**
+```json
+{
+  "count": 4,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": "uuid",
+      "content_type": "question",
+      "content_id": "uuid",
+      "type": "SPAM",
+      "description": "This appears to be promotional content",
+      "status": "RESOLVED",
+      "resolved_at": "2026-01-02T00:00:00Z",
+      "content_exists": true,
+      "link_target": {
+        "question_id": "uuid",
+        "question_slug": "how-do-i-calculate-my-cgpa",
+        "answer_id": null
+      },
+      "created_at": "2026-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+`resolved_at` is `null` while a report is PENDING. `content_exists` and
+`link_target` have the same meaning as on the admin list: `link_target` is
+`null` once the content is gone. A RESOLVED report does not necessarily mean
+content was removed, resolving can acknowledge a report without taking
+action, use `content_exists` to tell.
+
+---
+
 ### Resolve Report (Admin Only)
 **Endpoint:** `POST /api/v1/reports/{report_id}/resolve/`
 
@@ -2939,7 +3003,7 @@ anonymous requests.
 | Edit or delete an answer or comment (one shared pool) | 60 requests per hour |
 | Mark best answer | 30 requests per hour |
 | Voting (vote and remove-vote combined) | 100 requests per hour |
-| Search | 60 requests per minute |
+| Search (question search and user search share one pool) | 60 requests per minute |
 | Reports | 10 requests per hour |
 | General API (everything else) | 100 requests per minute |
 

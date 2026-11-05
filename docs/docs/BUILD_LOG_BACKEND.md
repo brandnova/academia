@@ -652,6 +652,20 @@ School Data Curation sourcing line.
   backend can deploy ahead of the frontend without breaking it, the only
   effect is truncation at 50 until the frontend adopts load-more. Both
   orderings end in the unique name column so page boundaries are stable
+- GET /reports/mine/ is a self-scoped list with its own serializer
+  (MyReportSerializer) that omits reporter, resolved_by, is_escalated and
+  escalated_by, so a reporter learns the outcome of their report without
+  learning anything about who handled it. It reuses the admin list's
+  prefetching helper. Resolves the earlier decision that a private view
+  stays distinct from profile and activity data
+- rejection_reason is validated (string, at most 1000 characters,
+  whitespace-only treated as none) because it is now stored and emailed.
+  This is a small addition to the documented contract. The rejection
+  response shape itself is unchanged, the reason is not echoed back
+- Found during this pass: two Accounts items had been marked done in
+  feature-list.md without being in the code (blank full_name handling and
+  the user search throttle scope). Implemented here, the full_name check
+  reads the model's max_length so an over-long name is a 400, not a 500
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env

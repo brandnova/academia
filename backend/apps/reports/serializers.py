@@ -27,7 +27,23 @@ class ReportCreateResponseSerializer(serializers.ModelSerializer):
         return obj.object_id
 
 
-class ReportSerializer(ReportCreateResponseSerializer):
+class ReportContentMixin:
+    """content_exists and link_target, shared by the admin and the
+    reporter-facing serializers."""
+
+    def get_content_exists(self, obj):
+        # False when the reported content was deleted by some path that
+        # doesn't auto-resolve its reports (e.g. an author deleting their
+        # own question).
+        return obj.content_object is not None
+
+    def get_link_target(self, obj):
+        # None when the content is gone, so a deleted item never produces a
+        # broken link.
+        return get_link_target(obj.content_object)
+
+
+class ReportSerializer(ReportContentMixin, ReportCreateResponseSerializer):
     reporter = ReporterSerializer(read_only=True)
     escalated_by = ReporterSerializer(read_only=True)
     content_exists = serializers.SerializerMethodField()
@@ -38,13 +54,17 @@ class ReportSerializer(ReportCreateResponseSerializer):
             "reporter", "is_escalated", "escalated_by", "content_exists", "link_target",
         ]
 
-    def get_content_exists(self, obj):
-        # False when the reported content was deleted by some path that
-        # doesn't auto-resolve its reports (e.g. an author deleting their
-        # own question). Lets an admin spot and clear these manually.
-        return obj.content_object is not None
 
-    def get_link_target(self, obj):
-        # None when the content is gone, so a deleted item never produces a
-        # broken link.
-        return get_link_target(obj.content_object)
+class MyReportSerializer(ReportContentMixin, ReportCreateResponseSerializer):
+    """What a user sees of their OWN reports. Deliberately leaves out
+    everything about the review itself: who reviewed it, whether a moderator
+    escalated it, who the reporter was (always the requester). Showing
+    those would expose moderator and admin activity, and the project's
+    privacy design is that reporting is private in both directions."""
+    content_exists = serializers.SerializerMethodField()
+    link_target = serializers.SerializerMethodField()
+
+    class Meta(ReportCreateResponseSerializer.Meta):
+        fields = ReportCreateResponseSerializer.Meta.fields + [
+            "resolved_at", "content_exists", "link_target",
+        ]

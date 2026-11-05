@@ -298,9 +298,13 @@ truthfulness or presence of content students post.
 
 ## Backend
 
-- [ ] Private "my submitted reports" view for a user's own account, deliberately
-      not part of the public/self profile page, reports are never shown on any
-      profile to avoid making a reporter's activity identifiable to others
+- [x] Private "my reports" view: GET /reports/mine/, self-scoped, shows only
+      the reporter's own reports with status and a link to the content,
+      never reviewer identity or escalation state, so reporting stays
+      private in both directions
+- [x] Hub activation rejection reason is now persisted
+      (HubActivationRequest.rejection_reason) and shown in the admin
+      request list, previously emailed and discarded
 - [x] Admin action audit log (who resolved which report, who suspended which user)
 - [ ] Answer edit history, so a heavily-edited answer's original context isn't lost
       framed as quality signal, not a leaderboard or engagement mechanic, consistent
