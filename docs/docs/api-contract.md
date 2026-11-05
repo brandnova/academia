@@ -272,7 +272,8 @@ answers are marked best), intended for badge-style display (e.g. "Posts (3)"),
 the actual objects are fetched via the endpoints below, not embedded here.
 This same shape, including stats, is also returned in the user field of the
 Google Login response. See "Frontend Permission Model" below for how to use
-the role fields.
+the role fields. Only hubs that are currently active are listed. A deactivated hub's
+assignments are kept but hidden here until the hub is reactivated.
 
 ---
 
@@ -629,8 +630,12 @@ responses for non-admins.
 
 **Caching & Visibility Behavior:**
 - **Cache**: Cached as `hub-detail:{hub_id}` using `CACHE_TTL_SHORT` (60 seconds).
+- **Inactive hubs**: A deactivated hub returns 404 to everyone except
+  platform admins. Admins bypass the cache entirely and can read an inactive
+  hub (`is_active: false`), so it can be found and reactivated.
 - **Invalidation**: Cleared automatically on:
   - Approve Activation Request (hub activation).
+  - Update Hub (deactivate or reactivate).
   - Assign / Remove Moderator.
 
 ---
@@ -649,7 +654,13 @@ responses for non-admins.
 
 **Caching & Visibility Behavior:**
 - **Cache**: Cached as `hub-by-school:{school_id}` using `CACHE_TTL_SHORT` (60 seconds).
-- **Invalidation**: Same invalidation triggers as Get Hub.
+- **Inactive hubs**: A deactivated hub returns 404 to everyone except
+  platform admins. Admins bypass the cache entirely and can read an inactive
+  hub (`is_active: false`), so it can be found and reactivated.
+- **Invalidation**: Cleared automatically on:
+  - Approve Activation Request (hub activation).
+  - Update Hub (deactivate or reactivate).
+  - Assign / Remove Moderator.
 
 ---
 
@@ -667,7 +678,59 @@ responses for non-admins.
 
 **Caching & Visibility Behavior:**
 - **Cache**: Cached as `hub-by-slug:{slug}` using `CACHE_TTL_SHORT` (60 seconds).
-- **Invalidation**: Same invalidation triggers as Get Hub.
+- **Inactive hubs**: A deactivated hub returns 404 to everyone except
+  platform admins. Admins bypass the cache entirely and can read an inactive
+  hub (`is_active: false`), so it can be found and reactivated.
+- **Invalidation**: Cleared automatically on:
+  - Approve Activation Request (hub activation).
+  - Update Hub (deactivate or reactivate).
+  - Assign / Remove Moderator.
+
+---
+
+### Update Hub (Admin Only)
+**Endpoint:** `PATCH /api/v1/hubs/{hub_id}/`
+
+Takes a hub offline or brings it back. This is the only editable field.
+
+**Request:**
+```json
+{
+  "is_active": false
+}
+```
+
+**Response (200 OK):** Same as GET `/api/v1/hubs/{hub_id}/`
+
+**Error Responses:**
+```json
+// 400 Bad Request - missing or non-boolean is_active
+{
+  "is_active": ["This field is required."]
+}
+
+// 403 Forbidden - not an admin (representatives cannot do this)
+{
+  "error": "You do not have permission to perform this action"
+}
+
+// 404 Not Found
+{
+  "error": "Hub not found"
+}
+```
+
+A deactivated hub behaves like a soft-delete: it returns 404 to non-admins on
+every hub route, its school's `has_hub` becomes `false`, and no new questions
+can be asked in it. Existing questions, answers, and comments are kept and
+remain readable. Moderator and representative assignments are kept untouched,
+so reactivating restores the team, but the hub disappears from the
+`moderator_for` and `representative_for` lists on `GET /users/me/` while it is
+offline, and the moderator and representative management endpoints return 404
+until it is reactivated. Repeating the current state returns 200 and changes
+nothing. A genuine change is recorded in the admin action log
+(`HUB_DEACTIVATED` / `HUB_REACTIVATED`) and invalidates the hub and school
+caches.
 
 ---
 
@@ -727,7 +790,8 @@ requests from piling up before an admin reviews the first one.
 
 Submitting a request sends every active admin a `NEW_ACTIVATION_REQUEST`
 notification, in-app only, excluding the requester if they happen to be an
-admin.
+admin. A school whose hub was deactivated can be requested again. Approving that
+request reactivates the existing hub.
 
 ---
 

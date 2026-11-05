@@ -21,6 +21,8 @@ class AdminActionLog(models.Model):
         TAG_MERGED = "TAG_MERGED", "Tag merged"
         TAG_RENAMED = "TAG_RENAMED", "Tag renamed"
         TAG_DELETED = "TAG_DELETED", "Tag deleted"
+        HUB_DEACTIVATED = "HUB_DEACTIVATED", "Hub deactivated"
+        HUB_REACTIVATED = "HUB_REACTIVATED", "Hub reactivated"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     actor = models.ForeignKey(
