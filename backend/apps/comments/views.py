@@ -7,6 +7,7 @@ from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, User
 from rest_framework.views import APIView
 
 from apps.answers.models import Answer
+from apps.core.throttling import MethodScopedThrottle
 from apps.core.utils import validate_uuid
 from apps.notifications.models import Notification
 from apps.notifications.services import notify
@@ -41,6 +42,10 @@ class CommentCreateView(APIView):
 class CommentDetailView(APIView):
     permission_classes = [IsAuthenticated]
     http_method_names = ["patch", "delete", "options"]
+    # Shared "content_edit" pool with AnswerDetailView.
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, MethodScopedThrottle]
+    throttle_scope = "content_edit"
+    throttled_methods = ["PATCH", "DELETE"]
 
     def get_comment(self, comment_id):
         parsed_id = validate_uuid(comment_id)

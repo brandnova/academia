@@ -349,7 +349,7 @@ truthfulness or presence of content students post.
       active and inactive schools in one combined list with no way to
       narrow to just one, AdminUserListView already has this exact pattern
       for users, worth matching here
-- [ ] Several write endpoints have no dedicated throttle scope and fall back
+- [x] Several write endpoints have no dedicated throttle scope and fall back
       to the general 100/min limit: School/Department creation, Answer
       edit/delete (AnswerDetailView), Mark Best Answer, Comment edit/delete
       (CommentDetailView), and Static Page creation (StaticPageListCreateView.post).
@@ -387,7 +387,7 @@ truthfulness or presence of content students post.
       directly from a search result without a follow-up request. Worth
       deciding whether slug specifically should be added to
       SearchQuestionSerializer
-- [ ] Static Pages endpoints (list and detail) have no caching, unlike
+- [x] Static Pages endpoints (list and detail) have no caching, unlike
       Schools/Hubs/Tags which all use the same short-TTL public-read
       pattern. Deliberately deferred at build time as non-blocking, worth
       picking up now that it's a formally tracked item
@@ -421,7 +421,7 @@ truthfulness or presence of content students post.
 - [x] GET /reports/ only supports a status filter, adding a content_type
       filter (question/answer/comment) would let admins scope their review
       more precisely
-- [ ] generate_unique_slug() has a TOCTOU race: the uniqueness check and the
+- [x] generate_unique_slug() has a TOCTOU race: the uniqueness check and the
       eventual save() aren't atomic, so two genuinely simultaneous creates
       with colliding names could both pass the check and the second save()
       would raise an uncaught IntegrityError (raw 500) instead of a clean
