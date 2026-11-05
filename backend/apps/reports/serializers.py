@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from apps.accounts.models import User
+from apps.core.content_links import get_link_target
 
 from .models import Report
 
@@ -30,10 +31,11 @@ class ReportSerializer(ReportCreateResponseSerializer):
     reporter = ReporterSerializer(read_only=True)
     escalated_by = ReporterSerializer(read_only=True)
     content_exists = serializers.SerializerMethodField()
+    link_target = serializers.SerializerMethodField()
 
     class Meta(ReportCreateResponseSerializer.Meta):
         fields = ReportCreateResponseSerializer.Meta.fields + [
-            "reporter", "is_escalated", "escalated_by", "content_exists",
+            "reporter", "is_escalated", "escalated_by", "content_exists", "link_target",
         ]
 
     def get_content_exists(self, obj):
@@ -41,3 +43,8 @@ class ReportSerializer(ReportCreateResponseSerializer):
         # doesn't auto-resolve its reports (e.g. an author deleting their
         # own question). Lets an admin spot and clear these manually.
         return obj.content_object is not None
+
+    def get_link_target(self, obj):
+        # None when the content is gone, so a deleted item never produces a
+        # broken link.
+        return get_link_target(obj.content_object)

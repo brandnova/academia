@@ -635,6 +635,23 @@ School Data Curation sourcing line.
   notification type needs a frontend icon-map change), and hub approvals
   and rejections remain unlogged because HubActivationRequest already
   records the reviewer
+- Deep-linking answer and comment notifications and reports is solved with an
+  additive link_target field ({question_id, question_slug, answer_id}), not
+  new GET /answers/{id}/ and /comments/{id}/ endpoints plus a permalink
+  page. The frontend builds /questions/{id}/{slug}#answer-{id} and needs no
+  extra request. A comment's answer_id is its parent answer, since comments
+  only render inside their answer. Resolved by apps.core.content_links
+  (deferred imports, duck-typed on the three reportable models), null when
+  the content is gone or isn't a question, answer or comment
+- Notification and report lists use GenericPrefetch (Django 5.0+) with
+  select_related on the parent question, so link_target costs a handful of
+  queries per page instead of one or two per row. Notification content types
+  not listed in the prefetch (hubs, reports, activation requests) take
+  Django's default path
+- Tag list pagination envelope is a superset of the old shape, so the
+  backend can deploy ahead of the frontend without breaking it, the only
+  effect is truncation at 50 until the frontend adopts load-more. Both
+  orderings end in the unique name column so page boundaries are stable
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
