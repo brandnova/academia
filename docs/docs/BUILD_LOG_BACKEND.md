@@ -1,12 +1,11 @@
 # BUILD LOG
 
 ## Current Phase
-Not a numbered phase. Two related GitHub issues: MODERATOR_ASSIGNED existed as
-a Notification type and the assignment endpoints existed since Phase 14, but
-nothing ever triggered it. Broader review requested alongside it turned up a
-second real gap: project-plan.md's Moderator Responsibilities section
-describes moderators receiving notifications about new questions in their
-hub, this was documented from the start and never built.
+Not a numbered phase. The post-MVP backend audit backlog is complete: every
+item from Project_audit_notes.md and feature-list.md's Platform Improvements
+section has shipped or was deliberately decided against. Production runs on
+Vercel (Supabase Postgres, Upstash Redis), PythonAnywhere remains the
+preview and testing backend.
 
 ## Completed Phases
 - Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
@@ -709,14 +708,12 @@ it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
 Question slugs, and the 400 Invalid ID format response all work as designed.
 
 ### Known Deviations From Docs
-- api-contract.md's ID Format Validation section is framed around path
-  parameters; this pass reuses the same validator and error shape for the
-  target_tag_id body field on Merge Tag, worth a small wording tweak at the
-  next sync to acknowledge body fields can hit this too, not just URLs
+None, cleared by the November 5, 2026 docs sync.
 
 ### Next Immediate Step
-NEW_REPORT admin notification (same shape of fix, blocked on getting current
-apps/reports/views.py and apps/reports/models.py, since this project has
-shown real drift from earlier chat sessions and I'm not writing against
-stale memory). This doubles as the first app in the planned full
-system audit.
+Backend backlog closed. Deferred on purpose: answer edit history, a cloud
+media storage backend (decide and verify alongside the first upload
+feature), a read endpoint for AdminActionLog, and rep-scoped report
+visibility (needs a decision, also needs frontend work). Next is the
+pre-launch checklist, run together with the frontend's: error alerting,
+database backups, email delivery limits, and rotating secrets.

@@ -2978,6 +2978,8 @@ comment, notification, report, department, activation request, user) is validate
 as a well-formed UUID before any lookup happens. A malformed ID (wrong length,
 invalid characters, etc.) returns a 400, distinct from a well-formed ID that simply
 doesn't match anything, which still returns the resource's documented 404.
+Body fields that identify a resource, such as `target_tag_id` on Merge Tag,
+are validated the same way and return the same 400.
 
 **Response (400 Bad Request):**
 ```json

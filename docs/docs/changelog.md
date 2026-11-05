@@ -6,6 +6,91 @@ semantic version, the project isn't published as a versioned package yet.
 Once a public API is released, that surface will carry its own /v1/,
 /v2/ versioning, tracked separately from this page.
 
+## Docs Sync, November 5, 2026
+
+Brought the core docs and both build logs in line with the post-MVP backend maintenance pass logged directly below. Most doc changes were applied in the same PR as the change that caused them, this entry records the sync as a whole.
+
+- database-schema.md: School gained institution_type, ownership, state, regulatory_code, source_url, last_verified_at, and country; new SchoolSourceRecord model; Report gained is_escalated and escalated_by; HubActivationRequest gained rejection_reason; new AdminActionLog model; Notification.type gained USER_SUSPENDED, HUB_ACTIVATION_REJECTED, and REPORT_REVIEWED; matching index and cascade notes
+- api-contract.md: new sections for Update Hub, Escalate Report, and List My Reports; List Schools gained the institution_type, ownership, state, and is_active filters; List Reports gained is_escalated and content_type filters plus content_exists and link_target; Resolve Report gained auto_resolved_count; List Notifications gained link_target; List Tags is now paginated; Google Login documents the suspended-account 403; Update Current User documents blank-name validation; Rate Limits gained the content_edit and mark_best rows; the hub routes document the inactive-hub admin bypass; the duplicated Escalate Report section was removed; ID Format Validation now acknowledges body fields such as target_tag_id
+- feature-list.md: every backend Platform Improvements item completed in this pass is checked off, the stale "search results omit slug" line was removed, and the Moderation backlog's escalate-to-admin item is checked
+- BUILD_LOG_BACKEND.md: Key Decisions entries for every change below, Current Phase and Next Immediate Step refreshed, Known Deviations cleared
+- README.md and index.md: deployment notes and status updated for the new production stack
+
+Process:
+- One item is intentionally left open: api-contract.md documents GET /users/search/ as Admin or School Representative, and a message during frontend development described the intended permission as including Moderators. Never confirmed which is correct, the code follows the contract.
+
+## Post-MVP Backend Maintenance Pass, November 5, 2026
+
+A tracked backlog from an app-by-app audit (Project_audit_notes.md and feature-list.md's Platform Improvements section), worked through one GitHub issue or small batch at a time, each confirmed with cURL tests and a manual checklist before the next. It landed across a series of merged PRs and is logged here as one entry, grouped by area rather than chronologically.
+
+Moderation and reports:
+- Report escalation: moderators and representatives of the content's hub, or admins, can flag a pending report for priority review through POST /reports/{id}/escalate/. Adds is_escalated and escalated_by to Report, an is_escalated filter on GET /reports/, and reuses the NEW_REPORT notification with escalation wording rather than adding a type
+- Resolving a report with DELETE_CONTENT now closes every other pending report on the deleted content and on anything cascade-deleted with it (a question's answers and comments), notifies those reporters, and returns auto_resolved_count. Reports orphaned by other paths, mainly an author deleting their own content, are flagged with content_exists: false on the admin list instead
+- GET /reports/ gained a content_type filter
+- GET /reports/mine/: a private, self-scoped list of the requester's own reports with status, resolution time, and a link to the content. Deliberately omits reviewer identity and escalation state, so reporting stays private in both directions
+- Admin action audit log: new AdminActionLog model in apps.core, written in the same transaction as the action it records, for report resolve and reject, user suspend and reactivate, tag merge, rename and delete, and hub deactivate and reactivate. Only genuine state changes log. Read-only in Django admin, no API endpoint yet. Tag merge is now atomic as part of this
+- Notifications and reports about answers and comments carry a link_target (question id, slug, and the answer to anchor to), so they can deep-link into the question page without a standalone answer or comment page. Related objects are prefetched, so these lists no longer issue a query per row
+
+Notifications and email:
+- Three new notification types: USER_SUSPENDED (email and in-app, only on the active to suspended transition), HUB_ACTIVATION_REJECTED (email and in-app, quotes the admin's reason), and REPORT_REVIEWED (in-app only, sent to the original reporter and never to the reviewing admin)
+- Hub activation rejection reasons are now persisted (rejection_reason, capped at 1000 characters) and shown in the admin request list, previously they were emailed and discarded
+- Email templates redesigned around a shared base layout, plus two new templates for suspension and rejection
+- Audit finding: the "missing email" that prompted the review was correct behavior, the pipeline never notifies someone about their own action
+
+Hubs and schools:
+- Hub deactivation: PATCH /hubs/{id}/ with is_active (admin only, idempotent). A deactivated hub 404s for non-admins, blocks new questions, keeps existing content readable, and keeps moderator and representative assignments, which are hidden from GET /users/me/ until the hub is reactivated. The three hub lookup routes gained the same admin bypass the school routes have
+- Cache invalidation gap closed: school edits, department changes, and hub activation now invalidate the school-by-slug cache through a shared invalidate_school_cache() helper used by both apps. SchoolBySlugView gained an admin bypass, so a deactivated school is reachable and reactivatable through its normal slug URL
+- GET /schools/ gained an is_active filter for admins, inert for everyone else
+- School Data Curation schema: institution_type, ownership, state, regulatory_code, source_url, last_verified_at, and a forward-compatible country field on School, plus the SchoolSourceRecord provenance model so a future re-verification pass never auto-deactivates a school. List Schools gained institution_type, ownership, and state filters, Django admin gained filters and a provenance inline, and seed_demo_data populates the new fields
+
+Accounts and authentication:
+- stats is now part of UserSerializer, so it appears on the Google Login response as documented, and on PATCH /users/me/
+- Google-created accounts get an explicitly unusable password, the Google email_verified flag is checked, and suspended accounts are rejected at login with a 403 instead of receiving tokens that fail on the next request
+- PATCH /users/me/ rejects blank, whitespace-only, null, and over-length names with a field error instead of silently doing nothing
+- GET /users/search/ shares the 60 per minute search throttle
+
+Questions, tags, answers, and comments:
+- The unanswered queue now includes hubs where the user is a representative but not yet a moderator, matching the reasoning behind the NEW_QUESTION fan-out, and the lock permission check uses the shared user_is_moderator_or_representative_for_hub() helper
+- Tag names are length-checked on both write paths (question tagging and rename), closing a raw 500 that any logged-in user could trigger
+- GET /tags/ is paginated (default 50, max 100) with the standard envelope, a superset of the old shape, and no longer runs a count query per tag
+- New throttle scopes: content_edit (60 per hour, one pool for editing or deleting answers and comments) and mark_best (30 per hour). School, department, and static page creation deliberately stay on the general limit, they are admin or representative gated
+
+Static pages and slugs:
+- Static page list and detail are cached per visibility tier (public and staff, never per user), admins bypass the cache, invalidation is immediate, 404s are never cached
+- generate_unique_slug() race closed: School and StaticPage save through save_with_unique_slug(), which retries inside a savepoint when a simultaneous create took the slug
+
+Platform, settings, and deployment:
+- Production settings refuse to start on SQLite unless DJANGO_ALLOW_SQLITE=True (the PythonAnywhere preview opts in), the DRF browsable renderer is disabled in production, the default storage backend is env-overridable (DEFAULT_FILE_STORAGE_BACKEND) but deliberately still local until an upload feature exists, and .env.example documents DATABASE_URL as the only database path
+- New production deployment on Vercel (backend and frontend as separate projects) using Supabase Postgres through the transaction pooler (DATABASE_CONN_MAX_AGE=0) and Upstash Redis. The PythonAnywhere backend and original Vercel frontend remain as the preview and testing environment
+- Dev tooling: print_test_tokens command (local only, requires DEBUG) mints tokens for three fixed seed test users, so cURL tests need no Google login
+
+Behavior changes worth knowing:
+- Suspended accounts now get a 403 at login
+- GET /tags/ is paginated, clients reading only results see the first 50 tags until updated
+- Resolve Report responses include auto_resolved_count
+- GET /users/me/ omits deactivated hubs from moderator_for and representative_for
+- Mark best answer and answer or comment edits and deletes are rate limited
+
+Migrations added: reports (escalation fields and index), schools (curation fields and SchoolSourceRecord), core (AdminActionLog, later its action choices), notifications (type choices), hubs (rejection_reason).
+
+New shared helpers: user_is_platform_admin, user_is_moderator_or_representative_for_hub, invalidate_school_cache, save_with_unique_slug, log_admin_action, get_link_target.
+
+## Post-MVP Backend Passes, Backfilled Summary (dates not recorded, all after July 5, 2026)
+
+These passes were logged in BUILD_LOG_BACKEND.md as they happened but never received changelog entries. Summarized here in the order they appear there.
+
+- Production readiness: env-driven CORS, Redis caching with an automatic local-memory fallback that fails open, view caching on schools, hubs, tags, and search, production security settings, whitenoise, structured logging, a health check that verifies the database and cache, JSON 404 and 500 handlers, and the seed_demo_data command
+- URL and ID ergonomics: school and hub lookups by slug, cosmetic question slugs, and a clean 400 for malformed IDs
+- API completeness and permission visibility: the health check documented, moderator_for and representative_for on GET /users/me/, a public representatives list, school slugs on nested school objects, and the Frontend Permission Model section in api-contract.md
+- Vote state visibility: user_vote on every answer object
+- SOLVED status semantics: "has a best answer" decoupled from "closed to answers", with question following and a separate, deliberate lock capability for moderators and admins
+- User search and self profile: GET /users/search/, activity stats on GET /users/me/, GET /users/me/answers/ and /comments/, and an author filter on GET /questions/
+- Tag administration: admin-only tag delete and merge or rename
+- Static pages: admin-managed pages with PUBLIC or STAFF visibility and a draft state
+- Notification fan-out: triggers for moderator and representative assignment, NEW_QUESTION to hub staff, and in-app alerts to admins for new activation requests and new reports
+- View count dedup fix: the 24-hour per-user window failed silently when Redis was unreachable, cache failures on that path now log
+- School directory import: a real Nigerian directory (NUC, NBTE, and NCCE sources) imported through an idempotent management command. New schools import inactive as a manual review gate, and a list of possible duplicates is kept for review
+
 ## Frontend Docs Sync, July 12, 2026
 
 Synced the frontend build's accumulated deviations into the four core docs:

@@ -20,7 +20,7 @@ The platform is not a social feed. There is no engagement-driven scrolling or va
 ## Live
 
 - **App:** https://academia-prvw.vercel.app
-- **API:** hosted on PythonAnywhere, documented in full below
+- **API:** production on Vercel (Supabase Postgres, Upstash Redis), documented in full below. A PythonAnywhere deployment remains as the preview and testing backend
 - **Docs:** https://brandnova.github.io/academia/
 
 ## Repository Structure
@@ -59,6 +59,8 @@ If you're contributing, these documents are the source of truth. Any deviation f
 **Backend:** Django 6.0.6, Python 3.12, PostgreSQL (Supabase), Django REST Framework, JWT auth (SimpleJWT) via Google OAuth (verified directly against Google's userinfo endpoint), Redis caching with an automatic local-memory fallback, django-cors-headers, whitenoise for static files. Deployed on PythonAnywhere.
 
 **Frontend:** Next.js (App Router), JavaScript, deployed on Vercel, consuming the backend purely as a versioned JSON API (`/api/v1/`). Tailwind v4 (CSS-first config), no third-party component library, lucide-react for icons.
+
+Production on Vercel, with PythonAnywhere kept as the preview and testing deployment.
 
 ## Project Status
 
