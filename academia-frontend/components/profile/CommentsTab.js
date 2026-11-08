@@ -65,7 +65,7 @@ export default function CommentsTab() {
 
   return (
     <div>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)] stagger-list">
+      <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
         {comments.map((c) => (
           <Link
             key={c.id}

@@ -102,7 +102,7 @@ export default function HubQuestionList({ hubId, departments }) {
                   name="status"
                   checked={statusFilter === opt.value}
                   onChange={() => setStatusFilter(opt.value)}
-                  className="border-gray-300 dark:border-gray-600"
+                  className="border-[var(--color-border-strong)]"
                 />
                 {opt.label}
               </label>
@@ -115,7 +115,7 @@ export default function HubQuestionList({ hubId, departments }) {
             <select
               value={departmentFilter}
               onChange={(e) => setDepartmentFilter(e.target.value)}
-              className="w-full px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+              className="w-full px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             >
               <option value="">All departments</option>
               {departments.map((d) => (
@@ -141,7 +141,7 @@ export default function HubQuestionList({ hubId, departments }) {
           <select
             value={ordering}
             onChange={(e) => setOrdering(e.target.value)}
-            className="px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+            className="px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
           >
             <option value="-created_at">Newest</option>
             <option value="created_at">Oldest</option>
@@ -188,7 +188,7 @@ export default function HubQuestionList({ hubId, departments }) {
             <button
               onClick={handleLoadMore}
               disabled={loadingMore}
-              className="text-sm px-4 py-2 rounded border border-gray-300 dark:border-gray-600 disabled:opacity-50"
+              className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)] disabled:opacity-50"
             >
               {loadingMore ? "Loading..." : "View more"}
             </button>

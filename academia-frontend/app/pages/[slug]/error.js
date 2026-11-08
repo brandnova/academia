@@ -8,7 +8,7 @@ export default function PageError({ error, reset }) {
       </p>
       <button
         onClick={reset}
-        className="text-sm px-4 py-2 rounded border border-gray-300 dark:border-gray-600"
+        className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)]"
       >
         Try again
       </button>

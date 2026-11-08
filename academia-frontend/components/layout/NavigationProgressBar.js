@@ -94,7 +94,7 @@ function ProgressBarInner() {
   // rendered" signal.
   useEffect(() => {
     finish();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [pathname, searchParams]);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ function ProgressBarInner() {
   return (
     <div
       aria-hidden="true"
-      className="fixed top-0 left-0 right-0 z-[100] h-[2.5px] pointer-events-none transition-opacity duration-200"
+      className="fixed top-0 left-0 right-0 z-progress h-[2.5px] pointer-events-none transition-opacity duration-200"
       style={{ opacity: visible ? 1 : 0 }}
     >
       <div

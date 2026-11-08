@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { Trash2 } from "lucide-react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { Trash2, Users } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
-import Skeleton from "@/components/ui/Skeleton";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 import SearchBar from "@/components/ui/SearchBar";
+import Skeleton from "@/components/ui/Skeleton";
 import UserSearchPicker from "./UserSearchPicker";
 
 const SEARCH_THRESHOLD = 6;
@@ -23,6 +25,10 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
   const [addStatus, setAddStatus] = useState("idle");
   const [addError, setAddError] = useState("");
   const [query, setQuery] = useState("");
+
+  // State alone cannot stop a double click: both clicks can run before React
+  // re-renders with addStatus set. A ref flips immediately.
+  const addingRef = useRef(false);
 
   const canActuallyManage = canManage && (role !== "representatives" || isAdmin);
 
@@ -49,7 +55,8 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
   }, [members, query]);
 
   async function handleAdd(selectedUser) {
-    if (addStatus === "loading") return;
+    if (addingRef.current) return;
+    addingRef.current = true;
     setAddStatus("loading");
     setAddError("");
     try {
@@ -62,6 +69,8 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
     } catch (err) {
       setAddStatus("error");
       setAddError(err.message);
+    } finally {
+      addingRef.current = false;
     }
   }
 
@@ -80,7 +89,7 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
 
   if (status === "loading") return <Skeleton className="h-20 w-full" />;
   if (status === "error") {
-    return <p className="text-red-600 dark:text-red-400 text-sm">Couldn't load: {errorMsg}</p>;
+    return <ErrorMessage>Couldn't load: {errorMsg}</ErrorMessage>;
   }
 
   return (
@@ -92,10 +101,10 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
       )}
 
       {members.length === 0 ? (
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">None assigned yet.</p>
+        <EmptyState variant="inline" icon={Users} title="None assigned yet" className="mb-2" />
       ) : filteredMembers.length === 0 ? (
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-          No one matches "{query}".
+          No one matches &quot;{query}&quot;.
         </p>
       ) : (
         <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] mb-3">
@@ -117,7 +126,9 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
         </ul>
       )}
 
-      {removeError && <p className="text-red-600 dark:text-red-400 text-xs mb-2">{removeError}</p>}
+      <ErrorMessage size="xs" className="mb-2">
+        {removeError}
+      </ErrorMessage>
 
       {canActuallyManage && (
         <>
@@ -128,7 +139,9 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
           />
           {addStatus === "loading" && <p className="text-xs text-gray-400 mt-1">Adding...</p>}
           {addStatus === "error" && (
-            <p className="text-red-600 dark:text-red-400 text-xs mt-1">{addError}</p>
+            <ErrorMessage size="xs" className="mt-1">
+              {addError}
+            </ErrorMessage>
           )}
         </>
       )}

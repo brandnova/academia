@@ -9,7 +9,7 @@ export default function RequestHubCTA({ schoolId, schoolName }) {
 
   if (submitted) {
     return (
-      <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 text-center">
+      <div className="border border-[var(--color-border)] rounded-lg p-6 text-center">
         <p className="font-medium mb-1">Request submitted.</p>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           An admin will review your request for {schoolName}.
@@ -19,7 +19,7 @@ export default function RequestHubCTA({ schoolId, schoolName }) {
   }
 
   return (
-    <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 text-center">
+    <div className="border border-[var(--color-border)] rounded-lg p-6 text-center">
       <p className="font-medium mb-1">{schoolName} doesn't have an active hub yet.</p>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
         Be the first to request one.

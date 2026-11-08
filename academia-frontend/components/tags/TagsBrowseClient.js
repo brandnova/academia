@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
+import { Tag } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
 
@@ -12,28 +15,73 @@ export default function TagsBrowseClient() {
   const debouncedQuery = useDebouncedValue(query, 500);
   const [sortPopular, setSortPopular] = useState(true);
   const [tags, setTags] = useState([]);
+  const [count, setCount] = useState(0);
+  const [nextPage, setNextPage] = useState(null);
   const [status, setStatus] = useState("loading");
   const [errorMsg, setErrorMsg] = useState("");
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState("");
 
-  const fetchTags = useCallback(async () => {
-    setStatus("loading");
-    setErrorMsg("");
-    try {
+  const loadId = useRef(0);
+  const mounted = useRef(true);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+
+  const fetchPage = useCallback(
+    async (page) => {
       const params = new URLSearchParams();
       if (debouncedQuery) params.set("search", debouncedQuery);
       if (sortPopular) params.set("popular", "true");
-      const data = await clientFetch(`/tags/?${params.toString()}`);
-      setTags(data.results);
-      setStatus("ready");
-    } catch (err) {
-      setErrorMsg(err.message);
-      setStatus("error");
-    }
-  }, [debouncedQuery, sortPopular]);
+      params.set("page", page);
+      return clientFetch(`/tags/?${params.toString()}`);
+    },
+    [debouncedQuery, sortPopular]
+  );
 
   useEffect(() => {
-    fetchTags();
-  }, [fetchTags]);
+    const id = ++loadId.current;
+    setStatus("loading");
+    setErrorMsg("");
+    setLoadMoreError("");
+    fetchPage(1)
+      .then((data) => {
+        if (id !== loadId.current) return;
+        setTags(data.results);
+        setCount(data.count);
+        setNextPage(data.next ? 2 : null);
+        setStatus("ready");
+      })
+      .catch((err) => {
+        if (id !== loadId.current) return;
+        setErrorMsg(err.message);
+        setStatus("error");
+      });
+  }, [fetchPage]);
+
+  async function handleLoadMore() {
+    const id = loadId.current;
+    setLoadingMore(true);
+    setLoadMoreError("");
+    try {
+      const data = await fetchPage(nextPage);
+      if (!mounted.current || id !== loadId.current) return;
+      setTags((prev) => {
+        // Popularity order can shift between requests, skip anything already shown.
+        const seen = new Set(prev.map((t) => t.id));
+        return [...prev, ...data.results.filter((t) => !seen.has(t.id))];
+      });
+      setNextPage(data.next ? nextPage + 1 : null);
+    } catch (err) {
+      if (mounted.current && id === loadId.current) setLoadMoreError(err.message);
+    } finally {
+      if (mounted.current) setLoadingMore(false);
+    }
+  }
 
   return (
     <div className="max-w-2xl">
@@ -53,9 +101,9 @@ export default function TagsBrowseClient() {
         </div>
         <button
           onClick={() => setSortPopular((prev) => !prev)}
-          className="text-sm px-4 py-2 rounded border border-gray-300 dark:border-gray-600 whitespace-nowrap"
+          className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)] whitespace-nowrap"
         >
-          {sortPopular ? "Sorted by popularity" : "Sorted A–Z"}
+          {sortPopular ? "Sorted by popularity" : "Sorted A-Z"}
         </button>
       </div>
 
@@ -67,30 +115,46 @@ export default function TagsBrowseClient() {
         </div>
       )}
 
-      {status === "error" && (
-        <p className="text-red-600 dark:text-red-400 text-sm">
-          Couldn't load tags: {errorMsg}
-        </p>
-      )}
+      {status === "error" && <ErrorMessage>Couldn't load tags: {errorMsg}</ErrorMessage>}
 
       {status === "ready" && tags.length === 0 && (
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
-          No tags found{debouncedQuery ? ` for "${debouncedQuery}"` : ""}.
-        </p>
+        <EmptyState
+          icon={Tag}
+          title="No tags found"
+          description={debouncedQuery ? `Nothing matches "${debouncedQuery}".` : undefined}
+        />
       )}
 
       {status === "ready" && tags.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <Link
-              key={tag.id}
-              href={`/tags/${encodeURIComponent(tag.name)}`}
-              className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded border border-gray-300 dark:border-gray-600 hover:border-accent hover:text-accent transition-colors"
-            >
-              {tag.name}
-              <span className="text-xs text-gray-400">{tag.question_count}</span>
-            </Link>
-          ))}
+        <>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+            {count} tag{count !== 1 ? "s" : ""}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <Link
+                key={tag.id}
+                href={`/tags/${encodeURIComponent(tag.name)}`}
+                className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded border border-[var(--color-border-strong)] hover:border-accent hover:text-accent transition-colors"
+              >
+                {tag.name}
+                <span className="text-xs text-gray-400">{tag.question_count}</span>
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
+
+      {nextPage && status === "ready" && (
+        <div className="mt-6 text-center">
+          <button
+            onClick={handleLoadMore}
+            disabled={loadingMore}
+            className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)] disabled:opacity-50"
+          >
+            {loadingMore ? "Loading..." : "View more"}
+          </button>
+          <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
         </div>
       )}
     </div>

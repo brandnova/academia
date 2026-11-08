@@ -65,7 +65,7 @@ export default function EscalateButton({ contentType, contentId, open, onClose }
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-modal">
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-sm w-full border-t-4 border-accent">
         {status === "success" ? (
           <div>

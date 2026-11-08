@@ -107,7 +107,7 @@ export default function SchoolsPage() {
             type="checkbox"
             checked={hasHubOnly}
             onChange={(e) => setHasHubOnly(e.target.checked)}
-            className="rounded border-gray-300 dark:border-gray-600"
+            className="rounded border-[var(--color-border-strong)]"
           />
           Has active hub
         </label>
@@ -119,7 +119,7 @@ export default function SchoolsPage() {
           <select
             value={institutionType}
             onChange={(e) => setInstitutionType(e.target.value)}
-            className="w-full px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+            className="w-full px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
           >
             <option value="">All types</option>
             {INSTITUTION_TYPE_OPTIONS.map((opt) => (
@@ -137,7 +137,7 @@ export default function SchoolsPage() {
           <select
             value={ownership}
             onChange={(e) => setOwnership(e.target.value)}
-            className="w-full px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+            className="w-full px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
           >
             <option value="">All ownership types</option>
             {OWNERSHIP_OPTIONS.map((opt) => (
@@ -156,7 +156,7 @@ export default function SchoolsPage() {
             value={stateQuery}
             onChange={(e) => setStateQuery(e.target.value)}
             placeholder="e.g. Lagos"
-            className="w-full px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+            className="w-full px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
           />
         </div>
       </aside>
@@ -211,7 +211,7 @@ export default function SchoolsPage() {
             <button
               onClick={handleLoadMore}
               disabled={loadingMore}
-              className="text-sm px-4 py-2 rounded border border-gray-300 dark:border-gray-600 disabled:opacity-50"
+              className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)] disabled:opacity-50"
             >
               {loadingMore ? "Loading..." : "View more"}
             </button>

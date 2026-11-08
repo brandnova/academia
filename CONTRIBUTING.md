@@ -138,6 +138,8 @@ Keep the first line under about 70 characters. Add more detail in the commit bod
 6. Keep it small. A PR that does one thing is far easier to review than one that does five. If you find yourself fixing something unrelated along the way, open a separate issue for it instead of bundling it in.
 7. Every PR into `develop` gets an automatic Vercel preview deployment for the frontend, use it to sanity-check your own change before requesting review.
 8. If your PR sits open for a while and `develop` moves on without you, sync it before requesting another review: `git fetch upstream`, then `git merge upstream/develop` on your branch, resolve anything that conflicts, and push again.
+- [ ] `npm run check` passes (lint plus the structure check: no route files
+      in components/, no component files in app/, valid lucide icon names)
 
 ## Review and merge
 

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { X } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
+import { Input } from "@/components/ui/FormControls";
 
 export default function SearchTagFilter({ value, onChange }) {
   const [query, setQuery] = useState("");
@@ -11,15 +12,20 @@ export default function SearchTagFilter({ value, onChange }) {
   const [suggestions, setSuggestions] = useState([]);
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
+  const requestId = useRef(0);
 
   const fetchSuggestions = useCallback(async (q) => {
+    const id = ++requestId.current;
     try {
       const params = new URLSearchParams();
       if (q) params.set("search", q);
       else params.set("popular", "true");
+      params.set("page_size", "10");
       const data = await clientFetch(`/tags/?${params.toString()}`);
-      setSuggestions(data.results.slice(0, 6));
+      if (id !== requestId.current) return;
+      setSuggestions(data.results);
     } catch {
+      if (id !== requestId.current) return;
       setSuggestions([]);
     }
   }, []);
@@ -49,15 +55,19 @@ export default function SearchTagFilter({ value, onChange }) {
 
   return (
     <div ref={containerRef} className="relative">
-      <input
+      <Input
+        size="sm"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => setOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") setOpen(false);
+        }}
         placeholder="Filter by tag..."
-        className="w-full px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+        aria-label="Filter by tag"
       />
       {open && suggestions.length > 0 && (
-        <div className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg max-h-48 overflow-auto">
+        <div className="absolute z-dropdown mt-1 w-full bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg max-h-48 overflow-auto">
           {suggestions.map((tag) => (
             <button
               key={tag.id}

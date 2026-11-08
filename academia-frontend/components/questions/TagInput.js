@@ -12,8 +12,10 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
+  const requestId = useRef(0);
 
   const fetchSuggestions = useCallback(async (q) => {
+    const id = ++requestId.current;
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -22,12 +24,17 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
       } else {
         params.set("popular", "true");
       }
+      // The list is paginated now, and a suggestion box never needs more
+      // than a handful.
+      params.set("page_size", "10");
       const data = await clientFetch(`/tags/?${params.toString()}`);
-      setSuggestions(data.results.slice(0, 8));
+      if (id !== requestId.current) return;
+      setSuggestions(data.results);
     } catch {
+      if (id !== requestId.current) return;
       setSuggestions([]);
     } finally {
-      setLoading(false);
+      if (id === requestId.current) setLoading(false);
     }
   }, []);
 
@@ -68,6 +75,8 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
       if (query.trim()) addTag(query);
     } else if (e.key === "Backspace" && !query && value.length > 0) {
       removeTag(value[value.length - 1]);
+    } else if (e.key === "Escape") {
+      setOpen(false);
     }
   }
 
@@ -75,7 +84,7 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
 
   return (
     <div ref={containerRef} className="relative">
-      <div className="w-full min-h-[42px] px-2 py-1.5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 flex flex-wrap items-center gap-1.5">
+      <div className="w-full min-h-[42px] px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 flex flex-wrap items-center gap-1.5">
         {value.map((tag) => (
           <span
             key={tag}
@@ -98,6 +107,7 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setOpen(true)}
             onKeyDown={handleKeyDown}
+            aria-label="Add tags"
             placeholder={value.length === 0 ? "Search or add tags..." : ""}
             className="flex-1 min-w-[100px] text-sm bg-transparent outline-none py-0.5"
           />
@@ -105,7 +115,7 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
       </div>
 
       {open && (
-        <div className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg max-h-48 overflow-auto">
+        <div className="absolute z-dropdown mt-1 w-full bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg max-h-48 overflow-auto">
           {loading && <p className="px-3 py-2 text-xs text-gray-400">Searching...</p>}
           {!loading && unselectedSuggestions.length === 0 && (
             <p className="px-3 py-2 text-xs text-gray-400">

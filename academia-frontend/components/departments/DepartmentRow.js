@@ -52,12 +52,12 @@ export default function DepartmentRow({ department, onUpdated }) {
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm flex-1 min-w-[120px]"
+              className="px-2 py-1 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm flex-1 min-w-[120px]"
             />
             <input
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm w-20 shrink-0"
+              className="px-2 py-1 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm w-20 shrink-0"
             />
             <div className="flex items-center gap-1 shrink-0">
               <button onClick={save} disabled={status === "loading"} className="text-accent p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 disabled:opacity-40 transition-colors">

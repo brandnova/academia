@@ -28,14 +28,45 @@
 :root {
   --color-bg: #FBFAF8;
   --color-text: #16140F;
+  /* Dividers, card edges, structural lines. */
   --color-border: #E5E3DF;
+  /* Form controls and outlined buttons only. A warm replacement for the
+     cool gray-300/600 literals those used to carry, one step stronger than
+     --color-border so a field reads as a field. Retune here, nowhere else. */
+  --color-border-strong: #CFCBC2;
+  /* Secondary text: timestamps, meta rows, hints. Measured against every
+     surface the app uses, at least 4.5:1 (WCAG AA). Replaces the text-gray-400
+     and text-gray-500 classes, which failed in light mode (400) and dark mode
+     (500). */
+  --color-muted: #67645C;
 }
 
 .dark {
   --color-bg: #16171C;
   --color-text: #F5F3EE;
   --color-border: #2C2D34;
+  --color-border-strong: #3A3B44;
+  --color-muted: #9EA1AB;
 }
+
+@utility text-muted { color: var(--color-muted); }
+
+/* Stacking scale. The whole order, bottom to top, lives here. New overlays
+   pick a level from this list, never a raw number.
+     dropdown 20   popovers and autocomplete panels inside page content
+     sticky 30     TopBar, mobile Ask button
+     overlay 40    drawer backdrop
+     drawer 50     sidebar
+     modal 60      dialogs
+     toast 70      reserved, no toasts exist yet
+     progress 100  navigation progress bar */
+@utility z-dropdown { z-index: 20; }
+@utility z-sticky { z-index: 30; }
+@utility z-overlay { z-index: 40; }
+@utility z-drawer { z-index: 50; }
+@utility z-modal { z-index: 60; }
+@utility z-toast { z-index: 70; }
+@utility z-progress { z-index: 100; }
 
 html {
   overflow-x: hidden;

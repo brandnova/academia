@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { MessageSquare } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 import Skeleton from "@/components/ui/Skeleton";
 import QuestionListRow from "@/components/questions/QuestionListRow";
 
@@ -11,6 +14,17 @@ export default function RecentQuestionsList() {
   const [status, setStatus] = useState("loading");
   const [errorMsg, setErrorMsg] = useState("");
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState("");
+
+  // Same guard the initial fetch effect uses with its cancelled flag: a
+  // load-more response that lands after the user navigated away is dropped.
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   const fetchPage = useCallback(
     (page) => clientFetch(`/questions/?ordering=-created_at&page=${page}`),
@@ -38,14 +52,16 @@ export default function RecentQuestionsList() {
 
   async function handleLoadMore() {
     setLoadingMore(true);
+    setLoadMoreError("");
     try {
       const data = await fetchPage(nextPage);
+      if (!mounted.current) return;
       setQuestions((prev) => [...prev, ...data.results]);
       setNextPage(data.next ? nextPage + 1 : null);
     } catch (err) {
-      setErrorMsg(err.message);
+      if (mounted.current) setLoadMoreError(err.message);
     } finally {
-      setLoadingMore(false);
+      if (mounted.current) setLoadingMore(false);
     }
   }
 
@@ -59,23 +75,21 @@ export default function RecentQuestionsList() {
     );
   }
   if (status === "error") {
-    return (
-      <p className="text-red-600 dark:text-red-400 text-sm">
-        Couldn't load questions: {errorMsg}
-      </p>
-    );
+    return <ErrorMessage>Couldn't load questions: {errorMsg}</ErrorMessage>;
   }
   if (questions.length === 0) {
     return (
-      <p className="text-sm text-gray-500 dark:text-gray-400">
-        No questions yet, be the first to ask one.
-      </p>
+      <EmptyState
+        icon={MessageSquare}
+        title="No questions yet"
+        description="Be the first to ask one."
+      />
     );
   }
 
   return (
     <div>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)] stagger-list">
+      <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
         {questions.map((q) => (
           <QuestionListRow key={q.id} question={q} showSchool />
         ))}
@@ -89,6 +103,7 @@ export default function RecentQuestionsList() {
           >
             {loadingMore ? "Loading..." : "View more"}
           </button>
+          <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
         </div>
       )}
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {MessageSquare, Award, CheckCircle2, MessageCircle, ThumbsUp, ShieldCheck, HelpCircle, Building2, Flag, Bell, Ban, XCircle, FileCheck2} from "lucide-react";
+import { MessageSquare, Award, CheckCircle2, MessageCircle, ThumbsUp, ShieldCheck, HelpCircle, Building2, Flag, Bell, Ban, XCircle, FileCheck2} from "lucide-react";
 import { notificationTargetUrl } from "@/lib/notificationUrl";
 import { timeAgo } from "@/lib/timeAgo";
 
@@ -20,40 +20,47 @@ const ICONS = {
   REPORT_REVIEWED: FileCheck2,
 };
 
-export default function NotificationItem({ notification, onRead, onNavigate }) {
+// compact is for the bell dropdown: every row is exactly 4.875rem tall and the
+// message is clamped to two lines, so the dropdown can show an exact number of
+// rows. NotificationBell's list height (4 rows = 19.5rem) depends on this
+// number. Tailwind needs both as literal classes, keep them in sync.
+export default function NotificationItem({ notification, onRead, onNavigate, compact = false }) {
   const Icon = ICONS[notification.type] || Bell;
   const url = notificationTargetUrl(notification);
+  const unread = !notification.is_read;
 
   function handleClick() {
-    if (!notification.is_read) onRead(notification.id);
+    if (unread) onRead(notification.id);
     onNavigate?.();
   }
 
   const content = (
     <div
-      className={`flex items-start gap-3 px-3 py-2.5 text-sm ${
-        !notification.is_read ? "bg-accent/5" : ""
-      }`}
+      className={`flex gap-3 px-3 text-sm ${
+        compact ? "h-[4.875rem] items-center" : "items-start py-2.5"
+      } ${unread ? "bg-accent/5" : ""}`}
     >
       <Icon
-        className={`w-4 h-4 mt-0.5 shrink-0 ${
-          !notification.is_read ? "text-accent" : "text-gray-400"
+        className={`w-4 h-4 shrink-0 ${compact ? "" : "mt-0.5"} ${
+          unread ? "text-accent" : "text-gray-400"
         }`}
       />
       <div className="min-w-0 flex-1">
         <p
-          className={
-            !notification.is_read
-              ? "font-medium"
-              : "text-gray-600 dark:text-gray-400"
-          }
+          className={`break-words ${compact ? "line-clamp-2" : ""} ${
+            unread ? "font-medium" : "text-gray-600 dark:text-gray-400"
+          }`}
         >
+          {unread && <span className="sr-only">Unread: </span>}
           {notification.message}
         </p>
         <p className="text-xs text-gray-400 mt-0.5">{timeAgo(notification.created_at)}</p>
       </div>
-      {!notification.is_read && (
-        <span className="w-2 h-2 rounded-full bg-accent mt-1.5 shrink-0" />
+      {unread && (
+        <span
+          aria-hidden="true"
+          className={`w-2 h-2 rounded-full bg-accent shrink-0 ${compact ? "" : "mt-1.5"}`}
+        />
       )}
     </div>
   );

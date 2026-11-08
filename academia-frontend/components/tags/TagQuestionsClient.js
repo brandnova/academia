@@ -98,7 +98,7 @@ export default function TagQuestionsClient({ tagName }) {
                     name="status"
                     checked={statusFilter === opt.value}
                     onChange={() => setStatusFilter(opt.value)}
-                    className="border-gray-300 dark:border-gray-600"
+                    className="border-[var(--color-border-strong)]"
                   />
                   {opt.label}
                 </label>
@@ -146,7 +146,7 @@ export default function TagQuestionsClient({ tagName }) {
               <button
                 onClick={handleLoadMore}
                 disabled={loadingMore}
-                className="text-sm px-4 py-2 rounded border border-gray-300 dark:border-gray-600 disabled:opacity-50"
+                className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)] disabled:opacity-50"
               >
                 {loadingMore ? "Loading..." : "View more"}
               </button>

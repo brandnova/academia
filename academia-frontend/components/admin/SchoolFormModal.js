@@ -50,7 +50,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-modal">
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold">{isEdit ? "Edit school" : "New school"}</h2>
@@ -65,7 +65,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
           <div>
@@ -76,7 +76,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
               value={shortName}
               onChange={(e) => setShortName(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
           <div>
@@ -86,7 +86,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
             <input
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
           <div>
@@ -96,7 +96,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
             <input
               value={website}
               onChange={(e) => setWebsite(e.target.value)}
-              className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
 
@@ -108,7 +108,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
               <select
                 value={institutionType}
                 onChange={(e) => setInstitutionType(e.target.value)}
-                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               >
                 <option value="">Not set</option>
                 {INSTITUTION_TYPE_OPTIONS.map((opt) => (
@@ -125,7 +125,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
               <select
                 value={ownership}
                 onChange={(e) => setOwnership(e.target.value)}
-                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               >
                 <option value="">Not set</option>
                 {OWNERSHIP_OPTIONS.map((opt) => (
@@ -146,7 +146,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
                 value={stateName}
                 onChange={(e) => setStateName(e.target.value)}
                 placeholder="e.g. Lagos"
-                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               />
             </div>
             <div>
@@ -156,7 +156,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
               <input
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               />
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
             <button
               type="button"
               onClick={onClose}
-              className="text-sm px-4 py-2 rounded border border-gray-300 dark:border-gray-600"
+              className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)]"
             >
               Cancel
             </button>

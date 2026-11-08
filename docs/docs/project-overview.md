@@ -86,6 +86,8 @@ real data, not mocks.
 - **My profile**: basic info, avatar, own questions/answers
 - **Notifications**: list, mark read
 - **Request hub activation**: form, shown when a school has no active hub
+- **My reports**: the signed-in user's own reports and their outcomes, private
+  and never shown on the profile
 
 ### Moderator
 - **Unanswered questions queue**: scoped to their hub(s)
@@ -96,7 +98,9 @@ real data, not mocks.
 
 ### Admin
 - **Schools management**: create/edit schools
-- **Hub activation requests**: approve/reject queue
+- **Hub activation requests**: approve/reject queue, rejections can carry a reason
+- **Hub management**: moderators, representatives, departments, and taking a hub
+  offline or restoring it
 - **Reports dashboard**: pending/resolved reports
 - **User management**: view/suspend (later phase)
 
@@ -178,8 +182,11 @@ Both are content-first, but this one leans more utilitarian and dense. Principle
 - **"View more" load control**: matches the reference's pattern more closely
   than numbered pagination for long browsing lists; numbered pagination still
   fine for admin/moderator tables where jumping to a specific page matters.
-- **Theme toggle**: light/dark, placed in the footer/settings area like
-  Google's language selector slot.
+- **Theme toggle**: icon button (sun or moon) in the TopBar beside the
+  notification bell, light/dark, persisted in localStorage.
+- **Tabs**: `Tabs` (accessible tablist with arrow-key navigation, scrolls
+  sideways on narrow screens). Used by the profile page, a candidate for the
+  admin, moderation and hub tab bars.
 - Vote control, tag chip, comment thread item, hub header, notification
   bell, report modal, role-aware action bar, unchanged from the original
   list, just restyled to the new visual direction.
@@ -196,6 +203,13 @@ Both are content-first, but this one leans more utilitarian and dense. Principle
   Enum-to-label mappings for institution_type/ownership live in
   `lib/schoolLabels.js`, the single source of truth also consumed by the
   admin school form.
+- **Error message / Empty state**: `ErrorMessage` (error or warning tone,
+  announced to screen readers) and `EmptyState` (icon, title, description,
+  optional action, box or inline variant). Use these instead of ad hoc
+  red text or plain gray "nothing here" lines.
+- **Form controls**: `Input`, `Select`, `Textarea` and `FormField` in
+  `components/ui/FormControls.js`. FormField pairs label, hint and error
+  with the control for correct accessibility wiring.
 
 ---
 
@@ -280,4 +294,8 @@ Resolved during the Phase 0–15 build, kept here for reference:
   gray scale, so structural chrome is never a visually distinct "panel."
   Popover surfaces (profile menu, notification dropdown) are the deliberate
   exception, meant to read as elevated above the page.
-  
+- **Border tokens and stacking**: `--color-border` is for dividers and card
+  edges, `--color-border-strong` for form controls and outlined buttons.
+  Overlays use the named z-index utilities from globals.css (z-dropdown,
+  z-sticky, z-overlay, z-drawer, z-modal, z-toast, z-progress), never raw
+  numbers.

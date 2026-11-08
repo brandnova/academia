@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { Bell } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useAuth } from "@/lib/auth-context";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 import Skeleton from "@/components/ui/Skeleton";
 import NotificationItem from "@/components/notifications/NotificationItem";
 
@@ -137,16 +140,18 @@ export default function NotificationsPage() {
         </div>
       )}
 
-      {status === "error" && (
-        <p className="text-red-600 dark:text-red-400 text-sm">
-          Couldn't load notifications: {errorMsg}
-        </p>
-      )}
+      {status === "error" && <ErrorMessage>Couldn't load notifications: {errorMsg}</ErrorMessage>}
 
       {status === "ready" && notifications.length === 0 && (
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
-          {filter === "unread" ? "No unread notifications." : "No notifications yet."}
-        </p>
+        <EmptyState
+          icon={Bell}
+          title={filter === "unread" ? "No unread notifications" : "No notifications yet"}
+          description={
+            filter === "unread"
+              ? "You're all caught up."
+              : "Activity on your questions and answers will show up here."
+          }
+        />
       )}
 
       {status === "ready" && notifications.length > 0 && (
@@ -162,13 +167,11 @@ export default function NotificationsPage() {
           <button
             onClick={handleLoadMore}
             disabled={loadingMore}
-            className="text-sm px-4 py-2 rounded border border-[var(--color-border)] disabled:opacity-50"
+            className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)] disabled:opacity-50"
           >
             {loadingMore ? "Loading..." : "View more"}
           </button>
-          {loadMoreError && (
-            <p className="text-red-600 dark:text-red-400 text-sm mt-2">{loadMoreError}</p>
-          )}
+          <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
         </div>
       )}
     </div>

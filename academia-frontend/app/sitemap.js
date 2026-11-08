@@ -1,15 +1,29 @@
 import { apiFetch } from "@/lib/api";
+import { schoolUrl } from "@/lib/urls";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-// Safety cap, not a URL-proliferation concern like the filtered listing
-// pages: these are all genuinely distinct, valuable, indexable URLs. The
-// cap exists purely so sitemap generation can't balloon into hundreds of
-// backend requests as the question count grows. Revisit with Next's
-// generateSitemaps() (splitting into multiple sitemap files) once real
-// volume approaches this number, see BUILD_LOG_FRONTEND.md.
-const MAX_QUESTION_PAGES = 25;
-const QUESTION_PAGE_SIZE = 50;
+// Walks a paginated list endpoint. These caps are safety limits, not a
+// URL-proliferation concern: every entry is a distinct, valuable, indexable
+// page. They exist so sitemap generation cannot balloon into hundreds of
+// backend calls as content grows. Revisit with Next's generateSitemaps()
+// (several sitemap files) once real volume approaches them, see
+// BUILD_LOG_FRONTEND.md. If a page fails midway, what was already collected
+// is kept, so a brief backend hiccup never drops a whole section.
+async function fetchAll(path, { pageSize, maxPages }) {
+  const items = [];
+  const separator = path.includes("?") ? "&" : "?";
+  try {
+    for (let page = 1; page <= maxPages; page += 1) {
+      const data = await apiFetch(`${path}${separator}page_size=${pageSize}&page=${page}`);
+      items.push(...data.results);
+      if (!data.next) break;
+    }
+  } catch {
+    // sitemap generation should never fail the build if the backend is briefly down
+  }
+  return items;
+}
 
 export default async function sitemap() {
   const staticRoutes = ["", "/schools", "/tags", "/search"].map((path) => ({
@@ -18,53 +32,32 @@ export default async function sitemap() {
     priority: path === "" ? 1 : 0.7,
   }));
 
-  let schoolRoutes = [];
-  try {
-    const schools = await apiFetch("/schools/?has_hub=true&page_size=100");
-    schoolRoutes = schools.results.map((s) => ({
-      url: `${SITE_URL}/schools/${s.id}`,
-      lastModified: s.updated_at,
-      changeFrequency: "daily",
-      priority: 0.8,
-    }));
-  } catch {
-    // sitemap generation shouldn't fail the build if the backend is briefly down
-  }
+  const [schools, tags, questions] = await Promise.all([
+    fetchAll("/schools/?has_hub=true", { pageSize: 100, maxPages: 10 }),
+    fetchAll("/tags/?popular=true", { pageSize: 100, maxPages: 10 }),
+    fetchAll("/questions/?ordering=-created_at", { pageSize: 50, maxPages: 25 }),
+  ]);
 
-  let tagRoutes = [];
-  try {
-    const tags = await apiFetch("/tags/?popular=true");
-    tagRoutes = tags.results.map((t) => ({
-      url: `${SITE_URL}/tags/${encodeURIComponent(t.name)}`,
-      changeFrequency: "weekly",
-      priority: 0.6,
-    }));
-  } catch {
-    // same as above
-  }
+  const schoolRoutes = schools.map((s) => ({
+    // The canonical school URL carries its slug, same as the page's own
+    // canonical tag.
+    url: `${SITE_URL}${schoolUrl(s)}`,
+    changeFrequency: "daily",
+    priority: 0.8,
+  }));
 
-  let questionRoutes = [];
-  try {
-    let page = 1;
-    let hasNext = true;
-    while (hasNext && page <= MAX_QUESTION_PAGES) {
-      const data = await apiFetch(
-        `/questions/?ordering=-created_at&page_size=${QUESTION_PAGE_SIZE}&page=${page}`
-      );
-      questionRoutes.push(
-        ...data.results.map((q) => ({
-          url: `${SITE_URL}/questions/${q.id}/${q.slug}`,
-          lastModified: q.updated_at,
-          changeFrequency: "weekly",
-          priority: 0.5,
-        }))
-      );
-      hasNext = Boolean(data.next);
-      page += 1;
-    }
-  } catch {
-    // same as above
-  }
+  const tagRoutes = tags.map((t) => ({
+    url: `${SITE_URL}/tags/${encodeURIComponent(t.name)}`,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
+
+  const questionRoutes = questions.map((q) => ({
+    url: `${SITE_URL}/questions/${q.id}/${q.slug}`,
+    lastModified: q.updated_at,
+    changeFrequency: "weekly",
+    priority: 0.5,
+  }));
 
   return [...staticRoutes, ...schoolRoutes, ...tagRoutes, ...questionRoutes];
 }

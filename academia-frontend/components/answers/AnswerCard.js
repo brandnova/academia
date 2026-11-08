@@ -203,7 +203,7 @@ export default function AnswerCard({
       className={`py-5 px-4 rounded-lg border transition-all ${
         answer.is_best && highlightBest
           ? "border-accent bg-accent/5"
-          : "border-gray-200 dark:border-gray-700"
+          : "border-[var(--color-border)]"
       }`}
     >
       {answer.is_best && highlightBest && (

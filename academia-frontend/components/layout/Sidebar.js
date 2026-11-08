@@ -1,10 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, School, Tag, Search, PlusCircle, ShieldCheck, Wrench } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
-import ThemeToggle from "./ThemeToggle";
 import PagesDropdown from "./PagesDropdown";
 
 const BASE_LINKS = [
@@ -17,6 +17,15 @@ const BASE_LINKS = [
 export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
   const { user } = useAuth();
+
+  useEffect(() => {
+    if (!isOpen) return;
+    function handleKeyDown(e) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   const hasModerationAccess =
     user && ((user.moderator_for?.length ?? 0) > 0 || (user.representative_for?.length ?? 0) > 0);
@@ -47,10 +56,18 @@ export default function Sidebar({ isOpen, onClose }) {
 
   return (
     <>
-      {isOpen && <div onClick={onClose} className="fixed inset-0 bg-black/40 z-40" />}
+      {isOpen && (
+        <div
+          aria-hidden="true"
+          onClick={onClose}
+          className="fixed inset-0 bg-black/40 z-overlay"
+        />
+      )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 border-r border-[var(--color-border)] bg-[var(--color-bg)] flex flex-col transition-transform duration-200 ${
+        aria-label="Site menu"
+        inert={!isOpen}
+        className={`fixed inset-y-0 left-0 z-drawer w-64 border-r border-[var(--color-border)] bg-[var(--color-bg)] flex flex-col transition-transform duration-200 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -72,10 +89,6 @@ export default function Sidebar({ isOpen, onClose }) {
             </>
           )}
         </nav>
-
-        <div className="px-4 py-3 border-t border-[var(--color-border)]">
-          <ThemeToggle />
-        </div>
       </aside>
     </>
   );

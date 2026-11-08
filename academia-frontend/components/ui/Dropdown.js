@@ -37,7 +37,7 @@ export default function Dropdown({ trigger, children, panelClassName = DEFAULT_P
       {trigger({ open, toggle })}
       {open && (
         <div
-          className={`bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded-lg shadow-lg z-50 ${panelClassName}`}
+          className={`bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded-lg shadow-lg z-dropdown ${panelClassName}`}
         >
           {typeof children === "function" ? children({ close, open }) : children}
         </div>

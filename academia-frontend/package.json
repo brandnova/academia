@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:structure": "node scripts/check-structure.mjs",
+    "check": "npm run lint && npm run check:structure"
   },
   "dependencies": {
     "lucide-react": "^1.23.0",

@@ -1,12 +1,19 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { Building2 } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
+import { timeAgo } from "@/lib/timeAgo";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { Input } from "@/components/ui/FormControls";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
-import { timeAgo } from "@/lib/timeAgo";
 
 const STATUS_TABS = ["PENDING", "APPROVED", "REJECTED"];
+// The backend stores and emails the rejection reason, and caps it at 1000
+// characters.
+const REASON_MAX = 1000;
 
 export default function ActivationRequestsQueue() {
   const [statusFilter, setStatusFilter] = useState("PENDING");
@@ -18,6 +25,7 @@ export default function ActivationRequestsQueue() {
   const [actionError, setActionError] = useState("");
   const [rejectingId, setRejectingId] = useState(null);
   const [rejectReason, setRejectReason] = useState("");
+  const [rejectError, setRejectError] = useState("");
   const [query, setQuery] = useState("");
 
   const fetchPage = useCallback(
@@ -89,16 +97,20 @@ export default function ActivationRequestsQueue() {
   async function handleReject(id) {
     setActioningId(id);
     setActionError("");
+    setRejectError("");
     try {
       await clientFetch(`/hubs/activation-requests/${id}/reject/`, {
         method: "POST",
-        body: JSON.stringify({ reason: rejectReason || undefined }),
+        body: JSON.stringify({ reason: rejectReason.trim() || undefined }),
       });
       setRequests((prev) => prev.filter((r) => r.id !== id));
       setRejectingId(null);
       setRejectReason("");
     } catch (err) {
-      setActionError(err.message);
+      // A 400 means the reason failed validation. The request stays pending,
+      // so the message belongs next to the field, not in the list footer.
+      if (err.status === 400) setRejectError(err.message);
+      else setActionError(err.message);
     } finally {
       setActioningId(null);
     }
@@ -107,11 +119,13 @@ export default function ActivationRequestsQueue() {
   function openReject(id) {
     setRejectingId(id);
     setRejectReason("");
+    setRejectError("");
   }
 
   function cancelReject() {
     setRejectingId(null);
     setRejectReason("");
+    setRejectError("");
   }
 
   return (
@@ -121,6 +135,7 @@ export default function ActivationRequestsQueue() {
           <button
             key={s}
             onClick={() => setStatusFilter(s)}
+            aria-pressed={statusFilter === s}
             className={`text-xs px-3 py-1 rounded border ${
               statusFilter === s
                 ? "border-accent text-accent"
@@ -137,7 +152,7 @@ export default function ActivationRequestsQueue() {
           <SearchBar value={query} onChange={setQuery} placeholder="Search by school or requester..." />
           <p className="text-xs text-gray-400 mt-1">
             Searches the {requests.length} request{requests.length !== 1 ? "s" : ""} loaded so far.
-            {nextPage && ' Load more below to search further.'}
+            {nextPage && " Load more below to search further."}
           </p>
         </div>
       )}
@@ -149,15 +164,13 @@ export default function ActivationRequestsQueue() {
           ))}
         </div>
       )}
-      {status === "error" && <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>}
+      {status === "error" && <ErrorMessage>{errorMsg}</ErrorMessage>}
       {status === "ready" && requests.length === 0 && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          No {statusFilter.toLowerCase()} requests.
-        </p>
+        <EmptyState icon={Building2} title={`No ${statusFilter.toLowerCase()} requests`} />
       )}
       {status === "ready" && requests.length > 0 && filteredRequests.length === 0 && (
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          No loaded requests match "{query}".
+          No loaded requests match &quot;{query}&quot;.
         </p>
       )}
 
@@ -173,31 +186,53 @@ export default function ActivationRequestsQueue() {
                 Requested by {req.user.full_name}
               </p>
               {req.notes && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 break-words">
                   &quot;{req.notes}&quot;
+                </p>
+              )}
+              {req.rejection_reason && (
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 break-words">
+                  <span className="font-medium">Reason:</span> {req.rejection_reason}
                 </p>
               )}
 
               {statusFilter === "PENDING" && (
                 <div className="mt-2">
                   {rejectingId === req.id ? (
-                    <div className="flex flex-wrap items-center gap-2">
-                      <input
-                        value={rejectReason}
-                        onChange={(e) => setRejectReason(e.target.value)}
-                        placeholder="Reason (optional)"
-                        className="flex-1 min-w-[140px] px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs"
-                      />
-                      <button
-                        onClick={() => handleReject(req.id)}
-                        disabled={actioningId === req.id}
-                        className="text-xs px-3 py-1 rounded border border-red-300 text-red-600 dark:text-red-400 disabled:opacity-50"
-                      >
-                        Confirm reject
-                      </button>
-                      <button onClick={cancelReject} className="text-xs text-gray-400">
-                        Cancel
-                      </button>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Input
+                          size="xs"
+                          fullWidth={false}
+                          className="flex-1 min-w-[140px]"
+                          value={rejectReason}
+                          onChange={(e) => {
+                            setRejectReason(e.target.value);
+                            if (rejectError) setRejectError("");
+                          }}
+                          maxLength={REASON_MAX}
+                          placeholder="Reason (optional)"
+                          aria-label="Rejection reason"
+                          invalid={Boolean(rejectError)}
+                        />
+                        <button
+                          onClick={() => handleReject(req.id)}
+                          disabled={actioningId === req.id}
+                          className="text-xs px-3 py-1 rounded border border-red-300 text-red-600 dark:text-red-400 disabled:opacity-50"
+                        >
+                          {actioningId === req.id ? "Rejecting..." : "Confirm reject"}
+                        </button>
+                        <button onClick={cancelReject} className="text-xs text-gray-400">
+                          Cancel
+                        </button>
+                      </div>
+                      <p className="text-xs text-gray-400 mt-1">
+                        {REASON_MAX - rejectReason.length} characters left. The requester receives
+                        this reason by email.
+                      </p>
+                      <ErrorMessage size="xs" className="mt-1">
+                        {rejectError}
+                      </ErrorMessage>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
@@ -222,7 +257,9 @@ export default function ActivationRequestsQueue() {
           ))}
         </div>
       )}
-      {actionError && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{actionError}</p>}
+      <ErrorMessage size="xs" className="mt-2">
+        {actionError}
+      </ErrorMessage>
       {nextPage && (
         <div className="mt-3 text-center">
           <button
