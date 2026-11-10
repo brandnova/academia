@@ -244,8 +244,8 @@ structure with more personality.
   the page body (not Tailwind's gray-900) so chrome and page background are
   always identical by construction. Popover surfaces (ProfileMenu,
   notification dropdown) deliberately keep bg-white/dark:bg-gray-800,
-  meant to read as elevated above the page, not blended into it. Theme
-  toggle lives at the bottom of the sidebar.
+  meant to read as elevated above the page, not blended into it. Theme 
+  toggle is an icon button in the TopBar beside the notification bell.
 - NaN relative-time fix: timeAgo() now guards against a missing/invalid
   date and returns null rather than NaN; QuestionListRow falls back to
   created_at when updated_at is absent (e.g. search results) and only
@@ -319,13 +319,6 @@ structure with more personality.
 - api-contract.md's Search Users section documents "Admin or School
   Representative" access; a message during development described the
   intended permission as including Moderators instead. Still unconfirmed.
-- Notifications and Reports targeting "answer" or "comment" content have no
-  standalone detail page to deep-link to; both render the content as
-  non-clickable plain text instead of a broken link.
-- Concurrent-request refresh race not yet mitigated: if multiple requests
-  expire at the same moment, more than one may attempt to use the same
-  refresh token before rotation completes, one could be rejected. Unlikely
-  at MVP traffic levels.
 - The HTML-entity arrow sweep (&larr; etc. to lucide icons) is incomplete,
   only the question detail page's back link was converted incidentally
   during the follow/lock work. At minimum the departments page and tags
@@ -405,3 +398,123 @@ give Academia's own seed/editorial account (used to post initial content
 ahead of real user growth) a visible identity mark, since avatars aren't
 rendered anywhere in the current UI and full_name alone was judged not
 distinctive enough on its own.
+
+## Frontend Audit Pass (Post-MVP)
+
+Batch 1, foundations.
+- Shared primitives: ErrorMessage (error and warning tones, role="alert"),
+  EmptyState (box and inline variants), FormControls (Input, Select,
+  Textarea, and FormField, which wires label, hint and error to a control
+  through a render prop). Adopted opportunistically in files each later
+  batch touches, then one grep-scoped sweep at the end.
+- Tokens: --color-border-strong added for form controls and outlined
+  buttons only (light #CFCBC2, dark #3A3B44), dividers stay on
+  --color-border. Measured roughly 1.6:1 against white, retune in one
+  place if a 3:1 control boundary is wanted.
+- Stacking scale in globals.css as @utility classes (z-dropdown 20,
+  z-sticky 30, z-overlay 40, z-drawer 50, z-modal 60, z-toast 70,
+  z-progress 100). Behavior changes: modals now sit above the drawer, the
+  actions menu slides under the sticky TopBar.
+- clientFetch owns friendly copy for network failure, 429 and gateway
+  timeouts, so every action inherits it. 400-level messages untouched.
+- Two ticked backlog items turned out stale against the code (TopBar
+  wordmark, sidebar backdrop) and were fixed properly. Sidebar gained
+  Escape-to-close and inert-when-closed.
+- scripts/check-structure.mjs: route-shaped files outside app/, component
+  files inside app/, and lucide icon-name verification.
+
+Batch 2, auth hardening.
+- Lint: react/no-unescaped-entities and react-hooks/set-state-in-effect are
+  switched off in eslint.config.mjs, with reasons beside them. 68 errors
+  existed before the audit pass and none came from new code. Revisit the
+  second one if data fetching moves to Suspense or a query library.
+- Route handlers: the Google handler and the catch-all proxy catch network
+  failures and return 503 {"error": ...} instead of a raw 500. Backend
+  error bodies still pass through, so the suspended 403 message, the 401
+  and the 429 reach the client unchanged.
+- lib/refreshSession.js: one in-flight refresh per refresh token, result
+  kept for 10 seconds. Cookies are cleared only on a definitive 400 or
+  401, never on 429, 5xx or a network failure. If the refresh succeeds but
+  the retried request fails, the rotated cookies are still returned.
+- Known limits: a race between two serverless instances can still cause a
+  stray logout, and an SSR refresh only reaches the browser when its next
+  request lands within the 10 second window on the same instance.
+- GoogleLoginButton shows errors in a popover under the button. A 403 shows
+  the suspension message plus a contact line, 401 gets friendly copy, and
+  429 and network failures come from clientFetch.
+
+Batch 3, notifications and deep links.
+- Bell dropdown: panel is a flex column (header, scrolling list, pinned
+  footer). The list shows exactly four compact rows (4 x 4.875rem) and the
+  rest scroll with a slim themed scrollbar. NotificationItem gained a
+  compact prop (fixed 4.875rem row, message clamped to two lines), the
+  height is tied to the list's max-h-[19.5rem], change them together.
+  Fetches page_size=6, refetches on every open without flashing the old
+  list, and refetches the unread count on focus and visibility (10 second
+  floor, no polling). A request counter drops stale responses.
+- Deep links: lib/linkTarget.js turns the backend's link_target into a
+  question URL plus #answer-{id}. notificationUrl.js prefers it for every
+  type and falls back to the old hub and question handling. VOTE and
+  NEW_COMMENT notifications are now real links. USER_SUSPENDED and other
+  account notices stay non-link rows.
+- #answer- scroll and flash: AnswerHashFlash (inside AnswersSection) runs
+  on load, hashchange and popstate. lib/locationEvents.js patches
+  history.pushState and replaceState to emit "app:locationchange", because
+  a Next <Link> that only changes the hash fires neither event.
+  lib/flash.js holds the ring flash shared with the best answer "View in
+  list" control, and honors prefers-reduced-motion.
+
+Batch 4, reports.
+- ReportsDashboard: content_exists false shows "Content removed" and hides
+  Resolve & delete (plain resolve and reject stay). A DELETE_CONTENT resolve
+  with auto_resolved_count above zero shows a dismissible notice and
+  refetches page one silently. Content-type select and the escalated filter
+  combine with the status tabs. A request counter drops stale list
+  responses, load-more is guarded the same way. Delete now has an inline
+  confirmation because it cascades to answers, comments and other reports.
+- /my-reports: server wrapper (noindex metadata) around MyReportsClient,
+  GET /reports/mine/ with All, Pending, Reviewed and No action taken tabs.
+  Never shows reviewer or escalation data. Disallowed in robots.js.
+  Linked from ProfileMenu, deliberately not from the profile page or tabs.
+- lib/reportLabels.js holds the report type labels shared by both screens.
+
+Batch 5, admin, moderation and profile.
+- Hub offline: HubStatusControl lives in AdminHubPicker, not on school rows,
+  because an offline hub reports has_hub false and would look the same as
+  no hub. SchoolPicker gained onlyWithHub (default true) so the admin picker
+  can search every school, then GET /hubs/by-school/{id}/, which admins can
+  read while a hub is offline. An offline hub hides HubTeamManager since its
+  moderator and representative routes 404. Only taking offline asks for
+  confirmation. refreshUser() runs after a change because /users/me/ lists
+  only active hubs.
+- SchoolsManager: Active, Inactive, All tabs. A row whose toggle moves it out
+  of the current view is removed locally and the count adjusted.
+- ActivationRequestsQueue: rejection reason shown on rows, reject input capped
+  at 1000 with a remaining counter, a 400 surfaces under the field.
+- UserSearchPicker: excludeIds is keyed by its joined ids so the search
+  callback stays stable, 429 gets its own copy, results disable while an add
+  is in flight. TeamMemberList uses a ref guard against double submits.
+- Profile: section order swapped (no fetch ordering dependency existed),
+  name edit trimmed and validated, avatar alt empty with no-referrer. FormControls
+  gained an lg size for the name field.
+
+Batch 6 and follow-ups.
+- Tags: /tags and TagsManager paginate with load-more (deduped by id because
+  popularity order can shift between pages), TagsManager keeps the search
+  bar mounted while loading. Suggestion lists use page_size=10 and drop stale
+  responses. sitemap.js uses one fetchAll helper (schools 10x100, tags
+  10x100, questions 25x50) that keeps partial results and lists the slugged
+  canonical school URL.
+- Load-more guards: RecentQuestionsList uses a mounted ref, the search page
+  uses a load counter plus a mounted ref, so a late "View more" can no longer
+  append stale rows.
+- SchoolPicker gained notice and busyId props, so feedback about a pick
+  renders under that school's row.
+- ThemeToggle is a TopBar icon button, icons swapped with CSS dark: variants
+  instead of state so the icon never flashes wrong, storage access wrapped in
+  try/catch. The sidebar footer was removed.
+- Profile: components/ui/Tabs.js (accessible tablist, arrow keys, scrolls
+  instead of wrapping), identity card with stats strip, one tab strip that
+  merges recent activity and post history. PostHistoryTabs was deleted.
+- Open: moderators are not told when their hub goes offline because GET
+  /users/me/ omits it. Backend issue drafted, frontend half waits for it.

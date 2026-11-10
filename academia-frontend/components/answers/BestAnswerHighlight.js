@@ -2,14 +2,12 @@
 
 import { CheckCircle2, ThumbsUp, ArrowDown } from "lucide-react";
 import { stripMarkdown } from "@/lib/markdown";
+import { scrollAndFlash } from "@/lib/flash";
 
 export default function BestAnswerHighlight({ answer }) {
   function jumpToAnswer() {
     const el = document.getElementById(`answer-${answer.id}`);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "center" });
-    el.classList.add("ring-2", "ring-accent");
-    setTimeout(() => el.classList.remove("ring-2", "ring-accent"), 1500);
+    if (el) scrollAndFlash(el);
   }
 
   return (

@@ -8,27 +8,41 @@ import {
 import MarkdownRenderer from "./MarkdownRenderer";
 
 const HEADING_ACTIONS = [
-  { key: "h1", icon: Heading1, heading: "#" },
-  { key: "h2", icon: Heading2, heading: "##" },
-  { key: "h3", icon: Heading3, heading: "###" },
+  { key: "h1", label: "Heading 1", icon: Heading1, heading: "#" },
+  { key: "h2", label: "Heading 2", icon: Heading2, heading: "##" },
+  { key: "h3", label: "Heading 3", icon: Heading3, heading: "###" },
 ];
 
 const ACTIONS = [
-  { key: "bold", icon: Bold, before: "**", after: "**", placeholder: "bold text", shortcut: "b" },
-  { key: "italic", icon: Italic, before: "_", after: "_", placeholder: "italic text", shortcut: "i" },
-  { key: "strike", icon: Strikethrough, before: "~~", after: "~~", placeholder: "strikethrough" },
-  { key: "link", icon: LinkIcon, before: "[", after: "](https://)", placeholder: "link text", shortcut: "k" },
-  { key: "ul", icon: List, block: "-" },
-  { key: "ol", icon: ListOrdered, block: "ol" },
-  { key: "quote", icon: Quote, block: ">" },
-  { key: "code", icon: Code, before: "`", after: "`", placeholder: "code", multilineBefore: "```\n", multilineAfter: "\n```" },
+  { key: "bold", label: "Bold", icon: Bold, before: "**", after: "**", placeholder: "bold text", shortcut: "b" },
+  { key: "italic", label: "Italic", icon: Italic, before: "_", after: "_", placeholder: "italic text", shortcut: "i" },
+  { key: "strike", label: "Strikethrough", icon: Strikethrough, before: "~~", after: "~~", placeholder: "strikethrough" },
+  { key: "link", label: "Link", icon: LinkIcon, before: "[", after: "](https://)", placeholder: "link text", shortcut: "k" },
+  { key: "ul", label: "Bulleted list", icon: List, block: "-" },
+  { key: "ol", label: "Numbered list", icon: ListOrdered, block: "ol" },
+  { key: "quote", label: "Quote", icon: Quote, block: ">" },
+  { key: "code", label: "Code", icon: Code, before: "`", after: "`", placeholder: "code", multilineBefore: "```\n", multilineAfter: "\n```" },
 ];
 
-export default function MarkdownEditor({ value, onChange, placeholder, rows = 6, richMode = false }) {
+export default function MarkdownEditor({
+  value,
+  onChange,
+  placeholder,
+  rows = 6,
+  richMode = false,
+  id,
+  invalid = false,
+  "aria-describedby": describedBy,
+  "aria-label": ariaLabel,
+}) {
   const textareaRef = useRef(null);
   const [preview, setPreview] = useState(false);
 
   const allActions = richMode ? [...HEADING_ACTIONS, ...ACTIONS] : ACTIONS;
+
+  const trimmed = value.trim();
+  const wordCount = trimmed ? trimmed.split(/\s+/).length : 0;
+  const charCount = value.length;
 
   function applyAction(action) {
     const textarea = textareaRef.current;
@@ -181,8 +195,12 @@ export default function MarkdownEditor({ value, onChange, placeholder, rows = 6,
   }
 
   return (
-    <div className="my-3 border border-gray-300 dark:border-gray-600 rounded overflow-hidden">
-      <div className="flex flex-wrap items-center gap-2 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-300 dark:border-gray-600 px-2 py-1">
+    <div
+      className={`my-3 border rounded overflow-hidden ${
+        invalid ? "border-red-500" : "border-[var(--color-border-strong)]"
+      }`}
+    >
+      <div className="flex flex-wrap items-center gap-2 bg-gray-50 dark:bg-gray-800/50 border-b border-[var(--color-border-strong)] px-2 py-1">
         <div className="flex flex-wrap items-center gap-0.5">
           {allActions.map((action) => (
             <button
@@ -190,7 +208,8 @@ export default function MarkdownEditor({ value, onChange, placeholder, rows = 6,
               type="button"
               onClick={() => applyAction(action)}
               disabled={preview}
-              title={action.key}
+              title={action.label}
+              aria-label={action.label}
               className="p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-accent disabled:opacity-40 disabled:pointer-events-none transition-colors"
             >
               <action.icon className="w-3.5 h-3.5" />
@@ -212,19 +231,34 @@ export default function MarkdownEditor({ value, onChange, placeholder, rows = 6,
           {value.trim() ? (
             <MarkdownRenderer content={value} allowHeadings={richMode} />
           ) : (
-            <p className="text-sm text-gray-400 italic">Nothing to preview yet.</p>
+            <p className="text-sm text-muted italic">Nothing to preview yet.</p>
           )}
         </div>
       ) : (
         <textarea
           ref={textareaRef}
+          id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           rows={rows}
+          aria-label={ariaLabel}
+          aria-describedby={describedBy}
+          aria-invalid={invalid || undefined}
           className="w-full block resize-y px-3 py-2 bg-white dark:bg-gray-800 text-sm focus:outline-none"
         />
+      )}
+
+      {richMode && (
+        <div className="flex justify-end gap-3 border-t border-[var(--color-border)] bg-gray-50 dark:bg-gray-800/50 px-3 py-1 text-xs text-muted">
+          <span>
+            {wordCount} word{wordCount !== 1 ? "s" : ""}
+          </span>
+          <span>
+            {charCount} character{charCount !== 1 ? "s" : ""}
+          </span>
+        </div>
       )}
     </div>
   );

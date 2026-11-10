@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { MessageSquare } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
+import EmptyState from "@/components/ui/EmptyState";
 import AnswerCard from "./AnswerCard";
 import AnswerForm from "./AnswerForm";
+import AnswerHashFlash from "./AnswerHashFlash";
 import BestAnswerHighlight from "./BestAnswerHighlight";
 
 export default function AnswersSection({ question }) {
@@ -38,6 +41,8 @@ export default function AnswersSection({ question }) {
 
   return (
     <div className="mt-8">
+      <AnswerHashFlash />
+
       {bestAnswer && <BestAnswerHighlight answer={bestAnswer} />}
 
       <h2 className="font-semibold mb-4">
@@ -45,9 +50,12 @@ export default function AnswersSection({ question }) {
       </h2>
 
       {answers.length === 0 ? (
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-          No answers yet. Be the first to help.
-        </p>
+        <EmptyState
+          icon={MessageSquare}
+          title="No answers yet"
+          description="Be the first to help."
+          className="mb-6"
+        />
       ) : (
         <div className="space-y-3 mb-6">
           {answers.map((answer) => (
@@ -66,7 +74,7 @@ export default function AnswersSection({ question }) {
         </div>
       )}
 
-      <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+      <div className="border-t border-[var(--color-border)] pt-6">
         <h3 className="text-sm font-medium mb-3">Your answer</h3>
         <AnswerForm questionId={question.id} locked={question.is_locked} onCreated={handleCreated} />
       </div>

@@ -3,13 +3,16 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
+import { fieldErrorsFrom } from "@/lib/formErrors";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 import MarkdownEditor from "@/components/ui/MarkdownEditor";
 
 export default function AnswerForm({ questionId, locked, onCreated }) {
   const { user } = useAuth();
   const [body, setBody] = useState("");
   const [status, setStatus] = useState("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [bodyError, setBodyError] = useState("");
+  const [generalError, setGeneralError] = useState("");
 
   if (!user) {
     return (
@@ -29,13 +32,13 @@ export default function AnswerForm({ questionId, locked, onCreated }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setBodyError("");
+    setGeneralError("");
     if (!body.trim()) {
-      setStatus("error");
-      setErrorMsg("Answer body is required.");
+      setBodyError("Answer body is required.");
       return;
     }
     setStatus("loading");
-    setErrorMsg("");
     try {
       const answer = await clientFetch("/answers/", {
         method: "POST",
@@ -46,21 +49,26 @@ export default function AnswerForm({ questionId, locked, onCreated }) {
       setStatus("idle");
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err.message);
+      const parsed = fieldErrorsFrom(err, { body: "body" });
+      setBodyError(parsed.fields.body);
+      setGeneralError(parsed.general);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} noValidate>
       <MarkdownEditor
         value={body}
-        onChange={setBody}
+        onChange={(next) => {
+          setBody(next);
+          if (bodyError) setBodyError("");
+        }}
         placeholder="Write your answer..."
         rows={4}
+        aria-label="Your answer"
+        invalid={Boolean(bodyError)}
       />
-      {status === "error" && (
-        <p className="text-red-600 dark:text-red-400 text-sm mb-2">{errorMsg}</p>
-      )}
+      <ErrorMessage className="mb-2">{bodyError || generalError}</ErrorMessage>
       <button
         type="submit"
         disabled={status === "loading"}

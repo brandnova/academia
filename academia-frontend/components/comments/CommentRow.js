@@ -51,7 +51,7 @@ export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
           <input
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            className="flex-1 min-w-[120px] px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs"
+            className="flex-1 min-w-[120px] px-2 py-1 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-xs"
           />
           <div className="flex items-center gap-2 shrink-0 text-[11px]">
             <button onClick={save} disabled={status === "loading"} className="text-accent">

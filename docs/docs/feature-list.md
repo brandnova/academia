@@ -238,6 +238,31 @@
 - [x] Real server-side search added to GET /questions/unanswered/,
       UnansweredQueue now searches the full result set, not just the
       loaded page
+- [x] Reports dashboard follow-ups: content_exists handling ("Content
+      removed", delete action hidden), auto_resolved_count notice with an
+      in-place refresh, content_type filter beside the status tabs, and
+      "View content" deep links from link_target. Resolve & delete now needs
+      a confirmation step.
+- [x] /my-reports page (GET /reports/mine/): the reporter's own reports with
+      status, review date and a link to the content. Private, never on the
+      profile, noindex plus a robots disallow, linked from ProfileMenu.
+- [x] Schools manager Active, Inactive and All tabs (GET /schools/?is_active=),
+      inactive rows carry a visible badge, toggling a row out of the current
+      tab removes it and fixes the count. Failed "View more" now shows an
+      error.
+- [x] Hub offline control for admins (PATCH /hubs/{id}/) in the Hub teams
+      tab, with a confirmation for taking a hub offline. The picker now
+      searches all schools so an offline hub can be found and restored.
+- [x] Activation request rejection reason shown on the Rejected tab, reject
+      input capped at 1000 characters with a remaining counter, and a 400
+      shown inline while the request stays pending.
+- [x] TeamMemberList add flow: double submits blocked with a ref guard, the
+      picker disables its selection while the POST is in flight, and its
+      search callback no longer re-fires on every parent render.
+- [x] UserSearchPicker shows friendly copy for a 429.
+- [x] Profile: "Your posts" now above "Recent activity", name edit trims,
+      disables Save when blank and shows backend field errors inline, avatar
+      is decorative with no-referrer.
 - [ ] GET /hubs/activation-requests/ intentionally kept as loaded-page-
       only search in ActivationRequestsQueue, a deliberate choice, not a
       gap, "bug turned feature"
@@ -454,7 +479,7 @@ truthfulness or presence of content students post.
 
 ## Frontend
 
-- [ ] lucide-react is pinned to ^1.23.0 in package.json, every prior known
+- [x] lucide-react is pinned to ^1.23.0 in package.json, every prior known
       release of this library uses a 0.x scheme. Not currently breaking
       anything (icons render, builds pass), but worth confirming via
       npm ls lucide-react whether this is a genuine 1.0 release or a typo,
@@ -462,7 +487,7 @@ truthfulness or presence of content students post.
 - [x] TopBar's "Academia" wordmark is plain text, not a link, inconsistent
       with Sidebar's identical-looking wordmark which does navigate home.
       TopBar is the persistently visible one, worth making it a Link too
-- [ ] No centralized z-index scale, ad hoc values (TopBar z-30, sidebar
+- [x] No centralized z-index scale, ad hoc values (TopBar z-30, sidebar
       backdrop z-40, sidebar/ProfileMenu dropdown both z-50,
       NavigationProgressBar z-[100]) risk collisions as more overlays are
       added. Worth a small shared constants pass before that happens
@@ -470,12 +495,12 @@ truthfulness or presence of content students post.
       backdrop is a bare div with onClick, no keyboard equivalent or
       button semantics; ThemeToggle's button doesn't expose aria-pressed
       for its current state. Cheap, low-risk, worth doing together
-- [ ] Establish a lint or PR-review convention preventing route-shaped
+- [x] Establish a lint or PR-review convention preventing route-shaped
       files from landing inside components/ (or component files landing
       inside app/), found two real instances of this during the shell
       audit (see Project_audit_notes.md), worth preventing recurrence now
       that contributors are regularly opening PRs
-- [ ] Both auth-related Route Handlers (app/api/backend/auth/google/route.js's
+- [x] Both auth-related Route Handlers (app/api/backend/auth/google/route.js's
       backend fetch, and the token refresh call inside the catch-all
       [...path]/route.js) have no try/catch around the backend network call
       itself, only around bad response handling. If the backend is
@@ -483,19 +508,35 @@ truthfulness or presence of content students post.
       unhandled exception that surfaces as a raw Next.js 500 instead of the
       app's normal error handling. Same gap in two places, worth fixing
       together
-- [ ] lib/jwt.js's decodeJwtExp uses Buffer, Node-runtime-only. Not an
+- [x] lib/jwt.js's decodeJwtExp uses Buffer, Node-runtime-only. Not an
       active bug (these routes default to the Node runtime), but would
       need atob/TextDecoder instead if any auth route is ever moved to the
       Edge runtime
-- [ ] Concurrent-request refresh race, formally consolidated here from
+- [x] Concurrent-request refresh race, formally consolidated here from
       BUILD_LOG_FRONTEND.md's Known Deviations: if multiple requests expire
       at the same moment, more than one may attempt to use the same
       refresh token before rotation completes, one could be rejected.
       Unlikely at MVP traffic levels
-- [ ] RecentQuestionsList's and app/search/page.js's handleLoadMore lack the
-      cancelled-flag unmount guard their own initial-fetch useEffect already
-      uses. Low real-world risk (manual click, not an automatic effect),
-      but worth the same consistency treatment
+- [x] RecentQuestionsList's and the search page's handleLoadMore now drop
+      responses that arrive after unmount or after the filter changed. Load
+      more failures are now shown (RecentQuestionsList stored them but never
+      displayed them).
+- [x] Tag list pagination: /tags browse uses load-more, TagsManager can
+      reach, merge and delete tags past the first 50, tag autocomplete, the
+      search tag filter and the merge control request page_size=10, and
+      sitemap.js walks every page of tags.
+- [x] Sitemap lists canonical slugged school URLs and walks every page of
+      schools, tags and questions through one helper that keeps partial
+      results on failure.
+- [x] TagsManager no longer replaces its search bar with a skeleton while
+      loading, which dropped focus on every debounced search.
+- [x] Theme toggle moved from the sidebar footer to an icon button in the
+      TopBar beside the notification bell.
+- [x] Profile page: identity card (avatar, inline name edit, role chips,
+      moderation link, stats strip) above one tab strip (Activity,
+      Questions, Answers, Comments). Tabs stay mounted once opened.
+- [x] Admin hub picker shows its "no hub yet" message under the school that
+      was picked, and rows show an opening state.
 - [x] Question detail's "back to school" link now routes directly via
       schoolUrl() instead of through the /hubs/{id} redirect hop.
       QuestionHubSchoolSerializer gained an id field, additive, needed
@@ -508,30 +549,34 @@ truthfulness or presence of content students post.
       extracting into one shared component (e.g. a small IconLabel) so
       icon-to-text proportion stays consistent by construction instead of
       needing to be independently gotten right in every new usage
-- [ ] border-gray-200 dark:border-gray-700 (Tailwind's literal gray scale)
+- [x] border-gray-200 dark:border-gray-700 (Tailwind's literal gray scale)
       still appears in place of border-[var(--color-border)] (the project's
       actual warm-neutral border token) in at least HubQuestionList and
       app/tags/[name]/page.js's list containers, found independently in two
       different passes of this audit, likely present elsewhere too. Worth
       one project-wide search-and-fix rather than continuing to patch
       individual instances as they're found
-- [ ] NotificationBell's dropdown only ever fetches once per session
+- [x] NotificationBell's dropdown only ever fetches once per session
       (toggle() skips refetching once status leaves "idle"), so both the
       notification list and its own unread count go stale after the first
       open, a new notification arriving mid-session won't show up, in the
       list or the badge, until a full page reload. Worth a deliberate
       decision on the right fix (refetch on every open, a periodic poll,
       or something event-driven) rather than picking one blind
-- [ ] ReportButton's modal uses raw border-gray-300 dark:border-gray-600
+- [x] ReportButton's modal uses raw border-gray-300 dark:border-gray-600
       instead of border-[var(--color-border)], the only modal shell in the
       app still on the un-tokenized value, RequestHubModal already uses
       the token correctly. Small, fix opportunistically
-- [ ] Filter sidebar (FilterSidebar, shared across HubQuestionList, search,
+- [x] Filter sidebar (FilterSidebar, shared across HubQuestionList, search,
       and tag question lists) stacks above the results list on mobile by
       default grid behavior, meaning a mobile visitor has to scroll past
       the entire filter panel before seeing any question. Worth a
       collapsible/toggle treatment on narrow screens, one shared component
       fix covers all three usages
+- [ ] Hub offline notice for moderators and representatives: needs a backend
+      change first (keep offline hubs in moderator_for and representative_for
+      with a hub_active flag, plus HUB_DEACTIVATED and HUB_REACTIVATED
+      notifications), then a banner on /moderation.
 - [ ] Empty states across the app are plain gray text ("No questions yet.",
       "No comments yet.", etc.) with no visual weight. A small shared
       EmptyState component (icon + message + optional call-to-action)

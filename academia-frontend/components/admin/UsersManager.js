@@ -121,7 +121,7 @@ export default function UsersManager() {
         <p className="text-sm text-gray-500 dark:text-gray-400">No users found.</p>
       )}
       {status === "ready" && users.length > 0 && (
-        <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)]">
+        <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
           {users.map((u) => (
             <div key={u.id} className="flex items-center justify-between py-2.5 px-2 text-sm">
               <div className="min-w-0">

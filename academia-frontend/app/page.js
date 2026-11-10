@@ -135,7 +135,7 @@ export default async function HomePage() {
                   <Link
                     key={t.id}
                     href={`/tags/${encodeURIComponent(t.name)}`}
-                    className="text-xs px-2.5 py-1 rounded border border-gray-300 dark:border-gray-600 hover:border-accent hover:text-accent transition-colors"
+                    className="text-xs px-2.5 py-1 rounded border border-[var(--color-border-strong)] hover:border-accent hover:text-accent transition-colors"
                   >
                     {t.name}
                   </Link>

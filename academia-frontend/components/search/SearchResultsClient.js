@@ -1,9 +1,12 @@
 "use client";
 
-import { Suspense, useState, useEffect, useCallback } from "react";
+import { Suspense, useState, useEffect, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
+import { Search } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
 import QuestionListRow from "@/components/questions/QuestionListRow";
@@ -26,6 +29,18 @@ function SearchResults() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [loadMoreError, setLoadMoreError] = useState("");
 
+  // loadId changes every time a new first page is requested (query or tag
+  // changed). A "View more" response is only appended if the search it
+  // belongs to is still the current one, and the component is still mounted.
+  const loadId = useRef(0);
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+
   const fetchPage = useCallback(
     async (page) => {
       const params = new URLSearchParams();
@@ -38,38 +53,38 @@ function SearchResults() {
   );
 
   useEffect(() => {
-    let cancelled = false;
+    const id = ++loadId.current;
     setStatus("loading");
     setErrorMsg("");
+    setLoadMoreError("");
     fetchPage(1)
       .then((data) => {
-        if (cancelled) return;
+        if (id !== loadId.current) return;
         setResults(data.results);
         setCount(data.count);
         setNextPage(data.next ? 2 : null);
         setStatus("ready");
       })
       .catch((err) => {
-        if (cancelled) return;
+        if (id !== loadId.current) return;
         setErrorMsg(err.message);
         setStatus("error");
       });
-    return () => {
-      cancelled = true;
-    };
   }, [fetchPage]);
 
   async function handleLoadMore() {
+    const id = loadId.current;
     setLoadingMore(true);
     setLoadMoreError("");
     try {
       const data = await fetchPage(nextPage);
+      if (!mounted.current || id !== loadId.current) return;
       setResults((prev) => [...prev, ...data.results]);
       setNextPage(data.next ? nextPage + 1 : null);
     } catch (err) {
-      setLoadMoreError(err.message);
+      if (mounted.current && id === loadId.current) setLoadMoreError(err.message);
     } finally {
-      setLoadingMore(false);
+      if (mounted.current) setLoadingMore(false);
     }
   }
 
@@ -108,17 +123,20 @@ function SearchResults() {
             </div>
           )}
 
-          {status === "error" && (
-            <p className="text-red-600 dark:text-red-400 text-sm">
-              Couldn't search: {errorMsg}
-            </p>
-          )}
+          {status === "error" && <ErrorMessage>Couldn't search: {errorMsg}</ErrorMessage>}
 
           {status === "ready" && results.length === 0 && (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
-              No questions found{debouncedQuery ? ` for "${debouncedQuery}"` : ""}
-              {tagFilter ? ` tagged "${tagFilter}"` : ""}.
-            </p>
+            <EmptyState
+              icon={Search}
+              title="No questions found"
+              description={
+                debouncedQuery || tagFilter
+                  ? `Nothing matches${debouncedQuery ? ` "${debouncedQuery}"` : ""}${
+                      tagFilter ? ` tagged "${tagFilter}"` : ""
+                    }. Try fewer or different words.`
+                  : undefined
+              }
+            />
           )}
 
           {status === "ready" && results.length > 0 && (
@@ -127,7 +145,7 @@ function SearchResults() {
                 {count} result{count !== 1 ? "s" : ""}
                 {!debouncedQuery && " · sorted by relevance and activity"}
               </p>
-              <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)] stagger-list">
+              <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
                 {results.map((q) => (
                   <QuestionListRow key={q.id} question={q} showSchool />
                 ))}
@@ -144,9 +162,7 @@ function SearchResults() {
               >
                 {loadingMore ? "Loading..." : "View more"}
               </button>
-              {loadMoreError && (
-                <p className="text-red-600 dark:text-red-400 text-sm mt-2">{loadMoreError}</p>
-              )}
+              <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
             </div>
           )}
         </div>

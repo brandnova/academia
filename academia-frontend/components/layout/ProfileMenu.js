@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronDown, User, LogOut } from "lucide-react";
+import { ChevronDown, User, Flag, LogOut } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import GoogleLoginButton from "@/components/auth/GoogleLoginButton";
 import Dropdown from "@/components/ui/Dropdown";
@@ -44,6 +44,14 @@ export default function ProfileMenu() {
           >
             <User className="w-4 h-4" />
             Your profile
+          </Link>
+          <Link
+            href="/my-reports"
+            onClick={close}
+            className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700"
+          >
+            <Flag className="w-4 h-4" />
+            My reports
           </Link>
           <button
             onClick={() => {

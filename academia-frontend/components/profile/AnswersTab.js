@@ -67,7 +67,7 @@ export default function AnswersTab() {
 
   return (
     <div>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-[var(--color-border)] stagger-list">
+      <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
         {answers.map((a) => (
           <Link
             key={a.id}

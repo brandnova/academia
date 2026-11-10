@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { clientFetch } from "@/lib/clientApi";
 import { useAuth } from "@/lib/auth-context";
 import { questionUrl } from "@/lib/urls";
+import { fieldErrorsFrom } from "@/lib/formErrors";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { FormField, Input, Select } from "@/components/ui/FormControls";
 import SchoolPicker from "@/components/questions/SchoolPicker";
 import TagInput from "@/components/questions/TagInput";
 import MarkdownEditor from "@/components/ui/MarkdownEditor";
@@ -16,25 +19,28 @@ function AskQuestionForm() {
   const { user, loading: authLoading } = useAuth();
 
   const [hub, setHub] = useState(null);
-  const [hubLoadStatus, setHubLoadStatus] = useState(prefilledHubId ? "loading" : "idle");
+  const [prefillStatus, setPrefillStatus] = useState(prefilledHubId ? "loading" : "idle");
+  const [selectingId, setSelectingId] = useState(null);
+  const [pickNotice, setPickNotice] = useState(null);
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [departmentId, setDepartmentId] = useState("");
   const [tags, setTags] = useState([]);
   const [status, setStatus] = useState("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [generalError, setGeneralError] = useState("");
 
   const loadHubById = useCallback(async (hubId) => {
-    setHubLoadStatus("loading");
+    setPrefillStatus("loading");
     try {
       const data = await clientFetch(`/hubs/${hubId}/`);
       setHub(data);
-      setHubLoadStatus("ready");
     } catch {
       // Bad or stale ?hub= param: fall back to the picker instead of a dead end
       setHub(null);
-      setHubLoadStatus("idle");
+    } finally {
+      setPrefillStatus("idle");
     }
   }, []);
 
@@ -43,33 +49,35 @@ function AskQuestionForm() {
   }, [prefilledHubId, loadHubById]);
 
   async function handleSelectSchool(school) {
-    setHubLoadStatus("loading");
-    setErrorMsg("");
+    if (selectingId) return;
+    setPickNotice(null);
+    setSelectingId(school.id);
     try {
       const data = await clientFetch(`/hubs/by-school/${school.id}/`);
       setHub(data);
-      setHubLoadStatus("ready");
     } catch (err) {
-      setHubLoadStatus("idle");
-      setErrorMsg(err.message);
+      setPickNotice({ schoolId: school.id, tone: "error", text: err.message });
+    } finally {
+      setSelectingId(null);
     }
   }
 
   function handleChangeSchool() {
     setHub(null);
     setDepartmentId("");
-    setHubLoadStatus("idle");
+    setFieldErrors({});
+    setGeneralError("");
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setGeneralError("");
     if (!body.trim()) {
-      setStatus("error");
-      setErrorMsg("Body is required.");
+      setFieldErrors({ body: "Body is required." });
       return;
     }
+    setFieldErrors({});
     setStatus("loading");
-    setErrorMsg("");
     try {
       const question = await clientFetch("/questions/", {
         method: "POST",
@@ -84,19 +92,24 @@ function AskQuestionForm() {
       router.push(questionUrl(question));
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err.message);
+      const parsed = fieldErrorsFrom(err, {
+        title: "title",
+        body: "body",
+        department: "department_id",
+        tags: "tags",
+      });
+      setFieldErrors(parsed.fields);
+      setGeneralError(parsed.general);
     }
   }
 
-  if (authLoading) return <p className="text-gray-500">Loading...</p>;
+  if (authLoading || prefillStatus === "loading") return <p className="text-gray-500">Loading...</p>;
 
   if (!user) {
     return (
       <p className="text-gray-500 dark:text-gray-400">You need to log in to ask a question.</p>
     );
   }
-
-  if (hubLoadStatus === "loading") return <p className="text-gray-500">Loading...</p>;
 
   if (!hub) {
     return (
@@ -105,8 +118,7 @@ function AskQuestionForm() {
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
           Which school is this about?
         </p>
-        <SchoolPicker onSelect={handleSelectSchool} />
-        {errorMsg && <p className="text-red-600 dark:text-red-400 text-sm mt-3">{errorMsg}</p>}
+        <SchoolPicker onSelect={handleSelectSchool} notice={pickNotice} busyId={selectingId} />
       </div>
     );
   }
@@ -125,51 +137,59 @@ function AskQuestionForm() {
         </button>
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Title</label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Body</label>
-          <MarkdownEditor
-            value={body}
-            onChange={setBody}
-            placeholder="Describe your question in detail..."
-            rows={6}
-          />
-        </div>
+      <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        <FormField label="Title" error={fieldErrors.title}>
+          {(field) => (
+            <Input
+              {...field}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          )}
+        </FormField>
+
+        <FormField label="Body" error={fieldErrors.body}>
+          {(field) => (
+            <MarkdownEditor
+              {...field}
+              value={body}
+              onChange={setBody}
+              placeholder="Describe your question in detail..."
+              rows={6}
+            />
+          )}
+        </FormField>
+
         {hub.departments?.length > 0 && (
-          <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-              Department (optional)
-            </label>
-            <select
-              value={departmentId}
-              onChange={(e) => setDepartmentId(e.target.value)}
-              className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
-            >
-              <option value="">None</option>
-              {hub.departments.map((d) => (
-                <option key={d.id} value={d.id}>
-                  {d.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <FormField label="Department (optional)" error={fieldErrors.department}>
+            {(field) => (
+              <Select
+                {...field}
+                value={departmentId}
+                onChange={(e) => setDepartmentId(e.target.value)}
+              >
+                <option value="">None</option>
+                {hub.departments.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name}
+                  </option>
+                ))}
+              </Select>
+            )}
+          </FormField>
         )}
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Tags</label>
-          <TagInput value={tags} onChange={setTags} />
-        </div>
-        {status === "error" && (
-          <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>
-        )}
+
+        <FormField error={fieldErrors.tags}>
+          {() => (
+            <div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Tags</p>
+              <TagInput value={tags} onChange={setTags} />
+            </div>
+          )}
+        </FormField>
+
+        <ErrorMessage>{generalError}</ErrorMessage>
         <button
           type="submit"
           disabled={status === "loading"}

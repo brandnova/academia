@@ -42,7 +42,7 @@ export default function LockToggle({ question }) {
         className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border disabled:opacity-50 ${
           question.is_locked
             ? "border-red-300 text-red-600 dark:text-red-400"
-            : "border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400"
+            : "border-[var(--color-border-strong)] text-gray-500 dark:text-gray-400"
         }`}
       >
         {question.is_locked ? <Unlock className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}

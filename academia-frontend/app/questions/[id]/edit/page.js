@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { clientFetch } from "@/lib/clientApi";
 import { useAuth } from "@/lib/auth-context";
 import { questionUrl } from "@/lib/urls";
+import { fieldErrorsFrom } from "@/lib/formErrors";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { FormField, Input, Select } from "@/components/ui/FormControls";
 import Skeleton from "@/components/ui/Skeleton";
 import TagInput from "@/components/questions/TagInput";
 import MarkdownEditor from "@/components/ui/MarkdownEditor";
@@ -23,7 +26,8 @@ export default function EditQuestionPage({ params }) {
   const [departmentId, setDepartmentId] = useState("");
   const [tags, setTags] = useState([]);
   const [saveStatus, setSaveStatus] = useState("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [generalError, setGeneralError] = useState("");
 
   const load = useCallback(async () => {
     setLoadStatus("loading");
@@ -48,13 +52,13 @@ export default function EditQuestionPage({ params }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setGeneralError("");
     if (!body.trim()) {
-      setSaveStatus("error");
-      setErrorMsg("Body is required.");
+      setFieldErrors({ body: "Body is required." });
       return;
     }
+    setFieldErrors({});
     setSaveStatus("loading");
-    setErrorMsg("");
     try {
       const updated = await clientFetch(`/questions/${id}/`, {
         method: "PATCH",
@@ -68,7 +72,14 @@ export default function EditQuestionPage({ params }) {
       router.push(questionUrl(updated));
     } catch (err) {
       setSaveStatus("error");
-      setErrorMsg(err.message);
+      const parsed = fieldErrorsFrom(err, {
+        title: "title",
+        body: "body",
+        department: "department_id",
+        tags: "tags",
+      });
+      setFieldErrors(parsed.fields);
+      setGeneralError(parsed.general);
     }
   }
 
@@ -82,7 +93,7 @@ export default function EditQuestionPage({ params }) {
   }
 
   if (loadStatus === "error") {
-    return <p className="text-red-600 dark:text-red-400">Couldn't load this question.</p>;
+    return <ErrorMessage>Couldn't load this question.</ErrorMessage>;
   }
 
   if (!user || user.id !== question.author.id) {
@@ -96,52 +107,60 @@ export default function EditQuestionPage({ params }) {
   return (
     <div className="max-w-2xl">
       <h1 className="text-xl font-semibold mb-6">Edit question</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Title</label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Body</label>
-          <MarkdownEditor 
-            value={body} 
-            onChange={setBody} 
-            placeholder="Describe your question in detail..." 
-            rows={6} 
-          />
-        </div>
+      <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        <FormField label="Title" error={fieldErrors.title}>
+          {(field) => (
+            <Input
+              {...field}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          )}
+        </FormField>
+
+        <FormField label="Body" error={fieldErrors.body}>
+          {(field) => (
+            <MarkdownEditor
+              {...field}
+              value={body}
+              onChange={setBody}
+              placeholder="Describe your question in detail..."
+              rows={6}
+            />
+          )}
+        </FormField>
+
         {hubDepartments.length > 0 && (
-          <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-              Department
-            </label>
-            <select
-              value={departmentId}
-              onChange={(e) => setDepartmentId(e.target.value)}
-              className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
-            >
-              <option value="">None</option>
-              {hubDepartments.map((d) => (
-                <option key={d.id} value={d.id}>
-                  {d.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <FormField label="Department" error={fieldErrors.department}>
+            {(field) => (
+              <Select
+                {...field}
+                value={departmentId}
+                onChange={(e) => setDepartmentId(e.target.value)}
+              >
+                <option value="">None</option>
+                {hubDepartments.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name}
+                  </option>
+                ))}
+              </Select>
+            )}
+          </FormField>
         )}
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Tags</label>
-          <TagInput value={tags} onChange={setTags} />
-        </div>
-        {saveStatus === "error" && (
-          <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>
-        )}
-        <div className="w-max flex flex-row justify-between gap-[20px]">
+
+        <FormField error={fieldErrors.tags}>
+          {() => (
+            <div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Tags</p>
+              <TagInput value={tags} onChange={setTags} />
+            </div>
+          )}
+        </FormField>
+
+        <ErrorMessage>{generalError}</ErrorMessage>
+        <div className="flex items-center gap-3">
           <button
             type="submit"
             disabled={saveStatus === "loading"}
@@ -151,7 +170,7 @@ export default function EditQuestionPage({ params }) {
           </button>
           <button
             type="button"
-            className="px-4 py-2 rounded border border-gray-300 dark:border-gray-600 text-sm cursor-pointer"
+            className="px-4 py-2 rounded border border-[var(--color-border-strong)] text-sm"
             onClick={() => router.push(questionUrl(question))}
           >
             Cancel

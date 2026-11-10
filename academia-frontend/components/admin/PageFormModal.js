@@ -36,7 +36,7 @@ export default function PageFormModal({ page, onClose, onSaved }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-modal">
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold">{isEdit ? "Edit page" : "New page"}</h2>
@@ -54,7 +54,7 @@ export default function PageFormModal({ page, onClose, onSaved }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
           {isEdit && (
@@ -78,7 +78,7 @@ export default function PageFormModal({ page, onClose, onSaved }) {
               <select
                 value={visibility}
                 onChange={(e) => setVisibility(e.target.value)}
-                className="px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                className="px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               >
                 <option value="PUBLIC">Public</option>
                 <option value="STAFF">Staff only</option>
@@ -99,7 +99,7 @@ export default function PageFormModal({ page, onClose, onSaved }) {
             <button
               type="button"
               onClick={onClose}
-              className="text-sm px-4 py-2 rounded border border-gray-300 dark:border-gray-600"
+              className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)]"
             >
               Cancel
             </button>

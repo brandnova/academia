@@ -9,6 +9,7 @@ export default function robots() {
         "/admin",
         "/moderation",
         "/profile",
+        "/my-reports",
         "/notifications",
         "/questions/new",
         "/questions/*/edit",

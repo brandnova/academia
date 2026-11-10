@@ -79,7 +79,7 @@ export default function CommentThread({ answerId, hubId, commentCount, onCountCh
       </button>
 
       {expanded && (
-        <div className="mt-2 pl-3 border-l-2 border-gray-200 dark:border-gray-700 space-y-2">
+        <div className="mt-2 pl-3 border-l-2 border-[var(--color-border)] space-y-2">
           {status === "loading" && <p className="text-xs text-gray-400">Loading comments...</p>}
           {status === "error" && (
             <p className="text-xs text-red-600 dark:text-red-400">
@@ -107,7 +107,7 @@ export default function CommentThread({ answerId, hubId, commentCount, onCountCh
                 onChange={(e) => setNewBody(e.target.value)}
                 required
                 placeholder="Add a comment..."
-                className="flex-1 px-2 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs"
+                className="flex-1 px-2 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-xs"
               />
               <button
                 type="submit"

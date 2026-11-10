@@ -157,7 +157,7 @@ export default function PagesManager() {
         <select
           value={visibilityFilter}
           onChange={(e) => setVisibilityFilter(e.target.value)}
-          className="px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+          className="px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
         >
           {VISIBILITY_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
@@ -168,7 +168,7 @@ export default function PagesManager() {
         <select
           value={publishedFilter}
           onChange={(e) => setPublishedFilter(e.target.value)}
-          className="px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+          className="px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
         >
           {PUBLISHED_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>

@@ -39,7 +39,7 @@ export default function FollowButton({ questionId, initialFollowing }) {
         className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border disabled:opacity-50 ${
           following
             ? "border-accent text-accent"
-            : "border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400"
+            : "border-[var(--color-border-strong)] text-gray-500 dark:text-gray-400"
         }`}
       >
         {following ? <Bell className="w-3.5 h-3.5 fill-current" /> : <BellOff className="w-3.5 h-3.5" />}

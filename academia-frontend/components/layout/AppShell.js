@@ -4,6 +4,7 @@ import { useState } from "react";
 import Sidebar from "./Sidebar";
 import TopBar from "./TopBar";
 import Footer from "./Footer";
+import AskFab from "./AskFab";
 import NavigationProgressBar from "./NavigationProgressBar";
 
 export default function AppShell({ children }) {
@@ -14,8 +15,9 @@ export default function AppShell({ children }) {
       <NavigationProgressBar />
       <TopBar onMenuClick={() => setSidebarOpen((prev) => !prev)} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-6">{children}</main>
+      <main className="flex-1 w-full max-w-5xl mx-auto px-4 pt-6 pb-24 sm:pb-6">{children}</main>
       <Footer />
+      <AskFab />
     </div>
   );
 }

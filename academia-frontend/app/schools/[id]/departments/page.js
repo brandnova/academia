@@ -101,7 +101,7 @@ export default function ManageDepartmentsPage({ params }) {
       {departments.length === 0 ? (
         <p className="text-sm text-gray-500 dark:text-gray-400">No departments yet.</p>
       ) : (
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700 border-y border-gray-200 dark:border-gray-700">
+        <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
           {departments.map((dept) => (
             <DepartmentRow key={dept.id} department={dept} onUpdated={handleUpdated} />
           ))}
