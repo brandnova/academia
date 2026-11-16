@@ -132,7 +132,7 @@ What differs from web:
 | Ask action | Floating pill below `sm`, plus buttons on pages | Raised centre tab |
 | Secondary actions | Dropdown kebab menu | Bottom sheet |
 | Modals | Centered dialogs | Bottom sheets, under 80% height, backdrop tap and swipe dismiss |
-| Sheets | Centered dialogs | Bottom sheets, backdrop tap and Back dismiss, swipe down planned |
+| Sheets | Centered dialogs | Bottom sheets, backdrop tap, Back and a swipe down on the handle dismiss |
 | Filters | Collapsible sidebar | Horizontal chips and a filter sheet |
 | Touch targets | Pointer sized | At least 44pt, bigger toolbar buttons in the editor |
 | Corners | Standard and large radius | 8pt controls, 12pt FAB, 16pt sheet tops |

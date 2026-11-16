@@ -257,12 +257,12 @@ export function Markdown({ markdown, compact, allowHeadings = false, style }: { 
   const { colors } = useTheme();
   const blocks = useMemo(() => parseMarkdown(markdown ?? ''), [markdown]);
   const ctx: InlineContext = { accent: colors.accent, codeBg: colors.subtle };
-  const bodyStyle: StyleProp<TextStyle> = { fontSize: compact ? 14 : 15, lineHeight: compact ? 22 : 24, fontFamily: fonts.regular, color: colors.textSecondary };
+  const bodyStyle: StyleProp<TextStyle> = { fontSize: compact ? 14 : 15, lineHeight: compact ? 22 : 24, fontFamily: fonts.regular, color: colors.ink };
 
   if (blocks.length === 0) {
     return (
       <View style={style}>
-        <RNText style={[bodyStyle, { color: colors.textFaint }]}>Nothing to preview yet.</RNText>
+        <RNText style={[bodyStyle, { color: colors.muted }]}>Nothing to preview yet.</RNText>
       </View>
     );
   }
@@ -274,18 +274,18 @@ export function Markdown({ markdown, compact, allowHeadings = false, style }: { 
 
         if (block.type === 'code') {
           return (
-            <View key={key} style={[styles.codeBlock, { backgroundColor: colors.surfaceMuted }]}>
-              <RNText style={{ fontFamily: MONO, fontSize: 12.5, lineHeight: 19, color: colors.textSecondary }}>{block.text}</RNText>
+            <View key={key} style={[styles.codeBlock, { backgroundColor: colors.subtle }]}>
+              <RNText style={{ fontFamily: MONO, fontSize: 12.5, lineHeight: 19, color: colors.ink }}>{block.text}</RNText>
             </View>
           );
         }
-        if (block.type === 'hr') return <View key={key} style={[styles.hr, { backgroundColor: colors.divider }]} />;
-        if (block.type === 'list') return renderList(block, key, bodyStyle, ctx, colors.textMuted, 0);
+        if (block.type === 'hr') return <View key={key} style={[styles.hr, { backgroundColor: colors.line }]} />;
+        if (block.type === 'list') return renderList(block, key, bodyStyle, ctx, colors.muted, 0);
 
         if (block.type === 'quote') {
           return (
             <View key={key} style={[styles.quote, { borderLeftColor: colors.accent }]}>
-              <RNText style={[bodyStyle, { fontStyle: 'italic', color: colors.textMuted }]}>{renderInline(block.text, key, ctx)}</RNText>
+              <RNText style={[bodyStyle, { fontStyle: 'italic', color: colors.muted }]}>{renderInline(block.text, key, ctx)}</RNText>
             </View>
           );
         }
@@ -293,7 +293,7 @@ export function Markdown({ markdown, compact, allowHeadings = false, style }: { 
         if (allowHeadings && (block.type === 'h1' || block.type === 'h2' || block.type === 'h3')) {
           const size = block.type === 'h1' ? 19 : block.type === 'h2' ? 17 : 15;
           return (
-            <RNText key={key} style={{ fontSize: size, lineHeight: size * 1.35, fontFamily: fonts.bold, color: colors.text }}>
+            <RNText key={key} style={{ fontSize: size, lineHeight: size * 1.35, fontFamily: fonts.bold, color: colors.ink }}>
               {renderInline(block.text, key, ctx)}
             </RNText>
           );

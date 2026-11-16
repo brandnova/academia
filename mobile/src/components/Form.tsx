@@ -32,7 +32,7 @@ export function Field({
   return (
     <View style={[{ marginBottom: 14 }, style]}>
       {label ? (
-        <Text size={12} weight="semibold" color={colors.textMuted} style={{ marginBottom: 6 }}>
+        <Text size={12} weight="semibold" color={colors.muted} style={{ marginBottom: 6 }}>
           {label}
         </Text>
       ) : null}
@@ -42,7 +42,7 @@ export function Field({
           {error}
         </Text>
       ) : hint ? (
-        <Text size={11} color={colors.textFaint} style={{ marginTop: 5 }}>
+        <Text size={11} color={colors.muted} style={{ marginTop: 5 }}>
           {hint}
         </Text>
       ) : null}
@@ -62,15 +62,15 @@ export function Input({ label, error, hint, containerStyle, ...rest }: InputProp
   return (
     <Field label={label} error={error} hint={hint} style={containerStyle}>
       <TextInput
-        placeholderTextColor={colors.textFaint}
+        placeholderTextColor={colors.muted}
         {...rest}
         style={[
           styles.input,
           webInputReset,
           {
             backgroundColor: colors.surface,
-            borderColor: error ? colors.danger : colors.border,
-            color: colors.text,
+            borderColor: error ? colors.danger : colors.strong,
+            color: colors.ink,
           },
         ]}
       />
@@ -88,7 +88,7 @@ export function TextArea({
   return (
     <Field label={label} error={error}>
       <TextInput
-        placeholderTextColor={colors.textFaint}
+        placeholderTextColor={colors.muted}
         multiline
         textAlignVertical="top"
         {...rest}
@@ -99,8 +99,8 @@ export function TextArea({
           {
             minHeight,
             backgroundColor: colors.surface,
-            borderColor: error ? colors.danger : colors.border,
-            color: colors.text,
+            borderColor: error ? colors.danger : colors.strong,
+            color: colors.ink,
           },
         ]}
       />
@@ -136,15 +136,15 @@ export function SelectRow({
           styles.select,
           {
             backgroundColor: colors.surface,
-            borderColor: colors.border,
+            borderColor: colors.strong,
             opacity: disabled ? 0.55 : pressed ? 0.8 : 1,
           },
         ]}
       >
-        <Text size={14} color={value ? colors.text : colors.textFaint} numberOfLines={1} style={{ flex: 1 }}>
+        <Text size={14} color={value ? colors.ink : colors.muted} numberOfLines={1} style={{ flex: 1 }}>
           {value ?? placeholder}
         </Text>
-        <Icon name="chevronDown" size={11} color={colors.textFaint} />
+        <Icon name="chevronDown" size={11} color={colors.muted} />
       </Pressable>
     </Field>
   );
@@ -169,7 +169,7 @@ export function ToggleRow({
           {label}
         </Text>
         {description ? (
-          <Text size={11} color={colors.textMuted} style={{ marginTop: 2 }}>
+          <Text size={11} color={colors.muted} style={{ marginTop: 2 }}>
             {description}
           </Text>
         ) : null}
@@ -177,7 +177,7 @@ export function ToggleRow({
       <Switch
         value={value}
         onValueChange={onValueChange}
-        trackColor={{ false: colors.surfaceSunken, true: colors.accentSolid }}
+        trackColor={{ false: colors.strong, true: colors.accentSolid }}
         thumbColor="#FFFFFF"
         accessibilityLabel={label}
       />
@@ -189,7 +189,7 @@ export function FormError({ message }: { message?: string | null }) {
   const { colors } = useTheme();
   if (!message) return null;
   return (
-    <View style={[styles.errorBox, { backgroundColor: colors.dangerSoft }]}>
+    <View accessibilityRole="alert" style={[styles.errorBox, { backgroundColor: colors.dangerSoft }]}>
       <Icon name="warning" size={13} color={colors.danger} />
       <Text size={12} color={colors.danger} style={{ flex: 1 }}>
         {message}

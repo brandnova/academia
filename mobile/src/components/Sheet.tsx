@@ -1,9 +1,9 @@
-import React from 'react';
-import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { Animated, Keyboard, KeyboardAvoidingView, Modal, PanResponder, Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Icon, IconName } from '../components/Icon';
-import { Text } from '../components/Text';
+import { Icon, IconName } from './Icon';
+import { Text } from './Text';
 import { useKeyboard } from '../lib/useKeyboard';
 import { radii, sheetShadow, useTheme } from '../theme';
 
@@ -20,47 +20,80 @@ interface SheetProps {
 }
 
 /**
- * Native-feeling bottom sheet. Backdrop tap, Android back, and the close
- * affordance dismiss it. Content is capped at 82 percent of the screen and
- * scrolls when it grows.
+ * Bottom sheet. Backdrop tap, Android back, the close button and a swipe down on the handle area dismiss it.
+ * Content is capped at 82 percent of the screen and scrolls when it grows.
  */
 export function Sheet({ visible, onClose, title, label, children, scroll = true, footer, showClose = false, headerRight }: SheetProps) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
-  const { visible: isKeyboardVisible } = useKeyboard(visible);
+  const { visible: keyboardVisible } = useKeyboard(visible);
+  const drag = useRef(new Animated.Value(0)).current;
+  const height = useRef(0);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
+  const visibleRef = useRef(visible);
+  visibleRef.current = visible;
+
+  useEffect(() => {
+    if (visible) drag.setValue(0);
+  }, [visible, drag]);
+
+  const settle = () => Animated.spring(drag, { toValue: 0, useNativeDriver: true, bounciness: 0 }).start();
+
+  const pan = useMemo(
+    () =>
+      PanResponder.create({
+        onMoveShouldSetPanResponder: (_, g) => g.dy > 4 && g.dy > Math.abs(g.dx),
+        onPanResponderMove: (_, g) => drag.setValue(Math.max(0, g.dy)),
+        onPanResponderRelease: (_, g) => {
+          if (g.dy > Math.max(90, height.current * 0.3) || g.vy > 0.9) {
+            Keyboard.dismiss();
+            Animated.timing(drag, { toValue: height.current || 600, duration: 150, useNativeDriver: true }).start(() => {
+              closeRef.current();
+              // Some sheets step back instead of closing (comments). Slide back up if it is still open.
+              setTimeout(() => visibleRef.current && Animated.timing(drag, { toValue: 0, duration: 180, useNativeDriver: true }).start(), 60);
+            });
+          } else settle();
+        },
+        onPanResponderTerminate: settle,
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [drag],
+  );
 
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent presentationStyle="overFullScreen" onRequestClose={onClose}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.root}>
         <Pressable accessibilityRole="button" accessibilityLabel="Close" onPress={onClose} style={[StyleSheet.absoluteFill, { backgroundColor: colors.overlay }]} />
-        <View
-          style={[
-            styles.panel,
-            { backgroundColor: colors.surface, borderTopColor: colors.line, paddingBottom: isKeyboardVisible ? 12 : Math.max(insets.bottom, 16) },
-            sheetShadow,
-          ]}
+        <Animated.View
+          onLayout={(event) => {
+            height.current = event.nativeEvent.layout.height;
+          }}
+          style={[styles.panel, { backgroundColor: colors.surface, borderTopColor: colors.line, paddingBottom: keyboardVisible ? 12 : Math.max(insets.bottom, 16) }, sheetShadow, { transform: [{ translateY: drag }] }]}
         >
-          <View style={[styles.grabber, { backgroundColor: colors.strong }]} />
+          <View {...pan.panHandlers}>
+            <View style={[styles.grabber, { backgroundColor: colors.strong }]} />
 
-          {label ? (
-            <Text variant="label" color={colors.muted} style={styles.label}>
-              {label}
-            </Text>
-          ) : null}
-
-          {title || showClose || headerRight ? (
-            <View style={styles.header}>
-              <Text variant="title" style={{ flex: 1 }} numberOfLines={2}>
-                {title}
+            {label ? (
+              <Text variant="label" color={colors.muted} style={styles.label}>
+                {label}
               </Text>
-              {headerRight}
-              {showClose ? (
-                <Pressable accessibilityRole="button" accessibilityLabel="Close" hitSlop={8} onPress={onClose}>
-                  <Icon name="close" size={16} color={colors.muted} />
-                </Pressable>
-              ) : null}
-            </View>
-          ) : null}
+            ) : null}
+
+            {title || showClose || headerRight ? (
+              <View style={styles.header}>
+                <Text variant="title" style={{ flex: 1 }} numberOfLines={2}>
+                  {title}
+                </Text>
+                {headerRight}
+                {showClose ? (
+                  <Pressable accessibilityRole="button" accessibilityLabel="Close" hitSlop={8} onPress={onClose}>
+                    <Icon name="close" size={16} color={colors.muted} />
+                  </Pressable>
+                ) : null}
+              </View>
+            ) : null}
+          </View>
 
           {scroll ? (
             <ScrollView keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false} contentContainerStyle={styles.body}>
@@ -71,7 +104,7 @@ export function Sheet({ visible, onClose, title, label, children, scroll = true,
           )}
 
           {footer ? <View style={styles.footer}>{footer}</View> : null}
-        </View>
+        </Animated.View>
       </KeyboardAvoidingView>
     </Modal>
   );
@@ -101,10 +134,7 @@ export function ActionSheet({ visible, onClose, label, actions }: { visible: boo
               onClose();
               setTimeout(action.onPress, 120);
             }}
-            style={({ pressed }) => [
-              styles.row,
-              { borderTopColor: colors.line, borderTopWidth: index === 0 ? 0 : StyleSheet.hairlineWidth, backgroundColor: pressed ? colors.subtle : 'transparent' },
-            ]}
+            style={({ pressed }) => [styles.row, { borderTopColor: colors.line, borderTopWidth: index === 0 ? 0 : StyleSheet.hairlineWidth, backgroundColor: pressed ? colors.subtle : 'transparent' }]}
           >
             {action.icon ? (
               <View style={{ width: 22, alignItems: 'center' }}>
@@ -150,22 +180,12 @@ export function ConfirmSheet({
         </Text>
       ) : null}
       <View style={styles.buttonRow}>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={cancelLabel}
-          onPress={onCancel}
-          style={({ pressed }) => [styles.secondaryButton, { borderColor: colors.strong, opacity: pressed ? 0.75 : 1 }]}
-        >
+        <Pressable accessibilityRole="button" accessibilityLabel={cancelLabel} onPress={onCancel} style={({ pressed }) => [styles.secondaryButton, { borderColor: colors.strong, opacity: pressed ? 0.75 : 1 }]}>
           <Text size={14} weight="semibold" center>
             {cancelLabel}
           </Text>
         </Pressable>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={confirmLabel}
-          onPress={onConfirm}
-          style={({ pressed }) => [styles.primaryButton, { backgroundColor: danger ? colors.danger : colors.accentSolid, opacity: pressed ? 0.85 : 1 }]}
-        >
+        <Pressable accessibilityRole="button" accessibilityLabel={confirmLabel} onPress={onConfirm} style={({ pressed }) => [styles.primaryButton, { backgroundColor: danger ? colors.danger : colors.accentSolid, opacity: pressed ? 0.85 : 1 }]}>
           <Text size={14} weight="semibold" color="#FFFFFF" center>
             {confirmLabel}
           </Text>

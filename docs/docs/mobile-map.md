@@ -15,7 +15,8 @@ read [design-guide.md](design-guide.md), for history and decisions read
   (native stack, bottom tabs) plus a custom slide-over drawer. Icons: FontAwesome6 through `@expo/vector-icons`.
   Font: Plus Jakarta Sans 400 to 800 (`@expo-google-fonts/plus-jakarta-sans`).
 - Native modules: `expo-secure-store`, `expo-network`, `expo-splash-screen`, `expo-linking`,
-  `expo-constants`, `expo-font`, `@react-native-google-signin/google-signin` (native Google sign in).
+  `expo-constants`, `expo-font`, `expo-updates`, `expo-system-ui`,
+  `@react-native-google-signin/google-signin` (native Google sign in).
   Web preview only: `react-native-web`, `expo-auth-session`, `expo-web-browser`.
 - No state library. Plain React context providers plus two data hooks (`useQuery`, `usePagedList`).
 - Builds: `eas.json` has `development`, `preview` (APK) and `production` profiles. The `env` block of a
@@ -174,7 +175,7 @@ https links in the app need Android intent filters with autoVerify and `assetlin
 | `Chips.tsx` | `Chip`, `FilterChips` (`options`, `value`, `onChange`, `variant`, `wrap`, `allowClear`), `SegmentedTabs`, `TagPill`, `TopicChip`, `Badge` | One chip style everywhere |
 | `Tabs.tsx` | `Tabs` (`tabs`, `value`, `onChange`) | Underlined, scrolls |
 | `SearchField.tsx` | `SearchField`, `SearchPill` | Pill inputs |
-| `Sheet.tsx` | `Sheet` (`visible`, `onClose`, `title`, `label`, `scroll`, `footer`, `showClose`, `headerRight`), `ActionSheet`, `ConfirmSheet`, `SheetAction` | Bottom sheet, max 82 percent height |
+| `Sheet.tsx` | `Sheet` (`visible`, `onClose`, `title`, `label`, `scroll`, `footer`, `showClose`, `headerRight`), `ActionSheet`, `ConfirmSheet`, `SheetAction` | Bottom sheet, max 82 percent height; swipe down on the handle and title area dismisses |
 | `States.tsx` | `Loading`, `EmptyState`, `ErrorState`, `SkeletonQuestionList`, `SkeletonBlock`, `ListFooter`, `ViewMoreButton`, `OfflineBanner` | `ErrorState` has a network variant |
 | `QuestionRow.tsx` | `QuestionRow`, `StatusIcon`, `StatusLabel` | Plain-text snippets via `stripMarkdown` |
 | `SchoolRow.tsx`, `TagRow.tsx` | | List rows |
@@ -274,7 +275,7 @@ https links in the app need Android intent filters with autoVerify and `assetlin
 
 ## 17. Known gaps
 
-See "Known gaps" in the Mobile section of [feature-list.md](feature-list.md): sheet swipe down, offline cache,
+See "Known gaps" in the Mobile section of [feature-list.md](feature-list.md): offline cache,
 https app links (launch), VoiceOver and all iOS checks (untested), native Google sign in verification on the final build.
 
 ## 18. Keeping this file current

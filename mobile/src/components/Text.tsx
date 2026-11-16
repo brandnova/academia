@@ -67,6 +67,7 @@ export function Text({
 
   return (
     <RNText
+      maxFontSizeMultiplier={1.4}
       {...rest}
       style={[
         base,

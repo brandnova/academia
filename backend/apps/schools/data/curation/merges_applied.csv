@@ -1,0 +1,3 @@
+canonical_row_id,canonical_name,absorbed_row_id,absorbed_name,absorbed_source_file,reason,evidence
+128,"Delta University of Science and Technology, Ozoro",383,"Delta State Polytechnic, Ozoro, Delta State",(NBTE) STATE POLYTECHNICS.md,UPGRADE_ABSORBED,"'Delta State Polytechnic, Ozoro, Delta State' upgraded to 'Delta State University of Science And Technology', matched at ratio=0.87."
+131,Lagos State University of Science and Technology Ikorodu,401,"Lagos State Polytechnic, Ikorodu",(NBTE) STATE POLYTECHNICS.md,UPGRADE_ABSORBED,"'Lagos State Polytechnic, Ikorodu' upgraded to 'Lagos State University of Science and Technology', matched at ratio=0.92."

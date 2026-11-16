@@ -7,6 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "scheme": "academiaatlas",
+    "backgroundColor": "#FBFAF8",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.brandnova.academiaatlas"
@@ -47,6 +48,12 @@
         "projectId": "1e905e60-6146-40b1-b6de-183db3cd7475"
       }
     },
-    "owner": "mstrn0v4"
+    "owner": "mstrn0v4",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/1e905e60-6146-40b1-b6de-183db3cd7475"
+    }
   }
 }

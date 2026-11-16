@@ -141,7 +141,7 @@ export function IconButton({
         style,
       ]}
     >
-      <Icon name={icon} size={size} color={color ?? colors.textSecondary} />
+      <Icon name={icon} size={size} color={color ?? colors.ink} />
     </Pressable>
   );
 }

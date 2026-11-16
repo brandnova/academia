@@ -73,7 +73,7 @@ export function MarkdownEditor({ value, onChangeText, placeholder = 'Add any con
   };
 
   const bar = (
-    <View style={[styles.toolbar, toolbar === 'bottom' ? { borderTopWidth: 1 } : { borderBottomWidth: 1 }, { backgroundColor: colors.surfaceMuted, borderColor: colors.border }]}>
+    <View style={[styles.toolbar, toolbar === 'bottom' ? { borderTopWidth: 1 } : { borderBottomWidth: 1 }, { backgroundColor: colors.subtle, borderColor: colors.line }]}>
       <ScrollView horizontal keyboardShouldPersistTaps="always" showsHorizontalScrollIndicator={false} style={{ flex: 1 }} contentContainerStyle={styles.tools}>
         {TOOLS.map((tool) => (
           <Pressable
@@ -85,13 +85,13 @@ export function MarkdownEditor({ value, onChangeText, placeholder = 'Add any con
             onPress={() => run(tool)}
             style={({ pressed }) => [styles.tool, { backgroundColor: pressed ? colors.accentSoft : 'transparent', opacity: preview ? 0.35 : 1 }]}
           >
-            <Icon name={tool.icon} size={15} color={colors.textMuted} />
+            <Icon name={tool.icon} size={15} color={colors.muted} />
           </Pressable>
         ))}
       </ScrollView>
-      <Pressable accessibilityRole="button" accessibilityLabel={preview ? 'Write' : 'Preview'} onPress={() => setPreview((current) => !current)} style={[styles.previewToggle, { borderLeftColor: colors.border }]}>
-        <Icon name={preview ? 'edit' : 'eye'} size={13} color={preview ? colors.accent : colors.textMuted} />
-        <Text size={12} weight="semibold" color={preview ? colors.accent : colors.textMuted}>
+      <Pressable accessibilityRole="button" accessibilityLabel={preview ? 'Write' : 'Preview'} onPress={() => setPreview((current) => !current)} style={[styles.previewToggle, { borderLeftColor: colors.line }]}>
+        <Icon name={preview ? 'edit' : 'eye'} size={13} color={preview ? colors.accent : colors.muted} />
+        <Text size={12} weight="semibold" color={preview ? colors.accent : colors.muted}>
           {preview ? 'Write' : 'Preview'}
         </Text>
       </Pressable>
@@ -99,7 +99,7 @@ export function MarkdownEditor({ value, onChangeText, placeholder = 'Add any con
   );
 
   return (
-    <View style={[styles.container, { borderColor: colors.border, backgroundColor: colors.surface }]}>
+    <View style={[styles.container, { borderColor: colors.strong, backgroundColor: colors.surface }]}>
       {toolbar === 'top' ? bar : null}
 
       {preview ? (
@@ -114,11 +114,11 @@ export function MarkdownEditor({ value, onChangeText, placeholder = 'Add any con
           onSelectionChange={handleSelection}
           selection={forced ?? undefined}
           placeholder={placeholder}
-          placeholderTextColor={colors.textFaint}
+          placeholderTextColor={colors.muted}
           multiline
           autoFocus={autoFocus}
           accessibilityLabel={accessibilityLabel}
-          style={[styles.input, webInputReset, { minHeight, maxHeight, color: colors.text }]}
+          style={[styles.input, webInputReset, { minHeight, maxHeight, color: colors.ink }]}
         />
       )}
 

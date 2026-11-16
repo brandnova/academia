@@ -237,6 +237,16 @@ M13, docs sync and final checklists.
   Mobile section consolidated into the final regression checklist, CHANGELOG entry added.
 - Brand sources and the asset generator move to the repo root (brand/), they serve web and mobile.
 
+G2, palette regression, sheet swipe and EAS Update.
+- The M12 colour sweep was not applied after the theme dropped its legacy aliases, so text, input, icon and
+  code colours resolved to undefined at runtime (black in dark mode). Fixed by the sweep, found through
+  `npm run typecheck`. A GitHub Action now runs the mobile typecheck on every pull request.
+- expo-system-ui installed (without it Android ignores userInterfaceStyle automatic).
+- Sheet: a PanResponder on the grabber, label and title area drags the sheet down, closes past 30 percent
+  or on a flick, springs back otherwise, and slides back up when a sheet steps back instead of closing.
+- EAS Update configured (expo-updates, channels preview and production, runtimeVersion by appVersion).
+  JS and asset fixes ship with eas update, native changes bump the version and need a build.
+
 ## Key Decisions (append)
 - Comment actions, report and escalate live inside one sheet and switch by mode,
   because stacked Modals are unreliable on older Android
@@ -286,6 +296,8 @@ M13, docs sync and final checklists.
 - Native Google sign in uses the native account picker, not a browser redirect (reliability across
   phones). The preview build is the only build needed for it, no development build is required for the MVP
 - Builds are budgeted, pre-flight (typecheck, expo-doctor, export, prebuild) runs before every EAS build
+- OTA updates for JS and assets through EAS Update, a native change needs a version bump and a build
+- The mobile typecheck is a required pull request check
 
 ## Known Deviations From Docs (Mobile)
 - mobile-map.md listed the cached user key as academia.cached_user, the code uses academia.user (doc fixed).
