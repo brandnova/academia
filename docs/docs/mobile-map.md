@@ -1,6 +1,6 @@
 # Mobile Client Map
 
-A file-by-file mental model of `academia-mobile/`, for anyone (or any chat) picking up mobile work.
+A file-by-file mental model of `mobile/`, for anyone (or any chat) picking up mobile work.
 It answers "where does it live". For "what can it do" read the Mobile Client section of
 [feature-list.md](feature-list.md), for the API read [api-contract.md](api-contract.md), for visual rules
 read [design-guide.md](design-guide.md), for history and decisions read
@@ -282,6 +282,6 @@ https app links (launch), VoiceOver and all iOS checks (untested), native Google
 After any new file, route or shared component, regenerate the lists and update the matching section:
 
 ```bash
-cd academia-mobile && find src -type f \( -name "*.ts" -o -name "*.tsx" \) | sort
+cd mobile && find src -type f \( -name "*.ts" -o -name "*.tsx" \) | sort
 grep -rnE "^export (default )?(async )?(function|const|class) " src --include=*.ts --include=*.tsx
 ```

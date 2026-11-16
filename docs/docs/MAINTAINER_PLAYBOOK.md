@@ -1,7 +1,7 @@
 # Maintainer Playbook (Internal)
 
 This is for Mr Nova (project maintainer), not contributors. It's the operating rhythm that keeps
-Academia's collaboration running without needing a fresh decision every time
+Academia Atlas's collaboration running without needing a fresh decision every time
 something routine comes up. Revisit and adjust this as the project grows,
 it's a starting point, not a fixed rulebook.
 

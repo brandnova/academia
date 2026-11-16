@@ -1,6 +1,6 @@
 # Deployment Checklist
 
-One checklist for the whole launch. Work through Backend, then Frontend, then Mobile, then the
+One checklist for the whole launch. Work through Backend, then Web, then Mobile, then the
 shared operations and runbook at the end. Day-to-day regression checks are in
 [TESTING.md](TESTING.md). Provider-account steps need access to those accounts.
 
@@ -98,7 +98,7 @@ for i in $(seq 1 12); do curl -s -o /dev/null -w "%{http_code} " -X POST $API/au
 
 ---
 
-## 2. Frontend (Vercel)
+## 2. Web (Vercel)
 
 ### 2.1 Environment (redeploy after changes, `NEXT_PUBLIC_*` is baked in at build)
 - [ ] `BACKEND_API_URL`: the backend `/api/v1` base, no trailing slash, server only.
@@ -238,7 +238,7 @@ for i in $(seq 1 12); do curl -s -o /dev/null -w "%{http_code} " -X POST $API/au
 
 ### 3.9 Release-day smoke test
 ```bash
-cd academia-mobile
+cd mobile
 npm run typecheck
 npx expo-doctor
 npm run export:web

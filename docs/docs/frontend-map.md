@@ -1,7 +1,7 @@
-# Frontend Map
+# Web Map
 
-A file-by-file mental model of `academia-frontend/`, for anyone (or any chat) picking up
-frontend work. It answers "where does it live". For "what can it do" read the Frontend
+A file-by-file mental model of `web/`, for anyone (or any chat) picking up
+web work. It answers "where does it live". For "what can it do" read the Web
 Capabilities section of [feature-list.md](feature-list.md), for the API read
 [api-contract.md](api-contract.md), for visual rules read [design-guide.md](design-guide.md),
 and for history and decisions read [BUILD_LOG_FRONTEND.md](BUILD_LOG_FRONTEND.md).
@@ -241,7 +241,7 @@ Props are listed as they exist in code. "Calls" lists the API endpoints a compon
 
 ## 12. Known gaps
 
-See "Known gaps" in the Frontend Capabilities section of [feature-list.md](feature-list.md):
+See "Known gaps" in the Web Capabilities section of [feature-list.md](feature-list.md):
 hub-offline notice for moderators (needs backend), shared Modal primitive, label wiring in
 SchoolFormModal and PageFormModal, windowed "View more" lists, and optional stronger control
 borders.

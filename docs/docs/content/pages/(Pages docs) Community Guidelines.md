@@ -1,4 +1,4 @@
-Academia exists for one reason: to help students find real answers to real academic questions, and to make sure those answers are still useful to the next student who needs them. These guidelines exist to protect that.
+Academia Atlas exists for one reason: to help students find real answers to real academic questions, and to make sure those answers are still useful to the next student who needs them. These guidelines exist to protect that.
 
 ## The point of this platform
 
@@ -34,4 +34,4 @@ Content that breaks these guidelines can be removed. Accounts that repeatedly or
 
 ## One more thing
 
-Academia isn't an official university system, and answers here come from other students, not your school's registrar. For anything that genuinely matters (deadlines, formal requirements, official processes), always confirm with your school's official channels. This platform is here to point you in the right direction and save you time, not to replace your school's own communication.
+Academia Atlas isn't an official university system, and answers here come from other students, not your school's registrar. For anything that genuinely matters (deadlines, formal requirements, official processes), always confirm with your school's official channels. This platform is here to point you in the right direction and save you time, not to replace your school's own communication.

@@ -2,8 +2,8 @@
 
 *Last updated: November 2026*
 
-Academia is built and maintained by Brand Nova. This policy explains what information we
-collect on the Academia website and in the Academia mobile app (together, "the platform"),
+Academia Atlas is built and maintained by Brand Nova. This policy explains what information we
+collect on the Academia Atlas website and in the Academia Atlas mobile app (together, "the platform"),
 why, and what you can do about it.
 
 ## What we collect
@@ -87,11 +87,11 @@ brandnova.dev@gmail.com. We aim to respond to any request like this within a rea
 Your session is secured using industry-standard practices: encrypted connections (HTTPS),
 secure session cookies that can't be read by scripts on the website, secure device storage for
 session tokens in the mobile app, and rate limiting to prevent abuse. Because we never store a
-password, a whole category of credential-related risk simply doesn't apply to Academia accounts.
+password, a whole category of credential-related risk simply doesn't apply to Academia Atlas accounts.
 
 ## Children's privacy
 
-Academia is built for tertiary (post-secondary) students. We don't knowingly collect
+Academia Atlas is built for tertiary (post-secondary) students. We don't knowingly collect
 information from anyone below the minimum age required to access tertiary education in their
 country.
 

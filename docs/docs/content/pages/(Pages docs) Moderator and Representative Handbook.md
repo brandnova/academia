@@ -1,4 +1,4 @@
-If you're reading this, an admin has assigned you as a Moderator, School Representative, or both, for a hub on Academia. This page is your reference for what that means, day to day.
+If you're reading this, an admin has assigned you as a Moderator, School Representative, or both, for a hub on Academia Atlas. This page is your reference for what that means, day to day.
 
 ## The two roles, and how they differ
 
@@ -42,7 +42,7 @@ There's no self-service way to become a Moderator or Representative, an admin as
 
 ## Your day-to-day
 
-**Check the unanswered queue regularly.** A question sitting unanswered for days is the exact problem Academia exists to solve, don't let it happen on your watch.
+**Check the unanswered queue regularly.** A question sitting unanswered for days is the exact problem Academia Atlas exists to solve, don't let it happen on your watch.
 
 **Answer, don't just monitor.** You're not just a gatekeeper, you're expected to actually help answer questions when you're able to.
 

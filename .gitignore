@@ -20,7 +20,7 @@ out/
 # production
 build
 
-# misc
+# Misc
 .DS_Store
 *.pem
 
@@ -48,15 +48,6 @@ __pycache__/
 .venv/
 staticfiles/
 *.sqlite3
-.DS_Store
-
-# Build
-dist/
-build/
-
-# Environment
-.env
-.env.local
 
 # IDE
 .vscode/
@@ -78,26 +69,13 @@ web-build/
 expo-env.d.ts
 
 # native build output
-academia-mobile/ios/
-academia-mobile/android/
+mobile/ios/
+mobile/android/
 brand/src/.tmp/
 *.jks
 *.p8
 *.p12
 *.mobileprovision
 
-# local env (never commit real tokens or client secrets)
-.env
-.env.local
-.env.*.local
-
 # tooling
-*.tsbuildinfo
 .metro-health-check*
-npm-debug.*
-yarn-debug.*
-yarn-error.*
-
-# macOS
-.DS_Store
-*.pem
