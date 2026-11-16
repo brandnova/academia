@@ -52,7 +52,7 @@ EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="Academia <no-reply@academia.local>")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="Academia Atlas <no-reply@academia.local>")
 
 # Media storage. Nothing uploads files yet, so this stays FileSystemStorage,
 # which is NOT safe for real uploads here: Vercel's filesystem is read-only

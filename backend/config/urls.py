@@ -7,6 +7,9 @@ from apps.core.converters import LooseIDConverter
 
 register_converter(LooseIDConverter, "looseid")
 
+admin.site.site_header = "Academia Atlas administration"
+admin.site.site_title = "Academia Atlas admin"
+
 
 def custom_404_handler(request, exception=None):
     if request.path.startswith("/api/"):

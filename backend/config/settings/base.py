@@ -10,7 +10,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-SITE_NAME = "Academia"
+SITE_NAME = "Academia Atlas"
 FRONTEND_URL = env("FRONTEND_URL", default="http://localhost:3000")
 
 INSTALLED_APPS = [
