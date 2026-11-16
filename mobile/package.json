@@ -1,5 +1,5 @@
 {
-  "name": "academia-mobile",
+  "name": "academia-atlas-mobile",
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {
@@ -42,5 +42,5 @@
     "export:web": "expo export --platform web"
   },
   "private": true,
-  "description": "Academia mobile client (React Native / Expo)"
+  "description": "Academia Atlas mobile client (React Native / Expo)"
 }

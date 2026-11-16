@@ -5,7 +5,7 @@ import { Text } from './Text';
 import { isPlatformAccount } from '../config/app';
 import { useTheme } from '../theme';
 
-/** The "A" mark for Academia's own account. Renders nothing for anyone else. */
+/** The "A" mark for Academia Atlas's own account. Renders nothing for anyone else. */
 export function PlatformBadge({ userId, onPress }: { userId?: string | null; onPress?: () => void }) {
   const { colors } = useTheme();
   if (!userId || !isPlatformAccount(userId)) return null;
