@@ -31,8 +31,8 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
- .env*
-+!.env.example
+.env*
+!.env.example
 
 # vercel
 .vercel
@@ -67,5 +67,37 @@ site/
 
 # Custom
 gitignore/
-academia-tests/
-Todo.md
+.cache/
+
+# React Native
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# native build output
+academia-mobile/ios/
+academia-mobile/android/
+brand/src/.tmp/
+*.jks
+*.p8
+*.p12
+*.mobileprovision
+
+# local env (never commit real tokens or client secrets)
+.env
+.env.local
+.env.*.local
+
+# tooling
+*.tsbuildinfo
+.metro-health-check*
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
