@@ -385,7 +385,7 @@
               </div>
               <h1 class="text-xl font-extrabold leading-snug mb-2" x-text="currentQuestion.title"></h1>
               <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted mb-3">
-                <span class="flex items-center gap-1"><i class="fa-regular fa-user text-[11px]"></i>Asked by Amara Okafor<button @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia account">A</button></span>
+                <span class="flex items-center gap-1"><i class="fa-regular fa-user text-[11px]"></i>Asked by Amara Okafor<button @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia Atlas account">A</button></span>
                 <span class="flex items-center gap-1">
                   <i class="fa-regular fa-building text-[11px]"></i>
                   <button @click.stop="openSchool(schools.find(s => s.short === currentQuestion.school))" class="text-accent" x-text="currentQuestion.school"></button>
@@ -436,7 +436,7 @@
                       <!-- AGENT NOTE: byline sits ABOVE the body, small and muted, so the answer text is the visual priority.
                            The "A" mark is the platform account badge. Tapping it explains the account is official. -->
                       <span class="flex items-center gap-1 text-xs text-muted"><i class="fa-regular fa-user text-[11px]"></i><span x-text="'by ' + a.by"></span>
-                        <button x-show="a.official" @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia account">A</button>
+                        <button x-show="a.official" @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia Atlas account">A</button>
                       </span>
                       <button @click="openActions('answer', a)" aria-label="More actions" class="w-7 h-7 flex items-center justify-center text-muted"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                     </div>
@@ -627,7 +627,7 @@
           <section x-show="page==='pageView'" class="fade-up px-4 pt-4 pb-8">
             <h1 class="text-xl font-extrabold mb-3" x-text="pageDoc && pageDoc.title"></h1>
             <h2 class="text-base font-bold mt-4 mb-1">What we collect</h2>
-            <p class="text-[15px] leading-relaxed text-muted">Rendered Markdown for the selected page appears here. Academia is an independent platform, not an official system of any institution.</p>
+            <p class="text-[15px] leading-relaxed text-muted">Rendered Markdown for the selected page appears here. Academia Atlas is an independent platform, not an official system of any institution.</p>
           </section>
 
         </div>
@@ -730,7 +730,7 @@
                 <template x-for="(c, i) in (activeAnswer ? activeAnswer.comments : [])" :key="i">
                   <div class="flex items-start gap-2">
                     <div class="flex-1 min-w-0">
-                      <p class="text-[11px] text-muted flex items-center gap-1"><span x-text="c.by"></span><button x-show="c.official" @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia account">A</button></p>
+                      <p class="text-[11px] text-muted flex items-center gap-1"><span x-text="c.by"></span><button x-show="c.official" @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia Atlas account">A</button></p>
                       <p class="text-sm" x-text="c.text"></p>
                     </div>
                     <button x-show="signedIn" aria-label="Comment actions" class="w-9 h-9 flex items-center justify-center text-muted"><i class="fa-solid fa-ellipsis-vertical text-[13px]"></i></button>
@@ -774,14 +774,14 @@
 
             <!-- official account -->
             <div x-show="sheet==='official'">
-              <h2 class="font-bold text-base mb-1 text-accent">Official Academia account</h2>
-              <p class="text-sm text-muted">This content was posted by Academia's own team to help get things started, not a regular student account.</p>
+              <h2 class="font-bold text-base mb-1 text-accent">Official Academia Atlas account</h2>
+              <p class="text-sm text-muted">This content was posted by Academia Atlas's own team to help get things started, not a regular student account.</p>
             </div>
 
             <!-- open on web -->
             <div x-show="sheet==='web'">
               <h2 class="font-bold text-base mb-1">Open on the web</h2>
-              <p class="text-sm text-muted mb-1">These tools live on the Academia website. They open in your browser and you'll sign in there with the same Google account.</p>
+              <p class="text-sm text-muted mb-1">These tools live on the Academia Atlas website. They open in your browser and you'll sign in there with the same Google account.</p>
               <p class="text-xs text-muted mb-4" x-text="'academia.example' + webPath"></p>
               <div class="flex gap-2"><button @click="sheet=null" class="flex-1 text-sm py-3 rounded-xl border border-strong">Cancel</button><button @click="sheet=null" class="flex-1 text-sm py-3 rounded-xl bg-accent text-white font-semibold">Open in browser</button></div>
             </div>
@@ -903,7 +903,7 @@
       ],
       answers: [
         { id: 'a1', by: 'Zainab Nwosu', official: false, mine: false, best: true, score: 3, myVote: null, body: 'The process usually starts with your HOD signing off before resumption. Visit the departmental office first for your introduction letter.', comments: [{ by: 'Jahsway M. I.', text: 'This is actually helpful, thanks!' }, { by: 'Chidi Bello', text: 'Does this differ by state?' }] },
-        { id: 'a2', by: 'Academia Team', official: true, mine: false, best: false, score: 1, myVote: null, body: 'Also register with the ITF portal early, it can take a few days to process.', comments: [] },
+        { id: 'a2', by: 'Academia Atlas Team', official: true, mine: false, best: false, score: 1, myVote: null, body: 'Also register with the ITF portal early, it can take a few days to process.', comments: [] },
         { id: 'a3', by: 'Amara Okafor', official: false, mine: true, best: false, score: 0, myVote: null, body: 'Bring two passport photographs and a copy of your admission letter.', comments: [] },
       ],
       notifications: [

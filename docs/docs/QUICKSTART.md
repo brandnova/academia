@@ -37,9 +37,9 @@ explanation of why).
 1. Click "Fork" on the GitHub repo page.
 2. Clone your fork:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/academia.git
-   cd academia
-   git remote add upstream https://github.com/brandnova/academia.git
+   git clone https://github.com/YOUR-USERNAME/academia-atlas.git
+   cd academia-atlas
+   git remote add upstream https://github.com/brandnova/academia-atlas.git
    ```
 3. Sync and branch:
    ```bash
@@ -54,7 +54,7 @@ what the issue is about, for example `fix/profile-mobile-layout`.
 
 ## 4. Set up locally
 
-See README.md's "Getting Started" section for backend and frontend setup, it
+See README.md's "Getting Started" section for backend and web setup, it
 has the exact commands. Ask in General if anything doesn't work, environment
 setup problems are extremely common and not a reflection on you.
 
@@ -76,7 +76,7 @@ git push -u origin fix/short-description
 
 ## 7. Open the pull request
 
-On GitHub, open a PR **from your fork's branch into `brandnova/academia`'s
+On GitHub, open a PR **from your fork's branch into `brandnova/academia-atlas`'s
 `develop` branch** (not `main`), you'll see a "compare across forks" option
 when you start a new PR from your fork. Fill out the template, most
 importantly:
@@ -100,7 +100,7 @@ another look.
 
 Once approved, it gets squash-merged into `develop`. You'll see it move to
 Done on the project board, and a batch of `develop` changes gets released to
-production periodically. You're now a credited Academia contributor, visible
+production periodically. You're now a credited Academia Atlas contributor, visible
 on the GitHub contributor graph and in the project's recognition materials.
 
 ## If you get stuck

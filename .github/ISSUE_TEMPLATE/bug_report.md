@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Something in Academia isn't working as documented
+about: Something in Academia Atlas isn't working as documented
 title: "[BUG] "
 labels: bug
 assignees: ''

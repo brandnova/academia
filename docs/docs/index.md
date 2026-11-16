@@ -1,4 +1,4 @@
-# Academia
+# Academia Atlas
 
 A school-focused academic knowledge platform that helps students find answers, solve
 academic problems, and preserve institutional knowledge in a searchable, organized way.
@@ -14,13 +14,13 @@ and is built to extend to other countries.
 
 | If you want to know... | Read |
 |---|---|
-| What Academia is, why, and the principles behind it | [Project Plan](project-plan.md) |
+| What Academia Atlas is, why, and the principles behind it | [Project Plan](project-plan.md) |
 | What each surface can do today, and what is missing | [Feature List](feature-list.md) |
 | What the API accepts and returns, errors, rate limits | [API Contract](api-contract.md) |
 | What the data looks like | [Database Schema](database-schema.md) |
-| Where the code lives, per surface | [Backend Map](backend-map.md), [Frontend Map](frontend-map.md), [Mobile Map](mobile-map.md) |
+| Where the code lives, per surface | [Backend Map](backend-map.md), [Web Map](frontend-map.md), [Mobile Map](mobile-map.md) |
 | How it should look and feel (web and mobile) | [Design Guide](design-guide.md) |
-| Why it was built that way, decisions, open deviations | [Build Log Backend](BUILD_LOG_BACKEND.md), [Build Log Frontend](BUILD_LOG_FRONTEND.md), [Build Log Mobile](BUILD_LOG_MOBILE.md) |
+| Why it was built that way, decisions, open deviations | [Build Log Backend](BUILD_LOG_BACKEND.md), [Build Log Web](BUILD_LOG_FRONTEND.md), [Build Log Mobile](BUILD_LOG_MOBILE.md) |
 | What changed and when | [Change Log](changelog.md) |
 | How to verify it works | [Testing](TESTING.md) |
 | How to ship it | [Deployment Checklist](DEPLOYMENT_CHECKLIST.md) |
@@ -96,11 +96,11 @@ development artifact, not an afterthought.
 ## Repository structure
 
 ```text
-Academia/
+Academia Atlas/
 ├── docs/                    Documentation (MkDocs, published to GitHub Pages)
 ├── backend/                 Django REST Framework API
-├── academia-frontend/       Next.js web application
-├── academia-mobile/         Expo (React Native) mobile client
+├── web/                     Next.js web application
+├── mobile/                  Expo (React Native) mobile client
 ├── CHANGELOG.md             Canonical history, included in the docs site
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
@@ -112,4 +112,4 @@ Academia/
 
 ---
 
-*Academia aims to become the most useful destination for students seeking answers to academic questions, starting in Nigeria.*
+*Academia Atlas aims to become the most useful destination for students seeking answers to academic questions, starting in Nigeria.*

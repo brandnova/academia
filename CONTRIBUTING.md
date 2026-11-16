@@ -1,10 +1,10 @@
-# Contributing to Academia
+# Contributing to Academia Atlas
 
-Thanks for wanting to work on Academia. This document is written for people who may not have contributed to an open source project before, so it spells things out rather than assuming prior experience. If something here is unclear, ask in the project chat rather than guessing, that's what it's there for.
+Thanks for wanting to work on Academia Atlas. This document is written for people who may not have contributed to an open source project before, so it spells things out rather than assuming prior experience. If something here is unclear, ask in the project chat rather than guessing, that's what it's there for.
 
 ## What kind of contributions we're looking for right now
 
-Academia's MVP is complete and live. At this stage, we are deliberately working in **small, self-contained pieces**: one bug fix, one small feature, one polish item at a time. We are not taking on large architectural changes or new major features from outside contributors yet, that keeps things manageable while the team is still learning how to work together.
+Academia Atlas' MVP is complete and live. At this stage, we are deliberately working in **small, self-contained pieces**: one bug fix, one small feature, one polish item at a time. We are not taking on large architectural changes or new major features from outside contributors yet, that keeps things manageable while the team is still learning how to work together.
 
 Good places to start:
 - Issues labeled `good-first-issue`
@@ -58,17 +58,17 @@ If what you've found could let someone access data or accounts they shouldn't, d
 
 ## Fork, clone, and branch
 
-Academia uses the standard open source fork-and-PR model. You don't get direct push access to `brandnova/academia` itself, you work from your own copy (a "fork") and propose changes back via pull request. This is the normal, safe default for a project taking contributions from people the maintainer doesn't already know well, and it means you can start the moment you're assigned an issue, no waiting on anyone to grant you repository access first.
+Academia Atlas uses the standard open source fork-and-PR model. You don't get direct push access to `brandnova/academia-atlas` itself, you work from your own copy (a "fork") and propose changes back via pull request. This is the normal, safe default for a project taking contributions from people the maintainer doesn't already know well, and it means you can start the moment you're assigned an issue, no waiting on anyone to grant you repository access first.
 
-1. Click "Fork" on the GitHub repo page (top right). This creates `your-username/academia` under your own account.
+1. Click "Fork" on the GitHub repo page (top right). This creates `your-username/academia-atlas` under your own account.
 2. Clone your fork, not the original:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/academia.git
-   cd academia
+   git clone https://github.com/YOUR-USERNAME/academia-atlas.git
+   cd academia-atlas
    ```
 3. Add the original repo as a second remote, called `upstream`, so you can pull in the latest changes:
    ```bash
-   git remote add upstream https://github.com/brandnova/academia.git
+   git remote add upstream https://github.com/brandnova/academia-atlas.git
    ```
 4. Before starting any new task, sync your fork's `develop` with `upstream` first, so you're branching from the latest code, not a stale copy:
    ```bash
@@ -82,7 +82,7 @@ Academia uses the standard open source fork-and-PR model. You don't get direct p
    git checkout -b fix/short-description-of-the-fix
    ```
 
-See "Local setup" below for getting the app running, then "Making your pull request" for how the branch you just created gets back to `brandnova/academia`.
+See "Local setup" below for getting the app running, then "Making your pull request" for how the branch you just created gets back to `brandnova/academia-atlas`.
 
 If you become a regular, trusted contributor over time, you may eventually be offered direct push access to feature branches on the main repository, skipping the fork step. That's the maintainer's call as trust is established, not something to request upfront.
 
@@ -102,16 +102,16 @@ python manage.py seed_demo_data
 python manage.py runserver
 ```
 
-### Frontend (Next.js)
+### Web (Next.js)
 
 ```bash
-cd academia-frontend
+cd web
 npm install
 cp .env.example .env.local
 npm run dev
 ```
 
-Point your local frontend's env var at either your local backend or the deployed one, whichever your task needs.
+Point your local web app's env var at either your local backend or the deployed one, whichever your task needs.
 
 ### Mobile (Expo)
 
@@ -119,7 +119,7 @@ Use Node 22.13+, 24.3+ or 26+ and npm. Node 25 is outside React Native 0.88's
 supported engine range.
 
 ```bash
-cd academia-mobile
+cd mobile
 cp .env.example .env
 npm install
 npx expo start -c --lan
@@ -129,14 +129,14 @@ For a physical device, start the backend with `make run-lan` from `backend/`.
 Use `npx expo start --web` for the browser preview and
 `npm run typecheck`, `npm run export:web` and `npx expo-doctor` for mobile
 checks.
-See [academia-mobile/README.md](academia-mobile/README.md) for API host and
+See [mobile/README.md](mobile/README.md) for API host and
 Google sign-in setup. Run the cross-surface regression checks in
 [`docs/docs/TESTING.md`](docs/docs/TESTING.md).
 
 ## Branching model
 
-- `main` is the production branch on `brandnova/academia`. It is protected: nobody, including the maintainer, pushes to it directly. It only changes via a merge from `develop`.
-- `develop` is the integration branch on `brandnova/academia`. This is what your pull requests target, always, never `main`.
+- `main` is the production branch on `brandnova/academia-atlas`. It is protected: nobody, including the maintainer, pushes to it directly. It only changes via a merge from `develop`.
+- `develop` is the integration branch on `brandnova/academia-atlas`. This is what your pull requests target, always, never `main`.
 - On your own fork, name your branch after the issue you're working on, for example `fix/vote-count-off-by-one` or `feat/lock-question-ui`. See "Fork, clone, and branch" above for the exact commands.
 
 ## Commit messages
@@ -155,7 +155,7 @@ Keep the first line under about 70 characters. Add more detail in the commit bod
 ## Making your pull request
 
 1. Push your branch to your fork: `git push -u origin fix/short-description-of-the-fix`.
-2. On GitHub, open a pull request **from your fork's branch into `brandnova/academia`'s `develop` branch**, not `main`. When you click "New pull request" from your fork, GitHub shows a "compare across forks" option, that's the one you want.
+2. On GitHub, open a pull request **from your fork's branch into `brandnova/academia-atlas`'s `develop` branch**, not `main`. When you click "New pull request" from your fork, GitHub shows a "compare across forks" option, that's the one you want.
 3. Fill out the PR template, it will prompt you for what changed, why, and how you tested it.
 4. Link the issue your PR closes (`Closes #12`), this is also what auto-assigns the merge credit to that issue.
 5. If it's a frontend/UI change, include a before/after screenshot or short screen recording.
@@ -179,7 +179,7 @@ The project maintainer reviews every PR. Expect comments and requested changes, 
 
 ## Licensing your contribution
 
-By opening a pull request, you agree that your contribution is licensed under the project's MIT License (see `LICENSE`), same as the rest of the codebase. This is a standard, lightweight expectation on virtually every open source project, not something specific to Academia, and it's what makes it possible for your merged code to be freely used and built on alongside everyone else's.
+By opening a pull request, you agree that your contribution is licensed under the project's MIT License (see `LICENSE`), same as the rest of the codebase. This is a standard, lightweight expectation on virtually every open source project, not something specific to Academia Atlas, and it's what makes it possible for your merged code to be freely used and built on alongside everyone else's.
 
 ## Recognition
 

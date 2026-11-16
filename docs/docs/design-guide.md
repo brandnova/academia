@@ -1,12 +1,12 @@
 # Design Guide
 
-The visual and interaction rules for Academia on web and mobile. Shared rules come first,
+The visual and interaction rules for Academia Atlas on web and mobile. Shared rules come first,
 then web and mobile specifics. Component and file locations are in
 [frontend-map.md](frontend-map.md) and [mobile-map.md](mobile-map.md).
 
 ## Product and roles
 
-Academia helps students ask academic questions specific to their school and preserves useful
+Academia Atlas helps students ask academic questions specific to their school and preserves useful
 answers for future students. It is a searchable reference platform, not a social feed.
 
 | Role | Capabilities |
@@ -121,7 +121,7 @@ width. A homepage hero with a full-bleed background and a legibility scrim. Luci
 
 ## Mobile direction
 
-Follows [design/Mobile mockup.html](design/Mobile%20mockup.html), same tokens and typography.
+Follows [design/Mobile mockup](design/Mobile-mockup.html), same tokens and typography.
 What differs from web:
 
 | Area | Web | Mobile |

@@ -109,7 +109,7 @@ STATIC_PAGE_DATA = [
         "visibility": StaticPage.Visibility.PUBLIC,
         "is_published": True,
         "body": "# Privacy Policy\n\nThis is placeholder seed content describing how "
-                "Academia handles user data. Replace with the real policy before launch.",
+                "Academia Atlas handles user data. Replace with the real policy before launch.",
     },
     {
         "title": "Terms of Service",

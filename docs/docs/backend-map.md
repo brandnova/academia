@@ -94,7 +94,7 @@ Client
 ```
 
 - Google access tokens are checked against Google's `userinfo` endpoint.
-  Successful login returns Academia JWTs; there is no client secret or
+  Successful login returns Academia Atlas JWTs; there is no client secret or
   django-allauth flow. SimpleJWT rotates refresh tokens and blacklists used
   tokens.
 - `DEFAULT_PERMISSION_CLASSES` is intentionally `AllowAny` because public reads

@@ -1,1 +1,1 @@
-[View the main repo CHANGELOG.md](https://github.com/brandnova/academia)
+[View the main repo CHANGELOG.md](https://github.com/brandnova/academia-atlas)

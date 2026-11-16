@@ -35,7 +35,7 @@ def health_check(request):
 
     return Response({
         "status": overall_status,
-        "service": "academia-backend",
+        "service": "academia-atlas-backend",
         "checks": checks,
         "timestamp": timezone.now(),
     })

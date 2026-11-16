@@ -1,16 +1,16 @@
 # PROJECT PLAN
 
-# Academia
+# Academia Atlas
 
 ## Overview
 
-Academia is a school-focused academic knowledge platform designed to help students find answers to questions, solve academic problems, and preserve institutional knowledge in a searchable and organized way.
+Academia Atlas is a school-focused academic knowledge platform designed to help students find answers to questions, solve academic problems, and preserve institutional knowledge in a searchable and organized way.
 
 Students constantly encounter situations where important information exists, but is difficult to find. Questions about admissions, registration procedures, clearance requirements, departmental policies, GPA calculations, examinations, SIWES, projects, and countless other academic processes are often answered repeatedly across WhatsApp groups, Telegram channels, student forums, and private conversations.
 
 The same questions are asked every semester by different students because previous answers are scattered across platforms that are difficult to search and impossible to preserve.
 
-Academia exists to solve this problem.
+Academia Atlas exists to solve this problem.
 
 Its purpose is not to become a social network, a school management system, or an official university platform. Its purpose is to become a searchable academic knowledge base where questions can be asked once, answered well, and discovered by future students when they need them.
 
@@ -28,19 +28,19 @@ The long-term vision is to create a centralized academic knowledge network cover
 
 Every supported institution should have a dedicated hub where knowledge relevant to that institution can be collected, organized, searched, and maintained.
 
-Rather than forcing students to depend on temporary conversations or fragmented communities, Academia should become the first place students visit when they need guidance regarding their school.
+Rather than forcing students to depend on temporary conversations or fragmented communities, Academia Atlas should become the first place students visit when they need guidance regarding their school.
 
 The platform should gradually evolve into a living archive of institutional knowledge built through contributions from students, alumni, moderators, and school representatives.
 
 ### Market Strategy
 
-Academia is launching first with Nigerian tertiary institutions, where the founder's own experience with fragmented, unreliable institutional information originated. Nigeria is the platform's starting market, not its permanent identity. The data model, URL structure, and core architecture are built to extend to institutions in other countries as the Nigerian market is proven out, expansion into a new country is a data and content effort, not a redesign.
+Academia Atlas is launching first with Nigerian tertiary institutions, where the founder's own experience with fragmented, unreliable institutional information originated. Nigeria is the platform's starting market, not its permanent identity. The data model, URL structure, and core architecture are built to extend to institutions in other countries as the Nigerian market is proven out, expansion into a new country is a data and content effort, not a redesign.
 
 ---
 
 ## Core Principles
 
-Academia is guided by several principles that influence every product and technical decision.
+Academia Atlas is guided by several principles that influence every product and technical decision.
 
 ### One Hub Per School
 
@@ -64,7 +64,7 @@ The school dataset should eventually become one of the platform's most valuable 
 
 ### Knowledge Over Social Activity
 
-Academia prioritizes useful information over engagement metrics.
+Academia Atlas prioritizes useful information over engagement metrics.
 
 The goal is not to maximize scrolling, feeds, reactions, or endless interaction.
 
@@ -325,7 +325,7 @@ failure or a generic server error.
 ## Roles and Responsibilities
 
 ### User
-Most users of Academia are simply users.
+Most users of Academia Atlas are simply users.
 
 Users can:
 - Search content
@@ -421,7 +421,7 @@ Two backlog items noted here for visibility, to be designed when we get to them:
 
 ## Development Approach
 
-Academia will follow an API-first development process.
+Academia Atlas will follow an API-first development process.
 
 Before implementation begins, the project's behavior, data structures, and API responses should be documented and agreed upon.
 

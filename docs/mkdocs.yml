@@ -1,4 +1,5 @@
-site_name: Academia
+site_name: Academia Atlas
+site_url: https://brandnova.github.io/academia-atlas/
 
 theme:
   name: material
@@ -15,11 +16,11 @@ nav:
   - Design Guide: design-guide.md
   - Maps:
       - Backend Map: backend-map.md
-      - Frontend Map: frontend-map.md
+      - Web Map: frontend-map.md
       - Mobile Map: mobile-map.md
   - Build Logs:
       - Backend: BUILD_LOG_BACKEND.md
-      - Frontend: BUILD_LOG_FRONTEND.md
+      - Web: BUILD_LOG_FRONTEND.md
       - Mobile: BUILD_LOG_MOBILE.md
   - Mobile mockup: design/Mobile-mockup.html
   - Testing: TESTING.md

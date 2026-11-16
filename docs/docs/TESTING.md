@@ -1,6 +1,6 @@
-# Academia Regression Testing
+# Academia Atlas Regression Testing
 
-Use this checklist for regression checks across the backend, web frontend and
+Use this checklist for regression checks across the backend, web and
 mobile client. Release-only and provider-account setup is tracked separately
 in [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md).
 
@@ -18,12 +18,12 @@ permission, question-and-answer, search, report and notification flows against
 the API contract. Verify both allowed and denied role actions; the backend is
 the authority for permissions.
 
-## Frontend
+## Web
 
-Run the web checks from the frontend directory:
+Run the web checks from the web directory:
 
 ```bash
-cd academia-frontend
+cd web
 npm run check
 npm run build
 ```
@@ -39,7 +39,7 @@ populated states, plus light and dark themes and narrow-screen layouts.
 
 ```bash
 cd backend && make run-lan          # 0.0.0.0:8000 for a phone on Wi-Fi, or run the default server and use adb reverse
-cd academia-mobile && cp .env.example .env && npm install && npx expo start -c
+cd mobile && cp .env.example .env && npm install && npx expo start -c
 ```
 
 Alternatives to the LAN server: `adb reverse tcp:8000 tcp:8000` with `EXPO_PUBLIC_API_URL=http://localhost:8000/api/v1`,
@@ -103,7 +103,7 @@ sign-in sheet, paste both tokens. It does not exist in preview or production bui
 
 ### Automated checks
 ```bash
-cd academia-mobile
+cd mobile
 npm run typecheck
 npx expo-doctor
 npm run export:web

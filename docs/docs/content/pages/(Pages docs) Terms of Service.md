@@ -1,16 +1,16 @@
-These terms govern your use of Academia, operated by Brand Nova. By creating an account or using the platform, you agree to them.
+These terms govern your use of Academia Atlas, operated by Brand Nova. By creating an account or using the platform, you agree to them.
 
-## What Academia is
+## What Academia Atlas is
 
-Academia is an independent, student-built academic knowledge platform. It is **not** an official system of any university, polytechnic, or college of education, and it isn't affiliated with or endorsed by any specific institution unless that institution's hub is explicitly marked as verified.
+Academia Atlas is an independent, student-built academic knowledge platform. It is **not** an official system of any university, polytechnic, or college of education, and it isn't affiliated with or endorsed by any specific institution unless that institution's hub is explicitly marked as verified.
 
 ## Your account
 
-You sign in with Google. You're responsible for keeping your Google account secure, since it's how you access Academia. You agree to provide accurate information and not to impersonate another person, school, or role.
+You sign in with Google. You're responsible for keeping your Google account secure, since it's how you access Academia Atlas. You agree to provide accurate information and not to impersonate another person, school, or role.
 
 ## Your content
 
-You own what you post. By posting a question, answer, or comment, you grant Academia a license to display, store, and distribute that content on the platform, so other students can find and benefit from it, which is the entire point of the platform.
+You own what you post. By posting a question, answer, or comment, you grant Academia Atlas a license to display, store, and distribute that content on the platform, so other students can find and benefit from it, which is the entire point of the platform.
 
 You're responsible for what you post. Don't post anything you don't have the right to share, anything false presented as fact, or anything that violates our [Community Guidelines](/pages/community-guidelines).
 
@@ -30,19 +30,19 @@ We may remove content or suspend accounts that violate these terms or the Commun
 
 ## No guarantee of accuracy
 
-Content on Academia is written by students, for students. It is **not** verified official information from any institution. For anything with real consequences, deadlines, formal requirements, registration processes, always confirm with your school's official channels. Academia is a starting point, not a substitute for official communication from your institution.
+Content on Academia Atlas is written by students, for students. It is **not** verified official information from any institution. For anything with real consequences, deadlines, formal requirements, registration processes, always confirm with your school's official channels. Academia Atlas is a starting point, not a substitute for official communication from your institution.
 
 ## Open source
 
-Academia's source code is open, [Academia GitHub Repo](https://github.com/brandnova/academia/). This doesn't extend to Academia's name, branding, or the specific content users have posted, those aren't covered by the code's license.
+Academia Atlas's source code is open, [Academia Atlas GitHub Repo](https://github.com/brandnova/academia-atlas/). This doesn't extend to Academia Atlas's name, branding, or the specific content users have posted, those aren't covered by the code's license.
 
 ## Disclaimer and limitation of liability
 
-Academia is provided "as is." We do our best to keep it accurate, secure, and available, but we don't guarantee it will be error-free or uninterrupted, and we're not liable for decisions made based on user-submitted content. Always verify anything consequential through official channels.
+Academia Atlas is provided "as is." We do our best to keep it accurate, secure, and available, but we don't guarantee it will be error-free or uninterrupted, and we're not liable for decisions made based on user-submitted content. Always verify anything consequential through official channels.
 
 ## Termination
 
-You may stop using Academia at any time. We may suspend or terminate accounts that violate these terms. See our [Privacy Policy](/pages/privacy-policy) for what happens to your data if your account is removed.
+You may stop using Academia Atlas at any time. We may suspend or terminate accounts that violate these terms. See our [Privacy Policy](/pages/privacy-policy) for what happens to your data if your account is removed.
 
 ## Changes to these terms
 

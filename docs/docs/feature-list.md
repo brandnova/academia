@@ -139,7 +139,7 @@ not here.
 
 ---
 
-# Frontend Capabilities (academia-frontend)
+# Web Capabilities (web)
 
 Next.js 16 App Router, JavaScript, Tailwind v4, deployed on Vercel. Everything here is
 built and live unless marked. File-level detail is in frontend-map.md.
@@ -360,7 +360,7 @@ Where: app/globals.css, components/ui
       sourced primarily from NUC, NBTE, and NCCE official lists,
       cross-referenced against JAMB's institution list and secondary sources. 
       This is the first of what may become several country-specific data pipelines 
-      as Academia expands.
+      as Academia Atlas expands.
 - [x] Extend the School model with richer fields: institution type
       (university/polytechnic/college of education), ownership
       (federal/state/private), state, an official regulatory or JAMB code,
@@ -398,7 +398,7 @@ Where: app/globals.css, components/ui
       see BUILD_LOG_FRONTEND.md.
 - [x] Platform account visual marker: a single known account id (env-
       configured, unset by default) gets a small badge next to its name
-      wherever an author is shown, for Academia's own seed/editorial
+      wherever an author is shown, for Academia Atlas' own seed/editorial
       account. Not a role system, no is_admin exposure.
 
 ## Admin & Moderation UX (Post-MVP)
@@ -731,7 +731,7 @@ truthfulness or presence of content students post.
       anything (icons render, builds pass), but worth confirming via
       npm ls lucide-react whether this is a genuine 1.0 release or a typo,
       and spot-checking that no icon names changed if it's the former
-- [x] TopBar's "Academia" wordmark is plain text, not a link, inconsistent
+- [x] TopBar's "Academia Atlas" wordmark is plain text, not a link, inconsistent
       with Sidebar's identical-looking wordmark which does navigate home.
       TopBar is the persistently visible one, worth making it a Link too
 - [x] No centralized z-index scale, ad hoc values (TopBar z-30, sidebar
@@ -892,7 +892,7 @@ truthfulness or presence of content students post.
 
 ---
 
-# Mobile Client (academia-mobile)
+# Mobile Client (mobile)
 
 Expo (React Native, TypeScript) user client for iOS and Android. It calls the Django API directly, with tokens
 in secure storage and no web proxy. mobile-map.md says where the code lives. Area headings match the Frontend
