@@ -1,50 +1,62 @@
 # Academia
 
-A school-focused academic knowledge platform designed to help students find answers, solve academic problems, and preserve institutional knowledge in a searchable and organized way.
+A school-focused academic knowledge platform that helps students find answers, solve
+academic problems, and preserve institutional knowledge in a searchable, organized way.
+It is launching first with Nigerian tertiary institutions, where the problem originated,
+and is built to extend to other countries.
+
+> Student is confused. Student asks a question. Student gets an answer.
+> Future students find that answer without asking again.
 
 ---
 
-## The Problem
+## Which document answers what
 
-Every semester, students ask the same questions:
+| If you want to know... | Read |
+|---|---|
+| What Academia is, why, and the principles behind it | [Project Plan](project-plan.md) |
+| What each surface can do today, and what is missing | [Feature List](feature-list.md) |
+| What the API accepts and returns, errors, rate limits | [API Contract](api-contract.md) |
+| What the data looks like | [Database Schema](database-schema.md) |
+| Where the code lives, per surface | [Backend Map](backend-map.md), [Frontend Map](frontend-map.md), [Mobile Map](mobile-map.md) |
+| How it should look and feel (web and mobile) | [Design Guide](design-guide.md) |
+| Why it was built that way, decisions, open deviations | [Build Log Backend](BUILD_LOG_BACKEND.md), [Build Log Frontend](BUILD_LOG_FRONTEND.md), [Build Log Mobile](BUILD_LOG_MOBILE.md) |
+| What changed and when | [Change Log](changelog.md) |
+| How to verify it works | [Testing](TESTING.md) |
+| How to ship it | [Deployment Checklist](DEPLOYMENT_CHECKLIST.md) |
+| How to contribute and run the project | [Contributors Quickstart](QUICKSTART.md), [Maintainer Playbook](MAINTAINER_PLAYBOOK.md) |
 
-* How do I calculate my GPA?
-* What documents are required for clearance?
-* How does course registration work?
-* What should I expect during SIWES?
-* What happens if I miss a deadline?
-* What is the process for changing departments?
+## When something changes, update
 
-The answers usually exist somewhere, but they are scattered across WhatsApp groups, Telegram channels, student forums, and private conversations.
+| Change | Update |
+|---|---|
+| A capability is added, finished or found broken | Feature List (and its status mark) |
+| A file, route, screen, helper or component is added, moved or removed | The surface's map |
+| An endpoint, payload, error or rate limit changes | API Contract, then the Changelog |
+| A model or field changes | Database Schema, then the Changelog |
+| A decision was made or a doc deviation found | The surface's Build Log |
+| Anything shipped | Changelog |
+| A visual or interaction rule changes | Design Guide |
+| A launch step is added or found missing | Deployment Checklist |
 
-As older students graduate and conversations disappear, valuable knowledge is lost and the cycle repeats.
-
----
-
-## The Solution
-
-Academia provides a structured platform where academic questions can be asked, answered, searched, and preserved.
-
-Instead of information being buried inside temporary conversations, it becomes part of a permanent and searchable knowledge base organized around schools and departments.
-
-The goal is simple:
-
-> Student is confused.
-> Student asks a question.
-> Student gets an answer.
-> Future students find that answer without asking the same question again.
-
----
-
-## Market Strategy
-
-Academia is launching first with Nigerian tertiary institutions, where the problem it solves originated. Nigeria is the platform's starting market, not its permanent identity. The data model, URL structure, and core architecture are built to extend to institutions in other countries as the Nigerian market is proven out.
+Each document has one job. Do not copy content between them, link instead.
 
 ---
 
-## Core Principles
+## The problem
 
-Academia is built around a few simple ideas:
+Every semester, students ask the same questions: how to calculate a GPA, what clearance
+needs, how registration works, what to expect during SIWES, what happens after a missed
+deadline, how to change department. The answers exist, but they are scattered across
+WhatsApp groups, Telegram channels and private conversations, and they disappear when
+older students graduate.
+
+## The solution
+
+A structured platform where academic questions are asked, answered, searched and
+preserved, organized by school and department, instead of buried in temporary chats.
+
+## Core principles
 
 * One hub per school.
 * Schools are platform-managed records.
@@ -52,75 +64,51 @@ Academia is built around a few simple ideas:
 * Search comes before social features.
 * Information should become easier to find over time, not harder.
 
----
+## Surfaces
 
-## Documentation
+| Surface | Stack | Notes |
+|---|---|---|
+| Backend | Django REST Framework, PostgreSQL, SimpleJWT with Google sign in | Pure versioned JSON API at `/api/v1/` |
+| Web | Next.js (App Router), Tailwind v4, deployed on Vercel | Full product including moderation and admin tools |
+| Mobile | Expo (React Native, TypeScript) | User client. Staff open the web tools in the browser |
 
-The project documentation is organized around four core documents, plus supporting logs.
+## Development philosophy
 
-### Project Plan
-Defines the vision, goals, structure, and guiding decisions behind the platform.
+API first. Behavior, data structures and API responses are documented and agreed before
+implementation, and each surface is built against the same contract. Documentation is a
+development artifact, not an afterthought.
 
-### Feature List
-Defines the complete list of features, what's built, and what's planned for later.
+## Current status
 
-### Database Schema
-Defines the application's data structures, models, and relationships.
+**Phase:** post-MVP, pre-launch.
 
-### API Contract
-Defines the communication contract between the frontend and backend systems.
+* **Backend:** complete (15 MVP phases plus the post-MVP maintenance backlog), live on Vercel with Supabase Postgres and Upstash Redis. A PythonAnywhere deployment remains as the preview and testing backend.
+* **Web:** MVP and the eight-batch audit pass are complete and live.
+* **Mobile:** MVP built, post-MVP audit complete. See the Mobile section of the Feature List and the Mobile Build Log.
 
-### Project Overview
-The frontend-facing guide: sitemap, design philosophy, visual direction, and component list.
+## Next steps
 
----
+1. Do a repo cleanup.
+2. Work through the [Deployment Checklist](DEPLOYMENT_CHECKLIST.md) for backend, web and mobile.
+3. Onboard initial moderators and school representatives.
+4. Open the platform to real users.
 
-## Development Philosophy
-
-Academia follows an API-first development approach.
-
-System behavior, data structures, and API responses are documented and agreed upon before implementation. Frontend and backend development then proceed independently using the same documented contracts.
-
-This reduces integration issues, allows parallel development, and keeps both sides aligned throughout the project.
-
----
-
-## Current Status
-
-**Phase:** Post-MVP, pre-launch
-
-The backend is complete: all 15 planned MVP phases, plus post-MVP passes for production readiness, URL/ID ergonomics, and API completeness. The frontend MVP (Phases 0 through 15) is also complete and live on Vercel. Both are functional and deployed.
-
-The backend audit backlog is complete. The frontend is in its own audit-and-fix pass, working through the frontend list in `feature-list.md`'s Platform Improvements section. Production runs on Vercel, with the original PythonAnywhere and Vercel deployments kept as the preview and testing environment.
-
----
-
-## Repository Structure
+## Repository structure
 
 ```text
 Academia/
-│
-├── docs/                    - Project documentation (MkDocs, published to GitHub Pages)
-├── backend/                 - Django REST Framework API
-├── academia-frontend/       - Next.js application
-│
-├── CHANGELOG.md
+├── docs/                    Documentation (MkDocs, published to GitHub Pages)
+├── backend/                 Django REST Framework API
+├── academia-frontend/       Next.js web application
+├── academia-mobile/         Expo (React Native) mobile client
+├── CHANGELOG.md             Canonical history, included in the docs site
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
 ├── GOVERNANCE.md
-├── LICENSE
 ├── SECURITY.md
+├── LICENSE
 └── README.md
 ```
-
----
-
-## Next Steps
-
-1. Finish the frontend audit pass (see `feature-list.md`), then run the pre-launch checklist for both halves.
-2. Complete the Nigerian school directory import (data cleaning in progress).
-3. Onboard initial moderators and school representatives.
-4. Open the platform to real users.
 
 ---
 

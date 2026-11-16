@@ -323,10 +323,10 @@ School Data Curation sourcing line.
   independently regardless of what moderator_for/representative_for show,
   hiding a control is a convenience, never a substitute for the 403 a user
   would get attempting the action directly
-- No push notification exists yet for role assignment (is_moderator/is_rep
-  changes), the frontend is expected to refetch GET /users/me/ after login
-  and when entering a school/hub management context, not rely on it updating
-  mid-session automatically
+- Role assignment sends an in-app MODERATOR_ASSIGNED notification; clients
+  still refetch GET /users/me/ after login and when entering a school/hub
+  management context because role fields do not update in an already loaded
+  session
 - admin's moderator_for/representative_for are not backfilled with every hub,
   is_admin alone is the correct signal for blanket access, keeping the
   response bounded regardless of how many hubs exist
@@ -375,10 +375,6 @@ School Data Curation sourcing line.
   followers instead of adding a type), keeps the frontend's notification
   icon map from needing another special case for a distinction that's
   really just "assigned to a hub role"
-- NEW_QUESTION notifies moderators only, not representatives, grounded
-  directly in project-plan.md's existing (never-implemented) description of
-  moderator responsibilities. Representatives are described there as
-  coordinators, not as the audience for new-content alerts
 - Notified via a per-moderator notify() loop, same fan-out shape as the
   follow system's per-follower notifications, no email involved so this is
   pure DB writes, fine at MVP scale, same Celery-backlog note applies if
@@ -412,9 +408,6 @@ School Data Curation sourcing line.
   monitoring their dashboard as part of the role, so this doesn't need to
   pull anyone back to the platform the way a student-facing notification
   does
-- Same in-app-only channel policy as NEW_ACTIVATION_REQUEST: admins are
-  expected to already be monitoring their dashboard as part of the role,
-  this doesn't need to pull anyone back to the platform
 - Notification fan-out happens after the Report row is successfully
   created and the duplicate-report check has passed, so a blocked/invalid
   report submission never generates a stray notification
@@ -457,17 +450,6 @@ School Data Curation sourcing line.
   deliberately not built yet, dataset cleaning is happening in a separate
   chat first. This pass only lands the schema, serializers, views, and
   admin needed to receive that data whenever it's ready
-- institution_type deliberately kept to three values, not six. Allied
-  institutions, colleges of health technology, and colleges of nursing all
-  collapse into POLYTECHNIC as the nearest general category (all three are
-  NBTE-regulated, sub-degree technical institutions). The original specific
-  category label is preserved per-record on SchoolSourceRecord.raw_category,
-  nothing from the source is actually lost, it's just not promoted to a
-  first-class School field
-- country added now, while the directory was still seed-only, specifically
-  to avoid a far more expensive backfill later once real schools existed.
-  Plain CharField, not an enum or a Country model, no multi-country logic
-  built yet, this is forward compatibility only
 - Merge philosophy ended deliberately conservative after real, repeated
   false positives during data cleaning. Only two merges are fully
   automated, both gated on an explicit source-provided annotation (an
@@ -548,10 +530,6 @@ School Data Curation sourcing line.
   school's slug-based lookup can show stale has_hub for up to
   CACHE_TTL_MEDIUM after activation. Worth a shared invalidation helper
   used by both apps.schools and apps.hubs so this can't drift again
-- Reps included in NEW_QUESTION specifically because a freshly activated
-  hub can have zero moderators until a rep assigns some, without reps
-  included, a question could be posted into total silence, nobody notified
-  at all. This is a real gap being closed, not just a nice-to-have
 - AdminActionLog lives in apps.core, the first model that app has, since the
   log spans reports, accounts, and tags. Requires makemigrations core with
   the explicit app label. Chosen scope: only actions that left no trace
@@ -707,13 +685,28 @@ verification (fetching the already-seeded school via search instead of recreatin
 it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
 Question slugs, and the 400 Invalid ID format response all work as designed.
 
+## Mobile Client Support (Post-MVP)
+Not a numbered phase. Two small backend changes made by the agent that built the
+mobile client.
+
+- Search relevance floor: SearchQuestionsView filtered rank > 0, but Postgres
+  returns about 1e-20 (not 0) for non-matching rows on multi-term queries, so q
+  returned every question. The filter is now rank >= 0.0001. No contract shape
+  change, search now behaves as documented for both clients.
+- Development settings: ALLOWED_HOSTS is localhost and 127.0.0.1 plus anything in
+  the DJANGO_DEV_ALLOWED_HOSTS env var (comma separated), so Expo Go on a phone
+  can reach the dev server over the LAN without opening it to every Host header.
+  Development settings only, production is unchanged.
+- Local setup for mobile testing: DJANGO_DEV_ALLOWED_HOSTS=<your LAN ip>,
+  CORS_ALLOWED_ORIGINS includes http://localhost:8081 for the Expo web preview,
+  and the server runs on 0.0.0.0:8000 (make run-lan).
+
 ### Known Deviations From Docs
 None, cleared by the November 5, 2026 docs sync.
 
-### Next Immediate Step
-Backend backlog closed. Deferred on purpose: answer edit history, a cloud
-media storage backend (decide and verify alongside the first upload
-feature), a read endpoint for AdminActionLog, and rep-scoped report
-visibility (needs a decision, also needs frontend work). Next is the
-pre-launch checklist, run together with the frontend's: error alerting,
-database backups, email delivery limits, and rotating secrets.
+### Deferred Work
+Backend backlog is closed. Deferred on purpose: answer edit history, a cloud
+media storage backend (decide and verify alongside the first upload feature),
+a read endpoint for AdminActionLog, and rep-scoped report visibility (needs
+a decision and frontend work). Shared launch operations are tracked in
+`DEPLOYMENT_CHECKLIST.md`.

@@ -3,15 +3,30 @@ site_name: Academia
 theme:
   name: material
 
+exclude_docs: |
+  content/
+
 nav:
   - Home: index.md
-  - Project Overview: project-overview.md
   - Project Plan: project-plan.md
-  - Build Log Backend: BUILD_LOG_BACKEND.md
-  - Build Log Frontend: BUILD_LOG_FRONTEND.md
-  - Change Log: changelog.md
-  - Features: feature-list.md
-  - Database Schema: database-schema.md
+  - Feature List: feature-list.md
   - API Contract: api-contract.md
+  - Database Schema: database-schema.md
+  - Design Guide: design-guide.md
+  - Maps:
+      - Backend Map: backend-map.md
+      - Frontend Map: frontend-map.md
+      - Mobile Map: mobile-map.md
+  - Build Logs:
+      - Backend: BUILD_LOG_BACKEND.md
+      - Frontend: BUILD_LOG_FRONTEND.md
+      - Mobile: BUILD_LOG_MOBILE.md
+  - Mobile mockup: design/Mobile-mockup.html
+  - Testing: TESTING.md
+  - Deployment Checklist: DEPLOYMENT_CHECKLIST.md
+  - Change Log: changelog.md
   - Contributors Quickstart: QUICKSTART.md
   - Maintainer Playbook: MAINTAINER_PLAYBOOK.md
+
+markdown_extensions:
+  - pymdownx.snippets

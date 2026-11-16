@@ -1,8 +1,11 @@
 ## Current Phase
-Frontend MVP (Phases 0–15) complete and confirmed. Docs synced, see
-changelog.md's Frontend Docs Sync entry. Known Deviations below is now down
-to the one genuinely unresolved item pending your confirmation, plus a couple
-of low-priority, frontend-only implementation notes kept for visibility.
+Frontend MVP (Phases 0 to 15) plus the post-MVP audit pass are complete and
+live. The audit pass ran in eight batches (foundations, auth hardening,
+notifications and deep links, reports, admin and moderation and profile, tags
+and list guards, UX leftovers, shared patterns), see the Frontend Audit Pass
+section. Open: the hub-offline banner for moderators (backend first),
+label wiring for SchoolFormModal and PageFormModal, a shared Modal, and
+windowed lists.
 
 ## Completed Phases (Frontend)
 - Frontend Phase 0: Next.js App Router scaffolded, Tailwind v4 CSS-first
@@ -518,3 +521,46 @@ Batch 6 and follow-ups.
   merges recent activity and post history. PostHistoryTabs was deleted.
 - Open: moderators are not told when their hub goes offline because GET
   /users/me/ omits it. Backend issue drafted, frontend half waits for it.
+
+Batch 7, UX leftovers.
+- Contrast: text-gray-400 (about 2.5:1 light) and text-gray-500 (about 3.7:1
+  dark) failed AA. New --color-muted token (light #67645C, dark #9EA1AB) and
+  a text-muted utility, swapped in with a perl sweep. The border-strong
+  tokens measure about 1.6:1 against a 3:1 target for field edges, left
+  unchanged by choice, candidate values noted in the feature list.
+- AskFab (mobile only, signed in, hidden on forms and staff tools) at
+  z-sticky, AppShell main gained bottom padding on mobile.
+- Primitives sweep by scripts/codemod-primitives.mjs (dry run by default):
+  ErrorMessage for red and amber paragraphs with a size class, Input, Select
+  and Textarea for controls with the standard styling. Skips are listed,
+  checkboxes and radios silently. It restyles, it does not wire labels.
+- lib/formErrors.js turns DRF field-keyed 400s into per-field messages. The
+  ask, edit, answer, department and request-hub forms use FormField plus it.
+  SchoolPicker's notice and busyId now also serve the ask form.
+- MarkdownEditor: word and character count in richMode, real accessible
+  names on toolbar buttons, id, invalid, aria-describedby and aria-label
+  props so FormField can wire it.
+
+Batch 8, shared patterns.
+- IconLabel (xs, sm, md) owns icon size and text size for every meta row,
+  adopted in the question meta row, answer and comment bylines and
+  SchoolMetaBadge. The school hero rows already match md and were left.
+- EmptyState adopted in the lists a user can land on (hub, tag and school
+  lists, departments, profile tabs, unanswered queue, users, pages).
+- Load-more failures now show on the three profile tabs and UnansweredQueue.
+- ReportButton and EscalateButton use FormField. The school filters do too.
+- CommentThread's post box is an Input with an accessible name.
+
+## Frontend Design Decisions
+
+- Light and dark themes shipped together, with a manual toggle persisted in
+  localStorage.
+- A single blue accent (`#2563eb`) is defined as a CSS variable; the rest of the
+  palette remains restrained and neutral.
+- Styling uses custom Tailwind utilities rather than a third-party component
+  library.
+- Structural chrome shares the page background tokens. Elevated popovers are
+  the deliberate exception.
+- `--color-border` is for dividers and edges, `--color-border-strong` for
+  controls, and named z-index utilities from `globals.css` for overlays.
+- `--color-muted` is the shared token for secondary text.
