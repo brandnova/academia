@@ -60,7 +60,11 @@ class SearchQuestionsView(APIView):
         if q:
             vector = SearchVector("title", weight="A") + SearchVector("body", weight="B")
             search_query = SearchQuery(q)
-            queryset = queryset.annotate(rank=SearchRank(vector, search_query)).filter(rank__gt=0)
+            # Postgres can return a 1e-20 rank for non-matches when the query has
+            # multiple terms. A small floor keeps q filtering meaningful.
+            queryset = queryset.annotate(rank=SearchRank(vector, search_query)).filter(
+                rank__gte=0.0001
+            )
             ordering = ("-is_solved", "-top_vote", "-created_at", "-rank")
         else:
             queryset = queryset.annotate(rank=Value(None, output_field=FloatField()))
