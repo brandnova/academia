@@ -1,0 +1,2853 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://brandnova.github.io/academia-atlas/backend-map/">
+      
+      
+        <link rel="prev" href="../design-guide/">
+      
+      
+        <link rel="next" href="../frontend-map/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Backend Map - Academia Atlas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#backend-map" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Academia Atlas" class="md-header__button md-logo" aria-label="Academia Atlas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Academia Atlas
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Backend Map
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Academia Atlas" class="md-nav__button md-logo" aria-label="Academia Atlas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Academia Atlas
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feature List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend Map
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stack-and-local-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Stack and local commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-project-and-settings-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Project and settings files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Project and settings files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-request-and-response-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Request and response flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-app-and-file-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. App and file map
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. App and file map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appsaccounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appscore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.core
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsschools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.schools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appshubs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.hubs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsquestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsanswers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.answers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appscomments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appstags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appssearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsnotifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsreports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.reports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appspages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-route-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Route map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-shared-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Shared behavior
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Shared behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permissions-and-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissions and IDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#throttles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Throttles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notifications-and-email" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notifications and email
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-data-commands-and-source-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Data commands and source data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-testing-and-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Testing and verification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-where-to-make-a-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Where to make a change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-deferred-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Deferred work
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mobile-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Logs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Build Logs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_BACKEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_FRONTEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_MOBILE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design/Mobile-mockup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile mockup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TESTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEPLOYMENT_CHECKLIST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QUICKSTART/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MAINTAINER_PLAYBOOK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintainer Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stack-and-local-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Stack and local commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-project-and-settings-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Project and settings files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Project and settings files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-request-and-response-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Request and response flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-app-and-file-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. App and file map
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. App and file map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appsaccounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appscore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.core
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsschools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.schools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appshubs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.hubs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsquestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.questions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsanswers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.answers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appscomments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appstags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appssearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsnotifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appsreports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.reports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appspages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apps.pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-route-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Route map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-shared-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Shared behavior
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Shared behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permissions-and-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissions and IDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#throttles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Throttles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notifications-and-email" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notifications and email
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-data-commands-and-source-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Data commands and source data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-testing-and-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Testing and verification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-where-to-make-a-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Where to make a change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-deferred-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Deferred work
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="backend-map">Backend Map</h1>
+<p>A file-oriented guide to <code>backend/</code>: where the API's behavior lives and how its
+apps work together. Use it with the other maintained references:</p>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Question it answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../api-contract/">API Contract</a></td>
+<td>What endpoints accept and return, error shapes, permissions and rate limits</td>
+</tr>
+<tr>
+<td><a href="../database-schema/">Database Schema</a></td>
+<td>Models, fields, constraints, indexes and relationships</td>
+</tr>
+<tr>
+<td><a href="../BUILD_LOG_BACKEND/">Backend Build Log</a></td>
+<td>Why implementation choices were made, conventions and deviations</td>
+</tr>
+<tr>
+<td><a href="../feature-list/">Feature List</a></td>
+<td>Which capabilities exist, are incomplete or remain planned</td>
+</tr>
+</tbody>
+</table>
+<p>This map describes the current code organization. It is not a second API
+contract, schema reference or feature checklist.</p>
+<h2 id="1-stack-and-local-commands">1. Stack and local commands</h2>
+<ul>
+<li>Django 6.0.6 on Python 3.12, Django REST Framework, SimpleJWT with refresh
+  rotation and blacklist, PostgreSQL through psycopg 3, django-environ,
+  django-redis, django-cors-headers, WhiteNoise and Gunicorn.</li>
+<li>The product backend is a JSON API mounted under <code>/api/v1/</code>. Django admin is
+  available separately under <code>/admin/</code>.</li>
+<li>Run commands from <code>backend/</code>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>python manage.py runserver</code></td>
+<td>Local development server, defaults to development settings</td>
+</tr>
+<tr>
+<td><code>make run-lan</code></td>
+<td>Development server on <code>0.0.0.0:8000</code>, for device testing on the LAN</td>
+</tr>
+<tr>
+<td><code>make test</code></td>
+<td>Run Django's discovered test suite</td>
+</tr>
+<tr>
+<td><code>make migrate</code></td>
+<td>Apply migrations</td>
+</tr>
+<tr>
+<td><code>python manage.py seed_demo_data</code></td>
+<td>Seed development data; see the data-command notes below before using <code>--clear</code></td>
+</tr>
+<tr>
+<td><code>python manage.py print_test_tokens</code></td>
+<td>Print short-lived local test JWTs, DEBUG only</td>
+</tr>
+<tr>
+<td><code>python manage.py import_school_directory --dry-run</code></td>
+<td>Preview the regulator-directory import</td>
+</tr>
+</tbody>
+</table>
+<p><code>manage.py</code>, <code>config/wsgi.py</code> and <code>config/asgi.py</code> default to
+<code>config.settings.development</code>. Production must explicitly select
+<code>config.settings.production</code> with <code>DJANGO_SETTINGS_MODULE</code>.</p>
+<h2 id="2-project-and-settings-files">2. Project and settings files</h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>manage.py</code></td>
+<td>Django management-command entry point</td>
+</tr>
+<tr>
+<td><code>config/urls.py</code></td>
+<td>Registers the loose-ID converter, mounts each API app at <code>/api/v1/</code>, and defines JSON API 404/500 handlers</td>
+</tr>
+<tr>
+<td><code>config/settings/base.py</code></td>
+<td>Installed apps, middleware, templates, database, cache, CORS, authentication, default permissions, throttles, JWT lifetimes and logging</td>
+</tr>
+<tr>
+<td><code>config/settings/development.py</code></td>
+<td>Debug mode, loopback hosts plus <code>DJANGO_DEV_ALLOWED_HOSTS</code>, local SMTP at port 1025</td>
+</tr>
+<tr>
+<td><code>config/settings/production.py</code></td>
+<td>Production host/security settings, refuses SQLite unless explicitly allowed, JSON-only DRF renderer, SMTP and static/media storage configuration</td>
+</tr>
+<tr>
+<td><code>config/wsgi.py</code></td>
+<td>WSGI server entry point</td>
+</tr>
+<tr>
+<td><code>config/asgi.py</code></td>
+<td>ASGI server entry point</td>
+</tr>
+<tr>
+<td><code>requirements.txt</code></td>
+<td>Runtime dependencies</td>
+</tr>
+<tr>
+<td><code>Makefile</code></td>
+<td>Common run, migrate, shell, seed and test targets</td>
+</tr>
+<tr>
+<td><code>.env.example</code></td>
+<td>Environment variable names and local/deployment configuration notes</td>
+</tr>
+<tr>
+<td><code>templates/emails/</code></td>
+<td>Shared email base plus HTML and plain-text notification templates</td>
+</tr>
+</tbody>
+</table>
+<h3 id="environment-variables">Environment variables</h3>
+<p><code>backend/.env.example</code> is authoritative for environment-variable names.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Purpose and behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DJANGO_SECRET_KEY</code></td>
+<td>Required Django secret</td>
+</tr>
+<tr>
+<td><code>DJANGO_SETTINGS_MODULE</code></td>
+<td>Settings module; entry points default to development</td>
+</tr>
+<tr>
+<td><code>DATABASE_URL</code></td>
+<td>Database connection; local development falls back to <code>db.sqlite3</code> when unset</td>
+</tr>
+<tr>
+<td><code>DATABASE_CONN_MAX_AGE</code></td>
+<td>Persistent database connection lifetime; use <code>0</code> with the serverless transaction pooler</td>
+</tr>
+<tr>
+<td><code>DJANGO_ALLOWED_HOSTS</code>, <code>CSRF_TRUSTED_ORIGINS</code></td>
+<td>Production host and origin lists</td>
+</tr>
+<tr>
+<td><code>DJANGO_DEV_ALLOWED_HOSTS</code></td>
+<td>Additional development hosts, such as a LAN address for Expo Go</td>
+</tr>
+<tr>
+<td><code>DJANGO_ALLOW_SQLITE</code></td>
+<td>Explicit opt-in for SQLite under production settings, used by the preview deployment</td>
+</tr>
+<tr>
+<td><code>REDIS_URL</code></td>
+<td>Optional Redis cache; unset uses per-process local memory</td>
+</tr>
+<tr>
+<td><code>CACHE_TTL_SHORT</code>, <code>CACHE_TTL_MEDIUM</code>, <code>CACHE_TTL_SEARCH</code></td>
+<td>Cache durations, defaulting to 60, 300 and 30 seconds</td>
+</tr>
+<tr>
+<td><code>CORS_ALLOWED_ORIGINS</code></td>
+<td>Comma-separated origins; native requests do not use CORS, Expo web preview does</td>
+</tr>
+<tr>
+<td><code>FRONTEND_URL</code></td>
+<td>Base URL used for email links</td>
+</tr>
+<tr>
+<td><code>EMAIL_HOST</code>, <code>EMAIL_PORT</code>, <code>EMAIL_HOST_USER</code>, <code>EMAIL_HOST_PASSWORD</code>, <code>EMAIL_USE_TLS</code>, <code>DEFAULT_FROM_EMAIL</code></td>
+<td>Production mail transport and sender</td>
+</tr>
+<tr>
+<td><code>SECURE_SSL_REDIRECT</code>, <code>SECURE_HSTS_SECONDS</code></td>
+<td>Production HTTPS redirect and HSTS duration</td>
+</tr>
+<tr>
+<td><code>DJANGO_LOG_LEVEL</code></td>
+<td>Root logger threshold, defaults to <code>INFO</code></td>
+</tr>
+<tr>
+<td><code>DEFAULT_FILE_STORAGE_BACKEND</code></td>
+<td>Optional storage backend override; configure durable cloud storage before introducing uploads</td>
+</tr>
+</tbody>
+</table>
+<p>The Django setting names <code>SECRET_KEY</code> and <code>ALLOWED_HOSTS</code> are populated from
+<code>DJANGO_SECRET_KEY</code> and <code>DJANGO_ALLOWED_HOSTS</code>. Email environment-variable
+names match Django's <code>EMAIL_*</code> settings; <code>DEFAULT_FILE_STORAGE_BACKEND</code>
+selects the <code>STORAGES["default"]["BACKEND"]</code> value.</p>
+<h2 id="3-request-and-response-flow">3. Request and response flow</h2>
+<pre><code class="language-text">Client
+  -&gt; security, WhiteNoise and CORS middleware
+  -&gt; DRF authentication
+  -&gt; throttle
+  -&gt; explicit view permission
+  -&gt; view and serializer validation
+  -&gt; database write
+  -&gt; view-layer notifications, email and audit records
+  -&gt; response
+</code></pre>
+<ul>
+<li>Google access tokens are checked against Google's <code>userinfo</code> endpoint.
+  Successful login returns Academia Atlas JWTs; there is no client secret or
+  django-allauth flow. SimpleJWT rotates refresh tokens and blacklists used
+  tokens.</li>
+<li><code>DEFAULT_PERMISSION_CLASSES</code> is intentionally <code>AllowAny</code> because public reads
+  are common. Every view must declare its own permission classes. Client role
+  fields are for display only; the backend checks every protected write.</li>
+<li><code>apps.core.exceptions.custom_exception_handler</code> normalizes general DRF errors
+  and throttling responses. Field-specific 400 responses remain field-keyed.</li>
+<li>Route IDs use the registered <code>looseid</code> converter so malformed IDs reach the
+  view's UUID validation and return the documented 400 instead of a route 404.
+  A valid but missing ID returns 404.</li>
+<li>Notification and email side effects are initiated by views/services after
+  successful writes, not by model signals. Audit writes are made in the same
+  transaction as the action. Aggregate counters use targeted updates.</li>
+<li>The frontend calls through its Next.js proxy and httpOnly cookies; mobile
+  calls the API directly with bearer tokens in secure storage. Both use this
+  same contract.</li>
+</ul>
+<h2 id="4-app-and-file-map">4. App and file map</h2>
+<p>Every app has an <code>apps.py</code> registration module and a <code>migrations/</code> package.
+The entries below list the files that implement behavior, not routine
+<code>__init__.py</code> or migration files. All inspected app <code>tests.py</code> files are
+placeholders rather than substantive per-app test suites.</p>
+<h3 id="appsaccounts"><code>apps.accounts</code></h3>
+<p>Owns the custom user identity, Google login and user-facing account endpoints.
+The user distinguishes platform <code>is_admin</code> from Django <code>is_staff</code>.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td>UUID-keyed <code>User</code> model, email identity and role/account flags</td>
+</tr>
+<tr>
+<td><code>managers.py</code></td>
+<td><code>UserManager</code>: normalize email, set unusable passwords when omitted, and apply staff/admin defaults</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td><code>UserSerializer</code> includes hub-role summaries and computed activity counts; admin, update and user-picker representations use separate serializers</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Google userinfo verification and JWT response; throttled refresh; refresh-token blacklist logout; current-user read/name update; admin user search/list/status change; active-user search for staff pickers</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td><code>auth/google/</code>, <code>auth/refresh/</code>, <code>auth/logout/</code>, <code>users/me/</code>, <code>users/search/</code>, <code>admin/users/</code> and user detail</td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td><code>UserPagination</code>, 20 by default, maximum 100</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>Custom Django <code>UserAdmin</code></td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive account-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Suspending/reactivating a user is an admin action. A real suspension transition
+is logged and sends the user a notification; repeated state-setting does not
+create a second transition record.</p>
+<h3 id="appscore"><code>apps.core</code></h3>
+<p>Shared API infrastructure and utilities used across apps. <code>AdminActionLog</code> is
+read-only in Django admin and does not have a public API endpoint.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td><code>AdminActionLog</code>, an append-only record with actor, action, UUID target, label snapshot and metadata</td>
+</tr>
+<tr>
+<td><code>audit.py</code></td>
+<td><code>log_admin_action()</code>, called in the same transaction as the action</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>Read-only audit-log admin</td>
+</tr>
+<tr>
+<td><code>permissions.py</code></td>
+<td><code>user_is_platform_admin()</code> and <code>IsPlatformAdmin</code></td>
+</tr>
+<tr>
+<td><code>utils.py</code></td>
+<td>UUID parsing and validation helpers</td>
+</tr>
+<tr>
+<td><code>converters.py</code></td>
+<td><code>LooseIDConverter</code>, defers ID-format validation to the view</td>
+</tr>
+<tr>
+<td><code>slugs.py</code></td>
+<td>Unique persisted slug generation with collision retry, plus cosmetic display-slug handling</td>
+</tr>
+<tr>
+<td><code>cache.py</code></td>
+<td>Cache-key creation, safe get/set/delete, prefix invalidation and cached-response helper; cache failures log and fail open</td>
+</tr>
+<tr>
+<td><code>exceptions.py</code></td>
+<td><code>custom_exception_handler()</code> for normalized DRF and throttle errors</td>
+</tr>
+<tr>
+<td><code>throttling.py</code></td>
+<td><code>MethodScopedThrottle</code>, applies a throttle scope only to selected HTTP methods</td>
+</tr>
+<tr>
+<td><code>content_links.py</code></td>
+<td><code>get_link_target()</code> maps questions, answers and comments to question/answer link identifiers</td>
+</tr>
+<tr>
+<td><code>views.py</code>, <code>urls.py</code></td>
+<td><code>health_check()</code> probes database and cache; only database failure makes health degraded</td>
+</tr>
+<tr>
+<td><code>management/commands/seed_demo_data.py</code></td>
+<td>Seeds related development content across apps; supports reset and admin-email options</td>
+</tr>
+<tr>
+<td><code>management/commands/print_test_tokens.py</code></td>
+<td>Generates one-hour tokens for fixed local test users only when <code>DEBUG=True</code></td>
+</tr>
+<tr>
+<td><code>management/commands/import_school_directory.py</code></td>
+<td>Imports school and provenance CSVs, supports dry run, matches by short name/name, fills blank fields, creates unmatched schools inactive, and writes source records idempotently</td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive core tests found</td>
+</tr>
+</tbody>
+</table>
+<p>The directory import command currently does not expose source records through
+an API or mark old source records non-current. School curation fields and
+provenance are detailed in the <a href="../database-schema/">schema</a> and its open work
+is tracked in the <a href="../feature-list/">feature list</a>.</p>
+<h3 id="appsschools"><code>apps.schools</code></h3>
+<p>Owns platform-managed schools, departments and regulator-source provenance.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td><code>School</code>, <code>Department</code> and <code>SchoolSourceRecord</code>; stable school slug, computed active-hub state, school/department relationships and source provenance</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>School list/detail/write serializers; department list/create/update serializers; source-record serializer, currently not exposed by a view</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Public school and department reads; search and school filters; admin school create/update and inactive-school visibility; representative department create/update; slug lookup</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td>School list, ID and slug details; nested department list/create; department detail</td>
+</tr>
+<tr>
+<td><code>cache.py</code></td>
+<td><code>invalidate_school_cache()</code> clears list, detail and slug keys; called when hub activity changes computed <code>School.has_hub</code></td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>20 by default, maximum 100</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>School and department admin, school-source records inline</td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive school-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>School reads are public for active records. Platform admins can inspect
+inactive records. Department reads show active departments publicly and allow
+representatives/admins to manage the school’s departments.</p>
+<h3 id="appshubs"><code>apps.hubs</code></h3>
+<p>Owns school hubs, activation requests and staff assignments.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td>One-to-one <code>Hub</code> per school, <code>HubActivationRequest</code>, <code>ModeratorAssignment</code> and <code>SchoolRepresentativeAssignment</code></td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>Hub/school/department summaries, activation request input/output and role-assignment representations; validates inactive or already-served schools and duplicate pending requests</td>
+</tr>
+<tr>
+<td><code>permissions.py</code></td>
+<td>Hub/school-scoped moderator and representative checks, any-hub representative check, and shared <code>user_is_staff()</code> role check</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Public hub detail/by-school/by-slug reads; admin activity toggle and audit; user activation request and admin review; moderator and representative list/assign/deactivate; role and hub notifications</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td><code>hubs/</code>, activation request review, by-school and by-slug lookups, hub detail, nested moderators and representatives</td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>Activation requests, 20 by default, maximum 100</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>Admin registrations for hub, requests and both assignment models</td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive hub-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Hub activation invalidates both hub and school caches. Assignment records use
+active flags rather than hard deletion, preserving a team across hub
+deactivation.</p>
+<h3 id="appsquestions"><code>apps.questions</code></h3>
+<p>Owns questions, follows and question-level staff actions.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td>UUID question and follow models; status, hub, optional department, lock/view fields, answer count, best-answer ID and tag access</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>List/detail and create/update serializers; detail nests answers and follow state; <code>_sync_tags()</code> normalizes and synchronizes tag links</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Public list/detail, authenticated create, author-only edit/delete, staff unanswered queue, follow/unfollow and staff lock/unlock; authenticated view counts are deduplicated per-user over a rolling 24-hour cache window</td>
+</tr>
+<tr>
+<td><code>services.py</code></td>
+<td><code>notify_followers_of_new_answer()</code> and best-answer follower notifications, excluding the question author and answer author where appropriate</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td>Question list/detail, unanswered, follow and lock routes</td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>20 by default, <code>page_size</code> supported, maximum 50</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td><code>QuestionAdmin</code></td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive question-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Creation notifies active moderators and representatives assigned to the hub.
+Question create/update synchronizes tags through <code>apps.tags</code>. Detail
+serialization uses the answer serializers. Answer creation and best-answer
+selection call the follower notification service.</p>
+<h3 id="appsanswers"><code>apps.answers</code></h3>
+<p>Owns answers, votes and best-answer transitions.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td><code>Answer</code> and unique-per-user/per-answer <code>AnswerVote</code>; best-answer and vote-score fields, computed comment count</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>Answer author/question summaries, nested answer response and create/update validation; rejects missing or locked questions and advances an open question to answered</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Create, author-only edit/delete, vote/unvote, question-owner best-answer marking and the current user’s answer list</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td>Answer list/create/detail, vote, mark-best and <code>users/me/answers/</code></td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>20 by default, maximum 50</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>Answer and vote model registration</td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive answer-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Votes reject self-voting and update the score. Marking best sets the question
+to solved. Deleting its last answer reopens it; deleting the best answer while
+other answers remain returns it to answered. Creation and best-answer actions
+notify the relevant author and followers; vote events create in-app
+notifications. The answer serializer is also used in question details.</p>
+<h3 id="appscomments"><code>apps.comments</code></h3>
+<p>Owns answer comments and each user’s own-comment history.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td><code>Comment</code> linked to an answer and author, ordered by creation time</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>Comment, author and answer summaries; create/update and own-comment representations with parent-question information</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Public answer-comment list, authenticated create, author-only edit/delete and authenticated own-comment list</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td>Comment create/detail, answer comments and <code>users/me/comments/</code></td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>20 by default, maximum 100</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td><code>CommentAdmin</code></td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive comment-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Creating a comment notifies the answer author unless that author wrote the
+comment. Deleting an answer cascades to its comments.</p>
+<h3 id="appstags"><code>apps.tags</code></h3>
+<p>Owns normalized tag names, question-tag joins and admin tag maintenance.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td>Unique-name <code>Tag</code> and unique <code>QuestionTag</code> relation</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>Tag representation; uses an existing question-count annotation where available, otherwise counts related questions</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Public list/search/popularity and tag-question list; admin-only delete and merge/rename</td>
+</tr>
+<tr>
+<td><code>utils.py</code></td>
+<td>Tag length limit and <code>validate_tags()</code></td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td>Tag list, merge, delete/detail and questions-by-tag routes</td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>50 by default, maximum 100</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>Tag and question-tag admin</td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive tag-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Delete is blocked when a tag is attached unless forced. Merge deduplicates
+question/tag links, records an admin action and invalidates the tag-list cache.
+Question serializers own synchronization of tags on question writes.</p>
+<h3 id="appssearch"><code>apps.search</code></h3>
+<p>Provides the ranked question-search endpoint. It has no application models or
+schema migration.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>views.py</code></td>
+<td>Public, throttled and cached question search; supports hub/school/department/tag filters and PostgreSQL full-text search</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td><code>SearchQuestionSerializer</code>, question search summary and rounded rank</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td><code>search/questions/</code></td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>20 by default, maximum 50</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>No model registrations</td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive search-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>With a nonempty <code>q</code>, ranking orders solved status, top answer vote score,
+creation time and then text rank. Without <code>q</code>, it orders by solved status, top
+vote score and creation time. The rank floor removes PostgreSQL's tiny
+non-match scores. Results query <code>apps.questions.Question</code>, filter
+<code>QuestionTag</code>, and reuse question summary serializers.</p>
+<h3 id="appsnotifications"><code>apps.notifications</code></h3>
+<p>Owns in-app notification records, delivery helpers and read state.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td>Typed <code>Notification</code> with a generic content-object reference</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>Notification representation, related object identifiers and shared <code>link_target</code></td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Authenticated user-scoped list, optional read-state filter, unread count, mark-one-read and mark-all-read</td>
+</tr>
+<tr>
+<td><code>services.py</code></td>
+<td><code>create_notification()</code>, <code>send_notification_email()</code> and <code>notify()</code>; email delivery failures are logged rather than raised</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td>Notification list, mark-all-read and mark-read routes</td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>20 by default, maximum 100</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>Notification admin</td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive notification-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Views prefetch common question/answer/comment targets. Notification side
+effects originate in the question, answer, comment, hub, account and report
+flows. The allowed types, channel policy and recipients are summarized in
+<code>BUILD_LOG_BACKEND.md</code>; exact response fields are in <code>api-contract.md</code>.</p>
+<h3 id="appsreports"><code>apps.reports</code></h3>
+<p>Owns user reports and their admin review and staff escalation workflow.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td><code>Report</code> type/status, generic content target, reviewer/escalation fields and one-report-per-user/content uniqueness</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>Create response, admin report and private own-report forms; includes content-existence/link data while hiding review and escalation details from the reporter</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Restricts targets to questions, answers and comments; authenticated report creation; admin list/resolve/reject; hub staff escalation; resolves target hub and deletion cascades; handles orphan reports and notifications</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td>Report create/list, own reports, resolve, reject and escalate</td>
+</tr>
+<tr>
+<td><code>pagination.py</code></td>
+<td>20 by default, maximum 100</td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td>Report admin</td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive report-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Deleting reported content can cascade through answers/comments and
+auto-resolve related pending reports. Review/escalation actions log the
+appropriate admin action and notify relevant parties.</p>
+<h3 id="appspages"><code>apps.pages</code></h3>
+<p>Owns admin-managed policy, product and staff guide pages.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models.py</code></td>
+<td><code>StaticPage</code>: generated unique slug, public/staff visibility, publish state, optional creator and timestamps</td>
+</tr>
+<tr>
+<td><code>serializers.py</code></td>
+<td>Author, list/detail and create/update representations; trims and validates titles</td>
+</tr>
+<tr>
+<td><code>views.py</code></td>
+<td>Public/admin list and detail; tiered public, staff and admin visibility; admin writes; per-tier caches and invalidation</td>
+</tr>
+<tr>
+<td><code>urls.py</code></td>
+<td><code>pages/</code> and <code>pages/&lt;identifier&gt;/</code></td>
+</tr>
+<tr>
+<td><code>admin.py</code></td>
+<td><code>StaticPageAdmin</code></td>
+</tr>
+<tr>
+<td><code>tests.py</code></td>
+<td>Placeholder; no substantive page-app tests found</td>
+</tr>
+</tbody>
+</table>
+<p>Admins see drafts and all pages. Staff means an active moderator or
+representative and includes all published pages; other visitors see only
+published public pages. Reads return the same 404 for nonexistent and
+invisible pages. Detail GET uses the slug while PATCH/DELETE use the UUID on
+the same route shape.</p>
+<h2 id="5-route-map">5. Route map</h2>
+<p><code>config/urls.py</code> mounts the route groups below at <code>/api/v1/</code>. This table is a
+navigation aid; request and response schemas, complete permission behavior
+and errors are defined in the <a href="../api-contract/">API Contract</a>.</p>
+<p>Auth labels: <strong>public</strong> means no login required, <strong>user</strong> means any
+authenticated account, <strong>staff</strong> means moderator/representative for the
+relevant hub or admin, <strong>rep</strong> means representative for the relevant school
+or admin, and <strong>admin</strong> means platform admin.</p>
+<table>
+<thead>
+<tr>
+<th>App</th>
+<th>Route group</th>
+<th>Access and purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>core</code></td>
+<td><code>GET /health/</code></td>
+<td>Public liveness/dependency check; only database failure marks service degraded</td>
+</tr>
+<tr>
+<td><code>accounts</code></td>
+<td><code>POST /auth/google/</code>, <code>/auth/refresh/</code></td>
+<td>Public login/refresh, auth throttle</td>
+</tr>
+<tr>
+<td><code>accounts</code></td>
+<td><code>POST /auth/logout/</code></td>
+<td>User; blacklist current refresh token</td>
+</tr>
+<tr>
+<td><code>accounts</code></td>
+<td><code>GET</code>, <code>PATCH /users/me/</code></td>
+<td>User profile, role summaries, stats and name update</td>
+</tr>
+<tr>
+<td><code>accounts</code></td>
+<td><code>GET /users/search/</code></td>
+<td>Admin or representative of any hub; bounded picker results</td>
+</tr>
+<tr>
+<td><code>accounts</code></td>
+<td><code>GET /admin/users/</code>, <code>GET</code> and <code>PATCH /admin/users/{id}/</code></td>
+<td>Admin user search/detail and suspend/reactivate</td>
+</tr>
+<tr>
+<td><code>schools</code></td>
+<td><code>GET /schools/</code>, <code>GET /schools/{id}/</code></td>
+<td>Public active directory/detail; admins can inspect inactive records on the ID route</td>
+</tr>
+<tr>
+<td><code>schools</code></td>
+<td><code>GET /schools/by-slug/{slug}/</code></td>
+<td>Public active-school lookup; admins bypass the cache and can inspect inactive schools</td>
+</tr>
+<tr>
+<td><code>schools</code></td>
+<td><code>POST /schools/</code>, <code>PATCH /schools/{id}/</code></td>
+<td>Admin create/update; deactivate through <code>is_active</code></td>
+</tr>
+<tr>
+<td><code>schools</code></td>
+<td><code>GET</code>, <code>POST /schools/{id}/departments/</code>, <code>PATCH /departments/{id}/</code></td>
+<td>Public reads; school representative/admin writes</td>
+</tr>
+<tr>
+<td><code>hubs</code></td>
+<td><code>GET /hubs/{id}/</code>, <code>/hubs/by-school/{id}/</code>, <code>/hubs/by-slug/{slug}/</code></td>
+<td>Public active hub reads; admins can access inactive hubs</td>
+</tr>
+<tr>
+<td><code>hubs</code></td>
+<td><code>PATCH /hubs/{id}/</code></td>
+<td>Admin activity toggle, audited on real transitions</td>
+</tr>
+<tr>
+<td><code>hubs</code></td>
+<td><code>GET</code>, <code>POST /hubs/activation-requests/</code>, <code>POST .../{id}/approve/</code>, <code>POST .../{id}/reject/</code></td>
+<td>Authenticated request; admin list and review</td>
+</tr>
+<tr>
+<td><code>hubs</code></td>
+<td><code>GET</code>, <code>POST /hubs/{id}/moderators/</code>, <code>DELETE .../{user_id}/</code></td>
+<td>Public active list; representative/admin assignment and removal</td>
+</tr>
+<tr>
+<td><code>hubs</code></td>
+<td><code>GET</code>, <code>POST /hubs/{id}/representatives/</code>, <code>DELETE .../{user_id}/</code></td>
+<td>Public active list; admin assignment and removal</td>
+</tr>
+<tr>
+<td><code>questions</code></td>
+<td><code>GET</code>, <code>POST /questions/</code>; <code>GET</code>, <code>PATCH</code>, <code>DELETE /questions/{id}/</code></td>
+<td>Public reads; authenticated create; author edit/delete</td>
+</tr>
+<tr>
+<td><code>questions</code></td>
+<td><code>GET /questions/unanswered/</code></td>
+<td>Staff queue scoped to the user's hub roles</td>
+</tr>
+<tr>
+<td><code>questions</code></td>
+<td><code>POST</code>, <code>DELETE /questions/{id}/follow/</code>; <code>POST</code>, <code>DELETE /questions/{id}/lock/</code></td>
+<td>User follow; staff lock/unlock</td>
+</tr>
+<tr>
+<td><code>answers</code></td>
+<td><code>POST /answers/</code>, <code>PATCH</code>, <code>DELETE /answers/{id}/</code></td>
+<td>Authenticated create; author edit/delete</td>
+</tr>
+<tr>
+<td><code>answers</code></td>
+<td><code>POST</code>, <code>DELETE /answers/{id}/vote/</code>; <code>POST /answers/{id}/mark-best/</code></td>
+<td>User vote; question author marks best</td>
+</tr>
+<tr>
+<td><code>answers</code></td>
+<td><code>GET /users/me/answers/</code></td>
+<td>User's own answer history</td>
+</tr>
+<tr>
+<td><code>comments</code></td>
+<td><code>GET /answers/{id}/comments/</code>, <code>POST /comments/</code>, <code>PATCH</code>, <code>DELETE /comments/{id}/</code></td>
+<td>Public list; authenticated create; author edit/delete</td>
+</tr>
+<tr>
+<td><code>comments</code></td>
+<td><code>GET /users/me/comments/</code></td>
+<td>User's own comment history</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td><code>GET /tags/</code>, <code>GET /tags/{name}/questions/</code></td>
+<td>Public paginated tag list and question list</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td><code>DELETE /tags/{id}/</code>, <code>POST /tags/{id}/merge/</code></td>
+<td>Admin delete, merge or rename</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td><code>GET /search/questions/</code></td>
+<td>Public ranked search</td>
+</tr>
+<tr>
+<td><code>notifications</code></td>
+<td><code>GET /notifications/</code>, <code>POST /notifications/mark-all-read/</code>, <code>POST /notifications/{id}/mark-read/</code></td>
+<td>User-scoped list and read state</td>
+</tr>
+<tr>
+<td><code>reports</code></td>
+<td><code>POST /reports/</code>, <code>GET /reports/mine/</code></td>
+<td>User report creation and private report history</td>
+</tr>
+<tr>
+<td><code>reports</code></td>
+<td><code>GET /reports/</code>, <code>POST /reports/{id}/resolve/</code>, <code>/reject/</code></td>
+<td>Admin review</td>
+</tr>
+<tr>
+<td><code>reports</code></td>
+<td><code>POST /reports/{id}/escalate/</code></td>
+<td>Staff escalation for a hub report</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td><code>GET /pages/</code>, <code>GET /pages/{slug}/</code></td>
+<td>Public/staff/admin visibility tiers</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td><code>POST /pages/</code>, <code>PATCH</code>, <code>DELETE /pages/{id}/</code></td>
+<td>Admin page management</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-shared-behavior">6. Shared behavior</h2>
+<h3 id="permissions-and-ids">Permissions and IDs</h3>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Platform administrator</td>
+<td><code>apps.core.permissions.user_is_platform_admin()</code> and <code>IsPlatformAdmin</code></td>
+</tr>
+<tr>
+<td>Hub roles</td>
+<td><code>apps.hubs.permissions</code> helpers for moderator, representative and combined staff checks</td>
+</tr>
+<tr>
+<td>Method-specific throttling</td>
+<td><code>apps.core.throttling.MethodScopedThrottle</code></td>
+</tr>
+<tr>
+<td>Loose route IDs</td>
+<td><code>apps.core.converters.LooseIDConverter</code>; views validate UUID syntax with core helpers</td>
+</tr>
+<tr>
+<td>Slugs</td>
+<td><code>apps.core.slugs</code> generates persisted unique slugs and handles display-only URL slugs</td>
+</tr>
+<tr>
+<td>Generic content links</td>
+<td><code>apps.core.content_links.get_link_target()</code> provides question and answer identifiers for report/notification links</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cache">Cache</h3>
+<p>Redis is used when <code>REDIS_URL</code> is set; otherwise Django's local-memory cache is
+used. Redis failures fail open: throttles do not block due to an unavailable
+cache and cache-backed views recompute. Cache keys and invalidation helpers
+are centralized in <code>apps.core.cache</code>; school invalidation is shared with
+<code>apps.schools.cache</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Cached data</th>
+<th>Invalidation or expiry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>School lists and detail/by-slug data</td>
+<td>School writes; department and hub state changes also invalidate relevant school data</td>
+</tr>
+<tr>
+<td>Hub detail/by-school/by-slug</td>
+<td>Hub activity/update and team assignment changes</td>
+</tr>
+<tr>
+<td>Tag lists</td>
+<td>Tag delete, merge and rename</td>
+</tr>
+<tr>
+<td>Ranked question search</td>
+<td>Short TTL; no content-write invalidation</td>
+</tr>
+<tr>
+<td>Static pages</td>
+<td>Separate public/staff visibility tiers; writes invalidate, invisible 404s are not cached</td>
+</tr>
+<tr>
+<td>Authenticated question view dedup</td>
+<td>Per user, rolling 24-hour window; not a response cache</td>
+</tr>
+</tbody>
+</table>
+<p>Live Q&amp;A content and personalized responses are not cached as response
+objects. Refer to <code>apps/*/cache.py</code> and <code>apps.core.cache</code> when changing cache
+keys.</p>
+<h3 id="throttles">Throttles</h3>
+<p>Rates are configured in <code>config/settings/base.py</code>, keyed by throttle scope.
+Authenticated requests are user-throttled and anonymous requests are
+IP-throttled. Scoped write limits replace the global limit for that action;
+they do not stack.</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default anonymous/user</td>
+<td>100 per minute</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>10 per minute</td>
+</tr>
+<tr>
+<td>Question create</td>
+<td>30 per hour</td>
+</tr>
+<tr>
+<td>Answer create, comment create</td>
+<td>50 per hour each</td>
+</tr>
+<tr>
+<td>Content edit</td>
+<td>60 per hour</td>
+</tr>
+<tr>
+<td>Mark best</td>
+<td>30 per hour</td>
+</tr>
+<tr>
+<td>Voting</td>
+<td>100 per hour</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>60 per minute</td>
+</tr>
+<tr>
+<td>Reports</td>
+<td>10 per hour</td>
+</tr>
+</tbody>
+</table>
+<p>A view that refers to an unconfigured throttle scope raises a server
+configuration error; define the matching rate in <code>base.py</code>.</p>
+<h3 id="notifications-and-email">Notifications and email</h3>
+<p><code>apps.notifications.services</code> is the shared delivery entry point. The
+recipient/channel matrix and full notification type list live in
+<code>BUILD_LOG_BACKEND.md</code> and <code>api-contract.md</code>, rather than being duplicated
+here.</p>
+<table>
+<thead>
+<tr>
+<th>Triggering area</th>
+<th>Examples of behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accounts</td>
+<td>Suspension notice; role assignment notice is sent by hubs</td>
+</tr>
+<tr>
+<td>Hubs</td>
+<td>New activation request to active admins; approval/rejection to requester; moderator and representative assignment</td>
+</tr>
+<tr>
+<td>Questions</td>
+<td>New question to active hub moderators and representatives; answer/best-answer follower notifications are coordinated with answers</td>
+</tr>
+<tr>
+<td>Answers</td>
+<td>New answer and best-answer notices to relevant authors; vote notice to answer author</td>
+</tr>
+<tr>
+<td>Comments</td>
+<td>New comment notice to answer author, unless self-authored</td>
+</tr>
+<tr>
+<td>Reports</td>
+<td>New report to admins; staff escalation; review outcome to reporter</td>
+</tr>
+</tbody>
+</table>
+<p>Email templates are under <code>templates/emails/</code>. Development SMTP uses
+MailHog-compatible settings at localhost port 1025; production transport is
+environment configured. Email delivery errors are logged and do not undo a
+successful API write.</p>
+<h2 id="7-data-commands-and-source-data">7. Data commands and source data</h2>
+<table>
+<thead>
+<tr>
+<th>Command or path</th>
+<th>Purpose and cautions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apps/core/management/commands/seed_demo_data.py</code></td>
+<td>Seed schools, hubs, accounts, questions, answers, tags and pages. <code>--clear</code> cascades from schools and also clears tags/static pages; never use against a database holding the real directory. <code>--admin-email</code> promotes the specified account</td>
+</tr>
+<tr>
+<td><code>apps/core/management/commands/print_test_tokens.py</code></td>
+<td>Prints one-hour tokens for fixed admin, staff and regular test users; requires <code>DEBUG=True</code></td>
+</tr>
+<tr>
+<td><code>apps/core/management/commands/import_school_directory.py</code></td>
+<td>Idempotent NUC/NBTE/NCCE import. Matches by short name then name, fills blank values and creates unmatched schools inactive for review. <code>--dry-run</code> previews; source records are written, but prior rows are not marked non-current</td>
+</tr>
+<tr>
+<td><code>apps/schools/data/</code></td>
+<td>School import inputs and duplicate-review data; inspect the command and source files before running an import</td>
+</tr>
+<tr>
+<td><code>templates/emails/</code></td>
+<td>Shared email base and per-notification HTML/plain-text templates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-testing-and-verification">8. Testing and verification</h2>
+<p><code>make test</code> runs Django's test discovery from <code>backend/</code>. At the time this map
+was verified, app <code>tests.py</code> modules are placeholders and do not provide
+substantive per-app regression coverage. Use <a href="../TESTING/">Testing</a> for the
+cross-surface manual regression checklist. For endpoint-level inputs,
+responses, permissions and errors, use <a href="../api-contract/">API Contract</a>.</p>
+<p>Useful repository checks:</p>
+<pre><code class="language-bash">cd backend
+python manage.py check
+python manage.py showmigrations
+make test
+</code></pre>
+<p>For local mobile device access, set <code>DJANGO_DEV_ALLOWED_HOSTS</code> to the device-
+reachable development host, include the Expo web preview in
+<code>CORS_ALLOWED_ORIGINS</code> when testing web, then run <code>make run-lan</code>.</p>
+<h2 id="9-where-to-make-a-change">9. Where to make a change</h2>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Primary code path</th>
+<th>Documentation to update</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Endpoint or response behavior</td>
+<td>App <code>serializers.py</code>, <code>views.py</code>, <code>urls.py</code>, and relevant helper/service</td>
+<td>API Contract, Feature List if capability status changes, then Changelog</td>
+</tr>
+<tr>
+<td>Model, field or relationship</td>
+<td>App <code>models.py</code> and migration</td>
+<td>Database Schema, then Changelog</td>
+</tr>
+<tr>
+<td>Permission or role behavior</td>
+<td>View permission declaration and/or <code>apps.hubs.permissions</code> / <code>apps.core.permissions</code></td>
+<td>API Contract and Backend Build Log</td>
+</tr>
+<tr>
+<td>Notification or email</td>
+<td>Triggering view/service, <code>apps.notifications.services</code>, templates as needed</td>
+<td>API Contract and Backend Build Log</td>
+</tr>
+<tr>
+<td>Cache behavior</td>
+<td><code>apps.core.cache</code> and relevant app view/cache helper</td>
+<td>This map and Backend Build Log if convention changes</td>
+</tr>
+<tr>
+<td>Throttle behavior</td>
+<td>View throttle classes/scope and <code>config/settings/base.py</code></td>
+<td>API Contract and this map</td>
+</tr>
+<tr>
+<td>School import</td>
+<td><code>apps/core/management/commands/import_school_directory.py</code> and source inputs</td>
+<td>Feature List, Database Schema if data shape changes, Backend Build Log</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-deferred-work">10. Deferred work</h2>
+<p>The current backend backlog and deliberate deviations are maintained in
+<a href="../BUILD_LOG_BACKEND/">BUILD_LOG_BACKEND.md</a> and
+<a href="../feature-list/">feature-list.md</a>. Check those references before treating an
+absent endpoint or behavior as an accidental omission. In particular, audit
+log read access, representative-scoped report visibility, answer edit history
+and durable upload storage are not documented here as implemented features.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

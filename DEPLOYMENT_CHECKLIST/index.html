@@ -1,0 +1,2063 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://brandnova.github.io/academia-atlas/DEPLOYMENT_CHECKLIST/">
+      
+      
+        <link rel="prev" href="../TESTING/">
+      
+      
+        <link rel="next" href="../changelog/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Deployment Checklist - Academia Atlas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deployment-checklist" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Academia Atlas" class="md-header__button md-logo" aria-label="Academia Atlas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Academia Atlas
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deployment Checklist
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Academia Atlas" class="md-nav__button md-logo" aria-label="Academia Atlas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Academia Atlas
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feature List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mobile-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Logs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Build Logs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_BACKEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_FRONTEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_MOBILE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design/Mobile-mockup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile mockup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TESTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Checklist
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-before-anything-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Before anything else
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Backend
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-environment-and-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Environment and secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-security-and-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Security and platform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-cache-and-throttling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Cache and throttling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-email" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Email
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-data-and-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Data and accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-api-smoke-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 API smoke tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-permissions-spot-checks-live-api-three-test-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.8 Permissions spot checks (live API, three test accounts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-observability-and-backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.9 Observability and backups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-web-vercel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Web (Vercel)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Web (Vercel)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-environment-redeploy-after-changes-next_public_-is-baked-in-at-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Environment (redeploy after changes, NEXT_PUBLIC_* is baked in at build)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-google-sign-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Google sign in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-session-and-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Session and proxy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23b-build-and-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3b Build and quality gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-search-and-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Search and sharing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-content-and-legal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Content and legal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mobile-expo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Mobile (Expo)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Mobile (Expo)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-brand-and-app-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Brand and app identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-expo-and-eas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Expo and EAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-google-sign-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Google sign in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-api-and-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 API and configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-permissions-privacy-and-store-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Permissions, privacy and store compliance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-product-and-policy-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Product and policy decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-accessibility-and-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Accessibility and quality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-store-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Store submission
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-release-day-smoke-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.9 Release-day smoke test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#310-owner-sign-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.10 Owner sign-off
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-cross-surface-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cross-surface regression
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-shared-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Shared operations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-launch-runbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Launch runbook
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-first-72-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. First 72 hours
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-rollback-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Rollback matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QUICKSTART/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MAINTAINER_PLAYBOOK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintainer Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-before-anything-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Before anything else
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Backend
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-environment-and-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Environment and secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-security-and-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Security and platform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-cache-and-throttling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Cache and throttling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-email" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Email
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-data-and-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Data and accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-api-smoke-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 API smoke tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-permissions-spot-checks-live-api-three-test-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.8 Permissions spot checks (live API, three test accounts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-observability-and-backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.9 Observability and backups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-web-vercel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Web (Vercel)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Web (Vercel)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-environment-redeploy-after-changes-next_public_-is-baked-in-at-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Environment (redeploy after changes, NEXT_PUBLIC_* is baked in at build)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-google-sign-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Google sign in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-session-and-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Session and proxy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23b-build-and-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3b Build and quality gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-search-and-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Search and sharing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-content-and-legal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Content and legal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mobile-expo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Mobile (Expo)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Mobile (Expo)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-brand-and-app-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Brand and app identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-expo-and-eas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Expo and EAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-google-sign-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Google sign in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-api-and-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 API and configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-permissions-privacy-and-store-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Permissions, privacy and store compliance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-product-and-policy-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Product and policy decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-accessibility-and-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Accessibility and quality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-store-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 Store submission
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#39-release-day-smoke-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.9 Release-day smoke test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#310-owner-sign-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.10 Owner sign-off
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-cross-surface-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cross-surface regression
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-shared-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Shared operations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-launch-runbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Launch runbook
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-first-72-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. First 72 hours
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-rollback-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Rollback matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="deployment-checklist">Deployment Checklist</h1>
+<p>One checklist for the whole launch. Work through Backend, then Web, then Mobile, then the
+shared operations and runbook at the end. Day-to-day regression checks are in
+<a href="../TESTING/">TESTING.md</a>. Provider-account steps need access to those accounts.</p>
+<p><code>[ ]</code> not done, <code>[x]</code> done. Commands assume Fedora bash.</p>
+<hr />
+<h2 id="0-before-anything-else">0. Before anything else</h2>
+<ul>
+<li>[ ] Domain and DNS decided (web, API, optional status page).</li>
+<li>[ ] Support inbox exists and is monitored (it is shown to suspended users and in store listings).</li>
+<li>[ ] Password manager holds every secret below, never git or chat.</li>
+<li>[ ] Accounts exist: Vercel, Supabase, Upstash, email provider, Google Cloud, Expo (EAS),
+      Apple Developer, Google Play Console.</li>
+<li>[ ] Rollback owner and launch day decided (avoid launching on a Friday evening).</li>
+</ul>
+<hr />
+<h2 id="1-backend">1. Backend</h2>
+<h3 id="11-environment-and-secrets">1.1 Environment and secrets</h3>
+<ul>
+<li>[ ] <code>SECRET_KEY</code> is new, long and unique per environment.</li>
+<li>[ ] <code>DEBUG</code> is off. <code>print_test_tokens</code> refuses to run, confirm it does.</li>
+<li>[ ] <code>DATABASE_URL</code> is set and scoped to every environment that builds or runs (the production
+      settings guard also fires during Vercel builds). <code>DJANGO_ALLOW_SQLITE</code> is NOT set in production.</li>
+<li>[ ] <code>DATABASE_CONN_MAX_AGE=0</code> behind the Supabase transaction pooler.</li>
+<li>[ ] <code>ALLOWED_HOSTS</code>, <code>CSRF_TRUSTED_ORIGINS</code> and <code>CORS_ALLOWED_ORIGINS</code> list exact origins, no
+      wildcards. The Expo web preview origin is absent from production.</li>
+<li>[ ] <code>FRONTEND_URL</code> is the live site, so email buttons link correctly.</li>
+<li>[ ] <code>REDIS_URL</code> points at Upstash. Cache TTL variables reviewed.</li>
+<li>[ ] Email delivery variables are set for the real provider (not MailHog).</li>
+</ul>
+<h3 id="12-database">1.2 Database</h3>
+<ul>
+<li>[ ] Production Postgres created, backups enabled, point-in-time recovery understood.</li>
+<li>[ ] <code>python manage.py migrate</code> applied. <code>makemigrations --check</code> shows nothing pending.</li>
+<li>[ ] Django admin superuser created with a strong password. Admin URL protected (consider
+      restricting or renaming the path).</li>
+<li>[ ] A platform admin account exists (and the platform account used for seed content, see 1.6).</li>
+</ul>
+<h3 id="13-security-and-platform">1.3 Security and platform</h3>
+<ul>
+<li>[ ] HTTPS only. HSTS, secure cookies and <code>SECURE_PROXY_SSL_HEADER</code> are active in production settings.</li>
+<li>[ ] Browsable API renderer is disabled (responses are JSON only).</li>
+<li>[ ] <code>makemigrations</code>, <code>check --deploy</code> run clean:
+      <code>python manage.py check --deploy</code></li>
+<li>[ ] Static files served (whitenoise) and Django admin loads with styling.</li>
+<li>[ ] No secrets in the repo: <code>git log -p | grep -iE "secret|password|token"</code> reviewed.</li>
+</ul>
+<h3 id="14-cache-and-throttling">1.4 Cache and throttling</h3>
+<ul>
+<li>[ ] Throttle counters use the shared Redis, not per-process memory.</li>
+<li>[ ] Redis outage fails open (kill the connection once on a preview and confirm the API still answers).</li>
+<li>[ ] Rate limits behave on the live API (see 1.7).</li>
+</ul>
+<h3 id="15-email">1.5 Email</h3>
+<ul>
+<li>[ ] Send each emailed notification once with real accounts: new answer, best answer, hub
+      activated, hub rejected (with reason), account suspended. Check the inbox, spam folder and links.</li>
+<li>[ ] Sender domain has SPF and DKIM so mail does not land in spam.</li>
+</ul>
+<h3 id="16-data-and-accounts">1.6 Data and accounts</h3>
+<ul>
+<li>[ ] School directory imported with <code>import_school_directory</code>. New schools import inactive:
+      review and activate them deliberately. <code>known_possible_duplicates.csv</code> triaged.</li>
+<li>[ ] <strong>Never</strong> run <code>seed_demo_data --clear</code> against production (it wipes schools).</li>
+<li>[ ] Static pages created through the admin: Privacy Policy, Terms, Community Guidelines (public)
+      and the Moderator Handbook (staff), all published.</li>
+<li>[ ] Platform (official) account created, promoted to admin, its id noted for the frontend and
+      mobile <code>PLATFORM_ACCOUNT_ID</code> variables, before seed questions are posted.</li>
+<li>[ ] First hubs activated, first representatives and moderators assigned.</li>
+</ul>
+<h3 id="17-api-smoke-tests">1.7 API smoke tests</h3>
+<pre><code class="language-bash">API=https://YOUR-BACKEND/api/v1
+curl -s $API/health/ | python -m json.tool                       # status ok, database ok, cache ok
+curl -s &quot;$API/schools/?page_size=2&quot; | python -m json.tool | head -20
+curl -s -o /dev/null -w &quot;%{http_code}\n&quot; $API/users/me/          # 401
+curl -s -o /dev/null -w &quot;%{http_code}\n&quot; $API/nope/              # 404 as JSON, not an HTML page
+curl -s &quot;$API/search/questions/?q=zzqx+wwvk&quot; | python -m json.tool | head -5   # count 0 (rank floor)
+curl -s -I -H &quot;Origin: https://evil.example&quot; $API/schools/ | grep -i access-control   # prints nothing
+for i in $(seq 1 12); do curl -s -o /dev/null -w &quot;%{http_code} &quot; -X POST $API/auth/google/ \
+  -H &quot;Content-Type: application/json&quot; -d '{&quot;access_token&quot;:&quot;x&quot;}'; done; echo   # 401s, then 429
+</code></pre>
+<ul>
+<li>[ ] All of the above behave as commented.</li>
+<li>[ ] Token refresh and refresh-token revocation work against the live API (log out, reuse the old refresh token).</li>
+<li>[ ] A suspended account is rejected at login with the 403 message.</li>
+</ul>
+<h3 id="18-permissions-spot-checks-live-api-three-test-accounts">1.8 Permissions spot checks (live API, three test accounts)</h3>
+<ul>
+<li>[ ] A regular user gets 403 on: schools POST, tag merge, report resolve, admin users, hub PATCH.</li>
+<li>[ ] A moderator can lock a question in their hub and gets 403 in another hub.</li>
+<li>[ ] A representative can assign a moderator for their hub only.</li>
+<li>[ ] A guest can read but gets 401 on every write.</li>
+</ul>
+<h3 id="19-observability-and-backups">1.9 Observability and backups</h3>
+<ul>
+<li>[ ] Error alerting (Sentry or equivalent) for the backend, with a test event received.</li>
+<li>[ ] Uptime check on <code>/api/v1/health/</code> with an alert route.</li>
+<li>[ ] Database backup restore tested once, not just configured.</li>
+<li>[ ] Log location known (Vercel logs), structured logs readable.</li>
+</ul>
+<hr />
+<h2 id="2-web-vercel">2. Web (Vercel)</h2>
+<h3 id="21-environment-redeploy-after-changes-next_public_-is-baked-in-at-build">2.1 Environment (redeploy after changes, <code>NEXT_PUBLIC_*</code> is baked in at build)</h3>
+<ul>
+<li>[ ] <code>BACKEND_API_URL</code>: the backend <code>/api/v1</code> base, no trailing slash, server only.</li>
+<li>[ ] <code>NEXT_PUBLIC_SITE_URL</code>: the real public origin. It is also used for the server's calls to
+      its own proxy, so a wrong value breaks server-rendered pages.</li>
+<li>[ ] <code>NEXT_PUBLIC_GOOGLE_CLIENT_ID</code>.</li>
+<li>[ ] <code>NEXT_PUBLIC_PLATFORM_ACCOUNT_ID</code> (optional, comma-separated).</li>
+<li>[ ] Variables are scoped to Production, and Preview uses the preview backend.</li>
+<li>[ ] Production branch is <code>main</code>. Preview deployments do not use production secrets.</li>
+</ul>
+<h3 id="22-google-sign-in">2.2 Google sign in</h3>
+<ul>
+<li>[ ] The production origin is in the OAuth client's Authorized JavaScript origins.</li>
+<li>[ ] The consent screen is published, not in testing mode, or only test users can sign in.</li>
+<li>[ ] Sign in works with a brand-new Google account, an existing account and a suspended account.</li>
+</ul>
+<h3 id="23-session-and-proxy">2.3 Session and proxy</h3>
+<ul>
+<li>[ ] Cookies show HttpOnly and Secure on the live domain (DevTools, Application tab), SameSite Lax.</li>
+<li>[ ] No token is visible to JavaScript (<code>document.cookie</code> shows no auth cookie).</li>
+<li>[ ] After a long idle or backend cold start, a page loads or shows the friendly "taking too long"
+      copy, never a raw 500.</li>
+<li>[ ] Logging out blacklists the refresh token.</li>
+</ul>
+<h3 id="23b-build-and-quality-gates">2.3b Build and quality gates</h3>
+<ul>
+<li>[ ] <code>npm run check &amp;&amp; npm run build</code> pass with no warnings you do not understand.</li>
+<li>[ ] Lighthouse mobile on the home page, a school page and a question page. Note the scores,
+      fix anything under 80 for performance or under 90 for accessibility.</li>
+<li>[ ] Light and dark mode and a 360px width through: sign in, ask, answer, vote, comment,
+      notifications, profile, report, search.</li>
+<li>[ ] Keyboard-only pass: tab through a question page, every control reachable with a visible focus ring.</li>
+<li>[ ] Browser matrix: latest Chrome, Safari (iOS), Firefox, Samsung Internet if you can.</li>
+<li>[ ] 404 and error pages render for a missing school, question and page.</li>
+</ul>
+<h3 id="24-search-and-sharing">2.4 Search and sharing</h3>
+<ul>
+<li>[ ] Add the property in Google Search Console (DNS domain verification is the least fiddly),
+      submit <code>/sitemap.xml</code>, inspect the home page, a school, a question and a tag.</li>
+<li>[ ] <code>/robots.txt</code> shows the disallow list, and <code>/my-reports</code>, <code>/admin</code> and <code>/moderation</code> are blocked.</li>
+<li>[ ] Rich Results Test passes on a question (BreadcrumbList) and the home page (WebSite).</li>
+<li>[ ] Facebook Sharing Debugger and the X card validator show correct cards for a school and a question.</li>
+<li>[ ] Preview deployments are not indexable (check the response headers).</li>
+<li>[ ] Canonical URLs use the real domain.</li>
+</ul>
+<h3 id="25-content-and-legal">2.5 Content and legal</h3>
+<ul>
+<li>[ ] Privacy Policy, Terms, Community Guidelines and the Moderator Handbook are published.</li>
+<li>[ ] Footer links to them work. The app-promotion banner, if built, stays hidden until store URLs exist.</li>
+</ul>
+<hr />
+<h2 id="3-mobile-expo">3. Mobile (Expo)</h2>
+<h3 id="31-brand-and-app-identity">3.1 Brand and app identity</h3>
+<ul>
+<li>[ ] OAuth clients created in Google Cloud: Web (also used for the web preview), Android for the EAS keystore (package com.brandnova.academiaatlas, SHA-1 from <code>eas credentials</code>, custom URI scheme enabled) and iOS (bundle id). Native sign in uses code flow with PKCE, so the Android and iOS clients need no secret.</li>
+<li>[ ] After the first Play upload, create a second Android client for the Play app signing SHA-1 and put its id in the production profile.</li>
+<li>[ ] Image splash re-introduced only after a small test asset renders correctly on a real device (native splash is colour only for now).</li>
+<li>[ ] iOS bundle identifier and Android package name set in <code>app.json</code> (currently <code>com.brandnova.academiaatlas</code>).</li>
+<li>[ ] Ownership of the <code>academiaatlas</code> URL scheme and any universal link domain confirmed.</li>
+<li>[ ] Store screenshots at the required sizes for iPhone and Android.</li>
+<li>[ ] Store descriptions, keywords and privacy answers written.</li>
+<li>[x] Identifiers decided and set in app.json: com.brandnova.academiaatlas (Android and iOS), scheme academiaatlas, slug academia-atlas-mobile, launcher name A-Atlas. Google OAuth redirect URIs must be created from these.</li>
+<li>[ ] Icon kit generated by <code>brand/make-brand-assets.sh</code> from <code>brand/src</code> and checked on a real build (icon, adaptive, monochrome, splash light and dark), plus Play 512, Google consent logo 120 and the Play feature graphic 1024x500 made by hand.</li>
+<li>[ ] expo-splash-screen plugin configured with light and dark backgrounds and checked on Android 12+ and iOS (Android 9 shows the legacy splash).</li>
+<li>[ ] Monochrome icon checked on Android 13+ themed icons, launcher label checked for truncation.</li>
+<li>[ ] The production profile in eas.json holds the real production API, web URL and the production database's platform account id (no placeholders).</li>
+</ul>
+<h3 id="32-expo-and-eas">3.2 Expo and EAS</h3>
+<ul>
+<li>[ ] Expo account and organization created, <code>npx eas init</code> run, placeholder ownership replaced.</li>
+<li>[ ] EAS build profiles for development, preview and production.</li>
+<li>[ ] Development build with the real identifiers, then a preview build for testers.</li>
+<li>[ ] iOS certificates and Android keystores managed through EAS, stored in the password manager.</li>
+<li>[ ] Decision on EAS Update (channels and a rollback plan if yes).</li>
+<li>[ ] Crash reporting (Sentry or equivalent) added before the first tester build. If added, wire it into ErrorBoundary.componentDidCatch.</li>
+<li>[ ] Pre-flight before every EAS build: typecheck, expo-doctor, <code>npx expo export --platform android</code>, <code>npx expo prebuild --platform android --no-install --clean</code> then <code>rm -rf android</code>.</li>
+<li>[ ] Build budget tracked (free tier, local builds with <code>eas build --local</code> do not use cloud builds). Decision on EAS Update (expo-updates, runtimeVersion) made before the last native build.</li>
+</ul>
+<h3 id="33-google-sign-in">3.3 Google sign in</h3>
+<ul>
+<li>[ ] OAuth clients in one Google Cloud project: Web (its id goes in EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID), Android (package com.brandnova.academiaatlas plus the SHA-1 of the EAS keystore from <code>eas credentials -p android</code>, no id goes in the app), iOS later.</li>
+<li>[ ] After the first Play upload add a second Android client with the Play app signing SHA-1 (Play re-signs the app).</li>
+<li>[ ] Consent screen branding (name, support email, 120px logo). While in Testing, add test users, switch to In production to open it up.</li>
+<li>[ ] Native sign in verified on a real Android 9 and Android 15 phone and an iPhone: new account, existing account, suspended account (403 copy and support email visible), cancelled chooser.</li>
+<li>[ ] No client secret exists anywhere in the mobile project.</li>
+</ul>
+<h3 id="34-api-and-configuration">3.4 API and configuration</h3>
+<ul>
+<li>[ ] EXPO_PUBLIC_API_URL (https, including /api/v1), EXPO_PUBLIC_WEB_BASE_URL and the Google client ids are set in the eas.json env block of every profile you build (EAS never reads the local .env). A build without EXPO_PUBLIC_API_URL silently targets 10.0.2.2, and the web base URL defaults to the preview site.</li>
+<li>[ ] The backend health URL opens in the phone's browser before you build.</li>
+<li>[ ] No test tokens, <code>.env</code> files or keystores are committed.</li>
+<li>[ ] Tokens are only in SecureStore on device, never AsyncStorage.</li>
+<li>[ ] Token refresh verified against production with an expired access token, and a network
+      failure during refresh does not sign the user out.</li>
+<li>[ ] Backend revokes the refresh token on logout.</li>
+<li>[ ] The search rank-floor fix is deployed (the mobile Search screen depends on it).</li>
+<li>[ ] <code>EXPO_PUBLIC_API_URL</code> (https), EXPO_PUBLIC_WEB_BASE_URL and the Google client ids are set for each EAS profile. A build without <code>EXPO_PUBLIC_API_URL</code> silently targets localhost or 10.0.2.2, and the web base URL defaults to the preview site.</li>
+<li>[ ] Preview builds use an https backend (Android 9 and newer block cleartext HTTP in release builds).</li>
+<li>[ ] Dev token sheet cannot appear in preview or production builds (compiled out by <strong>DEV</strong>), confirm once on a preview APK.</li>
+</ul>
+<h3 id="35-permissions-privacy-and-store-compliance">3.5 Permissions, privacy and store compliance</h3>
+<ul>
+<li>[ ] <code>app.json</code> and the built manifest request no permissions beyond network access (no
+      location, camera, photos, contacts or microphone), matching the Privacy Policy.</li>
+<li>[ ] No analytics or advertising SDK in the app. Any crash reporting is disclosed.</li>
+<li>[ ] Privacy Policy page covers the mobile app (secure storage, Google sign in) and its URL is
+      entered in both stores.</li>
+<li>[ ] Apple privacy nutrition labels and the Google Data safety form completed and consistent
+      with the policy.</li>
+<li>[ ] <strong>Account deletion</strong>: both stores require apps that create accounts to provide a way to
+      request deletion (Apple: a path inside the app, Google: an in-app path plus a web link).
+      Decide the path (a "Request account deletion" action that emails or calls a backend
+      endpoint) and implement it before submission. Verify the current store wording before submitting.</li>
+<li>[ ] Age rating questionnaire answered (user-generated content, no ads, no purchases).</li>
+<li>[ ] User-generated content safeguards satisfy store review: report, block or escalate path,
+      and a way to contact the developer. Reporting exists, confirm the review notes say where.</li>
+</ul>
+<h3 id="36-product-and-policy-decisions">3.6 Product and policy decisions</h3>
+<ul>
+<li>[ ] Push notifications are out of scope for the first release (in-app only). Confirm.</li>
+<li>[ ] Official badges: the config supports a comma-separated list of ids.</li>
+<li>[ ] Staff tools intentionally open the web app in the system browser and never share the session.</li>
+<li>[ ] Admin and moderation dashboards remain web-only.</li>
+<li>[x] NavigationContainer linking config exists (academiaatlas:// scheme, paths mirror the web routes).</li>
+<li>[ ] Universal and app links for the https URL: Android intent filters with autoVerify in app.json plus /.well-known/assetlinks.json (needs the Play signing SHA-256), iOS associatedDomains plus apple-app-site-association, all on the final domain.</li>
+<li>[ ] First launch with no network behaves sensibly.</li>
+</ul>
+<h3 id="37-accessibility-and-quality">3.7 Accessibility and quality</h3>
+<ul>
+<li>[ ] iOS Dynamic Type and Android font scaling tested.</li>
+<li>[ ] VoiceOver and TalkBack on the main flows.</li>
+<li>[ ] Every icon-only button has an accessibility label.</li>
+<li>[ ] Focus order in the sign-in sheet, filter sheet, report sheet and comments sheet.</li>
+<li>[ ] Light, dark and system theme changes.</li>
+<li>[ ] Offline banner, retry and pull to refresh.</li>
+<li>[ ] Long names and titles, empty states, and 400 field errors.</li>
+<li>[ ] A small Android phone and a large iPhone.</li>
+<li>[ ] Keyboard never hides the answer composer, ask form or any sheet input (device test).</li>
+<li>[ ] No em dash characters ship in copy.</li>
+</ul>
+<h3 id="38-store-submission">3.8 Store submission</h3>
+<ul>
+<li>[ ] App Store Connect and Google Play app records created.</li>
+<li>[ ] Demo account and review notes provided if the store asks.</li>
+<li>[ ] Production build uploaded and passed internal testing.</li>
+<li>[ ] Phased release, then monitor crash-free sessions and API errors.</li>
+<li>[ ] Previous build kept available for rollback. Release tagged in git, build number in <code>CHANGELOG.md</code>.</li>
+</ul>
+<h3 id="39-release-day-smoke-test">3.9 Release-day smoke test</h3>
+<pre><code class="language-bash">cd mobile
+npm run typecheck
+npx expo-doctor
+npm run export:web
+</code></pre>
+<p>On a physical device with the production build:
+- [ ] Install, sign in with Google, browse as a guest, sign out.
+- [ ] Ask a question and delete it. Answer, vote, comment, mark best answer.
+- [ ] Open a notification with a link and one without.
+- [ ] Report content and escalate as a staff account. Lock and unlock a question as staff.
+- [ ] Open moderation and admin links in the system browser.
+- [ ] My reports, pages and profile tabs. Dark mode and offline copy.
+- [ ] Share a question and open the shared link.</p>
+<h3 id="310-owner-sign-off">3.10 Owner sign-off</h3>
+<ul>
+<li>[ ] Backend production URL and CORS confirmed.</li>
+<li>[ ] Google OAuth production clients confirmed.</li>
+<li>[ ] Test accounts removed or rotated, dev mode disabled.</li>
+<li>[ ] Store listings, screenshots and legal pages approved.</li>
+<li>[ ] Release build uploaded and smoke tested.</li>
+</ul>
+<hr />
+<h2 id="4-cross-surface-regression">4. Cross-surface regression</h2>
+<ul>
+<li>[ ] Run the full regression checklist in <a href="../TESTING/">TESTING.md</a> against production: backend,
+      web and mobile, with all three roles (guest, regular user, staff, admin).</li>
+<li>[ ] One end-to-end story: sign in on mobile, ask a question, answer it from web as another user,
+      receive the notification on mobile and the email, mark best from mobile, see SOLVED on web.</li>
+</ul>
+<h2 id="5-shared-operations">5. Shared operations</h2>
+<ul>
+<li>[ ] Error alerting for backend, web and mobile, and everyone knows where the logs are.</li>
+<li>[ ] Database backups configured and a restore tested.</li>
+<li>[ ] Email delivery limits understood, bounce and spam complaints visible.</li>
+<li>[ ] Production secrets rotated once before launch and stored in the password manager.</li>
+<li>[ ] Uptime monitoring on <code>/api/v1/health/</code> with a phone alert.</li>
+<li>[ ] Rollback procedures tested before launch: Vercel "Promote previous deployment" (both
+      projects) on a preview, previous mobile build kept in the stores.</li>
+<li>[ ] Support inbox has an owner and a response routine. Abuse reporting has an owner (admins
+      review reports regularly).</li>
+</ul>
+<h2 id="6-launch-runbook">6. Launch runbook</h2>
+<ol>
+<li>Freeze changes. Tag the release in git.</li>
+<li>Deploy the backend. Run section 1.7 smoke tests and 1.8 permission checks.</li>
+<li>Deploy the frontend. Verify sign in, core pages and the production API connection.</li>
+<li>Submit or release the mobile build. Verify sign in and core flows on a device.</li>
+<li>Run section 4, the cross-surface regression and the end-to-end story.</li>
+<li>Announce to the first moderators and representatives, then to students.</li>
+<li>If a smoke check fails, stop the rollout and roll back only the affected surface with its
+   tested procedure.</li>
+</ol>
+<h2 id="7-first-72-hours">7. First 72 hours</h2>
+<ul>
+<li>[ ] Watch error alerts, 5xx rate, 429 rate (too many may mean limits are too tight) and email bounces.</li>
+<li>[ ] Check the unanswered queue daily and answer or escalate.</li>
+<li>[ ] Review the first reports and suspensions for tone and consistency.</li>
+<li>[ ] Collect feedback in one place and triage into the Feature List backlogs.</li>
+<li>[ ] Decide hotfix versus next release for anything found. Hotfix path: branch from <code>main</code>, pull
+      request, merge, verify on production.</li>
+</ul>
+<h2 id="8-rollback-matrix">8. Rollback matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Rollback</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend</td>
+<td>Redeploy the previous Vercel deployment</td>
+<td>Check migrations: a backwards-incompatible migration needs a manual plan before launch</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>Vercel "Promote previous deployment"</td>
+<td>Instant, no data change</td>
+</tr>
+<tr>
+<td>Mobile</td>
+<td>Halt the phased release, keep the previous build available, EAS Update rollback if used</td>
+<td>A bad native build cannot be recalled from user devices, which is why the phased release matters</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

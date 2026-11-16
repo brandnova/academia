@@ -1,0 +1,2107 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://brandnova.github.io/academia-atlas/mobile-map/">
+      
+      
+        <link rel="prev" href="../frontend-map/">
+      
+      
+        <link rel="next" href="../BUILD_LOG_BACKEND/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Mobile Map - Academia Atlas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mobile-client-map" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Academia Atlas" class="md-header__button md-logo" aria-label="Academia Atlas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Academia Atlas
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Mobile Map
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Academia Atlas" class="md-nav__button md-logo" aria-label="Academia Atlas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Academia Atlas
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feature List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Map
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stack-and-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Stack and tooling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Environment variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-architecture-and-data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Architecture and data flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-provider-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Provider tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-navigation-routes-and-deep-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Navigation, routes and deep links
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-screens-srcscreens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Screens (src/screens/)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-srcapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. src/api/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-srcauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. src/auth/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-srcfeatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. src/features/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-srccomponents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. src/components/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-srctheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. src/theme/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-srclib-and-srcconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. src/lib/ and src/config/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-behaviours-that-are-easy-to-get-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Behaviours that are easy to get wrong
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-endpoint-index-endpoint-to-callers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Endpoint index (endpoint to callers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-how-to-add-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. How to add things
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-known-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Known gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-keeping-this-file-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Keeping this file current
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Logs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Build Logs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_BACKEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_FRONTEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_MOBILE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design/Mobile-mockup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile mockup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TESTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEPLOYMENT_CHECKLIST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QUICKSTART/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MAINTAINER_PLAYBOOK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintainer Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stack-and-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Stack and tooling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Environment variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-architecture-and-data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Architecture and data flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-provider-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Provider tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-navigation-routes-and-deep-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Navigation, routes and deep links
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-screens-srcscreens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Screens (src/screens/)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-srcapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. src/api/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-srcauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. src/auth/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-srcfeatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. src/features/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-srccomponents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. src/components/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-srctheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. src/theme/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-srclib-and-srcconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. src/lib/ and src/config/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-behaviours-that-are-easy-to-get-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Behaviours that are easy to get wrong
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-endpoint-index-endpoint-to-callers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Endpoint index (endpoint to callers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-how-to-add-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. How to add things
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-known-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Known gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-keeping-this-file-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Keeping this file current
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="mobile-client-map">Mobile Client Map</h1>
+<p>A file-by-file mental model of <code>mobile/</code>, for anyone (or any chat) picking up mobile work.
+It answers "where does it live". For "what can it do" read the Mobile Client section of
+<a href="../feature-list/">feature-list.md</a>, for the API read <a href="../api-contract/">api-contract.md</a>, for visual rules
+read <a href="../design-guide/">design-guide.md</a>, for history and decisions read
+<a href="../BUILD_LOG_MOBILE/">BUILD_LOG_MOBILE.md</a>, for regression checks <a href="../TESTING/">TESTING.md</a>, for launch work
+<a href="../DEPLOYMENT_CHECKLIST/">DEPLOYMENT_CHECKLIST.md</a>. The UX reference is <code>design/Mobile mockup.html</code>.</p>
+<hr />
+<h2 id="1-stack-and-tooling">1. Stack and tooling</h2>
+<ul>
+<li>React Native 0.88.1, React 19.3.0, Expo SDK ~58, TypeScript ~6.0.3. Navigation: React Navigation 7
+  (native stack, bottom tabs) plus a custom slide-over drawer. Icons: FontAwesome6 through <code>@expo/vector-icons</code>.
+  Font: Plus Jakarta Sans 400 to 800 (<code>@expo-google-fonts/plus-jakarta-sans</code>).</li>
+<li>Native modules: <code>expo-secure-store</code>, <code>expo-network</code>, <code>expo-splash-screen</code>, <code>expo-linking</code>,
+  <code>expo-constants</code>, <code>expo-font</code>, <code>@react-native-google-signin/google-signin</code> (native Google sign in).
+  Web preview only: <code>react-native-web</code>, <code>expo-auth-session</code>, <code>expo-web-browser</code>.</li>
+<li>No state library. Plain React context providers plus two data hooks (<code>useQuery</code>, <code>usePagedList</code>).</li>
+<li>Builds: <code>eas.json</code> has <code>development</code>, <code>preview</code> (APK) and <code>production</code> profiles. The <code>env</code> block of a
+  profile holds the public <code>EXPO_PUBLIC_*</code> values, EAS never reads <code>.env</code>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm start</code>, <code>android</code>, <code>ios</code>, <code>web</code></td>
+<td>Expo dev server (<code>npx expo start -c</code> clears the cache)</td>
+</tr>
+<tr>
+<td><code>npm run typecheck</code></td>
+<td><code>tsc --noEmit</code></td>
+</tr>
+<tr>
+<td><code>npm run export:web</code></td>
+<td>Production web export check</td>
+</tr>
+<tr>
+<td><code>npx expo-doctor</code></td>
+<td>Dependency and config health</td>
+</tr>
+<tr>
+<td><code>npx expo export --platform android</code></td>
+<td>Proves the JS bundles (pre-flight before a build)</td>
+</tr>
+<tr>
+<td><code>npx expo prebuild --platform android --no-install --clean</code></td>
+<td>Validates <code>app.json</code> and config plugins, then <code>rm -rf android</code></td>
+</tr>
+<tr>
+<td><code>brand/make-brand-assets.sh</code></td>
+<td>Generates every icon, splash and brand PNG (repo root)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-environment-variables">2. Environment variables</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Consumer</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EXPO_PUBLIC_API_URL</code></td>
+<td><code>src/api/config.ts</code></td>
+<td>API base including <code>/api/v1</code>. Derived from the Metro host when blank (Expo Go). Required in builds</td>
+</tr>
+<tr>
+<td><code>EXPO_PUBLIC_WEB_BASE_URL</code></td>
+<td><code>src/config/app.ts</code></td>
+<td>Share links and the staff web handoff</td>
+</tr>
+<tr>
+<td><code>EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID</code>, <code>EXPO_PUBLIC_GOOGLE_CLIENT_ID</code></td>
+<td><code>src/auth/GoogleSignInButton.tsx</code></td>
+<td>Web OAuth client, used for web sign in and to configure the native library</td>
+</tr>
+<tr>
+<td><code>EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID</code></td>
+<td><code>GoogleSignInButton.tsx</code></td>
+<td>iOS client (iOS untested)</td>
+</tr>
+<tr>
+<td><code>EXPO_PUBLIC_PLATFORM_ACCOUNT_ID</code></td>
+<td><code>src/config/app.ts</code></td>
+<td>Comma separated user ids that get the official "A" badge (per database)</td>
+</tr>
+<tr>
+<td><code>EXPO_PUBLIC_SUPPORT_EMAIL</code></td>
+<td><code>src/config/app.ts</code></td>
+<td>Shown with the suspended-account message</td>
+</tr>
+<tr>
+<td><code>EXPO_PUBLIC_DEV_MODE</code></td>
+<td><code>src/config/app.ts</code></td>
+<td>Developer access sheet, honoured only when <code>__DEV__</code></td>
+</tr>
+<tr>
+<td><code>EXPO_PUBLIC_DEV_ACCESS_TOKEN</code>, <code>_REFRESH_TOKEN</code></td>
+<td><code>AuthProvider.tsx</code></td>
+<td>Optional seeded dev login, <code>__DEV__</code> only</td>
+</tr>
+</tbody>
+</table>
+<p><code>EXPO_PUBLIC_*</code> values are baked in at build time, so changing one needs a rebuild. The Android OAuth client
+has no variable: Google matches it by package name and signing SHA-1.</p>
+<h2 id="3-architecture-and-data-flow">3. Architecture and data flow</h2>
+<ul>
+<li><strong>Direct API.</strong> The app calls Django at <code>/api/v1</code> with no proxy. Native requests have no CORS.
+  <code>src/api/client.ts</code> attaches the bearer token to every request (also public reads, so <code>user_vote</code> and
+  <code>is_following</code> are personalised), enforces timeouts, and turns failures into <code>ApiError</code>
+  (<code>status</code>, <code>fields</code>, <code>network</code>).</li>
+<li><strong>Session.</strong> Tokens live in <code>expo-secure-store</code> (localStorage on web). A 401 triggers one shared refresh.
+  The session is cleared only on a definitive 400 or 401 from <code>/auth/refresh/</code>. Network failure, 429 and 5xx
+  keep the session and start from the cached user.</li>
+<li><strong>Guests and the auth gate.</strong> Guests browse freely. <code>requireAuth(action)</code> opens one sign-in sheet that
+  keeps the screen and resumes the action after login. The Login screen is a one-time welcome.</li>
+<li><strong>Roles.</strong> <code>useCapabilities()</code> is the only place roles are derived. Hiding a control is UX, the backend
+  enforces everything. The mobile client has no moderation or admin screens: staff get lock, report and
+  escalate in context and "Open on web" handoffs that never carry a token.</li>
+<li><strong>Lists.</strong> <code>usePagedList</code> (paged, deduped, stale-guarded, pull to refresh, View more with its own error).
+  <code>useQuery</code> for single resources.</li>
+<li><strong>Google.</strong> Native: Google account picker, access token to <code>POST /auth/google/</code>. Web: browser token flow.</li>
+</ul>
+<h2 id="4-provider-tree">4. Provider tree</h2>
+<pre><code class="language-text">SafeAreaProvider
+ ThemeProvider            (waits for the stored preference before first paint)
+  ErrorBoundary
+   NetworkProvider        (expo-network, drives OfflineBanner)
+    AuthProvider          (tokens, user, refresh handler, sign in and out)
+     AuthGateProvider     (sign-in sheet, Developer access sheet in DEV_MODE)
+      UnreadProvider      (unread count for the Alerts badge)
+       StaffWebProvider   (confirmation sheet for web handoffs)
+        AppShell          (BootSplash while auth loads)
+         DrawerProvider &gt; RootNavigator + Drawer
+</code></pre>
+<h2 id="5-navigation-routes-and-deep-links">5. Navigation, routes and deep links</h2>
+<p>Files in <code>src/navigation/</code>: <code>types.ts</code> (param lists, <code>navigationRef</code>, <code>navigateRoot</code>, <code>startAsk</code>),
+<code>RootNavigator.tsx</code> (stack, theme, linking), <code>TabNavigator.tsx</code>, <code>TabBar.tsx</code> (Home, Schools, raised Ask,
+Alerts with unread count, Profile), <code>Drawer.tsx</code> and <code>DrawerProvider.tsx</code> (swipe left, Back or backdrop
+closes), <code>linking.ts</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Params</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Main</code></td>
+<td>tabs <code>Home</code>, <code>Schools</code>, <code>Ask</code>, <code>Alerts</code>, <code>Profile</code></td>
+<td><code>Ask</code> params: <code>nonce</code>, <code>hubId</code>, <code>schoolId</code>, <code>schoolName</code>, <code>editQuestionId</code></td>
+</tr>
+<tr>
+<td><code>Login</code></td>
+<td>none</td>
+<td>Shown to a first-time guest and after logout</td>
+</tr>
+<tr>
+<td><code>School</code></td>
+<td><code>schoolId?</code>, <code>slug?</code>, <code>name?</code></td>
+<td>UUID or slug</td>
+</tr>
+<tr>
+<td><code>Question</code></td>
+<td><code>questionId</code>, <code>answerId?</code></td>
+<td><code>answerId</code> scrolls to and flashes that answer</td>
+</tr>
+<tr>
+<td><code>Search</code>, <code>Tags</code>, <code>MyReports</code>, <code>Pages</code></td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td><code>TagQuestions</code></td>
+<td><code>tag</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>PageView</code></td>
+<td><code>slug</code>, <code>title?</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Deep links (<code>linking.ts</code>): prefixes <code>academiaatlas://</code>, the Expo dev URL and <code>WEB_BASE_URL</code>. Paths mirror the
+web: <code>questions/:id/:slug?</code>, <code>schools/:id/:slug?</code>, <code>tags/:tag</code>, <code>pages/:slug</code>, <code>search</code>, <code>tags</code>,
+<code>my-reports</code>, <code>notifications</code>, <code>schools</code>, <code>profile</code>. A <code>#answer-{id}</code> suffix opens the question at that answer.
+https links in the app need Android intent filters with autoVerify and <code>assetlinks.json</code> (launch work).</p>
+<h2 id="6-screens-srcscreens">6. Screens (<code>src/screens/</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Screen</th>
+<th>Endpoints</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HomeScreen</code></td>
+<td><code>GET /questions/</code>, <code>/schools/?has_hub=true</code>, <code>/tags/?popular=true</code>, <code>/hubs/by-school/{id}/</code> per card</td>
+<td>Search pill, <code>SchoolCard</code> strip, tags, recent questions</td>
+</tr>
+<tr>
+<td><code>SearchScreen</code></td>
+<td><code>GET /search/questions/</code> (dev builds fall back to <code>/questions/?search=</code>)</td>
+<td>500 ms debounce, <code>TagFilter</code>, "Searching..." state</td>
+</tr>
+<tr>
+<td><code>SchoolsScreen</code></td>
+<td><code>GET /schools/</code> (search, has_hub, institution_type, ownership, state)</td>
+<td>Filter sheet, <code>Chip</code>s</td>
+</tr>
+<tr>
+<td><code>SchoolScreen</code></td>
+<td><code>GET /schools/{id}/</code> or <code>/by-slug/</code>, <code>/hubs/by-school/{id}/</code>, <code>GET /questions/</code>, <code>POST /hubs/activation-requests/</code></td>
+<td><code>SchoolHero</code>, status and department chips, sort sheet, <code>RequestHubSheet</code></td>
+</tr>
+<tr>
+<td><code>TagsScreen</code>, <code>TagQuestionsScreen</code></td>
+<td><code>GET /tags/</code>, <code>/tags/{name}/questions/</code></td>
+<td>Popular or A to Z, status chips</td>
+</tr>
+<tr>
+<td><code>QuestionScreen</code></td>
+<td><code>GET</code>, <code>DELETE /questions/{id}/</code>, follow, lock, answer edit, delete, vote, mark-best</td>
+<td>Composes <code>AnswerCard</code>, <code>AnswerComposer</code>, <code>BestAnswerPin</code>, <code>CommentsSheet</code>, <code>ReportForm</code></td>
+</tr>
+<tr>
+<td><code>AskScreen</code></td>
+<td><code>/schools/?has_hub=true</code>, <code>/hubs/by-school/{id}/</code>, <code>/hubs/{id}/</code>, <code>GET /questions/{id}/</code> (edit), <code>POST</code>, <code>PATCH /questions/</code></td>
+<td>School step, form step, <code>TagInput</code>, edit loads fresh</td>
+</tr>
+<tr>
+<td><code>NotificationsScreen</code></td>
+<td><code>GET /notifications/</code>, <code>mark-read</code>, <code>mark-all-read</code></td>
+<td>12 types with icons, <code>link_target</code> deep links, admin types open the web</td>
+</tr>
+<tr>
+<td><code>ProfileScreen</code></td>
+<td><code>GET</code>, <code>PATCH /users/me/</code></td>
+<td><code>ProfileTabs</code>, <code>EditNameSheet</code>, staff web buttons</td>
+</tr>
+<tr>
+<td><code>MyReportsScreen</code></td>
+<td><code>GET /reports/mine/</code></td>
+<td>Private, never shows reviewer or escalation data</td>
+</tr>
+<tr>
+<td><code>PagesScreen</code>, <code>PageScreen</code></td>
+<td><code>GET /pages/</code>, <code>/pages/{slug}/</code></td>
+<td>Staff and Draft badges, headings enabled on pages</td>
+</tr>
+<tr>
+<td><code>LoginScreen</code></td>
+<td><code>POST /auth/google/</code></td>
+<td>Google, guest, Developer access in dev builds</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-srcapi">7. <code>src/api/</code></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Exports</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config.ts</code></td>
+<td><code>API_BASE_URL</code>, <code>API_BASE_SOURCE</code></td>
+<td><code>EXPO_PUBLIC_API_URL</code>, else the Metro host on port 8000, else <code>10.0.2.2</code> on Android or localhost</td>
+</tr>
+<tr>
+<td><code>client.ts</code></td>
+<td><code>apiRequest</code>, <code>ApiError</code>, <code>FRIENDLY_MESSAGES</code>, <code>errorMessage</code>, <code>fieldError</code>, <code>isAbortError</code>, <code>setAccessToken</code>, <code>getAccessToken</code>, <code>setRefreshHandler</code>, <code>setUnauthorizedHandler</code></td>
+<td>Fetch wrapper, single-flight refresh, friendly copy for network, 429 and gateway errors</td>
+</tr>
+<tr>
+<td><code>types.ts</code></td>
+<td>entity types, filters, enums</td>
+<td>Mirrors api-contract.md</td>
+</tr>
+<tr>
+<td><code>endpoints.ts</code></td>
+<td><code>api</code></td>
+<td>Typed SDK. User client only: auth, me, schools, hubs (read and activation request), questions, answers, comments, tags, search, notifications, reports (create, mine, escalate), pages</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-srcauth">8. <code>src/auth/</code></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Exports</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AuthProvider.tsx</code></td>
+<td><code>AuthProvider</code>, <code>useAuth</code></td>
+<td><code>status</code>, <code>user</code>, <code>isAuthenticated</code>, <code>welcomeSeen</code>, <code>sessionExpiredAt</code>, <code>signInWithGoogleToken</code>, <code>signInWithAccessToken</code> (dev), <code>signOut</code>, <code>refreshUser</code>, <code>updateProfile</code>, <code>markWelcomeSeen</code></td>
+</tr>
+<tr>
+<td><code>GoogleSignInButton.tsx</code></td>
+<td><code>GoogleSignInButton</code>, <code>googleConfigured</code></td>
+<td>Native account picker, web browser flow, "unavailable" states for missing config and Expo Go</td>
+</tr>
+<tr>
+<td><code>UnreadProvider.tsx</code></td>
+<td><code>UnreadProvider</code>, <code>useUnread</code></td>
+<td><code>unreadCount</code>, <code>refresh</code>, <code>setUnreadCount</code>. Refreshes on mount, user change and app foreground</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-srcfeatures">9. <code>src/features/</code></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Props or exports</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auth/AuthGateProvider.tsx</code></td>
+<td><code>requireAuth(action?, message?)</code>, <code>promptSignIn(message?)</code></td>
+<td>One sign-in sheet, resumes the pending action</td>
+</tr>
+<tr>
+<td><code>auth/DevAccessSheet.tsx</code></td>
+<td><code>visible</code>, <code>onClose</code>, <code>onSuccess?</code></td>
+<td>Paste test tokens, dev builds only</td>
+</tr>
+<tr>
+<td><code>network/NetworkProvider.tsx</code></td>
+<td><code>useNetwork()</code> gives <code>isOffline</code></td>
+<td>Used by <code>Screen</code></td>
+</tr>
+<tr>
+<td><code>staff/useCapabilities.ts</code></td>
+<td><code>role</code>, <code>roleLabel</code>, <code>isAdmin</code>, <code>isStaff</code>, <code>canModerateHub(hubId)</code></td>
+<td>Single source for roles</td>
+</tr>
+<tr>
+<td><code>staff/StaffWebProvider.tsx</code></td>
+<td><code>openOnWeb(path, label?)</code></td>
+<td>Confirmation sheet, system browser, no tokens</td>
+</tr>
+<tr>
+<td><code>staff/StaffLockControl.tsx</code></td>
+<td><code>hubId</code>, <code>locked</code>, <code>busy</code>, <code>onPress</code></td>
+<td>Lock and Unlock pill for hub staff</td>
+</tr>
+<tr>
+<td><code>staff/StaffDrawerSection.tsx</code>, <code>StaffProfileButtons.tsx</code></td>
+<td></td>
+<td>Web handoff rows</td>
+</tr>
+<tr>
+<td><code>staff/notifications.ts</code></td>
+<td><code>useAdminNotificationWeb(type, onOpen)</code></td>
+<td>Admin-only types open the web</td>
+</tr>
+<tr>
+<td><code>reports/ReportForm.tsx</code></td>
+<td><code>contentType</code>, <code>contentId</code>, <code>escalate</code>, <code>onClose</code></td>
+<td>Report, or report then escalate as one action</td>
+</tr>
+<tr>
+<td><code>comments/CommentsSheet.tsx</code></td>
+<td><code>answer</code>, <code>hubId</code>, <code>onClose</code>, <code>onCountChange</code></td>
+<td>Thread plus menu, edit, delete, report, official note, all in one sheet</td>
+</tr>
+<tr>
+<td><code>answers/AnswerCard.tsx</code></td>
+<td><code>answer</code>, <code>canMarkBest</code>, <code>flashing</code>, <code>voteBusy</code>, <code>onLayout</code>, <code>onVote</code>, <code>onMenu</code>, <code>onComments</code>, <code>onMarkBest</code>, <code>onOfficial</code></td>
+<td>One answer</td>
+</tr>
+<tr>
+<td><code>answers/AnswerComposer.tsx</code></td>
+<td><code>questionId</code>, <code>locked</code>, <code>onPosted</code></td>
+<td>Sticky bar, owns draft and post state</td>
+</tr>
+<tr>
+<td><code>answers/BestAnswerPin.tsx</code></td>
+<td><code>answer</code>, <code>onJump</code>, <code>onOfficial</code></td>
+<td>Read-only best answer preview</td>
+</tr>
+<tr>
+<td><code>questions/TagInput.tsx</code></td>
+<td><code>tags</code>, <code>onChange</code>, <code>error?</code>, <code>onFocusChange?</code></td>
+<td>Chips, popular tags, debounced search, free text</td>
+</tr>
+<tr>
+<td><code>schools/SchoolCard.tsx</code></td>
+<td><code>school</code>, <code>refreshKey?</code>, <code>onPress</code>; <code>SCHOOL_CARD_WIDTH</code>, <code>SCHOOL_CARD_HEIGHT</code></td>
+<td>Fetches its own hub count</td>
+</tr>
+<tr>
+<td><code>schools/SchoolHero.tsx</code></td>
+<td><code>school</code>, <code>hub</code></td>
+<td>Header, stats, Ask action</td>
+</tr>
+<tr>
+<td><code>schools/RequestHubSheet.tsx</code></td>
+<td><code>school</code>, <code>visible</code>, <code>onClose</code></td>
+<td>Hub activation request</td>
+</tr>
+<tr>
+<td><code>tags/TagFilter.tsx</code></td>
+<td><code>value</code>, <code>onChange</code></td>
+<td>Search tag filter</td>
+</tr>
+<tr>
+<td><code>profile/useProfileActivity.ts</code></td>
+<td><code>(userId, enabled)</code></td>
+<td>Three paged lists and a combined <code>refresh</code></td>
+</tr>
+<tr>
+<td><code>profile/ProfileTabs.tsx</code>, <code>EditNameSheet.tsx</code></td>
+<td><code>activity</code>; <code>visible</code>, <code>onClose</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-srccomponents">10. <code>src/components/</code></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Exports and props</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Screen.tsx</code></td>
+<td><code>Screen</code> (<code>children</code>, <code>style</code>, <code>edges</code>), <code>Divider</code>, <code>Spacer</code></td>
+<td>Safe area plus <code>OfflineBanner</code></td>
+</tr>
+<tr>
+<td><code>TopBar.tsx</code></td>
+<td><code>TopBar</code> (<code>title</code>, <code>wordmark</code>, <code>onBack</code>, <code>right</code>, <code>showBorder</code>), <code>HeaderIconButton</code>, <code>HeaderTextButton</code>, <code>SectionHeader</code></td>
+<td>Root screens get the menu, detail screens a back arrow</td>
+</tr>
+<tr>
+<td><code>Text.tsx</code></td>
+<td><code>Text</code> (<code>variant</code>, <code>weight</code>, <code>size</code>, <code>color</code>, <code>center</code>)</td>
+<td>Font scaling capped at 1.4</td>
+</tr>
+<tr>
+<td><code>Button.tsx</code></td>
+<td><code>Button</code> (<code>title</code>, <code>variant</code>, <code>size</code>, <code>icon</code>, <code>iconRight</code>, <code>loading</code>, <code>disabled</code>, <code>fullWidth</code>), <code>IconButton</code></td>
+<td>Variants primary, secondary, ghost, danger, dangerSoft, accentSoft</td>
+</tr>
+<tr>
+<td><code>Form.tsx</code></td>
+<td><code>Field</code>, <code>Input</code>, <code>TextArea</code>, <code>SelectRow</code>, <code>ToggleRow</code>, <code>FormError</code></td>
+<td>Field errors sit under their field</td>
+</tr>
+<tr>
+<td><code>Icon.tsx</code></td>
+<td><code>Icon</code> (<code>name</code>, <code>size</code>, <code>color</code>, <code>family</code>), <code>IconName</code></td>
+<td>Semantic names to FontAwesome6</td>
+</tr>
+<tr>
+<td><code>Chips.tsx</code></td>
+<td><code>Chip</code>, <code>FilterChips</code> (<code>options</code>, <code>value</code>, <code>onChange</code>, <code>variant</code>, <code>wrap</code>, <code>allowClear</code>), <code>SegmentedTabs</code>, <code>TagPill</code>, <code>TopicChip</code>, <code>Badge</code></td>
+<td>One chip style everywhere</td>
+</tr>
+<tr>
+<td><code>Tabs.tsx</code></td>
+<td><code>Tabs</code> (<code>tabs</code>, <code>value</code>, <code>onChange</code>)</td>
+<td>Underlined, scrolls</td>
+</tr>
+<tr>
+<td><code>SearchField.tsx</code></td>
+<td><code>SearchField</code>, <code>SearchPill</code></td>
+<td>Pill inputs</td>
+</tr>
+<tr>
+<td><code>Sheet.tsx</code></td>
+<td><code>Sheet</code> (<code>visible</code>, <code>onClose</code>, <code>title</code>, <code>label</code>, <code>scroll</code>, <code>footer</code>, <code>showClose</code>, <code>headerRight</code>), <code>ActionSheet</code>, <code>ConfirmSheet</code>, <code>SheetAction</code></td>
+<td>Bottom sheet, max 82 percent height</td>
+</tr>
+<tr>
+<td><code>States.tsx</code></td>
+<td><code>Loading</code>, <code>EmptyState</code>, <code>ErrorState</code>, <code>SkeletonQuestionList</code>, <code>SkeletonBlock</code>, <code>ListFooter</code>, <code>ViewMoreButton</code>, <code>OfflineBanner</code></td>
+<td><code>ErrorState</code> has a network variant</td>
+</tr>
+<tr>
+<td><code>QuestionRow.tsx</code></td>
+<td><code>QuestionRow</code>, <code>StatusIcon</code>, <code>StatusLabel</code></td>
+<td>Plain-text snippets via <code>stripMarkdown</code></td>
+</tr>
+<tr>
+<td><code>SchoolRow.tsx</code>, <code>TagRow.tsx</code></td>
+<td></td>
+<td>List rows</td>
+</tr>
+<tr>
+<td><code>Markdown.tsx</code></td>
+<td><code>Markdown</code> (<code>markdown</code>, <code>compact</code>, <code>allowHeadings</code>), <code>parseMarkdown</code></td>
+<td>Safe renderer, headings only when allowed (pages)</td>
+</tr>
+<tr>
+<td><code>MarkdownEditor.tsx</code></td>
+<td><code>MarkdownEditor</code> (<code>value</code>, <code>onChangeText</code>, <code>minHeight</code>, <code>maxHeight</code>, <code>toolbar</code>)</td>
+<td>Editing logic is in <code>lib/markdownEdit.ts</code></td>
+</tr>
+<tr>
+<td><code>KeyboardAvoid.tsx</code></td>
+<td><code>KeyboardAvoid</code></td>
+<td>The wrapper for screens with bottom inputs</td>
+</tr>
+<tr>
+<td><code>PlatformBadge.tsx</code></td>
+<td><code>PlatformBadge</code>, <code>OfficialAccountNote</code></td>
+<td>Next to every author name</td>
+</tr>
+<tr>
+<td><code>BrandMark.tsx</code></td>
+<td><code>BrandMark</code> (<code>width</code>)</td>
+<td>Square brand PNGs, white A in dark mode</td>
+</tr>
+<tr>
+<td><code>Avatar.tsx</code></td>
+<td><code>Avatar</code> (<code>name</code>, <code>uri</code>, <code>size</code>, <code>bordered</code>)</td>
+<td>Initial fallback</td>
+</tr>
+<tr>
+<td><code>ErrorBoundary.tsx</code></td>
+<td><code>ErrorBoundary</code></td>
+<td><code>componentDidCatch</code> is the crash reporting hook</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11-srctheme">11. <code>src/theme/</code></h2>
+<p><code>ThemeProvider</code>, <code>useTheme()</code> (<code>mode</code>, <code>preference</code>, <code>colors</code>, <code>setPreference</code>, <code>toggleMode</code>), <code>palettes</code>, <code>fonts</code>,
+<code>radii</code>, <code>touchTarget</code>, <code>fabShadow</code>, <code>sheetShadow</code>, <code>webInputReset</code>. Palette tokens exactly as in design-guide.md:
+<code>bg</code>, <code>surface</code>, <code>subtle</code>, <code>line</code>, <code>strong</code>, <code>ink</code>, <code>muted</code>, <code>accent</code>, <code>accentSolid</code>, <code>accentSoft</code>, <code>onAccent</code>,
+<code>success</code>, <code>successSoft</code>, <code>danger</code>, <code>dangerSoft</code>, <code>warningBg</code>, <code>warningInk</code>, <code>overlay</code>, <code>skeleton</code>, <code>isDark</code>.</p>
+<h2 id="12-srclib-and-srcconfig">12. <code>src/lib/</code> and <code>src/config/</code></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Exports</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>storage.ts</code></td>
+<td><code>storage</code>, <code>STORAGE_KEYS</code></td>
+<td>Secure store (localStorage on web). Keys <code>academia.access_token</code>, <code>academia.refresh_token</code>, <code>academia.user</code>. Keys keep the <code>academia.</code> prefix</td>
+</tr>
+<tr>
+<td><code>time.ts</code></td>
+<td><code>timeAgo</code>, <code>pluralize</code>, <code>compactNumber</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>useQuery.ts</code>, <code>usePagedList.ts</code></td>
+<td></td>
+<td>Fetch hooks</td>
+</tr>
+<tr>
+<td><code>useDebouncedValue.ts</code>, <code>useRefreshOnFocus.ts</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>useKeyboard.ts</code></td>
+<td><code>useKeyboard(active)</code> gives <code>{ height, visible }</code></td>
+<td>The only keyboard subscriber</td>
+</tr>
+<tr>
+<td><code>useReduceMotion.ts</code></td>
+<td></td>
+<td>Reduced motion preference</td>
+</tr>
+<tr>
+<td><code>markdownEdit.ts</code></td>
+<td><code>toggleInline</code>, <code>toggleBlock</code>, <code>wrapLink</code>, <code>continueList</code>, <code>INLINE</code></td>
+<td>Pure editing helpers</td>
+</tr>
+<tr>
+<td><code>stripMarkdown.ts</code></td>
+<td><code>stripMarkdown</code></td>
+<td>One-line plain text</td>
+</tr>
+<tr>
+<td><code>config/app.ts</code></td>
+<td><code>WEB_BASE_URL</code>, <code>SUPPORT_EMAIL</code>, <code>DEV_MODE</code>, <code>PLATFORM_ACCOUNT_IDS</code>, <code>isPlatformAccount</code>, <code>webUrl</code>, <code>IS_WEB</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>config/brand.ts</code></td>
+<td><code>BRAND</code></td>
+<td>Name, short name, tagline, the two mark assets</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-conventions">13. Conventions</h2>
+<ol>
+<li>Lists: <code>usePagedList</code>, <code>FlatList</code> with <code>RefreshControl</code>, <code>ViewMoreButton</code> in the footer, skeleton while loading,
+   <code>EmptyState</code> when empty, <code>ErrorState</code> with retry.</li>
+<li>Forms: <code>Field</code> plus <code>fieldError(err, name)</code>. Never show raw error objects.</li>
+<li>Sheets over modal screens. Never stack Modals: switch the content of one sheet by mode.</li>
+<li>Colours only through <code>useTheme()</code> tokens, never hex (white on accent excepted).</li>
+<li>Roles only through <code>useCapabilities()</code>.</li>
+<li>Restricted actions through <code>requireAuth</code>, never a redirect to Login.</li>
+<li>Screens with inputs wrap in <code>KeyboardAvoid</code>, keyboard state only from <code>useKeyboard</code>.</li>
+<li>Reuse: a block used twice, or one that pushes a screen past a few hundred lines, becomes a component.</li>
+<li>User content only through <code>Markdown</code> and <code>MarkdownEditor</code>, new formatting goes in <code>lib/markdownEdit.ts</code>.</li>
+<li>Author names always carry <code>PlatformBadge</code>.</li>
+<li>Suggestion lists render inline under the field, not as popovers.</li>
+<li>Reports through <code>ReportForm</code> only.</li>
+<li>No em dash characters in code, comments or docs.</li>
+</ol>
+<h2 id="14-behaviours-that-are-easy-to-get-wrong">14. Behaviours that are easy to get wrong</h2>
+<ul>
+<li>SOLVED means "has a best answer". Only <code>is_locked</code> blocks new answers. Only the question author marks best.</li>
+<li>Reports are private: <code>/my-reports</code> only, no reviewer or escalation data, never on the profile.</li>
+<li>Notification and report links come from <code>link_target</code>, <code>null</code> means no link.</li>
+<li>A failed refresh must not log the user out unless it was a definitive 400 or 401.</li>
+<li>Vote switching updates the UI after each confirmed server step.</li>
+<li>Heading syntax renders as plain text everywhere except static pages.</li>
+<li>Preview and production builds contain no developer sheet and no seeded tokens (<code>__DEV__</code>).</li>
+</ul>
+<h2 id="15-endpoint-index-endpoint-to-callers">15. Endpoint index (endpoint to callers)</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Callers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /auth/google/</code></td>
+<td><code>LoginScreen</code>, <code>AuthGateProvider</code>, <code>AuthProvider</code></td>
+</tr>
+<tr>
+<td><code>POST /auth/refresh/</code>, <code>/auth/logout/</code></td>
+<td><code>AuthProvider</code></td>
+</tr>
+<tr>
+<td><code>GET</code>, <code>PATCH /users/me/</code></td>
+<td><code>AuthProvider</code>, <code>EditNameSheet</code></td>
+</tr>
+<tr>
+<td><code>GET /users/me/answers/</code>, <code>/users/me/comments/</code></td>
+<td><code>useProfileActivity</code></td>
+</tr>
+<tr>
+<td><code>GET /questions/</code></td>
+<td><code>HomeScreen</code>, <code>SchoolScreen</code>, <code>useProfileActivity</code>, <code>SearchScreen</code> (dev fallback)</td>
+</tr>
+<tr>
+<td><code>GET /questions/{id}/</code></td>
+<td><code>QuestionScreen</code>, <code>AskScreen</code></td>
+</tr>
+<tr>
+<td><code>POST /questions/</code>, <code>PATCH /questions/{id}/</code></td>
+<td><code>AskScreen</code></td>
+</tr>
+<tr>
+<td><code>DELETE /questions/{id}/</code></td>
+<td><code>QuestionScreen</code></td>
+</tr>
+<tr>
+<td>follow, lock</td>
+<td><code>QuestionScreen</code>, <code>StaffLockControl</code></td>
+</tr>
+<tr>
+<td><code>POST /answers/</code></td>
+<td><code>AnswerComposer</code></td>
+</tr>
+<tr>
+<td>answer edit, delete, vote, mark-best</td>
+<td><code>QuestionScreen</code></td>
+</tr>
+<tr>
+<td>comments (list, create, update, delete)</td>
+<td><code>CommentsSheet</code></td>
+</tr>
+<tr>
+<td><code>POST /reports/</code>, <code>POST /reports/{id}/escalate/</code></td>
+<td><code>ReportForm</code></td>
+</tr>
+<tr>
+<td><code>GET /reports/mine/</code></td>
+<td><code>MyReportsScreen</code></td>
+</tr>
+<tr>
+<td><code>GET /schools/</code></td>
+<td><code>HomeScreen</code>, <code>SchoolsScreen</code>, <code>AskScreen</code></td>
+</tr>
+<tr>
+<td><code>GET /schools/{id}/</code>, <code>/schools/by-slug/{slug}/</code></td>
+<td><code>SchoolScreen</code></td>
+</tr>
+<tr>
+<td><code>GET /hubs/{id}/</code></td>
+<td><code>AskScreen</code></td>
+</tr>
+<tr>
+<td><code>GET /hubs/by-school/{id}/</code></td>
+<td><code>SchoolCard</code>, <code>SchoolScreen</code>, <code>AskScreen</code></td>
+</tr>
+<tr>
+<td><code>POST /hubs/activation-requests/</code></td>
+<td><code>RequestHubSheet</code></td>
+</tr>
+<tr>
+<td><code>GET /tags/</code></td>
+<td><code>HomeScreen</code>, <code>TagsScreen</code>, <code>TagInput</code>, <code>TagFilter</code></td>
+</tr>
+<tr>
+<td><code>GET /tags/{name}/questions/</code></td>
+<td><code>TagQuestionsScreen</code></td>
+</tr>
+<tr>
+<td><code>GET /search/questions/</code></td>
+<td><code>SearchScreen</code></td>
+</tr>
+<tr>
+<td>notifications (list, mark-read, mark-all-read)</td>
+<td><code>NotificationsScreen</code>, <code>UnreadProvider</code></td>
+</tr>
+<tr>
+<td><code>GET /pages/</code>, <code>/pages/{slug}/</code></td>
+<td><code>PagesScreen</code>, <code>PageScreen</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="16-how-to-add-things">16. How to add things</h2>
+<ul>
+<li><strong>New screen:</strong> add the file in <code>src/screens/</code>, a route and its params in <code>navigation/types.ts</code>, register it in
+  <code>RootNavigator.tsx</code>, add a path in <code>linking.ts</code>, and add its row to section 6.</li>
+<li><strong>New API call:</strong> add it to <code>endpoints.ts</code> (user client only), type it in <code>types.ts</code>, use <code>useQuery</code> or <code>usePagedList</code>.</li>
+<li><strong>New notification type:</strong> add its icon to <code>NotificationsScreen</code>, and to the web client.</li>
+<li><strong>New env variable:</strong> read it in <code>config/app.ts</code>, add it to <code>.env.example</code>, <code>eas.json</code> and section 2.</li>
+</ul>
+<h2 id="17-known-gaps">17. Known gaps</h2>
+<p>See "Known gaps" in the Mobile section of <a href="../feature-list/">feature-list.md</a>: sheet swipe down, offline cache,
+https app links (launch), VoiceOver and all iOS checks (untested), native Google sign in verification on the final build.</p>
+<h2 id="18-keeping-this-file-current">18. Keeping this file current</h2>
+<p>After any new file, route or shared component, regenerate the lists and update the matching section:</p>
+<pre><code class="language-bash">cd mobile &amp;&amp; find src -type f \( -name &quot;*.ts&quot; -o -name &quot;*.tsx&quot; \) | sort
+grep -rnE &quot;^export (default )?(async )?(function|const|class) &quot; src --include=*.ts --include=*.tsx
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

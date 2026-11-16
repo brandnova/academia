@@ -1,0 +1,2035 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://brandnova.github.io/academia-atlas/frontend-map/">
+      
+      
+        <link rel="prev" href="../backend-map/">
+      
+      
+        <link rel="next" href="../mobile-map/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Web Map - Academia Atlas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#web-map" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Academia Atlas" class="md-header__button md-logo" aria-label="Academia Atlas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Academia Atlas
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Web Map
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Academia Atlas" class="md-nav__button md-logo" aria-label="Academia Atlas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Academia Atlas
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feature List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Map
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stack-and-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Stack and tooling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Environment variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-architecture-and-data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Architecture and data flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-routes-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Routes (app/)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-lib" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. lib/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. components/
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. components/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ui-shared-primitives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ui/ (shared primitives)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        layout/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature components
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-endpoint-index-endpoint-to-callers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Endpoint index (endpoint to callers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-permissions-on-the-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Permissions on the client
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-behaviours-that-are-easy-to-get-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Behaviours that are easy to get wrong
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-how-to-add-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. How to add things
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-known-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Known gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-keeping-this-file-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Keeping this file current
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mobile-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Logs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Build Logs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_BACKEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_FRONTEND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BUILD_LOG_MOBILE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design/Mobile-mockup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile mockup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TESTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEPLOYMENT_CHECKLIST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QUICKSTART/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MAINTAINER_PLAYBOOK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintainer Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stack-and-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Stack and tooling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Environment variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-architecture-and-data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Architecture and data flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-routes-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Routes (app/)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-lib" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. lib/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. components/
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. components/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ui-shared-primitives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ui/ (shared primitives)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        layout/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature components
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-endpoint-index-endpoint-to-callers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Endpoint index (endpoint to callers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-permissions-on-the-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Permissions on the client
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-behaviours-that-are-easy-to-get-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Behaviours that are easy to get wrong
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-how-to-add-things" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. How to add things
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-known-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Known gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-keeping-this-file-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Keeping this file current
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="web-map">Web Map</h1>
+<p>A file-by-file mental model of <code>web/</code>, for anyone (or any chat) picking up
+web work. It answers "where does it live". For "what can it do" read the Web
+Capabilities section of <a href="../feature-list/">feature-list.md</a>, for the API read
+<a href="../api-contract/">api-contract.md</a>, for visual rules read <a href="../design-guide/">design-guide.md</a>,
+and for history and decisions read <a href="../BUILD_LOG_FRONTEND/">BUILD_LOG_FRONTEND.md</a>.</p>
+<hr />
+<h2 id="1-stack-and-tooling">1. Stack and tooling</h2>
+<ul>
+<li>Next.js 16 App Router (Turbopack), React 19, JavaScript (no TypeScript), Tailwind v4
+  (CSS-first, no tailwind.config.js), lucide-react 1.23 icons, marked plus sanitize-html
+  for Markdown, Plus Jakarta Sans through next/font (self-hosted). No third-party component
+  library.</li>
+<li>Deployed on Vercel. The browser never talks to Django directly.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm run dev</code>, <code>build</code>, <code>start</code></td>
+<td>Standard Next.js scripts</td>
+</tr>
+<tr>
+<td><code>npm run lint</code></td>
+<td>ESLint (two rules are off on purpose, see eslint.config.mjs)</td>
+</tr>
+<tr>
+<td><code>npm run check:structure</code></td>
+<td><code>scripts/check-structure.mjs</code>: no route files outside app/, no component files inside app/, every lucide icon name must exist</td>
+</tr>
+<tr>
+<td><code>npm run check</code></td>
+<td>lint plus structure check. Run <code>npm run check &amp;&amp; npm run build</code> before every PR</td>
+</tr>
+<tr>
+<td><code>scripts/codemod-primitives.mjs</code></td>
+<td>One-off migration to ErrorMessage and the form controls. Dry run by default, <code>--write</code> applies. Safe to re-run</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-environment-variables">2. Environment variables</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Where</th>
+<th>Consumers</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BACKEND_API_URL</code></td>
+<td>server only</td>
+<td>app/api/backend routes</td>
+<td>Backend <code>/api/v1</code> base, no trailing slash</td>
+</tr>
+<tr>
+<td><code>NEXT_PUBLIC_SITE_URL</code></td>
+<td>build and server</td>
+<td>lib/api.js, metadata, sitemap, robots, OG</td>
+<td>Public origin, also used for server calls to the app's own proxy</td>
+</tr>
+<tr>
+<td><code>NEXT_PUBLIC_GOOGLE_CLIENT_ID</code></td>
+<td>browser</td>
+<td>GoogleLoginButton</td>
+<td>Google Identity Services client id</td>
+</tr>
+<tr>
+<td><code>NEXT_PUBLIC_PLATFORM_ACCOUNT_ID</code></td>
+<td>browser</td>
+<td>lib/platformAccount.js</td>
+<td>Comma-separated user ids that get the platform badge (optional)</td>
+</tr>
+</tbody>
+</table>
+<p><code>NEXT_PUBLIC_*</code> values are baked in at build time, so changing one needs a redeploy.</p>
+<h2 id="3-architecture-and-data-flow">3. Architecture and data flow</h2>
+<pre><code class="language-text">Browser -&gt; Next route handler /api/backend/[...path] -&gt; Django /api/v1/...
+</code></pre>
+<ul>
+<li><strong>Tokens</strong> live only in httpOnly cookies, never in browser-readable code. The route
+  handler attaches <code>Authorization</code>, retries once after a refresh and rotates the cookies.</li>
+<li><strong>Refresh</strong>: <code>lib/refreshSession.js</code> keeps one in-flight refresh per refresh token and
+  remembers the result for 10 seconds, so concurrent 401s share one refresh. Cookies are
+  cleared only on a definitive 400 or 401 from the refresh endpoint, never on 429, 5xx or a
+  network failure. Backend unreachable returns 503 <code>{ "error": ... }</code>.</li>
+<li><strong>Client components</strong> call <code>clientFetch</code> (lib/clientApi.js). It throws an Error carrying
+  <code>status</code>, <code>fields</code> (the raw DRF body) and friendly copy for network failure, 429 and
+  gateway errors.</li>
+<li><strong>Server components</strong> call <code>apiFetch</code> (lib/api.js), which forwards the request cookies to
+  the app's own proxy through <code>NEXT_PUBLIC_SITE_URL</code>.</li>
+<li><strong>Events</strong>: a 401 anywhere dispatches <code>auth:expired</code> and AuthProvider logs the UI out.
+  <code>lib/locationEvents.js</code> patches <code>history.pushState</code> and <code>replaceState</code> to emit
+  <code>app:locationchange</code>, because a Next <code>&lt;Link&gt;</code> that only changes the hash fires neither
+  <code>hashchange</code> nor <code>popstate</code>.</li>
+<li><strong>Known limits</strong>: a race between two serverless instances can cause a stray logout, and a
+  token refresh during a server render cannot reach the browser until its next request.</li>
+</ul>
+<h2 id="4-routes-app">4. Routes (<code>app/</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>File</th>
+<th>Rendering</th>
+<th>Data and notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td><code>page.js</code></td>
+<td>Server</td>
+<td><code>/schools/?has_hub=true&amp;page_size=5</code>, <code>/tags/?popular=true</code>. HeroSearchBar, RecentQuestionsList, side cards, WebSite JSON-LD. <code>opengraph-image.js</code> beside it is the site-wide fallback</td>
+</tr>
+<tr>
+<td><code>/schools</code></td>
+<td><code>schools/page.js</code></td>
+<td>Client</td>
+<td><code>/schools/</code> with search, has_hub, institution_type, ownership, state, page</td>
+</tr>
+<tr>
+<td><code>/schools/[id]/[[...slug]]</code></td>
+<td><code>schools/[id]/[[...slug]]/page.js</code></td>
+<td>Server</td>
+<td><code>/schools/{id}/</code>, <code>/hubs/by-school/{id}/</code>. generateMetadata, canonical, BreadcrumbList. <code>error.js</code>, <code>not-found.js</code>, <code>opengraph-image.js</code> sit in <code>schools/[id]/</code></td>
+</tr>
+<tr>
+<td><code>/schools/[id]/departments</code></td>
+<td><code>schools/[id]/departments/page.js</code></td>
+<td>Client</td>
+<td><code>/schools/{id}/</code>, <code>/schools/{id}/departments/</code>. Representatives and admins</td>
+</tr>
+<tr>
+<td><code>/hubs/[id]</code></td>
+<td><code>hubs/[id]/page.js</code></td>
+<td>Server redirect</td>
+<td><code>/hubs/{id}/</code>, permanent redirect to the school page. Has <code>error.js</code>, <code>not-found.js</code></td>
+</tr>
+<tr>
+<td><code>/hubs/by-school/[schoolId]</code></td>
+<td><code>hubs/by-school/[schoolId]/page.js</code></td>
+<td>Server redirect</td>
+<td>Permanent redirect to the school page</td>
+</tr>
+<tr>
+<td><code>/questions/new</code></td>
+<td><code>questions/new/page.js</code></td>
+<td>Client</td>
+<td><code>/hubs/{id}/</code>, <code>/hubs/by-school/{id}/</code>, POST <code>/questions/</code>. Wrapped in Suspense for <code>?hub=</code></td>
+</tr>
+<tr>
+<td><code>/questions/[id]/edit</code></td>
+<td><code>questions/[id]/edit/page.js</code></td>
+<td>Client</td>
+<td><code>/questions/{id}/</code> GET and PATCH, <code>/hubs/{hub}/</code> for departments</td>
+</tr>
+<tr>
+<td><code>/questions/[id]/[[...slug]]</code></td>
+<td><code>questions/[id]/[[...slug]]/page.js</code></td>
+<td>Server</td>
+<td><code>/questions/{id}/</code>. generateMetadata, BreadcrumbList. <code>error.js</code>, <code>not-found.js</code>, <code>opengraph-image.js</code> sit in <code>questions/[id]/</code></td>
+</tr>
+<tr>
+<td><code>/tags</code></td>
+<td><code>tags/page.js</code></td>
+<td>Server wrapper</td>
+<td>TagsBrowseClient</td>
+</tr>
+<tr>
+<td><code>/tags/[name]</code></td>
+<td><code>tags/[name]/page.js</code></td>
+<td>Server wrapper</td>
+<td>generateMetadata, TagQuestionsClient. <code>opengraph-image.js</code> uses <code>/tags/?search=</code></td>
+</tr>
+<tr>
+<td><code>/search</code></td>
+<td><code>search/page.js</code></td>
+<td>Server wrapper</td>
+<td>generateMetadata (noindex when <code>?q=</code>), SearchResultsClient</td>
+</tr>
+<tr>
+<td><code>/notifications</code></td>
+<td><code>notifications/page.js</code></td>
+<td>Client</td>
+<td><code>/notifications/</code>, <code>mark-read</code>, <code>mark-all-read</code>. Private</td>
+</tr>
+<tr>
+<td><code>/profile</code></td>
+<td><code>profile/page.js</code></td>
+<td>Client</td>
+<td><code>/users/me/</code> GET and PATCH, tabs. Private</td>
+</tr>
+<tr>
+<td><code>/my-reports</code></td>
+<td><code>my-reports/page.js</code></td>
+<td>Server wrapper</td>
+<td>noindex metadata, MyReportsClient. Private</td>
+</tr>
+<tr>
+<td><code>/moderation</code></td>
+<td><code>moderation/page.js</code></td>
+<td>Client</td>
+<td>StaffGuides, one HubTeamManager per hub the user helps manage. Staff only</td>
+</tr>
+<tr>
+<td><code>/admin</code></td>
+<td><code>admin/page.js</code></td>
+<td>Client</td>
+<td>ReportsDashboard, SchoolsManager, ActivationRequestsQueue, UsersManager, TagsManager, PagesManager, AdminHubPicker. Admin only</td>
+</tr>
+<tr>
+<td><code>/pages/[slug]</code></td>
+<td><code>pages/[slug]/page.js</code></td>
+<td>Server</td>
+<td><code>/pages/{slug}/</code>. Markdown. <code>error.js</code>, <code>not-found.js</code></td>
+</tr>
+<tr>
+<td><code>/api/backend/[...path]</code></td>
+<td><code>api/backend/[...path]/route.js</code></td>
+<td>Route handler</td>
+<td>The proxy described above</td>
+</tr>
+<tr>
+<td><code>/api/backend/auth/google</code></td>
+<td><code>api/backend/auth/google/route.js</code></td>
+<td>Route handler</td>
+<td>POST. Exchanges the Google token and sets the cookies</td>
+</tr>
+<tr>
+<td><code>/api/backend/auth/logout</code></td>
+<td><code>api/backend/auth/logout/route.js</code></td>
+<td>Route handler</td>
+<td>POST. Blacklists the refresh token (best effort), clears cookies</td>
+</tr>
+<tr>
+<td><code>robots.js</code>, <code>sitemap.js</code></td>
+<td><code>app/</code></td>
+<td>Server</td>
+<td>robots disallows <code>/my-reports</code>, <code>/admin</code>, <code>/moderation</code>, private areas. sitemap walks schools, tags and questions with one <code>fetchAll</code> helper and keeps partial results</td>
+</tr>
+<tr>
+<td><code>layout.js</code></td>
+<td><code>app/layout.js</code></td>
+<td>Server</td>
+<td>Root layout, fonts, global providers, AppShell</td>
+</tr>
+</tbody>
+</table>
+<p>Rule: special files like <code>opengraph-image.js</code> must sit at the leaf segment, never after an
+optional catch-all.</p>
+<h2 id="5-lib">5. <code>lib/</code></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Exports</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api.js</code></td>
+<td><code>apiFetch(path, options)</code></td>
+<td>Server-side fetch, forwards cookies through the app's own proxy</td>
+</tr>
+<tr>
+<td><code>clientApi.js</code></td>
+<td><code>clientFetch(path, options)</code>, <code>FRIENDLY_MESSAGES</code></td>
+<td>Client fetch with typed errors and friendly copy</td>
+</tr>
+<tr>
+<td><code>auth-context.js</code></td>
+<td><code>AuthProvider</code>, <code>useAuth()</code></td>
+<td><code>{ user, loading, refreshUser, logout }</code>. Listens for <code>auth:expired</code></td>
+</tr>
+<tr>
+<td><code>cookies.js</code></td>
+<td><code>setAuthCookies(response, access, refresh)</code>, <code>clearAuthCookies(response)</code></td>
+<td>httpOnly cookie handling for route handlers</td>
+</tr>
+<tr>
+<td><code>jwt.js</code></td>
+<td><code>decodeJwtExp(token)</code></td>
+<td>Reads <code>exp</code> without Buffer (edge safe)</td>
+</tr>
+<tr>
+<td><code>refreshSession.js</code></td>
+<td><code>refreshSession(refreshToken)</code></td>
+<td>Shared in-flight refresh with a 10 second grace window</td>
+</tr>
+<tr>
+<td><code>urls.js</code></td>
+<td><code>questionUrl(q)</code>, <code>schoolUrl(s)</code></td>
+<td>UUID plus cosmetic slug URLs, with a client fallback slug</td>
+</tr>
+<tr>
+<td><code>slugify.js</code></td>
+<td><code>slugify(text)</code></td>
+<td>Fallback slug when a response omits one</td>
+</tr>
+<tr>
+<td><code>linkTarget.js</code></td>
+<td><code>linkTargetUrl(linkTarget)</code></td>
+<td><code>link_target</code> to a question URL plus <code>#answer-{id}</code></td>
+</tr>
+<tr>
+<td><code>notificationUrl.js</code></td>
+<td><code>notificationTargetUrl(n)</code></td>
+<td>Prefers <code>link_target</code>, falls back to older per-type handling</td>
+</tr>
+<tr>
+<td><code>flash.js</code></td>
+<td><code>flashElement(el, duration)</code>, <code>scrollAndFlash(el)</code></td>
+<td>Accent ring flash, honors reduced motion</td>
+</tr>
+<tr>
+<td><code>locationEvents.js</code></td>
+<td>(side effect)</td>
+<td>Emits <code>app:locationchange</code></td>
+</tr>
+<tr>
+<td><code>formErrors.js</code></td>
+<td><code>fieldErrorsFrom(err, fieldMap)</code></td>
+<td>DRF 400 body to per-field messages plus a general message</td>
+</tr>
+<tr>
+<td><code>markdown.js</code></td>
+<td><code>renderMarkdown(text, { allowHeadings })</code>, <code>stripMarkdown(text)</code></td>
+<td>marked plus sanitize-html, and plain text for previews</td>
+</tr>
+<tr>
+<td><code>og.js</code></td>
+<td><code>loadOgFonts</code>, <code>truncateText</code>, <code>OgCard</code></td>
+<td>Open Graph image layout (inline styles only)</td>
+</tr>
+<tr>
+<td><code>platformAccount.js</code></td>
+<td><code>isPlatformAccount(authorId)</code></td>
+<td>Platform badge check</td>
+</tr>
+<tr>
+<td><code>reportLabels.js</code>, <code>schoolLabels.js</code></td>
+<td>label maps and option lists</td>
+<td>Enum to label</td>
+</tr>
+<tr>
+<td><code>timeAgo.js</code></td>
+<td><code>timeAgo(dateStr)</code></td>
+<td>Relative time, null for a missing or invalid date</td>
+</tr>
+<tr>
+<td><code>useDebouncedValue.js</code></td>
+<td><code>useDebouncedValue(value, delay = 500)</code></td>
+<td>Debounce hook</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-components">6. <code>components/</code></h2>
+<p>Props are listed as they exist in code. "Calls" lists the API endpoints a component uses.</p>
+<h3 id="ui-shared-primitives">ui/ (shared primitives)</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Props</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dropdown.js</code></td>
+<td><code>trigger</code>, <code>children</code>, <code>panelClassName</code></td>
+<td>Popover shell, Escape closes. Render-prop trigger and children</td>
+</tr>
+<tr>
+<td><code>ActionsMenu.js</code></td>
+<td><code>items</code>, <code>align="right"</code>, <code>triggerLabel</code></td>
+<td>Kebab menu. Items are <code>{ label, icon, onClick, danger?, accent? }</code></td>
+</tr>
+<tr>
+<td><code>ErrorMessage.js</code></td>
+<td><code>children</code>, <code>size</code> (2xs, xs, sm), <code>tone</code> (error, warning), <code>className</code>, <code>id</code></td>
+<td><code>role="alert"</code>, renders nothing when empty</td>
+</tr>
+<tr>
+<td><code>EmptyState.js</code></td>
+<td><code>icon</code>, <code>title</code>, <code>description</code>, <code>action</code>, <code>variant</code> (box, inline)</td>
+<td>Used by every list</td>
+</tr>
+<tr>
+<td><code>FormControls.js</code></td>
+<td><code>Input</code>, <code>Select</code>, <code>Textarea</code> (<code>size</code> xs to lg, <code>fullWidth</code>, <code>invalid</code>, <code>className</code>), <code>FormField</code> (<code>label</code>, <code>hint</code>, <code>error</code>, <code>className</code>, <code>children</code>)</td>
+<td>FormField children is a function receiving <code>{ id, aria-describedby, invalid }</code></td>
+</tr>
+<tr>
+<td><code>IconLabel.js</code></td>
+<td><code>icon</code>, <code>size</code> (xs, sm, md), <code>as</code>, <code>className</code>, <code>children</code></td>
+<td>One icon plus label, owns icon and text size together</td>
+</tr>
+<tr>
+<td><code>Tabs.js</code></td>
+<td><code>tabs</code>, <code>value</code>, <code>onChange</code>, <code>idBase</code>, <code>ariaLabel</code>, <code>className</code></td>
+<td>Accessible tablist, arrow keys, scrolls instead of wrapping</td>
+</tr>
+<tr>
+<td><code>SearchBar.js</code></td>
+<td><code>value</code>, <code>onChange</code>, <code>placeholder</code>, <code>loading</code></td>
+<td>Pill search input with inline spinner</td>
+</tr>
+<tr>
+<td><code>Skeleton.js</code></td>
+<td><code>className</code></td>
+<td>Shimmer placeholder</td>
+</tr>
+<tr>
+<td><code>FilterSidebar.js</code></td>
+<td><code>FilterSidebar</code> (<code>children</code>, <code>onClear</code>, <code>hasActiveFilters</code>, <code>activeCount</code>), <code>FilterSection</code> (<code>title</code>, <code>children</code>)</td>
+<td>Collapses on narrow screens, badge shows the active count</td>
+</tr>
+<tr>
+<td><code>MarkdownEditor.js</code></td>
+<td><code>value</code>, <code>onChange</code>, <code>placeholder</code>, <code>rows</code>, <code>richMode</code>, <code>id</code>, <code>invalid</code>, <code>aria-describedby</code>, <code>aria-label</code></td>
+<td>Toolbar, shortcuts (B, I, K), list continuation, toggle off, preview. <code>richMode</code> adds headings and a word and character count</td>
+</tr>
+<tr>
+<td><code>MarkdownRenderer.js</code></td>
+<td><code>content</code>, <code>className</code>, <code>allowHeadings</code></td>
+<td>Safe render of sanitized Markdown</td>
+</tr>
+<tr>
+<td><code>PlatformAuthorBadge.js</code></td>
+<td><code>authorId</code></td>
+<td>The "A" mark, tap to explain, only for platform account ids</td>
+</tr>
+</tbody>
+</table>
+<h3 id="layout">layout/</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Props</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AppShell.js</code></td>
+<td><code>children</code></td>
+<td>TopBar, Sidebar, main, Footer, AskFab, NavigationProgressBar</td>
+</tr>
+<tr>
+<td><code>TopBar.js</code></td>
+<td><code>onMenuClick</code></td>
+<td>Wordmark link, ThemeToggle, NotificationBell, ProfileMenu</td>
+</tr>
+<tr>
+<td><code>Sidebar.js</code></td>
+<td><code>isOpen</code>, <code>onClose</code></td>
+<td>Overlay drawer at every width, Escape and backdrop close, inert when closed</td>
+</tr>
+<tr>
+<td><code>AskFab.js</code></td>
+<td>none</td>
+<td>Floating Ask button below <code>sm</code>, signed in only, hidden on forms and staff tools</td>
+</tr>
+<tr>
+<td><code>ProfileMenu.js</code></td>
+<td>none</td>
+<td>Dropdown with profile and My reports links, log out</td>
+</tr>
+<tr>
+<td><code>ThemeToggle.js</code></td>
+<td>none</td>
+<td>Icon button, CSS-swapped icon so it never flashes wrong</td>
+</tr>
+<tr>
+<td><code>PagesDropdown.js</code></td>
+<td><code>onNavigate</code></td>
+<td>Published static pages. Calls <code>/pages/</code></td>
+</tr>
+<tr>
+<td><code>NavigationProgressBar.js</code>, <code>Footer.js</code></td>
+<td>none</td>
+<td>Route progress bar, footer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="feature-components">Feature components</h3>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Component (props)</th>
+<th>Calls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auth</td>
+<td><code>GoogleLoginButton</code></td>
+<td>POST <code>/auth/google/</code></td>
+</tr>
+<tr>
+<td>home</td>
+<td><code>HeroSearchBar</code>, <code>RecentQuestionsList</code></td>
+<td><code>/questions/?ordering=-created_at&amp;page=</code></td>
+</tr>
+<tr>
+<td>schools</td>
+<td><code>SchoolListRow</code> (<code>school</code>), <code>SchoolMetaBadge</code> (<code>icon</code>, <code>label</code>), <code>RequestHubCTA</code> (<code>schoolId</code>, <code>schoolName</code>), <code>ManageDepartmentsLink</code> (<code>schoolId</code>)</td>
+<td>none</td>
+</tr>
+<tr>
+<td>hubs</td>
+<td><code>HubQuestionList</code> (<code>hubId</code>, <code>departments</code>), <code>RequestHubModal</code> (<code>schoolId</code>, <code>schoolName</code>, <code>onClose</code>, <code>onSuccess</code>)</td>
+<td><code>/questions/</code> with hub, status, department, ordering, search, page. POST <code>/hubs/activation-requests/</code></td>
+</tr>
+<tr>
+<td>departments</td>
+<td><code>DepartmentForm</code> (<code>schoolId</code>, <code>onCreated</code>), <code>DepartmentRow</code> (<code>department</code>, <code>onUpdated</code>)</td>
+<td>POST <code>/schools/{id}/departments/</code>, PATCH <code>/departments/{id}/</code></td>
+</tr>
+<tr>
+<td>questions</td>
+<td><code>QuestionListRow</code> (<code>question</code>, <code>showSchool</code>), <code>StatusIcon</code> (<code>status</code>, <code>showLabel</code>), <code>QuestionActions</code> (<code>question</code>), <code>FollowButton</code> (<code>questionId</code>, <code>initialFollowing</code>), <code>LockToggle</code> (<code>question</code>), <code>SchoolPicker</code> (<code>onSelect</code>, <code>onlyWithHub</code>, <code>notice</code>, <code>busyId</code>), <code>TagInput</code> (<code>value</code>, <code>onChange</code>, <code>maxTags</code>)</td>
+<td>DELETE <code>/questions/{id}/</code>, POST and DELETE <code>/questions/{id}/follow/</code>, POST and DELETE <code>/questions/{id}/lock/</code>, <code>/schools/</code>, <code>/tags/</code></td>
+</tr>
+<tr>
+<td>answers</td>
+<td><code>AnswersSection</code> (<code>question</code>), <code>AnswerCard</code> (<code>answer</code>, <code>questionId</code>, <code>hubId</code>, <code>canMarkBest</code>, <code>onMarkBest</code>, <code>onUpdated</code>, <code>onDeleted</code>, <code>highlightBest</code>), <code>AnswerForm</code> (<code>questionId</code>, <code>locked</code>, <code>onCreated</code>), <code>AnswerHashFlash</code>, <code>BestAnswerHighlight</code> (<code>answer</code>)</td>
+<td>POST <code>/answers/</code>, PATCH and DELETE <code>/answers/{id}/</code>, POST and DELETE <code>/answers/{id}/vote/</code>, POST <code>/answers/{id}/mark-best/</code>, <code>/questions/{id}/</code> (refresh)</td>
+</tr>
+<tr>
+<td>comments</td>
+<td><code>CommentThread</code> (<code>answerId</code>, <code>hubId</code>, <code>commentCount</code>, <code>onCountChange</code>), <code>CommentRow</code> (<code>comment</code>, <code>hubId</code>, <code>onUpdate</code>, <code>onDelete</code>)</td>
+<td><code>/answers/{id}/comments/</code>, POST <code>/comments/</code>, PATCH and DELETE <code>/comments/{id}/</code></td>
+</tr>
+<tr>
+<td>notifications</td>
+<td><code>NotificationBell</code>, <code>NotificationItem</code> (<code>notification</code>, <code>onRead</code>, <code>onNavigate</code>, <code>compact</code>)</td>
+<td><code>/notifications/</code> (page_size 1 for the badge, page_size 6 for the list), <code>mark-read</code>, <code>mark-all-read</code></td>
+</tr>
+<tr>
+<td>reports</td>
+<td><code>ReportButton</code> and <code>EscalateButton</code> (<code>contentType</code>, <code>contentId</code>, <code>open</code>, <code>onClose</code>), <code>canEscalate(user, hubId)</code>, <code>MyReportsClient</code></td>
+<td>POST <code>/reports/</code>, POST <code>/reports/{id}/escalate/</code>, <code>/reports/mine/</code></td>
+</tr>
+<tr>
+<td>search</td>
+<td><code>SearchResultsClient</code>, <code>SearchTagFilter</code> (<code>value</code>, <code>onChange</code>)</td>
+<td><code>/search/questions/</code>, <code>/tags/</code></td>
+</tr>
+<tr>
+<td>tags</td>
+<td><code>TagsBrowseClient</code>, <code>TagQuestionsClient</code> (<code>tagName</code>)</td>
+<td><code>/tags/</code>, <code>/tags/{name}/questions/</code></td>
+</tr>
+<tr>
+<td>profile</td>
+<td><code>ActivityFeed</code> (<code>userId</code>), <code>QuestionsTab</code> (<code>userId</code>), <code>AnswersTab</code>, <code>CommentsTab</code></td>
+<td><code>/questions/?author=</code>, <code>/users/me/answers/</code>, <code>/users/me/comments/</code></td>
+</tr>
+<tr>
+<td>moderation</td>
+<td><code>HubTeamManager</code> (<code>hub</code>, <code>canManageModerators</code>, <code>canManageRepresentatives</code>, <code>canManageDepartments</code>, <code>isModerator</code>), <code>TeamMemberList</code> (<code>hubId</code>, <code>role</code>, <code>canManage</code>, <code>isAdmin</code>), <code>UserSearchPicker</code> (<code>onSelect</code>, <code>excludeIds</code>, <code>disabled</code>), <code>HubDepartmentsTab</code> (<code>schoolId</code>), <code>HubUnansweredTab</code> (<code>hubId</code>, <code>isModerator</code>), <code>UnansweredQueue</code> (<code>hubId</code>, <code>showSchool</code>), <code>ReportsDashboard</code>, <code>StaffGuides</code>, <code>AdminHubPicker</code></td>
+<td><code>/hubs/{id}/{moderators or representatives}/</code> list, POST, DELETE, <code>/users/search/</code>, <code>/questions/unanswered/</code>, <code>/reports/</code> list, <code>resolve</code>, <code>reject</code>, <code>/pages/</code>, <code>/hubs/by-school/{id}/</code></td>
+</tr>
+<tr>
+<td>admin</td>
+<td><code>SchoolsManager</code>, <code>SchoolAdminRow</code> (<code>school</code>, <code>onUpdated</code>), <code>SchoolFormModal</code> (<code>school</code>, <code>onClose</code>, <code>onSaved</code>), <code>ActivationRequestsQueue</code>, <code>UsersManager</code>, <code>TagsManager</code>, <code>TagMergeControl</code> (<code>tag</code>, <code>onMerged</code>, <code>onCancel</code>), <code>PagesManager</code>, <code>PageFormModal</code> (<code>page</code>, <code>onClose</code>, <code>onSaved</code>), <code>HubStatusControl</code> (<code>hub</code>, <code>onChanged</code>)</td>
+<td><code>/schools/</code> GET, POST, PATCH, <code>/hubs/activation-requests/</code> list, <code>approve</code>, <code>reject</code>, <code>/admin/users/</code> GET and PATCH, <code>/tags/</code> list, <code>merge</code>, DELETE, <code>/pages/</code> GET, POST, PATCH, DELETE, PATCH <code>/hubs/{id}/</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-endpoint-index-endpoint-to-callers">7. Endpoint index (endpoint to callers)</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Callers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/auth/google/</code>, <code>/auth/logout/</code></td>
+<td>GoogleLoginButton, auth-context, the two auth route handlers</td>
+</tr>
+<tr>
+<td><code>/users/me/</code></td>
+<td>AuthProvider, profile page (PATCH name)</td>
+</tr>
+<tr>
+<td><code>/users/me/answers/</code>, <code>/users/me/comments/</code></td>
+<td>ActivityFeed, AnswersTab, CommentsTab</td>
+</tr>
+<tr>
+<td><code>/users/search/</code></td>
+<td>UserSearchPicker</td>
+</tr>
+<tr>
+<td><code>/questions/</code></td>
+<td>RecentQuestionsList, HubQuestionList, ActivityFeed, QuestionsTab, ask page (POST)</td>
+</tr>
+<tr>
+<td><code>/questions/{id}/</code></td>
+<td>question page (server), edit page, AnswerCard (refresh), QuestionActions (DELETE), OG image</td>
+</tr>
+<tr>
+<td><code>/questions/{id}/follow/</code>, <code>/lock/</code></td>
+<td>FollowButton, LockToggle</td>
+</tr>
+<tr>
+<td><code>/questions/unanswered/</code></td>
+<td>UnansweredQueue</td>
+</tr>
+<tr>
+<td><code>/answers/...</code>, <code>/comments/...</code></td>
+<td>AnswerForm, AnswerCard, AnswersSection, CommentThread</td>
+</tr>
+<tr>
+<td><code>/schools/</code> and <code>/schools/{id}/</code></td>
+<td>schools page, SchoolPicker, SchoolsManager, SchoolAdminRow, SchoolFormModal, school page, departments page, home page</td>
+</tr>
+<tr>
+<td><code>/schools/{id}/departments/</code>, <code>/departments/{id}/</code></td>
+<td>DepartmentForm, DepartmentRow, HubDepartmentsTab, departments page</td>
+</tr>
+<tr>
+<td><code>/hubs/{id}/</code>, <code>/hubs/by-school/{id}/</code></td>
+<td>ask and edit pages, school page, hub redirects, AdminHubPicker, HubStatusControl (PATCH)</td>
+</tr>
+<tr>
+<td><code>/hubs/activation-requests/...</code></td>
+<td>RequestHubModal, ActivationRequestsQueue</td>
+</tr>
+<tr>
+<td><code>/hubs/{id}/moderators/</code>, <code>/representatives/</code></td>
+<td>TeamMemberList</td>
+</tr>
+<tr>
+<td><code>/tags/...</code>, <code>/tags/{name}/questions/</code></td>
+<td>TagInput, SearchTagFilter, TagsBrowseClient, TagQuestionsClient, TagsManager, TagMergeControl, home page, OG image</td>
+</tr>
+<tr>
+<td><code>/search/questions/</code></td>
+<td>SearchResultsClient</td>
+</tr>
+<tr>
+<td><code>/notifications/...</code></td>
+<td>NotificationBell, notifications page</td>
+</tr>
+<tr>
+<td><code>/reports/...</code></td>
+<td>ReportButton, EscalateButton, MyReportsClient, ReportsDashboard</td>
+</tr>
+<tr>
+<td><code>/admin/users/...</code></td>
+<td>UsersManager</td>
+</tr>
+<tr>
+<td><code>/pages/...</code></td>
+<td>PagesDropdown, StaffGuides, PagesManager, PageFormModal, pages/[slug]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-permissions-on-the-client">8. Permissions on the client</h2>
+<ul>
+<li>Roles come from <code>useAuth().user</code>: <code>is_admin</code>, <code>moderator_for[]</code>, <code>representative_for[]</code>
+  (hub_id plus school). Hiding a control is UX only, the backend enforces everything.</li>
+<li><code>canEscalate(user, hubId)</code> in <code>EscalateButton.js</code> is the one check for escalation. Lock,
+  moderation tabs and department management derive from the same fields.</li>
+<li><code>refreshUser()</code> must run after an admin changes a hub's status, because <code>/users/me/</code> lists
+  only active hubs.</li>
+</ul>
+<h2 id="9-conventions">9. Conventions</h2>
+<ul>
+<li><strong>Lists</strong>: status <code>loading | ready | error</code>, first page in an effect with a cancel or
+  request-id guard, "View more" appends (dedupe by id when order can shift), load-more errors
+  shown under the button, empty state through EmptyState, count line "N things".</li>
+<li><strong>Forms</strong>: FormField plus Input, Select or Textarea (label tied to control, inline error).
+  Backend field errors through <code>fieldErrorsFrom</code>. No raw red paragraphs, use ErrorMessage.</li>
+<li><strong>Modals</strong> (Report, Escalate, SchoolForm, PageForm, RequestHub) are controlled, <code>z-modal</code>,
+  with no shared Modal primitive yet.</li>
+<li><strong>Tokens</strong>: <code>--color-border</code> dividers, <code>--color-border-strong</code> controls, <code>text-muted</code> for
+  all secondary text (never <code>text-gray-400</code> or <code>500</code>), <code>--color-accent</code> #3454D1. Stacking
+  utilities: <code>z-dropdown</code> 20, <code>z-sticky</code> 30, <code>z-overlay</code> 40, <code>z-drawer</code> 50, <code>z-modal</code> 60,
+  <code>z-toast</code> 70, <code>z-progress</code> 100. Never raw z numbers. See <a href="../design-guide/">design-guide.md</a>.</li>
+<li><strong>Client API</strong>: always <code>clientFetch</code>, never <code>fetch</code> to the backend from the browser.</li>
+</ul>
+<h2 id="10-behaviours-that-are-easy-to-get-wrong">10. Behaviours that are easy to get wrong</h2>
+<ul>
+<li>SOLVED means "has a best answer". Only <code>is_locked</code> blocks new answers.</li>
+<li>Question and school URLs are UUID plus a cosmetic slug, the slug is never used for lookup.</li>
+<li>Notification and report links come from <code>link_target</code>, <code>null</code> means no link.</li>
+<li>Reports are private: <code>/my-reports</code> only, never on the profile, never reviewer or
+  escalation data.</li>
+<li><code>router.refresh()</code> updates server props but never resets a client component's own state,
+  reset loading state explicitly after a success.</li>
+</ul>
+<h2 id="11-how-to-add-things">11. How to add things</h2>
+<ul>
+<li><strong>New page</strong>: file under <code>app/</code>, metadata through <code>export const metadata</code> or
+  <code>generateMetadata</code>. If it needs client state, make a thin server wrapper plus a client
+  component.</li>
+<li><strong>New list</strong>: copy HubQuestionList's loading pattern, use EmptyState and ErrorMessage.</li>
+<li><strong>New API call</strong>: through <code>clientFetch</code> (client) or <code>apiFetch</code> (server).</li>
+<li><strong>New icon</strong>: import from lucide-react, <code>npm run check:structure</code> verifies the name.</li>
+<li><strong>New notification type</strong>: add its icon to the NotificationItem icon map, and to the mobile
+  client.</li>
+</ul>
+<h2 id="12-known-gaps">12. Known gaps</h2>
+<p>See "Known gaps" in the Web Capabilities section of <a href="../feature-list/">feature-list.md</a>:
+hub-offline notice for moderators (needs backend), shared Modal primitive, label wiring in
+SchoolFormModal and PageFormModal, windowed "View more" lists, and optional stronger control
+borders.</p>
+<h2 id="13-keeping-this-file-current">13. Keeping this file current</h2>
+<p>Regenerate the tree and exports after any file move, new route or new shared primitive:</p>
+<pre><code class="language-bash">find app components lib scripts -type f \( -name &quot;*.js&quot; -o -name &quot;*.mjs&quot; \) | sort
+grep -rnE &quot;^export (default )?(async )?function &quot; app components lib --include=*.js
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
