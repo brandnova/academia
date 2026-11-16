@@ -13,7 +13,7 @@ export default function TopBar({ onMenuClick }) {
         <button
           onClick={onMenuClick}
           aria-label="Toggle menu"
-          className="text-gray-500 dark:text-gray-400 hover:text-accent"
+          className="text-muted hover:text-accent"
         >
           <Menu className="w-5 h-5" />
         </button>

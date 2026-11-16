@@ -51,7 +51,7 @@ export default function AdminHubPicker() {
         <HubStatusControl hub={hub} onChanged={setHub} />
 
         {offline ? (
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-muted">
             Moderators, representatives and the unanswered queue are unavailable while the hub is
             offline.
           </p>
@@ -74,7 +74,7 @@ export default function AdminHubPicker() {
 
   return (
     <div>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+      <p className="text-sm text-muted mb-3">
         Pick any school to manage its hub: moderators, representatives, departments, or take the
         hub offline.
       </p>

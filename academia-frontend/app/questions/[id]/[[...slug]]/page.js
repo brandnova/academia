@@ -8,6 +8,7 @@ import QuestionActions from "@/components/questions/QuestionActions";
 import AnswersSection from "@/components/answers/AnswersSection";
 import FollowButton from "@/components/questions/FollowButton";
 import LockToggle from "@/components/questions/LockToggle";
+import IconLabel from "@/components/ui/IconLabel";
 import PlatformAuthorBadge from "@/components/ui/PlatformAuthorBadge";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer"
 
@@ -101,25 +102,21 @@ export default async function QuestionDetailPage({ params }) {
           <StatusIcon status={question.status} showLabel />
         </div>
         {question.is_locked && (
-          <span className="flex items-center gap-1 text-xs text-red-600 dark:text-red-400 shrink-0 pt-1.5">
-            <Lock className="w-3.5 h-3.5" /> Locked
-          </span>
+          <IconLabel icon={Lock} className="text-red-600 dark:text-red-400 shrink-0 pt-1.5">
+            Locked
+          </IconLabel>
         )}
       </div>
 
-      <div className="flex flex-wrap gap-3 text-xs text-gray-400 mb-4">
-        <span className="flex items-center gap-1">
-          <User size={14} /> Asked by {question.author.full_name}
+      <div className="flex flex-wrap gap-3 text-muted mb-4">
+        <IconLabel icon={User}>
+          Asked by {question.author.full_name}
           <PlatformAuthorBadge authorId={question.author.id} />
-        </span>
+        </IconLabel>
         {question.department && (
-          <span className="flex items-center gap-1">
-            <Building2 size={14} /> {question.department.name}
-          </span>
+          <IconLabel icon={Building2}>{question.department.name}</IconLabel>
         )}
-        <span className="flex items-center gap-1">
-          <Eye size={14} /> {question.view_count} views
-        </span>
+        <IconLabel icon={Eye}>{question.view_count} views</IconLabel>
       </div>
 
       {question.tags?.length > 0 && (

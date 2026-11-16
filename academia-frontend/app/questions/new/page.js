@@ -103,11 +103,11 @@ function AskQuestionForm() {
     }
   }
 
-  if (authLoading || prefillStatus === "loading") return <p className="text-gray-500">Loading...</p>;
+  if (authLoading || prefillStatus === "loading") return <p className="text-muted">Loading...</p>;
 
   if (!user) {
     return (
-      <p className="text-gray-500 dark:text-gray-400">You need to log in to ask a question.</p>
+      <p className="text-muted">You need to log in to ask a question.</p>
     );
   }
 
@@ -115,7 +115,7 @@ function AskQuestionForm() {
     return (
       <div className="max-w-lg">
         <h1 className="text-xl font-semibold mb-1">Ask a question</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+        <p className="text-sm text-muted mb-6">
           Which school is this about?
         </p>
         <SchoolPicker onSelect={handleSelectSchool} notice={pickNotice} busyId={selectingId} />
@@ -126,7 +126,7 @@ function AskQuestionForm() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-xl font-semibold mb-1">Ask a question</h1>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+      <p className="text-sm text-muted mb-6">
         Posting to {hub.school.name}{" "}
         <button
           type="button"
@@ -183,7 +183,7 @@ function AskQuestionForm() {
         <FormField error={fieldErrors.tags}>
           {() => (
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Tags</p>
+              <p className="text-xs text-muted mb-1">Tags</p>
               <TagInput value={tags} onChange={setTags} />
             </div>
           )}
@@ -204,7 +204,7 @@ function AskQuestionForm() {
 
 export default function AskQuestionPage() {
   return (
-    <Suspense fallback={<p className="text-gray-500">Loading...</p>}>
+    <Suspense fallback={<p className="text-muted">Loading...</p>}>
       <AskQuestionForm />
     </Suspense>
   );

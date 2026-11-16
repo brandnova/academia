@@ -16,7 +16,7 @@ export default function AnswerForm({ questionId, locked, onCreated }) {
 
   if (!user) {
     return (
-      <p className="text-sm text-gray-500 dark:text-gray-400">
+      <p className="text-sm text-muted">
         You need to log in to answer this question.
       </p>
     );
@@ -24,7 +24,7 @@ export default function AnswerForm({ questionId, locked, onCreated }) {
 
   if (locked) {
     return (
-      <p className="text-sm text-gray-500 dark:text-gray-400">
+      <p className="text-sm text-muted">
         This question has been locked and is no longer accepting new answers.
       </p>
     );

@@ -42,10 +42,10 @@ export default function PagesDropdown({ onNavigate }) {
       </button>
       {open && (
         <div className="pl-10 py-1 space-y-0.5">
-          {status === "loading" && <p className="text-xs text-gray-400 py-1">Loading...</p>}
+          {status === "loading" && <p className="text-xs text-muted py-1">Loading...</p>}
           {status === "error" && <p className="text-xs text-red-500 py-1">Couldn't load.</p>}
           {status === "ready" && pages.length === 0 && (
-            <p className="text-xs text-gray-400 py-1">No pages yet.</p>
+            <p className="text-xs text-muted py-1">No pages yet.</p>
           )}
           {status === "ready" &&
             pages.map((p) => (
@@ -53,7 +53,7 @@ export default function PagesDropdown({ onNavigate }) {
                 key={p.id}
                 href={`/pages/${p.slug}`}
                 onClick={onNavigate}
-                className="block text-sm text-gray-500 dark:text-gray-400 hover:text-accent py-1"
+                className="block text-sm text-muted hover:text-accent py-1"
               >
                 {p.title}
               </Link>

@@ -68,7 +68,7 @@ export function FormField({ label, hint, error, className = "", children }) {
   return (
     <div className={className}>
       {label && (
-        <label htmlFor={id} className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+        <label htmlFor={id} className="block text-xs text-muted mb-1">
           {label}
         </label>
       )}
@@ -78,7 +78,7 @@ export function FormField({ label, hint, error, className = "", children }) {
         invalid: Boolean(error),
       })}
       {hint && (
-        <p id={hintId} className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p id={hintId} className="text-xs text-muted mt-1">
           {hint}
         </p>
       )}

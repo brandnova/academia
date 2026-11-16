@@ -139,7 +139,7 @@ export default function ActivationRequestsQueue() {
             className={`text-xs px-3 py-1 rounded border ${
               statusFilter === s
                 ? "border-accent text-accent"
-                : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+                : "border-[var(--color-border)] text-muted"
             }`}
           >
             {s.charAt(0) + s.slice(1).toLowerCase()}
@@ -150,7 +150,7 @@ export default function ActivationRequestsQueue() {
       {status === "ready" && requests.length > 0 && (
         <div className="mb-4">
           <SearchBar value={query} onChange={setQuery} placeholder="Search by school or requester..." />
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-muted mt-1">
             Searches the {requests.length} request{requests.length !== 1 ? "s" : ""} loaded so far.
             {nextPage && " Load more below to search further."}
           </p>
@@ -169,7 +169,7 @@ export default function ActivationRequestsQueue() {
         <EmptyState icon={Building2} title={`No ${statusFilter.toLowerCase()} requests`} />
       )}
       {status === "ready" && requests.length > 0 && filteredRequests.length === 0 && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-muted">
           No loaded requests match &quot;{query}&quot;.
         </p>
       )}
@@ -180,18 +180,18 @@ export default function ActivationRequestsQueue() {
             <div key={req.id} className="border border-[var(--color-border)] rounded-lg p-3 text-sm">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="font-medium">{req.school.name}</span>
-                <span className="text-xs text-gray-400">{timeAgo(req.created_at)}</span>
+                <span className="text-xs text-muted">{timeAgo(req.created_at)}</span>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+              <p className="text-xs text-muted mt-0.5">
                 Requested by {req.user.full_name}
               </p>
               {req.notes && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 break-words">
+                <p className="text-xs text-muted mt-1 break-words">
                   &quot;{req.notes}&quot;
                 </p>
               )}
               {req.rejection_reason && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 break-words">
+                <p className="text-xs text-muted mt-1 break-words">
                   <span className="font-medium">Reason:</span> {req.rejection_reason}
                 </p>
               )}
@@ -222,11 +222,11 @@ export default function ActivationRequestsQueue() {
                         >
                           {actioningId === req.id ? "Rejecting..." : "Confirm reject"}
                         </button>
-                        <button onClick={cancelReject} className="text-xs text-gray-400">
+                        <button onClick={cancelReject} className="text-xs text-muted">
                           Cancel
                         </button>
                       </div>
-                      <p className="text-xs text-gray-400 mt-1">
+                      <p className="text-xs text-muted mt-1">
                         {REASON_MAX - rejectReason.length} characters left. The requester receives
                         this reason by email.
                       </p>

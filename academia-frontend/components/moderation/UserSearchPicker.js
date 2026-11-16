@@ -73,7 +73,7 @@ export default function UserSearchPicker({ onSelect, excludeIds = [], disabled =
       {open && debouncedQuery && (
         <div className="absolute z-dropdown mt-1 w-full bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg max-h-48 overflow-auto">
           {status === "loading" && (
-            <p className="px-3 py-2 text-xs text-gray-400">Searching...</p>
+            <p className="px-3 py-2 text-xs text-muted">Searching...</p>
           )}
           {status === "error" && (
             <p role="alert" className="px-3 py-2 text-xs text-red-600 dark:text-red-400">
@@ -81,7 +81,7 @@ export default function UserSearchPicker({ onSelect, excludeIds = [], disabled =
             </p>
           )}
           {status === "ready" && results.length === 0 && (
-            <p className="px-3 py-2 text-xs text-gray-400">No matching users.</p>
+            <p className="px-3 py-2 text-xs text-muted">No matching users.</p>
           )}
           {status === "ready" &&
             results.map((u) => (
@@ -97,7 +97,7 @@ export default function UserSearchPicker({ onSelect, excludeIds = [], disabled =
                 className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
               >
                 <p className="font-medium">{u.full_name}</p>
-                <p className="text-xs text-gray-400">{u.email}</p>
+                <p className="text-xs text-muted">{u.email}</p>
               </button>
             ))}
         </div>

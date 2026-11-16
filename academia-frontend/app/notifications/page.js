@@ -91,11 +91,11 @@ export default function NotificationsPage() {
     }
   }
 
-  if (authLoading) return <p className="text-gray-500">Loading...</p>;
+  if (authLoading) return <p className="text-muted">Loading...</p>;
 
   if (!user) {
     return (
-      <p className="text-gray-500 dark:text-gray-400">
+      <p className="text-muted">
         You need to log in to view notifications.
       </p>
     );
@@ -124,7 +124,7 @@ export default function NotificationsPage() {
             className={`text-sm px-3 py-1.5 rounded border ${
               filter === f
                 ? "border-accent text-accent"
-                : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+                : "border-[var(--color-border)] text-muted"
             }`}
           >
             {f === "all" ? "All" : "Unread"}

@@ -7,11 +7,11 @@ import StaffGuides from "@/components/moderation/StaffGuides";
 export default function ModerationPage() {
   const { user, loading } = useAuth();
 
-  if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-muted">Loading...</p>;
 
   if (!user) {
     return (
-      <p className="text-gray-500 dark:text-gray-400">You need to log in to view this page.</p>
+      <p className="text-muted">You need to log in to view this page.</p>
     );
   }
 
@@ -37,7 +37,7 @@ export default function ModerationPage() {
 
   if (!isStaff) {
     return (
-      <p className="text-gray-500 dark:text-gray-400">
+      <p className="text-muted">
         You don't currently hold a moderator or representative role for any hub.
       </p>
     );
@@ -46,7 +46,7 @@ export default function ModerationPage() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-xl font-semibold mb-1">Moderation</h1>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+      <p className="text-sm text-muted mb-6">
         Tools for the hubs you help manage.
       </p>
 
@@ -64,7 +64,7 @@ export default function ModerationPage() {
           />
         ))
       ) : (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-muted">
           You're an admin without an explicit assignment for any specific hub.
           Hub-level management tools live on /admin.
         </p>

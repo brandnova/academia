@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Pencil, Check, X, RotateCcw } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { Input } from "@/components/ui/FormControls";
 
 export default function DepartmentRow({ department, onUpdated }) {
   const [editing, setEditing] = useState(false);
@@ -49,15 +51,15 @@ export default function DepartmentRow({ department, onUpdated }) {
       <div className="flex items-center justify-between gap-3">
         {editing ? (
           <div className="flex items-center gap-2 flex-1 min-w-0 flex-wrap">
-            <input
+            <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="px-2 py-1 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm flex-1 min-w-[120px]"
+              size="sm" fullWidth={false} className="flex-1 min-w-[120px]"
             />
-            <input
+            <Input
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="px-2 py-1 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm w-20 shrink-0"
+              size="sm" fullWidth={false} className="w-20 shrink-0"
             />
             <div className="flex items-center gap-1 shrink-0">
               <button onClick={save} disabled={status === "loading"} className="text-accent p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 disabled:opacity-40 transition-colors">
@@ -71,7 +73,7 @@ export default function DepartmentRow({ department, onUpdated }) {
         ) : (
           <span
             className={`min-w-0 flex-1 truncate text-sm ${
-              !department.is_active ? "text-gray-400 line-through" : ""
+              !department.is_active ? "text-muted line-through" : ""
             }`}
           >
             {department.name}
@@ -87,7 +89,7 @@ export default function DepartmentRow({ department, onUpdated }) {
             <button
               onClick={toggleActive}
               disabled={status === "loading"}
-              className="text-xs text-gray-500 dark:text-gray-400 hover:text-accent flex items-center gap-1 whitespace-nowrap"
+              className="text-xs text-muted hover:text-accent flex items-center gap-1 whitespace-nowrap"
             >
               {department.is_active ? (
                 "Deactivate"
@@ -101,7 +103,7 @@ export default function DepartmentRow({ department, onUpdated }) {
         )}
       </div>
       {status === "error" && (
-        <p className="text-red-600 dark:text-red-400 text-xs mt-1.5">{error}</p>
+        <ErrorMessage size="xs" className="mt-1.5">{error}</ErrorMessage>
       )}
     </li>
   );

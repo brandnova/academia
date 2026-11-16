@@ -49,7 +49,7 @@ export default function HubTeamManager({
               className={`text-xs px-3 py-1 rounded border ${
                 tab === t.key
                   ? "border-accent text-accent"
-                  : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+                  : "border-[var(--color-border)] text-muted"
               }`}
             >
               {t.label}

@@ -97,7 +97,7 @@ export default async function SchoolProfilePage({ params }) {
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
           <div className="min-w-0">
             <h1 className="text-2xl md:text-3xl font-semibold truncate">{school.name}</h1>
-            <p className="text-gray-500 dark:text-gray-400">{school.short_name}</p>
+            <p className="text-muted">{school.short_name}</p>
           </div>
           {hub && (
             <Link
@@ -109,7 +109,7 @@ export default async function SchoolProfilePage({ params }) {
           )}
         </div>
 
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted">
           {school.location && (
             <span className="flex items-center gap-1.5">
               <MapPin className="w-4 h-4" /> {school.location}
@@ -133,7 +133,7 @@ export default async function SchoolProfilePage({ params }) {
         </div>
 
         {hasClassificationMeta && (
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-500 dark:text-gray-400 mt-3 pt-3 border-t border-[var(--color-border)]">
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted mt-3 pt-3 border-t border-[var(--color-border)]">
             <SchoolMetaBadge icon={Landmark} label={INSTITUTION_TYPE_LABELS[school.institution_type]} />
             <SchoolMetaBadge icon={Shield} label={OWNERSHIP_LABELS[school.ownership]} />
             <SchoolMetaBadge icon={Map} label={school.state} />
@@ -151,7 +151,7 @@ export default async function SchoolProfilePage({ params }) {
         )}
 
         {hub && (
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-500 dark:text-gray-400 mt-3 pt-3 border-t border-[var(--color-border)]">
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted mt-3 pt-3 border-t border-[var(--color-border)]">
             <span className="flex items-center gap-1.5">
               <MessageSquare className="w-4 h-4" /> {hub.question_count} question
               {hub.question_count !== 1 ? "s" : ""}

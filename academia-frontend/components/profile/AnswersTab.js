@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Reply } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { questionUrl } from "@/lib/urls";
 import { timeAgo } from "@/lib/timeAgo";
 import Skeleton from "@/components/ui/Skeleton";
 import { stripMarkdown } from "@/lib/markdown";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function AnswersTab() {
   const [answers, setAnswers] = useState([]);
@@ -15,6 +17,7 @@ export default function AnswersTab() {
   const [status, setStatus] = useState("loading");
   const [errorMsg, setErrorMsg] = useState("");
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState("");
 
   const fetchPage = useCallback((page) => clientFetch(`/users/me/answers/?page=${page}`), []);
 
@@ -40,12 +43,13 @@ export default function AnswersTab() {
 
   async function handleLoadMore() {
     setLoadingMore(true);
+    setLoadMoreError("");
     try {
       const data = await fetchPage(nextPage);
       setAnswers((prev) => [...prev, ...data.results]);
       setNextPage(data.next ? nextPage + 1 : null);
     } catch (err) {
-      setErrorMsg(err.message);
+      setLoadMoreError(err.message);
     } finally {
       setLoadingMore(false);
     }
@@ -60,9 +64,15 @@ export default function AnswersTab() {
       </div>
     );
   }
-  if (status === "error") return <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>;
+  if (status === "error") return <ErrorMessage>{errorMsg}</ErrorMessage>;
   if (answers.length === 0) {
-    return <p className="text-sm text-gray-500 dark:text-gray-400">No answers submitted yet.</p>;
+    return (
+      <EmptyState
+        icon={Reply}
+        title="No answers yet"
+        description="Answers you write will show up here."
+      />
+    );
   }
 
   return (
@@ -78,8 +88,8 @@ export default function AnswersTab() {
               {a.is_best && <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />}
               <span className="truncate">{a.question.title}</span>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 truncate mt-0.5">{stripMarkdown(a.body)}</p>
-            <div className="flex gap-3 text-xs text-gray-400 mt-1">
+            <p className="text-sm text-muted truncate mt-0.5">{stripMarkdown(a.body)}</p>
+            <div className="flex gap-3 text-xs text-muted mt-1">
               <span>{a.vote_score} votes</span>
               <span>{timeAgo(a.created_at)}</span>
             </div>
@@ -95,6 +105,7 @@ export default function AnswersTab() {
           >
             {loadingMore ? "Loading..." : "View more"}
           </button>
+          <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
         </div>
       )}
     </div>

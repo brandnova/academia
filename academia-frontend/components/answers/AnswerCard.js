@@ -8,9 +8,11 @@ import CommentThread from "@/components/comments/CommentThread";
 import ReportButton from "@/components/reports/ReportButton";
 import EscalateButton, { canEscalate } from "@/components/reports/EscalateButton";
 import ActionsMenu from "@/components/ui/ActionsMenu";
+import IconLabel from "@/components/ui/IconLabel";
 import PlatformAuthorBadge from "@/components/ui/PlatformAuthorBadge";
 import MarkdownEditor from "@/components/ui/MarkdownEditor";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer"
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function AnswerCard({
   answer,
@@ -151,7 +153,7 @@ export default function AnswerCard({
           <button
             onClick={handleRemoveVote}
             disabled={voteStatus === "loading"}
-            className="text-gray-400 hover:text-red-500 disabled:opacity-50"
+            className="text-muted hover:text-red-500 disabled:opacity-50"
           >
             Remove vote
           </button>
@@ -213,19 +215,20 @@ export default function AnswerCard({
       )}
 
       <div className="flex items-start justify-between gap-2 mb-1.5">
-        <span className="flex items-center gap-1 text-xs text-gray-400">
-          <User size={14} /> by {answer.author.full_name}
+        <IconLabel icon={User} className="text-muted">
+          by {answer.author.full_name}
           <PlatformAuthorBadge authorId={answer.author.id} />
-        </span>
+        </IconLabel>
         {menuItems.length > 0 && <ActionsMenu items={menuItems} />}
       </div>
 
       {editing ? (
         <div>
-          <MarkdownEditor 
-            value={body} 
-            onChange={setBody} 
-            rows={4} 
+          <MarkdownEditor
+            value={body}
+            onChange={setBody}
+            rows={4}
+            aria-label="Edit your answer"
           />
           <div className="flex items-center gap-3">
             <button
@@ -240,7 +243,7 @@ export default function AnswerCard({
                 setEditing(false);
                 setBody(answer.body);
               }}
-              className="text-sm text-gray-400"
+              className="text-sm text-muted"
             >
               Cancel
             </button>
@@ -252,7 +255,7 @@ export default function AnswerCard({
 
       {confirmingDelete && (
         <div className="flex items-center gap-2 text-xs mt-2">
-          <span className="text-gray-500">Delete this answer?</span>
+          <span className="text-muted">Delete this answer?</span>
           <button
             onClick={handleDelete}
             disabled={deleteStatus === "loading"}
@@ -260,17 +263,17 @@ export default function AnswerCard({
           >
             {deleteStatus === "loading" ? "Deleting..." : "Confirm"}
           </button>
-          <button onClick={() => setConfirmingDelete(false)} className="text-gray-400">
+          <button onClick={() => setConfirmingDelete(false)} className="text-muted">
             Cancel
           </button>
         </div>
       )}
 
-      <div className="flex items-center gap-2 mt-3 text-xs text-gray-400">
+      <div className="flex items-center gap-2 mt-3 text-xs text-muted">
         {renderVoteControl()}
       </div>
 
-      {voteError && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{voteError}</p>}
+      {voteError && <ErrorMessage size="xs" className="mt-2">{voteError}</ErrorMessage>}
 
       {canMarkBest && !answer.is_best && (
         <div className="mt-3">
@@ -283,7 +286,7 @@ export default function AnswerCard({
             {markStatus === "loading" ? "Marking..." : "Mark as best answer"}
           </button>
           {markError && (
-            <p className="text-red-600 dark:text-red-400 text-xs mt-1">{markError}</p>
+            <ErrorMessage size="xs" className="mt-1">{markError}</ErrorMessage>
           )}
         </div>
       )}
@@ -308,7 +311,7 @@ export default function AnswerCard({
         onClose={() => setActiveModal(null)}
       />
 
-      {errorMsg && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{errorMsg}</p>}
+      {errorMsg && <ErrorMessage size="xs" className="mt-2">{errorMsg}</ErrorMessage>}
     </div>
   );
 }

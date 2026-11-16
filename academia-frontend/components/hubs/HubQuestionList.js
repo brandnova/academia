@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { MessageSquare } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
 import QuestionListRow from "@/components/questions/QuestionListRow";
 import FilterSidebar, { FilterSection } from "@/components/ui/FilterSidebar";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { Select } from "@/components/ui/FormControls";
 
 const STATUS_OPTIONS = [
   { value: "", label: "All" },
@@ -82,6 +86,7 @@ export default function HubQuestionList({ hubId, departments }) {
 
   const activeCount = Number(Boolean(statusFilter)) + Number(Boolean(departmentFilter));
   const hasActiveFilters = activeCount > 0;
+  const filtered = hasActiveFilters || Boolean(debouncedQuery);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 mt-8">
@@ -112,10 +117,11 @@ export default function HubQuestionList({ hubId, departments }) {
 
         {departments.length > 0 && (
           <FilterSection title="Department">
-            <select
+            <Select
               value={departmentFilter}
               onChange={(e) => setDepartmentFilter(e.target.value)}
-              className="w-full px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
+              size="sm"
+              aria-label="Department"
             >
               <option value="">All departments</option>
               {departments.map((d) => (
@@ -123,7 +129,7 @@ export default function HubQuestionList({ hubId, departments }) {
                   {d.name}
                 </option>
               ))}
-            </select>
+            </Select>
           </FilterSection>
         )}
       </FilterSidebar>
@@ -138,16 +144,17 @@ export default function HubQuestionList({ hubId, departments }) {
               loading={query !== debouncedQuery}
             />
           </div>
-          <select
+          <Select
             value={ordering}
             onChange={(e) => setOrdering(e.target.value)}
-            className="px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
+            fullWidth={false}
+            aria-label="Sort questions"
           >
             <option value="-created_at">Newest</option>
             <option value="created_at">Oldest</option>
             <option value="-views">Most viewed</option>
             <option value="views">Least viewed</option>
-          </select>
+          </Select>
         </div>
 
         {status === "loading" && (
@@ -159,20 +166,24 @@ export default function HubQuestionList({ hubId, departments }) {
         )}
 
         {status === "error" && (
-          <p className="text-red-600 dark:text-red-400 text-sm">
+          <ErrorMessage>
             Couldn't load questions: {errorMsg}
-          </p>
+          </ErrorMessage>
         )}
 
         {status === "ready" && questions.length === 0 && (
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
-            No questions yet{hasActiveFilters || debouncedQuery ? " matching these filters" : ""}.
-          </p>
+          <EmptyState
+            icon={MessageSquare}
+            title={filtered ? "No questions match" : "No questions yet"}
+            description={
+              filtered ? "Try a different search or clear a filter." : "Be the first to ask one."
+            }
+          />
         )}
 
         {status === "ready" && questions.length > 0 && (
           <>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+            <p className="text-sm text-muted mb-3">
               {count} question{count !== 1 ? "s" : ""}
             </p>
             <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
@@ -193,7 +204,7 @@ export default function HubQuestionList({ hubId, departments }) {
               {loadingMore ? "Loading..." : "View more"}
             </button>
             {loadMoreError && (
-              <p className="text-red-600 dark:text-red-400 text-sm mt-2">{loadMoreError}</p>
+              <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
             )}
           </div>
         )}

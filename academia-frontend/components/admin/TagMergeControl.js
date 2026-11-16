@@ -55,7 +55,7 @@ export default function TagMergeControl({ tag, onMerged, onCancel }) {
 
   return (
     <div className="mt-2 p-3 rounded border border-[var(--color-border)] bg-gray-50 dark:bg-gray-800/50">
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+      <p className="text-xs text-muted mb-2">
         Merge <strong>{tag.name}</strong> into an existing tag, or type a new
         name to rename it.
       </p>
@@ -77,7 +77,7 @@ export default function TagMergeControl({ tag, onMerged, onCancel }) {
               className="w-full text-left px-3 py-2 text-sm hover:bg-white dark:hover:bg-gray-700 flex items-center justify-between disabled:opacity-50"
             >
               <span>{t.name}</span>
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-muted">
                 {t.question_count} questions &middot; merge into this
               </span>
             </button>
@@ -92,7 +92,7 @@ export default function TagMergeControl({ tag, onMerged, onCancel }) {
         >
           {status === "loading" ? "Merging..." : `Rename/merge to "${query.trim()}"`}
         </button>
-        <button onClick={onCancel} className="text-xs text-gray-400">
+        <button onClick={onCancel} className="text-xs text-muted">
           Cancel
         </button>
       </div>

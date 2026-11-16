@@ -16,12 +16,12 @@ export default function SchoolListRow({ school }) {
         )}
         <div className="min-w-0">
           <p className="font-medium truncate">{school.name}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+          <p className="text-sm text-muted truncate">
             {school.short_name}{school.location ? ` · ${school.location}` : ""}
           </p>
         </div>
       </div>
-      <span className="text-xs text-gray-400 shrink-0 ml-4">
+      <span className="text-xs text-muted shrink-0 ml-4">
         {school.has_hub ? "Hub active" : "No hub yet"}
       </span>
     </Link>

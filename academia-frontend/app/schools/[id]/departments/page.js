@@ -1,7 +1,7 @@
 "use client";
 
 import { use, useEffect, useState, useCallback } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Building2 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
@@ -9,6 +9,8 @@ import { schoolUrl } from "@/lib/urls";
 import Skeleton from "@/components/ui/Skeleton";
 import DepartmentForm from "@/components/departments/DepartmentForm";
 import DepartmentRow from "@/components/departments/DepartmentRow";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function ManageDepartmentsPage({ params }) {
   const { id } = use(params);
@@ -59,7 +61,7 @@ export default function ManageDepartmentsPage({ params }) {
 
   if (!user) {
     return (
-      <p className="text-gray-500 dark:text-gray-400">
+      <p className="text-muted">
         You need to log in to manage departments.
       </p>
     );
@@ -67,9 +69,9 @@ export default function ManageDepartmentsPage({ params }) {
 
   if (status === "error") {
     return (
-      <p className="text-red-600 dark:text-red-400 text-sm">
+      <ErrorMessage>
         Couldn't load this page: {errorMsg}
-      </p>
+      </ErrorMessage>
     );
   }
 
@@ -83,23 +85,27 @@ export default function ManageDepartmentsPage({ params }) {
           <ArrowLeft className="w-4 h-4" /> Back to {school.name}
         </Link>
         <h1 className="text-xl font-semibold mt-2">Manage Departments</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-muted">
           Add, rename, or deactivate departments for {school.name}.
         </p>
       </div>
 
       {!canManage && (
-        <p className="text-sm text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800 rounded p-4 mb-6">
+        <ErrorMessage tone="warning" className="border border-amber-200 dark:border-amber-800 rounded p-4 mb-6">
           You're signed in, but you're not a School Representative for this school
           or a platform admin. You can still try the form below, but the server
           will reject any change.
-        </p>
+        </ErrorMessage>
       )}
 
       <DepartmentForm schoolId={id} onCreated={handleCreated} />
 
       {departments.length === 0 ? (
-        <p className="text-sm text-gray-500 dark:text-gray-400">No departments yet.</p>
+        <EmptyState
+          icon={Building2}
+          title="No departments yet"
+          description="Add the first one with the form above."
+        />
       ) : (
         <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
           {departments.map((dept) => (

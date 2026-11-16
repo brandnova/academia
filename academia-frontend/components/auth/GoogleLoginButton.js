@@ -91,7 +91,7 @@ export default function GoogleLoginButton() {
         <div className="absolute right-0 top-full mt-2 w-64 z-dropdown rounded-lg border border-[var(--color-border)] bg-white dark:bg-gray-800 shadow-lg p-3">
           <ErrorMessage size="xs">{errorMsg}</ErrorMessage>
           {suspended && (
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs text-muted mt-2">
               If you think this is a mistake, contact {SUPPORT_EMAIL}.
             </p>
           )}

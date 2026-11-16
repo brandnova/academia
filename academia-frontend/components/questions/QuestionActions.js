@@ -37,7 +37,7 @@ export default function QuestionActions({ question }) {
   if (confirming) {
     return (
       <div className="flex items-center gap-2 text-sm">
-        <span className="text-gray-500">Delete this question?</span>
+        <span className="text-muted">Delete this question?</span>
         <button
           onClick={handleDelete}
           disabled={deleteStatus === "loading"}
@@ -45,7 +45,7 @@ export default function QuestionActions({ question }) {
         >
           {deleteStatus === "loading" ? "Deleting..." : "Confirm"}
         </button>
-        <button onClick={() => setConfirming(false)} className="text-gray-400">
+        <button onClick={() => setConfirming(false)} className="text-muted">
           Cancel
         </button>
         {errorMsg && <span className="text-red-600 dark:text-red-400 text-xs">{errorMsg}</span>}

@@ -210,7 +210,7 @@ export default function MarkdownEditor({
               disabled={preview}
               title={action.label}
               aria-label={action.label}
-              className="p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-accent disabled:opacity-40 disabled:pointer-events-none transition-colors"
+              className="p-1.5 rounded text-muted hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-accent disabled:opacity-40 disabled:pointer-events-none transition-colors"
             >
               <action.icon className="w-3.5 h-3.5" />
             </button>
@@ -219,7 +219,7 @@ export default function MarkdownEditor({
         <button
           type="button"
           onClick={() => setPreview((p) => !p)}
-          className="flex items-center gap-1 rounded px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-accent transition-colors ml-auto"
+          className="flex items-center gap-1 rounded px-2 py-1 text-xs text-muted hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-accent transition-colors ml-auto"
         >
           {preview ? <Pencil className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
           {preview ? "Write" : "Preview"}

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { clientFetch } from "@/lib/clientApi";
 import { useAuth } from "@/lib/auth-context";
 import CommentRow from "./CommentRow";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { Input } from "@/components/ui/FormControls";
 
 export default function CommentThread({ answerId, hubId, commentCount, onCountChange }) {
   const { user } = useAuth();
@@ -80,14 +82,14 @@ export default function CommentThread({ answerId, hubId, commentCount, onCountCh
 
       {expanded && (
         <div className="mt-2 pl-3 border-l-2 border-[var(--color-border)] space-y-2">
-          {status === "loading" && <p className="text-xs text-gray-400">Loading comments...</p>}
+          {status === "loading" && <p className="text-xs text-muted">Loading comments...</p>}
           {status === "error" && (
-            <p className="text-xs text-red-600 dark:text-red-400">
+            <ErrorMessage size="xs">
               Couldn't load comments: {errorMsg}
-            </p>
+            </ErrorMessage>
           )}
           {status === "ready" && comments.length === 0 && (
-            <p className="text-xs text-gray-400">No comments yet.</p>
+            <p className="text-xs text-muted">No comments yet.</p>
           )}
           {status === "ready" &&
             comments.map((comment) => (
@@ -101,13 +103,16 @@ export default function CommentThread({ answerId, hubId, commentCount, onCountCh
             ))}
 
           {user ? (
-            <form onSubmit={handlePost} className="flex items-center gap-2 pt-1">
-              <input
+            <form onSubmit={handlePost} className="flex items-stretch gap-2 pt-1">
+              <Input
                 value={newBody}
                 onChange={(e) => setNewBody(e.target.value)}
                 required
                 placeholder="Add a comment..."
-                className="flex-1 px-2 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-xs"
+                aria-label="Add a comment"
+                size="xs"
+                fullWidth={false}
+                className="flex-1"
               />
               <button
                 type="submit"
@@ -118,10 +123,10 @@ export default function CommentThread({ answerId, hubId, commentCount, onCountCh
               </button>
             </form>
           ) : (
-            <p className="text-xs text-gray-400">Log in to comment.</p>
+            <p className="text-xs text-muted">Log in to comment.</p>
           )}
           {postError && (
-            <p className="text-xs text-red-600 dark:text-red-400">{postError}</p>
+            <ErrorMessage size="xs">{postError}</ErrorMessage>
           )}
         </div>
       )}

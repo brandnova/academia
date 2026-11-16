@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { Building2 } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import Skeleton from "@/components/ui/Skeleton";
 import DepartmentForm from "@/components/departments/DepartmentForm";
 import DepartmentRow from "@/components/departments/DepartmentRow";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function HubDepartmentsTab({ schoolId }) {
   const [departments, setDepartments] = useState([]);
@@ -38,14 +41,14 @@ export default function HubDepartmentsTab({ schoolId }) {
 
   if (status === "loading") return <Skeleton className="h-32 w-full" />;
   if (status === "error") {
-    return <p className="text-red-600 dark:text-red-400 text-sm">Couldn't load: {errorMsg}</p>;
+    return <ErrorMessage>Couldn't load: {errorMsg}</ErrorMessage>;
   }
 
   return (
     <div>
       <DepartmentForm schoolId={schoolId} onCreated={handleCreated} />
       {departments.length === 0 ? (
-        <p className="text-sm text-gray-500 dark:text-gray-400">No departments yet.</p>
+        <EmptyState variant="inline" icon={Building2} title="No departments yet" />
       ) : (
         <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
           {departments.map((dept) => (

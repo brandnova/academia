@@ -78,7 +78,7 @@ export default function SchoolPicker({
         )}
         {status === "error" && <ErrorMessage>Couldn't load schools: {errorMsg}</ErrorMessage>}
         {status === "ready" && schools.length === 0 && (
-          <div className="text-sm text-gray-500 dark:text-gray-400">
+          <div className="text-sm text-muted">
             <p>
               {onlyWithHub ? "No schools with an active hub found" : "No schools found"}
               {debouncedQuery ? ` for "${debouncedQuery}"` : ""}.
@@ -106,13 +106,13 @@ export default function SchoolPicker({
                 >
                   <span className="min-w-0">
                     <span className="block font-medium text-sm truncate">{school.name}</span>
-                    <span className="block text-xs text-gray-500 dark:text-gray-400 truncate">
+                    <span className="block text-xs text-muted truncate">
                       {school.short_name}
                       {school.location ? ` · ${school.location}` : ""}
                     </span>
                   </span>
                   {!onlyWithHub && (
-                    <span className="shrink-0 text-xs text-gray-400">
+                    <span className="shrink-0 text-xs text-muted">
                       {busyId === school.id
                         ? "Opening..."
                         : school.has_hub

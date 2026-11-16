@@ -84,18 +84,18 @@ export default function MyReportsClient() {
     }
   }
 
-  if (authLoading) return <p className="text-gray-500">Loading...</p>;
+  if (authLoading) return <p className="text-muted">Loading...</p>;
 
   if (!user) {
     return (
-      <p className="text-gray-500 dark:text-gray-400">You need to log in to view your reports.</p>
+      <p className="text-muted">You need to log in to view your reports.</p>
     );
   }
 
   return (
     <div className="max-w-2xl">
       <h1 className="text-xl font-semibold mb-1">My reports</h1>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+      <p className="text-sm text-muted mb-6">
         Only you can see this list. Reports never appear on your profile.
       </p>
 
@@ -108,7 +108,7 @@ export default function MyReportsClient() {
             className={`text-sm px-3 py-1.5 rounded border ${
               statusFilter === f.value
                 ? "border-accent text-accent"
-                : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+                : "border-[var(--color-border)] text-muted"
             }`}
           >
             {f.label}
@@ -150,21 +150,21 @@ export default function MyReportsClient() {
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="font-medium">
                     {REPORT_TYPE_LABELS[report.type] || report.type}
-                    <span className="font-normal text-gray-400"> on a {report.content_type}</span>
+                    <span className="font-normal text-muted"> on a {report.content_type}</span>
                   </span>
-                  <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                  <span className="flex items-center gap-1 text-xs text-muted">
                     <StatusIcon className="w-3.5 h-3.5" />
                     {display.label}
                   </span>
                 </div>
 
                 {report.description && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2 break-words">
+                  <p className="text-xs text-muted mt-1 line-clamp-2 break-words">
                     &quot;{report.description}&quot;
                   </p>
                 )}
 
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-xs text-gray-400">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-xs text-muted">
                   <span>Reported {timeAgo(report.created_at)}</span>
                   {report.resolved_at && <span>Reviewed {timeAgo(report.resolved_at)}</span>}
                   {contentUrl ? (

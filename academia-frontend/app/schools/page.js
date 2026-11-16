@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { School } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
 import SchoolListRow from "@/components/schools/SchoolListRow";
 import { INSTITUTION_TYPE_OPTIONS, OWNERSHIP_OPTIONS } from "@/lib/schoolLabels";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { FormField, Input, Select } from "@/components/ui/FormControls";
 
 export default function SchoolsPage() {
   const [query, setQuery] = useState("");
@@ -92,7 +96,7 @@ export default function SchoolsPage() {
     <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-8">
       <aside className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+          <h2 className="font-semibold text-sm text-muted uppercase tracking-wide">
             Filter
           </h2>
           {hasActiveFilters && (
@@ -112,53 +116,53 @@ export default function SchoolsPage() {
           Has active hub
         </label>
 
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-            Institution type
-          </label>
-          <select
-            value={institutionType}
-            onChange={(e) => setInstitutionType(e.target.value)}
-            className="w-full px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
-          >
-            <option value="">All types</option>
-            {INSTITUTION_TYPE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <FormField label="Institution type">
+          {(field) => (
+            <Select
+              {...field}
+              value={institutionType}
+              onChange={(e) => setInstitutionType(e.target.value)}
+              size="sm"
+            >
+              <option value="">All types</option>
+              {INSTITUTION_TYPE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </Select>
+          )}
+        </FormField>
 
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-            Ownership
-          </label>
-          <select
-            value={ownership}
-            onChange={(e) => setOwnership(e.target.value)}
-            className="w-full px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
-          >
-            <option value="">All ownership types</option>
-            {OWNERSHIP_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <FormField label="Ownership">
+          {(field) => (
+            <Select
+              {...field}
+              value={ownership}
+              onChange={(e) => setOwnership(e.target.value)}
+              size="sm"
+            >
+              <option value="">All ownership types</option>
+              {OWNERSHIP_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </Select>
+          )}
+        </FormField>
 
-        <div>
-          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-            State
-          </label>
-          <input
-            value={stateQuery}
-            onChange={(e) => setStateQuery(e.target.value)}
-            placeholder="e.g. Lagos"
-            className="w-full px-2 py-1.5 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
-          />
-        </div>
+        <FormField label="State">
+          {(field) => (
+            <Input
+              {...field}
+              value={stateQuery}
+              onChange={(e) => setStateQuery(e.target.value)}
+              placeholder="e.g. Lagos"
+              size="sm"
+            />
+          )}
+        </FormField>
       </aside>
 
       <div>
@@ -180,22 +184,26 @@ export default function SchoolsPage() {
         )}
 
         {status === "error" && (
-          <p className="text-red-600 dark:text-red-400 text-sm">
+          <ErrorMessage>
             Couldn't load schools: {errorMsg}
-          </p>
+          </ErrorMessage>
         )}
 
         {status === "ready" && schools.length === 0 && (
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
-            No schools found
-            {debouncedQuery ? ` for "${debouncedQuery}"` : ""}
-            {hasActiveFilters ? " matching these filters" : ""}.
-          </p>
+          <EmptyState
+            icon={School}
+            title="No schools found"
+            description={
+              debouncedQuery || hasActiveFilters
+                ? "Try a different search or clear a filter."
+                : undefined
+            }
+          />
         )}
 
         {status === "ready" && schools.length > 0 && (
           <>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+            <p className="text-sm text-muted mb-3">
               {count} school{count !== 1 ? "s" : ""}
             </p>
             <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
@@ -216,7 +224,7 @@ export default function SchoolsPage() {
               {loadingMore ? "Loading..." : "View more"}
             </button>
             {loadMoreError && (
-              <p className="text-red-600 dark:text-red-400 text-sm mt-2">{loadMoreError}</p>
+              <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
             )}
           </div>
         )}

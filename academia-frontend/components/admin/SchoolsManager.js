@@ -140,7 +140,7 @@ export default function SchoolsManager() {
             className={`text-xs px-3 py-1 rounded border ${
               activeFilter === t.key
                 ? "border-accent text-accent"
-                : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+                : "border-[var(--color-border)] text-muted"
             }`}
           >
             {t.label}
@@ -165,7 +165,7 @@ export default function SchoolsManager() {
       )}
       {status === "ready" && schools.length > 0 && (
         <>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+          <p className="text-sm text-muted mb-2">
             {count} school{count !== 1 ? "s" : ""}
           </p>
           <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">

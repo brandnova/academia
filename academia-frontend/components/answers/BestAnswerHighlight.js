@@ -16,7 +16,7 @@ export default function BestAnswerHighlight({ answer }) {
         <CheckCircle2 className="w-4 h-4" /> Best answer
       </div>
       <p className="text-sm line-clamp-4">{stripMarkdown(answer.body)}</p>
-      <div className="flex items-center justify-between mt-3 text-xs text-gray-400">
+      <div className="flex items-center justify-between mt-3 text-xs text-muted">
         <span className="flex items-center gap-1">
           <ThumbsUp className="w-3.5 h-3.5" />
           {answer.vote_score}

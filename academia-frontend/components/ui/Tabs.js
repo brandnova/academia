@@ -49,12 +49,12 @@ export default function Tabs({ tabs, value, onChange, idBase, ariaLabel, classNa
               className={`shrink-0 whitespace-nowrap text-sm px-3 py-2 border-b-2 ${
                 selected
                   ? "border-accent text-accent font-medium"
-                  : "border-transparent text-gray-500 dark:text-gray-400 hover:text-accent"
+                  : "border-transparent text-muted hover:text-accent"
               }`}
             >
               {t.label}
               {typeof t.count === "number" && (
-                <span className="ml-1.5 text-xs text-gray-400">{t.count}</span>
+                <span className="ml-1.5 text-xs text-muted">{t.count}</span>
               )}
             </button>
           );

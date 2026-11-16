@@ -30,9 +30,9 @@ export default function ProfilePage() {
   // so coming back keeps its loaded pages and scroll position.
   const [visited, setVisited] = useState(() => new Set(["activity"]));
 
-  if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-muted">Loading...</p>;
   if (!user) {
-    return <p className="text-gray-500 dark:text-gray-400">You need to log in to view this page.</p>;
+    return <p className="text-muted">You need to log in to view this page.</p>;
   }
 
   const isModerator = (user.moderator_for?.length ?? 0) > 0;
@@ -151,7 +151,7 @@ export default function ProfilePage() {
                   >
                     {status === "loading" ? "Saving..." : "Save"}
                   </button>
-                  <button type="button" onClick={cancelEditing} className="text-sm text-gray-400">
+                  <button type="button" onClick={cancelEditing} className="text-sm text-muted">
                     Cancel
                   </button>
                 </div>
@@ -168,7 +168,7 @@ export default function ProfilePage() {
                 </button>
               </div>
             )}
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 truncate">{user.email}</p>
+            <p className="text-sm text-muted mt-0.5 truncate">{user.email}</p>
 
             {(user.is_admin || hasModerationAccess) && (
               <div className="flex flex-wrap items-center gap-2 mt-3">
@@ -202,7 +202,7 @@ export default function ProfilePage() {
         <dl className="grid grid-cols-4 divide-x divide-[var(--color-border)] border-t border-[var(--color-border)]">
           {stats.map(([label, value]) => (
             <div key={label} className="flex flex-col-reverse items-center px-1 py-3 text-center">
-              <dt className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400">{label}</dt>
+              <dt className="text-[11px] sm:text-xs text-muted">{label}</dt>
               <dd className="text-lg font-semibold">{value}</dd>
             </div>
           ))}

@@ -1,7 +1,7 @@
 export default function HubUnansweredTab({ hubId, isModerator }) {
   if (!isModerator) {
     return (
-      <p className="text-sm text-gray-500 dark:text-gray-400">
+      <p className="text-sm text-muted">
         You'll see this hub's unanswered questions once you're a moderator for
         it. As a representative, you can add yourself from the Moderators tab
         above.
