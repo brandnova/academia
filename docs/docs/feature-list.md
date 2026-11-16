@@ -910,7 +910,7 @@ Where: src/navigation, src/components (TopBar, Screen, States), src/features/net
 - [x] Error boundary with a friendly fallback (iOS untested) | gap closed: web uses error.js boundaries
 - [x] Deep links through the academiaatlas:// scheme, paths mirror the web routes, #answer-{id} scrolls to the answer (iOS untested) | differs: scheme links, https links need launch setup
 - [ ] Opening shared https web links in the app (Android intent filters with autoVerify, assetlinks.json, apple-app-site-association) | gap: DEPLOYMENT_CHECKLIST
-- [ ] Sheets close with a swipe down on the handle and title area, like the drawer swipe (Sheet.tsx PanResponder, no new dependency, iOS untested) | gap: design-guide and mockup already call for swipe dismiss
+- [x] Sheets close with a swipe down on the handle and title area, like the drawer swipe (iOS untested) | parity with the drawer
 - [ ] Offline cached content (the banner only warns) | gap: future, with the web's low-data mode
 - [x] Skeleton pulse honours reduced motion, flash ring is a static border | parity
 - [x] Logo mark in the top bar, boot splash and login, white A in dark mode, wordmark stays on one line | parity
@@ -1035,9 +1035,10 @@ Where: src/theme, src/components
 ## Engineering
 - [x] npm run typecheck, npx expo-doctor, npm run export:web, pre-flight before every EAS build
 - [x] endpoints.ts carries only user-client methods
+- [x] EAS Update (channels preview and production, runtimeVersion by appVersion), mobile typecheck runs on every pull request
 
 ## Known gaps
-Sheet swipe down, offline cache (future), https app links (launch), native Google sign in verification on the final build, VoiceOver and every iOS check (untested), backend: hub_question_count and search row fields.
+- 
 
 ## Differs from web (by design)
 - User client only: no moderation or admin screens, staff open the web app in the system browser, no tokens in the URL

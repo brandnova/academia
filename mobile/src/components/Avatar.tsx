@@ -34,7 +34,7 @@ export function Avatar({ name, uri, size = 40, style, bordered }: Props) {
           borderRadius: size / 2,
           backgroundColor: colors.accentSoft,
           borderWidth: bordered ? 1 : 0,
-          borderColor: colors.border,
+          borderColor: colors.line,
         },
         style,
       ]}

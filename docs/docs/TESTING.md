@@ -93,6 +93,9 @@ sign-in sheet, paste both tokens. It does not exist in preview or production bui
 ### Global checks
 - Loading, empty, error with Retry, "Can't connect" for network failures, offline banner, pull to refresh.
 - Dark mode by system and manual, no flash, text uses ink and muted tokens, a theme change keeps working across screens.
+- Dark mode text, inputs, editor, code blocks and icons are readable everywhere, and the app follows the system theme.
+- Sheets close with a swipe down on the handle and title area, content still scrolls inside.
+- An EAS Update published to the channel reaches an installed build after two app launches.
 - 429, 502, 503, 504 and no-network copy matches the contract. 400 errors attach to fields.
 - Drawer closes on backdrop, Back and swipe. Tab bar matches the mockup. Wordmark stays on one line.
 - Deep links from a closed and a running app: `academiaatlas://questions/{id}`, with `#answer-{id}`, `schools/{id}/{slug}`, `tags/{tag}`.

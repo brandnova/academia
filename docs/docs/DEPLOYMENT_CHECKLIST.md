@@ -167,10 +167,10 @@ for i in $(seq 1 12); do curl -s -o /dev/null -w "%{http_code} " -X POST $API/au
 - [ ] EAS build profiles for development, preview and production.
 - [ ] Development build with the real identifiers, then a preview build for testers.
 - [ ] iOS certificates and Android keystores managed through EAS, stored in the password manager.
-- [ ] Decision on EAS Update (channels and a rollback plan if yes).
+- [x] EAS Update configured. Publish JS and asset fixes with `eas update --channel preview|production --message "..."`. A new native module, native app.json change or SDK upgrade needs a version bump and a new build.
 - [ ] Crash reporting (Sentry or equivalent) added before the first tester build. If added, wire it into ErrorBoundary.componentDidCatch.
 - [ ] Pre-flight before every EAS build: typecheck, expo-doctor, `npx expo export --platform android`, `npx expo prebuild --platform android --no-install --clean` then `rm -rf android`.
-- [ ] Build budget tracked (free tier, local builds with `eas build --local` do not use cloud builds). Decision on EAS Update (expo-updates, runtimeVersion) made before the last native build.
+- [ ] Build budget tracked (free tier, local builds with `eas build --local` do not use cloud builds).
 
 ### 3.3 Google sign in
 - [ ] OAuth clients in one Google Cloud project: Web (its id goes in EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID), Android (package com.brandnova.academiaatlas plus the SHA-1 of the EAS keystore from `eas credentials -p android`, no id goes in the app), iOS later.

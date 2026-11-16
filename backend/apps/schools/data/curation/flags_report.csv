@@ -1,0 +1,1885 @@
+flag_type,row_ids,detail
+SPARSE_ROW,2,Missing: state
+SPARSE_ROW,5,Missing: state
+SPARSE_ROW,6,Missing: state
+SPARSE_ROW,7,Missing: state
+SPARSE_ROW,8,Missing: state
+SPARSE_ROW,9,Missing: state
+SPARSE_ROW,11,Missing: state
+SPARSE_ROW,12,Missing: state
+SPARSE_ROW,13,Missing: state
+SPARSE_ROW,14,Missing: state
+SPARSE_ROW,16,Missing: state
+SPARSE_ROW,17,Missing: state
+SPARSE_ROW,18,Missing: state
+SPARSE_ROW,19,Missing: state
+SPARSE_ROW,20,Missing: state
+SPARSE_ROW,21,Missing: state
+SPARSE_ROW,23,Missing: state
+SPARSE_ROW,24,Missing: state
+SPARSE_ROW,25,Missing: state
+SPARSE_ROW,26,Missing: state
+SPARSE_ROW,27,Missing: state
+SPARSE_ROW,28,Missing: state
+SPARSE_ROW,29,Missing: state
+SPARSE_ROW,30,Missing: state
+SPARSE_ROW,31,Missing: state
+SPARSE_ROW,32,Missing: state
+SPARSE_ROW,33,Missing: state
+SPARSE_ROW,34,Missing: state
+SPARSE_ROW,35,Missing: state
+SPARSE_ROW,36,Missing: state
+SPARSE_ROW,37,Missing: state
+SPARSE_ROW,38,Missing: state
+SPARSE_ROW,39,Missing: state
+SPARSE_ROW,40,Missing: state
+SPARSE_ROW,41,Missing: state
+SPARSE_ROW,43,Missing: state
+SPARSE_ROW,44,"Missing: state, website"
+SPARSE_ROW,45,"Missing: state, website"
+SPARSE_ROW,46,"Missing: state, website"
+SPARSE_ROW,47,"Missing: state, website"
+SPARSE_ROW,48,"Missing: state, website"
+SPARSE_ROW,49,"Missing: state, website"
+SPARSE_ROW,50,Missing: state
+SPARSE_ROW,51,Missing: state
+SPARSE_ROW,53,Missing: state
+SPARSE_ROW,54,Missing: website
+SPARSE_ROW,55,Missing: website
+SPARSE_ROW,56,"Missing: state, website"
+SPARSE_ROW,57,Missing: website
+SPARSE_ROW,58,"Missing: state, website"
+SPARSE_ROW,59,"Missing: state, website"
+SPARSE_ROW,60,"Missing: state, website"
+SPARSE_ROW,61,Missing: website
+SPARSE_ROW,62,Missing: website
+SPARSE_ROW,64,Missing: state
+SPARSE_ROW,65,"Missing: state, website"
+SPARSE_ROW,66,"Missing: state, website"
+SPARSE_ROW,67,"Missing: state, website"
+SPARSE_ROW,68,"Missing: state, website"
+SPARSE_ROW,69,"Missing: state, website"
+SPARSE_ROW,70,"Missing: state, website"
+SPARSE_ROW,71,"Missing: state, website"
+SPARSE_ROW,72,"Missing: state, website"
+SPARSE_ROW,73,"Missing: state, website"
+SPARSE_ROW,74,"Missing: state, website"
+SPARSE_ROW,75,"Missing: state, website"
+SPARSE_ROW,76,"Missing: state, website"
+SPARSE_ROW,78,Missing: state
+SPARSE_ROW,79,Missing: state
+SPARSE_ROW,80,Missing: state
+SPARSE_ROW,81,Missing: state
+SPARSE_ROW,83,Missing: state
+SPARSE_ROW,84,Missing: state
+SPARSE_ROW,85,Missing: state
+SPARSE_ROW,86,Missing: state
+SPARSE_ROW,87,Missing: state
+SPARSE_ROW,88,Missing: state
+SPARSE_ROW,89,Missing: state
+SPARSE_ROW,90,Missing: state
+SPARSE_ROW,91,Missing: state
+SPARSE_ROW,92,Missing: state
+SPARSE_ROW,93,Missing: state
+SPARSE_ROW,94,Missing: state
+SPARSE_ROW,95,Missing: state
+SPARSE_ROW,96,Missing: state
+SPARSE_ROW,97,Missing: state
+SPARSE_ROW,100,Missing: state
+SPARSE_ROW,101,Missing: state
+SPARSE_ROW,102,Missing: state
+SPARSE_ROW,103,Missing: state
+SPARSE_ROW,104,Missing: state
+SPARSE_ROW,105,Missing: state
+SPARSE_ROW,107,Missing: state
+SPARSE_ROW,108,Missing: state
+SPARSE_ROW,109,Missing: state
+SPARSE_ROW,110,Missing: state
+SPARSE_ROW,111,Missing: state
+SPARSE_ROW,112,Missing: state
+SPARSE_ROW,113,Missing: state
+SPARSE_ROW,114,Missing: state
+SPARSE_ROW,116,Missing: state
+SPARSE_ROW,117,Missing: state
+SPARSE_ROW,118,Missing: state
+SPARSE_ROW,119,Missing: state
+SPARSE_ROW,120,"Missing: state, website"
+SPARSE_ROW,121,"Missing: state, website"
+SPARSE_ROW,122,"Missing: state, website"
+SPARSE_ROW,123,Missing: state
+SPARSE_ROW,124,Missing: state
+SPARSE_ROW,126,Missing: state
+SPARSE_ROW,127,Missing: state
+SPARSE_ROW,128,Missing: state
+SPARSE_ROW,129,Missing: state
+SPARSE_ROW,130,"Missing: state, website"
+SPARSE_ROW,131,"Missing: state, website"
+SPARSE_ROW,132,Missing: website
+SPARSE_ROW,133,Missing: website
+SPARSE_ROW,134,"Missing: state, website"
+SPARSE_ROW,135,"Missing: state, website"
+SPARSE_ROW,136,"Missing: state, website"
+SPARSE_ROW,137,"Missing: state, website"
+SPARSE_ROW,138,"Missing: state, website"
+SPARSE_ROW,139,"Missing: state, website"
+SPARSE_ROW,140,"Missing: state, website"
+SPARSE_ROW,141,"Missing: state, website"
+SPARSE_ROW,142,"Missing: state, website"
+SPARSE_ROW,143,"Missing: state, website"
+SPARSE_ROW,144,"Missing: state, website"
+SPARSE_ROW,145,"Missing: state, website"
+SPARSE_ROW,146,"Missing: state, website"
+SPARSE_ROW,147,Missing: state
+SPARSE_ROW,148,Missing: state
+SPARSE_ROW,149,Missing: state
+SPARSE_ROW,150,Missing: state
+SPARSE_ROW,151,Missing: state
+SPARSE_ROW,152,Missing: state
+SPARSE_ROW,154,Missing: state
+SPARSE_ROW,155,Missing: state
+SPARSE_ROW,156,Missing: state
+SPARSE_ROW,158,Missing: state
+SPARSE_ROW,159,Missing: state
+SPARSE_ROW,161,Missing: state
+SPARSE_ROW,162,Missing: state
+SPARSE_ROW,163,Missing: state
+SPARSE_ROW,164,Missing: state
+SPARSE_ROW,165,Missing: state
+SPARSE_ROW,166,Missing: state
+SPARSE_ROW,168,Missing: state
+SPARSE_ROW,169,Missing: state
+SPARSE_ROW,170,Missing: state
+SPARSE_ROW,172,Missing: state
+SPARSE_ROW,174,Missing: state
+SPARSE_ROW,175,Missing: state
+SPARSE_ROW,176,Missing: state
+SPARSE_ROW,178,Missing: state
+SPARSE_ROW,179,Missing: state
+SPARSE_ROW,180,Missing: state
+SPARSE_ROW,181,Missing: state
+SPARSE_ROW,183,Missing: state
+SPARSE_ROW,184,Missing: state
+SPARSE_ROW,185,Missing: state
+SPARSE_ROW,186,Missing: state
+SPARSE_ROW,187,Missing: state
+SPARSE_ROW,188,Missing: state
+SPARSE_ROW,189,Missing: state
+SPARSE_ROW,190,Missing: state
+SPARSE_ROW,191,Missing: state
+SPARSE_ROW,192,Missing: state
+SPARSE_ROW,193,Missing: state
+SPARSE_ROW,194,Missing: state
+SPARSE_ROW,195,Missing: state
+SPARSE_ROW,196,Missing: state
+SPARSE_ROW,197,Missing: state
+SPARSE_ROW,198,Missing: state
+SPARSE_ROW,200,Missing: state
+SPARSE_ROW,201,Missing: state
+SPARSE_ROW,202,Missing: state
+SPARSE_ROW,203,Missing: state
+SPARSE_ROW,205,Missing: state
+SPARSE_ROW,206,Missing: state
+SPARSE_ROW,207,Missing: state
+SPARSE_ROW,208,Missing: state
+SPARSE_ROW,209,Missing: state
+SPARSE_ROW,210,Missing: state
+SPARSE_ROW,211,Missing: state
+SPARSE_ROW,212,Missing: state
+SPARSE_ROW,213,Missing: state
+SPARSE_ROW,214,Missing: state
+SPARSE_ROW,215,Missing: state
+SPARSE_ROW,217,Missing: state
+SPARSE_ROW,218,"Missing: state, website"
+SPARSE_ROW,222,Missing: state
+SPARSE_ROW,223,Missing: state
+SPARSE_ROW,224,"Missing: state, website"
+SPARSE_ROW,225,"Missing: state, website"
+SPARSE_ROW,226,Missing: state
+SPARSE_ROW,227,Missing: website
+SPARSE_ROW,228,"Missing: state, website"
+SPARSE_ROW,229,"Missing: state, website"
+SPARSE_ROW,230,"Missing: state, website"
+SPARSE_ROW,231,Missing: state
+SPARSE_ROW,232,"Missing: state, website"
+SPARSE_ROW,233,"Missing: state, website"
+SPARSE_ROW,234,Missing: state
+SPARSE_ROW,235,Missing: state
+SPARSE_ROW,236,Missing: state
+SPARSE_ROW,237,"Missing: state, website"
+SPARSE_ROW,238,"Missing: state, website"
+SPARSE_ROW,239,Missing: state
+SPARSE_ROW,240,"Missing: state, website"
+SPARSE_ROW,241,Missing: website
+SPARSE_ROW,242,"Missing: state, website"
+SPARSE_ROW,244,Missing: website
+SPARSE_ROW,245,"Missing: state, website"
+SPARSE_ROW,246,Missing: website
+SPARSE_ROW,247,"Missing: state, website"
+SPARSE_ROW,248,"Missing: state, website"
+SPARSE_ROW,249,"Missing: state, website"
+SPARSE_ROW,250,Missing: state
+SPARSE_ROW,251,"Missing: state, website"
+SPARSE_ROW,252,"Missing: state, website"
+SPARSE_ROW,253,Missing: website
+SPARSE_ROW,254,Missing: state
+SPARSE_ROW,255,Missing: website
+SPARSE_ROW,256,"Missing: state, website"
+SPARSE_ROW,257,Missing: website
+SPARSE_ROW,258,"Missing: state, website"
+SPARSE_ROW,259,"Missing: state, website"
+SPARSE_ROW,260,"Missing: state, website"
+SPARSE_ROW,261,"Missing: state, website"
+SPARSE_ROW,262,"Missing: state, website"
+SPARSE_ROW,263,"Missing: state, website"
+SPARSE_ROW,264,"Missing: state, website"
+SPARSE_ROW,265,"Missing: state, website"
+SPARSE_ROW,266,Missing: state
+SPARSE_ROW,267,Missing: website
+SPARSE_ROW,268,"Missing: state, website"
+SPARSE_ROW,269,"Missing: state, website"
+SPARSE_ROW,270,"Missing: state, website"
+SPARSE_ROW,271,Missing: website
+SPARSE_ROW,272,"Missing: state, website"
+SPARSE_ROW,273,"Missing: state, website"
+SPARSE_ROW,274,Missing: state
+SPARSE_ROW,275,"Missing: state, website"
+SPARSE_ROW,276,"Missing: state, website"
+SPARSE_ROW,277,"Missing: state, website"
+SPARSE_ROW,278,"Missing: state, website"
+SPARSE_ROW,279,"Missing: state, website"
+SPARSE_ROW,280,"Missing: state, website"
+SPARSE_ROW,281,"Missing: state, website"
+SPARSE_ROW,282,Missing: state
+SPARSE_ROW,283,"Missing: state, website"
+SPARSE_ROW,284,"Missing: state, website"
+SPARSE_ROW,285,Missing: website
+SPARSE_ROW,286,"Missing: state, website"
+SPARSE_ROW,287,"Missing: state, website"
+SPARSE_ROW,288,"Missing: state, website"
+SPARSE_ROW,289,"Missing: state, website"
+SPARSE_ROW,290,"Missing: state, website"
+SPARSE_ROW,291,"Missing: state, website"
+SPARSE_ROW,292,"Missing: state, website"
+SPARSE_ROW,293,Missing: website
+SPARSE_ROW,294,"Missing: state, website"
+SPARSE_ROW,295,"Missing: state, website"
+SPARSE_ROW,297,"Missing: state, website"
+SPARSE_ROW,298,"Missing: state, website"
+SPARSE_ROW,299,"Missing: state, website"
+SPARSE_ROW,300,"Missing: state, website"
+SPARSE_ROW,301,"Missing: state, website"
+SPARSE_ROW,302,"Missing: state, website"
+SPARSE_ROW,303,"Missing: state, website"
+SPARSE_ROW,304,"Missing: state, website"
+SPARSE_ROW,305,"Missing: state, website"
+SPARSE_ROW,306,Missing: website
+SPARSE_ROW,307,"Missing: state, website"
+SPARSE_ROW,308,"Missing: state, website"
+SPARSE_ROW,309,"Missing: state, website"
+SPARSE_ROW,310,"Missing: state, website"
+SPARSE_ROW,311,"Missing: state, website"
+SPARSE_ROW,312,"Missing: state, website"
+SPARSE_ROW,313,"Missing: state, website"
+SPARSE_ROW,314,"Missing: state, website"
+SPARSE_ROW,315,"Missing: state, website"
+SPARSE_ROW,316,"Missing: state, website"
+SPARSE_ROW,317,"Missing: state, website"
+SPARSE_ROW,318,"Missing: state, website"
+SPARSE_ROW,319,"Missing: state, website"
+SPARSE_ROW,320,"Missing: state, website"
+SPARSE_ROW,321,"Missing: state, website"
+SPARSE_ROW,322,Missing: state
+SPARSE_ROW,323,"Missing: state, website"
+SPARSE_ROW,324,"Missing: state, website"
+SPARSE_ROW,325,"Missing: state, website"
+SPARSE_ROW,326,Missing: website
+SPARSE_ROW,327,Missing: website
+SPARSE_ROW,328,"Missing: state, website"
+SPARSE_ROW,329,Missing: website
+SPARSE_ROW,330,Missing: website
+SPARSE_ROW,331,Missing: website
+SPARSE_ROW,332,Missing: website
+SPARSE_ROW,333,Missing: website
+SPARSE_ROW,334,Missing: website
+SPARSE_ROW,335,Missing: website
+SPARSE_ROW,336,Missing: website
+SPARSE_ROW,337,Missing: website
+SPARSE_ROW,338,Missing: website
+SPARSE_ROW,339,Missing: website
+SPARSE_ROW,340,Missing: website
+SPARSE_ROW,341,Missing: website
+SPARSE_ROW,342,Missing: website
+SPARSE_ROW,343,Missing: website
+SPARSE_ROW,344,Missing: website
+SPARSE_ROW,345,Missing: website
+SPARSE_ROW,346,Missing: website
+SPARSE_ROW,347,Missing: website
+SPARSE_ROW,348,Missing: website
+SPARSE_ROW,349,Missing: website
+SPARSE_ROW,350,Missing: website
+SPARSE_ROW,351,Missing: website
+SPARSE_ROW,352,Missing: website
+SPARSE_ROW,353,Missing: website
+SPARSE_ROW,354,Missing: website
+SPARSE_ROW,355,Missing: website
+SPARSE_ROW,356,Missing: website
+SPARSE_ROW,357,Missing: website
+SPARSE_ROW,358,Missing: website
+SPARSE_ROW,359,Missing: website
+SPARSE_ROW,360,Missing: website
+SPARSE_ROW,361,Missing: website
+SPARSE_ROW,362,Missing: website
+SPARSE_ROW,363,Missing: website
+SPARSE_ROW,364,Missing: website
+SPARSE_ROW,365,Missing: website
+SPARSE_ROW,366,Missing: website
+SPARSE_ROW,367,Missing: website
+SPARSE_ROW,368,Missing: website
+SPARSE_ROW,369,Missing: website
+SPARSE_ROW,370,"Missing: state, website"
+SPARSE_ROW,371,Missing: website
+SPARSE_ROW,372,Missing: website
+SPARSE_ROW,373,Missing: website
+SPARSE_ROW,374,Missing: website
+SPARSE_ROW,375,Missing: website
+SPARSE_ROW,376,Missing: website
+SPARSE_ROW,377,Missing: website
+SPARSE_ROW,378,Missing: website
+SPARSE_ROW,379,"Missing: state, website"
+SPARSE_ROW,380,Missing: website
+SPARSE_ROW,381,Missing: website
+SPARSE_ROW,382,Missing: website
+SPARSE_ROW,383,Missing: website
+SPARSE_ROW,384,Missing: website
+SPARSE_ROW,385,Missing: website
+SPARSE_ROW,386,Missing: website
+SPARSE_ROW,387,Missing: website
+SPARSE_ROW,388,Missing: website
+SPARSE_ROW,389,Missing: website
+SPARSE_ROW,390,Missing: website
+SPARSE_ROW,391,Missing: website
+SPARSE_ROW,392,Missing: website
+SPARSE_ROW,393,Missing: website
+SPARSE_ROW,394,Missing: website
+SPARSE_ROW,395,Missing: website
+SPARSE_ROW,396,Missing: website
+SPARSE_ROW,397,Missing: website
+SPARSE_ROW,398,Missing: website
+SPARSE_ROW,399,Missing: website
+SPARSE_ROW,400,Missing: website
+SPARSE_ROW,401,Missing: website
+SPARSE_ROW,402,Missing: website
+SPARSE_ROW,403,Missing: website
+SPARSE_ROW,404,Missing: website
+SPARSE_ROW,405,Missing: website
+SPARSE_ROW,406,Missing: website
+SPARSE_ROW,407,Missing: website
+SPARSE_ROW,408,Missing: website
+SPARSE_ROW,409,Missing: website
+SPARSE_ROW,410,Missing: website
+SPARSE_ROW,411,Missing: website
+SPARSE_ROW,412,Missing: website
+SPARSE_ROW,413,Missing: website
+SPARSE_ROW,414,Missing: website
+SPARSE_ROW,415,Missing: website
+SPARSE_ROW,416,Missing: website
+SPARSE_ROW,417,Missing: website
+SPARSE_ROW,418,Missing: website
+SPARSE_ROW,419,Missing: website
+SPARSE_ROW,420,Missing: website
+SPARSE_ROW,421,Missing: website
+SPARSE_ROW,422,Missing: website
+SPARSE_ROW,423,Missing: website
+SPARSE_ROW,424,Missing: website
+SPARSE_ROW,425,Missing: website
+SPARSE_ROW,426,Missing: website
+SPARSE_ROW,427,Missing: website
+SPARSE_ROW,428,Missing: website
+SPARSE_ROW,429,"Missing: state, website"
+SPARSE_ROW,430,Missing: website
+SPARSE_ROW,431,Missing: website
+SPARSE_ROW,432,Missing: website
+SPARSE_ROW,433,Missing: website
+SPARSE_ROW,434,Missing: website
+SPARSE_ROW,435,Missing: website
+SPARSE_ROW,436,Missing: website
+SPARSE_ROW,437,Missing: website
+SPARSE_ROW,438,Missing: website
+SPARSE_ROW,439,Missing: website
+SPARSE_ROW,440,Missing: website
+SPARSE_ROW,441,Missing: website
+SPARSE_ROW,442,Missing: website
+SPARSE_ROW,443,Missing: website
+SPARSE_ROW,444,Missing: website
+SPARSE_ROW,445,Missing: website
+SPARSE_ROW,446,Missing: website
+SPARSE_ROW,447,Missing: website
+SPARSE_ROW,448,Missing: website
+SPARSE_ROW,449,Missing: website
+SPARSE_ROW,450,Missing: website
+SPARSE_ROW,451,Missing: website
+SPARSE_ROW,452,Missing: website
+SPARSE_ROW,453,Missing: website
+SPARSE_ROW,454,Missing: website
+SPARSE_ROW,455,Missing: website
+SPARSE_ROW,456,Missing: website
+SPARSE_ROW,457,Missing: website
+SPARSE_ROW,458,Missing: website
+SPARSE_ROW,459,Missing: website
+SPARSE_ROW,460,Missing: website
+SPARSE_ROW,461,Missing: website
+SPARSE_ROW,462,Missing: website
+SPARSE_ROW,463,Missing: website
+SPARSE_ROW,464,Missing: website
+SPARSE_ROW,465,Missing: website
+SPARSE_ROW,466,Missing: website
+SPARSE_ROW,467,Missing: website
+SPARSE_ROW,468,Missing: website
+SPARSE_ROW,469,Missing: website
+SPARSE_ROW,470,Missing: website
+SPARSE_ROW,471,Missing: website
+SPARSE_ROW,472,Missing: website
+SPARSE_ROW,473,Missing: website
+SPARSE_ROW,474,Missing: website
+SPARSE_ROW,475,Missing: website
+SPARSE_ROW,476,Missing: website
+SPARSE_ROW,477,Missing: website
+SPARSE_ROW,478,Missing: website
+SPARSE_ROW,479,Missing: website
+SPARSE_ROW,480,Missing: website
+SPARSE_ROW,481,Missing: website
+SPARSE_ROW,482,Missing: website
+SPARSE_ROW,483,Missing: website
+SPARSE_ROW,484,Missing: website
+SPARSE_ROW,485,Missing: website
+SPARSE_ROW,486,Missing: website
+SPARSE_ROW,487,Missing: website
+SPARSE_ROW,488,Missing: website
+SPARSE_ROW,489,Missing: website
+SPARSE_ROW,490,Missing: website
+SPARSE_ROW,491,Missing: website
+SPARSE_ROW,492,Missing: website
+SPARSE_ROW,493,Missing: website
+SPARSE_ROW,494,Missing: website
+SPARSE_ROW,495,Missing: website
+SPARSE_ROW,496,Missing: website
+SPARSE_ROW,497,Missing: website
+SPARSE_ROW,498,Missing: website
+SPARSE_ROW,499,Missing: website
+SPARSE_ROW,500,Missing: website
+SPARSE_ROW,501,Missing: website
+SPARSE_ROW,502,Missing: website
+SPARSE_ROW,503,Missing: website
+SPARSE_ROW,504,Missing: website
+SPARSE_ROW,505,Missing: website
+SPARSE_ROW,506,Missing: website
+SPARSE_ROW,507,Missing: website
+SPARSE_ROW,508,Missing: website
+SPARSE_ROW,509,Missing: website
+SPARSE_ROW,510,Missing: website
+SPARSE_ROW,511,Missing: website
+SPARSE_ROW,512,Missing: website
+SPARSE_ROW,513,Missing: website
+SPARSE_ROW,514,Missing: website
+SPARSE_ROW,515,Missing: website
+SPARSE_ROW,516,Missing: website
+SPARSE_ROW,517,Missing: website
+SPARSE_ROW,518,Missing: website
+SPARSE_ROW,519,Missing: website
+SPARSE_ROW,520,Missing: website
+SPARSE_ROW,521,Missing: website
+SPARSE_ROW,522,Missing: website
+SPARSE_ROW,523,Missing: website
+SPARSE_ROW,524,Missing: website
+SPARSE_ROW,525,Missing: website
+SPARSE_ROW,526,Missing: website
+SPARSE_ROW,527,Missing: website
+SPARSE_ROW,528,Missing: website
+SPARSE_ROW,529,Missing: website
+SPARSE_ROW,530,Missing: website
+SPARSE_ROW,531,Missing: website
+SPARSE_ROW,532,Missing: website
+SPARSE_ROW,533,Missing: website
+SPARSE_ROW,534,Missing: website
+SPARSE_ROW,535,Missing: website
+SPARSE_ROW,536,"Missing: ownership, state, website"
+SPARSE_ROW,537,"Missing: state, website"
+SPARSE_ROW,538,"Missing: state, website"
+SPARSE_ROW,539,"Missing: state, website"
+SPARSE_ROW,540,"Missing: state, website"
+SPARSE_ROW,541,"Missing: state, website"
+SPARSE_ROW,542,"Missing: state, website"
+SPARSE_ROW,543,"Missing: state, website"
+SPARSE_ROW,544,"Missing: state, website"
+SPARSE_ROW,545,"Missing: state, website"
+SPARSE_ROW,546,"Missing: state, website"
+SPARSE_ROW,547,"Missing: state, website"
+SPARSE_ROW,548,"Missing: state, website"
+SPARSE_ROW,549,"Missing: state, website"
+SPARSE_ROW,550,"Missing: state, website"
+SPARSE_ROW,551,"Missing: state, website"
+SPARSE_ROW,552,"Missing: state, website"
+SPARSE_ROW,553,"Missing: state, website"
+SPARSE_ROW,554,"Missing: state, website"
+SPARSE_ROW,555,"Missing: state, website"
+SPARSE_ROW,556,"Missing: state, website"
+SPARSE_ROW,557,"Missing: state, website"
+SPARSE_ROW,558,"Missing: state, website"
+SPARSE_ROW,559,"Missing: state, website"
+SPARSE_ROW,560,"Missing: state, website"
+SPARSE_ROW,561,"Missing: state, website"
+SPARSE_ROW,562,"Missing: state, website"
+SPARSE_ROW,563,"Missing: state, website"
+SPARSE_ROW,564,"Missing: state, website"
+SPARSE_ROW,565,"Missing: state, website"
+SPARSE_ROW,566,"Missing: state, website"
+SPARSE_ROW,567,"Missing: state, website"
+SPARSE_ROW,568,"Missing: state, website"
+SPARSE_ROW,569,"Missing: state, website"
+SPARSE_ROW,570,"Missing: state, website"
+SPARSE_ROW,571,"Missing: state, website"
+SPARSE_ROW,572,"Missing: state, website"
+SPARSE_ROW,573,"Missing: state, website"
+SPARSE_ROW,574,"Missing: state, website"
+SPARSE_ROW,575,"Missing: state, website"
+SPARSE_ROW,576,"Missing: state, website"
+SPARSE_ROW,577,"Missing: state, website"
+SPARSE_ROW,578,"Missing: state, website"
+SPARSE_ROW,579,"Missing: state, website"
+SPARSE_ROW,580,"Missing: state, website"
+SPARSE_ROW,581,"Missing: state, website"
+SPARSE_ROW,582,"Missing: state, website"
+SPARSE_ROW,583,"Missing: state, website"
+SPARSE_ROW,584,"Missing: state, website"
+SPARSE_ROW,585,"Missing: state, website"
+SPARSE_ROW,586,"Missing: state, website"
+SPARSE_ROW,587,"Missing: state, website"
+SPARSE_ROW,588,"Missing: state, website"
+SPARSE_ROW,589,"Missing: state, website"
+SPARSE_ROW,590,"Missing: state, website"
+SPARSE_ROW,591,"Missing: state, website"
+SPARSE_ROW,592,"Missing: state, website"
+SPARSE_ROW,593,"Missing: state, website"
+SPARSE_ROW,594,"Missing: state, website"
+SPARSE_ROW,595,"Missing: state, website"
+SPARSE_ROW,596,"Missing: state, website"
+SPARSE_ROW,597,"Missing: state, website"
+SPARSE_ROW,598,"Missing: state, website"
+SPARSE_ROW,599,"Missing: state, website"
+SPARSE_ROW,600,"Missing: state, website"
+SPARSE_ROW,601,"Missing: state, website"
+SPARSE_ROW,602,"Missing: state, website"
+SPARSE_ROW,603,"Missing: state, website"
+SPARSE_ROW,604,"Missing: state, website"
+SPARSE_ROW,605,"Missing: state, website"
+SPARSE_ROW,606,"Missing: state, website"
+SPARSE_ROW,607,"Missing: state, website"
+SPARSE_ROW,608,"Missing: state, website"
+SPARSE_ROW,609,"Missing: state, website"
+SPARSE_ROW,610,"Missing: state, website"
+SPARSE_ROW,611,Missing: website
+SPARSE_ROW,612,Missing: website
+SPARSE_ROW,613,Missing: website
+SPARSE_ROW,614,Missing: website
+SPARSE_ROW,615,Missing: website
+SPARSE_ROW,616,Missing: website
+SPARSE_ROW,617,Missing: website
+SPARSE_ROW,618,Missing: website
+SPARSE_ROW,619,Missing: website
+SPARSE_ROW,620,Missing: website
+SPARSE_ROW,621,Missing: website
+SPARSE_ROW,622,Missing: website
+SPARSE_ROW,623,Missing: website
+SPARSE_ROW,624,Missing: website
+SPARSE_ROW,625,Missing: website
+SPARSE_ROW,626,Missing: website
+SPARSE_ROW,627,Missing: website
+SPARSE_ROW,628,Missing: website
+SPARSE_ROW,629,Missing: website
+SPARSE_ROW,630,Missing: website
+SPARSE_ROW,631,Missing: website
+SPARSE_ROW,632,Missing: website
+SPARSE_ROW,633,Missing: website
+SPARSE_ROW,634,Missing: website
+SPARSE_ROW,635,Missing: website
+SPARSE_ROW,636,Missing: website
+SPARSE_ROW,637,Missing: website
+SPARSE_ROW,638,Missing: website
+SPARSE_ROW,639,Missing: website
+SPARSE_ROW,640,Missing: website
+SPARSE_ROW,641,Missing: website
+SPARSE_ROW,642,Missing: website
+SPARSE_ROW,643,Missing: website
+SPARSE_ROW,644,Missing: website
+SPARSE_ROW,645,Missing: website
+SPARSE_ROW,646,Missing: website
+SPARSE_ROW,647,Missing: website
+SPARSE_ROW,648,Missing: website
+SPARSE_ROW,649,Missing: website
+SPARSE_ROW,650,Missing: website
+SPARSE_ROW,651,Missing: website
+SPARSE_ROW,652,Missing: website
+SPARSE_ROW,653,Missing: website
+SPARSE_ROW,654,Missing: website
+SPARSE_ROW,655,Missing: website
+SPARSE_ROW,656,Missing: website
+SPARSE_ROW,657,Missing: website
+SPARSE_ROW,658,Missing: website
+SPARSE_ROW,659,"Missing: ownership, website"
+SPARSE_ROW,660,Missing: website
+SPARSE_ROW,661,Missing: website
+SPARSE_ROW,662,Missing: website
+SPARSE_ROW,663,Missing: website
+SPARSE_ROW,664,Missing: website
+SPARSE_ROW,665,Missing: website
+SPARSE_ROW,666,Missing: website
+SPARSE_ROW,667,Missing: website
+SPARSE_ROW,668,Missing: website
+SPARSE_ROW,669,Missing: website
+SPARSE_ROW,670,Missing: website
+SPARSE_ROW,671,Missing: website
+SPARSE_ROW,672,Missing: website
+SPARSE_ROW,673,Missing: website
+SPARSE_ROW,674,Missing: website
+SPARSE_ROW,675,Missing: website
+SPARSE_ROW,676,Missing: website
+SPARSE_ROW,677,Missing: website
+SPARSE_ROW,678,Missing: website
+SPARSE_ROW,679,Missing: website
+SPARSE_ROW,680,Missing: website
+SPARSE_ROW,681,Missing: website
+SPARSE_ROW,682,Missing: website
+SPARSE_ROW,683,Missing: website
+SPARSE_ROW,684,Missing: website
+SPARSE_ROW,685,Missing: website
+SPARSE_ROW,686,Missing: website
+SPARSE_ROW,687,"Missing: state, website"
+SPARSE_ROW,688,"Missing: state, website"
+SPARSE_ROW,689,"Missing: state, website"
+SPARSE_ROW,690,"Missing: state, website"
+SPARSE_ROW,691,"Missing: state, website"
+SPARSE_ROW,692,"Missing: state, website"
+SPARSE_ROW,693,"Missing: state, website"
+SPARSE_ROW,694,"Missing: state, website"
+SPARSE_ROW,695,"Missing: state, website"
+SPARSE_ROW,696,"Missing: state, website"
+SPARSE_ROW,697,"Missing: state, website"
+SPARSE_ROW,698,"Missing: state, website"
+SPARSE_ROW,699,"Missing: state, website"
+SPARSE_ROW,700,"Missing: state, website"
+SPARSE_ROW,701,"Missing: state, website"
+SPARSE_ROW,702,"Missing: state, website"
+SPARSE_ROW,703,"Missing: state, website"
+SPARSE_ROW,704,"Missing: state, website"
+SPARSE_ROW,705,"Missing: state, website"
+SPARSE_ROW,706,"Missing: state, website"
+SPARSE_ROW,707,"Missing: state, website"
+SPARSE_ROW,708,"Missing: state, website"
+SPARSE_ROW,709,"Missing: state, website"
+SPARSE_ROW,710,"Missing: state, website"
+SPARSE_ROW,711,"Missing: state, website"
+SPARSE_ROW,712,"Missing: state, website"
+SPARSE_ROW,713,"Missing: state, website"
+SPARSE_ROW,714,"Missing: state, website"
+SPARSE_ROW,715,"Missing: state, website"
+SPARSE_ROW,716,"Missing: state, website"
+SPARSE_ROW,717,"Missing: state, website"
+SPARSE_ROW,718,"Missing: state, website"
+SPARSE_ROW,719,"Missing: state, website"
+SPARSE_ROW,720,"Missing: state, website"
+SPARSE_ROW,721,"Missing: state, website"
+SPARSE_ROW,722,"Missing: state, website"
+SPARSE_ROW,723,"Missing: state, website"
+SPARSE_ROW,724,"Missing: state, website"
+SPARSE_ROW,725,"Missing: state, website"
+SPARSE_ROW,726,"Missing: state, website"
+SPARSE_ROW,727,"Missing: state, website"
+SPARSE_ROW,728,"Missing: state, website"
+SPARSE_ROW,729,"Missing: state, website"
+SPARSE_ROW,730,"Missing: state, website"
+SPARSE_ROW,731,"Missing: state, website"
+SPARSE_ROW,732,"Missing: state, website"
+SPARSE_ROW,733,"Missing: state, website"
+SPARSE_ROW,734,"Missing: state, website"
+SPARSE_ROW,735,"Missing: state, website"
+SPARSE_ROW,736,"Missing: state, website"
+SPARSE_ROW,737,"Missing: state, website"
+SPARSE_ROW,738,"Missing: state, website"
+SPARSE_ROW,739,"Missing: state, website"
+SPARSE_ROW,740,"Missing: state, website"
+SPARSE_ROW,741,"Missing: state, website"
+SPARSE_ROW,742,"Missing: state, website"
+SPARSE_ROW,743,"Missing: state, website"
+SPARSE_ROW,744,"Missing: state, website"
+SPARSE_ROW,745,"Missing: state, website"
+SPARSE_ROW,746,"Missing: ownership, state, website"
+SPARSE_ROW,747,"Missing: ownership, state, website"
+SPARSE_ROW,748,"Missing: ownership, state, website"
+SPARSE_ROW,749,"Missing: ownership, state, website"
+SPARSE_ROW,750,"Missing: state, website"
+SPARSE_ROW,751,"Missing: ownership, state, website"
+SPARSE_ROW,752,"Missing: ownership, state, website"
+SPARSE_ROW,753,"Missing: ownership, state, website"
+SPARSE_ROW,754,"Missing: ownership, state, website"
+SPARSE_ROW,755,Missing: website
+SPARSE_ROW,756,Missing: website
+SPARSE_ROW,757,Missing: website
+SPARSE_ROW,758,Missing: website
+SPARSE_ROW,759,Missing: website
+SPARSE_ROW,760,Missing: website
+SPARSE_ROW,761,Missing: website
+SPARSE_ROW,762,Missing: website
+SPARSE_ROW,763,Missing: website
+SPARSE_ROW,764,Missing: website
+SPARSE_ROW,765,Missing: website
+SPARSE_ROW,766,Missing: website
+SPARSE_ROW,767,Missing: website
+SPARSE_ROW,768,Missing: website
+SPARSE_ROW,769,Missing: website
+SPARSE_ROW,770,Missing: website
+SPARSE_ROW,771,Missing: website
+SPARSE_ROW,772,Missing: website
+SPARSE_ROW,773,Missing: website
+SPARSE_ROW,774,Missing: website
+SPARSE_ROW,775,Missing: website
+SPARSE_ROW,776,Missing: website
+SPARSE_ROW,777,Missing: website
+SPARSE_ROW,778,Missing: website
+SPARSE_ROW,779,Missing: website
+SPARSE_ROW,780,Missing: website
+SPARSE_ROW,781,Missing: website
+SPARSE_ROW,782,Missing: website
+SPARSE_ROW,783,Missing: website
+SPARSE_ROW,784,Missing: website
+SPARSE_ROW,785,Missing: website
+SPARSE_ROW,786,Missing: website
+SPARSE_ROW,787,Missing: website
+SPARSE_ROW,788,Missing: website
+SPARSE_ROW,789,Missing: website
+SPARSE_ROW,790,Missing: website
+SPARSE_ROW,791,Missing: website
+SPARSE_ROW,792,Missing: website
+SPARSE_ROW,793,Missing: website
+SPARSE_ROW,794,Missing: website
+SPARSE_ROW,795,Missing: website
+SPARSE_ROW,796,Missing: website
+SPARSE_ROW,797,Missing: website
+SPARSE_ROW,798,Missing: website
+SPARSE_ROW,799,Missing: website
+SPARSE_ROW,800,Missing: website
+SPARSE_ROW,801,Missing: website
+SPARSE_ROW,802,Missing: website
+SPARSE_ROW,803,Missing: website
+SPARSE_ROW,804,Missing: website
+SPARSE_ROW,805,Missing: website
+SPARSE_ROW,806,Missing: website
+SPARSE_ROW,807,Missing: website
+SPARSE_ROW,808,Missing: website
+SPARSE_ROW,809,Missing: website
+SPARSE_ROW,810,Missing: website
+SPARSE_ROW,811,Missing: website
+SPARSE_ROW,812,Missing: website
+SPARSE_ROW,813,Missing: website
+SPARSE_ROW,814,Missing: website
+SPARSE_ROW,815,Missing: website
+SPARSE_ROW,816,Missing: website
+SPARSE_ROW,817,Missing: website
+SPARSE_ROW,818,Missing: website
+SPARSE_ROW,819,Missing: website
+SPARSE_ROW,820,Missing: website
+SPARSE_ROW,821,Missing: website
+SPARSE_ROW,822,Missing: website
+SPARSE_ROW,823,Missing: website
+SPARSE_ROW,824,Missing: website
+SPARSE_ROW,825,Missing: website
+SPARSE_ROW,826,Missing: website
+SPARSE_ROW,827,Missing: website
+SPARSE_ROW,828,Missing: website
+SPARSE_ROW,829,Missing: website
+SPARSE_ROW,830,Missing: website
+SPARSE_ROW,831,Missing: website
+SPARSE_ROW,832,Missing: website
+SPARSE_ROW,833,Missing: website
+SPARSE_ROW,834,Missing: website
+SPARSE_ROW,835,"Missing: state, website"
+SPARSE_ROW,836,"Missing: state, website"
+SPARSE_ROW,837,"Missing: state, website"
+SPARSE_ROW,838,"Missing: state, website"
+SPARSE_ROW,839,"Missing: state, website"
+SPARSE_ROW,840,"Missing: state, website"
+SPARSE_ROW,841,"Missing: state, website"
+SPARSE_ROW,842,"Missing: state, website"
+SPARSE_ROW,843,"Missing: state, website"
+SPARSE_ROW,844,"Missing: state, website"
+SPARSE_ROW,845,"Missing: state, website"
+SPARSE_ROW,846,"Missing: state, website"
+SPARSE_ROW,847,"Missing: state, website"
+SPARSE_ROW,848,"Missing: state, website"
+SPARSE_ROW,849,"Missing: state, website"
+SPARSE_ROW,850,"Missing: state, website"
+SPARSE_ROW,851,"Missing: state, website"
+SPARSE_ROW,852,"Missing: state, website"
+SPARSE_ROW,853,"Missing: state, website"
+SPARSE_ROW,854,"Missing: state, website"
+SPARSE_ROW,855,"Missing: state, website"
+SPARSE_ROW,856,"Missing: state, website"
+SPARSE_ROW,857,"Missing: state, website"
+SPARSE_ROW,858,"Missing: state, website"
+SPARSE_ROW,859,"Missing: state, website"
+SPARSE_ROW,860,"Missing: state, website"
+SPARSE_ROW,861,"Missing: state, website"
+SPARSE_ROW,862,"Missing: state, website"
+SPARSE_ROW,863,"Missing: state, website"
+SPARSE_ROW,864,"Missing: state, website"
+SPARSE_ROW,865,"Missing: state, website"
+SPARSE_ROW,866,"Missing: state, website"
+SPARSE_ROW,867,"Missing: state, website"
+SPARSE_ROW,868,"Missing: ownership, state, website"
+SPARSE_ROW,869,"Missing: ownership, state, website"
+SPARSE_ROW,870,"Missing: ownership, state, website"
+SPARSE_ROW,871,"Missing: ownership, state, website"
+SPARSE_ROW,872,"Missing: state, website"
+SPARSE_ROW,873,"Missing: state, website"
+SPARSE_ROW,874,"Missing: ownership, state, website"
+SPARSE_ROW,875,"Missing: ownership, state, website"
+SPARSE_ROW,876,"Missing: state, website"
+SPARSE_ROW,877,Missing: website
+SPARSE_ROW,878,Missing: website
+SPARSE_ROW,879,Missing: website
+SPARSE_ROW,880,Missing: website
+SPARSE_ROW,881,Missing: website
+SPARSE_ROW,882,Missing: website
+SPARSE_ROW,883,Missing: website
+SPARSE_ROW,884,Missing: website
+SPARSE_ROW,885,Missing: website
+SPARSE_ROW,886,Missing: website
+SPARSE_ROW,887,Missing: website
+SPARSE_ROW,888,Missing: website
+SPARSE_ROW,889,Missing: website
+SPARSE_ROW,890,Missing: website
+SPARSE_ROW,891,Missing: website
+SPARSE_ROW,892,Missing: website
+SPARSE_ROW,893,Missing: website
+SPARSE_ROW,894,Missing: website
+SPARSE_ROW,895,Missing: website
+SPARSE_ROW,896,Missing: website
+SPARSE_ROW,897,Missing: website
+SPARSE_ROW,898,Missing: website
+SPARSE_ROW,899,Missing: website
+SPARSE_ROW,900,Missing: website
+SPARSE_ROW,901,Missing: website
+SPARSE_ROW,902,Missing: website
+SPARSE_ROW,903,Missing: website
+SPARSE_ROW,904,Missing: website
+SPARSE_ROW,905,Missing: website
+SPARSE_ROW,906,Missing: website
+SPARSE_ROW,907,Missing: website
+SPARSE_ROW,908,Missing: website
+SPARSE_ROW,909,Missing: website
+SPARSE_ROW,910,Missing: website
+SPARSE_ROW,911,Missing: website
+SPARSE_ROW,912,Missing: website
+SPARSE_ROW,913,Missing: website
+SPARSE_ROW,914,Missing: website
+SPARSE_ROW,915,Missing: website
+SPARSE_ROW,916,Missing: website
+SPARSE_ROW,917,Missing: website
+SPARSE_ROW,918,Missing: website
+SPARSE_ROW,919,Missing: website
+SPARSE_ROW,920,Missing: website
+SPARSE_ROW,921,Missing: website
+SPARSE_ROW,922,Missing: website
+SPARSE_ROW,923,Missing: website
+SPARSE_ROW,924,Missing: website
+SPARSE_ROW,925,Missing: website
+SPARSE_ROW,926,Missing: website
+SPARSE_ROW,927,Missing: website
+SPARSE_ROW,928,Missing: website
+SPARSE_ROW,929,Missing: website
+SPARSE_ROW,930,Missing: website
+SPARSE_ROW,931,Missing: website
+SPARSE_ROW,932,Missing: website
+SPARSE_ROW,933,Missing: website
+SPARSE_ROW,934,Missing: website
+SPARSE_ROW,935,Missing: website
+SPARSE_ROW,936,Missing: website
+SPARSE_ROW,937,Missing: website
+SPARSE_ROW,938,Missing: website
+SPARSE_ROW,939,Missing: website
+SPARSE_ROW,940,Missing: website
+SPARSE_ROW,941,Missing: website
+SPARSE_ROW,942,"Missing: ownership, website"
+SPARSE_ROW,943,Missing: website
+SPARSE_ROW,944,Missing: website
+SPARSE_ROW,945,Missing: website
+SPARSE_ROW,946,Missing: website
+SPARSE_ROW,947,Missing: website
+SPARSE_ROW,948,Missing: website
+SPARSE_ROW,949,Missing: website
+SPARSE_ROW,950,Missing: website
+SPARSE_ROW,951,Missing: website
+SPARSE_ROW,952,Missing: website
+SPARSE_ROW,953,Missing: website
+SPARSE_ROW,954,Missing: website
+SPARSE_ROW,955,Missing: website
+SPARSE_ROW,956,Missing: website
+SPARSE_ROW,957,Missing: website
+SPARSE_ROW,958,Missing: website
+SPARSE_ROW,959,Missing: website
+SPARSE_ROW,960,Missing: website
+SPARSE_ROW,961,Missing: website
+SPARSE_ROW,962,Missing: website
+SPARSE_ROW,963,Missing: website
+SPARSE_ROW,964,Missing: website
+SPARSE_ROW,965,Missing: website
+SPARSE_ROW,966,Missing: website
+SPARSE_ROW,967,Missing: website
+SPARSE_ROW,968,Missing: website
+SPARSE_ROW,969,Missing: website
+SPARSE_ROW,970,Missing: website
+SPARSE_ROW,971,Missing: website
+SPARSE_ROW,972,Missing: website
+SPARSE_ROW,973,Missing: website
+SPARSE_ROW,974,Missing: website
+SPARSE_ROW,975,Missing: website
+SPARSE_ROW,976,Missing: website
+SPARSE_ROW,977,Missing: website
+SPARSE_ROW,978,Missing: website
+SPARSE_ROW,979,Missing: website
+SPARSE_ROW,980,Missing: website
+SPARSE_ROW,981,Missing: website
+SPARSE_ROW,982,Missing: website
+SPARSE_ROW,983,Missing: website
+SPARSE_ROW,984,Missing: website
+SPARSE_ROW,985,Missing: website
+SPARSE_ROW,986,Missing: website
+SPARSE_ROW,987,Missing: website
+SPARSE_ROW,988,Missing: website
+SPARSE_ROW,989,Missing: website
+SPARSE_ROW,990,Missing: website
+SPARSE_ROW,991,Missing: website
+SPARSE_ROW,992,Missing: website
+SPARSE_ROW,993,Missing: website
+SPARSE_ROW,994,Missing: website
+SPARSE_ROW,995,Missing: website
+SPARSE_ROW,996,Missing: website
+SPARSE_ROW,997,Missing: website
+SPARSE_ROW,998,Missing: website
+SPARSE_ROW,999,Missing: website
+SPARSE_ROW,1000,Missing: website
+SPARSE_ROW,1001,Missing: website
+SPARSE_ROW,1002,Missing: website
+SPARSE_ROW,1003,Missing: website
+SPARSE_ROW,1004,Missing: website
+SPARSE_ROW,1005,Missing: website
+SPARSE_ROW,1006,Missing: website
+SPARSE_ROW,1007,Missing: website
+SPARSE_ROW,1008,Missing: website
+SPARSE_ROW,1009,Missing: website
+SPARSE_ROW,1010,Missing: website
+SPARSE_ROW,1011,Missing: website
+SPARSE_ROW,1012,Missing: website
+SPARSE_ROW,1013,Missing: website
+SPARSE_ROW,1014,Missing: website
+SPARSE_ROW,1015,Missing: website
+SPARSE_ROW,1016,Missing: website
+SPARSE_ROW,1017,Missing: website
+SPARSE_ROW,1018,Missing: website
+SPARSE_ROW,1019,Missing: website
+SPARSE_ROW,1020,Missing: website
+SPARSE_ROW,1021,Missing: website
+SPARSE_ROW,1022,Missing: website
+SPARSE_ROW,1023,Missing: website
+SPARSE_ROW,1024,Missing: website
+SPARSE_ROW,1025,Missing: website
+SPARSE_ROW,1026,Missing: website
+SPARSE_ROW,1027,Missing: website
+SPARSE_ROW,1028,Missing: website
+SPARSE_ROW,1029,Missing: website
+SPARSE_ROW,1030,Missing: website
+SPARSE_ROW,1031,Missing: website
+SPARSE_ROW,1032,Missing: website
+SPARSE_ROW,1033,Missing: website
+SPARSE_ROW,1034,Missing: website
+SPARSE_ROW,1035,Missing: website
+SPARSE_ROW,1036,Missing: website
+SPARSE_ROW,1037,Missing: website
+SPARSE_ROW,1038,Missing: website
+SPARSE_ROW,1039,Missing: website
+SPARSE_ROW,1040,Missing: website
+SPARSE_ROW,1041,Missing: website
+SPARSE_ROW,1042,Missing: website
+SPARSE_ROW,1043,Missing: website
+SPARSE_ROW,1044,Missing: website
+SPARSE_ROW,1045,Missing: website
+SPARSE_ROW,1046,Missing: website
+SPARSE_ROW,1047,Missing: website
+SPARSE_ROW,1048,Missing: website
+SPARSE_ROW,1049,Missing: website
+SPARSE_ROW,1050,Missing: website
+SPARSE_ROW,1051,Missing: website
+SPARSE_ROW,1052,Missing: website
+SPARSE_ROW,1053,Missing: website
+SPARSE_ROW,1054,Missing: website
+SPARSE_ROW,1055,Missing: website
+SPARSE_ROW,1056,Missing: website
+SPARSE_ROW,1057,Missing: website
+SPARSE_ROW,1058,Missing: website
+SPARSE_ROW,1059,Missing: website
+SPARSE_ROW,1060,Missing: website
+SPARSE_ROW,1061,Missing: website
+SPARSE_ROW,1062,Missing: website
+SPARSE_ROW,1063,"Missing: ownership, website"
+SPARSE_ROW,1064,Missing: website
+SPARSE_ROW,1065,Missing: website
+SPARSE_ROW,1066,Missing: website
+SPARSE_ROW,1067,Missing: website
+SPARSE_ROW,1068,Missing: website
+SPARSE_ROW,1069,Missing: website
+SPARSE_ROW,1070,Missing: website
+SPARSE_ROW,1071,Missing: website
+SPARSE_ROW,1072,Missing: website
+SPARSE_ROW,1073,Missing: website
+SPARSE_ROW,1074,Missing: website
+SPARSE_ROW,1075,Missing: website
+SPARSE_ROW,1076,Missing: website
+SPARSE_ROW,1077,Missing: website
+SPARSE_ROW,1078,Missing: website
+SPARSE_ROW,1079,Missing: website
+SPARSE_ROW,1080,Missing: website
+SPARSE_ROW,1081,Missing: website
+SPARSE_ROW,1082,Missing: website
+SPARSE_ROW,1083,Missing: website
+SPARSE_ROW,1084,Missing: website
+SPARSE_ROW,1085,Missing: website
+SPARSE_ROW,1086,Missing: website
+SPARSE_ROW,1087,Missing: website
+SPARSE_ROW,1088,Missing: website
+SPARSE_ROW,1089,Missing: website
+SPARSE_ROW,1090,Missing: website
+SPARSE_ROW,1091,Missing: website
+SPARSE_ROW,1092,Missing: website
+SPARSE_ROW,1093,Missing: website
+SPARSE_ROW,1094,Missing: website
+SPARSE_ROW,1095,Missing: website
+SPARSE_ROW,1096,Missing: website
+SPARSE_ROW,1097,Missing: ownership
+SPARSE_ROW,1098,Missing: website
+SPARSE_ROW,1099,Missing: website
+SPARSE_ROW,1102,Missing: website
+SPARSE_ROW,1104,Missing: website
+SPARSE_ROW,1105,Missing: website
+SPARSE_ROW,1106,Missing: website
+SPARSE_ROW,1107,Missing: website
+SPARSE_ROW,1108,Missing: website
+SPARSE_ROW,1109,Missing: website
+SPARSE_ROW,1110,Missing: website
+SPARSE_ROW,1111,Missing: website
+SPARSE_ROW,1113,Missing: website
+SPARSE_ROW,1115,Missing: website
+SPARSE_ROW,1116,Missing: website
+SPARSE_ROW,1117,"Missing: ownership, website"
+SPARSE_ROW,1118,Missing: website
+SPARSE_ROW,1119,Missing: website
+SPARSE_ROW,1120,Missing: website
+SPARSE_ROW,1121,Missing: website
+SPARSE_ROW,1122,Missing: website
+SPARSE_ROW,1124,Missing: website
+SPARSE_ROW,1125,Missing: website
+SPARSE_ROW,1126,"Missing: ownership, website"
+SPARSE_ROW,1127,Missing: website
+SPARSE_ROW,1129,Missing: website
+SPARSE_ROW,1130,Missing: website
+SPARSE_ROW,1131,Missing: website
+SPARSE_ROW,1132,Missing: website
+SPARSE_ROW,1134,Missing: website
+SPARSE_ROW,1135,Missing: website
+SPARSE_ROW,1136,Missing: website
+SPARSE_ROW,1137,Missing: website
+SPARSE_ROW,1140,Missing: website
+SPARSE_ROW,1146,Missing: website
+SPARSE_ROW,1147,Missing: website
+SPARSE_ROW,1149,Missing: website
+SPARSE_ROW,1150,Missing: website
+SPARSE_ROW,1151,Missing: website
+SPARSE_ROW,1152,Missing: website
+SPARSE_ROW,1153,Missing: website
+SPARSE_ROW,1156,Missing: website
+SPARSE_ROW,1159,Missing: website
+SPARSE_ROW,1160,Missing: website
+SPARSE_ROW,1162,Missing: website
+SPARSE_ROW,1164,Missing: website
+SPARSE_ROW,1165,Missing: website
+SPARSE_ROW,1166,Missing: website
+SPARSE_ROW,1168,Missing: website
+SPARSE_ROW,1169,Missing: website
+SPARSE_ROW,1170,Missing: website
+SPARSE_ROW,1171,Missing: website
+SPARSE_ROW,1172,Missing: website
+SPARSE_ROW,1173,Missing: website
+SPARSE_ROW,1176,Missing: website
+SPARSE_ROW,1178,Missing: website
+SPARSE_ROW,1179,Missing: website
+SPARSE_ROW,1180,Missing: website
+SPARSE_ROW,1181,Missing: website
+SPARSE_ROW,1184,Missing: website
+SPARSE_ROW,1185,Missing: website
+SPARSE_ROW,1186,Missing: website
+SPARSE_ROW,1187,Missing: website
+SPARSE_ROW,1188,Missing: website
+SPARSE_ROW,1191,Missing: website
+SPARSE_ROW,1192,Missing: ownership
+SPARSE_ROW,1194,Missing: ownership
+SPARSE_ROW,1195,Missing: website
+SPARSE_ROW,1196,Missing: ownership
+SPARSE_ROW,1199,Missing: website
+SPARSE_ROW,1200,Missing: website
+SPARSE_ROW,1202,Missing: website
+SPARSE_ROW,1203,Missing: website
+SPARSE_ROW,1205,Missing: website
+SPARSE_ROW,1206,Missing: website
+SPARSE_ROW,1208,Missing: ownership
+SPARSE_ROW,1210,Missing: website
+SPARSE_ROW,1212,Missing: website
+SPARSE_ROW,1214,Missing: website
+SPARSE_ROW,1216,Missing: website
+SPARSE_ROW,1223,Missing: website
+SPARSE_ROW,1224,Missing: website
+SPARSE_ROW,1225,Missing: website
+SPARSE_ROW,1226,Missing: website
+SPARSE_ROW,1227,Missing: website
+SPARSE_ROW,1229,Missing: website
+SPARSE_ROW,1230,Missing: website
+SPARSE_ROW,1231,"Missing: ownership, website"
+SPARSE_ROW,1232,Missing: website
+SPARSE_ROW,1234,Missing: website
+SPARSE_ROW,1235,Missing: website
+SPARSE_ROW,1238,Missing: website
+SPARSE_ROW,1239,Missing: website
+SPARSE_ROW,1240,Missing: website
+SPARSE_ROW,1241,"Missing: ownership, website"
+SPARSE_ROW,1243,Missing: website
+SPARSE_ROW,1244,"Missing: ownership, website"
+SPARSE_ROW,1246,Missing: website
+SPARSE_ROW,1248,Missing: website
+SPARSE_ROW,1249,Missing: website
+SPARSE_ROW,1250,Missing: website
+SPARSE_ROW,1251,Missing: website
+SPARSE_ROW,1252,Missing: website
+SPARSE_ROW,1255,"Missing: ownership, website"
+SPARSE_ROW,1257,Missing: website
+SPARSE_ROW,1258,"Missing: ownership, website"
+SPARSE_ROW,1259,Missing: website
+SPARSE_ROW,1261,"Missing: ownership, website"
+SPARSE_ROW,1263,Missing: website
+SPARSE_ROW,1264,Missing: ownership
+SPARSE_ROW,1265,Missing: website
+SPARSE_ROW,1267,Missing: website
+SPARSE_ROW,1270,Missing: website
+SPARSE_ROW,1273,Missing: website
+SPARSE_ROW,1274,Missing: website
+SPARSE_ROW,1276,Missing: website
+SPARSE_ROW,1277,Missing: website
+SPARSE_ROW,1278,Missing: website
+SPARSE_ROW,1279,Missing: website
+SPARSE_ROW,1280,Missing: website
+SPARSE_ROW,1281,"Missing: ownership, website"
+SPARSE_ROW,1282,Missing: website
+SPARSE_ROW,1284,Missing: website
+SPARSE_ROW,1285,Missing: website
+SPARSE_ROW,1286,Missing: ownership
+SPARSE_ROW,1287,"Missing: ownership, website"
+SPARSE_ROW,1289,Missing: ownership
+SPARSE_ROW,1290,Missing: website
+SPARSE_ROW,1291,Missing: ownership
+SPARSE_ROW,1293,Missing: website
+SPARSE_ROW,1294,Missing: website
+SPARSE_ROW,1295,Missing: website
+SPARSE_ROW,1298,Missing: website
+SPARSE_ROW,1299,Missing: website
+SPARSE_ROW,1300,Missing: website
+SPARSE_ROW,1303,Missing: website
+SPARSE_ROW,1304,Missing: website
+SPARSE_ROW,1306,Missing: website
+SPARSE_ROW,1311,"Missing: ownership, website"
+SPARSE_ROW,1312,Missing: website
+SPARSE_ROW,1315,"Missing: ownership, website"
+SPARSE_ROW,1316,Missing: website
+SPARSE_ROW,1317,Missing: website
+SPARSE_ROW,1318,Missing: website
+SPARSE_ROW,1319,Missing: website
+SPARSE_ROW,1321,Missing: website
+SPARSE_ROW,1322,Missing: website
+SPARSE_ROW,1323,Missing: website
+SPARSE_ROW,1325,Missing: website
+SPARSE_ROW,1327,Missing: website
+SPARSE_ROW,1328,Missing: website
+SPARSE_ROW,1329,Missing: website
+SPARSE_ROW,1330,Missing: website
+SPARSE_ROW,1331,Missing: website
+SPARSE_ROW,1334,Missing: website
+SPARSE_ROW,1336,Missing: website
+SPARSE_ROW,1338,"Missing: ownership, website"
+SPARSE_ROW,1339,Missing: website
+SPARSE_ROW,1342,Missing: website
+SPARSE_ROW,1343,Missing: website
+SPARSE_ROW,1344,Missing: website
+SPARSE_ROW,1345,Missing: website
+SPARSE_ROW,1346,Missing: website
+SPARSE_ROW,1352,"Missing: ownership, website"
+SPARSE_ROW,1353,Missing: website
+SPARSE_ROW,1356,Missing: website
+SPARSE_ROW,1357,"Missing: ownership, website"
+UPGRADE_NO_MATCH_FOUND,383,"'Delta State Polytechnic, Ozoro, Delta State' says it's now 'Delta State University of Science And Technology', no matching university row found in this dataset. Needs a manual call."
+UPGRADE_MATCH_FOUND,401;131,"'Lagos State Polytechnic, Ikorodu' says it's now 'Lagos State University of Science and Technology', matches existing row 131 ('Lagos State University of Science and Technology Ikorodu'). Likely the same institution, do not import both."
+CROSS_REFERENCE_NO_MATCH,1097,"NCCE row 'Abubakar Tatari Polytechnic' (category: Polytechnics offering NCE) is polytechnic-flavored but no match found, likely fine as a standalone COLLEGE_OF_EDUCATION entry, worth a quick look."
+CROSS_REFERENCE_MATCH_FOUND,1231;397,"NCCE row 'Hassan Usman Katsina Polytechnic' (category: Polytechnics offering NCE) matches polytechnic row 397 ('Hassan Usman Katsina Polytechnic, Katshina'). Likely the same institution, recommend discarding this NCCE row."
+CROSS_REFERENCE_MATCH_FOUND,1255;393,"NCCE row 'Jigawa State Polytechnic' (category: Polytechnics offering NCE) matches polytechnic row 393 ('Jigawa State Polytechnic, Dutse'). Likely the same institution, recommend discarding this NCCE row."
+CROSS_REFERENCE_NO_MATCH,1258,"NCCE row 'Kaduna Polytechnics' (category: Polytechnics offering NCE) is polytechnic-flavored but no match found, likely fine as a standalone COLLEGE_OF_EDUCATION entry, worth a quick look."
+CROSS_REFERENCE_MATCH_FOUND,1261;395,"NCCE row 'Kano State Polytechnic' (category: Polytechnics offering NCE) matches polytechnic row 395 ('Kano State Polytechnic, Kano'). Likely the same institution, recommend discarding this NCCE row."
+CROSS_REFERENCE_NO_MATCH,1264,"NCCE row 'Kebbi State Polytechnic' (category: Polytechnics offering NCE) is polytechnic-flavored but no match found, likely fine as a standalone COLLEGE_OF_EDUCATION entry, worth a quick look."
+CROSS_REFERENCE_MATCH_FOUND,1291;394,"NCCE row 'Nuhu Bamalli Polytechnic' (category: Polytechnics offering NCE) matches polytechnic row 394 ('Nuhu Bamalli Polytechnic, Zaria'). Likely the same institution, recommend discarding this NCCE row."
+CROSS_REFERENCE_NO_MATCH,1311,"NCCE row 'Plateau State Polytechnic' (category: Polytechnics offering NCE) is polytechnic-flavored but no match found, likely fine as a standalone COLLEGE_OF_EDUCATION entry, worth a quick look."
+CROSS_REFERENCE_NO_MATCH,1315,"NCCE row 'Ramat Polytechnic' (category: Polytechnics offering NCE) is polytechnic-flavored but no match found, likely fine as a standalone COLLEGE_OF_EDUCATION entry, worth a quick look."
+CROSS_REFERENCE_NO_MATCH,1338,"NCCE row 'The Polytechnic Iree, Osun State' (category: Polytechnics offering NCE) is polytechnic-flavored but no match found, likely fine as a standalone COLLEGE_OF_EDUCATION entry, worth a quick look."
+CROSS_REFERENCE_NO_MATCH,1352,"NCCE row 'Waziri Umaru Federal Polytechnic' (category: Polytechnics offering NCE) is polytechnic-flavored but no match found, likely fine as a standalone COLLEGE_OF_EDUCATION entry, worth a quick look."
+POSSIBLE_DUPLICATE,376;1097,"'Abubakar Tatari Ali Polytechnic, Bauchi' ((NBTE) STATE POLYTECHNICS.md) vs 'Abubakar Tatari Polytechnic' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1138;1205,"'Climax College of Education, Bauchi' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education Bauchi' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,782;784,"'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,782;976,"'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+LIKELY_EXACT_DUPLICATE,784;976,"'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+LIKELY_EXACT_DUPLICATE,788;793,"'AREWA AMBASSADOR INTERNATIONAL COLLEGE OF HEALTH SCIENCE AND TECHNOLOGY ZARIA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Arewa Ambassador International College of Health Science and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=1.00"
+POSSIBLE_DUPLICATE,395;1261,"'Kano State Polytechnic, Kano' ((NBTE) STATE POLYTECHNICS.md) vs 'Kano State Polytechnic' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.90"
+POSSIBLE_DUPLICATE,690;997,"'Aminu Dabo College of Health Sciences and Technology, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Jameel Chiroma College of Health Science and Technology, Kano' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,708;709,"'Kano State College of Health Sciences and Technology, B.U.K Road' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Kano State College of Health Sciences and Technology, Sani Marshall Rd.' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,795;985,"'Flagship College of Nursing Science, Bichi Kano.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Flagship Collage of Nursing Sciences, Bichi, Kano State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.91"
+POSSIBLE_DUPLICATE,795;990,"'Flagship College of Nursing Science, Bichi Kano.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Flagship College of Nursing Sciences, Bichi, Kano State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.93"
+POSSIBLE_DUPLICATE,869;870,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Kano State College of Nursing Sciences Dambatta' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,869;871,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Kano State College of Nursing Scinnces Gwarzo' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,870;871,"'Kano State College of Nursing Sciences Dambatta' ((NBTE) COLLEGES OF NURSING.md) vs 'Kano State College of Nursing Scinnces Gwarzo' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+LIKELY_EXACT_DUPLICATE,985;990,"'Flagship Collage of Nursing Sciences, Bichi, Kano State' ((NBTE) COLLEGES OF NURSING.md) vs 'Flagship College of Nursing Sciences, Bichi, Kano State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.98"
+LIKELY_EXACT_DUPLICATE,986;989,"'Alhassan Ibrahim Dawanau Collage of Health Sciences and Technology, Hotoro, Kano, Kano State' ((NBTE) COLLEGES OF NURSING.md) vs 'Alhassan Ibrahim Dawanau College of Health Sciences and Technology, Hotoro, Kano, Kano State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.99"
+POSSIBLE_DUPLICATE,986;991,"'Alhassan Ibrahim Dawanau Collage of Health Sciences and Technology, Hotoro, Kano, Kano State' ((NBTE) COLLEGES OF NURSING.md) vs 'Alhassan Ibrahim Dawanau Collage of Health Sciences and Technology, Hotoro, Kano,' ((NBTE) COLLEGES OF NURSING.md), ratio=0.93"
+LIKELY_EXACT_DUPLICATE,987;988,"'Emirates Collage of Nursing Sciences, Tudun Yola, Kabuga Satellite Town, Kano, Kano State' ((NBTE) COLLEGES OF NURSING.md) vs 'Emirates College of Nursing Sciences, Tudun Yola, Kabuga Satellite Town, Kano, Kano State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.99"
+POSSIBLE_DUPLICATE,989;991,"'Alhassan Ibrahim Dawanau College of Health Sciences and Technology, Hotoro, Kano, Kano State' ((NBTE) COLLEGES OF NURSING.md) vs 'Alhassan Ibrahim Dawanau Collage of Health Sciences and Technology, Hotoro, Kano,' ((NBTE) COLLEGES OF NURSING.md), ratio=0.92"
+POSSIBLE_DUPLICATE,993;1002,"'Hamdala College of Nursing Sciences Kano, Kano State' ((NBTE) COLLEGES OF NURSING.md) vs 'Nafisatu College of Nursing Sciences, Kwankwaso, Kano State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,1108;1112,"'Al-fajr College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Al-Mustafa College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.90"
+POSSIBLE_DUPLICATE,1108;1120,"'Al-fajr College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Annur College of Education Kano' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.88"
+POSSIBLE_DUPLICATE,1108;1170,"'Al-fajr College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Dala College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.92"
+POSSIBLE_DUPLICATE,1112;1120,"'Al-Mustafa College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Annur College of Education Kano' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1112;1170,"'Al-Mustafa College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Dala College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.88"
+POSSIBLE_DUPLICATE,1120;1170,"'Annur College of Education Kano' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Dala College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.89"
+POSSIBLE_DUPLICATE,1170;1320,"'Dala College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md) vs 'S. Light College of Education, Kano' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.86"
+LIKELY_EXACT_DUPLICATE,853;1088,"'Shehu Sule College of Nursing & Midwifery, Damaturu, Yobe State' ((NBTE) COLLEGES OF NURSING.md) vs 'Shehu Sule College of Nursing and Midwifery, Damaturu, Yobe State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.97"
+POSSIBLE_DUPLICATE,550;551,"'Federal College of Forestry Resources Management, Fugar' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal College of Forestry Resources Management, Ishiagu' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.91"
+POSSIBLE_DUPLICATE,550;552,"'Federal College of Forestry Resources Management, Fugar' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal College of Forestry Resources Management, Maiduguri' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.93"
+POSSIBLE_DUPLICATE,551;552,"'Federal College of Forestry Resources Management, Ishiagu' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal College of Forestry Resources Management, Maiduguri' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.91"
+POSSIBLE_DUPLICATE,551;629,"'Federal College of Forestry Resources Management, Ishiagu' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal College of Forest Resources Management, Ishiagu, Ebonyi State' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.88"
+POSSIBLE_DUPLICATE,555;556,"'Federal College of Land Resources Technology, Kuru' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal College of Land Resources Technology, Owerri' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.92"
+POSSIBLE_DUPLICATE,252;286,"'Newgate University, MInna, Niger State.' ((NUC) PRIVATE UNIVERSITIES.md) vs 'El-Amin University, Minna, Niger State' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.83"
+POSSIBLE_DUPLICATE,815;1036,"'Newgate College of Health Technology, Minna, Niger State' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Delight College of Health Sciences and Technology Minna, Niger State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1035;1042,"'Standard College of Nursing Sciences, Minna, Niger State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Degalaxy College of Nursing Sciences, Minna, Niger State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,393;1255,"'Jigawa State Polytechnic, Dutse' ((NBTE) STATE POLYTECHNICS.md) vs 'Jigawa State Polytechnic' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.89"
+POSSIBLE_DUPLICATE,865;971,"'Iqra College of Nursing Sciences Dutse, Jigawa State' ((NBTE) COLLEGES OF NURSING.md) vs 'Belba College of Nursing Sciences Jigawa State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,968;969,"'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Birnin Kudu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,968;970,"'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Hadejia' ((NBTE) COLLEGES OF NURSING.md), ratio=0.91"
+POSSIBLE_DUPLICATE,969;970,"'Jigawa State College of Nursing Sciences, Birnin Kudu' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Hadejia' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,397;1231,"'Hassan Usman Katsina Polytechnic, Katshina' ((NBTE) STATE POLYTECHNICS.md) vs 'Hassan Usman Katsina Polytechnic' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.88"
+POSSIBLE_DUPLICATE,797;801,"'Katsina State College of Health Science & Technology, Kankia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KATSINA STATE COLLEGE HEALTH SCIENCES and TECHNOLOGY, DAURA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,799;802,"'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.90"
+POSSIBLE_DUPLICATE,799;803,"'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cognate Community College of Health Science and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,799;1011,"'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Khuddam College of Health Science and Technology, Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,800;802,"'Kebram College of Health Science and Technology, Katsina, Katsina State' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,800;1011,"'Kebram College of Health Science and Technology, Katsina, Katsina State' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Khuddam College of Health Science and Technology, Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+LIKELY_EXACT_DUPLICATE,802;1011,"'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Khuddam College of Health Science and Technology, Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.96"
+POSSIBLE_DUPLICATE,803;1011,"'Cognate Community College of Health Science and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Khuddam College of Health Science and Technology, Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1005;1007,"'ESSEMM College of Nursing Sciences, Katsina, Katsina State' ((NBTE) COLLEGES OF NURSING.md) vs 'North West College of Nursing Sciences, Katsina, Katsina State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,1005;1008,"'ESSEMM College of Nursing Sciences, Katsina, Katsina State' ((NBTE) COLLEGES OF NURSING.md) vs 'Bawo College of Nursing Sciences, Daura, Katsina State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1007;1008,"'North West College of Nursing Sciences, Katsina, Katsina State' ((NBTE) COLLEGES OF NURSING.md) vs 'Bawo College of Nursing Sciences, Daura, Katsina State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,954;955,"'Jewel College of Nursing Sciences, Gombe, Gombe State' ((NBTE) COLLEGES OF NURSING.md) vs 'Adamu Fura College of Nursing Sciences, Gombe, Gombe State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,954;956,"'Jewel College of Nursing Sciences, Gombe, Gombe State' ((NBTE) COLLEGES OF NURSING.md) vs 'Jewel College of Nursing Sciences, Gombe' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,1136;1250,"'Christian College of Education, Gombe' ((NCCE) COLLEGES OF EDUCATION.md) vs 'JIBWIS College of Education Gombe' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,403;404,"'Nasarawa State College of Agriculture, Science and Technology Lafia' ((NBTE) STATE POLYTECHNICS.md) vs 'College of Agriculture, Science and Technology, Lafia' ((NBTE) STATE POLYTECHNICS.md), ratio=0.87"
+POSSIBLE_DUPLICATE,403;714,"'Nasarawa State College of Agriculture, Science and Technology Lafia' ((NBTE) STATE POLYTECHNICS.md) vs 'Nasarawa State College of Health Science and Technology, Keffi' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+LIKELY_EXACT_DUPLICATE,1029;1030,"'Famsas Collage Health Sciences and Technology, Keffi, Nasarawa State' ((NBTE) COLLEGES OF NURSING.md) vs 'Famsas College of Health Sciences and Technology, Keffi, Nasarawa State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.96"
+LIKELY_EXACT_DUPLICATE,1014;1015,"'U.E.C College of Nursing Sciences, Ochadamu, Kogi State' ((NBTE) COLLEGES OF NURSING.md) vs 'U.E.C College of Nursing Sciences, Ochadamu, Kogi State' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+POSSIBLE_DUPLICATE,1014;1017,"'U.E.C College of Nursing Sciences, Ochadamu, Kogi State' ((NBTE) COLLEGES OF NURSING.md) vs 'ECWA College of Nursing Sciences, Egbe, Kogi State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1015;1017,"'U.E.C College of Nursing Sciences, Ochadamu, Kogi State' ((NBTE) COLLEGES OF NURSING.md) vs 'ECWA College of Nursing Sciences, Egbe, Kogi State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1265;1266,"'Kogi East College of Education' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Kogi State College of Education, Ankpa' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1265;1267,"'Kogi East College of Education' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Kogi State College of Education, Kabba' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1266;1267,"'Kogi State College of Education, Ankpa' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Kogi State College of Education, Kabba' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.92"
+POSSIBLE_DUPLICATE,617;618,"'International Institute of Tourism, Yenagoa, Bayelsa State' ((NBTE) ALLIED INSTITUTIONS.md) vs 'International Institute of Tourism and Hospitality Yenagoa, Bayelsa State' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.88"
+POSSIBLE_DUPLICATE,694;760,"'Bayelsa State College of Health Technology, Otuogidi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Bayelsa state college of Health Technology, Otuogidi-Ogbia, Bayelsa state' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,843;969,"'Kebbi State College of Nursing Sciences, Birnin Kebbi' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Birnin Kudu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,398;1264,"'Kebbi State Polytechnic Dakingari' ((NBTE) STATE POLYTECHNICS.md) vs 'Kebbi State Polytechnic' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.82"
+POSSIBLE_DUPLICATE,22;182,"'National Open University of Nigeria, Abuja' ((NUC) FEDERAL UNIVERSITIES.md) vs 'Nile University of Nigeria, Abuja' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.88"
+POSSIBLE_DUPLICATE,22;267,"'National Open University of Nigeria, Abuja' ((NUC) FEDERAL UNIVERSITIES.md) vs 'Canadian University of Nigeria, Abuja' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.86"
+POSSIBLE_DUPLICATE,54;173,"'National University of Science and Technology, Abuja' ((NUC) FEDERAL UNIVERSITIES.md) vs 'African University of Science and Technology, Abuja' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.87"
+POSSIBLE_DUPLICATE,177;296,"'Veritas University, Abuja' ((NUC) PRIVATE UNIVERSITIES.md) vs 'Eranova University, Abuja' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.83"
+POSSIBLE_DUPLICATE,177;322,"'Veritas University, Abuja' ((NUC) PRIVATE UNIVERSITIES.md) vs 'City University Abuja' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.84"
+POSSIBLE_DUPLICATE,182;267,"'Nile University of Nigeria, Abuja' ((NUC) PRIVATE UNIVERSITIES.md) vs 'Canadian University of Nigeria, Abuja' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.88"
+POSSIBLE_DUPLICATE,182;326,"'Nile University of Nigeria, Abuja' ((NUC) PRIVATE UNIVERSITIES.md) vs 'Ummah University of Nigeria, Abuja' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.86"
+POSSIBLE_DUPLICATE,267;326,"'Canadian University of Nigeria, Abuja' ((NUC) PRIVATE UNIVERSITIES.md) vs 'Ummah University of Nigeria, Abuja' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.84"
+LIKELY_EXACT_DUPLICATE,480;634,"'LeadTech School of Management and Technology, Abuja, FCT' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'LeadTech School of Management and Technology, Abuja' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.96"
+LIKELY_EXACT_DUPLICATE,778;949,"'Horizon College of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Horizon Collage of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja' ((NBTE) COLLEGES OF NURSING.md), ratio=0.98"
+LIKELY_EXACT_DUPLICATE,778;950,"'Horizon College of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Horizon College of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+LIKELY_EXACT_DUPLICATE,949;950,"'Horizon Collage of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja' ((NBTE) COLLEGES OF NURSING.md) vs 'Horizon College of Nursing Sciences, Anagada, Gwagwalada, FCT Abuja' ((NBTE) COLLEGES OF NURSING.md), ratio=0.98"
+POSSIBLE_DUPLICATE,951;952,"'Oasis College of Nursing Sciences, Kuje, FCT Abuja' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Jahi, FCT Abuja' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,644;745,"'Khemsafe College of Management, Science, and Technology, Kaduna, Kaduna State' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Penfield College of Health Sciences and Technology, Kaduna, Kaduna State' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,745;792,"'Penfield College of Health Sciences and Technology, Kaduna, Kaduna State' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Charity College of Health Science and Technology, Mando, Kaduna State' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,786;787,"'Beijing College of Health Sciences & Technology, Kaduna' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+LIKELY_EXACT_DUPLICATE,790;978,"'Al-kausar College of Health Technology Foundation, Kaduna' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Kausar College of Health Technology Foundation, Kaduna' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+POSSIBLE_DUPLICATE,979;980,"'Kaduna State College of Nursing & Midwifery Pambegua' ((NBTE) COLLEGES OF NURSING.md) vs 'Kaduna State College of Nursing & Midwifery Tudun Wada' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,979;981,"'Kaduna State College of Nursing & Midwifery Pambegua' ((NBTE) COLLEGES OF NURSING.md) vs 'Kaduna State College of Nursing & Midwifery Kafanchan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,980;981,"'Kaduna State College of Nursing & Midwifery Tudun Wada' ((NBTE) COLLEGES OF NURSING.md) vs 'Kaduna State College of Nursing & Midwifery Kafanchan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+LIKELY_EXACT_DUPLICATE,513;514,"'First City Polytechnic, Abeokuta, Ogun State' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'First City Polytechnic, Abeokuta, Ogun State' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=1.00"
+POSSIBLE_DUPLICATE,457;608,"'Intercontinental College of Technology, Makurdi, Benue State' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'International College of Technology, Makurdi, Benue State' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.90"
+POSSIBLE_DUPLICATE,207;222,"'Kola Daisi University Ibadan, Oyo State' ((NUC) PRIVATE UNIVERSITIES.md) vs 'Dominion University Ibadan, Oyo State' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.84"
+LIKELY_EXACT_DUPLICATE,209;222,"'Dominican University Ibadan Oyo State' ((NUC) PRIVATE UNIVERSITIES.md) vs 'Dominion University Ibadan, Oyo State' ((NUC) PRIVATE UNIVERSITIES.md), ratio=0.96"
+POSSIBLE_DUPLICATE,419;531,"'The Polytechnic, Ibadan' ((NBTE) STATE POLYTECHNICS.md) vs 'Tower Polytechnic, Ibadan' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=0.91"
+POSSIBLE_DUPLICATE,527;531,"'Bolmor Polytechnic, Ibadan' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Tower Polytechnic, Ibadan' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1067;1070,"'CAI College of Nursing Sciences, Ibadan, Oyo State' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,809;1023,"'Yusjib College of Health Sciences and Technology, Ilorin, Kwara' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Grandplus College of Health Sciences and Technology, Ilorin, Kwara State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,1221;1282,"'First De-Wise College of Education, Ilorin' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Muhyideen College of Education, Ilorin' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1234;1282,"'His Grace College of Education, Ilorin' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Muhyideen College of Education, Ilorin' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,34;39,"'University of Jos' ((NUC) FEDERAL UNIVERSITIES.md) vs 'University of Uyo' ((NUC) FEDERAL UNIVERSITIES.md), ratio=0.88"
+POSSIBLE_DUPLICATE,916;928,"'Anchor College of Nursing Sciences, Asaba, Delta State' ((NBTE) COLLEGES OF NURSING.md) vs 'Soarster College of Nursing Science, Asaba, Delta State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,917;918,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta College of Nursing Sciences Agbor Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,917;919,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,917;920,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Warri Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,917;921,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Sapele Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,917;922,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Warri Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.94"
+POSSIBLE_DUPLICATE,917;923,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Eku Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.92"
+POSSIBLE_DUPLICATE,917;924,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Asaba Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.94"
+POSSIBLE_DUPLICATE,918;919,"'Delta College of Nursing Sciences Agbor Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,918;920,"'Delta College of Nursing Sciences Agbor Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Warri Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,918;921,"'Delta College of Nursing Sciences Agbor Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Sapele Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,919;920,"'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Warri Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.94"
+POSSIBLE_DUPLICATE,919;921,"'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Sapele Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.95"
+POSSIBLE_DUPLICATE,919;922,"'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Warri Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,919;923,"'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Eku Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,919;924,"'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Asaba Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,919;928,"'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Soarster College of Nursing Science, Asaba, Delta State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,920;921,"'Delta State College of Nursing Sciences Warri Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Sapele Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.93"
+POSSIBLE_DUPLICATE,920;922,"'Delta State College of Nursing Sciences Warri Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Warri Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,920;923,"'Delta State College of Nursing Sciences Warri Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Eku Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,920;924,"'Delta State College of Nursing Sciences Warri Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Asaba Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,921;922,"'Delta State College of Nursing Sciences Sapele Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Warri Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,921;923,"'Delta State College of Nursing Sciences Sapele Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Eku Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,921;924,"'Delta State College of Nursing Sciences Sapele Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Asaba Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,922;923,"'Delta State College of Nursing Sciences, Warri Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Eku Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.92"
+POSSIBLE_DUPLICATE,922;924,"'Delta State College of Nursing Sciences, Warri Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Asaba Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.92"
+POSSIBLE_DUPLICATE,923;924,"'Delta State College of Nursing Sciences, Eku Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Asaba Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.92"
+POSSIBLE_DUPLICATE,44;48,"'Federal University of Health Sciences, Otukpo, Benue State' ((NUC) FEDERAL UNIVERSITIES.md) vs 'Federal University of Health Sciences, Azare, Bauchi State' ((NUC) FEDERAL UNIVERSITIES.md), ratio=0.84"
+POSSIBLE_DUPLICATE,44;49,"'Federal University of Health Sciences, Otukpo, Benue State' ((NUC) FEDERAL UNIVERSITIES.md) vs 'Federal University of Health Sciences, Ila Orangun, Osun State' ((NUC) FEDERAL UNIVERSITIES.md), ratio=0.83"
+POSSIBLE_DUPLICATE,48;49,"'Federal University of Health Sciences, Azare, Bauchi State' ((NUC) FEDERAL UNIVERSITIES.md) vs 'Federal University of Health Sciences, Ila Orangun, Osun State' ((NUC) FEDERAL UNIVERSITIES.md), ratio=0.83"
+POSSIBLE_DUPLICATE,48;56,"'Federal University of Health Sciences, Azare, Bauchi State' ((NUC) FEDERAL UNIVERSITIES.md) vs 'Federal University of Health Sciences Kwale, Delta State' ((NUC) FEDERAL UNIVERSITIES.md), ratio=0.86"
+POSSIBLE_DUPLICATE,56;57,"'Federal University of Health Sciences Kwale, Delta State' ((NUC) FEDERAL UNIVERSITIES.md) vs 'Federal University of Health Sciences, Katsina' ((NUC) FEDERAL UNIVERSITIES.md), ratio=0.82"
+POSSIBLE_DUPLICATE,57;63,"'Federal University of Health Sciences, Katsina' ((NUC) FEDERAL UNIVERSITIES.md) vs 'Federal University of Allied Health Sciences, Enugu' ((NUC) FEDERAL UNIVERSITIES.md), ratio=0.82"
+POSSIBLE_DUPLICATE,690;704,"'Aminu Dabo College of Health Sciences and Technology, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,690;718,"'Aminu Dabo College of Health Sciences and Technology, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,690;782,"'Aminu Dabo College of Health Sciences and Technology, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,690;787,"'Aminu Dabo College of Health Sciences and Technology, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,690;799,"'Aminu Dabo College of Health Sciences and Technology, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.82"
+POSSIBLE_DUPLICATE,690;802,"'Aminu Dabo College of Health Sciences and Technology, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,690;1085,"'Aminu Dabo College of Health Sciences and Technology, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,704;740,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Shehu Idris College of Health Sciences and Technology, Makarfi' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,704;741,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Zamfara State College of Health Sciences and Tchnology, Tsafe' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.82"
+POSSIBLE_DUPLICATE,704;781,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,704;782,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,704;786,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Beijing College of Health Sciences & Technology, Kaduna' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,704;787,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,704;799,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,704;802,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,704;996,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,704;1085,"'Emirates College of Health Sciences and Technology, Kabuga' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,708;718,"'Kano State College of Health Sciences and Technology, B.U.K Road' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.82"
+POSSIBLE_DUPLICATE,708;719,"'Kano State College of Health Sciences and Technology, B.U.K Road' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Oyo State College of Health Sciences and Technology, Eleyele, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.82"
+POSSIBLE_DUPLICATE,708;787,"'Kano State College of Health Sciences and Technology, B.U.K Road' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,708;801,"'Kano State College of Health Sciences and Technology, B.U.K Road' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KATSINA STATE COLLEGE HEALTH SCIENCES and TECHNOLOGY, DAURA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,717;823,"'Ogun State Polytechnic of Health and Allied Sciences, Ilese-Ijebu' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Ogun Polytechnic of Health and Allied Sciences, Ilese Ijebu' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.93"
+POSSIBLE_DUPLICATE,718;781,"'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,718;782,"'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,718;784,"'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,718;787,"'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,718;802,"'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,718;814,"'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Jubilation College of Health Sciences and Technology LTD' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,718;976,"'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,718;1037,"'Ondo College of Health Sciences and Technology, Ondo' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,740;782,"'Shehu Idris College of Health Sciences and Technology, Makarfi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,740;799,"'Shehu Idris College of Health Sciences and Technology, Makarfi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,740;802,"'Shehu Idris College of Health Sciences and Technology, Makarfi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,741;802,"'Zamfara State College of Health Sciences and Tchnology, Tsafe' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,745;1055,"'Penfield College of Health Sciences and Technology, Kaduna, Kaduna State' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Ikirun College of Health Sciences and Technology, Ikirun, Osun State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,781;782,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,781;784,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,781;787,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,781;799,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,781;802,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,781;805,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'College of Health Sciences and Technology, Jega, Kebbi State' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,781;976,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,781;996,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,781;1037,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,781;1085,"'College of Health Sciences and Technology, Hadejia' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,782;787,"'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,782;799,"'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,782;802,"'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.90"
+POSSIBLE_DUPLICATE,782;996,"'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,782;1085,"'Dagamas College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,784;787,"'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,784;799,"'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,784;802,"'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,784;996,"'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,784;1037,"'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,784;1085,"'AL-HAROON COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, ZARIA.' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,786;799,"'Beijing College of Health Sciences & Technology, Kaduna' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,787;799,"'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,787;801,"'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KATSINA STATE COLLEGE HEALTH SCIENCES and TECHNOLOGY, DAURA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,787;802,"'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,787;976,"'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,787;996,"'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,787;1037,"'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,787;1085,"'ASSAM COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, KADUNA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,799;976,"'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,799;1037,"'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,799;1085,"'Cherish College of Health Sciences and Technology, Katsina' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,802;809,"'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Yusjib College of Health Sciences and Technology, Ilorin, Kwara' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.82"
+POSSIBLE_DUPLICATE,802;814,"'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Jubilation College of Health Sciences and Technology LTD' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.82"
+POSSIBLE_DUPLICATE,802;976,"'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,802;996,"'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,802;1037,"'KUDAMS COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY KATSINA' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,814;976,"'Jubilation College of Health Sciences and Technology LTD' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,814;996,"'Jubilation College of Health Sciences and Technology LTD' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,814;1037,"'Jubilation College of Health Sciences and Technology LTD' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,838;839,"'College of Nursing Sciences, ABUTH, Zaria' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Tambuwal' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,838;912,"'College of Nursing Sciences, ABUTH, Zaria' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,838;1092,"'College of Nursing Sciences, ABUTH, Zaria' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,839;868,"'College of Nursing Sciences Tambuwal' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Tambuwal, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,839;912,"'College of Nursing Sciences Tambuwal' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,839;913,"'College of Nursing Sciences Tambuwal' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Monguno' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,839;952,"'College of Nursing Sciences Tambuwal' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Jahi, FCT Abuja' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,839;1051,"'College of Nursing Sciences Tambuwal' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,839;1092,"'College of Nursing Sciences Tambuwal' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,843;937,"'Kebbi State College of Nursing Sciences, Birnin Kebbi' ((NBTE) COLLEGES OF NURSING.md) vs 'Edo State College of Nursing Sciences, Benin City' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,844;856,"'Lagos State College of Nursing Sciences, Igando' ((NBTE) COLLEGES OF NURSING.md) vs 'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,844;869,"'Lagos State College of Nursing Sciences, Igando' ((NBTE) COLLEGES OF NURSING.md) vs 'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,844;947,"'Lagos State College of Nursing Sciences, Igando' ((NBTE) COLLEGES OF NURSING.md) vs 'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,844;961,"'Lagos State College of Nursing Sciences, Igando' ((NBTE) COLLEGES OF NURSING.md) vs 'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,844;1031,"'Lagos State College of Nursing Sciences, Igando' ((NBTE) COLLEGES OF NURSING.md) vs 'Nasarawa State College of Nursing Sciences, Lafia' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,844;1038,"'Lagos State College of Nursing Sciences, Igando' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,844;1040,"'Lagos State College of Nursing Sciences, Igando' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,855;856,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,855;869,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,855;901,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Adamu Adamu College Of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,855;947,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,855;961,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,855;999,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Dansharif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,855;1026,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Kwara State College of Nursing Sciences, Oke-Ode' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,855;1031,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Nasarawa State College of Nursing Sciences, Lafia' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,855;1038,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,855;1040,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,855;1053,"'Anambra State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,856;869,"'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md) vs 'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,856;961,"'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md) vs 'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,856;969,"'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Birnin Kudu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,856;1026,"'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md) vs 'Kwara State College of Nursing Sciences, Oke-Ode' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,856;1031,"'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md) vs 'Nasarawa State College of Nursing Sciences, Lafia' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,856;1038,"'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,856;1040,"'Kwara State College of Nursing Sciences Ilorin' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,859;1070,"'College of Nursing Sciences, Adazi Nnukwu' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,859;1092,"'College of Nursing Sciences, Adazi Nnukwu' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,860;881,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Marjorie Bash College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,860;886,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Maurid College of Nursing Sciences, Mbiaso' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,860;901,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Adamu Adamu College Of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,860;907,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,860;925,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Royal Mira College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,860;953,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,860;959,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,860;962,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,860;975,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Almadina College of Nursing Sciences, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,860;999,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Dansharif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,860;1012,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,860;1053,"'Al-Maarif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,861;863,"'College of Nursing Sciences Mbano Imo State' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Alor Anambra State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,861;868,"'College of Nursing Sciences Mbano Imo State' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Tambuwal, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,861;909,"'College of Nursing Sciences Mbano Imo State' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Maiduguri, Borno state' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,861;993,"'College of Nursing Sciences Mbano Imo State' ((NBTE) COLLEGES OF NURSING.md) vs 'Hamdala College of Nursing Sciences Kano, Kano State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,861;1067,"'College of Nursing Sciences Mbano Imo State' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,862;874,"'College of Nursing Sciences, St. Gerald Catholic Hospital Kakuri Kaduna State' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences St. Camillus, Catholic Hospital, Uromi, Edo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,863;894,"'College of Nursing Sciences, Alor Anambra State' ((NBTE) COLLEGES OF NURSING.md) vs 'Millennium College of Nursing Sciences, Awka Anambra State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,868;1083,"'College of Nursing Sciences, Tambuwal, Sokoto State' ((NBTE) COLLEGES OF NURSING.md) vs 'Gamji College of Nursing Sciences, Sokoto, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,868;1084,"'College of Nursing Sciences, Tambuwal, Sokoto State' ((NBTE) COLLEGES OF NURSING.md) vs 'Gamji College of Nursing Sciences, Sokoto, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,869;905,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,869;947,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,869;961,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,869;968,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,869;970,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Hadejia' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,869;1026,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Kwara State College of Nursing Sciences, Oke-Ode' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,869;1038,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,869;1040,"'Kano State College of Nursing Sciences Madobi' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,870;968,"'Kano State College of Nursing Sciences Dambatta' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,870;1040,"'Kano State College of Nursing Sciences Dambatta' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,881;907,"'Marjorie Bash College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,881;1012,"'Marjorie Bash College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,881;1053,"'Marjorie Bash College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,883;919,"'Abia State College of Nursing Sciences, Aba Campus, Abia State' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Asaba Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,883;920,"'Abia State College of Nursing Sciences, Aba Campus, Abia State' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Warri Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,883;921,"'Abia State College of Nursing Sciences, Aba Campus, Abia State' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences Sapele Campus Delta State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,883;924,"'Abia State College of Nursing Sciences, Aba Campus, Abia State' ((NBTE) COLLEGES OF NURSING.md) vs 'Delta State College of Nursing Sciences, Asaba Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,884;965,"'Zamaki College of Health Sciences and Technology, Yola, Adamawa State' ((NBTE) COLLEGES OF NURSING.md) vs 'G-City College of Health Sciences and Technology, Gwaram, Jigawa State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,884;1030,"'Zamaki College of Health Sciences and Technology, Yola, Adamawa State' ((NBTE) COLLEGES OF NURSING.md) vs 'Famsas College of Health Sciences and Technology, Keffi, Nasarawa State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,886;907,"'Maurid College of Nursing Sciences, Mbiaso' ((NBTE) COLLEGES OF NURSING.md) vs 'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,886;959,"'Maurid College of Nursing Sciences, Mbiaso' ((NBTE) COLLEGES OF NURSING.md) vs 'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,886;1001,"'Maurid College of Nursing Sciences, Mbiaso' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,886;1053,"'Maurid College of Nursing Sciences, Mbiaso' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,886;1070,"'Maurid College of Nursing Sciences, Mbiaso' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,888;890,"'College of Nursing Sciences, University of Uyo Teaching Hospital (UUTH)' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, University of Uyo Teaching Hospital' ((NBTE) COLLEGES OF NURSING.md), ratio=0.95"
+POSSIBLE_DUPLICATE,888;910,"'College of Nursing Sciences, University of Uyo Teaching Hospital (UUTH)' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, University of Maiduguri Teaching Hospital ,Maiduguri' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,888;1079,"'College of Nursing Sciences, University of Uyo Teaching Hospital (UUTH)' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, University of Port- Harcourt Teaching Hospital' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,890;910,"'College of Nursing Sciences, University of Uyo Teaching Hospital' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, University of Maiduguri Teaching Hospital ,Maiduguri' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,890;1069,"'College of Nursing Sciences, University of Uyo Teaching Hospital' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Bowen University Teaching Hospital, Ogbomosho' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,890;1079,"'College of Nursing Sciences, University of Uyo Teaching Hospital' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, University of Port- Harcourt Teaching Hospital' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,897;902,"'Margaret College of Nursing Sciences, Amichi' ((NBTE) COLLEGES OF NURSING.md) vs 'Al-Huda College of Nursing Sciences, Bauchi' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,899;1053,"'Alive College of Nursing Sciences, Nnewi' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,899;1070,"'Alive College of Nursing Sciences, Nnewi' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,901;904,"'Adamu Adamu College Of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'SA'ADU ZUNGUR COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,901;1053,"'Adamu Adamu College Of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,902;975,"'Al-Huda College of Nursing Sciences, Bauchi' ((NBTE) COLLEGES OF NURSING.md) vs 'Almadina College of Nursing Sciences, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,903;1090,"'Mama Yalwa College of Nursing Sciences, Federal Medical Centre Misau' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Federal Medical Centre, Nguru' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,904;907,"'SA'ADU ZUNGUR COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,904;962,"'SA'ADU ZUNGUR COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,904;1012,"'SA'ADU ZUNGUR COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,904;1053,"'SA'ADU ZUNGUR COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,905;912,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,905;926,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'ST. PIO COLLEGE OF NURSING SCIENCES, ASABA' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,905;953,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,905;959,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,905;962,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,905;1001,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,905;1010,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'Nexus College of Nursing Sciences, Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,905;1012,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,905;1051,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,905;1053,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,905;1092,"'NKST COLLEGE OF NURSING SCIENCES, MKAR' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,907;925,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Royal Mira College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,907;953,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,907;959,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,907;962,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,907;975,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Almadina College of Nursing Sciences, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,907;999,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Dansharif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,907;1001,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,907;1012,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,907;1053,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.91"
+POSSIBLE_DUPLICATE,907;1070,"'Makurdi College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,908;912,"'Labe College of Nursing Sciences, Gboko' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,908;913,"'Labe College of Nursing Sciences, Gboko' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Monguno' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,908;956,"'Labe College of Nursing Sciences, Gboko' ((NBTE) COLLEGES OF NURSING.md) vs 'Jewel College of Nursing Sciences, Gombe' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,908;1001,"'Labe College of Nursing Sciences, Gboko' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,908;1012,"'Labe College of Nursing Sciences, Gboko' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,908;1051,"'Labe College of Nursing Sciences, Gboko' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,908;1053,"'Labe College of Nursing Sciences, Gboko' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,910;1079,"'College of Nursing Sciences, University of Maiduguri Teaching Hospital ,Maiduguri' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences, University of Port- Harcourt Teaching Hospital' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,912;913,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Monguno' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,912;953,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,912;956,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'Jewel College of Nursing Sciences, Gombe' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,912;964,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Umulogho, Imo' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,912;1001,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,912;1012,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,912;1051,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,912;1053,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,912;1092,"'College of Nursing Sciences, Gwoza' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.91"
+POSSIBLE_DUPLICATE,913;959,"'College of Nursing Sciences Monguno' ((NBTE) COLLEGES OF NURSING.md) vs 'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,913;1001,"'College of Nursing Sciences Monguno' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,913;1092,"'College of Nursing Sciences Monguno' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,917;1044,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Ogun State College of Nursing Sciences, Ijebu-Ode Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,917;1045,"'Delta State College of Nursing Sciences, Agbor Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Ogun State College of Nursing Sciences, Ilaro Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,922;1045,"'Delta State College of Nursing Sciences, Warri Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Ogun State College of Nursing Sciences, Ilaro Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,923;1044,"'Delta State College of Nursing Sciences, Eku Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Ogun State College of Nursing Sciences, Ijebu-Ode Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,923;1045,"'Delta State College of Nursing Sciences, Eku Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Ogun State College of Nursing Sciences, Ilaro Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,924;1045,"'Delta State College of Nursing Sciences, Asaba Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Ogun State College of Nursing Sciences, Ilaro Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,925;927,"'Royal Mira College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Royal Mira College of Nursing Sciences, Owa-Oyibu, Delta' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,925;975,"'Royal Mira College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Almadina College of Nursing Sciences, Zaria' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,925;1012,"'Royal Mira College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,925;1053,"'Royal Mira College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,926;1012,"'ST. PIO COLLEGE OF NURSING SCIENCES, ASABA' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,926;1070,"'ST. PIO COLLEGE OF NURSING SCIENCES, ASABA' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,926;1092,"'ST. PIO COLLEGE OF NURSING SCIENCES, ASABA' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,933;947,"'Ebonyi State College of Nursing Sciences, Uburu' ((NBTE) COLLEGES OF NURSING.md) vs 'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,933;961,"'Ebonyi State College of Nursing Sciences, Uburu' ((NBTE) COLLEGES OF NURSING.md) vs 'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,933;968,"'Ebonyi State College of Nursing Sciences, Uburu' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,933;1038,"'Ebonyi State College of Nursing Sciences, Uburu' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,933;1040,"'Ebonyi State College of Nursing Sciences, Uburu' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,937;1040,"'Edo State College of Nursing Sciences, Benin City' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,942;947,"'ENUGU STATE COLLEGE OF NURSING SCIENCES ENUGU, PARK LANE' ((NBTE) COLLEGES OF NURSING.md) vs 'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,943;946,"'Peaceland College of Nursing Sciences, Enugu, Enugu State' ((NBTE) COLLEGES OF NURSING.md) vs 'La Vera College of Nursing Sciences, Nsukka, Enugu State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,947;961,"'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md) vs 'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,947;968,"'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,947;1038,"'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,947;1040,"'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,947;1045,"'Enugu State College of Nursing Sciences, Awgu' ((NBTE) COLLEGES OF NURSING.md) vs 'Ogun State College of Nursing Sciences, Ilaro Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,948;951,"'YAGONGWO COLLEGE OF NURSING SCIENCES, KUJE-ABUJA' ((NBTE) COLLEGES OF NURSING.md) vs 'Oasis College of Nursing Sciences, Kuje, FCT Abuja' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,953;959,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,953;962,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,953;999,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Dansharif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,953;1001,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,953;1012,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,953;1025,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Heartsavers College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,953;1038,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,953;1051,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,953;1053,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,953;1070,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,953;1092,"'FCT College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,954;1017,"'Jewel College of Nursing Sciences, Gombe, Gombe State' ((NBTE) COLLEGES OF NURSING.md) vs 'ECWA College of Nursing Sciences, Egbe, Kogi State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,956;1051,"'Jewel College of Nursing Sciences, Gombe' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,959;961,"'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,959;1001,"'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,959;1051,"'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,959;1053,"'Merit College Of Nursing Sciences Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,960;1018,"'Mother of Mercy College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'MINISTRY OF MERCY COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.91"
+POSSIBLE_DUPLICATE,961;968,"'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,961;1001,"'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,961;1038,"'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,961;1040,"'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,961;1041,"'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Kontagora' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,961;1053,"'Imo State College of Nursing Sciences, Orlu' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,962;999,"'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Dansharif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,962;1001,"'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,962;1012,"'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,962;1038,"'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,962;1053,"'Kings College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,964;1092,"'College of Nursing Sciences Umulogho, Imo' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,968;1031,"'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md) vs 'Nasarawa State College of Nursing Sciences, Lafia' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,968;1038,"'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,968;1040,"'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,968;1041,"'Jigawa State College of Nursing Sciences, Babura' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Kontagora' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,969;1040,"'Jigawa State College of Nursing Sciences, Birnin Kudu' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,970;1026,"'Jigawa State College of Nursing Sciences, Hadejia' ((NBTE) COLLEGES OF NURSING.md) vs 'Kwara State College of Nursing Sciences, Oke-Ode' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,970;1031,"'Jigawa State College of Nursing Sciences, Hadejia' ((NBTE) COLLEGES OF NURSING.md) vs 'Nasarawa State College of Nursing Sciences, Lafia' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,970;1038,"'Jigawa State College of Nursing Sciences, Hadejia' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,970;1040,"'Jigawa State College of Nursing Sciences, Hadejia' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,971;1067,"'Belba College of Nursing Sciences Jigawa State' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,975;1001,"'Almadina College of Nursing Sciences, Zaria' ((NBTE) COLLEGES OF NURSING.md) vs 'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,975;1070,"'Almadina College of Nursing Sciences, Zaria' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,976;996,"'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md) vs 'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,976;1037,"'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md) vs 'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,976;1085,"'Al-Haroon College of Health Sciences and Technology, Zaria' ((NBTE) COLLEGES OF NURSING.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,982;1049,"'Throneroom College of Nursing Sciences LTD' ((NBTE) COLLEGES OF NURSING.md) vs 'CHEP COLLEGE OF NURSING SCIENCES LTD_GTE' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,982;1051,"'Throneroom College of Nursing Sciences LTD' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,996;1085,"'Al-Ikhlas College of Health Sciences and Technology, Wudil' ((NBTE) COLLEGES OF NURSING.md) vs 'Caliphate College of Health Sciences and Technology, Shuni' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,999;1012,"'Dansharif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,999;1053,"'Dansharif College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,1001;1010,"'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md) vs 'Nexus College of Nursing Sciences, Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,1001;1012,"'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md) vs 'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1001;1051,"'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1001;1053,"'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,1001;1070,"'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,1001;1092,"'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1001;1093,"'IMAN COLLEGE OF NURSING SCIENCES, KANO' ((NBTE) COLLEGES OF NURSING.md) vs 'Ba'illa College of Nursing Sciences, Kaura Namoda' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1012;1025,"'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'Heartsavers College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,1012;1038,"'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,1012;1051,"'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1012;1053,"'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.92"
+POSSIBLE_DUPLICATE,1012;1070,"'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1012;1092,"'SAJO COLLEGE OF NURSING SCIENCES' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1017;1064,"'ECWA College of Nursing Sciences, Egbe, Kogi State' ((NBTE) COLLEGES OF NURSING.md) vs 'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1017;1065,"'ECWA College of Nursing Sciences, Egbe, Kogi State' ((NBTE) COLLEGES OF NURSING.md) vs 'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1017;1066,"'ECWA College of Nursing Sciences, Egbe, Kogi State' ((NBTE) COLLEGES OF NURSING.md) vs 'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1017;1067,"'ECWA College of Nursing Sciences, Egbe, Kogi State' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1021;1023,"'Adeshina College of Health Sciences and Technology, Share, Kwara State' ((NBTE) COLLEGES OF NURSING.md) vs 'Grandplus College of Health Sciences and Technology, Ilorin, Kwara State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1021;1030,"'Adeshina College of Health Sciences and Technology, Share, Kwara State' ((NBTE) COLLEGES OF NURSING.md) vs 'Famsas College of Health Sciences and Technology, Keffi, Nasarawa State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1025;1053,"'Heartsavers College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+LIKELY_EXACT_DUPLICATE,1028;1033,"'THE SIGNATURE COLLEGE OF NURSING SCIENCES, KARU, NASARAWA STATE' ((NBTE) COLLEGES OF NURSING.md) vs 'Signature College of Nursing Sciences Karu, Nassarawa State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.96"
+POSSIBLE_DUPLICATE,1031;1038,"'Nasarawa State College of Nursing Sciences, Lafia' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1031;1040,"'Nasarawa State College of Nursing Sciences, Lafia' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1032;1033,"'Kariyoma College of Nursing Sciences Lafia, Nassarawa State' ((NBTE) COLLEGES OF NURSING.md) vs 'Signature College of Nursing Sciences Karu, Nassarawa State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1034;1035,"'Dako College of Nursing Sciences, Suleja, Niger State' ((NBTE) COLLEGES OF NURSING.md) vs 'Standard College of Nursing Sciences, Minna, Niger State.' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1034;1042,"'Dako College of Nursing Sciences, Suleja, Niger State' ((NBTE) COLLEGES OF NURSING.md) vs 'Degalaxy College of Nursing Sciences, Minna, Niger State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1037;1055,"'Crown College of Health Sciences and Technology, Minna' ((NBTE) COLLEGES OF NURSING.md) vs 'Ikirun College of Health Sciences and Technology, Ikirun, Osun State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1038;1040,"'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md), ratio=0.94"
+POSSIBLE_DUPLICATE,1038;1041,"'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Kontagora' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,1038;1053,"'Niger State College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1039;1049,"'Ya'ilu College of Nursing Sciences LTD/GTE' ((NBTE) COLLEGES OF NURSING.md) vs 'CHEP COLLEGE OF NURSING SCIENCES LTD_GTE' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1040;1041,"'Niger State College of Nursing Sciences, Bida' ((NBTE) COLLEGES OF NURSING.md) vs 'Niger State College of Nursing Sciences, Kontagora' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,1044;1045,"'Ogun State College of Nursing Sciences, Ijebu-Ode Campus' ((NBTE) COLLEGES OF NURSING.md) vs 'Ogun State College of Nursing Sciences, Ilaro Campus' ((NBTE) COLLEGES OF NURSING.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1049;1051,"'CHEP COLLEGE OF NURSING SCIENCES LTD_GTE' ((NBTE) COLLEGES OF NURSING.md) vs 'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md), ratio=0.89"
+POSSIBLE_DUPLICATE,1051;1053,"'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md) vs 'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1051;1070,"'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1051;1092,"'Chep College of Nursing Sciences, Ota' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1052;1058,"'Peacock College Of Nursing Sciences, Akure, Ondo State' ((NBTE) COLLEGES OF NURSING.md) vs 'Mercy College of Nursing Sciences, Iwara, Osun State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1053;1070,"'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1053;1092,"'OAR College of Nursing Sciences' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Gusau' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1058;1061,"'Mercy College of Nursing Sciences, Iwara, Osun State' ((NBTE) COLLEGES OF NURSING.md) vs 'Skyward College of Nursing Sciences, Iwo , Osun State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1058;1067,"'Mercy College of Nursing Sciences, Iwara, Osun State' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1063;1071,"'COLLEGE OF NURSING SCIENCES, MUSLIM MEDICAL FOUNDATION, SAKI' ((NBTE) COLLEGES OF NURSING.md) vs 'College of Nursing Sciences Muslim Medical Foundation Saki, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.92"
+LIKELY_EXACT_DUPLICATE,1064;1065,"'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md) vs 'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+LIKELY_EXACT_DUPLICATE,1064;1066,"'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md) vs 'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+POSSIBLE_DUPLICATE,1064;1067,"'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+LIKELY_EXACT_DUPLICATE,1065;1066,"'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md) vs 'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+POSSIBLE_DUPLICATE,1065;1067,"'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1066;1067,"'Adeniyi College of Nursing Sciences, Igbope, Oyo State' ((NBTE) COLLEGES OF NURSING.md) vs 'CAI College of Nursing Sciences, Ibadan, Oyo State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+LIKELY_EXACT_DUPLICATE,1081;1082,"'Fatima College of Nursing Sciences, Bodinga, Sokoto State' ((NBTE) COLLEGES OF NURSING.md) vs 'Fatima College of Nursing Sciences, Bodinga, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+POSSIBLE_DUPLICATE,1081;1083,"'Fatima College of Nursing Sciences, Bodinga, Sokoto State' ((NBTE) COLLEGES OF NURSING.md) vs 'Gamji College of Nursing Sciences, Sokoto, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1081;1084,"'Fatima College of Nursing Sciences, Bodinga, Sokoto State' ((NBTE) COLLEGES OF NURSING.md) vs 'Gamji College of Nursing Sciences, Sokoto, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1082;1083,"'Fatima College of Nursing Sciences, Bodinga, Sokoto State' ((NBTE) COLLEGES OF NURSING.md) vs 'Gamji College of Nursing Sciences, Sokoto, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1082;1084,"'Fatima College of Nursing Sciences, Bodinga, Sokoto State' ((NBTE) COLLEGES OF NURSING.md) vs 'Gamji College of Nursing Sciences, Sokoto, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+LIKELY_EXACT_DUPLICATE,1083;1084,"'Gamji College of Nursing Sciences, Sokoto, Sokoto State' ((NBTE) COLLEGES OF NURSING.md) vs 'Gamji College of Nursing Sciences, Sokoto, Sokoto State' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+LIKELY_EXACT_DUPLICATE,761;762,"'Asoka College of Health Science and Technology, Otukpo, Benue state' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Adoka College of Health Science and Technology, Otukpo, Benue State' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.98"
+POSSIBLE_DUPLICATE,765;766,"'Mbagen College of Health Technology, Benue State' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'College of Health Technology Aliade, Benue State' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,413;720,"'Osun State College of Technology, Esa ? Oke,' ((NBTE) STATE POLYTECHNICS.md) vs 'Osun State College of Health Technology, Ilesa' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,525;1338,"'Wolex Polytechnic, Iwo, Osun State' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'The Polytechnic Iree, Osun State' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.83"
+POSSIBLE_DUPLICATE,826;830,"'COLLEGE OF HEALTH TECHNOLOGY EJIGBO,OSUN STATE' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Hamzainab College of Health Technology Osogbo, Osun State' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+LIKELY_EXACT_DUPLICATE,1073;1074,"'Plateau State College of Health Technology, Pankshin' ((NBTE) COLLEGES OF NURSING.md) vs 'Plateau State College of Health Technology, Pankshin' ((NBTE) COLLEGES OF NURSING.md), ratio=1.00"
+POSSIBLE_DUPLICATE,333;363,"'Federal Polytechnic, Oko' ((NBTE) FEDERAL POLYTECHNICS.md) vs 'Federal Polytechnic, Ede' ((NBTE) FEDERAL POLYTECHNICS.md), ratio=0.87"
+LIKELY_EXACT_DUPLICATE,598;611,"'Nigerian Navy College of Accounts & Finance Owerrinta, Abia State' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Nigerian Navy College of Accounts and Finance Owerrinta, Abia State' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.97"
+POSSIBLE_DUPLICATE,1262;1339,"'Kashim Ibrahim College of Education' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Tijjani Ibrahim College of Education' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.87"
+POSSIBLE_DUPLICATE,132;1325,"'Shehu Shagari University of Education, Sokoto' ((NUC) STATE UNIVERSITIES.md) vs 'Shehu Shagari College of Education, Sokoto' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.82"
+POSSIBLE_DUPLICATE,446;521,"'Uyo City Polytechnic, Uyo' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Iwo City Polytechnic, Iwo' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=0.83"
+POSSIBLE_DUPLICATE,565;566,"'School of Biomedical Engineering Technology, ABUTH, Shika-Zaria' ((NBTE) ALLIED INSTITUTIONS.md) vs 'School of Biomedical Engineering Technology, Luth, Idi Araba' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.87"
+POSSIBLE_DUPLICATE,567;568,"'School of Biomedical Engineering, UBTH, Benin' ((NBTE) ALLIED INSTITUTIONS.md) vs 'School of Biomedical Engineering, UMTH, Maiduguri' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.84"
+POSSIBLE_DUPLICATE,435;880,"'MADONNA COLLEGE OF HEALTH TECHNOLOGY, OLOKORO UMUAHIA' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Madonna College of Health Technology, Olokoro Umuahia, Abia State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.90"
+POSSIBLE_DUPLICATE,710;1024,"'Kwara State College of Health Technology, Offa' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Best College of Health Technology, Offa' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,389;495,"'Institute of Management And Technology, Enugu' ((NBTE) STATE POLYTECHNICS.md) vs 'Enville Institute of Management and Technology, Ikeja' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=0.83"
+LIKELY_EXACT_DUPLICATE,427;574,"'College of Administration, Management And Technology, Potiskum' ((NBTE) STATE POLYTECHNICS.md) vs 'College of Administration, Management & Technology, Potiskum' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.97"
+POSSIBLE_DUPLICATE,429;503,"'Eko College of Management and Technology' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Unique College of Management and Technology, Lagos' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=0.85"
+POSSIBLE_DUPLICATE,429;630,"'Eko College of Management and Technology' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'EFON ALAAYE COLLEGE OF MANAGEMENT AND TECHNOLOGY' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.89"
+LIKELY_EXACT_DUPLICATE,481;482,"'Raindrops Institute of Management and Technology, Amannachi, Orsu LGA, Imo State' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Raindrops Institute of Management and Technology, Amannachi, Orsu LGA, Imo State' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=1.00"
+LIKELY_EXACT_DUPLICATE,481;483,"'Raindrops Institute of Management and Technology, Amannachi, Orsu LGA, Imo State' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Raindrops Institute of Management and Technology Amannchi, Orsu LGA, Imo State' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=0.99"
+LIKELY_EXACT_DUPLICATE,482;483,"'Raindrops Institute of Management and Technology, Amannachi, Orsu LGA, Imo State' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Raindrops Institute of Management and Technology Amannchi, Orsu LGA, Imo State' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=0.99"
+LIKELY_EXACT_DUPLICATE,484;647,"'Mustibrah College of Information Technology and Management Studies' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Mustibrah College of Information Technology and Management Studies' ((NBTE) ALLIED INSTITUTIONS.md), ratio=1.00"
+POSSIBLE_DUPLICATE,573;582,"'College of Business and Management Studies, Konduga' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Harvarde College of Business and Management Studies, Abeokuta' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.84"
+POSSIBLE_DUPLICATE,573;670,"'College of Business and Management Studies, Konduga' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Adecom College of Business and Management Studies, Ibadan' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.83"
+POSSIBLE_DUPLICATE,582;670,"'Harvarde College of Business and Management Studies, Abeokuta' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Adecom College of Business and Management Studies, Ibadan' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.84"
+POSSIBLE_DUPLICATE,643;644,"'Khemsafe College of Management, Science and Technology' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Khemsafe College of Management, Science, and Technology, Kaduna, Kaduna State' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.84"
+POSSIBLE_DUPLICATE,723;724,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,723;725,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.90"
+POSSIBLE_DUPLICATE,723;726,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,723;727,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,723;728,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,723;729,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,723;730,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,723;731,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,723;732,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,723;733,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UPTH, Port-Harcourt' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,723;734,"'School of Health Information Management, AKTH, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, LUTH, Idi Araba, Lagos' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,724;725,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,724;726,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,724;727,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,724;728,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,724;729,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,724;730,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,724;731,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,724;732,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,724;733,"'School of Health Information Management, ATBUTH, Bauchi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UPTH, Port-Harcourt' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,725;726,"'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.90"
+POSSIBLE_DUPLICATE,725;727,"'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.91"
+POSSIBLE_DUPLICATE,725;728,"'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,725;729,"'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,725;730,"'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,725;731,"'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,725;732,"'School of Health Information Management, NAUTH, Nnewi' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,726;727,"'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,726;728,"'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,726;729,"'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,726;730,"'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,726;731,"'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.90"
+POSSIBLE_DUPLICATE,726;732,"'School of Health Information Management, OAUTH, Ile-Ife' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,727;728,"'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,727;729,"'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.90"
+POSSIBLE_DUPLICATE,727;730,"'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,727;731,"'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.91"
+POSSIBLE_DUPLICATE,727;732,"'School of Health Information Management, UBTH, Benin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,728;729,"'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.90"
+POSSIBLE_DUPLICATE,728;730,"'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,728;731,"'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,728;732,"'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,728;733,"'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UPTH, Port-Harcourt' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,728;734,"'School of Health Information Management, UCTH, Calabar' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, LUTH, Idi Araba, Lagos' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.86"
+POSSIBLE_DUPLICATE,729;730,"'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,729;731,"'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.89"
+POSSIBLE_DUPLICATE,729;732,"'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,729;734,"'School of Health Information Management, UCH, Ibadan' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, LUTH, Idi Araba, Lagos' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,730;731,"'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.87"
+POSSIBLE_DUPLICATE,730;732,"'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,730;733,"'School of Health Information Management, UDUTH, Sokoto' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UPTH, Port-Harcourt' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,731;732,"'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.90"
+POSSIBLE_DUPLICATE,731;733,"'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UPTH, Port-Harcourt' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,731;734,"'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, LUTH, Idi Araba, Lagos' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,731;735,"'School of Health Information Management, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, University of Uyo' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,732;733,"'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, UPTH, Port-Harcourt' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,732;734,"'School of Health Information Management, UMTH, Maiduguri' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, LUTH, Idi Araba, Lagos' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.82"
+POSSIBLE_DUPLICATE,744;748,"'School of Health Information Management, Federal Teaching Hospital Gombe' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Health Information Management, Aminu Kano Teaching Hospital, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.85"
+POSSIBLE_DUPLICATE,755;842,"'Abia State College of Health Science and Management Technology, Aba' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Imo State College of Health Sciences & Management Technology, Amaigbo' ((NBTE) COLLEGES OF NURSING.md), ratio=0.88"
+POSSIBLE_DUPLICATE,1107;1304,"'AL HIKMA COLLEGE OF EDUCATION, ANKPA' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Peace College Of Education Ankpa' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1266;1304,"'Kogi State College of Education, Ankpa' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Peace College Of Education Ankpa' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,580;581,"'Federal Training Centre, Kaduna' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Maiduguri' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.86"
+POSSIBLE_DUPLICATE,580;621,"'Federal Training Centre, Kaduna' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Calabar' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.85"
+POSSIBLE_DUPLICATE,580;632,"'Federal Training Centre, Kaduna' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Enugu' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.85"
+POSSIBLE_DUPLICATE,580;652,"'Federal Training Centre, Kaduna' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Ilorin' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.83"
+POSSIBLE_DUPLICATE,580;654,"'Federal Training Centre, Kaduna' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Ikoyi' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.85"
+POSSIBLE_DUPLICATE,581;632,"'Federal Training Centre, Maiduguri' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Enugu' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.87"
+POSSIBLE_DUPLICATE,581;652,"'Federal Training Centre, Maiduguri' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Ilorin' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.86"
+POSSIBLE_DUPLICATE,581;654,"'Federal Training Centre, Maiduguri' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Ikoyi' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.84"
+POSSIBLE_DUPLICATE,621;652,"'Federal Training Centre, Calabar' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Ilorin' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.85"
+POSSIBLE_DUPLICATE,632;652,"'Federal Training Centre, Enugu' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Ilorin' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.85"
+POSSIBLE_DUPLICATE,632;654,"'Federal Training Centre, Enugu' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Ikoyi' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.83"
+POSSIBLE_DUPLICATE,652;654,"'Federal Training Centre, Ilorin' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Training Centre, Ikoyi' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.92"
+POSSIBLE_DUPLICATE,355;1352,"'Waziri Umaru Federal Polytechnic, Birnin-Kebbi' ((NBTE) FEDERAL POLYTECHNICS.md) vs 'Waziri Umaru Federal Polytechnic' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.83"
+POSSIBLE_DUPLICATE,394;1291,"'Nuhu Bamalli Polytechnic, Zaria' ((NBTE) STATE POLYTECHNICS.md) vs 'Nuhu Bamalli Polytechnic' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.89"
+POSSIBLE_DUPLICATE,439;441,"'Hope Polytechnic, Ikono' ((NBTE) PRIVATE POLYTECHNICS.md) vs 'Loam Polytechnic, Ikono' ((NBTE) PRIVATE POLYTECHNICS.md), ratio=0.86"
+POSSIBLE_DUPLICATE,686;1357,"'Zamfara Institute of Information Technology, ZIIT, Gusau' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Zaria Institute of Information Technology' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1228;1229,"'Grace City College of Education' ((NCCE) COLLEGES OF EDUCATION.md) vs 'GRACE COLLEGE OF EDUCATION' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1229;1234,"'GRACE COLLEGE OF EDUCATION' ((NCCE) COLLEGES OF EDUCATION.md) vs 'His Grace College of Education, Ilorin' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.83"
+LIKELY_EXACT_DUPLICATE,831;832,"'Iseyin Collage of Science and Health Technology, iseyin, Oyo State' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'Iseyin College of Science & Health Technology Iseyin, Oyo State' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.95"
+POSSIBLE_DUPLICATE,544;545,"'Federal College of Animal Health & Production Technology, Ibadan,' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal College of Animal Health & Production Technology, Vom' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.93"
+POSSIBLE_DUPLICATE,553;619,"'Federal College of Freshwater Fisheries Technology, New Bussa' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal College of Freshwater Fisheries Technology, Baga' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.92"
+POSSIBLE_DUPLICATE,547;548,"'Federal College of Forestry, Ibadan' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal College of Forestry, Jos' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.86"
+POSSIBLE_DUPLICATE,653;1324,"'SHARIFAT INSTITUTE OF PROFESSIONAL AND ISLAMIC LEGAL STUDIES, ILORIN' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Sharifat Institute of Professional and Islamic Legal Studies' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.94"
+POSSIBLE_DUPLICATE,615;1094,"'A.D Rufai College of Education, Legal & General Studies, Misau, Bauchi State' ((NBTE) ALLIED INSTITUTIONS.md) vs 'A.D. Rufa'i College of Education, Legal and General Studies' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.82"
+LIKELY_EXACT_DUPLICATE,684;1145,"'College of Education & Legal Studies, Nguru' ((NBTE) ALLIED INSTITUTIONS.md) vs 'College of Education and Legal Studies, Nguru' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.95"
+POSSIBLE_DUPLICATE,578;671,"'Federal Cooperative College, Kaduna' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal Cooperative College, Ibadan' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.91"
+POSSIBLE_DUPLICATE,642;672,"'Federal School of Statistics, Manchok' ((NBTE) ALLIED INSTITUTIONS.md) vs 'Federal School of Statistics, Ibadan' ((NBTE) ALLIED INSTITUTIONS.md), ratio=0.87"
+POSSIBLE_DUPLICATE,847;848,"'School of Nursing, Ekiti State University Teaching Hospital, Ado-Ekiti' ((NBTE) COLLEGES OF NURSING.md) vs 'School of Nursing, Lagos State University Teaching Hospital (LUTH)' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,1116;1118,"'Aminu Kano College of Education' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Aminu Sale College of Education, Azare' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.82"
+POSSIBLE_DUPLICATE,738;776,"'School of Orthopaedic Cast Technology, NOH, Dala, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Orthopaedic Cast Technology, NOH, Enugu' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.88"
+POSSIBLE_DUPLICATE,738;739,"'School of Orthopaedic Cast Technology, NOH, Dala, Kano' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Orthopedic Cast Technology, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.83"
+POSSIBLE_DUPLICATE,739;776,"'School of Orthopedic Cast Technology, UITH, Ilorin' ((NBTE) COLLEGES OF HEALTH TECH.md) vs 'School of Orthopaedic Cast Technology, NOH, Enugu' ((NBTE) COLLEGES OF HEALTH TECH.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1004;1006,"'Cherish College of Nursing and Midwifery, Batsari' ((NBTE) COLLEGES OF NURSING.md) vs 'Cherish College of Nursing and Midwifery, Batsari, Katsina State' ((NBTE) COLLEGES OF NURSING.md), ratio=0.87"
+POSSIBLE_DUPLICATE,836;1077,"'College of Nursing and Midwifery, Gombe' ((NBTE) COLLEGES OF NURSING.md) vs 'SAHLAN COLLEGE OF NURSING AND MIDWIFERY' ((NBTE) COLLEGES OF NURSING.md), ratio=0.83"
+POSSIBLE_DUPLICATE,979;1000,"'Kaduna State College of Nursing & Midwifery Pambegua' ((NBTE) COLLEGES OF NURSING.md) vs 'Kano State College of Nursing and Midwifery, Kano' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,979;1003,"'Kaduna State College of Nursing & Midwifery Pambegua' ((NBTE) COLLEGES OF NURSING.md) vs 'Katsina State College of Nursing & Midwifery Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,979;1087,"'Kaduna State College of Nursing & Midwifery Pambegua' ((NBTE) COLLEGES OF NURSING.md) vs 'Taraba State College of Nursing & Midwifery' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,980;1003,"'Kaduna State College of Nursing & Midwifery Tudun Wada' ((NBTE) COLLEGES OF NURSING.md) vs 'Katsina State College of Nursing & Midwifery Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,981;1000,"'Kaduna State College of Nursing & Midwifery Kafanchan' ((NBTE) COLLEGES OF NURSING.md) vs 'Kano State College of Nursing and Midwifery, Kano' ((NBTE) COLLEGES OF NURSING.md), ratio=0.85"
+POSSIBLE_DUPLICATE,981;1003,"'Kaduna State College of Nursing & Midwifery Kafanchan' ((NBTE) COLLEGES OF NURSING.md) vs 'Katsina State College of Nursing & Midwifery Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1000;1003,"'Kano State College of Nursing and Midwifery, Kano' ((NBTE) COLLEGES OF NURSING.md) vs 'Katsina State College of Nursing & Midwifery Katsina' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1000;1078,"'Kano State College of Nursing and Midwifery, Kano' ((NBTE) COLLEGES OF NURSING.md) vs 'Plateau State College of Nursing and Midwifery, VOM' ((NBTE) COLLEGES OF NURSING.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1003;1087,"'Katsina State College of Nursing & Midwifery Katsina' ((NBTE) COLLEGES OF NURSING.md) vs 'Taraba State College of Nursing & Midwifery' ((NBTE) COLLEGES OF NURSING.md), ratio=0.82"
+POSSIBLE_DUPLICATE,1142;1200,"'College of Education (Technical), Dass' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Asaba' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.84"
+POSSIBLE_DUPLICATE,1198;1199,"'Federal College of Education (Technical) in Yauri' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Akoka' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.88"
+POSSIBLE_DUPLICATE,1198;1200,"'Federal College of Education (Technical) in Yauri' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Asaba' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.88"
+POSSIBLE_DUPLICATE,1198;1201,"'Federal College of Education (Technical) in Yauri' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Bichi' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1198;1202,"'Federal College of Education (Technical) in Yauri' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gombe' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.86"
+POSSIBLE_DUPLICATE,1198;1203,"'Federal College of Education (Technical) in Yauri' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gusau' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1198;1204,"'Federal College of Education (Technical) in Yauri' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Omoku' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.88"
+POSSIBLE_DUPLICATE,1199;1200,"'Federal College of Education (Technical), Akoka' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Asaba' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.93"
+POSSIBLE_DUPLICATE,1199;1201,"'Federal College of Education (Technical), Akoka' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Bichi' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.89"
+POSSIBLE_DUPLICATE,1199;1202,"'Federal College of Education (Technical), Akoka' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gombe' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1199;1203,"'Federal College of Education (Technical), Akoka' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gusau' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1199;1204,"'Federal College of Education (Technical), Akoka' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Omoku' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.93"
+POSSIBLE_DUPLICATE,1200;1201,"'Federal College of Education (Technical), Asaba' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Bichi' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1200;1202,"'Federal College of Education (Technical), Asaba' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gombe' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1200;1203,"'Federal College of Education (Technical), Asaba' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gusau' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.93"
+POSSIBLE_DUPLICATE,1200;1204,"'Federal College of Education (Technical), Asaba' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Omoku' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.89"
+POSSIBLE_DUPLICATE,1201;1202,"'Federal College of Education (Technical), Bichi' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gombe' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1201;1203,"'Federal College of Education (Technical), Bichi' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gusau' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.89"
+POSSIBLE_DUPLICATE,1201;1204,"'Federal College of Education (Technical), Bichi' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Omoku' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.89"
+POSSIBLE_DUPLICATE,1202;1203,"'Federal College of Education (Technical), Gombe' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Gusau' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1202;1204,"'Federal College of Education (Technical), Gombe' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Omoku' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.93"
+POSSIBLE_DUPLICATE,1203;1204,"'Federal College of Education (Technical), Gusau' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Federal College of Education (Technical), Omoku' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1149;1150,"'College of Education Oju' ((NCCE) COLLEGES OF EDUCATION.md) vs 'College of Education Oro' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.92"
+POSSIBLE_DUPLICATE,1249;1250,"'JIBWIS College of Education' ((NCCE) COLLEGES OF EDUCATION.md) vs 'JIBWIS College of Education Gombe' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.90"
+POSSIBLE_DUPLICATE,1249;1251,"'JIBWIS College of Education' ((NCCE) COLLEGES OF EDUCATION.md) vs 'JIBWIS College of Education Jos' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.93"
+POSSIBLE_DUPLICATE,1249;1252,"'JIBWIS College of Education' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Jibwis College of Education, Gumau' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.90"
+POSSIBLE_DUPLICATE,1250;1251,"'JIBWIS College of Education Gombe' ((NCCE) COLLEGES OF EDUCATION.md) vs 'JIBWIS College of Education Jos' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1250;1252,"'JIBWIS College of Education Gombe' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Jibwis College of Education, Gumau' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.91"
+POSSIBLE_DUPLICATE,1251;1252,"'JIBWIS College of Education Jos' ((NCCE) COLLEGES OF EDUCATION.md) vs 'Jibwis College of Education, Gumau' ((NCCE) COLLEGES OF EDUCATION.md), ratio=0.88"
