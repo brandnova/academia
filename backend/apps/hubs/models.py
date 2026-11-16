@@ -40,6 +40,11 @@ class HubActivationRequest(models.Model):
     user = models.ForeignKey(User, related_name="hub_activation_requests", on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
     notes = models.TextField(null=True, blank=True)
+    # The admin's stated reason when rejecting. Previously emailed and then
+    # thrown away, now kept so a rejection stays traceable. Null for
+    # requests that were approved, are still pending, or were rejected
+    # without a reason.
+    rejection_reason = models.TextField(null=True, blank=True)
     reviewed_by = models.ForeignKey(
         User, null=True, blank=True,
         related_name="reviewed_activation_requests", on_delete=models.SET_NULL,

@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "A-Atlas",
+    "slug": "academia-atlas-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "academiaatlas",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.brandnova.academiaatlas"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#3454D1",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.brandnova.academiaatlas"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store",
+      "expo-web-browser",
+      "@react-native-google-signin/google-signin",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FBFAF8",
+          "dark": {
+            "backgroundColor": "#16171C"
+          }
+        }
+      ],
+      "expo-status-bar",
+      "@react-native-google-signin/google-signin"
+    ],
+    "description": "Academia Atlas mobile client, academic answers organized by school.",
+    "extra": {
+      "eas": {
+        "projectId": "1e905e60-6146-40b1-b6de-183db3cd7475"
+      }
+    },
+    "owner": "mstrn0v4"
+  }
+}

@@ -11,13 +11,13 @@ from rest_framework.views import APIView
 from apps.core.cache import (
     cache_get_response,
     get_cached,
-    invalidate_key,
     invalidate_prefix,
     make_cache_key,
     set_cached,
 )
-from apps.core.permissions import IsPlatformAdmin
+from apps.core.permissions import IsPlatformAdmin, user_is_platform_admin
 from apps.core.utils import validate_uuid
+from .cache import invalidate_school_cache
 from .models import Department, School
 from .pagination import SchoolPagination
 from .serializers import (
@@ -43,13 +43,12 @@ class SchoolListCreateView(generics.ListCreateAPIView):
             return SchoolWriteSerializer
         return SchoolListSerializer
 
-    def _requesting_user_is_admin(self):
-        user = self.request.user
-        return bool(user and user.is_authenticated and getattr(user, "is_admin", False))
-
     def get_queryset(self):
-        if self._requesting_user_is_admin():
+        if user_is_platform_admin(self.request.user):
             queryset = School.objects.all()
+            is_active_param = self.request.query_params.get("is_active")
+            if is_active_param is not None:
+                queryset = queryset.filter(is_active=is_active_param.lower() == "true")
         else:
             queryset = School.objects.filter(is_active=True)
 
@@ -84,7 +83,7 @@ class SchoolListCreateView(generics.ListCreateAPIView):
     def list(self, request, *args, **kwargs):
         # Admins see inactive schools too, so their response must never be
         # served from (or written to) the shared public cache.
-        if self._requesting_user_is_admin():
+        if user_is_platform_admin(request.user):
             return super().list(request, *args, **kwargs)
         return self._cached_list(request, *args, **kwargs)
 
@@ -106,10 +105,6 @@ class SchoolDetailView(APIView):
             return [IsAuthenticated(), IsPlatformAdmin()]
         return [AllowAny()]
 
-    def _requesting_user_is_admin(self):
-        user = self.request.user
-        return bool(user and user.is_authenticated and getattr(user, "is_admin", False))
-
     def get_school(self, school_id, include_inactive=False):
         parsed_id = validate_uuid(school_id)
         qs = School.objects.all() if include_inactive else School.objects.filter(is_active=True)
@@ -119,7 +114,7 @@ class SchoolDetailView(APIView):
             raise NotFound("School not found")
 
     def get(self, request, school_id):
-        if self._requesting_user_is_admin():
+        if user_is_platform_admin(request.user):
             school = self.get_school(school_id, include_inactive=True)
             return Response(SchoolDetailSerializer(school).data)
 
@@ -141,8 +136,7 @@ class SchoolDetailView(APIView):
         write_serializer = SchoolWriteSerializer(school, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         school = write_serializer.save()
-        invalidate_key(make_cache_key("school-detail", school.id))
-        invalidate_prefix("school-list")
+        invalidate_school_cache(school)
         return Response(SchoolDetailSerializer(school).data)
 
 
@@ -150,6 +144,16 @@ class SchoolBySlugView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, slug):
+        # Admin bypass, mirroring SchoolDetailView.get(): without this, a
+        # deactivated school was a dead-end 404 via slug even for the admin
+        # trying to reactivate it, only the raw UUID route worked.
+        if user_is_platform_admin(request.user):
+            try:
+                school = School.objects.get(slug=slug)
+            except School.DoesNotExist:
+                raise NotFound("School not found")
+            return Response(SchoolDetailSerializer(school).data)
+
         cache_key = make_cache_key("school-by-slug", slug)
         cached = get_cached(cache_key)
         if cached is not None:
@@ -183,10 +187,8 @@ class DepartmentListCreateView(APIView):
 
         from apps.hubs.permissions import user_is_representative_for_school
         user = request.user
-        can_manage = bool(
-            user
-            and user.is_authenticated
-            and (getattr(user, "is_admin", False) or user_is_representative_for_school(user, school.id))
+        can_manage = user_is_platform_admin(user) or (
+            bool(user and user.is_authenticated) and user_is_representative_for_school(user, school.id)
         )
 
         departments = school.departments.all() if can_manage else school.departments.filter(is_active=True)
@@ -208,7 +210,7 @@ class DepartmentListCreateView(APIView):
                 {"name": ["A department with this name already exists for this school."]},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        invalidate_key(make_cache_key("school-detail", school.id))
+        invalidate_school_cache(school)
         return Response(DepartmentSerializer(department).data, status=status.HTTP_201_CREATED)
 
 
@@ -233,5 +235,5 @@ class DepartmentDetailView(APIView):
         write_serializer = DepartmentUpdateSerializer(department, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
         department = write_serializer.save()
-        invalidate_key(make_cache_key("school-detail", department.school_id))
+        invalidate_school_cache(department.school)
         return Response(DepartmentSerializer(department).data)

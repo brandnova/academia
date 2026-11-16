@@ -6,19 +6,24 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     moderator_for = serializers.SerializerMethodField()
     representative_for = serializers.SerializerMethodField()
+    stats = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = [
             "id", "email", "full_name", "avatar", "is_admin",
-            "moderator_for", "representative_for", "created_at",
+            "moderator_for", "representative_for", "stats", "created_at",
         ]
         read_only_fields = fields
 
     def get_moderator_for(self, obj):
         from apps.hubs.models import ModeratorAssignment
+        # hub__is_active: a deactivated hub is a 404 for non-admins, so
+        # listing it here would hand the frontend a management card whose
+        # hub can't be loaded. The assignment itself is kept, reactivating
+        # the hub brings it straight back.
         assignments = ModeratorAssignment.objects.filter(
-            user=obj, is_active=True
+            user=obj, is_active=True, hub__is_active=True
         ).select_related("hub__school")
         return [
             {
@@ -35,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
     def get_representative_for(self, obj):
         from apps.hubs.models import SchoolRepresentativeAssignment
         assignments = SchoolRepresentativeAssignment.objects.filter(
-            user=obj, is_active=True
+            user=obj, is_active=True, hub__is_active=True
         ).select_related("hub__school")
         return [
             {
@@ -48,6 +53,24 @@ class UserSerializer(serializers.ModelSerializer):
             }
             for a in assignments
         ]
+
+    def get_stats(self, obj):
+        # Previously computed inline inside MeView.get() only, and manually
+        # bolted onto the response dict there. Promoted to a real
+        # SerializerMethodField so it appears everywhere UserSerializer is
+        # used, matching what api-contract.md already documented (that this
+        # is also returned on the Google Login response), which wasn't
+        # actually true before this change.
+        from apps.answers.models import Answer
+        from apps.comments.models import Comment
+        from apps.questions.models import Question
+
+        return {
+            "question_count": Question.objects.filter(author_id=obj.id).count(),
+            "answer_count": Answer.objects.filter(author_id=obj.id).count(),
+            "best_answer_count": Answer.objects.filter(author_id=obj.id, is_best=True).count(),
+            "comment_count": Comment.objects.filter(author_id=obj.id).count(),
+        }
 
 
 class AdminUserSerializer(serializers.ModelSerializer):

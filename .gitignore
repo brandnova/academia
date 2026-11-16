@@ -20,7 +20,7 @@ out/
 # production
 build
 
-# misc
+# Misc
 .DS_Store
 *.pem
 
@@ -31,8 +31,8 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
- .env*
-+!.env.example
+.env*
+!.env.example
 
 # vercel
 .vercel
@@ -48,15 +48,6 @@ __pycache__/
 .venv/
 staticfiles/
 *.sqlite3
-.DS_Store
-
-# Build
-dist/
-build/
-
-# Environment
-.env
-.env.local
 
 # IDE
 .vscode/
@@ -67,5 +58,24 @@ site/
 
 # Custom
 gitignore/
-academia-tests/
-Todo.md
+.cache/
+
+# React Native
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# native build output
+mobile/ios/
+mobile/android/
+brand/src/.tmp/
+*.jks
+*.p8
+*.p12
+*.mobileprovision
+
+# tooling
+.metro-health-check*

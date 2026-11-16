@@ -1,9 +1,10 @@
-.PHONY: help run migrate shell docker-up docker-down docker-logs css dev test superuser clean
+.PHONY: help run run-lan migrate shell docker-up docker-down docker-logs css dev test superuser clean
 
 help:
 	@echo "Available commands:"
 	@echo "  make help         - Show this help message"
-	@echo "  make run          - Start Django development server"
+	@echo "  make run          - Start Django development server (localhost)"
+	@echo "  make run-lan      - Start Django on 0.0.0.0:8000 for phone/Expo Go testing"
 	@echo "  make migrations   - Create new migrations"
 	@echo "  make migrate      - Run database migrations"
 	@echo "  make shell        - Open Django shell"
@@ -12,6 +13,9 @@ help:
 
 run:
 	python manage.py runserver
+
+run-lan:
+	python manage.py runserver 0.0.0.0:8000
 
 migrations:
 	python manage.py makemigrations

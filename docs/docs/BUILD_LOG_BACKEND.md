@@ -1,12 +1,11 @@
 # BUILD LOG
 
 ## Current Phase
-Not a numbered phase. Two related GitHub issues: MODERATOR_ASSIGNED existed as
-a Notification type and the assignment endpoints existed since Phase 14, but
-nothing ever triggered it. Broader review requested alongside it turned up a
-second real gap: project-plan.md's Moderator Responsibilities section
-describes moderators receiving notifications about new questions in their
-hub, this was documented from the start and never built.
+Not a numbered phase. The post-MVP backend audit backlog is complete: every
+item from Project_audit_notes.md and feature-list.md's Platform Improvements
+section has shipped or was deliberately decided against. Production runs on
+Vercel (Supabase Postgres, Upstash Redis), PythonAnywhere remains the
+preview and testing backend.
 
 ## Completed Phases
 - Phase 0: Django 6.0.6 project scaffolded, settings split (base/development/production),
@@ -324,10 +323,10 @@ School Data Curation sourcing line.
   independently regardless of what moderator_for/representative_for show,
   hiding a control is a convenience, never a substitute for the 403 a user
   would get attempting the action directly
-- No push notification exists yet for role assignment (is_moderator/is_rep
-  changes), the frontend is expected to refetch GET /users/me/ after login
-  and when entering a school/hub management context, not rely on it updating
-  mid-session automatically
+- Role assignment sends an in-app MODERATOR_ASSIGNED notification; clients
+  still refetch GET /users/me/ after login and when entering a school/hub
+  management context because role fields do not update in an already loaded
+  session
 - admin's moderator_for/representative_for are not backfilled with every hub,
   is_admin alone is the correct signal for blanket access, keeping the
   response bounded regardless of how many hubs exist
@@ -376,10 +375,6 @@ School Data Curation sourcing line.
   followers instead of adding a type), keeps the frontend's notification
   icon map from needing another special case for a distinction that's
   really just "assigned to a hub role"
-- NEW_QUESTION notifies moderators only, not representatives, grounded
-  directly in project-plan.md's existing (never-implemented) description of
-  moderator responsibilities. Representatives are described there as
-  coordinators, not as the audience for new-content alerts
 - Notified via a per-moderator notify() loop, same fan-out shape as the
   follow system's per-follower notifications, no email involved so this is
   pure DB writes, fine at MVP scale, same Celery-backlog note applies if
@@ -413,9 +408,6 @@ School Data Curation sourcing line.
   monitoring their dashboard as part of the role, so this doesn't need to
   pull anyone back to the platform the way a student-facing notification
   does
-- Same in-app-only channel policy as NEW_ACTIVATION_REQUEST: admins are
-  expected to already be monitoring their dashboard as part of the role,
-  this doesn't need to pull anyone back to the platform
 - Notification fan-out happens after the Report row is successfully
   created and the duplicate-report check has passed, so a blocked/invalid
   report submission never generates a stray notification
@@ -458,17 +450,6 @@ School Data Curation sourcing line.
   deliberately not built yet, dataset cleaning is happening in a separate
   chat first. This pass only lands the schema, serializers, views, and
   admin needed to receive that data whenever it's ready
-- institution_type deliberately kept to three values, not six. Allied
-  institutions, colleges of health technology, and colleges of nursing all
-  collapse into POLYTECHNIC as the nearest general category (all three are
-  NBTE-regulated, sub-degree technical institutions). The original specific
-  category label is preserved per-record on SchoolSourceRecord.raw_category,
-  nothing from the source is actually lost, it's just not promoted to a
-  first-class School field
-- country added now, while the directory was still seed-only, specifically
-  to avoid a far more expensive backfill later once real schools existed.
-  Plain CharField, not an enum or a Country model, no multi-country logic
-  built yet, this is forward compatibility only
 - Merge philosophy ended deliberately conservative after real, repeated
   false positives during data cleaning. Only two merges are fully
   automated, both gated on an explicit source-provided annotation (an
@@ -515,6 +496,153 @@ School Data Curation sourcing line.
   twice consecutively and identically, treated as a paste artifact and
   deduplicated, not a real functional bug since Python's later definition
   silently wins either way
+- Small batch, three independent fixes landed together: a shared
+  user_is_platform_admin() helper in apps.core.permissions replacing three
+  duplicated inline checks (SchoolListCreateView, SchoolDetailView,
+  DepartmentListCreateView), an is_active filter added to GET /schools/ for
+  admins matching AdminUserListView's existing pattern, and tag name length
+  validation added to both write paths (question tagging via
+  validate_tags(), and TagMergeView's rename branch) closing a gap any
+  regular user could hit, not just admins
+- Tag length check lives in apps.tags.utils rather than apps.tags.models,
+  since it needs to be importable from apps.questions.serializers via the
+  same deferred-import convention _sync_tags already uses to avoid a
+  circular import (apps.tags.models imports apps.questions.models directly
+  at module level)
+- Accounts app hardening batch: stats promoted to a SerializerMethodField
+  on UserSerializer (closes a real doc/code mismatch on the Google Login
+  response, plus an incidental second one on PATCH /users/me/ that hadn't
+  been noticed before), set_unusable_password() now called explicitly for
+  Google-created users, suspended accounts rejected at login with a 403
+  instead of a token pair that fails on the next request, and email_verified
+  checked before creating or logging in a user
+- GoogleLoginView keeps get_or_create() for its atomicity guarantee rather
+  than splitting into a separate lookup-then-create, the unusable-password
+  step is applied afterward conditioned on the created flag instead, to
+  avoid reintroducing a race on simultaneous first-time logins for the same
+  new email
+- email_verified failure reuses the existing "Invalid Google token" message
+  rather than a new one, tightens behavior without expanding documented
+  error surface
+- Cache invalidation gap (combined with the school-by-slug finding from
+  the Schools audit): approving a hub activation request changes
+  School.has_hub but never invalidates school-by-slug:{slug}, so a
+  school's slug-based lookup can show stale has_hub for up to
+  CACHE_TTL_MEDIUM after activation. Worth a shared invalidation helper
+  used by both apps.schools and apps.hubs so this can't drift again
+- AdminActionLog lives in apps.core, the first model that app has, since the
+  log spans reports, accounts, and tags. Requires makemigrations core with
+  the explicit app label. Chosen scope: only actions that left no trace
+  (user suspend/reactivate, tag merge/rename/delete, and the action taken
+  when resolving or rejecting a report). Report and HubActivationRequest
+  already record resolved_by/reviewed_by, so hub approvals and rejections
+  are not logged. Read-only in Django admin, no API endpoint yet. target_id
+  is a plain UUID and target_label a snapshot, so entries survive their
+  target's deletion
+- Audit writes happen inside the same transaction.atomic() block as the
+  action they record, so an action and its log entry succeed or roll back
+  together. Only genuine state changes log: repeated suspends and requests
+  blocked with a 400 write nothing. Tag merge's multi-write loop gained an
+  atomic wrapper as part of this, it previously could leave a half-finished
+  merge on failure
+- Model.delete() sets the instance's pk to None, so ids and names needed for
+  logging (tag id and name, report content id) are captured before the
+  delete, the same trap as the stale GenericForeignKey cache fixed earlier
+- Orphaned reports: auto-resolve covers only the DELETE_CONTENT cascade,
+  where the full set of deleted rows can be computed up front (a Question
+  takes its Answers and their Comments, an Answer takes its Comments). Other
+  orphan sources, mainly an author deleting their own content, are surfaced
+  with a content_exists flag on ReportSerializer rather than auto-resolved.
+  Auto-resolving them would need model signals (against this project's
+  convention of triggering side effects from the view layer) or a
+  GenericRelation, which would delete the reports themselves and touch three
+  other apps' models. That is a design decision for later, not a quiet fix
+- Auto-resolved reports use a queryset update() rather than per-instance
+  save(), sidestepping the stale GenericForeignKey cache problem, and
+  their reporters get the same in-app REPORT_REVIEWED notification as the
+  primary report's reporter, excluding the acting admin
+- Throttle scopes were decided per endpoint, not blanket-applied. Answer and
+  comment edit/delete share one "content_edit" pool (60/hour), Mark Best
+  Answer has its own "mark_best" scope (30/hour) because each success can
+  send an email plus follower notifications. School, Department, and Static
+  Page creation deliberately stay on the general limit since only admins and
+  representatives can reach them. New scope names must exist in
+  DEFAULT_THROTTLE_RATES or the view raises ImproperlyConfigured (a 500)
+- Static Pages caching is keyed by visibility TIER (public/staff), never by
+  user, and the tier is part of every key, which is what keeps staff-only
+  pages from ever reaching a public request. Admins bypass the cache (they
+  see drafts). Only 200s are cached, so the 404-not-403 property holds.
+  Invalidation deletes exact keys instead of a prefix wipe so it also works
+  on the LocMemCache fallback. _visible_queryset(user) kept as a thin
+  wrapper over the new tier helpers
+- generate_unique_slug() only checks, it cannot reserve. save_with_unique_slug()
+  in apps.core.slugs wraps the INSERT in a savepoint and retries with a fresh
+  slug only when the failed slug now exists in the table, so a duplicate
+  name/short_name IntegrityError is re-raised untouched rather than retried
+  forever. Known remaining edge: simultaneous identical name/short_name
+  submissions still hit an IntegrityError, since that uniqueness is checked
+  in the serializer. Admin-only, left alone
+- Production settings guard against SQLite: base.py's SQLite fallback is
+  kept for contributors, production.py raises ImproperlyConfigured on it
+  unless DJANGO_ALLOW_SQLITE=True. The opt-out exists because the
+  PythonAnywhere preview site intentionally runs production settings on
+  SQLite. The guard also fires during Vercel builds, so DATABASE_URL must
+  be scoped to every environment that deploys
+- Media storage backend deliberately NOT wired to a cloud provider yet. The
+  default backend is env-overridable (DEFAULT_FILE_STORAGE_BACKEND) but no
+  package was added: Django 6 compatibility of the Cloudinary storage
+  package could not be confirmed, and no feature exercises uploads yet.
+  Decide and verify the backend alongside the first upload feature
+- Hub deactivation is a soft-delete through PATCH /hubs/{id}/ (is_active
+  only, admin only, idempotent), logged to AdminActionLog as HUB_DEACTIVATED
+  and HUB_REACTIVATED only on a genuine transition. Deliberately scoped:
+  existing questions, answers and comments stay readable and answerable
+  because hiding them would touch the question, search, tag and unanswered
+  views and contradict the knowledge-preservation principle, only NEW
+  questions are blocked (validate_hub_id already required an active hub).
+  Moderator and representative assignments are never altered, so
+  reactivation restores the team, but UserSerializer's moderator_for and
+  representative_for now list only active hubs so the frontend never gets a
+  management card for a hub that 404s
+- Users can still file an activation request for a school whose hub was
+  deactivated, and approving it reactivates the existing hub. Left as-is
+  on purpose, it works as an admin-reviewed appeal. Revisit if it gets
+  spammed
+- Not done, by choice: no notification to a deactivated hub's team (a new
+  notification type needs a frontend icon-map change), and hub approvals
+  and rejections remain unlogged because HubActivationRequest already
+  records the reviewer
+- Deep-linking answer and comment notifications and reports is solved with an
+  additive link_target field ({question_id, question_slug, answer_id}), not
+  new GET /answers/{id}/ and /comments/{id}/ endpoints plus a permalink
+  page. The frontend builds /questions/{id}/{slug}#answer-{id} and needs no
+  extra request. A comment's answer_id is its parent answer, since comments
+  only render inside their answer. Resolved by apps.core.content_links
+  (deferred imports, duck-typed on the three reportable models), null when
+  the content is gone or isn't a question, answer or comment
+- Notification and report lists use GenericPrefetch (Django 5.0+) with
+  select_related on the parent question, so link_target costs a handful of
+  queries per page instead of one or two per row. Notification content types
+  not listed in the prefetch (hubs, reports, activation requests) take
+  Django's default path
+- Tag list pagination envelope is a superset of the old shape, so the
+  backend can deploy ahead of the frontend without breaking it, the only
+  effect is truncation at 50 until the frontend adopts load-more. Both
+  orderings end in the unique name column so page boundaries are stable
+- GET /reports/mine/ is a self-scoped list with its own serializer
+  (MyReportSerializer) that omits reporter, resolved_by, is_escalated and
+  escalated_by, so a reporter learns the outcome of their report without
+  learning anything about who handled it. It reuses the admin list's
+  prefetching helper. Resolves the earlier decision that a private view
+  stays distinct from profile and activity data
+- rejection_reason is validated (string, at most 1000 characters,
+  whitespace-only treated as none) because it is now stored and emailed.
+  This is a small addition to the documented contract. The rejection
+  response shape itself is unchanged, the reason is not echoed back
+- Found during this pass: two Accounts items had been marked done in
+  feature-list.md without being in the code (blank full_name handling and
+  the user search throttle scope). Implemented here, the full_name check
+  reads the model's max_length so an over-long name is a 400, not a 500
 
 ## Conventions Established
 - manage.py/wsgi.py/asgi.py default to development settings; production is explicit via env
@@ -557,15 +685,28 @@ verification (fetching the already-seeded school via search instead of recreatin
 it) confirmed slug generation, by-slug lookups for both School and Hub, cosmetic
 Question slugs, and the 400 Invalid ID format response all work as designed.
 
-### Known Deviations From Docs
-- api-contract.md's ID Format Validation section is framed around path
-  parameters; this pass reuses the same validator and error shape for the
-  target_tag_id body field on Merge Tag, worth a small wording tweak at the
-  next sync to acknowledge body fields can hit this too, not just URLs
+## Mobile Client Support (Post-MVP)
+Not a numbered phase. Two small backend changes made by the agent that built the
+mobile client.
 
-### Next Immediate Step
-NEW_REPORT admin notification (same shape of fix, blocked on getting current
-apps/reports/views.py and apps/reports/models.py, since this project has
-shown real drift from earlier chat sessions and I'm not writing against
-stale memory). This doubles as the first app in the planned full
-system audit.
+- Search relevance floor: SearchQuestionsView filtered rank > 0, but Postgres
+  returns about 1e-20 (not 0) for non-matching rows on multi-term queries, so q
+  returned every question. The filter is now rank >= 0.0001. No contract shape
+  change, search now behaves as documented for both clients.
+- Development settings: ALLOWED_HOSTS is localhost and 127.0.0.1 plus anything in
+  the DJANGO_DEV_ALLOWED_HOSTS env var (comma separated), so Expo Go on a phone
+  can reach the dev server over the LAN without opening it to every Host header.
+  Development settings only, production is unchanged.
+- Local setup for mobile testing: DJANGO_DEV_ALLOWED_HOSTS=<your LAN ip>,
+  CORS_ALLOWED_ORIGINS includes http://localhost:8081 for the Expo web preview,
+  and the server runs on 0.0.0.0:8000 (make run-lan).
+
+### Known Deviations From Docs
+None, cleared by the November 5, 2026 docs sync.
+
+### Deferred Work
+Backend backlog is closed. Deferred on purpose: answer edit history, a cloud
+media storage backend (decide and verify alongside the first upload feature),
+a read endpoint for AdminActionLog, and rep-scoped report visibility (needs
+a decision and frontend work). Shared launch operations are tracked in
+`DEPLOYMENT_CHECKLIST.md`.

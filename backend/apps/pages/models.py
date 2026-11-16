@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 
 from apps.accounts.models import User
-from apps.core.slugs import generate_unique_slug
+from apps.core.slugs import save_with_unique_slug
 
 
 class StaticPage(models.Model):
@@ -34,6 +34,6 @@ class StaticPage(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = generate_unique_slug(StaticPage, self.title)
-        super().save(*args, **kwargs)
+        if self.slug:
+            return super().save(*args, **kwargs)
+        save_with_unique_slug(self, self.title, super().save, *args, **kwargs)

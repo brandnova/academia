@@ -14,8 +14,9 @@ from apps.notifications.services import notify
 from apps.questions.models import Question
 
 from .models import Answer, AnswerVote
-from .serializers import AnswerCreateSerializer, AnswerResponseSerializer, AnswerUpdateSerializer
 from .pagination import AnswerPagination
+from .serializers import AnswerCreateSerializer, AnswerResponseSerializer, AnswerUpdateSerializer
+
 
 class AnswerCreateView(APIView):
     permission_classes = [IsAuthenticated]
@@ -56,6 +57,11 @@ class AnswerCreateView(APIView):
 class AnswerDetailView(APIView):
     permission_classes = [IsAuthenticated]
     http_method_names = ["patch", "delete", "options"]
+    # Shared "content_edit" pool with CommentDetailView: one budget per user
+    # for editing or deleting their own answers and comments.
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, MethodScopedThrottle]
+    throttle_scope = "content_edit"
+    throttled_methods = ["PATCH", "DELETE"]
 
     def get_answer(self, answer_id):
         parsed_id = validate_uuid(answer_id)
@@ -163,6 +169,11 @@ class AnswerVoteView(APIView):
 
 class MarkBestAnswerView(APIView):
     permission_classes = [IsAuthenticated]
+    # Tighter than the edit pool because every successful call can send an
+    # email and follower notifications, so repeatedly switching the best
+    # answer is a real spam vector, not just a database write.
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, ScopedRateThrottle]
+    throttle_scope = "mark_best"
 
     def post(self, request, answer_id):
         parsed_id = validate_uuid(answer_id)

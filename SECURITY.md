@@ -1,6 +1,6 @@
 # Security Policy
 
-Academia handles real user accounts, authentication tokens, and personal data. If you find a security vulnerability, please help us fix it before it's public knowledge.
+Academia Atlas handles real user accounts, authentication tokens, and personal data. If you find a security vulnerability, please help us fix it before it's public knowledge.
 
 ## Please do not
 
@@ -19,4 +19,4 @@ You'll get an acknowledgment as soon as possible, and credit once it's fixed and
 
 ## Scope
 
-This covers the Academia backend (Django REST Framework API), the Academia frontend (Next.js app), and their deployed instances. Issues in third-party dependencies should generally be reported upstream to that project directly, but let us know too if it affects Academia specifically.
+This covers the Academia Atlas backend (Django REST Framework API), the Academia Atlas frontend (Next.js app), and their deployed instances. Issues in third-party dependencies should generally be reported upstream to that project directly, but let us know too if it affects Academia Atlas specifically.

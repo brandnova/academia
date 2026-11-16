@@ -1,0 +1,150 @@
+"use client";
+
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { Trash2, Users } from "lucide-react";
+import { clientFetch } from "@/lib/clientApi";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import SearchBar from "@/components/ui/SearchBar";
+import Skeleton from "@/components/ui/Skeleton";
+import UserSearchPicker from "./UserSearchPicker";
+
+const SEARCH_THRESHOLD = 6;
+
+// Representative assignment is admin-only per api-contract.md
+// (POST /hubs/{hub_id}/representatives/), regardless of what a parent
+// component passes as canManage. This is a deliberate second check, not
+// trusting the caller alone, so a future change to a parent's prop wiring
+// can't silently reopen this by mistake.
+export default function TeamMemberList({ hubId, role, canManage, isAdmin = false }) {
+  const [members, setMembers] = useState([]);
+  const [status, setStatus] = useState("loading");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [removingId, setRemovingId] = useState(null);
+  const [removeError, setRemoveError] = useState("");
+  const [addStatus, setAddStatus] = useState("idle");
+  const [addError, setAddError] = useState("");
+  const [query, setQuery] = useState("");
+
+  // State alone cannot stop a double click: both clicks can run before React
+  // re-renders with addStatus set. A ref flips immediately.
+  const addingRef = useRef(false);
+
+  const canActuallyManage = canManage && (role !== "representatives" || isAdmin);
+
+  const load = useCallback(async () => {
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const data = await clientFetch(`/hubs/${hubId}/${role}/`);
+      setMembers(data.results);
+      setStatus("ready");
+    } catch (err) {
+      setErrorMsg(err.message);
+      setStatus("error");
+    }
+  }, [hubId, role]);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  const filteredMembers = useMemo(() => {
+    if (!query) return members;
+    return members.filter((m) => m.user.full_name.toLowerCase().includes(query.toLowerCase()));
+  }, [members, query]);
+
+  async function handleAdd(selectedUser) {
+    if (addingRef.current) return;
+    addingRef.current = true;
+    setAddStatus("loading");
+    setAddError("");
+    try {
+      const assignment = await clientFetch(`/hubs/${hubId}/${role}/`, {
+        method: "POST",
+        body: JSON.stringify({ user_id: selectedUser.id }),
+      });
+      setMembers((prev) => [...prev, assignment]);
+      setAddStatus("idle");
+    } catch (err) {
+      setAddStatus("error");
+      setAddError(err.message);
+    } finally {
+      addingRef.current = false;
+    }
+  }
+
+  async function handleRemove(memberUserId) {
+    setRemovingId(memberUserId);
+    setRemoveError("");
+    try {
+      await clientFetch(`/hubs/${hubId}/${role}/${memberUserId}/`, { method: "DELETE" });
+      setMembers((prev) => prev.filter((m) => m.user.id !== memberUserId));
+    } catch (err) {
+      setRemoveError(err.message);
+    } finally {
+      setRemovingId(null);
+    }
+  }
+
+  if (status === "loading") return <Skeleton className="h-20 w-full" />;
+  if (status === "error") {
+    return <ErrorMessage>Couldn't load: {errorMsg}</ErrorMessage>;
+  }
+
+  return (
+    <div>
+      {members.length >= SEARCH_THRESHOLD && (
+        <div className="mb-3">
+          <SearchBar value={query} onChange={setQuery} placeholder="Search by name..." />
+        </div>
+      )}
+
+      {members.length === 0 ? (
+        <EmptyState variant="inline" icon={Users} title="None assigned yet" className="mb-2" />
+      ) : filteredMembers.length === 0 ? (
+        <p className="text-sm text-muted mb-3">
+          No one matches &quot;{query}&quot;.
+        </p>
+      ) : (
+        <ul className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] mb-3">
+          {filteredMembers.map((m) => (
+            <li key={m.id} className="flex items-center justify-between py-2 px-2 text-sm">
+              <span>{m.user.full_name}</span>
+              {canActuallyManage && (
+                <button
+                  onClick={() => handleRemove(m.user.id)}
+                  disabled={removingId === m.user.id}
+                  className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-red-500 disabled:opacity-50 transition-colors"
+                  aria-label={`Remove ${m.user.full_name}`}
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <ErrorMessage size="xs" className="mb-2">
+        {removeError}
+      </ErrorMessage>
+
+      {canActuallyManage && (
+        <>
+          <UserSearchPicker
+            onSelect={handleAdd}
+            excludeIds={members.map((m) => m.user.id)}
+            disabled={addStatus === "loading"}
+          />
+          {addStatus === "loading" && <p className="text-xs text-muted mt-1">Adding...</p>}
+          {addStatus === "error" && (
+            <ErrorMessage size="xs" className="mt-1">
+              {addError}
+            </ErrorMessage>
+          )}
+        </>
+      )}
+    </div>
+  );
+}

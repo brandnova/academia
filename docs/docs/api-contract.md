@@ -94,6 +94,13 @@ redirect-based OAuth dance, and a small, predictable request/response contract.
 This is the entire flow, there's no separate "callback URL" or server-rendered
 redirect page to build, it's a client-side popup plus one API call.
 
+### Native clients
+
+Any Google OAuth client that obtains an access token with the `email` and
+`profile` scopes can use this endpoint. The backend verifies the token through
+Google's `userinfo` endpoint; the mobile app uses separate OAuth client IDs for
+each platform.
+
 Login and token refresh are both rate limited to 10 requests per minute per client
 (see Rate Limits below), to slow down credential-stuffing style abuse.
 
@@ -116,7 +123,26 @@ Login and token refresh are both rate limited to 10 requests per minute per clie
     "id": "uuid",
     "email": "user@example.com",
     "full_name": "John Doe",
-    "avatar": "https://lh3.googleusercontent.com/..."
+    "avatar": "https://lh3.googleusercontent.com/...",
+    "is_admin": false,
+    "moderator_for": [
+      {
+        "hub_id": "uuid",
+        "school": { "id": "uuid", "name": "University of Lagos", "slug": "unilag" }
+      }
+    ],
+    "representative_for": [
+      {
+        "hub_id": "uuid",
+        "school": { "id": "uuid", "name": "University of Lagos", "slug": "unilag" }
+      }
+    ],
+    "stats": {
+      "question_count": 12,
+      "answer_count": 34,
+      "best_answer_count": 9,
+      "comment_count": 21
+    }
   }
 }
 ```
@@ -135,9 +161,23 @@ Login and token refresh are both rate limited to 10 requests per minute per clie
 }
 ```
 
+**Response (403 Forbidden):**
+```json
+{
+  "error": "Your account has been suspended"
+}
+```
+
 Behavior notes: first login for an email creates the `User` record automatically
 (no separate signup step); subsequent logins reuse the same user and refresh
 `full_name`/`avatar` from Google if they've changed.
+A suspended account (`is_active: false`) is rejected at login with a 403 and
+a clear message, rather than issuing a token pair that only fails on the
+next authenticated request. Google-authenticated accounts also have
+set_unusable_password() called explicitly at creation, and a Google
+userinfo response with email_verified: false is rejected the same as an
+invalid token, closing two hardening gaps ahead of the planned email/
+password auth phase.
 
 ---
 
@@ -258,7 +298,8 @@ answers are marked best), intended for badge-style display (e.g. "Posts (3)"),
 the actual objects are fetched via the endpoints below, not embedded here.
 This same shape, including stats, is also returned in the user field of the
 Google Login response. See "Frontend Permission Model" below for how to use
-the role fields.
+the role fields. Only hubs that are currently active are listed. A deactivated hub's
+assignments are kept but hidden here until the hub is reactivated.
 
 ---
 
@@ -271,6 +312,16 @@ the role fields.
   "full_name": "Johnathan Doe"
 }
 ```
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "full_name": ["This field may not be blank."]
+}
+```
+A blank, whitespace-only, or null `full_name` is rejected, as is one longer
+than the field's maximum length. Omitting `full_name` leaves the account
+unchanged and returns 200. The name is stored trimmed.
 
 **Response (200 OK):** Same as GET `/api/v1/users/me/`
 
@@ -348,11 +399,11 @@ admin assigns both explicitly:
 
 The newly assigned user does not see this reflected until their next
 `GET /users/me/` call picks up the new `moderator_for`/`representative_for`
-entry, there is currently no push notification for this (`MODERATOR_ASSIGNED`
-exists as a notification type but has no trigger wired to it yet, tracked in
-feature-list.md). Refetch the current user after login and when navigating
-into a school or hub the person might administer, rather than relying on it
-updating automatically mid-session.
+entry. An in-app `MODERATOR_ASSIGNED` notification now fires for moderator and
+representative assignments, but it does not update the current-user fields in
+an already loaded session. Refetch the current user after login and when
+navigating into a school or hub the person might administer, rather than
+relying on those fields updating automatically mid-session.
 
 ### Deriving what to show
 
@@ -387,6 +438,9 @@ wherever a school is being displayed.
 - `institution_type` - Filter by UNIVERSITY/POLYTECHNIC/COLLEGE_OF_EDUCATION
 - `ownership` - Filter by FEDERAL/STATE/PRIVATE
 - `state` - Filter by Nigerian state (exact match, case-insensitive)
+- `is_active` - Admin only, filter by active status (true/false). Ignored
+  for non-admin requests, which are always restricted to active schools
+  regardless of this param
 - `page` - Page number (default: 1)
 - `page_size` - Items per page (default: 20, max: 100)
 
@@ -495,7 +549,9 @@ nullable, expect null on any school created before that import.
 ```
 
 **Caching Behavior:**
-- **Cache**: Cached as `school-by-slug:{slug}` using `CACHE_TTL_MEDIUM` (300 seconds). No admin bypass on this slug lookup path.
+- **Cache**: Non-admin responses are cached as `school-by-slug:{slug}` using
+  `CACHE_TTL_MEDIUM` (300 seconds). Platform admins bypass the cache and can
+  retrieve inactive schools.
 
 This is an additive lookup path alongside the existing UUID-based one, both remain
 valid indefinitely. `slug` is generated once at creation from `short_name` and never
@@ -612,8 +668,12 @@ responses for non-admins.
 
 **Caching & Visibility Behavior:**
 - **Cache**: Cached as `hub-detail:{hub_id}` using `CACHE_TTL_SHORT` (60 seconds).
+- **Inactive hubs**: A deactivated hub returns 404 to everyone except
+  platform admins. Admins bypass the cache entirely and can read an inactive
+  hub (`is_active: false`), so it can be found and reactivated.
 - **Invalidation**: Cleared automatically on:
   - Approve Activation Request (hub activation).
+  - Update Hub (deactivate or reactivate).
   - Assign / Remove Moderator.
 
 ---
@@ -632,7 +692,13 @@ responses for non-admins.
 
 **Caching & Visibility Behavior:**
 - **Cache**: Cached as `hub-by-school:{school_id}` using `CACHE_TTL_SHORT` (60 seconds).
-- **Invalidation**: Same invalidation triggers as Get Hub.
+- **Inactive hubs**: A deactivated hub returns 404 to everyone except
+  platform admins. Admins bypass the cache entirely and can read an inactive
+  hub (`is_active: false`), so it can be found and reactivated.
+- **Invalidation**: Cleared automatically on:
+  - Approve Activation Request (hub activation).
+  - Update Hub (deactivate or reactivate).
+  - Assign / Remove Moderator.
 
 ---
 
@@ -650,7 +716,59 @@ responses for non-admins.
 
 **Caching & Visibility Behavior:**
 - **Cache**: Cached as `hub-by-slug:{slug}` using `CACHE_TTL_SHORT` (60 seconds).
-- **Invalidation**: Same invalidation triggers as Get Hub.
+- **Inactive hubs**: A deactivated hub returns 404 to everyone except
+  platform admins. Admins bypass the cache entirely and can read an inactive
+  hub (`is_active: false`), so it can be found and reactivated.
+- **Invalidation**: Cleared automatically on:
+  - Approve Activation Request (hub activation).
+  - Update Hub (deactivate or reactivate).
+  - Assign / Remove Moderator.
+
+---
+
+### Update Hub (Admin Only)
+**Endpoint:** `PATCH /api/v1/hubs/{hub_id}/`
+
+Takes a hub offline or brings it back. This is the only editable field.
+
+**Request:**
+```json
+{
+  "is_active": false
+}
+```
+
+**Response (200 OK):** Same as GET `/api/v1/hubs/{hub_id}/`
+
+**Error Responses:**
+```json
+// 400 Bad Request - missing or non-boolean is_active
+{
+  "is_active": ["This field is required."]
+}
+
+// 403 Forbidden - not an admin (representatives cannot do this)
+{
+  "error": "You do not have permission to perform this action"
+}
+
+// 404 Not Found
+{
+  "error": "Hub not found"
+}
+```
+
+A deactivated hub behaves like a soft-delete: it returns 404 to non-admins on
+every hub route, its school's `has_hub` becomes `false`, and no new questions
+can be asked in it. Existing questions, answers, and comments are kept and
+remain readable. Moderator and representative assignments are kept untouched,
+so reactivating restores the team, but the hub disappears from the
+`moderator_for` and `representative_for` lists on `GET /users/me/` while it is
+offline, and the moderator and representative management endpoints return 404
+until it is reactivated. Repeating the current state returns 200 and changes
+nothing. A genuine change is recorded in the admin action log
+(`HUB_DEACTIVATED` / `HUB_REACTIVATED`) and invalidates the hub and school
+caches.
 
 ---
 
@@ -710,7 +828,8 @@ requests from piling up before an admin reviews the first one.
 
 Submitting a request sends every active admin a `NEW_ACTIVATION_REQUEST`
 notification, in-app only, excluding the requester if they happen to be an
-admin.
+admin. A school whose hub was deactivated can be requested again. Approving that
+request reactivates the existing hub.
 
 ---
 
@@ -739,6 +858,7 @@ admin.
       },
       "status": "PENDING",
       "notes": "Our university needs a hub for students",
+      "rejection_reason": null,
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -806,9 +926,12 @@ email).
 ```
 
 Rejecting sends the requesting user a `HUB_ACTIVATION_REJECTED` notification
-(email and in-app). The `reason` field is used in the email body if provided,
-but is not currently persisted anywhere, it does not appear in
-`GET /hubs/activation-requests/` or anywhere else after the email sends.
+(email and in-app). The `reason` field is optional text of at most 1000
+characters (whitespace-only counts as no reason, a non-string or over-long
+value returns a 400 field error and leaves the request pending). It is
+stored as `rejection_reason`, shown in `GET /hubs/activation-requests/`, and
+quoted in the email. `rejection_reason` is `null` for approved and pending
+requests and for rejections made without a reason.
 
 ---
 
@@ -1002,6 +1125,11 @@ Rate limited to 30 requests per hour per user (see Rate Limits below).
 {
   "hub_id": ["Hub with ID 'uuid' does not exist."]
 }
+
+// 400 Bad Request - tag name too long
+{
+  "tags": ["Tag names must be 50 characters or fewer."]
+}
 ```
 
 Creating a question sends a `NEW_QUESTION` notification, in-app only, to
@@ -1155,9 +1283,11 @@ question's title regenerates its slug.
 }
 ```
 
-A platform admin sees unanswered questions across every hub. A user with an active
-`ModeratorAssignment` sees only questions belonging to hub(s) they are assigned to
-moderate. A user with neither is blocked with a 403.
+A platform admin sees unanswered questions across every hub. A user with an
+active `ModeratorAssignment` or `SchoolRepresentativeAssignment` for a hub
+sees unanswered questions belonging to that hub, this includes a
+freshly-activated hub with representatives assigned but no moderator yet.
+A user with none of these is blocked with a 403.
 
 ---
 
@@ -1519,7 +1649,7 @@ answers through this or any other endpoint. Ordered by most recent first.
 }
 ```
 
-This endpoint is public — no authentication required. Pagination uses the same
+This endpoint is public, no authentication required. Pagination uses the same
 envelope as all list endpoints (`count`, `next`, `previous`, `results`).
 
 ---
@@ -1646,11 +1776,16 @@ this without duplicating an endpoint.
 
 **Query Parameters:**
 - `search` - Search by tag name
-- `popular` - Sort by question count (true/false)
+- `popular` - Sort by question count (true/false), ties broken by name
+- `page` - Page number (default: 1)
+- `page_size` - Items per page (default: 50, max: 100)
 
 **Response (200 OK):**
 ```json
 {
+  "count": 120,
+  "next": "https://api.academia.com/api/v1/tags/?page=2",
+  "previous": null,
   "results": [
     {
       "id": "uuid",
@@ -1666,13 +1801,17 @@ this without duplicating an endpoint.
 }
 ```
 
-This endpoint is not paginated, it returns every matching tag in one response.
 Tag names are normalized to lowercase everywhere, on creation, search, and every
-filter, so "GPA" and "gpa" are always treated as the same tag.
+filter, so "GPA" and "gpa" are always treated as the same tag. Results are
+ordered alphabetically, or by question count with `popular=true`, with the name
+as a tiebreaker so pages never overlap. Requesting a page past the end returns
+a 404. This endpoint was unpaginated before: the new envelope is a superset of
+the old `{"results": [...]}` shape, but a client that assumed it received every
+tag now only sees the first page.
 
 **Caching & Visibility Behavior:**
-- **Cache**: Public requests are cached using `tag-list:<query_params>` key for `CACHE_TTL_SHORT` (60 seconds).
-- **Invalidation**: Clears only when the cache TTL expires (since tags are created implicitly during question creation/update).
+- **Cache**: Public requests are cached using `tag-list:<query_params>` key for `CACHE_TTL_SHORT` (60 seconds), page and page_size included.
+- **Invalidation**: Cleared when a tag is merged, renamed, or deleted. New tags created implicitly through question tagging appear when the TTL expires.
 
 ---
 
@@ -1716,6 +1855,8 @@ removes the tag from every question it's on (via cascade on `QuestionTag`), it
 does not delete the questions themselves.
 
 **Invalidation Note:** Invalidates the `tag-list` cache prefix.
+
+This action is recorded in the admin action log (visible in Django admin).
 
 ---
 
@@ -1803,6 +1944,11 @@ than counted as a reassignment.
 {
   "error": "Invalid ID format"
 }
+
+// 400 Bad Request - target_name too long
+{
+  "target_name": ["Tag names must be 50 characters or fewer."]
+}
 ```
 
 **Response (404 Not Found):**
@@ -1813,6 +1959,8 @@ than counted as a reassignment.
 ```
 
 **Invalidation Note:** Invalidates the `tag-list` cache prefix.
+
+This action is recorded in the admin action log (visible in Django admin).
 
 ---
 
@@ -1877,6 +2025,10 @@ but it has no fixed upper bound (it is not a normalized 0 to 1 percentage). It i
 rank against, in that case results still return, ordered by the first three
 ranking priorities above.
 
+When `q` is given, rows with a text rank below 0.0001 are excluded. PostgreSQL
+returns about 1e-20 for non-matches on multi-term queries, so without this floor
+`q` would not filter.
+
 **Caching & Visibility Behavior:**
 - **Cache**: Public requests are cached using `search-questions:<query_params>` key for `CACHE_TTL_SEARCH` (30 seconds).
 - **Invalidation**: TTL expiry only, no active invalidation trigger exists for search results, given the short TTL and the volume of writes (new answers, votes, status changes) that could affect ranking, active invalidation wasn't worth the complexity.
@@ -1900,11 +2052,16 @@ ranking priorities above.
   "results": [
     {
       "id": "uuid",
-      "type": "NEW_ANSWER",
-      "message": "Jane Smith answered your question: 'How do I calculate my CGPA?'",
+      "type": "NEW_COMMENT",
+      "message": "Jane Smith commented on your answer",
       "is_read": false,
       "related_object_id": "uuid",
-      "related_object_type": "question",
+      "related_object_type": "answer",
+      "link_target": {
+        "question_id": "uuid",
+        "question_slug": "how-do-i-calculate-my-cgpa",
+        "answer_id": "uuid"
+      },
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
@@ -1933,6 +2090,15 @@ the original requester when their activation request is rejected),
 `REPORT_REVIEWED` (in-app only, sent to the original reporter when their
 report is resolved or rejected, excluding the reporter if they happen to
 be the reviewing admin).
+
+`link_target` says where to send the user: the question page, optionally
+anchored to an answer, e.g.
+`/questions/{question_id}/{question_slug}#answer-{answer_id}`. It is set when
+the related object is a question, answer, or comment. For a comment,
+`answer_id` is the comment's parent answer (comments render inside their
+answer). It is `null` when there is nothing to link to: hubs, activation
+requests, reports, account notices, or content that has since been deleted.
+`page_size` is supported (default 20, max 100).
 
 ---
 
@@ -2045,6 +2211,8 @@ rejected.
 **Query Parameters:**
 - `status` - PENDING/RESOLVED/REJECTED
 - `is_escalated` - true/false
+- `content_type` - question/answer/comment. An unrecognized value returns a
+  400 with the same message as Create Report's `content_type` error
 - `page` - Page number
 
 **Response (200 OK):**
@@ -2065,11 +2233,77 @@ rejected.
       },
       "is_escalated": false,
       "escalated_by": null,
+      "content_exists": true,
+      "link_target": {
+        "question_id": "uuid",
+        "question_slug": "how-do-i-calculate-my-cgpa",
+        "answer_id": "uuid"
+      },
       "created_at": "2026-01-01T00:00:00Z"
     }
   ]
 }
 ```
+
+`content_exists` is `false` when the reported content has since been deleted
+by a path that doesn't auto-resolve its reports (for example an author
+deleting their own question). Such a report stays PENDING until an admin
+rejects it or resolves it, resolving with `DELETE_CONTENT` is safe, it simply
+finds nothing to delete.
+
+`link_target` has the same shape and meaning as on notifications: the
+question, plus the answer to anchor to when the reported content is an answer
+or a comment. It is `null` whenever `content_exists` is `false`.
+
+---
+
+### List My Reports
+**Endpoint:** `GET /api/v1/reports/mine/`
+
+Requires authentication. Returns only reports the requesting user filed,
+newest first, so a reporter can see whether anything came of them. It is
+deliberately minimal and self-scoped: there is no way to see another user's
+reports, and nothing about the review itself (who reviewed it, whether a
+moderator escalated it) is exposed, since reports are private in both
+directions.
+
+**Query Parameters:**
+- `status` - PENDING/RESOLVED/REJECTED
+- `page` - Page number
+- `page_size` - Items per page
+
+**Response (200 OK):**
+```json
+{
+  "count": 4,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": "uuid",
+      "content_type": "question",
+      "content_id": "uuid",
+      "type": "SPAM",
+      "description": "This appears to be promotional content",
+      "status": "RESOLVED",
+      "resolved_at": "2026-01-02T00:00:00Z",
+      "content_exists": true,
+      "link_target": {
+        "question_id": "uuid",
+        "question_slug": "how-do-i-calculate-my-cgpa",
+        "answer_id": null
+      },
+      "created_at": "2026-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+`resolved_at` is `null` while a report is PENDING. `content_exists` and
+`link_target` have the same meaning as on the admin list: `link_target` is
+`null` once the content is gone. A RESOLVED report does not necessarily mean
+content was removed, resolving can acknowledge a report without taking
+action, use `content_exists` to tell.
 
 ---
 
@@ -2089,6 +2323,7 @@ rejected.
   "message": "Report resolved",
   "status": "RESOLVED",
   "action_taken": "DELETE_CONTENT",
+  "auto_resolved_count": 3,
   "resolved_at": "2026-01-01T00:00:00Z"
 }
 ```
@@ -2102,6 +2337,14 @@ rejected.
 
 Resolving sends the original reporter a `REPORT_REVIEWED` notification,
 in-app only, excluding the reporter if they are also the resolving admin.
+
+When `action` is `DELETE_CONTENT`, every other PENDING report pointing at the
+deleted content, or at answers and comments removed along with it by cascade
+(deleting a question removes its answers and their comments), is resolved in
+the same request. Their reporters receive the same `REPORT_REVIEWED`
+notification, excluding the resolving admin. `auto_resolved_count` says how
+many were closed this way, `0` for any other action. The resolution is
+recorded in the admin action log.
 
 `action: "DELETE_CONTENT"` is the only value with special behavior, it deletes the
 underlying reported object. Any other value, or omitting `action` entirely, resolves
@@ -2132,68 +2375,7 @@ valid to acknowledge but doesn't warrant removal.
 Rejecting sends the original reporter a `REPORT_REVIEWED` notification,
 in-app only, excluding the reporter if they are also the rejecting admin.
 
----
-
-### Escalate Report
-**Endpoint:** `POST /api/v1/reports/{report_id}/escalate/`
-
-Restricted to an active Moderator or Representative for the reported content's
-hub, or an admin. Marks an existing PENDING report as escalated, signaling
-that a staff member's judgment (not just a student complaint) flagged it for
-priority review. Requires an existing report, there is no way to escalate
-unreported content directly, file a report first via `POST /reports/` then
-escalate it.
-
-**Response (200 OK):**
-```json
-{
-  "id": "uuid",
-  "content_type": "question",
-  "content_id": "uuid",
-  "type": "SPAM",
-  "description": "This appears to be promotional content",
-  "status": "PENDING",
-  "reporter": {
-    "id": "uuid",
-    "full_name": "John Doe"
-  },
-  "is_escalated": true,
-  "escalated_by": {
-    "id": "uuid",
-    "full_name": "Jane Moderator"
-  },
-  "created_at": "2026-01-01T00:00:00Z"
-}
-```
-
-**Error Responses:**
-```json
-// 400 Bad Request - Already reviewed
-{
-  "error": "This report has already been reviewed"
-}
-
-// 400 Bad Request - Already escalated
-{
-  "error": "This report has already been escalated"
-}
-
-// 400 Bad Request - Reported content no longer exists
-{
-  "error": "The reported content no longer exists"
-}
-
-// 403 Forbidden - No moderator/representative role for this hub, and not admin
-{
-  "error": "You do not have permission to perform this action"
-}
-```
-
-Escalating sends every active admin a `NEW_REPORT` notification, in-app only,
-excluding the escalator if they happen to be an admin. This reuses the same
-notification type as report creation, with message text that specifically
-frames it as an escalation, matching the project's precedent of reusing
-notification types over adding new ones for closely related events.
+This action is recorded in the admin action log (visible in Django admin).
 
 ---
 
@@ -2225,6 +2407,12 @@ escalate it.
     "id": "uuid",
     "full_name": "Jane Moderator"
   },
+  "content_exists": true,
+    "link_target": {
+      "question_id": "uuid",
+      "question_slug": "how-do-i-calculate-my-cgpa",
+      "answer_id": "uuid"
+    },
   "created_at": "2026-01-01T00:00:00Z"
 }
 ```
@@ -2512,6 +2700,8 @@ This endpoint only accepts `is_active`. Promoting or demoting `is_admin` status 
 not available through this endpoint in the MVP. An admin cannot suspend their own
 account, to prevent accidental lockout.
 
+This action is recorded in the admin action log (visible in Django admin).
+
 ---
 
 ## Static Pages
@@ -2544,6 +2734,16 @@ Not paginated, low volume. Visibility is computed per requester:
 
 `created_by` is `null` if the creating user's account has since been deleted.
 
+**Caching Behavior:**
+- **Cache**: Responses for anonymous/plain users and for staff are cached
+  separately (two visibility tiers, never per user), using `CACHE_TTL_MEDIUM`
+  (300 seconds). The tier is part of every cache key, so a page visible only
+  to staff can never be served to a public request.
+- **Admin Bypass**: Admins always read live data, including drafts, and never
+  populate the shared cache.
+- **Invalidation**: Creating, updating, or deleting a page clears its cached
+  list and detail entries for both tiers immediately. A 404 is never cached.
+
 ---
 
 ### Get Page
@@ -2575,6 +2775,16 @@ Same visibility rules as List Pages, applied per-page. A page that exists but
 isn't visible to the requester returns the identical 404 as a page that
 genuinely doesn't exist, a `STAFF`-only or draft page's existence is never
 confirmable to a request that can't see it.
+
+**Caching Behavior:**
+- **Cache**: Responses for anonymous/plain users and for staff are cached
+  separately (two visibility tiers, never per user), using `CACHE_TTL_MEDIUM`
+  (300 seconds). The tier is part of every cache key, so a page visible only
+  to staff can never be served to a public request.
+- **Admin Bypass**: Admins always read live data, including drafts, and never
+  populate the shared cache.
+- **Invalidation**: Creating, updating, or deleting a page clears its cached
+  list and detail entries for both tiers immediately. A 404 is never cached.
 
 ---
 
@@ -2737,6 +2947,8 @@ comment, notification, report, department, activation request, user) is validate
 as a well-formed UUID before any lookup happens. A malformed ID (wrong length,
 invalid characters, etc.) returns a 400, distinct from a well-formed ID that simply
 doesn't match anything, which still returns the resource's documented 404.
+Body fields that identify a resource, such as `target_tag_id` on Merge Tag,
+are validated the same way and return the same 400.
 
 **Response (400 Bad Request):**
 ```json
@@ -2759,8 +2971,10 @@ anonymous requests.
 | Question creation | 30 requests per hour |
 | Answer creation | 50 requests per hour |
 | Comment creation | 50 requests per hour |
+| Edit or delete an answer or comment (one shared pool) | 60 requests per hour |
+| Mark best answer | 30 requests per hour |
 | Voting (vote and remove-vote combined) | 100 requests per hour |
-| Search | 60 requests per minute |
+| Search (question search and user search share one pool) | 60 requests per minute |
 | Reports | 10 requests per hour |
 | General API (everything else) | 100 requests per minute |
 
@@ -2768,6 +2982,13 @@ The scoped limits above (authentication, question/answer/comment creation, votin
 search, reports) apply in place of the general limit for that specific action, not
 in addition to it. Reading data (GET requests) is never subject to the tighter
 write-action limits, only the general 100 per minute baseline applies to reads.
+
+The edit/delete limit counts PATCH and DELETE on both answers and comments
+against a single per-user pool. Mark best answer is limited more tightly
+because each successful call can send an email and follower notifications.
+School, Department, and Static Page creation are intentionally left on the
+general 100 per minute baseline: all three are restricted to admins or
+school representatives, so they are not open to abuse by ordinary accounts.
 
 ---
 

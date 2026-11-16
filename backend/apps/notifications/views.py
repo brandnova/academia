@@ -17,7 +17,32 @@ class NotificationListView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        queryset = Notification.objects.filter(user=self.request.user)
+        from django.contrib.contenttypes.prefetch import GenericPrefetch
+
+        from apps.answers.models import Answer
+        from apps.comments.models import Comment
+        from apps.questions.models import Question
+
+        # link_target needs each notification's related object, and for an
+        # answer or comment, its parent question too. GenericPrefetch loads
+        # them in one query per content type with the parent joined in,
+        # instead of one or two queries per notification row. Other related
+        # types (hubs, reports, activation requests) take Django's default
+        # prefetch path.
+        queryset = (
+            Notification.objects.filter(user=self.request.user)
+            .select_related("content_type")
+            .prefetch_related(
+                GenericPrefetch(
+                    "content_object",
+                    [
+                        Question.objects.all(),
+                        Answer.objects.select_related("question"),
+                        Comment.objects.select_related("answer__question"),
+                    ],
+                )
+            )
+        )
         is_read = self.request.query_params.get("is_read")
         if is_read is not None:
             queryset = queryset.filter(is_read=is_read.lower() == "true")

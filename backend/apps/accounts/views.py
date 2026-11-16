@@ -1,14 +1,17 @@
 import requests
+from django.db import transaction
 from django.db.models import Q
 from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle
+from rest_framework.throttling import AnonRateThrottle, ScopedRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 
+from apps.core.audit import log_admin_action
+from apps.core.models import AdminActionLog
 from apps.core.permissions import IsPlatformAdmin
 from apps.core.utils import validate_uuid
 from apps.notifications.models import Notification
@@ -53,7 +56,19 @@ class GoogleLoginView(APIView):
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
-        user, _ = User.objects.get_or_create(
+        # The v3 userinfo endpoint returns email_verified as a real JSON
+        # boolean. An unverified email means Google itself isn't vouching
+        # that this account controls that address, trusting it implicitly
+        # would let someone sign in as an email they don't actually own.
+        # Reuses the existing generic message rather than a new one, this
+        # tightens behavior without adding new documented response text.
+        if not google_data.get("email_verified", False):
+            return Response(
+                {"error": "Invalid Google token"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        user, created = User.objects.get_or_create(
             email=email,
             defaults={
                 "full_name": google_data.get("name", email.split("@")[0]),
@@ -61,15 +76,31 @@ class GoogleLoginView(APIView):
             },
         )
 
+        if created:
+            # get_or_create() calls the base manager's plain create(), never
+            # UserManager._create_user(), so password was left at Django's
+            # blank default rather than genuinely unusable. Harmless today
+            # with no password-auth path at all, but worth hardening
+            # explicitly before email/password auth ships.
+            user.set_unusable_password()
+            user.save(update_fields=["password"])
+
+        if not user.is_active:
+            return Response(
+                {"error": "Your account has been suspended"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
         updated_fields = []
-        if google_data.get("picture") and user.avatar != google_data.get("picture"):
-            user.avatar = google_data.get("picture")
-            updated_fields.append("avatar")
-        if google_data.get("name") and user.full_name != google_data.get("name"):
-            user.full_name = google_data.get("name")
-            updated_fields.append("full_name")
-        if updated_fields:
-            user.save(update_fields=updated_fields + ["updated_at"])
+        if not created:
+            if google_data.get("picture") and user.avatar != google_data.get("picture"):
+                user.avatar = google_data.get("picture")
+                updated_fields.append("avatar")
+            if google_data.get("name") and user.full_name != google_data.get("name"):
+                user.full_name = google_data.get("name")
+                updated_fields.append("full_name")
+            if updated_fields:
+                user.save(update_fields=updated_fields + ["updated_at"])
 
         refresh = RefreshToken.for_user(user)
 
@@ -112,25 +143,31 @@ class MeView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        from apps.answers.models import Answer
-        from apps.comments.models import Comment
-        from apps.questions.models import Question
-
-        data = UserSerializer(request.user).data
-        data["stats"] = {
-            "question_count": Question.objects.filter(author_id=request.user.id).count(),
-            "answer_count": Answer.objects.filter(author_id=request.user.id).count(),
-            "best_answer_count": Answer.objects.filter(author_id=request.user.id, is_best=True).count(),
-            "comment_count": Comment.objects.filter(author_id=request.user.id).count(),
-        }
-        return Response(data)
+        # stats is now a SerializerMethodField on UserSerializer itself,
+        # no longer bolted onto the response dict here manually.
+        return Response(UserSerializer(request.user).data)
 
     def patch(self, request):
         user = request.user
-        full_name = request.data.get("full_name")
-        if full_name:
-            user.full_name = full_name
-            user.save(update_fields=["full_name", "updated_at"])
+        # Only touch the name when the client actually sent the field.
+        # Previously a blank value was indistinguishable from an omitted
+        # one and silently did nothing, with a 200, unlike every other
+        # write path in this codebase. The length check reads the model's
+        # own limit, so an over-long name is a clean 400 instead of a
+        # database error.
+        if "full_name" in request.data:
+            raw_name = request.data.get("full_name")
+            full_name = raw_name.strip() if isinstance(raw_name, str) else ""
+            if not full_name:
+                raise ValidationError({"full_name": ["This field may not be blank."]})
+            max_length = User._meta.get_field("full_name").max_length
+            if max_length and len(full_name) > max_length:
+                raise ValidationError(
+                    {"full_name": [f"Ensure this field has no more than {max_length} characters."]}
+                )
+            if full_name != user.full_name:
+                user.full_name = full_name
+                user.save(update_fields=["full_name", "updated_at"])
         return Response(UserSerializer(user).data)
 
 
@@ -180,7 +217,24 @@ class AdminUserDetailView(APIView):
 
         write_serializer = AdminUserUpdateSerializer(user, data=request.data, partial=True)
         write_serializer.is_valid(raise_exception=True)
-        user = write_serializer.save()
+
+        with transaction.atomic():
+            user = write_serializer.save()
+
+            # Logged only on a genuine transition, not on a repeated
+            # suspend/reactivate call that changes nothing.
+            if was_active != user.is_active:
+                log_admin_action(
+                    actor=request.user,
+                    action=(
+                        AdminActionLog.Action.USER_REACTIVATED
+                        if user.is_active
+                        else AdminActionLog.Action.USER_SUSPENDED
+                    ),
+                    target_type="user",
+                    target_id=user.id,
+                    target_label=user.email,
+                )
 
         if was_active and not user.is_active:
             notify(
@@ -197,6 +251,11 @@ class AdminUserDetailView(APIView):
 
 class UserSearchView(APIView):
     permission_classes = [IsAuthenticated]
+    # Type-ahead picker, so it is hit far more rapidly than a typical
+    # endpoint. Shares the existing "search" scope (60/min) instead of
+    # falling back to the generic limit.
+    throttle_classes = [AnonRateThrottle, UserRateThrottle, ScopedRateThrottle]
+    throttle_scope = "search"
 
     def get(self, request):
         from apps.hubs.permissions import user_is_representative_for_any_hub
@@ -214,4 +273,3 @@ class UserSearchView(APIView):
         ).order_by("full_name")[:10]
 
         return Response({"results": UserSearchSerializer(users, many=True).data})
-

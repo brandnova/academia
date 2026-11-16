@@ -10,7 +10,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-SITE_NAME = "Academia"
+SITE_NAME = "Academia Atlas"
 FRONTEND_URL = env("FRONTEND_URL", default="http://localhost:3000")
 
 INSTALLED_APPS = [
@@ -146,6 +146,9 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    # Open by default on purpose: this is a mostly-public-read platform. The
+    # flip side is that any NEW view that forgets permission_classes is
+    # public, not private. Every view must set permissions explicitly.
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
     ],
@@ -161,6 +164,8 @@ REST_FRAMEWORK = {
         "question_create": "30/hour",
         "answer_create": "50/hour",
         "comment_create": "50/hour",
+        "content_edit": "60/hour",
+        "mark_best": "30/hour",
         "voting": "100/hour",
         "search": "60/minute",
         "reports": "10/hour",

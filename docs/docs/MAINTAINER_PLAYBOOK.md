@@ -1,7 +1,7 @@
 # Maintainer Playbook (Internal)
 
 This is for Mr Nova (project maintainer), not contributors. It's the operating rhythm that keeps
-Academia's collaboration running without needing a fresh decision every time
+Academia Atlas's collaboration running without needing a fresh decision every time
 something routine comes up. Revisit and adjust this as the project grows,
 it's a starting point, not a fixed rulebook.
 
@@ -78,7 +78,7 @@ If someone claims a task and goes quiet:
 ## Reviewing pull requests
 
 You're new to this too, so a simple standard: does it do what the issue
-asked, does it match the relevant doc (api-contract.md, project-overview.md,
+asked, does it match the relevant doc (api-contract.md, design-guide.md,
 etc.), does it look like it was actually tested. That's enough of a bar for
 small, well-scoped tasks.
 
