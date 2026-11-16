@@ -4,8 +4,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-MOBILE="${MOBILE_DIR:-academia-mobile}"   # becomes mobile after the folder rename
-WEB="${WEB_DIR:-academia-frontend}"       # becomes web after the folder rename
+MOBILE="${MOBILE_DIR:-mobile}"
+WEB="${WEB_DIR:-web}"
 S=brand/src; O=$MOBILE/assets; B=$O/brand; W=$WEB/app
 BLUE="#3454D1"   # UI accent, flattens corners and recolours the mark
 INSET=86         # percent kept when cutting off baked-in rounded corners (100 if the file is already square)
