@@ -80,7 +80,7 @@ export default function SearchTagFilter({ value, onChange }) {
               className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-between"
             >
               <span>{tag.name}</span>
-              <span className="text-xs text-gray-400">{tag.question_count}</span>
+              <span className="text-xs text-muted">{tag.question_count}</span>
             </button>
           ))}
         </div>

@@ -21,7 +21,7 @@ export default function EmptyState({
       )}
       {title && <p className="text-sm font-medium">{title}</p>}
       {description && (
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 max-w-sm">{description}</p>
+        <p className="text-sm text-muted mt-1 max-w-sm">{description}</p>
       )}
       {action && <div className="mt-4">{action}</div>}
     </div>

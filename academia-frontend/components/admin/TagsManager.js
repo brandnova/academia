@@ -142,7 +142,7 @@ export default function TagsManager() {
 
       {status === "ready" && tags.length > 0 && (
         <>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+          <p className="text-sm text-muted mb-2">
             {count} tag{count !== 1 ? "s" : ""}
           </p>
           <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
@@ -151,11 +151,11 @@ export default function TagsManager() {
                 <div className="flex items-center justify-between gap-3">
                   <div className="min-w-0">
                     <span className="text-sm font-medium break-words">{tag.name}</span>
-                    <span className="text-xs text-gray-400 ml-2">
+                    <span className="text-xs text-muted ml-2">
                       {tag.question_count} questions
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 text-gray-400 shrink-0">
+                  <div className="flex items-center gap-3 text-muted shrink-0">
                     <button
                       onClick={() => setMergingId(mergingId === tag.id ? null : tag.id)}
                       className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-accent transition-colors"
@@ -184,7 +184,7 @@ export default function TagsManager() {
                     </ErrorMessage>
                     <button
                       onClick={() => setDeleteConfirmId(null)}
-                      className="mt-0.5 text-xs text-gray-400 underline"
+                      className="mt-0.5 text-xs text-muted underline"
                     >
                       Cancel
                     </button>

@@ -1,0 +1,28 @@
+{
+  "cli": { "version": ">= 16.0.0", "appVersionSource": "remote" },
+  "build": {
+    "development": { "developmentClient": true, "distribution": "internal", "env": { "EXPO_PUBLIC_DEV_MODE": "1" } },
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://tester02.pythonanywhere.com/api/v1",
+        "EXPO_PUBLIC_WEB_BASE_URL": "https://academia-prvw.vercel.app",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "246980996828-8qjhcdhinph5jdneafu0sh6pdl0dl1h8.apps.googleusercontent.com",
+        "EXPO_PUBLIC_PLATFORM_ACCOUNT_ID": "b1fbf3f8-b383-4f14-8da5-15be14baf4b9",
+        "EXPO_PUBLIC_SUPPORT_EMAIL": "brandnova.dev@gmail.com"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://tester02.pythonanywhere.com/api/v1",
+        "EXPO_PUBLIC_WEB_BASE_URL": "https://academia-prvw.vercel.app",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "246980996828-8qjhcdhinph5jdneafu0sh6pdl0dl1h8.apps.googleusercontent.com",
+        "EXPO_PUBLIC_PLATFORM_ACCOUNT_ID": "b1fbf3f8-b383-4f14-8da5-15be14baf4b9",
+        "EXPO_PUBLIC_SUPPORT_EMAIL": "brandnova.dev@gmail.com"
+      }
+    }
+  },
+  "submit": { "production": {} }
+}

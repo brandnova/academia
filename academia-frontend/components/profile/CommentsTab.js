@@ -2,10 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { MessageCircle } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { questionUrl } from "@/lib/urls";
 import { timeAgo } from "@/lib/timeAgo";
 import Skeleton from "@/components/ui/Skeleton";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function CommentsTab() {
   const [comments, setComments] = useState([]);
@@ -13,6 +16,7 @@ export default function CommentsTab() {
   const [status, setStatus] = useState("loading");
   const [errorMsg, setErrorMsg] = useState("");
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState("");
 
   const fetchPage = useCallback((page) => clientFetch(`/users/me/comments/?page=${page}`), []);
 
@@ -38,12 +42,13 @@ export default function CommentsTab() {
 
   async function handleLoadMore() {
     setLoadingMore(true);
+    setLoadMoreError("");
     try {
       const data = await fetchPage(nextPage);
       setComments((prev) => [...prev, ...data.results]);
       setNextPage(data.next ? nextPage + 1 : null);
     } catch (err) {
-      setErrorMsg(err.message);
+      setLoadMoreError(err.message);
     } finally {
       setLoadingMore(false);
     }
@@ -58,9 +63,15 @@ export default function CommentsTab() {
       </div>
     );
   }
-  if (status === "error") return <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>;
+  if (status === "error") return <ErrorMessage>{errorMsg}</ErrorMessage>;
   if (comments.length === 0) {
-    return <p className="text-sm text-gray-500 dark:text-gray-400">No comments yet.</p>;
+    return (
+      <EmptyState
+        icon={MessageCircle}
+        title="No comments yet"
+        description="Comments you write will show up here."
+      />
+    );
   }
 
   return (
@@ -72,9 +83,9 @@ export default function CommentsTab() {
             href={questionUrl(c.answer.question)}
             className="block py-3 px-1 hover:bg-gray-50 dark:hover:bg-gray-800/50"
           >
-            <p className="text-xs text-gray-400 truncate">on {c.answer.question.title}</p>
+            <p className="text-xs text-muted truncate">on {c.answer.question.title}</p>
             <p className="text-sm mt-0.5 truncate">{c.body}</p>
-            <p className="text-xs text-gray-400 mt-1">{timeAgo(c.created_at)}</p>
+            <p className="text-xs text-muted mt-1">{timeAgo(c.created_at)}</p>
           </Link>
         ))}
       </div>
@@ -87,6 +98,7 @@ export default function CommentsTab() {
           >
             {loadingMore ? "Loading..." : "View more"}
           </button>
+          <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
         </div>
       )}
     </div>

@@ -18,7 +18,7 @@ function truncateName(fullName) {
 export default function ProfileMenu() {
   const { user, loading, logout } = useAuth();
 
-  if (loading) return <span className="text-sm text-gray-400">Loading...</span>;
+  if (loading) return <span className="text-sm text-muted">Loading...</span>;
 
   if (!user) return <GoogleLoginButton />;
 
@@ -31,7 +31,7 @@ export default function ProfileMenu() {
           className="flex items-center gap-1.5 text-sm px-2 py-1.5 rounded hover:bg-gray-50 dark:hover:bg-gray-800"
         >
           <span className="max-w-[140px] truncate">{truncateName(user.full_name)}</span>
-          <ChevronDown className="w-4 h-4 text-gray-400" />
+          <ChevronDown className="w-4 h-4 text-muted" />
         </button>
       )}
     >

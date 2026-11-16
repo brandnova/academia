@@ -1,12 +1,15 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2, FileText } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
 import PageFormModal from "./PageFormModal";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { Select } from "@/components/ui/FormControls";
 
 const VISIBILITY_OPTIONS = [
   { value: "", label: "All visibility" },
@@ -137,12 +140,12 @@ export default function PagesManager() {
         >
           <Plus className="w-4 h-4" /> New page
         </button>
-        {modalLoading && <span className="text-xs text-gray-400">Loading page...</span>}
+        {modalLoading && <span className="text-xs text-muted">Loading page...</span>}
       </div>
       {modalLoadError && (
-        <p className="text-red-600 dark:text-red-400 text-sm mb-3">
+        <ErrorMessage className="mb-3">
           Couldn't load that page for editing: {modalLoadError}
-        </p>
+        </ErrorMessage>
       )}
 
       <div className="flex flex-col sm:flex-row gap-3 mb-4">
@@ -154,43 +157,52 @@ export default function PagesManager() {
             loading={query !== debouncedQuery}
           />
         </div>
-        <select
+        <Select
           value={visibilityFilter}
           onChange={(e) => setVisibilityFilter(e.target.value)}
-          className="px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
+          fullWidth={false}
+          aria-label="Filter by visibility"
         >
           {VISIBILITY_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
           ))}
-        </select>
-        <select
+        </Select>
+        <Select
           value={publishedFilter}
           onChange={(e) => setPublishedFilter(e.target.value)}
-          className="px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
+          fullWidth={false}
+          aria-label="Filter by status"
         >
           {PUBLISHED_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
           ))}
-        </select>
+        </Select>
       </div>
 
-      {status === "error" && <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>}
+      {status === "error" && <ErrorMessage>{errorMsg}</ErrorMessage>}
       {status === "ready" && pages.length === 0 && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">No pages yet.</p>
+        <EmptyState
+          icon={FileText}
+          title="No pages yet"
+          description="Create one for policies, guides or staff notes."
+        />
       )}
       {status === "ready" && pages.length > 0 && filteredPages.length === 0 && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          No pages match these filters.
-          {hasActiveFilters && (
-            <button onClick={clearFilters} className="ml-2 text-accent hover:underline">
-              Clear filters
-            </button>
-          )}
-        </p>
+        <EmptyState
+          icon={FileText}
+          title="No pages match these filters"
+          action={
+            hasActiveFilters && (
+              <button onClick={clearFilters} className="text-sm text-accent hover:underline">
+                Clear filters
+              </button>
+            )
+          }
+        />
       )}
       {status === "ready" && filteredPages.length > 0 && (
         <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
@@ -203,18 +215,18 @@ export default function PagesManager() {
                     className={`text-[10px] px-1.5 py-0.5 rounded ${
                       page.is_published
                         ? "bg-accent/10 text-accent"
-                        : "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
+                        : "bg-gray-100 dark:bg-gray-800 text-muted"
                     }`}
                   >
                     {page.is_published ? "Published" : "Draft"}
                   </span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-muted">
                     {page.visibility === "STAFF" ? "Staff" : "Public"}
                   </span>
                 </div>
-                <p className="text-xs text-gray-400 truncate">/pages/{page.slug}</p>
+                <p className="text-xs text-muted truncate">/pages/{page.slug}</p>
               </div>
-              <div className="flex items-center gap-2 shrink-0 text-gray-400">
+              <div className="flex items-center gap-2 shrink-0 text-muted">
                 <button
                   onClick={() => openEdit(page)}
                   disabled={modalLoading}
@@ -235,7 +247,7 @@ export default function PagesManager() {
                     <button
                       onClick={() => setDeleteConfirmId(null)}
                       disabled={deletingId === page.id}
-                      className="text-xs px-2 py-1 rounded border border-[var(--color-border)] text-gray-500 dark:text-gray-400 disabled:opacity-50"
+                      className="text-xs px-2 py-1 rounded border border-[var(--color-border)] text-muted disabled:opacity-50"
                     >
                       Cancel
                     </button>
@@ -254,7 +266,7 @@ export default function PagesManager() {
           ))}
         </div>
       )}
-      {deleteError && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{deleteError}</p>}
+      {deleteError && <ErrorMessage size="xs" className="mt-2">{deleteError}</ErrorMessage>}
 
       {modalPage !== null && (
         <PageFormModal

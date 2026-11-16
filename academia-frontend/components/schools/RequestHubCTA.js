@@ -11,7 +11,7 @@ export default function RequestHubCTA({ schoolId, schoolName }) {
     return (
       <div className="border border-[var(--color-border)] rounded-lg p-6 text-center">
         <p className="font-medium mb-1">Request submitted.</p>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-muted">
           An admin will review your request for {schoolName}.
         </p>
       </div>
@@ -21,7 +21,7 @@ export default function RequestHubCTA({ schoolId, schoolName }) {
   return (
     <div className="border border-[var(--color-border)] rounded-lg p-6 text-center">
       <p className="font-medium mb-1">{schoolName} doesn't have an active hub yet.</p>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+      <p className="text-sm text-muted mb-4">
         Be the first to request one.
       </p>
       <button

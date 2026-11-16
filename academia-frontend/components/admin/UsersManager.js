@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { Users } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useAuth } from "@/lib/auth-context";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import SearchBar from "@/components/ui/SearchBar";
 import Skeleton from "@/components/ui/Skeleton";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 const FILTER_TABS = [
   { key: "", label: "All" },
@@ -98,10 +101,11 @@ export default function UsersManager() {
           <button
             key={t.key}
             onClick={() => setActiveFilter(t.key)}
+            aria-pressed={activeFilter === t.key}
             className={`text-xs px-3 py-1 rounded border ${
               activeFilter === t.key
                 ? "border-accent text-accent"
-                : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+                : "border-[var(--color-border)] text-muted"
             }`}
           >
             {t.label}
@@ -116,19 +120,23 @@ export default function UsersManager() {
           ))}
         </div>
       )}
-      {status === "error" && <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>}
+      {status === "error" && <ErrorMessage>{errorMsg}</ErrorMessage>}
       {status === "ready" && users.length === 0 && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">No users found.</p>
+        <EmptyState
+          icon={Users}
+          title="No users found"
+          description={debouncedQuery ? "Try a different search." : undefined}
+        />
       )}
       {status === "ready" && users.length > 0 && (
         <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
           {users.map((u) => (
             <div key={u.id} className="flex items-center justify-between py-2.5 px-2 text-sm">
               <div className="min-w-0">
-                <p className={`truncate ${!u.is_active ? "text-gray-400 line-through" : ""}`}>
+                <p className={`truncate ${!u.is_active ? "text-muted line-through" : ""}`}>
                   {u.full_name} {u.is_admin && <span className="text-xs text-accent">(admin)</span>}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{u.email}</p>
+                <p className="text-xs text-muted truncate">{u.email}</p>
               </div>
               <button
                 onClick={() => toggleSuspend(u)}
@@ -142,7 +150,7 @@ export default function UsersManager() {
           ))}
         </div>
       )}
-      {actionError && <p className="text-red-600 dark:text-red-400 text-xs mt-2">{actionError}</p>}
+      {actionError && <ErrorMessage size="xs" className="mt-2">{actionError}</ErrorMessage>}
       {nextPage && (
         <div className="mt-3 text-center">
           <button

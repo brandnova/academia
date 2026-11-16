@@ -94,6 +94,13 @@ redirect-based OAuth dance, and a small, predictable request/response contract.
 This is the entire flow, there's no separate "callback URL" or server-rendered
 redirect page to build, it's a client-side popup plus one API call.
 
+### Native clients
+
+Any Google OAuth client that obtains an access token with the `email` and
+`profile` scopes can use this endpoint. The backend verifies the token through
+Google's `userinfo` endpoint; the mobile app uses separate OAuth client IDs for
+each platform.
+
 Login and token refresh are both rate limited to 10 requests per minute per client
 (see Rate Limits below), to slow down credential-stuffing style abuse.
 
@@ -116,7 +123,26 @@ Login and token refresh are both rate limited to 10 requests per minute per clie
     "id": "uuid",
     "email": "user@example.com",
     "full_name": "John Doe",
-    "avatar": "https://lh3.googleusercontent.com/..."
+    "avatar": "https://lh3.googleusercontent.com/...",
+    "is_admin": false,
+    "moderator_for": [
+      {
+        "hub_id": "uuid",
+        "school": { "id": "uuid", "name": "University of Lagos", "slug": "unilag" }
+      }
+    ],
+    "representative_for": [
+      {
+        "hub_id": "uuid",
+        "school": { "id": "uuid", "name": "University of Lagos", "slug": "unilag" }
+      }
+    ],
+    "stats": {
+      "question_count": 12,
+      "answer_count": 34,
+      "best_answer_count": 9,
+      "comment_count": 21
+    }
   }
 }
 ```
@@ -373,11 +399,11 @@ admin assigns both explicitly:
 
 The newly assigned user does not see this reflected until their next
 `GET /users/me/` call picks up the new `moderator_for`/`representative_for`
-entry, there is currently no push notification for this (`MODERATOR_ASSIGNED`
-exists as a notification type but has no trigger wired to it yet, tracked in
-feature-list.md). Refetch the current user after login and when navigating
-into a school or hub the person might administer, rather than relying on it
-updating automatically mid-session.
+entry. An in-app `MODERATOR_ASSIGNED` notification now fires for moderator and
+representative assignments, but it does not update the current-user fields in
+an already loaded session. Refetch the current user after login and when
+navigating into a school or hub the person might administer, rather than
+relying on those fields updating automatically mid-session.
 
 ### Deriving what to show
 
@@ -523,7 +549,9 @@ nullable, expect null on any school created before that import.
 ```
 
 **Caching Behavior:**
-- **Cache**: Cached as `school-by-slug:{slug}` using `CACHE_TTL_MEDIUM` (300 seconds). No admin bypass on this slug lookup path.
+- **Cache**: Non-admin responses are cached as `school-by-slug:{slug}` using
+  `CACHE_TTL_MEDIUM` (300 seconds). Platform admins bypass the cache and can
+  retrieve inactive schools.
 
 This is an additive lookup path alongside the existing UUID-based one, both remain
 valid indefinitely. `slug` is generated once at creation from `short_name` and never
@@ -1621,7 +1649,7 @@ answers through this or any other endpoint. Ordered by most recent first.
 }
 ```
 
-This endpoint is public — no authentication required. Pagination uses the same
+This endpoint is public, no authentication required. Pagination uses the same
 envelope as all list endpoints (`count`, `next`, `previous`, `results`).
 
 ---
@@ -1996,6 +2024,10 @@ but it has no fixed upper bound (it is not a normalized 0 to 1 percentage). It i
 `null` whenever `q` is omitted, since relevance has no meaning without a query to
 rank against, in that case results still return, ordered by the first three
 ranking priorities above.
+
+When `q` is given, rows with a text rank below 0.0001 are excluded. PostgreSQL
+returns about 1e-20 for non-matches on multi-term queries, so without this floor
+`q` would not filter.
 
 **Caching & Visibility Behavior:**
 - **Cache**: Public requests are cached using `search-questions:<query_params>` key for `CACHE_TTL_SEARCH` (30 seconds).
@@ -2381,69 +2413,6 @@ escalate it.
       "question_slug": "how-do-i-calculate-my-cgpa",
       "answer_id": "uuid"
     },
-  "created_at": "2026-01-01T00:00:00Z"
-}
-```
-
-**Error Responses:**
-```json
-// 400 Bad Request - Already reviewed
-{
-  "error": "This report has already been reviewed"
-}
-
-// 400 Bad Request - Already escalated
-{
-  "error": "This report has already been escalated"
-}
-
-// 400 Bad Request - Reported content no longer exists
-{
-  "error": "The reported content no longer exists"
-}
-
-// 403 Forbidden - No moderator/representative role for this hub, and not admin
-{
-  "error": "You do not have permission to perform this action"
-}
-```
-
-Escalating sends every active admin a `NEW_REPORT` notification, in-app only,
-excluding the escalator if they happen to be an admin. This reuses the same
-notification type as report creation, with message text that specifically
-frames it as an escalation, matching the project's precedent of reusing
-notification types over adding new ones for closely related events.
-
----
-
-### Escalate Report
-**Endpoint:** `POST /api/v1/reports/{report_id}/escalate/`
-
-Restricted to an active Moderator or Representative for the reported content's
-hub, or an admin. Marks an existing PENDING report as escalated, signaling
-that a staff member's judgment (not just a student complaint) flagged it for
-priority review. Requires an existing report, there is no way to escalate
-unreported content directly, file a report first via `POST /reports/` then
-escalate it.
-
-**Response (200 OK):**
-```json
-{
-  "id": "uuid",
-  "content_type": "question",
-  "content_id": "uuid",
-  "type": "SPAM",
-  "description": "This appears to be promotional content",
-  "status": "PENDING",
-  "reporter": {
-    "id": "uuid",
-    "full_name": "John Doe"
-  },
-  "is_escalated": true,
-  "escalated_by": {
-    "id": "uuid",
-    "full_name": "Jane Moderator"
-  },
   "created_at": "2026-01-01T00:00:00Z"
 }
 ```

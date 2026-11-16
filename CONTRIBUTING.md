@@ -15,7 +15,11 @@ If you want to work on something that isn't already an issue, open one first and
 
 ## Before you start
 
-1. Read `project-plan.md`, `feature-list.md`, `database-schema.md`, and `api-contract.md` (backend) or `project-overview.md` (frontend), whichever is relevant to what you're working on. These are the source of truth for how the project is supposed to work. If your task requires deviating from them, say so in the issue before implementing it.
+1. Start at the [documentation map](docs/docs/index.md), then read the
+   documents relevant to your work: `project-plan.md`, `feature-list.md`,
+   `database-schema.md`, `api-contract.md`, the relevant implementation map,
+   and `design-guide.md`. If your task requires deviating from them, say so in
+   the issue before implementing it.
 2. Read `CODE_OF_CONDUCT.md`.
 3. Comment on the issue you want to work on and wait for it to be assigned to you, so two people don't duplicate effort.
 
@@ -101,13 +105,33 @@ python manage.py runserver
 ### Frontend (Next.js)
 
 ```bash
-cd frontend
+cd academia-frontend
 npm install
 cp .env.example .env.local
 npm run dev
 ```
 
 Point your local frontend's env var at either your local backend or the deployed one, whichever your task needs.
+
+### Mobile (Expo)
+
+Use Node 22.13+, 24.3+ or 26+ and npm. Node 25 is outside React Native 0.88's
+supported engine range.
+
+```bash
+cd academia-mobile
+cp .env.example .env
+npm install
+npx expo start -c --lan
+```
+
+For a physical device, start the backend with `make run-lan` from `backend/`.
+Use `npx expo start --web` for the browser preview and
+`npm run typecheck`, `npm run export:web` and `npx expo-doctor` for mobile
+checks.
+See [academia-mobile/README.md](academia-mobile/README.md) for API host and
+Google sign-in setup. Run the cross-surface regression checks in
+[`docs/docs/TESTING.md`](docs/docs/TESTING.md).
 
 ## Branching model
 

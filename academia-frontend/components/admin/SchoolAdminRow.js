@@ -33,16 +33,16 @@ export default function SchoolAdminRow({ school, onUpdated }) {
     <div className="flex items-center justify-between gap-3 py-3 px-2 text-sm">
       <div className="min-w-0">
         <div className="flex items-center gap-2 min-w-0">
-          <p className={`font-medium truncate ${inactive ? "text-gray-400 line-through" : ""}`}>
+          <p className={`font-medium truncate ${inactive ? "text-muted line-through" : ""}`}>
             {school.name}
           </p>
           {inactive && (
-            <span className="shrink-0 text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+            <span className="shrink-0 text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-muted">
               Inactive
             </span>
           )}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+        <p className="text-xs text-muted truncate">
           {school.short_name}
           {school.location ? ` · ${school.location}` : ""}
           {school.has_hub ? " · has hub" : ""}
@@ -51,7 +51,7 @@ export default function SchoolAdminRow({ school, onUpdated }) {
           {errorMsg}
         </ErrorMessage>
       </div>
-      <div className="flex items-center gap-3 shrink-0 text-gray-400">
+      <div className="flex items-center gap-3 shrink-0 text-muted">
         <button
           onClick={() => setEditing(true)}
           className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-accent transition-colors"

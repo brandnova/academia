@@ -24,7 +24,7 @@ export default function FilterSidebar({ children, onClear, hasActiveFilters, act
           )}
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`w-4 h-4 text-muted transition-transform ${open ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -34,7 +34,7 @@ export default function FilterSidebar({ children, onClear, hasActiveFilters, act
         } md:block border border-[var(--color-border)] rounded-lg p-4 space-y-4`}
       >
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+          <h2 className="font-semibold text-sm text-muted uppercase tracking-wide">
             Filter
           </h2>
           {hasActiveFilters && (
@@ -52,7 +52,7 @@ export default function FilterSidebar({ children, onClear, hasActiveFilters, act
 export function FilterSection({ title, children }) {
   return (
     <div className="pt-4 first:pt-0 border-t first:border-t-0 border-[var(--color-border)]">
-      <h3 className="text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">{title}</h3>
+      <h3 className="text-xs font-medium text-muted mb-2 uppercase tracking-wide">{title}</h3>
       {children}
     </div>
   );

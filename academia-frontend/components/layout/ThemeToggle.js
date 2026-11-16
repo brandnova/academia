@@ -37,7 +37,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={label}
       title={label}
-      className="p-2 rounded text-gray-500 dark:text-gray-400 hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800"
+      className="p-2 rounded text-muted hover:text-accent hover:bg-gray-50 dark:hover:bg-gray-800"
     >
       {/* Both icons exist, CSS shows the one that matches the real theme. */}
       <Moon className="w-5 h-5 dark:hidden" />

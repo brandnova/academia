@@ -29,7 +29,7 @@ export default async function StaticPageView({ params }) {
   return (
     <div className="max-w-2xl">
       <h1 className="text-2xl font-semibold mb-1">{page.title}</h1>
-      <p className="text-xs text-gray-400 mb-6">
+      <p className="text-xs text-muted mb-6">
         Last updated {new Date(page.updated_at).toLocaleDateString()}
         {page.created_by && ` by ${page.created_by.full_name}`}
       </p>

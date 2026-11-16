@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academia Atlas, Mobile Design Concept v2</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  /* AGENT NOTE: these colour names mirror the real web app tokens. Reproduce them as your
+     mobile theme: bg, ink, line (dividers), strong (form control borders), muted (secondary
+     text, already contrast checked at 4.5:1), surface (inputs, cards, sheets). */
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: { sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'] },
+        colors: {
+          accent: '#3454D1',
+          success: { DEFAULT: '#1D8A6C', dark: '#3FBF97' },
+          danger: '#CE4747',
+          app: 'var(--bg)', ink: 'var(--ink)', line: 'var(--line)',
+          strong: 'var(--strong)', muted: 'var(--muted)', surface: 'var(--surface)',
+        },
+      }
+    }
+  }
+</script>
+<style>
+  [x-cloak] { display: none !important; }
+  body { -webkit-font-smoothing: antialiased; }
+  .phone { --bg:#FBFAF8; --ink:#16140F; --line:#E5E3DF; --strong:#CFCBC2; --muted:#67645C; --surface:#FFFFFF; }
+  .phone.dark { --bg:#16171C; --ink:#F5F3EE; --line:#2C2D34; --strong:#3A3B44; --muted:#9EA1AB; --surface:#1E2939; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp .3s ease both; }
+  .screen::-webkit-scrollbar { display: none; }
+  .screen { -ms-overflow-style: none; scrollbar-width: none; }
+  button:active { transform: scale(0.97); }
+  button { transition: transform 120ms ease, background-color 150ms ease, color 150ms ease; }
+  .flash { box-shadow: 0 0 0 2px #3454D1; border-radius: 0.5rem; }
+</style>
+</head>
+
+<body class="bg-gray-100 font-sans min-h-screen py-8 px-4 text-gray-800" x-data="app()" x-cloak>
+<div class="mx-auto flex flex-col xl:flex-row items-center xl:items-start justify-center gap-8">
+
+  <!-- ===================== LEFT: viewer controls + phone ===================== -->
+  <div class="flex flex-col items-center gap-3">
+    <p class="font-bold text-sm">Academia Atlas, Mobile Design Concept v2</p>
+
+    <!-- Viewer controls. Not part of the app. They only exist to preview roles and states. -->
+    <div class="flex flex-wrap items-center justify-center gap-1.5 text-xs max-w-[430px]">
+      <span class="font-semibold text-gray-500 mr-1">Preview as</span>
+      <template x-for="r in ['guest','student','moderator','admin']" :key="r">
+        <button @click="setRole(r)" class="px-2.5 py-1 rounded border capitalize" :class="role===r ? 'bg-accent text-white border-accent' : 'bg-white border-gray-300'" x-text="r"></button>
+      </template>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-1.5 text-xs max-w-[430px]">
+      <span class="font-semibold text-gray-500 mr-1">UI state</span>
+      <template x-for="s in ['normal','loading','empty','error','offline']" :key="s">
+        <button @click="uiState=s" class="px-2.5 py-1 rounded border capitalize" :class="uiState===s ? 'bg-accent text-white border-accent' : 'bg-white border-gray-300'" x-text="s"></button>
+      </template>
+    </div>
+    <div class="flex items-center gap-2 text-xs">
+      <button @click="dark=!dark" class="px-2.5 py-1 rounded border border-gray-300 bg-white"><i class="fa-solid" :class="dark ? 'fa-sun' : 'fa-moon'"></i> <span x-text="dark ? 'Light' : 'Dark'"></span></button>
+      <button @click="restart()" class="px-2.5 py-1 rounded border border-gray-300 bg-white"><i class="fa-solid fa-rotate-left"></i> Restart</button>
+    </div>
+
+    <!-- ===================== PHONE FRAME ===================== -->
+    <div class="phone relative w-[390px] h-[820px] rounded-[2.75rem] border-[10px] border-gray-900 bg-gray-900 shadow-2xl overflow-hidden" :class="dark ? 'dark' : ''">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-2xl z-[60]"></div>
+
+      <div class="relative w-full h-full bg-app text-ink flex flex-col overflow-hidden rounded-[2rem]">
+
+        <!-- Status bar -->
+        <div class="flex items-center justify-between px-6 pt-3 pb-1 text-[13px] font-semibold shrink-0 relative z-10">
+          <span>9:41</span>
+          <div class="flex items-center gap-1.5 text-xs"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-full"></i></div>
+        </div>
+
+        <!-- AGENT NOTE: offline pattern. Nothing is cached yet, add this banner, and queue
+             nothing. Writes (post, vote, follow) fail with the friendly "Can't reach the server" copy. -->
+        <div x-show="uiState==='offline'" class="shrink-0 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 text-xs px-4 py-1.5 flex items-center gap-2 relative z-10">
+          <i class="fa-solid fa-wifi"></i> You're offline. Content may be out of date.
+        </div>
+
+        <!-- ===================== TOP BAR ===================== -->
+        <header x-show="page!=='login'" class="shrink-0 px-3 pt-1 pb-2 flex items-center gap-2 border-b border-line bg-app relative z-10">
+          <button x-show="canBack()" @click="back()" aria-label="Back" class="w-9 h-9 flex items-center justify-center text-muted"><i class="fa-solid fa-arrow-left"></i></button>
+          <button x-show="!canBack()" @click="drawerOpen=true" aria-label="Menu" class="w-9 h-9 flex items-center justify-center text-muted"><i class="fa-solid fa-bars"></i></button>
+          <button x-show="page==='home'" @click="go('home')" class="flex items-center gap-1.5 font-extrabold text-[15px] tracking-tight"><img :src="dark ? 'logo-dark.png' : 'logo-light.png'" alt="" class="w-5 h-5 object-contain"><span>Academia Atlas</span></button>
+          <p x-show="page!=='home'" class="font-bold text-sm truncate flex-1" x-text="title()"></p>
+          <div class="ml-auto flex items-center">
+            <button x-show="['home','schools'].includes(page)" @click="go('search')" aria-label="Search" class="w-9 h-9 flex items-center justify-center text-muted"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button x-show="page==='notifications' && unread()>0" @click="markAll()" class="text-xs text-accent font-medium px-2">Mark all read</button>
+          </div>
+        </header>
+
+        <!-- ===================== DRAWER ===================== -->
+        <div x-show="drawerOpen" x-transition.opacity @click="drawerOpen=false" class="absolute inset-0 bg-black/40 z-40"></div>
+
+        <!-- AGENT NOTE: swipe left also closes the drawer. -->
+        <div class="absolute inset-y-0 left-0 w-[290px] z-50 bg-surface border-r border-line flex flex-col transition-transform duration-300 ease-out" :class="drawerOpen ? 'translate-x-0' : '-translate-x-full'">
+          <div class="px-5 pt-9 pb-4 border-b border-line">
+            <template x-if="signedIn">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-full bg-accent/10 text-accent flex items-center justify-center font-bold shrink-0">A</div>
+                <div class="min-w-0 flex-1"><p class="font-bold text-sm truncate">Amara Okafor</p><p class="text-[11px] text-muted capitalize" x-text="role"></p></div>
+              </div>
+            </template>
+            <template x-if="!signedIn">
+              <div><p class="font-bold text-sm mb-2">Browsing as a guest</p><button @click="drawerOpen=false; sheet='signin'" class="w-full bg-accent text-white text-sm font-semibold rounded-lg py-2.5">Sign in with Google</button></div>
+            </template>
+          </div>
+          <nav class="flex-1 overflow-y-auto px-3 py-3 space-y-0.5 screen">
+            <button @click="go('tags'); drawerOpen=false" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm"><i class="fa-solid fa-tag w-4 text-center text-muted"></i>Browse tags</button>
+            <button @click="go('search'); drawerOpen=false" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm"><i class="fa-solid fa-magnifying-glass w-4 text-center text-muted"></i>Search</button>
+            <button x-show="signedIn" @click="go('myReports'); drawerOpen=false" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm"><i class="fa-regular fa-flag w-4 text-center text-muted"></i>My reports</button>
+            <button @click="go('pages'); drawerOpen=false" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm"><i class="fa-regular fa-file-lines w-4 text-center text-muted"></i>Policies and guides</button>
+            <!-- AGENT NOTE: staff entries are web handoffs, not screens. See the notes panel, "Staff scope". -->
+            <template x-if="isStaff">
+              <div class="pt-3 mt-3 border-t border-line">
+                <p class="px-3 text-[10px] font-bold uppercase tracking-wide text-muted mb-1">Staff tools (web)</p>
+                <button @click="openWeb('/moderation')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm"><i class="fa-solid fa-shield-halved w-4 text-center text-muted"></i>Moderation<i class="fa-solid fa-arrow-up-right-from-square ml-auto text-[10px] text-muted"></i></button>
+                <button x-show="role==='admin'" @click="openWeb('/admin')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm"><i class="fa-solid fa-toolbox w-4 text-center text-muted"></i>Admin dashboard<i class="fa-solid fa-arrow-up-right-from-square ml-auto text-[10px] text-muted"></i></button>
+              </div>
+            </template>
+          </nav>
+          <div class="px-3 py-3 border-t border-line space-y-0.5">
+            <button @click="dark=!dark" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm"><i class="fa-solid w-4 text-center text-muted" :class="dark ? 'fa-sun' : 'fa-moon'"></i><span x-text="dark ? 'Light mode' : 'Dark mode'"></span></button>
+            <button x-show="signedIn" @click="logout()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-danger"><i class="fa-solid fa-arrow-right-from-bracket w-4 text-center"></i>Log out</button>
+          </div>
+        </div>
+
+        <!-- ===================== SCROLLABLE CONTENT ===================== -->
+        <div class="screen flex-1 overflow-y-auto relative z-10" id="scroller">
+
+          <!-- AGENT NOTE: loading, empty and error patterns, one shared overlay here for the demo. In the app,
+               each list screen owns its own skeleton, empty state (icon, title, one line) and error state
+               with a Retry button. Wire pull-to-refresh on every list screen. -->
+          <div x-show="uiState!=='normal' && uiState!=='offline' && stateful()" class="absolute inset-0 z-20 bg-app">
+            <template x-if="uiState==='loading'">
+              <div class="p-4 space-y-4 animate-pulse">
+                <template x-for="i in 6" :key="i"><div class="space-y-2"><div class="h-4 bg-line rounded w-3/4"></div><div class="h-3 bg-line rounded w-full"></div><div class="h-3 bg-line rounded w-1/3"></div></div></template>
+              </div>
+            </template>
+            <template x-if="uiState==='empty'">
+              <div class="m-4 mt-10 border border-dashed border-strong rounded-xl py-12 px-6 text-center">
+                <i class="fa-regular fa-comments text-3xl text-strong mb-3"></i>
+                <p class="text-sm font-semibold" x-text="stateCopy().t"></p>
+                <p class="text-sm text-muted mt-1" x-text="stateCopy().d"></p>
+              </div>
+            </template>
+            <template x-if="uiState==='error'">
+              <div class="m-4 mt-10 text-center">
+                <i class="fa-solid fa-triangle-exclamation text-3xl text-danger mb-3"></i>
+                <p class="text-sm font-semibold">Couldn't load this</p>
+                <p class="text-sm text-muted mt-1 mb-4">The server is taking too long to respond. Please try again in a moment.</p>
+                <button @click="uiState='normal'" class="text-sm font-semibold px-4 py-2 rounded-lg border border-strong">Try again</button>
+              </div>
+            </template>
+          </div>
+
+          <!-- ===================== LOGIN ===================== -->
+          <section x-show="page==='login'" class="fade-up min-h-[720px] flex flex-col px-6 pt-16 pb-8">
+            <div class="flex-1">
+              <div class="flex items-center gap-2.5 mb-6">
+                <img :src="dark ? 'logo-dark.png' : 'logo-light.png'" alt="" class="w-10 h-10 object-contain">
+                <span class="text-xl font-extrabold tracking-tight">Academia Atlas</span>
+              </div>
+              <h1 class="text-3xl font-extrabold leading-tight mb-3">Academic answers for your school</h1>
+              <p class="text-[15px] text-muted leading-relaxed">Ask once, answer well, and the next student finds it without asking again. Organized by school and department.</p>
+              <!-- AGENT NOTE: 403 on POST /auth/google/ shows the backend message verbatim plus a support contact line.
+                   401 shows "We couldn't verify your Google account. Please try again." Toggle below to preview. -->
+              <div x-show="loginError" class="mt-6 rounded-lg border border-danger/30 bg-danger/5 p-3 text-sm text-danger">
+                Your account has been suspended
+                <p class="text-xs text-muted mt-1">If you think this is a mistake, contact brandnova.dev@gmail.com.</p>
+              </div>
+            </div>
+            <!-- AGENT NOTE: Native Google account picker on Android and iOS, not a browser redirect. -->
+            <button @click="signIn()" class="w-full flex items-center justify-center gap-2.5 bg-accent text-white text-[15px] font-semibold rounded-xl py-3.5"><i class="fa-brands fa-google"></i> Continue with Google</button>
+            <button @click="browseGuest()" class="w-full mt-3 text-sm font-semibold py-3 rounded-xl border border-strong">Browse as a guest</button>
+            <button @click="loginError=!loginError" class="mt-4 text-[11px] text-muted underline">Preview suspended-account error</button>
+            <p class="text-[11px] text-muted text-center mt-4">By continuing you agree to the <button @click="go('pages')" class="underline">Terms and Privacy Policy</button>.</p>
+          </section>
+
+          <!-- ===================== HOME ===================== -->
+          <section x-show="page==='home'" class="fade-up">
+            <div class="px-4 pt-3 pb-3">
+              <button @click="go('search')" class="w-full flex items-center gap-2.5 bg-surface border border-strong rounded-full px-4 py-3 text-sm text-muted"><i class="fa-solid fa-magnifying-glass text-xs"></i> Search questions across all schools...</button>
+            </div>
+            <div class="px-4 mb-4">
+              <div class="flex items-center justify-between mb-2"><p class="text-xs font-bold uppercase tracking-wide text-muted">Schools with hubs</p><button @click="go('schools')" class="text-xs text-accent font-medium">View all</button></div>
+              <div class="flex gap-2 overflow-x-auto -mx-4 px-4 screen">
+                <template x-for="s in schools.filter(x => x.hub)" :key="s.id">
+                  <button @click="openSchool(s)" class="shrink-0 w-52 text-left bg-surface border border-line rounded-xl overflow-hidden">
+                    <div class="flex items-center gap-2.5 p-3">
+                      <div class="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0"><i class="fa-solid fa-building-columns text-sm"></i></div>
+                      <div class="min-w-0 flex-1">
+                        <p class="text-sm font-extrabold leading-tight" x-text="s.short"></p>
+                        <p class="text-[11px] text-muted leading-snug line-clamp-2 mt-0.5" x-text="s.name"></p>
+                      </div>
+                      <div class="shrink-0 text-right">
+                        <p class="text-lg font-extrabold leading-tight text-accent" x-text="s.q"></p>
+                        <p class="text-[10px] text-muted">questions</p>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 border-t border-line px-3 py-2 text-[11px] text-muted">
+                      <i class="fa-solid fa-location-dot text-[10px]"></i>
+                      <span class="truncate flex-1" x-text="s.loc"></span>
+                      <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </div>
+                  </button>
+                </template>
+              </div>
+            </div>
+            <div class="px-4 mb-4">
+              <div class="flex items-center justify-between mb-2"><p class="text-xs font-bold uppercase tracking-wide text-muted">Popular tags</p><button @click="go('tags')" class="text-xs text-accent font-medium">View all</button></div>
+              <div class="flex flex-wrap gap-2">
+                <template x-for="t in tags.slice(0,6)" :key="t.name"><button @click="openTag(t.name)" class="text-xs px-2.5 py-1 rounded-lg border border-strong" x-text="t.name"></button></template>
+              </div>
+            </div>
+            <p class="px-4 pb-1 text-xs font-bold uppercase tracking-wide text-muted">Recent questions</p>
+          </section>
+
+          <!-- ===================== SEARCH ===================== -->
+          <section x-show="page==='search'" class="fade-up">
+            <div class="px-4 pt-3 pb-2">
+              <div class="flex items-center gap-2.5 bg-surface border border-strong rounded-full px-4 py-2.5">
+                <i class="fa-solid fa-magnifying-glass text-xs text-muted"></i>
+                <input x-model="searchQuery" placeholder="Search questions..." class="flex-1 bg-transparent text-sm outline-none">
+                <button x-show="searchQuery" @click="searchQuery=''" aria-label="Clear"><i class="fa-solid fa-xmark text-muted text-sm"></i></button>
+              </div>
+            </div>
+            <!-- AGENT NOTE: debounce 500ms. The tag filter is one tag at a time. Results come from GET /search/questions/ and
+                 are ordered solved, votes, recency, relevance. Without a query the same ordering applies. -->
+            <!-- AGENT NOTE: one horizontal scroll row. Selected tag shows an x; tapping it clears the filter. "More tags" opens the tags screen. -->
+            <div class="flex gap-2 px-4 pb-2 overflow-x-auto screen">
+              <template x-for="t in tags.slice(0,6)" :key="t.name">
+                <button @click="searchTag = searchTag===t.name ? '' : t.name" class="shrink-0 flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border" :class="searchTag===t.name ? 'bg-accent text-white border-accent' : 'border-strong'">
+                  <span x-text="t.name"></span>
+                  <i x-show="searchTag===t.name" class="fa-solid fa-xmark text-[10px]"></i>
+                </button>
+              </template>
+              <button @click="go('tags')" class="shrink-0 flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-strong text-muted"><span>More tags</span><i class="fa-solid fa-chevron-right text-[9px]"></i></button>
+            </div>
+            <p class="px-4 pb-2 text-xs text-muted" x-text="visibleQuestions.length + ' results' + (searchQuery ? '' : ' · sorted by relevance and activity')"></p>
+          </section>
+
+          <!-- ===================== SCHOOLS ===================== -->
+          <section x-show="page==='schools'" class="fade-up">
+            <div class="px-4 pt-3 pb-3 flex gap-2">
+              <div class="flex-1 flex items-center gap-2.5 bg-surface border border-strong rounded-full px-4 py-2.5 text-sm text-muted"><i class="fa-solid fa-magnifying-glass text-xs"></i> Search schools by name...</div>
+              <button @click="sheet='schoolFilters'" class="relative shrink-0 w-11 h-11 rounded-full border border-strong flex items-center justify-center bg-surface" aria-label="Filters">
+                <i class="fa-solid fa-sliders text-sm"></i>
+                <span x-show="filterCount()>0" class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-accent text-white text-[10px] font-semibold flex items-center justify-center" x-text="filterCount()"></span>
+              </button>
+            </div>
+            <p class="px-4 pb-2 text-xs text-muted" x-text="filteredSchools().length + ' schools'"></p>
+            <div class="divide-y divide-line border-y border-line">
+              <template x-for="s in filteredSchools()" :key="s.id">
+                <button @click="openSchool(s)" class="w-full text-left flex items-center gap-3 px-4 py-3.5">
+                  <i class="w-5 text-center shrink-0" :class="s.hub ? 'fa-solid fa-circle-check text-accent' : 'fa-regular fa-circle text-strong'"></i>
+                  <span class="min-w-0 flex-1"><span class="block font-semibold text-sm truncate" x-text="s.name"></span><span class="block text-xs text-muted truncate" x-text="s.short + ' · ' + s.loc"></span></span>
+                  <span class="text-[11px] text-muted shrink-0" x-text="s.hub ? 'Hub active' : 'No hub yet'"></span>
+                </button>
+              </template>
+            </div>
+            <div class="p-4 text-center"><button class="text-sm px-4 py-2 rounded-lg border border-strong">View more</button></div>
+          </section>
+
+          <!-- ===================== SCHOOL (hub) ===================== -->
+          <section x-show="page==='school' && currentSchool" class="fade-up">
+            <div class="px-4 pt-4 pb-4 border-b border-line" x-show="currentSchool">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <h1 class="text-xl font-extrabold leading-snug" x-text="currentSchool && currentSchool.name"></h1>
+                <i x-show="currentSchool && currentSchool.verified" class="fa-solid fa-shield-halved text-accent text-xs"></i>
+              </div>
+              <p class="text-sm text-muted" x-text="currentSchool && currentSchool.short"></p>
+              <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-sm text-muted mt-3">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[13px]"></i><span x-text="currentSchool && currentSchool.loc"></span></span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-globe text-[13px]"></i><a class="text-accent">Website</a></span>
+              </div>
+              <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-sm text-muted mt-3 pt-3 border-t border-line">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-landmark text-[13px]"></i><span x-text="currentSchool && currentSchool.type"></span></span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield text-[13px]"></i><span x-text="currentSchool && currentSchool.own"></span></span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-map text-[13px]"></i><span x-text="currentSchool && currentSchool.state"></span></span>
+              </div>
+              <template x-if="currentSchool && currentSchool.hub">
+                <div>
+                  <div class="flex gap-x-4 text-sm text-muted mt-3 pt-3 border-t border-line">
+                    <span class="flex items-center gap-1.5"><i class="fa-regular fa-message text-[13px]"></i><span x-text="currentSchool.q + ' questions'"></span></span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-shield text-[13px]"></i>3 moderators</span>
+                  </div>
+                  <button @click="askFromSchool()" class="w-full mt-4 bg-accent text-white text-sm font-semibold rounded-lg py-3"><i class="fa-solid fa-plus mr-1.5"></i>Ask a question</button>
+                </div>
+              </template>
+            </div>
+
+            <!-- AGENT NOTE: no hub. Show this card instead of the question list. The same card appears when an admin took the
+                 hub offline, because the API then reports has_hub false. A 404 on hub routes means "no hub", never a crash. -->
+            <template x-if="currentSchool && !currentSchool.hub">
+              <div class="m-4 border border-line rounded-xl p-5 text-center">
+                <p class="font-semibold text-sm mb-1" x-text="currentSchool.name + ' has no active hub yet.'"></p>
+                <p class="text-sm text-muted mb-4">Be the first to request one.</p>
+                <button @click="requireAuth(() => sheet='requestHub')" class="text-sm font-semibold px-4 py-2 rounded-lg bg-accent text-white">Request hub activation</button>
+              </div>
+            </template>
+
+            <!-- AGENT NOTE: filters are horizontal chips on mobile (the web uses a sidebar). Departments come from the hub detail. -->
+            <div x-show="currentSchool && currentSchool.hub">
+              <div class="flex gap-2 px-4 pt-3 overflow-x-auto screen">
+                <template x-for="s in ['All','Open','Answered','Solved']" :key="s"><button @click="statusFilter=s" class="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg border" :class="statusFilter===s ? 'bg-accent text-white border-accent' : 'border-strong text-muted'" x-text="s"></button></template>
+              </div>
+              <div class="flex gap-2 px-4 py-2 overflow-x-auto screen">
+                <template x-for="d in ['All departments','Economics','Law','Computer Science']" :key="d"><button @click="deptFilter=d" class="shrink-0 text-xs px-3 py-1.5 rounded-lg border" :class="deptFilter===d ? 'border-accent text-accent' : 'border-line text-muted'" x-text="d"></button></template>
+              </div>
+              <div class="flex items-center justify-between px-4 pt-2">
+                <span class="text-xs text-muted" x-text="visibleQuestions.length + ' questions'"></span>
+                <button class="text-xs font-medium text-accent">Sort: Newest</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===================== TAGS ===================== -->
+          <section x-show="page==='tags'" class="fade-up">
+            <div class="px-4 pt-3 pb-3"><div class="flex items-center gap-2.5 bg-surface border border-strong rounded-full px-4 py-2.5 text-sm text-muted"><i class="fa-solid fa-magnifying-glass text-xs"></i> Search tags...</div></div>
+            <div class="flex gap-2 px-4 pb-3">
+              <template x-for="s in [['popular','Popular'],['az','A to Z']]" :key="s[0]"><button @click="tagSort=s[0]" class="text-xs px-3 py-1.5 rounded-lg border" :class="tagSort===s[0] ? 'bg-accent text-white border-accent' : 'border-strong text-muted'" x-text="s[1]"></button></template>
+            </div>
+            <div class="divide-y divide-line border-y border-line">
+              <template x-for="t in sortedTags()" :key="t.name">
+                <button @click="openTag(t.name)" class="w-full flex items-center justify-between px-4 py-3.5 text-sm"><span x-text="t.name"></span><span class="text-xs text-muted" x-text="t.count + ' questions'"></span></button>
+              </template>
+            </div>
+            <div class="p-4 text-center"><button class="text-sm px-4 py-2 rounded-lg border border-strong">View more</button></div>
+          </section>
+
+          <!-- ===================== TAG QUESTIONS ===================== -->
+          <section x-show="page==='tagQuestions'" class="fade-up">
+            <div class="px-4 pt-4 pb-2"><h1 class="text-lg font-extrabold">Questions tagged <span class="text-accent" x-text="currentTag"></span></h1></div>
+            <div class="flex gap-2 px-4 pb-2 overflow-x-auto screen">
+              <template x-for="s in ['All','Open','Answered','Solved']" :key="s"><button @click="statusFilter=s" class="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg border" :class="statusFilter===s ? 'bg-accent text-white border-accent' : 'border-strong text-muted'" x-text="s"></button></template>
+            </div>
+          </section>
+
+          <!-- ===================== SHARED QUESTION LIST (home, search, school, tagQuestions) ===================== -->
+          <section x-show="listPages.includes(page) && !(page==='school' && currentSchool && !currentSchool.hub)">
+            <div class="divide-y divide-line border-y border-line">
+              <template x-for="q in visibleQuestions" :key="q.id">
+                <button @click="openQuestion(q)" class="w-full text-left flex items-start gap-3 px-4 py-3.5 active:bg-black/5">
+                  <span class="pt-0.5 w-4 text-center shrink-0"><i :class="statusIcon(q.status)"></i></span>
+                  <span class="min-w-0 flex-1">
+                    <span class="block font-semibold text-[14px] leading-snug truncate" x-text="q.title"></span>
+                    <span class="block text-xs text-muted truncate mt-0.5" x-text="q.snippet"></span>
+                    <span class="flex flex-wrap items-center gap-x-2 text-[11px] text-muted mt-1">
+                      <span class="text-accent" x-show="page!=='school'" x-text="q.school"></span>
+                      <span x-show="q.dept" x-text="q.dept"></span>
+                      <span x-text="q.answers + (q.answers===1 ? ' answer' : ' answers')"></span>
+                      <span x-text="q.time"></span>
+                      <i x-show="q.locked" class="fa-solid fa-lock text-danger text-[10px]"></i>
+                    </span>
+                  </span>
+                </button>
+              </template>
+            </div>
+            <div x-show="visibleQuestions.length===0" class="m-4 border border-dashed border-strong rounded-xl py-10 px-6 text-center"><p class="text-sm font-semibold">No questions match</p><p class="text-sm text-muted mt-1">Try a different search or clear a filter.</p></div>
+            <!-- AGENT NOTE: "View more" appends the next page and dedupes by id. Guard against stale responses when a filter
+                 changes mid-request. A failed load-more shows its error under the button, never silently. -->
+            <div class="p-4 text-center" x-show="visibleQuestions.length>0"><button class="text-sm px-4 py-2 rounded-lg border border-strong">View more</button></div>
+          </section>
+
+          <!-- ===================== QUESTION DETAIL ===================== -->
+          <section x-show="page==='question' && currentQuestion" class="fade-up pb-4">
+            <div class="px-4 pt-4 pb-4 border-b border-line">
+              <div class="flex items-center justify-between mb-2">
+                <span class="flex items-center gap-1.5 text-xs font-bold" :class="currentQuestion.status==='solved' ? 'text-success dark:text-success-dark' : 'text-muted'">
+                  <i :class="statusIcon(currentQuestion.status)"></i><span class="uppercase" x-text="currentQuestion.status"></span>
+                </span>
+                <span x-show="locked" class="flex items-center gap-1 text-xs text-danger"><i class="fa-solid fa-lock text-[11px]"></i>Locked</span>
+              </div>
+              <h1 class="text-xl font-extrabold leading-snug mb-2" x-text="currentQuestion.title"></h1>
+              <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted mb-3">
+                <span class="flex items-center gap-1"><i class="fa-regular fa-user text-[11px]"></i>Asked by Amara Okafor<button @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia account">A</button></span>
+                <span class="flex items-center gap-1">
+                  <i class="fa-regular fa-building text-[11px]"></i>
+                  <button @click.stop="openSchool(schools.find(s => s.short === currentQuestion.school))" class="text-accent" x-text="currentQuestion.school"></button>
+                  <span x-show="currentQuestion.dept" x-text="currentQuestion.dept"></span>
+                </span>
+                <span class="flex items-center gap-1"><i class="fa-regular fa-eye text-[11px]"></i>244 views</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <template x-for="t in currentQuestion.tags" :key="t"><button @click="openTag(t)" class="text-[11px] px-2 py-1 rounded bg-black/5 dark:bg-white/10 text-muted" x-text="t"></button></template>
+              </div>
+              <!-- AGENT NOTE: bodies are Markdown. Render with a safe renderer (headings, lists, links, code, quotes). Never inject raw HTML. -->
+              <p class="text-[15px] leading-relaxed">About to start my SIWES placement. Any tips for students in my department?</p>
+              <ul class="list-disc ml-5 mt-2 text-[15px] leading-relaxed"><li>What does a typical first week look like?</li><li>Which documents should I bring?</li></ul>
+
+              <!-- AGENT NOTE: follow stays visible. Lock is staff-only and shows for a moderator or representative of THIS hub, or an admin.
+                   Everything else (edit, delete, report, escalate, share) lives in the kebab bottom sheet. -->
+              <div class="flex items-center gap-2 mt-4">
+                <button @click="requireAuth(() => followed=!followed)" class="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg" :class="followed ? 'bg-accent text-white' : 'bg-black/5 dark:bg-white/10'">
+                  <i :class="followed ? 'fa-solid' : 'fa-regular'" class="fa-bell"></i><span x-text="followed ? 'Following' : 'Follow'"></span>
+                </button>
+                <button x-show="isStaff" @click="locked=!locked" class="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg" :class="locked ? 'bg-danger/10 text-danger' : 'bg-black/5 dark:bg-white/10'">
+                  <i class="fa-solid" :class="locked ? 'fa-lock-open' : 'fa-lock'"></i><span x-text="locked ? 'Unlock' : 'Lock'"></span>
+                </button>
+                <button @click="openActions('question')" aria-label="More actions" class="ml-auto w-9 h-9 rounded-lg bg-black/5 dark:bg-white/10 flex items-center justify-center"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              </div>
+            </div>
+
+            <!-- Best answer pin -->
+            <template x-if="bestAnswer()">
+              <div class="px-4 py-4 bg-accent/[0.06] border-b border-line">
+                <div class="flex items-center gap-1.5 text-accent text-xs font-bold mb-2"><i class="fa-solid fa-award"></i> BEST ANSWER</div>
+                <p class="text-sm leading-relaxed line-clamp-4" x-text="bestAnswer().body"></p>
+                <div class="flex items-center justify-between text-xs text-muted mt-2.5">
+                  <span><i class="fa-regular fa-thumbs-up mr-1"></i><span x-text="bestAnswer().score + ' · ' + bestAnswer().by"></span></span>
+                  <!-- AGENT NOTE: scrolls to that answer and flashes a 2px accent ring for about 1.5s (respect reduced motion).
+                       The same behaviour serves notification and report deep links via link_target.answer_id. -->
+                  <button @click="jumpTo(bestAnswer().id)" class="text-accent font-medium">View in list <i class="fa-solid fa-arrow-down text-[9px] ml-0.5"></i></button>
+                </div>
+              </div>
+            </template>
+
+            <div class="px-4 pt-4">
+              <p class="text-xs font-bold uppercase tracking-wide text-muted mb-3" x-text="answers.length + ' answers'"></p>
+              <div class="space-y-3">
+                <template x-for="a in answers" :key="a.id">
+                  <div :id="'ans-' + a.id" class="p-3 rounded-lg border border-line" :class="flashId===a.id && 'flash'">
+                    <div class="flex items-start justify-between gap-2 mb-1.5">
+                      <!-- AGENT NOTE: byline sits ABOVE the body, small and muted, so the answer text is the visual priority.
+                           The "A" mark is the platform account badge. Tapping it explains the account is official. -->
+                      <span class="flex items-center gap-1 text-xs text-muted"><i class="fa-regular fa-user text-[11px]"></i><span x-text="'by ' + a.by"></span>
+                        <button x-show="a.official" @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia account">A</button>
+                      </span>
+                      <button @click="openActions('answer', a)" aria-label="More actions" class="w-7 h-7 flex items-center justify-center text-muted"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                    <p class="text-[14px] leading-relaxed" x-text="a.body"></p>
+                    <div class="flex items-center gap-3 mt-3 text-xs text-muted">
+                      <template x-if="a.mine || !signedIn"><span class="flex items-center gap-1"><i class="fa-regular fa-thumbs-up"></i><span x-text="a.score"></span></span></template>
+                      <template x-if="!a.mine && signedIn && a.myVote">
+                        <span class="flex items-center gap-2"><span class="flex items-center gap-1 text-accent"><i class="fa-solid" :class="a.myVote==='UP' ? 'fa-thumbs-up' : 'fa-thumbs-down'"></i><span x-text="a.score"></span></span><button @click="vote(a, null)">Remove vote</button></span>
+                      </template>
+                      <template x-if="!a.mine && signedIn && !a.myVote">
+                        <span class="flex items-center gap-1"><button @click="vote(a,'UP')" class="w-9 h-9 flex items-center justify-center" aria-label="Upvote"><i class="fa-regular fa-thumbs-up"></i></button><span x-text="a.score"></span><button @click="vote(a,'DOWN')" class="w-9 h-9 flex items-center justify-center" aria-label="Downvote"><i class="fa-regular fa-thumbs-down"></i></button></span>
+                      </template>
+                      <button @click="openComments(a)" class="ml-auto text-accent font-medium" x-text="a.comments.length ? 'Comments (' + a.comments.length + ')' : 'Add a comment'"></button>
+                    </div>
+                    <button x-show="currentQuestion.mine && !a.best" @click="markBest(a)" class="mt-3 w-full flex items-center justify-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg border border-accent text-accent"><i class="fa-solid fa-award"></i>Mark as best answer</button>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===================== ASK ===================== -->
+          <section x-show="page==='ask'" class="fade-up">
+            <!-- Step 1: school -->
+            <div x-show="askStep==='school'" class="px-4 pt-4">
+              <h1 class="text-lg font-extrabold mb-1">Ask a question</h1>
+              <p class="text-sm text-muted mb-4">Which school is this about?</p>
+              <div class="flex items-center gap-2.5 bg-surface border border-strong rounded-full px-4 py-2.5 text-sm text-muted mb-3"><i class="fa-solid fa-magnifying-glass text-xs"></i> Search for your school...</div>
+              <!-- AGENT NOTE: only schools WITH an active hub are listed here (GET /schools/?has_hub=true). -->
+              <div class="divide-y divide-line border-y border-line">
+                <template x-for="s in schools.filter(x => x.hub)" :key="s.id">
+                  <button @click="askSchool=s; askStep='form'" class="w-full text-left py-3.5 px-1"><p class="font-semibold text-sm" x-text="s.name"></p><p class="text-xs text-muted" x-text="s.short + ' · ' + s.loc"></p></button>
+                </template>
+              </div>
+              <p class="text-sm text-muted mt-4">Don't see your school? <button @click="go('schools')" class="text-accent">Browse the full directory</button> to request a hub.</p>
+            </div>
+
+            <!-- Step 2: form -->
+            <div x-show="askStep==='form'" class="px-4 pt-4 pb-6">
+              <h1 class="text-lg font-extrabold mb-1">Ask a question</h1>
+              <p class="text-sm text-muted mb-5">Posting to <span class="font-semibold text-ink" x-text="askSchool && askSchool.name"></span> <button @click="askStep='school'" class="text-accent">(change school)</button></p>
+
+              <label class="block text-xs text-muted mb-1">Title</label>
+              <input placeholder="e.g. When does registration close?" class="w-full text-sm bg-surface border border-strong rounded-lg px-3.5 py-2.5 mb-4 outline-none focus:ring-2 focus:ring-accent/40">
+
+              <label class="block text-xs text-muted mb-1">Body</label>
+              <!-- AGENT NOTE: keep the editor simple. Toolbar: bold, italic, strikethrough, link, bullet list, numbered list, quote, code,
+                   plus a Preview toggle that renders the same Markdown renderer used for display. No word counter on mobile. -->
+              <div class="border border-strong rounded-lg overflow-hidden mb-4">
+                <div class="flex items-center gap-1 bg-black/[0.03] dark:bg-white/5 border-b border-strong px-1.5 py-1">
+                  <div class="flex items-center flex-1 min-w-0 overflow-x-auto screen">
+                    <template x-for="icon in ['fa-bold','fa-italic','fa-strikethrough','fa-link','fa-list-ul','fa-list-ol','fa-quote-right','fa-code']"><button class="shrink-0 w-11 h-11 flex items-center justify-center text-muted"><i class="fa-solid text-[11px]" :class="icon"></i></button></template>
+                  </div>
+                  <button @click="askPreview=!askPreview" class="shrink-0 text-[11px] font-semibold px-2 h-11" :class="askPreview ? 'text-accent' : 'text-muted'"><i class="fa-regular" :class="askPreview ? 'fa-pen-to-square' : 'fa-eye'"></i> <span x-text="askPreview ? 'Write' : 'Preview'"></span></button>
+                </div>
+                <textarea x-show="!askPreview" rows="5" placeholder="Describe your question in detail..." class="w-full block text-sm bg-surface px-3.5 py-2.5 outline-none"></textarea>
+                <div x-show="askPreview" class="px-3.5 py-2.5 text-sm min-h-[110px]">Rendered preview of your <strong>Markdown</strong> appears here.</div>
+              </div>
+
+              <label class="block text-xs text-muted mb-1">Department (optional)</label>
+              <div class="flex items-center justify-between text-sm bg-surface border border-strong rounded-lg px-3.5 py-2.5 mb-4 text-muted">None <i class="fa-solid fa-chevron-down text-xs"></i></div>
+
+              <p class="text-xs text-muted mb-1">Tags</p>
+              <div class="flex flex-wrap items-center gap-1.5 bg-surface border rounded-lg px-2.5 py-2" :class="askError ? 'border-danger' : 'border-strong'">
+                <template x-for="t in askTags" :key="t"><span class="flex items-center gap-1 text-xs px-2 py-1 rounded bg-accent/10 text-accent"><span x-text="t"></span><button @click="askTags=askTags.filter(x=>x!==t)" aria-label="Remove tag"><i class="fa-solid fa-xmark text-[10px]"></i></button></span></template>
+                <input @focus="tagsFocus=true" @blur="setTimeout(() => tagsFocus=false, 150)" placeholder="Search or add tags..." class="flex-1 min-w-[100px] text-sm bg-transparent outline-none py-0.5">
+              </div>
+              <div x-show="tagsFocus" class="mt-1.5 border border-strong rounded-lg bg-surface max-h-44 overflow-y-auto">
+                <p class="px-3.5 pt-2 pb-1 text-[11px] text-muted">Popular tags</p>
+                <template x-for="t in tags.filter(x => !askTags.includes(x.name))" :key="t.name">
+                  <button @click="askTags.push(t.name)" class="w-full flex items-center justify-between px-3.5 min-h-[44px] text-sm border-t border-line"><span x-text="t.name"></span><span class="text-xs text-muted" x-text="t.count"></span></button>
+                </template>
+              </div>
+              <!-- AGENT NOTE: show the first message of each field keyed 400 body ({ "tags": ["..."] }) directly under THAT field,
+                   not as one generic line. The red border and message below demonstrate it. -->
+              <p x-show="askError" class="text-xs text-danger mt-1">Tag names must be 50 characters or fewer.</p>
+              <button @click="askError=!askError" class="mt-3 text-[11px] text-muted underline">Preview field error</button>
+            </div>
+          </section>
+
+          <!-- ===================== NOTIFICATIONS ===================== -->
+          <section x-show="page==='notifications'" class="fade-up">
+            <template x-if="!signedIn"><div class="m-4 mt-10 text-center"><i class="fa-regular fa-bell text-3xl text-strong mb-3"></i><p class="text-sm font-semibold">Sign in to see your notifications</p><button @click="sheet='signin'" class="mt-4 text-sm font-semibold px-4 py-2 rounded-lg bg-accent text-white">Sign in with Google</button></div></template>
+            <template x-if="signedIn">
+              <div>
+                <div class="flex gap-2 px-4 pt-3 pb-2">
+                  <template x-for="f in ['all','unread']" :key="f"><button @click="notifFilter=f" class="text-xs px-3 py-1.5 rounded-lg border capitalize" :class="notifFilter===f ? 'border-accent text-accent' : 'border-line text-muted'" x-text="f"></button></template>
+                </div>
+                <!-- AGENT NOTE: 12 notification types, each with its own icon (map below in the script). Rows WITH a link_target are
+                     tappable (chevron) and open the question, scrolled to the answer. Rows WITHOUT one (USER_SUSPENDED, rejected
+                     requests, report outcomes) are plain, no chevron. Unread rows get the tint, a dot and bold text, and mark read on tap. -->
+                <div class="divide-y divide-line border-y border-line">
+                  <template x-for="(n, i) in visibleNotifications()" :key="n.id">
+                    <button @click="tapNotification(n)" class="w-full text-left flex items-start gap-3 px-4 py-3.5" :class="!n.read && 'bg-accent/[0.05]'">
+                      <i class="pt-0.5 w-4 text-center shrink-0" :class="nIcons[n.type] + (n.read ? ' text-muted' : ' text-accent')"></i>
+                      <span class="min-w-0 flex-1">
+                        <span class="block text-[13px] leading-snug break-words" :class="!n.read && 'font-semibold'" x-text="n.text"></span>
+                        <span class="block text-[11px] text-muted mt-0.5" x-text="n.time"></span>
+                        <span x-show="n.web && role==='admin'" class="inline-block mt-1.5 text-[11px] font-semibold text-accent">Open on web <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></span>
+                      </span>
+                      <span x-show="!n.read" class="w-2 h-2 rounded-full bg-accent mt-1.5 shrink-0"></span>
+                      <i x-show="n.link" class="fa-solid fa-chevron-right text-[10px] text-muted mt-1.5"></i>
+                    </button>
+                  </template>
+                </div>
+                <div class="p-4 text-center"><button class="text-sm px-4 py-2 rounded-lg border border-strong">View more</button></div>
+              </div>
+            </template>
+          </section>
+
+          <!-- ===================== PROFILE ===================== -->
+          <section x-show="page==='profile'" class="fade-up pb-6">
+            <template x-if="!signedIn"><div class="m-4 mt-10 text-center"><i class="fa-regular fa-user text-3xl text-strong mb-3"></i><p class="text-sm font-semibold">Sign in to see your profile</p><button @click="sheet='signin'" class="mt-4 text-sm font-semibold px-4 py-2 rounded-lg bg-accent text-white">Sign in with Google</button></div></template>
+            <template x-if="signedIn">
+              <div>
+                <div class="m-4 border border-line rounded-xl overflow-hidden">
+                  <div class="flex items-start gap-4 p-4">
+                    <div class="w-16 h-16 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xl font-semibold shrink-0">A</div>
+                    <div class="min-w-0 flex-1">
+                      <div class="flex items-center gap-1"><h1 class="text-lg font-bold truncate">Amara Okafor</h1><button @click="nameDraft='Amara Okafor'; nameError=''; sheet='editName'" aria-label="Edit name" class="w-8 h-8 flex items-center justify-center text-muted"><i class="fa-solid fa-pen text-xs"></i></button></div>
+                      <p class="text-sm text-muted truncate">amara@example.com</p>
+                      <div class="flex flex-wrap gap-1.5 mt-2.5" x-show="isStaff">
+                        <span x-show="role==='admin'" class="text-[11px] px-2 py-0.5 rounded bg-accent/10 text-accent">Admin</span>
+                        <span x-show="role==='moderator'" class="text-[11px] px-2 py-0.5 rounded bg-black/5 dark:bg-white/10 text-muted">Moderator</span>
+                      </div>
+                    </div>
+                  </div>
+                  <dl class="grid grid-cols-4 divide-x divide-line border-t border-line">
+                    <template x-for="s in [['Questions',12],['Answers',34],['Best answers',9],['Comments',21]]" :key="s[0]"><div class="flex flex-col-reverse items-center px-1 py-3 text-center"><dt class="text-[11px] text-muted" x-text="s[0]"></dt><dd class="text-lg font-semibold" x-text="s[1]"></dd></div></template>
+                  </dl>
+                </div>
+
+                <!-- AGENT NOTE: the ONLY staff surface in Profile. These open the web app in the system browser. -->
+                <div x-show="isStaff" class="mx-4 mb-4 space-y-2">
+                  <button @click="openWeb('/moderation')" class="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-line text-sm font-semibold"><span><i class="fa-solid fa-shield-halved text-accent mr-2"></i>Open moderation tools on web</span><i class="fa-solid fa-arrow-up-right-from-square text-xs text-muted"></i></button>
+                  <button x-show="role==='admin'" @click="openWeb('/admin')" class="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-line text-sm font-semibold"><span><i class="fa-solid fa-toolbox text-accent mr-2"></i>Open admin dashboard on web</span><i class="fa-solid fa-arrow-up-right-from-square text-xs text-muted"></i></button>
+                </div>
+
+                <div class="flex gap-1 px-4 border-b border-line overflow-x-auto screen">
+                  <template x-for="t in ['activity','questions','answers','comments']" :key="t"><button @click="profileTab=t" class="shrink-0 text-sm px-3 py-2 border-b-2 capitalize" :class="profileTab===t ? 'border-accent text-accent font-medium' : 'border-transparent text-muted'" x-text="t"></button></template>
+                </div>
+                <div class="divide-y divide-line border-b border-line">
+                  <template x-for="(it, i) in profileItems()" :key="i">
+                    <button @click="openQuestion(questions[0])" class="w-full text-left flex items-center gap-3 px-4 py-3">
+                      <i class="w-4 text-center text-accent shrink-0" :class="it.icon"></i><span class="flex-1 min-w-0 text-sm truncate" x-text="it.text"></span><span class="text-[11px] text-muted shrink-0" x-text="it.time"></span>
+                    </button>
+                  </template>
+                </div>
+
+                <div class="mx-4 mt-4 divide-y divide-line border border-line rounded-xl">
+                  <button @click="go('myReports')" class="w-full flex items-center justify-between px-4 py-3 text-sm"><span><i class="fa-regular fa-flag w-5 text-muted"></i>My reports</span><i class="fa-solid fa-chevron-right text-[10px] text-muted"></i></button>
+                  <button @click="go('pages')" class="w-full flex items-center justify-between px-4 py-3 text-sm"><span><i class="fa-regular fa-file-lines w-5 text-muted"></i>Policies and guides</span><i class="fa-solid fa-chevron-right text-[10px] text-muted"></i></button>
+                  <button @click="dark=!dark" class="w-full flex items-center justify-between px-4 py-3 text-sm"><span><i class="fa-solid w-5 text-muted" :class="dark ? 'fa-sun' : 'fa-moon'"></i><span x-text="dark ? 'Light mode' : 'Dark mode'"></span></span></button>
+                  <button @click="logout()" class="w-full flex items-center px-4 py-3 text-sm text-danger"><i class="fa-solid fa-arrow-right-from-bracket w-5"></i>Log out</button>
+                </div>
+              </div>
+            </template>
+          </section>
+
+          <!-- ===================== MY REPORTS ===================== -->
+          <section x-show="page==='myReports'" class="fade-up">
+            <!-- AGENT NOTE: private to the reporter. NEVER show who reviewed a report or any escalation info. RESOLVED does not mean the
+                 content was removed, use content_exists (shown as "Content removed") for that. This screen is NOT linked from Profile tabs. -->
+            <p class="px-4 pt-3 text-xs text-muted">Only you can see this list. Reports never appear on your profile.</p>
+            <div class="flex gap-2 px-4 py-3 overflow-x-auto screen">
+              <template x-for="f in [['all','All'],['PENDING','Pending'],['RESOLVED','Reviewed'],['REJECTED','No action taken']]" :key="f[0]"><button @click="reportFilter=f[0]" class="shrink-0 text-xs px-3 py-1.5 rounded-lg border" :class="reportFilter===f[0] ? 'border-accent text-accent' : 'border-line text-muted'" x-text="f[1]"></button></template>
+            </div>
+            <ul class="divide-y divide-line border-y border-line">
+              <template x-for="(r, i) in reports.filter(x => reportFilter==='all' || x.status===reportFilter)" :key="i">
+                <li class="px-4 py-3 text-sm">
+                  <div class="flex items-center justify-between gap-2"><span class="font-medium" x-text="r.type + ' on a ' + r.on"></span><span class="flex items-center gap-1 text-xs text-muted"><i :class="r.status==='PENDING' ? 'fa-regular fa-clock' : (r.status==='RESOLVED' ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-xmark')"></i><span x-text="r.status==='PENDING' ? 'Awaiting review' : (r.status==='RESOLVED' ? 'Reviewed' : 'No action taken')"></span></span></div>
+                  <p class="text-xs text-muted mt-1 line-clamp-2" x-text="'&quot;' + r.desc + '&quot;'"></p>
+                  <div class="flex gap-3 text-xs text-muted mt-1.5"><span x-text="'Reported ' + r.when"></span><span x-show="r.removed" class="italic">Content removed</span><button x-show="!r.removed" class="text-accent">View</button></div>
+                </li>
+              </template>
+            </ul>
+          </section>
+
+          <!-- ===================== PAGES ===================== -->
+          <section x-show="page==='pages'" class="fade-up">
+            <!-- AGENT NOTE: read-only. GET /pages/ returns only what the user may see (staff-only guides appear for staff). Bodies are Markdown. -->
+            <div class="divide-y divide-line border-y border-line mt-3">
+              <template x-for="p in pageList()" :key="p">
+                <button @click="pageDoc={title:p}; go('pageView')" class="w-full flex items-center justify-between px-4 py-3.5 text-sm"><span class="flex items-center gap-2"><span x-text="p"></span><span x-show="p==='Moderator and Representative Handbook'" class="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-accent/10 text-accent">Staff</span></span><i class="fa-solid fa-chevron-right text-[10px] text-muted"></i></button>
+              </template>
+            </div>
+          </section>
+          <section x-show="page==='pageView'" class="fade-up px-4 pt-4 pb-8">
+            <h1 class="text-xl font-extrabold mb-3" x-text="pageDoc && pageDoc.title"></h1>
+            <h2 class="text-base font-bold mt-4 mb-1">What we collect</h2>
+            <p class="text-[15px] leading-relaxed text-muted">Rendered Markdown for the selected page appears here. Academia is an independent platform, not an official system of any institution.</p>
+          </section>
+
+        </div>
+        <!-- ===================== END SCROLLABLE CONTENT ===================== -->
+
+        <!-- Sticky answer composer (question screen) -->
+        <div x-show="page==='question'" class="shrink-0 border-t border-line bg-surface relative z-10">
+          <template x-if="locked"><p class="px-4 py-3 pb-6 text-sm text-muted"><i class="fa-solid fa-lock mr-1.5"></i>This question is locked and is no longer accepting new answers.</p></template>
+          <template x-if="!locked && !signedIn"><button @click="sheet='signin'" class="w-full px-4 py-3 pb-6 text-sm text-muted text-left">Sign in to answer this question</button></template>
+          <template x-if="!locked && signedIn && !composerOpen"><button @click="composerOpen=true" class="w-full px-4 py-2.5 pb-6"><span class="block text-left text-sm text-muted bg-black/5 dark:bg-white/10 rounded-full px-4 py-2.5">Write an answer...</span></button></template>
+          <template x-if="!locked && signedIn && composerOpen">
+            <div class="px-3 pt-2 pb-6">
+              <div class="flex items-center justify-between mb-1.5 px-1"><span class="text-xs font-semibold text-muted">Your answer</span><button @click="composerOpen=false" aria-label="Collapse" class="text-muted"><i class="fa-solid fa-chevron-down"></i></button></div>
+              <div class="border border-strong rounded-lg overflow-hidden">
+                <textarea x-show="!composerPreview" rows="3" placeholder="Write your answer..." class="w-full block text-sm bg-surface px-3 py-2 outline-none"></textarea>
+                <div x-show="composerPreview" class="px-3 py-2 text-sm text-muted min-h-[70px]">Nothing to preview yet.</div>
+                <div class="flex items-center gap-1 bg-black/[0.03] dark:bg-white/5 border-t border-strong px-1.5 py-1">
+                  <div class="flex items-center flex-1 min-w-0 overflow-x-auto screen">
+                    <template x-for="icon in ['fa-bold','fa-italic','fa-link','fa-list-ul','fa-code']"><button class="shrink-0 w-11 h-11 flex items-center justify-center text-muted"><i class="fa-solid text-[11px]" :class="icon"></i></button></template>
+                  </div>
+                  <button @click="composerPreview=!composerPreview" class="shrink-0 text-[11px] font-semibold px-2 h-11 text-muted"><i class="fa-regular" :class="composerPreview ? 'fa-pen-to-square' : 'fa-eye'"></i></button>
+                </div>
+              </div>
+              <!-- AGENT NOTE: when the keyboard opens the composer must stay above it (keyboard avoiding). Post is disabled while sending. -->
+              <button @click="composerOpen=false" class="w-full mt-2 bg-accent text-white text-sm font-semibold rounded-lg py-2.5">Post answer</button>
+            </div>
+          </template>
+        </div>
+
+        <!-- Sticky post bar (ask form) -->
+        <div x-show="page==='ask' && askStep==='form'" class="shrink-0 border-t border-line bg-surface px-4 py-3 pb-6 relative z-10">
+          <button @click="postQuestion()" class="w-full bg-accent text-white text-sm font-semibold rounded-lg py-3">Post question</button>
+        </div>
+
+        <!-- ===================== BOTTOM TAB BAR ===================== -->
+        <div x-show="isRoot(page) && page!=='login'" class="shrink-0 border-t border-line bg-surface flex items-center justify-around px-2 pt-2 pb-6 relative z-10">
+          <button @click="go('home')" class="flex flex-col items-center gap-1 w-14" :class="page==='home' ? 'text-accent' : 'text-muted'"><i class="fa-solid fa-house text-[17px]"></i><span class="text-[10px] font-medium">Home</span></button>
+          <button @click="go('schools')" class="flex flex-col items-center gap-1 w-14" :class="page==='schools' ? 'text-accent' : 'text-muted'"><i class="fa-solid fa-building-columns text-[17px]"></i><span class="text-[10px] font-medium">Schools</span></button>
+          <!-- AGENT NOTE: Ask is a raised centre action. Guests get the sign-in sheet instead of the form. -->
+          <button @click="startAsk()" class="flex flex-col items-center justify-center -mt-5" aria-label="Ask a question"><span class="w-12 h-12 rounded-xl bg-accent text-white flex items-center justify-center shadow-lg"><i class="fa-solid fa-plus text-lg"></i></span></button>
+          <button @click="go('notifications')" class="relative flex flex-col items-center gap-1 w-14" :class="page==='notifications' ? 'text-accent' : 'text-muted'">
+            <i class="fa-regular fa-bell text-[17px]"></i><span class="text-[10px] font-medium">Alerts</span>
+            <span x-show="signedIn && unread()>0" class="absolute -top-0.5 right-2 min-w-[16px] h-4 px-1 rounded-full bg-accent text-white text-[10px] flex items-center justify-center" x-text="unread()"></span>
+          </button>
+          <button @click="go('profile')" class="flex flex-col items-center gap-1 w-14" :class="page==='profile' ? 'text-accent' : 'text-muted'"><i class="fa-solid fa-user text-[17px]"></i><span class="text-[10px] font-medium">Profile</span></button>
+        </div>
+
+        <!-- ===================== BOTTOM SHEETS ===================== -->
+        <!-- AGENT NOTE: use native bottom sheets for every secondary action (actions, report, comments, filters, confirmations).
+             Backdrop tap and swipe down dismiss. Keep sheets under 80% height and scrollable. -->
+        <div x-show="sheet" x-cloak class="absolute inset-0 z-[55]">
+          <div x-show="sheet" x-transition.opacity @click="sheet=null" class="absolute inset-0 bg-black/40"></div>
+          <div x-show="sheet" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-y-0" x-transition:leave-end="translate-y-full" class="absolute bottom-0 inset-x-0 bg-surface rounded-t-2xl px-5 pt-3 pb-8 max-h-[82%] overflow-y-auto screen">
+            <div class="mx-auto w-10 h-1 rounded-full bg-strong mb-4"></div>
+
+            <!-- sign in -->
+            <div x-show="sheet==='signin'">
+              <h2 class="font-bold text-base mb-1">Sign in to continue</h2>
+              <p class="text-sm text-muted mb-4">Browsing is open to everyone. Asking, answering, voting and following need an account.</p>
+              <button @click="signIn()" class="w-full flex items-center justify-center gap-2.5 bg-accent text-white text-sm font-semibold rounded-xl py-3"><i class="fa-brands fa-google"></i> Continue with Google</button>
+            </div>
+
+            <!-- actions -->
+            <div x-show="sheet==='actions'">
+              <p class="text-xs font-bold uppercase tracking-wide text-muted mb-1" x-text="'This ' + sheetTarget"></p>
+              <template x-for="it in actionItems()" :key="it.label">
+                <button @click="it.run()" class="w-full flex items-center gap-3 py-3.5 text-sm border-b border-line last:border-0" :class="it.danger ? 'text-danger' : (it.accent ? 'text-accent' : '')"><i class="w-5 text-center" :class="it.icon"></i><span x-text="it.label"></span></button>
+              </template>
+            </div>
+
+            <!-- delete confirm -->
+            <div x-show="sheet==='confirm'">
+              <h2 class="font-bold text-base mb-1" x-text="'Delete this ' + sheetTarget + '?'"></h2>
+              <p class="text-sm text-muted mb-4">This can't be undone.</p>
+              <div class="flex gap-2"><button @click="sheet=null" class="flex-1 text-sm py-3 rounded-xl border border-strong">Cancel</button><button @click="sheet=null" class="flex-1 text-sm py-3 rounded-xl bg-danger text-white font-semibold">Delete</button></div>
+            </div>
+
+            <!-- report / escalate -->
+            <div x-show="sheet==='report'" :class="reportMode==='escalate' && 'border-t-4 border-accent -mt-3 pt-3'">
+              <template x-if="!reportSent">
+                <div>
+                  <h2 class="font-bold text-base mb-1" :class="reportMode==='escalate' && 'text-accent'" x-text="(reportMode==='escalate' ? 'Escalate this ' : 'Report this ') + sheetTarget"></h2>
+                  <p class="text-xs text-muted mb-3" x-show="reportMode==='escalate'">This goes straight to every admin for priority review, not a routine report.</p>
+                  <!-- AGENT NOTE: escalate = POST /reports/ then POST /reports/{id}/escalate/, shown as ONE button and one loading state.
+                       If the first call says "already reported", tell the user an admin will review it directly. -->
+                  <p class="text-xs text-muted mb-1">Reason</p>
+                  <div class="grid grid-cols-2 gap-2 mb-3"><template x-for="r in ['Spam','Abuse','Misinformation','Duplicate']" :key="r"><label class="flex items-center gap-2 text-sm border border-line rounded-lg px-3 py-2.5"><input type="radio" name="reason" class="accent-[#3454D1]"><span x-text="r"></span></label></template></div>
+                  <p class="text-xs text-muted mb-1">Details (optional)</p>
+                  <textarea rows="3" class="w-full text-sm bg-surface border border-strong rounded-lg px-3 py-2 mb-3 outline-none"></textarea>
+                  <div class="flex gap-2"><button @click="sheet=null" class="flex-1 text-sm py-3 rounded-xl border border-strong">Cancel</button><button @click="reportSent=true" class="flex-1 text-sm py-3 rounded-xl bg-accent text-white font-semibold" x-text="reportMode==='escalate' ? 'Escalate' : 'Submit report'"></button></div>
+                </div>
+              </template>
+              <template x-if="reportSent"><div><p class="text-sm mb-4" x-text="reportMode==='escalate' ? 'Escalated. Every admin has been notified for priority review.' : 'Thanks, this has been reported for review.'"></p><button @click="sheet=null" class="text-sm text-accent font-semibold">Close</button></div></template>
+            </div>
+
+            <!-- comments -->
+            <div x-show="sheet==='comments'">
+              <h2 class="font-bold text-base mb-3">Comments</h2>
+              <div class="space-y-3 mb-4">
+                <template x-for="(c, i) in (activeAnswer ? activeAnswer.comments : [])" :key="i">
+                  <div class="flex items-start gap-2">
+                    <div class="flex-1 min-w-0">
+                      <p class="text-[11px] text-muted flex items-center gap-1"><span x-text="c.by"></span><button x-show="c.official" @click="sheet='official'" class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-accent text-white text-[9px] font-extrabold" aria-label="Official Academia account">A</button></p>
+                      <p class="text-sm" x-text="c.text"></p>
+                    </div>
+                    <button x-show="signedIn" aria-label="Comment actions" class="w-9 h-9 flex items-center justify-center text-muted"><i class="fa-solid fa-ellipsis-vertical text-[13px]"></i></button>
+                  </div>
+                </template>
+                <p x-show="activeAnswer && activeAnswer.comments.length===0" class="text-sm text-muted">No comments yet.</p>
+              </div>
+              <template x-if="signedIn"><div class="flex gap-2"><input placeholder="Add a comment..." class="flex-1 text-sm bg-surface border border-strong rounded-lg px-3 py-2.5 outline-none"><button class="px-4 rounded-lg bg-accent text-white text-sm font-semibold">Post</button></div></template>
+              <template x-if="!signedIn"><p class="text-sm text-muted">Sign in to comment.</p></template>
+            </div>
+
+            <!-- school filters -->
+            <div x-show="sheet==='schoolFilters'">
+              <div class="flex items-center justify-between mb-3"><h2 class="font-bold text-base">Filter schools</h2><button @click="schoolFilters={hub:false,type:'',own:'',state:''}" class="text-xs text-accent">Clear all</button></div>
+              <label class="flex items-center justify-between py-2.5 text-sm"><span>Has active hub</span><input type="checkbox" x-model="schoolFilters.hub" class="w-5 h-5 accent-[#3454D1]"></label>
+              <p class="text-xs text-muted mt-2 mb-1.5">Institution type</p>
+              <div class="flex flex-wrap gap-2 mb-3"><template x-for="t in ['University','Polytechnic','College of Education']" :key="t"><button @click="schoolFilters.type = schoolFilters.type===t ? '' : t" class="text-xs px-3 py-1.5 rounded-lg border" :class="schoolFilters.type===t ? 'bg-accent text-white border-accent' : 'border-strong'" x-text="t"></button></template></div>
+              <p class="text-xs text-muted mb-1.5">Ownership</p>
+              <div class="flex flex-wrap gap-2 mb-4"><template x-for="t in ['Federal','State','Private']" :key="t"><button @click="schoolFilters.own = schoolFilters.own===t ? '' : t" class="text-xs px-3 py-1.5 rounded-lg border" :class="schoolFilters.own===t ? 'bg-accent text-white border-accent' : 'border-strong'" x-text="t"></button></template></div>
+              <p class="text-xs text-muted mb-1.5">State</p>
+              <input x-model="schoolFilters.state" placeholder="e.g. Lagos" class="w-full text-sm bg-surface border border-strong rounded-lg px-3.5 py-2.5 mb-4 outline-none focus:ring-2 focus:ring-accent/40">
+              <button @click="sheet=null" class="w-full bg-accent text-white text-sm font-semibold rounded-xl py-3">Show results</button>
+            </div>
+
+            <!-- request hub -->
+            <div x-show="sheet==='requestHub'">
+              <h2 class="font-bold text-base mb-1">Request hub activation</h2>
+              <p class="text-sm text-muted mb-3">An admin will review this request before the hub goes live.</p>
+              <textarea rows="3" placeholder="Why does this school need a hub? (optional)" class="w-full text-sm bg-surface border border-strong rounded-lg px-3 py-2 mb-3 outline-none"></textarea>
+              <button @click="sheet=null" class="w-full bg-accent text-white text-sm font-semibold rounded-xl py-3">Submit request</button>
+            </div>
+
+            <!-- edit name -->
+            <div x-show="sheet==='editName'">
+              <h2 class="font-bold text-base mb-3">Edit your name</h2>
+              <input x-model="nameDraft" @input="nameError=''" class="w-full text-base font-semibold bg-surface border rounded-lg px-3 py-2.5 outline-none" :class="nameError ? 'border-danger' : 'border-strong'">
+              <p x-show="nameError" class="text-xs text-danger mt-1" x-text="nameError"></p>
+              <!-- AGENT NOTE: trim before saving, disable Save when blank, and show a backend field error (blank or too long) under the field. -->
+              <div class="flex gap-2 mt-4"><button @click="sheet=null" class="flex-1 text-sm py-3 rounded-xl border border-strong">Cancel</button><button @click="saveName()" class="flex-1 text-sm py-3 rounded-xl bg-accent text-white font-semibold">Save</button></div>
+            </div>
+
+            <!-- official account -->
+            <div x-show="sheet==='official'">
+              <h2 class="font-bold text-base mb-1 text-accent">Official Academia account</h2>
+              <p class="text-sm text-muted">This content was posted by Academia's own team to help get things started, not a regular student account.</p>
+            </div>
+
+            <!-- open on web -->
+            <div x-show="sheet==='web'">
+              <h2 class="font-bold text-base mb-1">Open on the web</h2>
+              <p class="text-sm text-muted mb-1">These tools live on the Academia website. They open in your browser and you'll sign in there with the same Google account.</p>
+              <p class="text-xs text-muted mb-4" x-text="'academia.example' + webPath"></p>
+              <div class="flex gap-2"><button @click="sheet=null" class="flex-1 text-sm py-3 rounded-xl border border-strong">Cancel</button><button @click="sheet=null" class="flex-1 text-sm py-3 rounded-xl bg-accent text-white font-semibold">Open in browser</button></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== RIGHT: notes for the building agent ===================== -->
+  <aside class="w-full max-w-[460px] text-[13px] leading-relaxed space-y-4 xl:sticky xl:top-8">
+    <h2 class="text-base font-extrabold">Notes:</h2>
+
+    <details open class="bg-white rounded-xl border border-gray-200 p-4">
+      <summary class="font-bold cursor-pointer">1. How to read this file</summary>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>The phone is the spec. Match layout, spacing, copy and states. The viewer controls above it (Preview as, UI state, dark, restart) exist only to show every role and state.</li>
+        <li>Search the HTML for <code>AGENT NOTE</code> for design decisions. The API contract wins over this mockup if they disagree, leave a note in BUILD_LOG_MOBILE.md.</li>
+        <li>Icons are Font Awesome here. Use your platform's equivalent icon set, keep the same meanings.</li>
+      </ul>
+    </details>
+
+    <details class="bg-white rounded-xl border border-gray-200 p-4">
+      <summary class="font-bold cursor-pointer">2. Design tokens (copy these)</summary>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>Accent #3454D1. Success #1D8A6C (dark #3FBF97). Danger #CE4747. Font Plus Jakarta Sans 400 to 800.</li>
+        <li>Light: bg #FBFAF8, ink #16140F, line #E5E3DF, strong (control borders) #CFCBC2, muted #67645C, surface #FFFFFF.</li>
+        <li>Dark: bg #16171C, ink #F5F3EE, line #2C2D34, strong #3A3B44, muted #9EA1AB, surface #1E2939.</li>
+        <li>Use "muted" for ALL secondary text, never raw grays (contrast checked 4.5:1 on every surface). Light and dark must both work, and follow the system theme by default.</li>
+        <li>Shape: rounded-lg for buttons and cards, rounded-full only for search pills and avatars. Minimum touch target 44pt.</li>
+      </ul>
+    </details>
+
+    <details class="bg-white rounded-xl border border-gray-200 p-4">
+      <summary class="font-bold cursor-pointer">3. Navigation and roles</summary>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>Tabs: Home, Schools, Ask (raised), Alerts (unread badge), Profile. Search icon sits in the top bar. The drawer holds Tags, Search, My reports, Policies and guides, and staff web links.</li>
+        <li>Roles: guest, student, moderator, admin. Derive from GET /users/me/ (is_admin, moderator_for, representative_for). Guests browse freely and get the sign-in sheet on any action.</li>
+        <li><b>Staff scope is strict.</b> No moderation or admin screens in the app. Staff get lock, escalate and report in context, and "Open on web" buttons that open the SYSTEM browser. See the staff section of the prompt.</li>
+        <li>Deep links: notifications and reports carry link_target. Open the question and scroll to answer_id. null means no link.</li>
+      </ul>
+    </details>
+
+    <details class="bg-white rounded-xl border border-gray-200 p-4">
+      <summary class="font-bold cursor-pointer">4. States every screen needs</summary>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>Loading skeleton, empty (icon, title, one line), error with Retry, offline banner with cached content. Use the UI state control to preview.</li>
+        <li>Friendly copy: no network, 429 "You're going a bit fast", 502/503/504 "taking too long", other 5xx. 400 field errors go under the field.</li>
+        <li>Pull to refresh on lists. Load more appends and dedupes by id. Ignore stale responses when filters change.</li>
+      </ul>
+    </details>
+
+    <details class="bg-white rounded-xl border border-gray-200 p-4">
+      <summary class="font-bold cursor-pointer">5. Screen to endpoint map</summary>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li><b>Login:</b> POST /auth/google/. 403 suspended, 401 invalid token.</li>
+        <li><b>Home:</b> GET /questions/?ordering=-created_at, /schools/?has_hub=true&page_size=5, /tags/?popular=true&page_size=8.</li>
+        <li><b>Search:</b> GET /search/questions/?q=&tag=&page= (results include slug).</li>
+        <li><b>Schools:</b> GET /schools/ with search, has_hub, institution_type, ownership, state, page.</li>
+        <li><b>School:</b> GET /schools/{id}/, /hubs/by-school/{id}/ (404 means no hub), /questions/?hub=&status=&department=&ordering=, POST /hubs/activation-requests/.</li>
+        <li><b>Tags:</b> GET /tags/ (paginated), /tags/{name}/questions/.</li>
+        <li><b>Question:</b> GET /questions/{id}/. Follow: POST and DELETE /questions/{id}/follow/. Lock: POST and DELETE /questions/{id}/lock/. Answers: POST /answers/, PATCH and DELETE /answers/{id}/, POST and DELETE /answers/{id}/vote/, POST /answers/{id}/mark-best/. Comments: GET /answers/{id}/comments/, POST /comments/, PATCH and DELETE /comments/{id}/. Reports: POST /reports/, POST /reports/{id}/escalate/.</li>
+        <li><b>Ask:</b> GET /schools/?has_hub=true, /hubs/by-school/{id}/ (departments), /tags/?search=, POST /questions/.</li>
+        <li><b>Alerts:</b> GET /notifications/, POST /notifications/{id}/mark-read/, POST /notifications/mark-all-read/.</li>
+        <li><b>Profile:</b> GET and PATCH /users/me/, GET /questions/?author=, /users/me/answers/, /users/me/comments/.</li>
+        <li><b>My reports:</b> GET /reports/mine/?status=. <b>Pages:</b> GET /pages/ and /pages/{slug}/.</li>
+      </ul>
+    </details>
+
+    <details class="bg-white rounded-xl border border-gray-200 p-4">
+      <summary class="font-bold cursor-pointer">6. Rules that are easy to get wrong</summary>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>SOLVED means "has a best answer", it does not close the question. Only is_locked blocks answers. Only the question's author marks best. Nobody votes on their own answer.</li>
+        <li>Bodies are Markdown, render safely. Question URLs use the id, the slug is cosmetic.</li>
+        <li>Reports are private both ways. Never show the reviewer or escalation state to a reporter.</li>
+        <li>Rate limits return 429. Tokens rotate on refresh, share one refresh promise, clear tokens only on a definitive 400 or 401.</li>
+        <li>Out of scope for this MVP: moderation, admin, hub offline controls, static page editing, windowed lists, push notifications (later).</li>
+      </ul>
+    </details>
+  </aside>
+</div>
+
+<script>
+  function app() {
+    return {
+      dark: false, page: 'login', hist: [], drawerOpen: false, sheet: null, sheetTarget: 'question',
+      role: 'student', uiState: 'normal', loginError: false,
+      followed: false, locked: false, composerOpen: false, composerPreview: false,
+      searchQuery: '', searchTag: '', statusFilter: 'All', deptFilter: 'All departments',
+      currentSchool: null, currentQuestion: null, currentTag: '', activeAnswer: null, flashId: null,
+      schoolFilters: { hub: false, type: '', own: '', state: '' },
+      tagSort: 'popular',
+      askStep: 'school', askSchool: null, askPreview: false, askError: false, askTags: ['siwes'], tagsFocus: false,
+      notifFilter: 'all', profileTab: 'activity', reportFilter: 'all', pageDoc: null,
+      reportMode: 'report', reportSent: false, nameDraft: '', nameError: '', webPath: '/moderation',
+      listPages: ['home', 'search', 'school', 'tagQuestions'],
+      rootPages: ['home', 'schools', 'ask', 'notifications', 'profile'],
+
+      schools: [
+        { id: 1, name: 'Ahmadu Bello University', short: 'ABU', loc: 'Zaria, Kaduna', type: 'University', own: 'Federal', state: 'Kaduna', hub: true, q: 812, verified: true },
+        { id: 2, name: 'University of Lagos', short: 'UNILAG', loc: 'Lagos', type: 'University', own: 'Federal', state: 'Lagos', hub: true, q: 640 },
+        { id: 3, name: 'Obafemi Awolowo University', short: 'OAU', loc: 'Ile-Ife, Osun', type: 'University', own: 'Federal', state: 'Osun', hub: true, q: 455 },
+        { id: 4, name: 'University of Ibadan', short: 'UI', loc: 'Ibadan, Oyo', type: 'University', own: 'Federal', state: 'Oyo', hub: true, q: 390 },
+        { id: 5, name: 'Lagos State University', short: 'LASU', loc: 'Ojo, Lagos', type: 'University', own: 'State', state: 'Lagos', hub: true, q: 210 },
+        { id: 6, name: 'Yaba College of Technology', short: 'YABATECH', loc: 'Yaba, Lagos', type: 'Polytechnic', own: 'Federal', state: 'Lagos', hub: false, q: 0 },
+      ],
+      tags: [
+        { name: 'gpa', count: 25 }, { name: 'registration', count: 18 }, { name: 'siwes', count: 14 },
+        { name: 'clearance', count: 11 }, { name: 'project', count: 9 }, { name: 'exams', count: 7 }, { name: 'transcript', count: 5 },
+      ],
+      questions: [
+        { id: 1, title: 'What should I expect during SIWES?', snippet: 'About to start my SIWES placement, any tips for students in my department?', status: 'solved', answers: 3, time: '2h ago', school: 'ABU', dept: 'Economics', tags: ['siwes', 'placement'], mine: true, locked: false },
+        { id: 2, title: 'How do I calculate my CGPA?', snippet: 'I keep getting a different number depending on which calculator I use.', status: 'solved', answers: 4, time: '5h ago', school: 'UNILAG', dept: 'Computer Science', tags: ['gpa', 'grading'], mine: false, locked: false },
+        { id: 3, title: 'What documents do I need for clearance?', snippet: 'Final year, about to start the process and no clear checklist.', status: 'answered', answers: 2, time: '8h ago', school: 'OAU', dept: '', tags: ['clearance'], mine: false, locked: false },
+        { id: 4, title: 'When does second semester registration open?', snippet: 'Portal still shows first semester results.', status: 'open', answers: 0, time: '1d ago', school: 'UI', dept: '', tags: ['registration'], mine: false, locked: false },
+        { id: 5, title: 'Can I change department after year one?', snippet: 'Thinking of moving from Economics to Law, is it possible?', status: 'open', answers: 0, time: '1d ago', school: 'ABU', dept: 'Law', tags: ['registration'], mine: false, locked: false },
+        { id: 6, title: 'Where do I collect my transcript?', snippet: 'Graduated last year and need it for an application.', status: 'answered', answers: 1, time: '2d ago', school: 'UNILAG', dept: '', tags: ['transcript', 'clearance'], mine: false, locked: true },
+      ],
+      answers: [
+        { id: 'a1', by: 'Zainab Nwosu', official: false, mine: false, best: true, score: 3, myVote: null, body: 'The process usually starts with your HOD signing off before resumption. Visit the departmental office first for your introduction letter.', comments: [{ by: 'Jahsway M. I.', text: 'This is actually helpful, thanks!' }, { by: 'Chidi Bello', text: 'Does this differ by state?' }] },
+        { id: 'a2', by: 'Academia Team', official: true, mine: false, best: false, score: 1, myVote: null, body: 'Also register with the ITF portal early, it can take a few days to process.', comments: [] },
+        { id: 'a3', by: 'Amara Okafor', official: false, mine: true, best: false, score: 0, myVote: null, body: 'Bring two passport photographs and a copy of your admission letter.', comments: [] },
+      ],
+      notifications: [
+        { id: 1, type: 'NEW_ANSWER', text: 'Zainab answered your question: "What should I expect during SIWES?"', time: '2h ago', read: false, link: true },
+        { id: 2, type: 'BEST_ANSWER', text: 'Your answer was marked as the best answer', time: '1d ago', read: false, link: true },
+        { id: 3, type: 'NEW_COMMENT', text: 'Chidi commented on your answer', time: '1d ago', read: true, link: true },
+        { id: 4, type: 'VOTE', text: 'Someone upvoted your answer', time: '2d ago', read: true, link: true },
+        { id: 5, type: 'HUB_ACTIVATED', text: 'Your hub activation request for YABATECH was approved', time: '3d ago', read: true, link: false },
+        { id: 6, type: 'MODERATOR_ASSIGNED', text: "You've been assigned as a moderator for ABU", time: '4d ago', read: true, link: false },
+        { id: 7, type: 'NEW_QUESTION', text: "New question posted in ABU", time: '4d ago', read: true, link: true },
+        { id: 8, type: 'NEW_REPORT', text: 'New spam report on a question', time: '5d ago', read: true, link: false, web: true },
+        { id: 9, type: 'NEW_ACTIVATION_REQUEST', text: 'New hub activation request for LASU', time: '5d ago', read: true, link: false, web: true },
+        { id: 10, type: 'USER_SUSPENDED', text: 'Your account was suspended. Contact support if this is a mistake.', time: '6d ago', read: true, link: false },
+        { id: 11, type: 'HUB_ACTIVATION_REJECTED', text: 'Your hub request was not approved. Reason: school not verified.', time: '1w ago', read: true, link: false },
+        { id: 12, type: 'REPORT_REVIEWED', text: 'A report you filed was reviewed', time: '1w ago', read: true, link: false },
+      ],
+      nIcons: {
+        NEW_ANSWER: 'fa-regular fa-message', BEST_ANSWER: 'fa-solid fa-award', HUB_ACTIVATED: 'fa-solid fa-circle-check',
+        NEW_COMMENT: 'fa-regular fa-comment', VOTE: 'fa-regular fa-thumbs-up', MODERATOR_ASSIGNED: 'fa-solid fa-shield-halved',
+        NEW_QUESTION: 'fa-regular fa-circle-question', NEW_ACTIVATION_REQUEST: 'fa-regular fa-building', NEW_REPORT: 'fa-regular fa-flag',
+        USER_SUSPENDED: 'fa-solid fa-ban', HUB_ACTIVATION_REJECTED: 'fa-regular fa-circle-xmark', REPORT_REVIEWED: 'fa-solid fa-clipboard-check',
+      },
+      reports: [
+        { type: 'Spam', on: 'question', desc: 'Promotional content', status: 'PENDING', when: '2 days ago', removed: false },
+        { type: 'Abuse', on: 'comment', desc: 'Rude reply under an answer', status: 'RESOLVED', when: '1 week ago', removed: true },
+        { type: 'Duplicate', on: 'question', desc: 'Same as an older thread', status: 'REJECTED', when: '2 weeks ago', removed: false },
+      ],
+
+      get signedIn() { return this.role !== 'guest'; },
+      get isStaff() { return ['moderator', 'admin'].includes(this.role); },
+      get visibleQuestions() {
+        let list = this.questions;
+        if (this.page === 'search') {
+          if (this.searchQuery) list = list.filter(q => (q.title + q.snippet).toLowerCase().includes(this.searchQuery.toLowerCase()));
+          if (this.searchTag) list = list.filter(q => q.tags.includes(this.searchTag));
+        }
+        if (this.page === 'school' && this.currentSchool) list = list.filter(q => q.school === this.currentSchool.short);
+        if (this.page === 'tagQuestions') list = list.filter(q => q.tags.includes(this.currentTag));
+        if (['school', 'tagQuestions'].includes(this.page) && this.statusFilter !== 'All') list = list.filter(q => q.status === this.statusFilter.toLowerCase());
+        if (this.page === 'school' && this.deptFilter !== 'All departments') list = list.filter(q => q.dept === this.deptFilter);
+        return list;
+      },
+
+      isRoot(p) { return this.rootPages.includes(p); },
+      canBack() { return !this.isRoot(this.page) && this.page !== 'login'; },
+      go(p) {
+        if (this.isRoot(p)) this.hist = []; else this.hist.push(this.page);
+        this.page = p; this.uiState = this.uiState === 'offline' ? 'offline' : 'normal';
+        this.$nextTick(() => { const s = document.getElementById('scroller'); if (s) s.scrollTop = 0; });
+      },
+      back() { this.page = this.hist.pop() || 'home'; },
+      title() {
+        const m = { schools: 'Schools', school: this.currentSchool ? this.currentSchool.short : 'School', question: 'Question', ask: 'Ask a question',
+          notifications: 'Notifications', profile: 'Profile', search: 'Search', tags: 'Tags', tagQuestions: this.currentTag,
+          myReports: 'My reports', pages: 'Policies and guides', pageView: this.pageDoc ? this.pageDoc.title : 'Page' };
+        return m[this.page] || '';
+      },
+      stateful() { return ['home', 'search', 'schools', 'school', 'tags', 'tagQuestions', 'notifications', 'myReports', 'profile'].includes(this.page); },
+      stateCopy() {
+        const m = { notifications: { t: 'You are all caught up', d: 'New activity will show up here.' }, myReports: { t: "You haven't reported anything", d: "If something doesn't belong here, use Report on any question, answer or comment." },
+          schools: { t: 'No schools found', d: 'Try a different search or clear a filter.' }, profile: { t: 'No activity yet', d: 'Questions and answers you post will show up here.' } };
+        return m[this.page] || { t: 'No questions yet', d: 'Be the first to ask one.' };
+      },
+      setRole(r) { this.role = r; if (this.page === 'login' && r !== 'guest') this.page = 'home'; },
+      signIn() { this.sheet = null; if (this.role === 'guest') this.role = 'student'; this.page = 'home'; this.hist = []; },
+      browseGuest() { this.role = 'guest'; this.page = 'home'; this.hist = []; },
+      logout() { this.drawerOpen = false; this.role = 'guest'; this.page = 'login'; this.hist = []; },
+      restart() { this.page = 'login'; this.role = 'student'; this.uiState = 'normal'; this.sheet = null; this.hist = []; this.drawerOpen = false; },
+      requireAuth(fn) { if (!this.signedIn) { this.sheet = 'signin'; return; } fn(); },
+
+      statusIcon(s) {
+        if (s === 'solved') return 'fa-solid fa-circle-check text-success dark:text-success-dark';
+        if (s === 'answered') return 'fa-regular fa-message text-accent';
+        return 'fa-regular fa-circle text-strong';
+      },
+      openSchool(s) { this.currentSchool = s; this.statusFilter = 'All'; this.deptFilter = 'All departments'; this.go('school'); },
+      openTag(t) { this.currentTag = t; this.statusFilter = 'All'; this.go('tagQuestions'); },
+      openQuestion(q) { this.currentQuestion = q; this.followed = false; this.locked = q.locked; this.composerOpen = false; this.go('question'); },
+      filterCount() { return Number(this.schoolFilters.hub) + Number(!!this.schoolFilters.type) + Number(!!this.schoolFilters.own) + Number(!!this.schoolFilters.state.trim()); },
+      filteredSchools() {
+        const st = this.schoolFilters.state.trim().toLowerCase();
+        return this.schools.filter(s => (!this.schoolFilters.hub || s.hub) && (!this.schoolFilters.type || s.type === this.schoolFilters.type) && (!this.schoolFilters.own || s.own === this.schoolFilters.own) && (!st || s.state.toLowerCase().includes(st)));
+      },
+      sortedTags() {
+        const list = [...this.tags];
+        return this.tagSort === 'az' ? list.sort((a, b) => a.name.localeCompare(b.name)) : list.sort((a, b) => b.count - a.count);
+      },
+
+      bestAnswer() { return this.answers.find(a => a.best); },
+      jumpTo(id) {
+        const el = document.getElementById('ans-' + id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        this.flashId = id; setTimeout(() => { this.flashId = null; }, 1500);
+      },
+      vote(a, dir) { a.score += dir ? 1 : -1; a.myVote = dir; },
+      markBest(a) { this.answers.forEach(x => x.best = false); a.best = true; this.currentQuestion.status = 'solved'; },
+      openComments(a) { this.activeAnswer = a; this.sheet = 'comments'; },
+
+      openActions(target, a) {
+        if (!this.signedIn) { this.sheet = 'signin'; return; }
+        this.sheetTarget = target; this.activeAnswer = a || null; this.sheet = 'actions';
+      },
+      targetMine() { return this.sheetTarget === 'question' ? this.currentQuestion.mine : !!(this.activeAnswer && this.activeAnswer.mine); },
+      actionItems() {
+        const items = [];
+        if (this.targetMine()) {
+          items.push({ label: 'Edit', icon: 'fa-regular fa-pen-to-square', run: () => { this.sheet = null; } });
+          items.push({ label: 'Delete', icon: 'fa-regular fa-trash-can', danger: true, run: () => { this.sheet = 'confirm'; } });
+        } else {
+          items.push({ label: 'Report', icon: 'fa-regular fa-flag', run: () => this.openReport('report') });
+          if (this.isStaff) items.push({ label: 'Escalate to admin', icon: 'fa-solid fa-shield-halved', accent: true, run: () => this.openReport('escalate') });
+        }
+        if (this.sheetTarget === 'question') items.push({ label: 'Share link', icon: 'fa-solid fa-arrow-up-from-bracket', run: () => { this.sheet = null; } });
+        return items;
+      },
+      openReport(mode) { this.reportMode = mode; this.reportSent = false; this.sheet = 'report'; },
+
+      startAsk() {
+        if (!this.signedIn) { this.sheet = 'signin'; return; }
+        this.askStep = 'school'; this.go('ask');
+      },
+      askFromSchool() {
+        if (!this.signedIn) { this.sheet = 'signin'; return; }
+        this.askSchool = this.currentSchool; this.askStep = 'form'; this.go('ask');
+      },
+      postQuestion() { this.openQuestion(this.questions[0]); },
+
+      unread() { return this.notifications.filter(n => !n.read).length; },
+      visibleNotifications() {
+        return this.notifications.filter(n => (this.role === 'admin' || !n.web) && (this.notifFilter === 'all' || !n.read));
+      },
+      markAll() { this.notifications.forEach(n => n.read = true); },
+      tapNotification(n) {
+        n.read = true;
+        if (n.link) this.openQuestion(this.questions[0]);
+        else if (n.web && this.role === 'admin') this.openWeb('/admin');
+      },
+
+      profileItems() {
+        const m = {
+          activity: [{ icon: 'fa-regular fa-message', text: 'Asked: What should I expect during SIWES?', time: '2h' }, { icon: 'fa-solid fa-reply', text: 'Answered: How do I calculate my CGPA?', time: '1d' }, { icon: 'fa-regular fa-comment', text: 'Commented on: Where do I collect my transcript?', time: '2d' }],
+          questions: [{ icon: 'fa-regular fa-message', text: 'What should I expect during SIWES?', time: '2h' }, { icon: 'fa-regular fa-message', text: 'Can I change department after year one?', time: '1d' }],
+          answers: [{ icon: 'fa-solid fa-award', text: 'How do I calculate my CGPA?', time: '1d' }, { icon: 'fa-solid fa-reply', text: 'What documents do I need for clearance?', time: '3d' }],
+          comments: [{ icon: 'fa-regular fa-comment', text: 'Where do I collect my transcript?', time: '2d' }],
+        };
+        return m[this.profileTab];
+      },
+      saveName() {
+        if (!this.nameDraft.trim()) { this.nameError = "Name can't be blank."; return; }
+        this.sheet = null;
+      },
+      pageList() { const p = ['Privacy Policy', 'Terms of Service', 'Community Guidelines']; if (this.isStaff) p.push('Moderator and Representative Handbook'); return p; },
+      openWeb(path) { this.webPath = path; this.drawerOpen = false; this.sheet = 'web'; },
+    };
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
+</body>
+</html>

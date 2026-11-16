@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ShieldAlert } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { FormField, Select, Textarea } from "@/components/ui/FormControls";
 
 const REPORT_TYPES = [
   { value: "SPAM", label: "Spam" },
@@ -93,40 +95,38 @@ export default function EscalateButton({ contentType, contentId, open, onClose }
               <ShieldAlert className="w-4 h-4" />
               Escalate this {contentType}
             </h2>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+            <p className="text-xs text-muted mb-4">
               This goes straight to every admin for priority review, not a
               routine report. Use it for content that needs a staff
               judgment call.
             </p>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Reason</label>
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              className="w-full px-3 py-2 rounded border border-[var(--color-border)] bg-white dark:bg-gray-800 text-sm mb-3"
-            >
-              {REPORT_TYPES.map((t) => (
-                <option key={t.value} value={t.value}>
-                  {t.label}
-                </option>
-              ))}
-            </select>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-              Details (optional)
-            </label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={3}
-              className="w-full px-3 py-2 rounded border border-[var(--color-border)] bg-white dark:bg-gray-800 text-sm mb-3"
-            />
-            {status === "error" && (
-              <p className="text-red-600 dark:text-red-400 text-sm mb-3">{errorMsg}</p>
-            )}
+            <FormField label="Reason" className="mb-3">
+              {(field) => (
+                <Select {...field} value={type} onChange={(e) => setType(e.target.value)}>
+                  {REPORT_TYPES.map((t) => (
+                    <option key={t.value} value={t.value}>
+                      {t.label}
+                    </option>
+                  ))}
+                </Select>
+              )}
+            </FormField>
+            <FormField label="Details (optional)" className="mb-3">
+              {(field) => (
+                <Textarea
+                  {...field}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows={3}
+                />
+              )}
+            </FormField>
+            <ErrorMessage className="mb-3">{status === "error" ? errorMsg : ""}</ErrorMessage>
             <div className="flex justify-end gap-2">
               <button
                 type="button"
                 onClick={close}
-                className="text-sm px-4 py-2 rounded border border-[var(--color-border)]"
+                className="text-sm px-4 py-2 rounded border border-[var(--color-border-strong)]"
               >
                 Cancel
               </button>

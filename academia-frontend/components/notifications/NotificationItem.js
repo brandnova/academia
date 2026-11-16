@@ -42,7 +42,7 @@ export default function NotificationItem({ notification, onRead, onNavigate, com
     >
       <Icon
         className={`w-4 h-4 shrink-0 ${compact ? "" : "mt-0.5"} ${
-          unread ? "text-accent" : "text-gray-400"
+          unread ? "text-accent" : "text-muted"
         }`}
       />
       <div className="min-w-0 flex-1">
@@ -54,7 +54,7 @@ export default function NotificationItem({ notification, onRead, onNavigate, com
           {unread && <span className="sr-only">Unread: </span>}
           {notification.message}
         </p>
-        <p className="text-xs text-gray-400 mt-0.5">{timeAgo(notification.created_at)}</p>
+        <p className="text-xs text-muted mt-0.5">{timeAgo(notification.created_at)}</p>
       </div>
       {unread && (
         <span

@@ -1,7 +1,7 @@
 import { Circle, MessageCircle, CheckCircle2 } from "lucide-react";
 
 const STATUS_CONFIG = {
-  OPEN: { icon: Circle, label: "Open", className: "text-gray-400" },
+  OPEN: { icon: Circle, label: "Open", className: "text-muted" },
   ANSWERED: { icon: MessageCircle, label: "Answered", className: "text-accent" },
   SOLVED: { icon: CheckCircle2, label: "Solved", className: "text-success dark:text-success-dark" },
 };

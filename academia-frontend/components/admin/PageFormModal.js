@@ -4,6 +4,8 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import MarkdownEditor from "@/components/ui/MarkdownEditor";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { Input, Select } from "@/components/ui/FormControls";
 
 export default function PageFormModal({ page, onClose, onSaved }) {
   const isEdit = Boolean(page);
@@ -42,28 +44,27 @@ export default function PageFormModal({ page, onClose, onSaved }) {
           <h2 className="font-semibold">{isEdit ? "Edit page" : "New page"}</h2>
           <button
             onClick={onClose}
-            className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-400 hover:text-gray-600"
+            className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-muted hover:text-gray-600"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Title</label>
-            <input
+            <label className="block text-xs text-muted mb-1">Title</label>
+            <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
           {isEdit && (
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-muted">
               URL: /pages/{page.slug} (never changes, even if the title does)
             </p>
           )}
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Body</label>
+            <label className="block text-xs text-muted mb-1">Body</label>
             <MarkdownEditor
               value={body}
               onChange={setBody}
@@ -74,15 +75,15 @@ export default function PageFormModal({ page, onClose, onSaved }) {
           </div>
           <div className="flex flex-wrap gap-6">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Visibility</label>
-              <select
+              <label className="block text-xs text-muted mb-1">Visibility</label>
+              <Select
                 value={visibility}
                 onChange={(e) => setVisibility(e.target.value)}
-                className="px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
+                fullWidth={false}
               >
                 <option value="PUBLIC">Public</option>
                 <option value="STAFF">Staff only</option>
-              </select>
+              </Select>
             </div>
             <label className="flex items-center gap-2 text-sm mt-5">
               <input
@@ -94,7 +95,7 @@ export default function PageFormModal({ page, onClose, onSaved }) {
               Published
             </label>
           </div>
-          {status === "error" && <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>}
+          {status === "error" && <ErrorMessage>{errorMsg}</ErrorMessage>}
           <div className="flex justify-end gap-2 pt-2">
             <button
               type="button"

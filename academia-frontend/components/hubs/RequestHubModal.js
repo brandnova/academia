@@ -50,12 +50,12 @@ export default function RequestHubModal({ schoolId, schoolName, onClose, onSucce
           <button
             onClick={onClose}
             aria-label="Close"
-            className="text-gray-400 hover:text-gray-600"
+            className="text-muted hover:text-gray-600"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+        <p className="text-sm text-muted mb-4">
           Requesting a hub for <strong>{schoolName}</strong>. An admin will review
           this request before the hub goes live.
         </p>

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { INSTITUTION_TYPE_OPTIONS, OWNERSHIP_OPTIONS } from "@/lib/schoolLabels";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { Input, Select } from "@/components/ui/FormControls";
 
 export default function SchoolFormModal({ school, onClose, onSaved }) {
   const isEdit = Boolean(school);
@@ -54,61 +56,56 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold">{isEdit ? "Edit school" : "New school"}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button onClick={onClose} className="text-muted hover:text-gray-600">
             <X className="w-5 h-5" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Name</label>
-            <input
+            <label className="block text-xs text-muted mb-1">Name</label>
+            <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+            <label className="block text-xs text-muted mb-1">
               Short name
             </label>
-            <input
+            <Input
               value={shortName}
               onChange={(e) => setShortName(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+            <label className="block text-xs text-muted mb-1">
               Location (optional)
             </label>
-            <input
+            <Input
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+            <label className="block text-xs text-muted mb-1">
               Website (optional)
             </label>
-            <input
+            <Input
               value={website}
               onChange={(e) => setWebsite(e.target.value)}
-              className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <label className="block text-xs text-muted mb-1">
                 Institution type
               </label>
-              <select
+              <Select
                 value={institutionType}
                 onChange={(e) => setInstitutionType(e.target.value)}
-                className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               >
                 <option value="">Not set</option>
                 {INSTITUTION_TYPE_OPTIONS.map((opt) => (
@@ -116,16 +113,15 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
                     {opt.label}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <label className="block text-xs text-muted mb-1">
                 Ownership
               </label>
-              <select
+              <Select
                 value={ownership}
                 onChange={(e) => setOwnership(e.target.value)}
-                className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               >
                 <option value="">Not set</option>
                 {OWNERSHIP_OPTIONS.map((opt) => (
@@ -133,36 +129,34 @@ export default function SchoolFormModal({ school, onClose, onSaved }) {
                     {opt.label}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <label className="block text-xs text-muted mb-1">
                 State (optional)
               </label>
-              <input
+              <Input
                 value={stateName}
                 onChange={(e) => setStateName(e.target.value)}
                 placeholder="e.g. Lagos"
-                className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <label className="block text-xs text-muted mb-1">
                 Country
               </label>
-              <input
+              <Input
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                className="w-full px-3 py-2 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-sm"
               />
             </div>
           </div>
 
           {status === "error" && (
-            <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>
+            <ErrorMessage>{errorMsg}</ErrorMessage>
           )}
           <div className="flex justify-end gap-2 pt-2">
             <button

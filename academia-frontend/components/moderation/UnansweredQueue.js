@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { Inbox } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import Skeleton from "@/components/ui/Skeleton";
 import SearchBar from "@/components/ui/SearchBar";
 import QuestionListRow from "@/components/questions/QuestionListRow";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function UnansweredQueue({ hubId, showSchool = false }) {
   const [query, setQuery] = useState("");
@@ -16,6 +19,7 @@ export default function UnansweredQueue({ hubId, showSchool = false }) {
   const [status, setStatus] = useState("loading");
   const [errorMsg, setErrorMsg] = useState("");
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState("");
 
   const fetchPage = useCallback(
     async (page) => {
@@ -32,6 +36,7 @@ export default function UnansweredQueue({ hubId, showSchool = false }) {
     let cancelled = false;
     setStatus("loading");
     setErrorMsg("");
+    setLoadMoreError("");
     fetchPage(1)
       .then((data) => {
         if (cancelled) return;
@@ -52,12 +57,13 @@ export default function UnansweredQueue({ hubId, showSchool = false }) {
 
   async function handleLoadMore() {
     setLoadingMore(true);
+    setLoadMoreError("");
     try {
       const data = await fetchPage(nextPage);
       setQuestions((prev) => [...prev, ...data.results]);
       setNextPage(data.next ? nextPage + 1 : null);
     } catch (err) {
-      setErrorMsg(err.message);
+      setLoadMoreError(err.message);
     } finally {
       setLoadingMore(false);
     }
@@ -83,22 +89,26 @@ export default function UnansweredQueue({ hubId, showSchool = false }) {
       )}
 
       {status === "error" && (
-        <p className="text-red-600 dark:text-red-400 text-sm">
+        <ErrorMessage>
           Couldn't load queue: {errorMsg}
-        </p>
+        </ErrorMessage>
       )}
 
       {status === "ready" && questions.length === 0 && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          {debouncedQuery
-            ? `No unanswered questions match "${debouncedQuery}".`
-            : "No unanswered questions right now."}
-        </p>
+        <EmptyState
+          icon={Inbox}
+          title={debouncedQuery ? "No matches" : "All caught up"}
+          description={
+            debouncedQuery
+              ? `No unanswered questions match "${debouncedQuery}".`
+              : "No unanswered questions right now."
+          }
+        />
       )}
 
       {status === "ready" && questions.length > 0 && (
         <>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{count} unanswered</p>
+          <p className="text-sm text-muted mb-2">{count} unanswered</p>
           <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
             {questions.map((q) => (
               <QuestionListRow key={q.id} question={q} showSchool={showSchool} />
@@ -116,6 +126,7 @@ export default function UnansweredQueue({ hubId, showSchool = false }) {
           >
             {loadingMore ? "Loading..." : "View more"}
           </button>
+          <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
         </div>
       )}
     </div>

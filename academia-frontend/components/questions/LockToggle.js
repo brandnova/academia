@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Lock, Unlock } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { clientFetch } from "@/lib/clientApi";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function LockToggle({ question }) {
   const { user } = useAuth();
@@ -42,13 +43,13 @@ export default function LockToggle({ question }) {
         className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border disabled:opacity-50 ${
           question.is_locked
             ? "border-red-300 text-red-600 dark:text-red-400"
-            : "border-[var(--color-border-strong)] text-gray-500 dark:text-gray-400"
+            : "border-[var(--color-border-strong)] text-muted"
         }`}
       >
         {question.is_locked ? <Unlock className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}
         {status === "loading" ? "..." : question.is_locked ? "Unlock question" : "Lock question"}
       </button>
-      {errorMsg && <p className="text-red-600 dark:text-red-400 text-xs mt-1">{errorMsg}</p>}
+      {errorMsg && <ErrorMessage size="xs" className="mt-1">{errorMsg}</ErrorMessage>}
     </div>
   );
 }

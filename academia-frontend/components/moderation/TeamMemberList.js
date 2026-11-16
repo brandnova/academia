@@ -103,7 +103,7 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
       {members.length === 0 ? (
         <EmptyState variant="inline" icon={Users} title="None assigned yet" className="mb-2" />
       ) : filteredMembers.length === 0 ? (
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+        <p className="text-sm text-muted mb-3">
           No one matches &quot;{query}&quot;.
         </p>
       ) : (
@@ -137,7 +137,7 @@ export default function TeamMemberList({ hubId, role, canManage, isAdmin = false
             excludeIds={members.map((m) => m.user.id)}
             disabled={addStatus === "loading"}
           />
-          {addStatus === "loading" && <p className="text-xs text-gray-400 mt-1">Adding...</p>}
+          {addStatus === "loading" && <p className="text-xs text-muted mt-1">Adding...</p>}
           {addStatus === "error" && (
             <ErrorMessage size="xs" className="mt-1">
               {addError}

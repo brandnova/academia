@@ -141,7 +141,7 @@ function SearchResults() {
 
           {status === "ready" && results.length > 0 && (
             <>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+              <p className="text-sm text-muted mb-3">
                 {count} result{count !== 1 ? "s" : ""}
                 {!debouncedQuery && " · sorted by relevance and activity"}
               </p>
@@ -173,7 +173,7 @@ function SearchResults() {
 
 export default function SearchResultsClient() {
   return (
-    <Suspense fallback={<p className="text-gray-500">Loading...</p>}>
+    <Suspense fallback={<p className="text-muted">Loading...</p>}>
       <SearchResults />
     </Suspense>
   );

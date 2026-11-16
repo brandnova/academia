@@ -166,7 +166,7 @@ export default function ReportsDashboard() {
               className={`text-xs px-3 py-1 rounded border ${
                 statusFilter === s
                   ? "border-accent text-accent"
-                  : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+                  : "border-[var(--color-border)] text-muted"
               }`}
             >
               {s.charAt(0) + s.slice(1).toLowerCase()}
@@ -194,7 +194,7 @@ export default function ReportsDashboard() {
           className={`flex items-center gap-1 text-xs px-3 py-1 rounded border sm:ml-auto ${
             escalatedOnly
               ? "border-accent bg-accent/10 text-accent"
-              : "border-[var(--color-border)] text-gray-500 dark:text-gray-400"
+              : "border-[var(--color-border)] text-muted"
           }`}
         >
           <ShieldAlert className="w-3.5 h-3.5" />
@@ -211,7 +211,7 @@ export default function ReportsDashboard() {
           <button
             onClick={() => setNotice("")}
             aria-label="Dismiss notice"
-            className="shrink-0 text-gray-400 hover:text-accent"
+            className="shrink-0 text-muted hover:text-accent"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -234,7 +234,7 @@ export default function ReportsDashboard() {
 
       {status === "ready" && reports.length > 0 && (
         <>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+          <p className="text-sm text-muted mb-2">
             {count} report{count !== 1 ? "s" : ""}
           </p>
           <div className="space-y-2">
@@ -262,12 +262,12 @@ export default function ReportsDashboard() {
                     <span className="font-medium">
                       {REPORT_TYPE_LABELS[report.type] || report.type}
                     </span>
-                    <span className="text-xs text-gray-400">{timeAgo(report.created_at)}</span>
+                    <span className="text-xs text-muted">{timeAgo(report.created_at)}</span>
                   </div>
 
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <p className="text-xs text-muted mb-1">
                     {removed ? (
-                      <span className="italic text-gray-400">Content removed</span>
+                      <span className="italic text-muted">Content removed</span>
                     ) : contentUrl ? (
                       <Link href={contentUrl} className="text-accent hover:underline">
                         View reported {report.content_type}
@@ -278,18 +278,18 @@ export default function ReportsDashboard() {
                   </p>
 
                   {report.description && (
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 break-words">
+                    <p className="text-xs text-muted mb-1 break-words">
                       &quot;{report.description}&quot;
                     </p>
                   )}
-                  <p className="text-xs text-gray-400 mb-2">
+                  <p className="text-xs text-muted mb-2">
                     Reported by {report.reporter?.full_name}
                   </p>
 
                   {statusFilter === "PENDING" &&
                     (confirmDeleteId === report.id ? (
                       <div className="flex flex-wrap items-center gap-2">
-                        <p className="w-full text-xs text-gray-500 dark:text-gray-400">
+                        <p className="w-full text-xs text-muted">
                           This permanently deletes the content and anything inside it, and closes
                           the related reports.
                         </p>
@@ -303,7 +303,7 @@ export default function ReportsDashboard() {
                         <button
                           onClick={() => setConfirmDeleteId(null)}
                           disabled={busy}
-                          className="text-xs text-gray-400"
+                          className="text-xs text-muted"
                         >
                           Cancel
                         </button>

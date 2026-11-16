@@ -6,7 +6,10 @@ import { useAuth } from "@/lib/auth-context";
 import ReportButton from "@/components/reports/ReportButton";
 import EscalateButton, { canEscalate } from "@/components/reports/EscalateButton";
 import ActionsMenu from "@/components/ui/ActionsMenu";
+import IconLabel from "@/components/ui/IconLabel";
 import PlatformAuthorBadge from "@/components/ui/PlatformAuthorBadge";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import { Input } from "@/components/ui/FormControls";
 
 export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
   const { user } = useAuth();
@@ -48,10 +51,13 @@ export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
     return (
       <div>
         <div className="flex flex-wrap items-center gap-2">
-          <input
+          <Input
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            className="flex-1 min-w-[120px] px-2 py-1 rounded border border-[var(--color-border-strong)] bg-white dark:bg-gray-800 text-xs"
+            size="xs"
+            fullWidth={false}
+            className="flex-1 min-w-[120px]"
+            aria-label="Edit comment"
           />
           <div className="flex items-center gap-2 shrink-0 text-[11px]">
             <button onClick={save} disabled={status === "loading"} className="text-accent">
@@ -62,14 +68,14 @@ export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
                 setEditing(false);
                 setBody(comment.body);
               }}
-              className="text-gray-400"
+              className="text-muted"
             >
               Cancel
             </button>
           </div>
         </div>
         {errorMsg && (
-          <p className="text-[11px] text-red-600 dark:text-red-400 mt-1">{errorMsg}</p>
+          <ErrorMessage size="2xs" className="mt-1">{errorMsg}</ErrorMessage>
         )}
       </div>
     );
@@ -93,15 +99,14 @@ export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
   return (
     <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
       <div className="min-w-0 flex-1 mb-4">
-        <p className="text-[11px] text-gray-400 mb-0.5 flex items-center gap-1">
-          <User size={12} />
+        <IconLabel as="p" icon={User} size="xs" className="text-muted mb-0.5">
           {comment.author.full_name}
           <PlatformAuthorBadge authorId={comment.author.id} />
-        </p>
+        </IconLabel>
         <p className="text-xs text-gray-700 dark:text-gray-300 break-words">{comment.body}</p>
       </div>
 
-      <div className="text-[11px] flex items-center gap-2 text-gray-400 shrink-0">
+      <div className="text-[11px] flex items-center gap-2 text-muted shrink-0">
         {confirming ? (
           <>
             <button
@@ -118,7 +123,7 @@ export default function CommentRow({ comment, hubId, onUpdate, onDelete }) {
         )}
       </div>
 
-      {errorMsg && <p className="text-[11px] text-red-600 dark:text-red-400 w-full">{errorMsg}</p>}
+      {errorMsg && <ErrorMessage size="2xs" className="w-full">{errorMsg}</ErrorMessage>}
 
       <ReportButton
         contentType="comment"

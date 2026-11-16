@@ -2,10 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { Tag } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import Skeleton from "@/components/ui/Skeleton";
 import QuestionListRow from "@/components/questions/QuestionListRow";
 import FilterSidebar, { FilterSection } from "@/components/ui/FilterSidebar";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 const STATUS_OPTIONS = [
   { value: "", label: "All" },
@@ -117,20 +120,24 @@ export default function TagQuestionsClient({ tagName }) {
           )}
 
           {status === "error" && (
-            <p className="text-red-600 dark:text-red-400 text-sm">
+            <ErrorMessage>
               Couldn't load questions: {errorMsg}
-            </p>
+            </ErrorMessage>
           )}
 
           {status === "ready" && questions.length === 0 && (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
-              No questions tagged "{tagName}" yet{statusFilter ? " with this status" : ""}.
-            </p>
+            <EmptyState
+              icon={Tag}
+              title={`No questions tagged "${tagName}"`}
+              description={
+                statusFilter ? "Try a different status." : "Questions with this tag will show up here."
+              }
+            />
           )}
 
           {status === "ready" && questions.length > 0 && (
             <>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+              <p className="text-sm text-muted mb-3">
                 {count} question{count !== 1 ? "s" : ""}
               </p>
               <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)] stagger-list">
@@ -151,7 +158,7 @@ export default function TagQuestionsClient({ tagName }) {
                 {loadingMore ? "Loading..." : "View more"}
               </button>
               {loadMoreError && (
-                <p className="text-red-600 dark:text-red-400 text-sm mt-2">{loadMoreError}</p>
+                <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
               )}
             </div>
           )}

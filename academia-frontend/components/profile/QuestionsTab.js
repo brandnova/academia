@@ -1,9 +1,12 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { MessageSquare } from "lucide-react";
 import { clientFetch } from "@/lib/clientApi";
 import Skeleton from "@/components/ui/Skeleton";
 import QuestionListRow from "@/components/questions/QuestionListRow";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function QuestionsTab({ userId }) {
   const [questions, setQuestions] = useState([]);
@@ -11,6 +14,7 @@ export default function QuestionsTab({ userId }) {
   const [status, setStatus] = useState("loading");
   const [errorMsg, setErrorMsg] = useState("");
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState("");
 
   const fetchPage = useCallback(
     (page) => clientFetch(`/questions/?author=${userId}&page=${page}`),
@@ -39,12 +43,13 @@ export default function QuestionsTab({ userId }) {
 
   async function handleLoadMore() {
     setLoadingMore(true);
+    setLoadMoreError("");
     try {
       const data = await fetchPage(nextPage);
       setQuestions((prev) => [...prev, ...data.results]);
       setNextPage(data.next ? nextPage + 1 : null);
     } catch (err) {
-      setErrorMsg(err.message);
+      setLoadMoreError(err.message);
     } finally {
       setLoadingMore(false);
     }
@@ -59,9 +64,15 @@ export default function QuestionsTab({ userId }) {
       </div>
     );
   }
-  if (status === "error") return <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg}</p>;
+  if (status === "error") return <ErrorMessage>{errorMsg}</ErrorMessage>;
   if (questions.length === 0) {
-    return <p className="text-sm text-gray-500 dark:text-gray-400">No questions asked yet.</p>;
+    return (
+      <EmptyState
+        icon={MessageSquare}
+        title="No questions yet"
+        description="Questions you ask will show up here."
+      />
+    );
   }
 
   return (
@@ -80,6 +91,7 @@ export default function QuestionsTab({ userId }) {
           >
             {loadingMore ? "Loading..." : "View more"}
           </button>
+          <ErrorMessage className="mt-2">{loadMoreError}</ErrorMessage>
         </div>
       )}
     </div>

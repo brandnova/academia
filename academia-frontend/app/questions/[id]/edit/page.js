@@ -98,7 +98,7 @@ export default function EditQuestionPage({ params }) {
 
   if (!user || user.id !== question.author.id) {
     return (
-      <p className="text-gray-500 dark:text-gray-400">
+      <p className="text-muted">
         You don't have permission to edit this question.
       </p>
     );
@@ -153,7 +153,7 @@ export default function EditQuestionPage({ params }) {
         <FormField error={fieldErrors.tags}>
           {() => (
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Tags</p>
+              <p className="text-xs text-muted mb-1">Tags</p>
               <TagInput value={tags} onChange={setTags} />
             </div>
           )}

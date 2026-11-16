@@ -120,7 +120,16 @@ Monetization must never compromise the accuracy or completeness of information o
 - Django REST Framework, pure API (no server-rendered product pages)
 - PostgreSQL database
 - JWT authentication (SimpleJWT)
-- Google OAuth verified via direct calls to Google's userinfo endpoint (not django-allauth, see "Known Deviations" note in BUILD_LOG.md / CHANGELOG.md for the reasoning)
+- Google OAuth verified via direct calls to Google's userinfo endpoint (not
+  django-allauth; see `BUILD_LOG_BACKEND.md` and `CHANGELOG.md` for the
+  rationale)
+
+### Mobile
+- React Native 0.88 with Expo SDK 58, TypeScript, and React Navigation 7
+- Google sign-in through `expo-auth-session`; the backend verifies the access
+  token against Google's `userinfo` endpoint
+- Talks directly to the versioned API; tokens use `expo-secure-store` on device
+- A user client only. Full moderation and admin tools remain on the web
 
 ### Development
 - API-first development
@@ -426,39 +435,28 @@ Documentation is treated as a development artifact rather than an afterthought.
 
 ## Documentation Structure
 
-The project maintains the following documents, each with a distinct purpose and update cadence:
+The published docs home explains which document answers which questions. The
+maintained set is:
 
-### project-plan.md (This document)
-Defines the vision, philosophy, structure, and guiding decisions of the platform.
-Updated during periodic doc-sync passes (see below), not every phase.
+- `project-plan.md`: product vision, principles, architecture and guiding
+  decisions.
+- `feature-list.md`: status of capabilities across backend, frontend and mobile.
+- `database-schema.md` and `api-contract.md`: data model and versioned API
+  contract.
+- `design-guide.md`: shared product and visual direction for web and mobile.
+- `frontend-map.md`, `mobile-map.md` and `backend-map.md`: implementation maps
+  for each client or service.
+- `TESTING.md`: regression checklist for backend, frontend and mobile.
+- `DEPLOYMENT_CHECKLIST.md`: backend, frontend and mobile launch requirements,
+  shared operations and launch runbook.
+- `BUILD_LOG_BACKEND.md`, `BUILD_LOG_FRONTEND.md` and `BUILD_LOG_MOBILE.md`:
+  short-term implementation history and current state for each surface.
+- `CHANGELOG.md` in the repository root: canonical durable history, included
+  in the published docs site rather than maintained as a second copy.
 
-### feature-list.md
-Defines the complete list of features and requirements to be implemented.
-Updated during doc-sync passes.
-
-### database-schema.md
-Defines models, relationships, constraints, and data structures.
-Updated during doc-sync passes.
-
-### api-contract.md
-Defines endpoints, request payloads, response payloads, and API behavior.
-Updated during doc-sync passes.
-
-### BUILD_LOG.md
-Short-term working memory. Updated after **every** completed phase, current
-phase, completed phases, key decisions, conventions established, and known
-deviations from the four core docs above. Its "Known Deviations" section is
-the queue of items waiting to be merged into the core docs at the next sync.
-
-### CHANGELOG.md (repo root) / docs/changelog.md (published docs site)
-The durable history. Gets a small entry after every phase, plus a "Docs Sync"
-entry whenever the four core docs are updated, describing what moved from
-"deviation" to "documented plan." Entries are grouped by development phase
-and date rather than semantic version, this project isn't a versioned
-external release yet. Once the public API ships, its endpoints carry their
-own `/v1/`, `/v2/` versioning independent of this log.
-
-**Each document should remain focused on its purpose and avoid duplicating information that belongs elsewhere.**
+The docs home and MkDocs navigation are the entry points to this set. Keep each
+document focused on its purpose and avoid duplicating information that belongs
+elsewhere.
 
 ---
 

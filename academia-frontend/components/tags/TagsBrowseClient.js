@@ -86,7 +86,7 @@ export default function TagsBrowseClient() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-xl font-semibold mb-1">Tags</h1>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+      <p className="text-sm text-muted mb-6">
         Browse questions by topic.
       </p>
 
@@ -127,7 +127,7 @@ export default function TagsBrowseClient() {
 
       {status === "ready" && tags.length > 0 && (
         <>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+          <p className="text-sm text-muted mb-3">
             {count} tag{count !== 1 ? "s" : ""}
           </p>
           <div className="flex flex-wrap gap-2">
@@ -138,7 +138,7 @@ export default function TagsBrowseClient() {
                 className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded border border-[var(--color-border-strong)] hover:border-accent hover:text-accent transition-colors"
               >
                 {tag.name}
-                <span className="text-xs text-gray-400">{tag.question_count}</span>
+                <span className="text-xs text-muted">{tag.question_count}</span>
               </Link>
             ))}
           </div>

@@ -96,7 +96,7 @@ export default async function HomePage() {
         <aside className="space-y-8">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center gap-1.5">
+              <h3 className="text-sm font-medium text-muted uppercase tracking-wide flex items-center gap-1.5">
                 <School className="w-4 h-4" /> Schools
               </h3>
               <Link href="/schools" className="text-xs text-accent hover:underline">
@@ -104,7 +104,7 @@ export default async function HomePage() {
               </Link>
             </div>
             {schools.length === 0 ? (
-              <p className="text-xs text-gray-400">No schools yet.</p>
+              <p className="text-xs text-muted">No schools yet.</p>
             ) : (
               <ul className="space-y-2">
                 {schools.map((s) => (
@@ -120,7 +120,7 @@ export default async function HomePage() {
 
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center gap-1.5">
+              <h3 className="text-sm font-medium text-muted uppercase tracking-wide flex items-center gap-1.5">
                 <Tag className="w-4 h-4" /> Tags
               </h3>
               <Link href="/tags" className="text-xs text-accent hover:underline">
@@ -128,7 +128,7 @@ export default async function HomePage() {
               </Link>
             </div>
             {tags.length === 0 ? (
-              <p className="text-xs text-gray-400">No tags yet.</p>
+              <p className="text-xs text-muted">No tags yet.</p>
             ) : (
               <div className="flex flex-wrap gap-2">
                 {tags.map((t) => (

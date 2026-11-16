@@ -7,6 +7,7 @@ import { clientFetch } from "@/lib/clientApi";
 import { questionUrl } from "@/lib/urls";
 import { timeAgo } from "@/lib/timeAgo";
 import Skeleton from "@/components/ui/Skeleton";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export default function ActivityFeed({ userId }) {
   const [items, setItems] = useState(null);
@@ -55,12 +56,12 @@ export default function ActivityFeed({ userId }) {
 
   if (status === "error") {
     return (
-      <p className="text-sm text-red-600 dark:text-red-400">Couldn't load recent activity.</p>
+      <ErrorMessage>Couldn't load recent activity.</ErrorMessage>
     );
   }
 
   if (items.length === 0) {
-    return <p className="text-sm text-gray-500 dark:text-gray-400">No recent activity.</p>;
+    return <p className="text-sm text-muted">No recent activity.</p>;
   }
 
   return (
@@ -75,7 +76,7 @@ export default function ActivityFeed({ userId }) {
             >
               <MessageSquare className="w-4 h-4 text-accent shrink-0" />
               <span className="truncate flex-1">Asked: {item.question.title}</span>
-              <span className="text-xs text-gray-400 shrink-0">{timeAgo(item.date)}</span>
+              <span className="text-xs text-muted shrink-0">{timeAgo(item.date)}</span>
             </Link>
           );
         }
@@ -88,7 +89,7 @@ export default function ActivityFeed({ userId }) {
             >
               <Reply className="w-4 h-4 text-accent shrink-0" />
               <span className="truncate flex-1">Answered: {item.answer.question.title}</span>
-              <span className="text-xs text-gray-400 shrink-0">{timeAgo(item.date)}</span>
+              <span className="text-xs text-muted shrink-0">{timeAgo(item.date)}</span>
             </Link>
           );
         }
@@ -102,7 +103,7 @@ export default function ActivityFeed({ userId }) {
             <span className="truncate flex-1">
               Commented on: {item.comment.answer.question.title}
             </span>
-            <span className="text-xs text-gray-400 shrink-0">{timeAgo(item.date)}</span>
+            <span className="text-xs text-muted shrink-0">{timeAgo(item.date)}</span>
           </Link>
         );
       })}

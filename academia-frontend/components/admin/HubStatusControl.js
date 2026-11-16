@@ -48,7 +48,7 @@ export default function HubStatusControl({ hub, onChanged }) {
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{hub.school.name}</p>
+          <p className="text-xs text-muted truncate">{hub.school.name}</p>
           <p
             className={`flex items-center gap-1.5 text-sm font-medium ${
               offline ? "text-amber-700 dark:text-amber-400" : ""
@@ -61,7 +61,7 @@ export default function HubStatusControl({ hub, onChanged }) {
             )}
             {offline ? "Hub offline" : "Hub active"}
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+          <p className="text-xs text-muted mt-0.5">
             {offline
               ? "Hidden from everyone except admins. Assignments are kept and return when the hub is restored."
               : "Visible to everyone."}
@@ -105,7 +105,7 @@ export default function HubStatusControl({ hub, onChanged }) {
             <button
               onClick={() => setConfirming(false)}
               disabled={saving}
-              className="text-sm text-gray-400"
+              className="text-sm text-muted"
             >
               Cancel
             </button>

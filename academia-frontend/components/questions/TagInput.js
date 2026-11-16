@@ -116,9 +116,9 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
 
       {open && (
         <div className="absolute z-dropdown mt-1 w-full bg-white dark:bg-gray-800 border border-[var(--color-border)] rounded shadow-lg max-h-48 overflow-auto">
-          {loading && <p className="px-3 py-2 text-xs text-gray-400">Searching...</p>}
+          {loading && <p className="px-3 py-2 text-xs text-muted">Searching...</p>}
           {!loading && unselectedSuggestions.length === 0 && (
-            <p className="px-3 py-2 text-xs text-gray-400">
+            <p className="px-3 py-2 text-xs text-muted">
               {query.trim()
                 ? `No matching tags. Press Enter to add "${query.trim().toLowerCase()}" as a new tag.`
                 : "No popular tags yet."}
@@ -133,12 +133,12 @@ export default function TagInput({ value, onChange, maxTags = 8 }) {
                 className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-between"
               >
                 <span>{tag.name}</span>
-                <span className="text-xs text-gray-400">{tag.question_count}</span>
+                <span className="text-xs text-muted">{tag.question_count}</span>
               </button>
             ))}
         </div>
       )}
-      <p className="text-xs text-gray-400 mt-1">
+      <p className="text-xs text-muted mt-1">
         Pick an existing tag or type a new one and press Enter. Up to {maxTags} tags.
       </p>
     </div>

@@ -26,9 +26,9 @@ export default function AdminPage() {
   const { user, loading } = useAuth();
   const [tab, setTab] = useState("reports");
 
-  if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-muted">Loading...</p>;
   if (!user || !user.is_admin) {
-    return <p className="text-gray-500 dark:text-gray-400">Admin access required.</p>;
+    return <p className="text-muted">Admin access required.</p>;
   }
 
   return (
@@ -43,7 +43,7 @@ export default function AdminPage() {
             className={`text-sm px-3 py-2 border-b-2 -mb-px ${
               tab === t.key
                 ? "border-accent text-accent font-medium"
-                : "border-transparent text-gray-500 dark:text-gray-400"
+                : "border-transparent text-muted"
             }`}
           >
             {t.label}
